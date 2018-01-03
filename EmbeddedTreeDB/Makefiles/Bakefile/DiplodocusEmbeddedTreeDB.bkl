@@ -1,0 +1,40 @@
+toolsets = gnu vs2015 vs2013;
+
+gnu.makefile = ../GNUmakefile/GNUmakefile;
+vs2015.solutionfile = ../VC14/DiplodocusEmbeddedTreeDB.sln;
+vs2013.solutionfile = ../VC12/DiplodocusEmbeddedTreeDB.sln;
+
+library DiplodocusEmbeddedTreeDB
+{
+    archs = x86 x86_64;
+   
+    includedirs += ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB;
+
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        outputdir = ../../../Lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        outputdir = ../../../Lib/$(arch);
+    }
+
+    if ($(config) == Debug)
+    {
+        basename = DiplodocusEmbeddedTreeDB-d;
+    }
+
+    headers
+    {
+        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB.h
+
+        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h
+    }
+
+    sources
+    {
+        ../../Source/EmbeddedTreeDB.cpp
+    }
+}
