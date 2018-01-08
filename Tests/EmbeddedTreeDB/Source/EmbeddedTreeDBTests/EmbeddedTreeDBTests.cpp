@@ -20,14 +20,9 @@
     IN THE SOFTWARE.
 */
 
-#include "EmbeddedTreeDBTests/EmbeddedTreeDBTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include "EmbeddedTreeDBTests.h"
 
-int main(int argc, char* argv[])
+void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("DiplodocusEmbeddedTreeDB");
-
-    AddEmbeddedTreeDBTests(theTestHarness);
-
-    return theTestHarness.run();
+    TestSequence& embeddedTreeDBTestSequence = theTestHarness.appendTestSequence("EmbeddedTreeDB tests");
 }

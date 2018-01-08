@@ -10,8 +10,15 @@ program DiplodocusEmbeddedTreeDBTests : IshikoTestFrameworkCore
 {
     archs = x86 x86_64;
 
+    headers
+    {
+        ../../Source/EmbeddedTreeDBTests/EmbeddedTreeDBTests.h
+    }
+
     sources
     {
         ../../Source/main.cpp
+
+        ../../Source/EmbeddedTreeDBTests/EmbeddedTreeDBTests.cpp
     }
 }
