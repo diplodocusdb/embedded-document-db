@@ -21,3 +21,16 @@
 */
 
 #include "EmbeddedTreeDB.h"
+
+namespace DiplodocusDB
+{
+
+EmbeddedTreeDB::EmbeddedTreeDB()
+{
+}
+
+EmbeddedTreeDB::~EmbeddedTreeDB()
+{
+}
+
+}

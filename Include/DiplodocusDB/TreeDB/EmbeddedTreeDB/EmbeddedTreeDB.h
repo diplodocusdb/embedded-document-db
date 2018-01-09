@@ -23,4 +23,18 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
 
+namespace DiplodocusDB
+{
+
+class EmbeddedTreeDB
+{
+public:
+    EmbeddedTreeDB();
+    ~EmbeddedTreeDB();
+};
+
+}
+
+#include "linkoptions.h"
+
 #endif

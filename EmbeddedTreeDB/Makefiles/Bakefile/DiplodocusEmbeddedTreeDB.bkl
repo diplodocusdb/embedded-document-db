@@ -31,6 +31,7 @@ library DiplodocusEmbeddedTreeDB
         ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB.h
 
         ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h
+        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
     }
 
     sources

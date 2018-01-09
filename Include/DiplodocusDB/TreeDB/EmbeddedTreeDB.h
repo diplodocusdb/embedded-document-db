@@ -25,4 +25,6 @@
 
 #include "EmbeddedTreeDB/EmbeddedTreeDB.h"
 
+#include "EmbeddedTreeDB/linkoptions.h"
+
 #endif

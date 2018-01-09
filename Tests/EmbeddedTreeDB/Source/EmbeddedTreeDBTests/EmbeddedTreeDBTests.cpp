@@ -21,8 +21,17 @@
 */
 
 #include "EmbeddedTreeDBTests.h"
+#include "DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h"
 
 void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
 {
     TestSequence& embeddedTreeDBTestSequence = theTestHarness.appendTestSequence("EmbeddedTreeDB tests");
+
+    new FileComparisonTest("Creation test 1", EmbeddedTreeDBCreationTest1, embeddedTreeDBTestSequence);
+}
+
+TestResult::EOutcome EmbeddedTreeDBCreationTest1(FileComparisonTest& test)
+{
+    DiplodocusDB::EmbeddedTreeDB db;
+    return TestResult::ePassed;
 }

@@ -29,4 +29,6 @@ using namespace Ishiko::TestFramework;
 
 void AddEmbeddedTreeDBTests(TestHarness& theTestHarness);
 
+TestResult::EOutcome EmbeddedTreeDBCreationTest1(FileComparisonTest& test);
+
 #endif
