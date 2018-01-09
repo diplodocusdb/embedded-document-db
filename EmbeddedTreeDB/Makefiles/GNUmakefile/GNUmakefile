@@ -71,12 +71,15 @@ BOOST_ROOT ?= $(BOOST)
 
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a
 
-../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a: $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o
-	$(AR) rcu $@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o
+../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a: $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o
+	$(AR) rcu $@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o: ../../Source/EmbeddedTreeDB.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDB.cpp
+
+$(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o: ../../Source/EmbeddedTreeDBImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDBImpl.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o: ../../Source/MasterFile.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/MasterFile.cpp

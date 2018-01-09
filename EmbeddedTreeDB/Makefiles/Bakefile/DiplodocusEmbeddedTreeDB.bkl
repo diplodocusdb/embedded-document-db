@@ -36,6 +36,7 @@ library DiplodocusEmbeddedTreeDB : Boost
         ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h
         ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
 
+        ../../Source/EmbeddedTreeDBImpl.h
         ../../Source/MasterFile.h
     }
 
@@ -43,6 +44,7 @@ library DiplodocusEmbeddedTreeDB : Boost
     {
         ../../Source/EmbeddedTreeDB.cpp
 
+        ../../Source/EmbeddedTreeDBImpl.cpp
         ../../Source/MasterFile.cpp
     }
 }
