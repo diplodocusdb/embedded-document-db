@@ -27,11 +27,28 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
 {
     TestSequence& embeddedTreeDBTestSequence = theTestHarness.appendTestSequence("EmbeddedTreeDB tests");
 
-    new FileComparisonTest("Creation test 1", EmbeddedTreeDBCreationTest1, embeddedTreeDBTestSequence);
+    new HeapAllocationErrorsTest("Creation test 1", EmbeddedTreeDBCreationTest1, embeddedTreeDBTestSequence);
+
+    new FileComparisonTest("create test 1", EmbeddedTreeDBCreateTest1, embeddedTreeDBTestSequence);
 }
 
-TestResult::EOutcome EmbeddedTreeDBCreationTest1(FileComparisonTest& test)
+TestResult::EOutcome EmbeddedTreeDBCreationTest1()
 {
     DiplodocusDB::EmbeddedTreeDB db;
     return TestResult::ePassed;
+}
+
+TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.create(outputPath);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
+
+    return result;
 }

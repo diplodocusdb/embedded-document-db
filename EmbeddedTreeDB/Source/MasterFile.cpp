@@ -20,25 +20,4 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
-
-#include <boost/filesystem/path.hpp>
-
-namespace DiplodocusDB
-{
-
-class EmbeddedTreeDB
-{
-public:
-    EmbeddedTreeDB();
-    ~EmbeddedTreeDB();
-
-    void create(const boost::filesystem::path& path);
-};
-
-}
-
-#include "linkoptions.h"
-
-#endif
+#include "MasterFile.h"

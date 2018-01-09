@@ -33,4 +33,8 @@ EmbeddedTreeDB::~EmbeddedTreeDB()
 {
 }
 
+void EmbeddedTreeDB::create(const boost::filesystem::path& path)
+{
+}
+
 }

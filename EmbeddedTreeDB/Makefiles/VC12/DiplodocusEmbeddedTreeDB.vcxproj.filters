@@ -26,9 +26,15 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\linkoptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\MasterFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\EmbeddedTreeDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MasterFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

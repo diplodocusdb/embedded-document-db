@@ -33,6 +33,11 @@ override CXXFLAGS += -O2
 else ifneq (,$(config))
 $(warning Unknown configuration "$(config)")
 endif
+#
+# Additionally, this makefile is customizable with the following
+# settings:
+#
+#      BOOST_ROOT  Path to the Boost installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -54,14 +59,27 @@ _builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(bui
 _builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
 $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
 endif
+
+# ------------
+# Configurable settings:
+# 
+
+# Path to the Boost installation
+BOOST_ROOT ?= $(BOOST)
+
+# ------------
+
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a
 
-../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a: $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o
-	$(AR) rcu $@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o
+../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a: $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o
+	$(AR) rcu $@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o: ../../Source/EmbeddedTreeDB.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDB.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDB.cpp
+
+$(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o: ../../Source/MasterFile.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/MasterFile.cpp
 
 clean:
 	rm -f $(_builddir)*.o
