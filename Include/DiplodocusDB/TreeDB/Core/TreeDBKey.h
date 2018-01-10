@@ -20,28 +20,7 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
-#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
-
-#include <string>
-#include <memory>
-
-namespace DiplodocusDB
-{
-
-class TreeDBNode
-{
-public:
-    TreeDBNode();
-    virtual ~TreeDBNode();
-
-    virtual std::shared_ptr<TreeDBNode> child(const std::string& key) = 0;
-
-    virtual std::shared_ptr<TreeDBNode> append(const std::string& key) = 0;
-};
-
-}
-
-#include "linkoptions.h"
+#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBKEY_H_
+#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBKEY_H_
 
 #endif
