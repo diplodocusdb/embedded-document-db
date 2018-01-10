@@ -23,4 +23,24 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
+#include "MasterFile.h"
+#include <boost/filesystem/path.hpp>
+
+namespace DiplodocusDB
+{
+
+class EmbeddedTreeDBImpl
+{
+public:
+    EmbeddedTreeDBImpl();
+    ~EmbeddedTreeDBImpl();
+
+    void create(const boost::filesystem::path& path);
+
+private:
+    MasterFile m_masterFile;
+};
+
+}
+
 #endif

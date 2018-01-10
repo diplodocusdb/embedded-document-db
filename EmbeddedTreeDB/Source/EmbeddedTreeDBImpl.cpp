@@ -21,3 +21,21 @@
 */
 
 #include "EmbeddedTreeDBImpl.h"
+
+namespace DiplodocusDB
+{
+
+EmbeddedTreeDBImpl::EmbeddedTreeDBImpl()
+{
+}
+
+EmbeddedTreeDBImpl::~EmbeddedTreeDBImpl()
+{
+}
+
+void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path)
+{
+    m_masterFile.create(path);
+}
+
+}

@@ -21,11 +21,13 @@
 */
 
 #include "EmbeddedTreeDB.h"
+#include "EmbeddedTreeDBImpl.h"
 
 namespace DiplodocusDB
 {
 
 EmbeddedTreeDB::EmbeddedTreeDB()
+    : m_impl(std::make_unique<EmbeddedTreeDBImpl>())
 {
 }
 
@@ -35,6 +37,7 @@ EmbeddedTreeDB::~EmbeddedTreeDB()
 
 void EmbeddedTreeDB::create(const boost::filesystem::path& path)
 {
+    m_impl->create(path);
 }
 
 }

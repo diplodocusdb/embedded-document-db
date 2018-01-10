@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
 
     theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
     boost::filesystem::create_directories("../../TestOutput");
+    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
 
     AddEmbeddedTreeDBTests(theTestHarness);
 

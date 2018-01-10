@@ -50,5 +50,7 @@ TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
 
+    result = TestResult::ePassed;
+
     return result;
 }

@@ -21,3 +21,22 @@
 */
 
 #include "MasterFile.h"
+#include <fstream>
+
+namespace DiplodocusDB
+{
+
+MasterFile::MasterFile()
+{
+}
+
+MasterFile::~MasterFile()
+{
+}
+
+void MasterFile::create(const boost::filesystem::path& path)
+{
+    std::fstream file(path.c_str(), std::fstream::out | std::fstream::binary);
+}
+
+}

@@ -24,9 +24,12 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
 
 #include <boost/filesystem/path.hpp>
+#include <memory>
 
 namespace DiplodocusDB
 {
+
+class EmbeddedTreeDBImpl;
 
 class EmbeddedTreeDB
 {
@@ -35,6 +38,9 @@ public:
     ~EmbeddedTreeDB();
 
     void create(const boost::filesystem::path& path);
+
+private:
+    std::unique_ptr<EmbeddedTreeDBImpl> m_impl;
 };
 
 }
