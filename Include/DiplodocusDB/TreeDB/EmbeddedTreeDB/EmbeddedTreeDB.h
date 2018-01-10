@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
 
+#include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include <boost/filesystem/path.hpp>
 #include <memory>
 
@@ -38,6 +39,8 @@ public:
     ~EmbeddedTreeDB();
 
     void create(const boost::filesystem::path& path);
+
+    TreeDBNode& root();
 
 private:
     std::unique_ptr<EmbeddedTreeDBImpl> m_impl;

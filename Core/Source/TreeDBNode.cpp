@@ -21,3 +21,16 @@
 */
 
 #include "TreeDBNode.h"
+
+namespace DiplodocusDB
+{
+
+TreeDBNode::TreeDBNode()
+{
+}
+
+TreeDBNode::~TreeDBNode()
+{
+}
+
+}

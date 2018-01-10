@@ -20,29 +20,21 @@
     IN THE SOFTWARE.
 */
 
-#include "EmbeddedTreeDBImpl.h"
 #include "EmbeddedTreeDBNodeImpl.h"
 
 namespace DiplodocusDB
 {
 
-EmbeddedTreeDBImpl::EmbeddedTreeDBImpl()
-    : m_root(std::make_shared<EmbeddedTreeDBNodeImpl>())
+EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl()
 {
 }
 
-EmbeddedTreeDBImpl::~EmbeddedTreeDBImpl()
+EmbeddedTreeDBNodeImpl::~EmbeddedTreeDBNodeImpl()
 {
 }
 
-void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path)
+void EmbeddedTreeDBNodeImpl::append(const std::string& key)
 {
-    m_masterFile.create(path);
-}
-
-TreeDBNode& EmbeddedTreeDBImpl::root()
-{
-    return *m_root;
 }
 
 }

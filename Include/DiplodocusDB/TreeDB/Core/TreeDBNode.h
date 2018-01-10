@@ -23,4 +23,22 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 
+#include <string>
+
+namespace DiplodocusDB
+{
+
+class TreeDBNode
+{
+public:
+    TreeDBNode();
+    virtual ~TreeDBNode();
+
+    virtual void append(const std::string& key) = 0;
+};
+
+}
+
+#include "linkoptions.h"
+
 #endif

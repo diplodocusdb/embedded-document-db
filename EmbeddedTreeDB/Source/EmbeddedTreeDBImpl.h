@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
 #include "MasterFile.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include <boost/filesystem/path.hpp>
 
 namespace DiplodocusDB
@@ -37,8 +38,11 @@ public:
 
     void create(const boost::filesystem::path& path);
 
+    TreeDBNode& root();
+
 private:
     MasterFile m_masterFile;
+    std::shared_ptr<TreeDBNode> m_root;
 };
 
 }
