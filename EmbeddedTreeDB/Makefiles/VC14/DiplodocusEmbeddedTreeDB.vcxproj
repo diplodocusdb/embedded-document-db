@@ -88,7 +88,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -139,7 +139,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\EmbeddedTreeDB.cpp" />
     <ClCompile Include="..\..\Source\EmbeddedTreeDBImpl.cpp" />
+    <ClCompile Include="..\..\Source\EmbeddedTreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\EmbeddedTreeDB.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\Source\EmbeddedTreeDBImpl.h" />
+    <ClInclude Include="..\..\Source\EmbeddedTreeDBNodeImpl.h" />
     <ClInclude Include="..\..\Source\MasterFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

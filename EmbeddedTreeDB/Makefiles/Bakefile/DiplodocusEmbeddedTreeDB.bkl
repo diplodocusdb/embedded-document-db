@@ -1,5 +1,7 @@
 ishikopath = envvar("ISHIKO");
 import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/Boost.bkl;
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 
 toolsets = gnu vs2015 vs2013;
 
@@ -7,7 +9,7 @@ gnu.makefile = ../GNUmakefile/GNUmakefile;
 vs2015.solutionfile = ../VC14/DiplodocusEmbeddedTreeDB.sln;
 vs2013.solutionfile = ../VC12/DiplodocusEmbeddedTreeDB.sln;
 
-library DiplodocusEmbeddedTreeDB : Boost
+library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, Boost
 {
     archs = x86 x86_64;
    
@@ -37,6 +39,7 @@ library DiplodocusEmbeddedTreeDB : Boost
         ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
 
         ../../Source/EmbeddedTreeDBImpl.h
+        ../../Source/EmbeddedTreeDBNodeImpl.h
         ../../Source/MasterFile.h
     }
 
@@ -45,6 +48,7 @@ library DiplodocusEmbeddedTreeDB : Boost
         ../../Source/EmbeddedTreeDB.cpp
 
         ../../Source/EmbeddedTreeDBImpl.cpp
+        ../../Source/EmbeddedTreeDBNodeImpl.cpp
         ../../Source/MasterFile.cpp
     }
 }

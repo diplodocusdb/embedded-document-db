@@ -40,4 +40,9 @@ void EmbeddedTreeDB::create(const boost::filesystem::path& path)
     m_impl->create(path);
 }
 
+TreeDBNode& EmbeddedTreeDB::root()
+{
+    return m_impl->root();
+}
+
 }
