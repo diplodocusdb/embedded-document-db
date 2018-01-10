@@ -1,0 +1,41 @@
+toolsets = gnu vs2015 vs2013;
+
+gnu.makefile = ../GNUmakefile/GNUmakefile;
+vs2015.solutionfile = ../VC14/DiplodocusTreeDBCore.sln;
+vs2013.solutionfile = ../VC12/DiplodocusTreeDBCore.sln;
+
+library DiplodocusTreeDBCore
+{
+    archs = x86 x86_64;
+   
+    includedirs += ../../../Include/DiplodocusDB/TreeDB/Core;
+
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        outputdir = ../../../Lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        outputdir = ../../../Lib/$(arch);
+    }
+
+    if ($(config) == Debug)
+    {
+        basename = DiplodocusTreeDBCore-d;
+    }
+
+    headers
+    {
+        ../../../Include/DiplodocusDB/TreeDB/TreeDBCore.h
+
+        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBNode.h
+        ../../../Include/DiplodocusDB/TreeDB/Core/linkoptions.h
+    }
+
+    sources
+    {
+        ../../Source/TreeDBNode.cpp
+    }
+}
