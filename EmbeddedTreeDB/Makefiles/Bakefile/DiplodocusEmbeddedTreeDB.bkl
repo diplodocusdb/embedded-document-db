@@ -41,6 +41,7 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, Boost
         ../../Source/EmbeddedTreeDBImpl.h
         ../../Source/EmbeddedTreeDBNodeImpl.h
         ../../Source/MasterFile.h
+        ../../Source/KeyCache.h
     }
 
     sources
@@ -50,5 +51,6 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, Boost
         ../../Source/EmbeddedTreeDBImpl.cpp
         ../../Source/EmbeddedTreeDBNodeImpl.cpp
         ../../Source/MasterFile.cpp
+        ../../Source/KeyCache.cpp
     }
 }

@@ -74,8 +74,8 @@ DIPLODOCUSDB_TREEDB_ROOT ?= $(DIPLODOCUSDB)/TreeDB
 
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a
 
-../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a: $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o
-	$(AR) rcu $@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o
+../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a: $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o
+	$(AR) rcu $@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o: ../../Source/EmbeddedTreeDB.cpp
@@ -89,6 +89,9 @@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o: ../../Source/Embe
 
 $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o: ../../Source/MasterFile.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/MasterFile.cpp
+
+$(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o: ../../Source/KeyCache.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/KeyCache.cpp
 
 clean:
 	rm -f $(_builddir)*.o
