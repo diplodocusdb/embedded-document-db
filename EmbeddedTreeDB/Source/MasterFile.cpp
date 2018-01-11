@@ -46,6 +46,11 @@ void MasterFile::open(const boost::filesystem::path& path)
     m_file.open(path.c_str(), std::fstream::in | std::fstream::out | std::fstream::binary);
 }
 
+void MasterFile::close()
+{
+    m_file.close();
+}
+
 void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node)
 {
     const std::string& keyValue = node.key().value();

@@ -48,6 +48,7 @@ TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test)
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath);
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
@@ -68,6 +69,8 @@ TestResult::EOutcome EmbeddedTreeDBNodeAppendTest1(FileComparisonTest& test)
 
     std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().append("key1");
     node->commit();
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest1.dpdb");

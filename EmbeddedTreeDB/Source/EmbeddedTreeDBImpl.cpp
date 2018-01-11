@@ -39,6 +39,11 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path)
     m_masterFile.create(path);
 }
 
+void EmbeddedTreeDBImpl::close()
+{
+    m_masterFile.close();
+}
+
 TreeDBNode& EmbeddedTreeDBImpl::root()
 {
     if (!m_root)
