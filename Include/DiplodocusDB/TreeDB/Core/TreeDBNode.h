@@ -23,7 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 
-#include <string>
+#include "TreeDBKey.h"
 #include <memory>
 
 namespace DiplodocusDB
@@ -35,9 +35,11 @@ public:
     TreeDBNode();
     virtual ~TreeDBNode();
 
-    virtual std::shared_ptr<TreeDBNode> child(const std::string& key) = 0;
+    virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key) = 0;
 
-    virtual std::shared_ptr<TreeDBNode> append(const std::string& key) = 0;
+    virtual std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) = 0;
+
+    virtual void commit() = 0;
 };
 
 }

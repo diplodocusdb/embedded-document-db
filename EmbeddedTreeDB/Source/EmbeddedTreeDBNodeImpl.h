@@ -28,13 +28,25 @@
 namespace DiplodocusDB
 {
 
+class EmbeddedTreeDBImpl;
+
 class EmbeddedTreeDBNodeImpl : public TreeDBNode
 {
 public:
-    EmbeddedTreeDBNodeImpl();
+    EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key);
     ~EmbeddedTreeDBNodeImpl() override;
 
-    void append(const std::string& key) override;
+    std::shared_ptr<TreeDBNode> child(const TreeDBKey& key) override;
+
+    std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) override;
+
+    void commit() override;
+
+    const TreeDBKey& key() const;
+
+private:
+    std::shared_ptr<EmbeddedTreeDBImpl> m_db;
+    TreeDBKey m_key;
 };
 
 }

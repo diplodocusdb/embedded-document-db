@@ -27,7 +27,6 @@ namespace DiplodocusDB
 {
 
 EmbeddedTreeDBImpl::EmbeddedTreeDBImpl()
-    : m_root(std::make_shared<EmbeddedTreeDBNodeImpl>())
 {
 }
 
@@ -42,7 +41,21 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path)
 
 TreeDBNode& EmbeddedTreeDBImpl::root()
 {
+    if (!m_root)
+    {
+        m_root = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "");
+    }
     return *m_root;
+}
+
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::createNode(const TreeDBKey& key)
+{
+    return std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key);
+}
+
+void EmbeddedTreeDBImpl::commitNode(const EmbeddedTreeDBNodeImpl& node)
+{
+    m_masterFile.commitNode(node);
 }
 
 }

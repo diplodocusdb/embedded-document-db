@@ -21,3 +21,27 @@
 */
 
 #include "TreeDBKey.h"
+
+namespace DiplodocusDB
+{
+
+TreeDBKey::TreeDBKey(const char* key)
+    : m_value(key)
+{
+}
+
+TreeDBKey::TreeDBKey(const std::string& key)
+    : m_value(key)
+{
+}
+
+TreeDBKey::~TreeDBKey()
+{
+}
+
+const std::string& TreeDBKey::value() const
+{
+    return m_value;
+}
+
+}

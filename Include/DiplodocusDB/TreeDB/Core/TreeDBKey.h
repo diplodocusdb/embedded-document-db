@@ -23,4 +23,26 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBKEY_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBKEY_H_
 
+#include <string>
+
+namespace DiplodocusDB
+{
+
+class TreeDBKey
+{
+public:
+    TreeDBKey(const char* key);
+    TreeDBKey(const std::string& key);
+    ~TreeDBKey();
+
+    const std::string& value() const;
+
+private:
+    std::string m_value;
+};
+
+}
+
+#include "linkoptions.h"
+
 #endif

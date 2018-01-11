@@ -30,7 +30,7 @@
 namespace DiplodocusDB
 {
 
-class EmbeddedTreeDBImpl
+class EmbeddedTreeDBImpl : public std::enable_shared_from_this<EmbeddedTreeDBImpl>
 {
 public:
     EmbeddedTreeDBImpl();
@@ -39,6 +39,9 @@ public:
     void create(const boost::filesystem::path& path);
 
     TreeDBNode& root();
+
+    std::shared_ptr<TreeDBNode> createNode(const TreeDBKey& key);
+    void commitNode(const EmbeddedTreeDBNodeImpl& node);
 
 private:
     MasterFile m_masterFile;

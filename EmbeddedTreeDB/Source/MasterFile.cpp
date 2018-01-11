@@ -21,7 +21,7 @@
 */
 
 #include "MasterFile.h"
-#include <fstream>
+#include "EmbeddedTreeDBNodeImpl.h"
 
 namespace DiplodocusDB
 {
@@ -37,6 +37,21 @@ MasterFile::~MasterFile()
 void MasterFile::create(const boost::filesystem::path& path)
 {
     std::fstream file(path.c_str(), std::fstream::out | std::fstream::binary);
+    file.close();
+    open(path);
+}
+
+void MasterFile::open(const boost::filesystem::path& path)
+{
+    m_file.open(path.c_str(), std::fstream::in | std::fstream::out | std::fstream::binary);
+}
+
+void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node)
+{
+    const std::string& keyValue = node.key().value();
+    uint32_t n = keyValue.size();
+    m_file.write((char *)&n, 4);
+    m_file.write(keyValue.c_str(), keyValue.size());
 }
 
 }

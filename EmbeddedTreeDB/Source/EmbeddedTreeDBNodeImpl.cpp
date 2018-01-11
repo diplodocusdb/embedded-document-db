@@ -21,11 +21,14 @@
 */
 
 #include "EmbeddedTreeDBNodeImpl.h"
+#include "EmbeddedTreeDBImpl.h"
 
 namespace DiplodocusDB
 {
 
-EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl()
+EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db,
+                                               const TreeDBKey& key)
+    : m_db(db), m_key(key)
 {
 }
 
@@ -33,8 +36,26 @@ EmbeddedTreeDBNodeImpl::~EmbeddedTreeDBNodeImpl()
 {
 }
 
-void EmbeddedTreeDBNodeImpl::append(const std::string& key)
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key)
 {
+    std::shared_ptr<TreeDBNode> result;
+
+    return result;
+}
+
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
+{
+    return m_db->createNode(key);
+}
+
+void EmbeddedTreeDBNodeImpl::commit()
+{
+    m_db->commitNode(*this);
+}
+
+const TreeDBKey& EmbeddedTreeDBNodeImpl::key() const
+{
+    return m_key;
 }
 
 }

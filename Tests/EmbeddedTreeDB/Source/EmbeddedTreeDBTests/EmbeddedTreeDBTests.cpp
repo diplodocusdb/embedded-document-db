@@ -30,6 +30,8 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("Creation test 1", EmbeddedTreeDBCreationTest1, embeddedTreeDBTestSequence);
 
     new FileComparisonTest("create test 1", EmbeddedTreeDBCreateTest1, embeddedTreeDBTestSequence);
+
+    new FileComparisonTest("append test 1", EmbeddedTreeDBNodeAppendTest1, embeddedTreeDBTestSequence);
 }
 
 TestResult::EOutcome EmbeddedTreeDBCreationTest1()
@@ -49,6 +51,26 @@ TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
+
+    result = TestResult::ePassed;
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBNodeAppendTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeAppendTest1.dpdb");
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.create(outputPath);
+
+    std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().append("key1");
+    node->commit();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest1.dpdb");
 
     result = TestResult::ePassed;
 

@@ -43,7 +43,7 @@ public:
     TreeDBNode& root();
 
 private:
-    std::unique_ptr<EmbeddedTreeDBImpl> m_impl;
+    std::shared_ptr<EmbeddedTreeDBImpl> m_impl;
 };
 
 }

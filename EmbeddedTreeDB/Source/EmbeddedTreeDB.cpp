@@ -27,7 +27,7 @@ namespace DiplodocusDB
 {
 
 EmbeddedTreeDB::EmbeddedTreeDB()
-    : m_impl(std::make_unique<EmbeddedTreeDBImpl>())
+    : m_impl(std::make_shared<EmbeddedTreeDBImpl>())
 {
 }
 

@@ -23,7 +23,11 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 
+#include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
+#include "EmbeddedTreeDBNodeImpl.h"
 #include <boost/filesystem/path.hpp>
+#include <fstream>
+#include <memory>
 
 namespace DiplodocusDB
 {
@@ -35,6 +39,12 @@ public:
     ~MasterFile();
 
     void create(const boost::filesystem::path& path);
+    void open(const boost::filesystem::path& path);
+
+    void commitNode(const EmbeddedTreeDBNodeImpl& node);
+
+private:
+    std::fstream m_file;
 };
 
 }
