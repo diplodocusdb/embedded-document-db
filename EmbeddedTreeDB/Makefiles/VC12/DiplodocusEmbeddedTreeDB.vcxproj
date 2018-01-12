@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\Source\EmbeddedTreeDB.cpp" />
     <ClCompile Include="..\..\Source\EmbeddedTreeDBImpl.cpp" />
     <ClCompile Include="..\..\Source\EmbeddedTreeDBNodeImpl.cpp" />
+    <ClCompile Include="..\..\Source\Record.cpp" />
     <ClCompile Include="..\..\Source\Page.cpp" />
     <ClCompile Include="..\..\Source\PageCache.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\Source\EmbeddedTreeDBImpl.h" />
     <ClInclude Include="..\..\Source\EmbeddedTreeDBNodeImpl.h" />
+    <ClInclude Include="..\..\Source\Record.h" />
     <ClInclude Include="..\..\Source\Page.h" />
     <ClInclude Include="..\..\Source\PageCache.h" />
     <ClInclude Include="..\..\Source\MasterFile.h" />
