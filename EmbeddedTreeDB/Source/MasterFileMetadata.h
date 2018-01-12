@@ -23,4 +23,21 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 
+#include "DiplodocusDB/Core/VersionNumber.h"
+
+namespace DiplodocusDB
+{
+
+class MasterFileMetadata
+{
+public:
+    MasterFileMetadata();
+    ~MasterFileMetadata();
+
+private:
+    VersionNumber m_fileFormatVersion;
+};
+
+}
+
 #endif

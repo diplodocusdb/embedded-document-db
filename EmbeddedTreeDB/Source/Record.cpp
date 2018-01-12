@@ -21,3 +21,25 @@
 */
 
 #include "Record.h"
+
+namespace DiplodocusDB
+{
+
+Record::Record()
+    : m_type(ERecordType::eInvalid)
+{
+}
+
+Record::~Record()
+{
+}
+
+void Record::load()
+{
+}
+
+void Record::save()
+{
+}
+
+}

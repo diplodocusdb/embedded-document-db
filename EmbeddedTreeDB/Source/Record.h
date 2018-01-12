@@ -23,4 +23,28 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
+namespace DiplodocusDB
+{
+
+class Record
+{
+public:
+    enum class ERecordType
+    {
+        eInvalid,
+        eMasterFileMetaData
+    };
+
+    Record();
+    ~Record();
+
+    void load();
+    void save();
+
+private:
+    ERecordType m_type;
+};
+
+}
+
 #endif

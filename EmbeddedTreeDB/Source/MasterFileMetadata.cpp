@@ -21,3 +21,17 @@
 */
 
 #include "MasterFileMetadata.h"
+
+namespace DiplodocusDB
+{
+
+MasterFileMetadata::MasterFileMetadata()
+    : m_fileFormatVersion(1, 0, 0)
+{
+}
+
+MasterFileMetadata::~MasterFileMetadata()
+{
+}
+
+}
