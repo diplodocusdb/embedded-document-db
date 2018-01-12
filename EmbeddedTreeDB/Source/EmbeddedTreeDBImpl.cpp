@@ -37,6 +37,13 @@ EmbeddedTreeDBImpl::~EmbeddedTreeDBImpl()
 void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path)
 {
     m_masterFile.create(path);
+    open(path);
+}
+
+void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path)
+{
+    m_masterFile.open(path);
+    m_root = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "");
 }
 
 void EmbeddedTreeDBImpl::close()
@@ -46,16 +53,22 @@ void EmbeddedTreeDBImpl::close()
 
 TreeDBNode& EmbeddedTreeDBImpl::root()
 {
-    if (!m_root)
-    {
-        m_root = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "");
-    }
     return *m_root;
 }
 
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::createNode(const TreeDBKey& key)
 {
     return std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key);
+}
+
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::getNode(const TreeDBKey& key)
+{
+    std::shared_ptr<TreeDBNode> result;
+    if (m_masterFile.getNode(key))
+    {
+        result = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key);
+    }
+    return result;
 }
 
 void EmbeddedTreeDBImpl::commitNode(const EmbeddedTreeDBNodeImpl& node)

@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
 #include "MasterFile.h"
+#include "KeyCache.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include <boost/filesystem/path.hpp>
 
@@ -37,15 +38,18 @@ public:
     ~EmbeddedTreeDBImpl();
 
     void create(const boost::filesystem::path& path);
+    void open(const boost::filesystem::path& path);
     void close();
 
     TreeDBNode& root();
 
     std::shared_ptr<TreeDBNode> createNode(const TreeDBKey& key);
+    std::shared_ptr<TreeDBNode> getNode(const TreeDBKey& key);
     void commitNode(const EmbeddedTreeDBNodeImpl& node);
 
 private:
     MasterFile m_masterFile;
+    KeyCache m_keyCache;
     std::shared_ptr<TreeDBNode> m_root;
 };
 

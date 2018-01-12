@@ -31,6 +31,8 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
 
     new FileComparisonTest("create test 1", EmbeddedTreeDBCreateTest1, embeddedTreeDBTestSequence);
 
+    new HeapAllocationErrorsTest("open test 1", EmbeddedTreeDBOpenTest1, embeddedTreeDBTestSequence);
+
     new FileComparisonTest("append test 1", EmbeddedTreeDBNodeAppendTest1, embeddedTreeDBTestSequence);
 }
 
@@ -55,6 +57,23 @@ TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test)
 
     result = TestResult::ePassed;
 
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest1.dpdb");
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(inputPath);
+
+    if (db.root().child("key1"))
+    {
+        result = TestResult::ePassed;
+    }
+    
     return result;
 }
 

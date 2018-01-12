@@ -38,9 +38,7 @@ EmbeddedTreeDBNodeImpl::~EmbeddedTreeDBNodeImpl()
 
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key)
 {
-    std::shared_ptr<TreeDBNode> result;
-
-    return result;
+    return m_db->getNode(key);
 }
 
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)

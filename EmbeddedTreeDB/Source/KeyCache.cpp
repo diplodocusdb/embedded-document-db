@@ -21,3 +21,16 @@
 */
 
 #include "KeyCache.h"
+
+namespace DiplodocusDB
+{
+
+KeyCache::KeyCache()
+{
+}
+
+KeyCache::~KeyCache()
+{
+}
+
+}

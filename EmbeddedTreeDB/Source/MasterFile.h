@@ -42,7 +42,11 @@ public:
     void open(const boost::filesystem::path& path);
     void close();
 
+    bool getNode(const TreeDBKey& key);
     void commitNode(const EmbeddedTreeDBNodeImpl& node);
+
+private:
+    std::string readString();
 
 private:
     std::fstream m_file;

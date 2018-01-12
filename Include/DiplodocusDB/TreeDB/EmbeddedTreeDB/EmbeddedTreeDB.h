@@ -39,6 +39,7 @@ public:
     ~EmbeddedTreeDB();
 
     void create(const boost::filesystem::path& path);
+    void open(const boost::filesystem::path& path);
     void close();
 
     TreeDBNode& root();

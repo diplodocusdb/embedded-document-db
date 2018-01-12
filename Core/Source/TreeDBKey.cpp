@@ -44,4 +44,14 @@ const std::string& TreeDBKey::value() const
     return m_value;
 }
 
+bool TreeDBKey::operator ==(const TreeDBKey& other) const
+{
+    return (m_value == other.m_value);
+}
+
+bool TreeDBKey::operator !=(const TreeDBKey& other) const
+{
+    return (m_value != other.m_value);
+}
+
 }

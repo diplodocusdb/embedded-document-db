@@ -31,6 +31,7 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness);
 
 TestResult::EOutcome EmbeddedTreeDBCreationTest1();
 TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test);
+TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest1(FileComparisonTest& test);
 
 #endif

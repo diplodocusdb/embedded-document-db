@@ -23,4 +23,16 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_KEYCACHE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_KEYCACHE_H_
 
+namespace DiplodocusDB
+{
+
+class KeyCache
+{
+public:
+    KeyCache();
+    ~KeyCache();
+};
+
+}
+
 #endif

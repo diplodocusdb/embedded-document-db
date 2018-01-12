@@ -38,7 +38,6 @@ void MasterFile::create(const boost::filesystem::path& path)
 {
     std::fstream file(path.c_str(), std::fstream::out | std::fstream::binary);
     file.close();
-    open(path);
 }
 
 void MasterFile::open(const boost::filesystem::path& path)
@@ -51,12 +50,34 @@ void MasterFile::close()
     m_file.close();
 }
 
+bool MasterFile::getNode(const TreeDBKey& key)
+{
+    bool result = false;
+    m_file.seekg(0);
+    TreeDBKey readKey = readString();
+    if (key == readKey)
+    {
+        result = true;
+    }
+    return result;
+}
+
 void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node)
 {
     const std::string& keyValue = node.key().value();
     uint32_t n = keyValue.size();
     m_file.write((char *)&n, 4);
     m_file.write(keyValue.c_str(), keyValue.size());
+}
+
+std::string MasterFile::readString()
+{
+    std::string result;
+    uint32_t n;
+    m_file.read((char *)&n, 4);
+    result.resize(n);
+    m_file.read(&result[0], n);
+    return result;
 }
 
 }

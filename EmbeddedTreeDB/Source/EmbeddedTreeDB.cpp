@@ -40,6 +40,11 @@ void EmbeddedTreeDB::create(const boost::filesystem::path& path)
     m_impl->create(path);
 }
 
+void EmbeddedTreeDB::open(const boost::filesystem::path& path)
+{
+    m_impl->open(path);
+}
+
 void EmbeddedTreeDB::close()
 {
     m_impl->close();

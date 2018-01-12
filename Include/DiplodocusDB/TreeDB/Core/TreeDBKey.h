@@ -37,6 +37,9 @@ public:
 
     const std::string& value() const;
 
+    bool operator ==(const TreeDBKey& other) const;
+    bool operator !=(const TreeDBKey& other) const;
+
 private:
     std::string m_value;
 };
