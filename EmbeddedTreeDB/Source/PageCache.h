@@ -20,17 +20,17 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
+#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGECACHE_H_
+#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGECACHE_H_
 
 namespace DiplodocusDB
 {
 
-class Page
+class PageCache
 {
 public:
-    Page();
-    ~Page();
+    PageCache();
+    ~PageCache();
 };
 
 }

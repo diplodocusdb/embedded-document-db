@@ -154,6 +154,7 @@
     <ClCompile Include="..\..\Source\EmbeddedTreeDBImpl.cpp" />
     <ClCompile Include="..\..\Source\EmbeddedTreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\Source\Page.cpp" />
+    <ClCompile Include="..\..\Source\PageCache.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
     <ClCompile Include="..\..\Source\KeyCache.cpp" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="..\..\Source\EmbeddedTreeDBImpl.h" />
     <ClInclude Include="..\..\Source\EmbeddedTreeDBNodeImpl.h" />
     <ClInclude Include="..\..\Source\Page.h" />
+    <ClInclude Include="..\..\Source\PageCache.h" />
     <ClInclude Include="..\..\Source\MasterFile.h" />
     <ClInclude Include="..\..\Source\KeyCache.h" />
   </ItemGroup>

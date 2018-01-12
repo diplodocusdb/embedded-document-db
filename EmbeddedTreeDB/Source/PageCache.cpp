@@ -20,19 +20,17 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
+#include "PageCache.h"
 
 namespace DiplodocusDB
 {
 
-class Page
+PageCache::PageCache()
 {
-public:
-    Page();
-    ~Page();
-};
-
 }
 
-#endif
+PageCache::~PageCache()
+{
+}
+
+}
