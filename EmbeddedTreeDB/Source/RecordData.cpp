@@ -21,3 +21,22 @@
 */
 
 #include "RecordData.h"
+
+namespace DiplodocusDB
+{
+
+RecordData::RecordData(Record::ERecordType type)
+    : m_type(type)
+{
+}
+
+RecordData::~RecordData()
+{
+}
+
+Record::ERecordType RecordData::type() const
+{
+    return m_type;
+}
+
+}

@@ -21,12 +21,17 @@
 */
 
 #include "Record.h"
+#include "RecordData.h"
 
 namespace DiplodocusDB
 {
 
 Record::Record()
-    : m_type(ERecordType::eInvalid)
+{
+}
+
+Record::Record(std::shared_ptr<RecordData> data)
+    : m_data(data)
 {
 }
 
@@ -34,12 +39,22 @@ Record::~Record()
 {
 }
 
+size_t Record::size() const
+{
+    return (8 + m_data->size());
+}
+
 void Record::load()
 {
 }
 
-void Record::save()
+void Record::save(std::ostream& s) const
 {
+    uint32_t type = (uint32_t)m_data->type();
+    s.write((char*)&type, 4);
+    uint32_t size = m_data->size();
+    s.write((char*)&size, 4);
+    m_data->serialize(s);
 }
 
 }

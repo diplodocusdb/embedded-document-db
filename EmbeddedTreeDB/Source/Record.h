@@ -23,26 +23,37 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
+#include <ostream>
+#include <memory>
+
 namespace DiplodocusDB
 {
+
+class RecordData;
 
 class Record
 {
 public:
     enum class ERecordType
     {
-        eInvalid,
-        eMasterFileMetaData
+        eInvalid = 0,
+        eMasterFileMetadata = 0x0001,
+        eKey = 0x0002,
+        eStartOfPage = 0x0F00,
+        eEndOfPage = 0x0F01
     };
 
     Record();
+    Record(std::shared_ptr<RecordData> data);
     ~Record();
 
+    size_t size() const;
+
     void load();
-    void save();
+    void save(std::ostream& s) const;
 
 private:
-    ERecordType m_type;
+    std::shared_ptr<RecordData> m_data;
 };
 
 }

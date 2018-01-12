@@ -23,4 +23,27 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDDATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDDATA_H_
 
+#include "Record.h"
+#include <ostream>
+
+namespace DiplodocusDB
+{
+
+class RecordData
+{
+public:
+    RecordData(Record::ERecordType type);
+    virtual ~RecordData();
+
+    Record::ERecordType type() const;
+
+    virtual size_t size() const = 0;
+    virtual void serialize(std::ostream& s) const = 0;
+
+private:
+    Record::ERecordType m_type;
+};
+
+}
+
 #endif
