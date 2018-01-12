@@ -29,4 +29,6 @@
 #pragma comment(lib, "DiplodocusEmbeddedTreeDB.lib")
 #endif
 
+#include "DiplodocusDB/Core/linkoptions.h"
+
 #endif
