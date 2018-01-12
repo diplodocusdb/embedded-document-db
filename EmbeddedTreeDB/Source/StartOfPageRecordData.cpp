@@ -21,3 +21,28 @@
 */
 
 #include "StartOfPageRecordData.h"
+
+namespace DiplodocusDB
+{
+
+StartOfPageRecordData::StartOfPageRecordData()
+    : RecordData(Record::ERecordType::eStartOfPage),
+    m_previousPage(0)
+{
+}
+
+StartOfPageRecordData::~StartOfPageRecordData()
+{
+}
+
+size_t StartOfPageRecordData::size() const
+{
+    return 4;
+}
+
+void StartOfPageRecordData::serialize(std::ostream& s) const
+{
+    s.write((char*)&m_previousPage, 4);
+}
+
+}

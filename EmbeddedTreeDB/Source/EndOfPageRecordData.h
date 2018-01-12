@@ -23,4 +23,24 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_ENDOFPAGERECORDDATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_ENDOFPAGERECORDDATA_H_
 
+#include "RecordData.h"
+
+namespace DiplodocusDB
+{
+
+class EndOfPageRecordData : public RecordData
+{
+public:
+    EndOfPageRecordData();
+    ~EndOfPageRecordData() override;
+
+    size_t size() const override;
+    void serialize(std::ostream& s) const override;
+
+private:
+    size_t m_nextPage;
+};
+
+}
+
 #endif

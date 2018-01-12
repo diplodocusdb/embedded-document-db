@@ -23,4 +23,24 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_STARTOFPAGERECORDDATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_STARTOFPAGERECORDDATA_H_
 
+#include "RecordData.h"
+
+namespace DiplodocusDB
+{
+
+class StartOfPageRecordData : public RecordData
+{
+public:
+    StartOfPageRecordData();
+    ~StartOfPageRecordData() override;
+
+    size_t size() const override;
+    void serialize(std::ostream& s) const override;
+
+private:
+    size_t m_previousPage;
+};
+
+}
+
 #endif

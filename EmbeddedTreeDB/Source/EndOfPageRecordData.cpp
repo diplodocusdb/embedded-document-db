@@ -21,3 +21,28 @@
 */
 
 #include "EndOfPageRecordData.h"
+
+namespace DiplodocusDB
+{
+
+EndOfPageRecordData::EndOfPageRecordData()
+    : RecordData(Record::ERecordType::eEndOfPage),
+    m_nextPage(0)
+{
+}
+
+EndOfPageRecordData::~EndOfPageRecordData()
+{
+}
+
+size_t EndOfPageRecordData::size() const
+{
+    return 4;
+}
+
+void EndOfPageRecordData::serialize(std::ostream& s) const
+{
+    s.write((char*)&m_nextPage, 4);
+}
+
+}
