@@ -27,6 +27,7 @@ namespace DiplodocusDB
 {
 
 MasterFile::MasterFile()
+    : m_pageCache(m_file)
 {
 }
 
@@ -53,10 +54,10 @@ void MasterFile::close()
 bool MasterFile::getNode(const TreeDBKey& key)
 {
     bool result = false;
-    m_file.seekg(0);
+    size_t offset = 0;
     while (!result)
     {
-        TreeDBKey readKey = readString();
+        TreeDBKey readKey = readString(offset);
         if (readKey == key)
         {
             result = true;
@@ -73,13 +74,18 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node)
     m_file.write(keyValue.c_str(), keyValue.size());
 }
 
-std::string MasterFile::readString()
+std::string MasterFile::readString(size_t& offset)
 {
     std::string result;
-    uint32_t n;
-    m_file.read((char *)&n, 4);
-    result.resize(n);
-    m_file.read(&result[0], n);
+
+    Page* page = m_pageCache.page(0);
+
+    char* ptr = (page->buffer() + offset);
+    uint32_t n = *((uint32_t*)ptr);
+    result.assign(ptr + 4, n);
+
+    offset += (4 + n);
+
     return result;
 }
 

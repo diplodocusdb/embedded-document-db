@@ -25,12 +25,36 @@
 namespace DiplodocusDB
 {
 
-PageCache::PageCache()
+PageCache::PageCache(std::fstream& file)
+    : m_file(file)
 {
 }
 
 PageCache::~PageCache()
 {
+}
+
+Page* PageCache::page(size_t i)
+{
+    Page* page = nullptr;
+    std::map<size_t, std::shared_ptr<Page> >::iterator it = m_pages.find(i);
+    if (it != m_pages.end())
+    {
+        page = it->second.get();
+    }
+    else
+    {
+        page = loadPage(i);
+    }
+    return page;
+}
+
+Page* PageCache::loadPage(size_t i)
+{
+    std::shared_ptr<Page> page = std::make_shared<Page>();
+    page->load(m_file, i);
+    m_pages.emplace(i, page);
+    return page.get();
 }
 
 }

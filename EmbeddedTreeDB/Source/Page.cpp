@@ -33,4 +33,16 @@ Page::~Page()
 {
 }
 
+char* Page::buffer()
+{
+    return m_buffer;
+}
+
+void Page::load(std::fstream& file,
+                size_t i)
+{
+    file.seekg(0);
+    file.read(m_buffer, 4096);
+}
+
 }

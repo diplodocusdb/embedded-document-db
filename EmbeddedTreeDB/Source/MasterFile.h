@@ -23,8 +23,9 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 
-#include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 #include "EmbeddedTreeDBNodeImpl.h"
+#include "PageCache.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 #include <boost/filesystem/path.hpp>
 #include <fstream>
 #include <memory>
@@ -46,10 +47,11 @@ public:
     void commitNode(const EmbeddedTreeDBNodeImpl& node);
 
 private:
-    std::string readString();
+    std::string readString(size_t& offset);
 
 private:
     std::fstream m_file;
+    PageCache m_pageCache;
 };
 
 }

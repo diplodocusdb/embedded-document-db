@@ -23,6 +23,8 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
 
+#include <fstream>
+
 namespace DiplodocusDB
 {
 
@@ -31,6 +33,13 @@ class Page
 public:
     Page();
     ~Page();
+
+    char* buffer();
+
+    void load(std::fstream& file, size_t i);
+
+private:
+    char m_buffer[4096];
 };
 
 }

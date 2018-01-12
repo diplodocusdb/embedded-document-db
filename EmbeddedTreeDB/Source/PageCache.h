@@ -23,14 +23,28 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGECACHE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGECACHE_H_
 
+#include "Page.h"
+#include <fstream>
+#include <map>
+#include <memory>
+
 namespace DiplodocusDB
 {
 
 class PageCache
 {
 public:
-    PageCache();
+    PageCache(std::fstream& file);
     ~PageCache();
+
+    Page* page(size_t i);
+
+private:
+    Page* loadPage(size_t i);
+
+private:
+    std::fstream& m_file;
+    std::map<size_t, std::shared_ptr<Page> > m_pages;
 };
 
 }
