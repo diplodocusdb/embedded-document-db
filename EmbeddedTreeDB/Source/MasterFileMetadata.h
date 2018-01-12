@@ -23,16 +23,20 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 
+#include "RecordData.h"
 #include "DiplodocusDB/Core/VersionNumber.h"
 
 namespace DiplodocusDB
 {
 
-class MasterFileMetadata
+class MasterFileMetadata : public RecordData
 {
 public:
     MasterFileMetadata();
-    ~MasterFileMetadata();
+    ~MasterFileMetadata() override;
+
+    size_t size() const override;
+    void serialize(std::ostream& s) const override;
 
 private:
     VersionNumber m_fileFormatVersion;

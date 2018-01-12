@@ -26,12 +26,26 @@ namespace DiplodocusDB
 {
 
 MasterFileMetadata::MasterFileMetadata()
-    : m_fileFormatVersion(1, 0, 0)
+    : RecordData(Record::ERecordType::eMasterFileMetadata),
+    m_fileFormatVersion(1, 0, 0)
 {
 }
 
 MasterFileMetadata::~MasterFileMetadata()
 {
+}
+
+size_t MasterFileMetadata::size() const
+{
+    return 12;
+}
+
+void MasterFileMetadata::serialize(std::ostream& s) const
+{
+    for (unsigned int v : m_fileFormatVersion.value())
+    {
+        s.write((char*)&v, 4);
+    }
 }
 
 }

@@ -27,7 +27,8 @@ namespace DiplodocusDB
 {
 
 MasterFile::MasterFile()
-    : m_pageCache(m_file)
+    : m_metadata(std::make_shared<MasterFileMetadata>()),
+    m_pageCache(m_file)
 {
 }
 
@@ -38,6 +39,12 @@ MasterFile::~MasterFile()
 void MasterFile::create(const boost::filesystem::path& path)
 {
     std::fstream file(path.c_str(), std::fstream::out | std::fstream::binary);
+
+    Page page(0);
+    Record metadataRecord(m_metadata);
+    page.appendRecord(metadataRecord);
+    page.save(file);
+
     file.close();
 }
 

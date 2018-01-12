@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 
+#include "MasterFileMetadata.h"
 #include "EmbeddedTreeDBNodeImpl.h"
 #include "PageCache.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
@@ -50,6 +51,7 @@ private:
     std::string readString(size_t& offset);
 
 private:
+    std::shared_ptr<MasterFileMetadata> m_metadata;
     std::fstream m_file;
     PageCache m_pageCache;
 };
