@@ -54,10 +54,13 @@ bool MasterFile::getNode(const TreeDBKey& key)
 {
     bool result = false;
     m_file.seekg(0);
-    TreeDBKey readKey = readString();
-    if (key == readKey)
+    while (!result)
     {
-        result = true;
+        TreeDBKey readKey = readString();
+        if (readKey == key)
+        {
+            result = true;
+        }
     }
     return result;
 }
