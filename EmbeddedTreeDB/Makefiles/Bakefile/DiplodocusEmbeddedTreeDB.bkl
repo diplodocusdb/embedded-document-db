@@ -44,6 +44,8 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, Boost
         ../../Source/Record.h
         ../../Source/RecordData.h
         ../../Source/KeyRecordData.h
+        ../../Source/StartOfPageRecordData.h
+        ../../Source/EndOfPageRecordData.h
         ../../Source/Page.h
         ../../Source/PageCache.h
         ../../Source/MasterFile.h
@@ -60,6 +62,8 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, Boost
         ../../Source/Record.cpp
         ../../Source/RecordData.cpp
         ../../Source/KeyRecordData.cpp
+        ../../Source/StartOfPageRecordData.cpp
+        ../../Source/EndOfPageRecordData.cpp
         ../../Source/Page.cpp
         ../../Source/PageCache.cpp
         ../../Source/MasterFileMetadata.cpp
