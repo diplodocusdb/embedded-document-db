@@ -51,8 +51,8 @@ Page* PageCache::page(size_t i)
 
 Page* PageCache::loadPage(size_t i)
 {
-    std::shared_ptr<Page> page = std::make_shared<Page>();
-    page->load(m_file, i);
+    std::shared_ptr<Page> page = std::make_shared<Page>(i);
+    page->load(m_file);
     m_pages.emplace(i, page);
     return page.get();
 }

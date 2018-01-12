@@ -21,11 +21,17 @@
 */
 
 #include "Page.h"
+#include "StartOfPageRecordData.h"
+#include "EndOfPageRecordData.h"
+#include <sstream>
 
 namespace DiplodocusDB
 {
 
-Page::Page()
+Page::Page(size_t index)
+    : m_index(index), m_bufferSize(0),
+    m_startOfPageRecord(std::make_shared<StartOfPageRecordData>()),
+    m_endOfPageRecord(std::make_shared<EndOfPageRecordData>())
 {
 }
 
@@ -38,10 +44,25 @@ char* Page::buffer()
     return m_buffer;
 }
 
-void Page::load(std::fstream& file,
-                size_t i)
+void Page::appendRecord(const Record& record)
 {
-    file.seekg(0);
+    std::stringstream stream;
+    record.save(stream);
+    memcpy(m_buffer + m_bufferSize, stream.str().c_str(), record.size());
+    m_bufferSize += record.size();
+}
+
+void Page::save(std::fstream& file)
+{
+    file.seekp(m_index * 4096);
+    m_startOfPageRecord.save(file);
+    file.write(m_buffer, m_bufferSize);
+    m_endOfPageRecord.save(file);
+}
+
+void Page::load(std::fstream& file)
+{
+    file.seekg(m_index * 4096);
     file.read(m_buffer, 4096);
 }
 

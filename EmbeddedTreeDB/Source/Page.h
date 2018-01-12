@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
 
+#include "Record.h"
 #include <fstream>
 
 namespace DiplodocusDB
@@ -31,15 +32,22 @@ namespace DiplodocusDB
 class Page
 {
 public:
-    Page();
+    Page(size_t index);
     ~Page();
 
     char* buffer();
 
-    void load(std::fstream& file, size_t i);
+    void appendRecord(const Record& record);
+
+    void save(std::fstream& file);
+    void load(std::fstream& file);
 
 private:
+    size_t m_index;
     char m_buffer[4096];
+    size_t m_bufferSize;
+    Record m_startOfPageRecord;
+    Record m_endOfPageRecord;
 };
 
 }
