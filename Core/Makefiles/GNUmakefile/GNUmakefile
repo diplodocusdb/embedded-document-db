@@ -33,6 +33,11 @@ override CXXFLAGS += -O2
 else ifneq (,$(config))
 $(warning Unknown configuration "$(config)")
 endif
+#
+# Additionally, this makefile is customizable with the following
+# settings:
+#
+#      ISHIKO_ERRORS_ROOT  Path to the Ishiko Errors installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -54,6 +59,16 @@ _builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(bui
 _builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
 $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
 endif
+
+# ------------
+# Configurable settings:
+# 
+
+# Path to the Ishiko Errors installation
+ISHIKO_ERRORS_ROOT ?= $(ISHIKO)/Errors
+
+# ------------
+
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a
 
 ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a: $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o
@@ -61,10 +76,10 @@ all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusT
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o: ../../Source/TreeDBKey.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBKey.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBKey.cpp
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o: ../../Source/TreeDBNode.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBNode.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBNode.cpp
 
 clean:
 	rm -f $(_builddir)*.o

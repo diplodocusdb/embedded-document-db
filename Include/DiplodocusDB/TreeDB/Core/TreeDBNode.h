@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 
 #include "TreeDBKey.h"
+#include "Ishiko/Errors/Error.h"
 #include <memory>
 
 namespace DiplodocusDB
@@ -39,7 +40,7 @@ public:
 
     virtual std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) = 0;
 
-    virtual void commit() = 0;
+    virtual void commit(Ishiko::Error& error) = 0;
 };
 
 }
