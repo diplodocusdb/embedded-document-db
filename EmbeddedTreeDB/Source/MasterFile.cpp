@@ -43,12 +43,13 @@ void MasterFile::create(const boost::filesystem::path& path,
     m_repository.create(path, error);
     if (!error)
     {
-        Page page(m_repository, 0);
+        Page* page = m_repository.allocatePage(error);
+        
         Record metadataRecord(m_metadata);
-        page.appendRecord(metadataRecord, error);
+        page->appendRecord(metadataRecord, error);
         if (!error)
         {
-            page.save(error);
+            page->save(error);
         }
     }
 }

@@ -34,6 +34,13 @@ PageCache::~PageCache()
 {
 }
 
+Page* PageCache::allocatePage(Ishiko::Error& error)
+{
+    std::shared_ptr<Page> page = std::make_shared<Page>(m_file, 0);
+    m_pages.emplace(0, page);
+    return page.get();
+}
+
 Page* PageCache::page(size_t i,
                       Ishiko::Error& error)
 {

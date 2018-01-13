@@ -42,6 +42,7 @@ public:
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
+    Page* allocatePage(Ishiko::Error& error);
     Page* page(size_t i, Ishiko::Error& error);
 
     std::fstream& file();

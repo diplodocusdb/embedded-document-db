@@ -40,6 +40,7 @@ public:
     PageCache(PageFileRepository& file);
     ~PageCache();
 
+    Page* allocatePage(Ishiko::Error& error);
     Page* page(size_t i, Ishiko::Error& error);
 
 private:

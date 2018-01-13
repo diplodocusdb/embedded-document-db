@@ -64,6 +64,11 @@ void PageFileRepository::close()
     m_file.close();
 }
 
+Page* PageFileRepository::allocatePage(Ishiko::Error& error)
+{
+    return m_pageCache.allocatePage(error);
+}
+
 Page* PageFileRepository::page(size_t i,
                                Ishiko::Error& error)
 {
