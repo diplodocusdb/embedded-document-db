@@ -51,6 +51,7 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, Ishik
         ../../Source/EndOfPageRecordData.h
         ../../Source/Page.h
         ../../Source/PageCache.h
+        ../../Source/PaginatedFile.h
         ../../Source/MasterFile.h
         ../../Source/MasterFileMetadata.h
         ../../Source/KeyCache.h
@@ -71,6 +72,7 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, Ishik
         ../../Source/EndOfPageRecordData.cpp
         ../../Source/Page.cpp
         ../../Source/PageCache.cpp
+        ../../Source/PaginatedFile.cpp
         ../../Source/MasterFileMetadata.cpp
         ../../Source/MasterFile.cpp
         ../../Source/KeyCache.cpp
