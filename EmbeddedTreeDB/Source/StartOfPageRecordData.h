@@ -34,11 +34,15 @@ public:
     StartOfPageRecordData();
     ~StartOfPageRecordData() override;
 
+    void setSize(size_t size);
+
     size_t size() const override;
-    void serialize(std::ostream& s) const override;
+    void read(const char* buffer) override;
+    void write(std::ostream& s, Ishiko::Error& error) const override;
 
 private:
     size_t m_previousPage;
+    size_t m_size;
 };
 
 }

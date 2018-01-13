@@ -40,9 +40,18 @@ size_t EndOfPageRecordData::size() const
     return 4;
 }
 
-void EndOfPageRecordData::serialize(std::ostream& s) const
+void EndOfPageRecordData::read(const char* buffer)
+{
+}
+
+void EndOfPageRecordData::write(std::ostream& s,
+                                Ishiko::Error& error) const
 {
     s.write((char*)&m_nextPage, 4);
+    if (!s.good())
+    {
+        error = -1;
+    }
 }
 
 }

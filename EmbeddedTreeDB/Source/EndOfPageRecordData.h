@@ -35,7 +35,8 @@ public:
     ~EndOfPageRecordData() override;
 
     size_t size() const override;
-    void serialize(std::ostream& s) const override;
+    void read(const char* buffer);
+    void write(std::ostream& s, Ishiko::Error& error) const override;
 
 private:
     size_t m_nextPage;

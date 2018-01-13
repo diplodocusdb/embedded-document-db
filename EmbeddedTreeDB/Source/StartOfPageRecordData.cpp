@@ -35,14 +35,34 @@ StartOfPageRecordData::~StartOfPageRecordData()
 {
 }
 
-size_t StartOfPageRecordData::size() const
+void StartOfPageRecordData::setSize(size_t size)
 {
-    return 4;
+    m_size = size;
 }
 
-void StartOfPageRecordData::serialize(std::ostream& s) const
+size_t StartOfPageRecordData::size() const
+{
+    return 8;
+}
+
+void StartOfPageRecordData::read(const char* buffer)
+{
+}
+
+void StartOfPageRecordData::write(std::ostream& s,
+                                  Ishiko::Error& error) const
 {
     s.write((char*)&m_previousPage, 4);
+    if (!s.good())
+    {
+        error = -1;
+    }
+
+    s.write((char*)&m_size, 4);
+    if (!s.good())
+    {
+        error = -1;
+    }
 }
 
 }
