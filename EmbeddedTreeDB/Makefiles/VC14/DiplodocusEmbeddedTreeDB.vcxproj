@@ -162,7 +162,7 @@
     <ClCompile Include="..\..\Source\EndOfPageRecordData.cpp" />
     <ClCompile Include="..\..\Source\Page.cpp" />
     <ClCompile Include="..\..\Source\PageCache.cpp" />
-    <ClCompile Include="..\..\Source\PaginatedFile.cpp" />
+    <ClCompile Include="..\..\Source\PageFileRepository.cpp" />
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
     <ClCompile Include="..\..\Source\KeyCache.cpp" />
@@ -182,7 +182,7 @@
     <ClInclude Include="..\..\Source\EndOfPageRecordData.h" />
     <ClInclude Include="..\..\Source\Page.h" />
     <ClInclude Include="..\..\Source\PageCache.h" />
-    <ClInclude Include="..\..\Source\PaginatedFile.h" />
+    <ClInclude Include="..\..\Source\PageFileRepository.h" />
     <ClInclude Include="..\..\Source\MasterFile.h" />
     <ClInclude Include="..\..\Source\MasterFileMetadata.h" />
     <ClInclude Include="..\..\Source\KeyCache.h" />

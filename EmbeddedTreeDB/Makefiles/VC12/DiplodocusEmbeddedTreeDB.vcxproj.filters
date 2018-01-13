@@ -59,7 +59,7 @@
     <ClInclude Include="..\..\Source\PageCache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\PaginatedFile.h">
+    <ClInclude Include="..\..\Source\PageFileRepository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MasterFile.h">
@@ -109,7 +109,7 @@
     <ClCompile Include="..\..\Source\PageCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\PaginatedFile.cpp">
+    <ClCompile Include="..\..\Source\PageFileRepository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp">
