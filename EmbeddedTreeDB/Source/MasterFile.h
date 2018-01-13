@@ -53,8 +53,8 @@ private:
     bool readValue(size_t& offset, std::string& value, Ishiko::Error& error);
 
 private:
+    PaginatedFile m_file;
     std::shared_ptr<MasterFileMetadata> m_metadata;
-    PaginatedFile m_file2;
 };
 
 }

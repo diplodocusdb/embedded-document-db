@@ -40,10 +40,10 @@ MasterFile::~MasterFile()
 void MasterFile::create(const boost::filesystem::path& path,
                         Ishiko::Error& error)
 {
-    m_file2.create(path, error);
+    m_file.create(path, error);
     if (!error)
     {
-        Page page(m_file2, 0);
+        Page page(m_file, 0);
         Record metadataRecord(m_metadata);
         page.appendRecord(metadataRecord, error);
         if (!error)
@@ -56,12 +56,12 @@ void MasterFile::create(const boost::filesystem::path& path,
 void MasterFile::open(const boost::filesystem::path& path,
                       Ishiko::Error& error)
 {
-    m_file2.open(path, error);
+    m_file.open(path, error);
 }
 
 void MasterFile::close()
 {
-    m_file2.close();
+    m_file.close();
 }
 
 bool MasterFile::findNode(const TreeDBKey& key,
@@ -100,7 +100,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
 void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
                             Ishiko::Error& error)
 {
-    Page* page = m_file2.page(0, error);
+    Page* page = m_file.page(0, error);
     if (!error)
     {
         std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
@@ -129,7 +129,7 @@ std::string MasterFile::readString(size_t& offset,
 {
     std::string result;
 
-    Page* page = m_file2.page(0, error);
+    Page* page = m_file.page(0, error);
     if (!error)
     {
         Record record;
@@ -153,7 +153,7 @@ bool MasterFile::readValue(size_t& offset,
 {
     bool result = false;
 
-    Page* page = m_file2.page(0, error);
+    Page* page = m_file.page(0, error);
     if (!error)
     {
         Record record;
