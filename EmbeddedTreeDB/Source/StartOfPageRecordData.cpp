@@ -45,7 +45,8 @@ size_t StartOfPageRecordData::size() const
     return 8;
 }
 
-void StartOfPageRecordData::read(const char* buffer)
+void StartOfPageRecordData::read(const char* buffer,
+                                 size_t recordDataSize)
 {
 }
 

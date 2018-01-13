@@ -39,13 +39,20 @@ KeyRecordData::~KeyRecordData()
 {
 }
 
+const std::string& KeyRecordData::key() const
+{
+    return m_key;
+}
+
 size_t KeyRecordData::size() const
 {
     return m_key.size();
 }
 
-void KeyRecordData::read(const char* buffer)
+void KeyRecordData::read(const char* buffer,
+                         size_t recordDataSize)
 {
+    m_key.assign(buffer, recordDataSize);
 }
 
 void KeyRecordData::write(std::ostream& s,

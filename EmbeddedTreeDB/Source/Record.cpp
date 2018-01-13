@@ -43,9 +43,26 @@ Record::~Record()
 {
 }
 
+Record::ERecordType Record::type() const
+{
+    if (m_data)
+    {
+        return m_data->type();
+    }
+    else
+    {
+        return ERecordType::eInvalid;
+    }
+}
+
 size_t Record::size() const
 {
     return (8 + m_data->size());
+}
+
+RecordData* Record::data()
+{
+    return m_data.get();
 }
 
 void Record::read(const char* buffer,
@@ -81,7 +98,8 @@ void Record::read(const char* buffer,
     
     if (!error)
     {
-        m_data->read(buffer + 4);
+        uint32_t size = *((uint32_t*)(buffer + 4));
+        m_data->read(buffer + 8, size);
     }
 }
 

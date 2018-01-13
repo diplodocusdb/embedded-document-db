@@ -40,8 +40,13 @@ size_t MasterFileMetadata::size() const
     return 12;
 }
 
-void MasterFileMetadata::serialize(std::ostream& s,
-                                   Ishiko::Error& error) const
+void MasterFileMetadata::read(const char* buffer,
+                              size_t recordDataSize)
+{
+}
+
+void MasterFileMetadata::write(std::ostream& s,
+                               Ishiko::Error& error) const
 {
     for (unsigned int v : m_fileFormatVersion.value())
     {

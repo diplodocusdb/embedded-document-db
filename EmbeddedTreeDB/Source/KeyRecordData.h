@@ -36,8 +36,10 @@ public:
     KeyRecordData(const TreeDBKey& key);
     ~KeyRecordData() override;
 
+    const std::string& key() const;
+
     size_t size() const override;
-    void read(const char* buffer) override;
+    void read(const char* buffer, size_t recordDataSize) override;
     void write(std::ostream& s, Ishiko::Error& error) const override;
 
 private:

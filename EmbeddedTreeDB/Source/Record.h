@@ -48,7 +48,9 @@ public:
     Record(std::shared_ptr<RecordData> data);
     ~Record();
 
+    ERecordType type() const;
     size_t size() const;
+    RecordData* data();
 
     void read(const char* buffer, Ishiko::Error& error);
     void write(std::ostream& s, Ishiko::Error& error) const;

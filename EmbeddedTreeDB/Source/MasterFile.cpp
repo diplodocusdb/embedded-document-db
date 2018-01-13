@@ -118,11 +118,16 @@ std::string MasterFile::readString(size_t& offset,
     Page* page = m_pageCache.page(0, error);
     if (!error)
     {
-        char* ptr = (page->buffer() + offset);
-        uint32_t n = *((uint32_t*)ptr);
-        result.assign(ptr + 4, n);
-
-        offset += (4 + n);
+        Record record;
+        record.read(page->buffer() + offset, error);
+        if (!error)
+        {
+            if (record.type() == Record::ERecordType::eKey)
+            {
+                result = (static_cast<KeyRecordData*>(record.data()))->key();
+            }
+            offset += record.size();
+        }
     }
 
     return result;

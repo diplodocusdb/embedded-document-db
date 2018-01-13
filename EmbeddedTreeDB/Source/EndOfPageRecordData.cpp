@@ -40,7 +40,8 @@ size_t EndOfPageRecordData::size() const
     return 4;
 }
 
-void EndOfPageRecordData::read(const char* buffer)
+void EndOfPageRecordData::read(const char* buffer,
+                               size_t recordDataSize)
 {
 }
 
