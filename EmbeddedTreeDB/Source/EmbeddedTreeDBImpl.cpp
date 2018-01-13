@@ -73,10 +73,12 @@ std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::getNode(const TreeDBKey& key,
                                                         Ishiko::Error& error)
 {
     std::shared_ptr<TreeDBNode> result;
-    bool found = m_masterFile.getNode(key, error);
+
+    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key);
+    bool found = m_masterFile.findNode(key, *temp, error);
     if (!error && found)
     {
-        result = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key);
+        result = temp;
     }
     return result;
 }

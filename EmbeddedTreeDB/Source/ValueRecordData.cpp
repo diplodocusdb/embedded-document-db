@@ -41,6 +41,11 @@ ValueRecordData::~ValueRecordData()
 {
 }
 
+const std::string& ValueRecordData::buffer() const
+{
+    return m_buffer;
+}
+
 size_t ValueRecordData::size() const
 {
     return (8 + m_buffer.size());
@@ -49,6 +54,7 @@ size_t ValueRecordData::size() const
 void ValueRecordData::read(const char* buffer,
                            size_t recordDataSize)
 {
+    m_buffer.assign(buffer + 8, recordDataSize - 8);
 }
 
 void ValueRecordData::write(std::ostream& s,

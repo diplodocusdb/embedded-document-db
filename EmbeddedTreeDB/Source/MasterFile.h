@@ -45,11 +45,12 @@ public:
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
-    bool getNode(const TreeDBKey& key, Ishiko::Error& error);
+    bool findNode(const TreeDBKey& key, EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
     void commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
 
 private:
     std::string readString(size_t& offset, Ishiko::Error& error);
+    bool readValue(size_t& offset, std::string& value, Ishiko::Error& error);
 
 private:
     std::shared_ptr<MasterFileMetadata> m_metadata;

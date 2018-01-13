@@ -33,6 +33,8 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
 
     new HeapAllocationErrorsTest("open test 1", EmbeddedTreeDBOpenTest1, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 2", EmbeddedTreeDBOpenTest2, embeddedTreeDBTestSequence);
+    new HeapAllocationErrorsTest("open test 3", EmbeddedTreeDBOpenTest3, embeddedTreeDBTestSequence);
+    new HeapAllocationErrorsTest("open test 4", EmbeddedTreeDBOpenTest4, embeddedTreeDBTestSequence);
 
     new FileComparisonTest("append test 1", EmbeddedTreeDBNodeAppendTest1, embeddedTreeDBTestSequence);
     new FileComparisonTest("append test 2", EmbeddedTreeDBNodeAppendTest2, embeddedTreeDBTestSequence);
@@ -80,9 +82,10 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test)
     db.open(inputPath, error);
     if (!error)
     {
-        if (db.root().child("key1", error))
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().child("key1", error);
+        if (node && !error)
         {
-            if (!error)
+            if (node->value().type() == DiplodocusDB::EPrimitiveDataType::eNULL)
             {
                 result = TestResult::ePassed;
             }
@@ -104,10 +107,64 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest2(Test& test)
     db.open(inputPath, error);
     if (!error)
     {
-        if ((db.root().child("key1", error)) &&
-            (db.root().child("key2", error)))
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node1 = db.root().child("key1", error);
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node2 = db.root().child("key2", error);
+        if (node1 && node2 && !error)
         {
-            if (!error)
+            if ((node1->value().type() == DiplodocusDB::EPrimitiveDataType::eNULL) &&
+                (node2->value().type() == DiplodocusDB::EPrimitiveDataType::eNULL))
+            {
+                result = TestResult::ePassed;
+            }
+        }
+    }
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBOpenTest3(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest3.dpdb");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().child("key1", error);
+        if (node && !error)
+        {
+            if (node->value().asString() == "value1")
+            {
+                result = TestResult::ePassed;
+            }
+        }
+    }
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBOpenTest4(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest4.dpdb");
+
+    DiplodocusDB::EmbeddedTreeDB db;
+
+    Ishiko::Error error;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node1 = db.root().child("key1", error);
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node2 = db.root().child("key2", error);
+        if (node1 && node2 && !error)
+        {
+            if ((node1->value().asString() == "value1") &&
+                (node2->value().asString() == "value2"))
             {
                 result = TestResult::ePassed;
             }

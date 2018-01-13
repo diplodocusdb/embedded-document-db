@@ -74,8 +74,9 @@ void MasterFile::close()
     m_file.close();
 }
 
-bool MasterFile::getNode(const TreeDBKey& key,
-                         Ishiko::Error& error)
+bool MasterFile::findNode(const TreeDBKey& key,
+                          EmbeddedTreeDBNodeImpl& node,
+                          Ishiko::Error& error)
 {
     bool result = false;
     size_t offset = 0;
@@ -88,6 +89,18 @@ bool MasterFile::getNode(const TreeDBKey& key,
         }
         if (readKey == key)
         {
+            std::string value;
+            bool found = readValue(offset, value, error);
+            if (error)
+            {
+                break;
+            }
+
+            if (found)
+            {
+                node.value().setString(value);
+            }
+
             result = true;
         }
     }
@@ -136,6 +149,31 @@ std::string MasterFile::readString(size_t& offset,
             if (record.type() == Record::ERecordType::eKey)
             {
                 result = (static_cast<KeyRecordData*>(record.data()))->key();
+            }
+            offset += record.size();
+        }
+    }
+
+    return result;
+}
+
+bool MasterFile::readValue(size_t& offset,
+                           std::string& value,
+                           Ishiko::Error& error)
+{
+    bool result = false;
+
+    Page* page = m_pageCache.page(0, error);
+    if (!error)
+    {
+        Record record;
+        record.read(page->buffer() + offset, error);
+        if (!error)
+        {
+            if (record.type() == Record::ERecordType::eValue)
+            {
+                value = (static_cast<ValueRecordData*>(record.data()))->buffer();
+                result = true;
             }
             offset += record.size();
         }
