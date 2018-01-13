@@ -151,11 +151,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TreeDBKey.cpp" />
+    <ClCompile Include="..\..\Source\TreeDBValue.cpp" />
     <ClCompile Include="..\..\Source\TreeDBNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\TreeDBCore.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBKey.h" />
+    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBValue.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBNode.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\linkoptions.h" />
   </ItemGroup>

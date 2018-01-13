@@ -71,12 +71,15 @@ ISHIKO_ERRORS_ROOT ?= $(ISHIKO)/Errors
 
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a
 
-../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a: $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o
-	$(AR) rcu $@ $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o
+../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a: $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o
+	$(AR) rcu $@ $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o: ../../Source/TreeDBKey.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBKey.cpp
+
+$(_builddir)DiplodocusTreeDBCore_TreeDBValue.o: ../../Source/TreeDBValue.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBValue.cpp
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o: ../../Source/TreeDBNode.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBNode.cpp
