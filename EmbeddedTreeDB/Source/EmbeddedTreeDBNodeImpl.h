@@ -36,11 +36,11 @@ public:
     EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key);
     ~EmbeddedTreeDBNodeImpl() override;
 
-    std::shared_ptr<TreeDBNode> child(const TreeDBKey& key) override;
+    std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) override;
 
     std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) override;
 
-    void commit() override;
+    void commit(Ishiko::Error& error) override;
 
     const TreeDBKey& key() const;
 

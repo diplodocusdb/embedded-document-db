@@ -36,9 +36,10 @@ EmbeddedTreeDBNodeImpl::~EmbeddedTreeDBNodeImpl()
 {
 }
 
-std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key)
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key,
+                                                          Ishiko::Error& error)
 {
-    return m_db->getNode(key);
+    return m_db->getNode(key, error);
 }
 
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
@@ -46,9 +47,9 @@ std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
     return m_db->createNode(key);
 }
 
-void EmbeddedTreeDBNodeImpl::commit()
+void EmbeddedTreeDBNodeImpl::commit(Ishiko::Error& error)
 {
-    m_db->commitNode(*this);
+    m_db->commitNode(*this, error);
 }
 
 const TreeDBKey& EmbeddedTreeDBNodeImpl::key() const

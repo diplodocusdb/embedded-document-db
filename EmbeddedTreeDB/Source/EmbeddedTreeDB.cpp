@@ -35,14 +35,16 @@ EmbeddedTreeDB::~EmbeddedTreeDB()
 {
 }
 
-void EmbeddedTreeDB::create(const boost::filesystem::path& path)
+void EmbeddedTreeDB::create(const boost::filesystem::path& path,
+                            Ishiko::Error& error)
 {
-    m_impl->create(path);
+    m_impl->create(path, error);
 }
 
-void EmbeddedTreeDB::open(const boost::filesystem::path& path)
+void EmbeddedTreeDB::open(const boost::filesystem::path& path,
+                          Ishiko::Error& error)
 {
-    m_impl->open(path);
+    m_impl->open(path, error);
 }
 
 void EmbeddedTreeDB::close()

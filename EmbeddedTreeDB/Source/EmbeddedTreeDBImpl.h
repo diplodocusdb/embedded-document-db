@@ -26,6 +26,7 @@
 #include "MasterFile.h"
 #include "KeyCache.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
+#include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
 
 namespace DiplodocusDB
@@ -37,15 +38,15 @@ public:
     EmbeddedTreeDBImpl();
     ~EmbeddedTreeDBImpl();
 
-    void create(const boost::filesystem::path& path);
-    void open(const boost::filesystem::path& path);
+    void create(const boost::filesystem::path& path, Ishiko::Error& error);
+    void open(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
     TreeDBNode& root();
 
     std::shared_ptr<TreeDBNode> createNode(const TreeDBKey& key);
-    std::shared_ptr<TreeDBNode> getNode(const TreeDBKey& key);
-    void commitNode(const EmbeddedTreeDBNodeImpl& node);
+    std::shared_ptr<TreeDBNode> getNode(const TreeDBKey& key, Ishiko::Error& error);
+    void commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
 
 private:
     MasterFile m_masterFile;
