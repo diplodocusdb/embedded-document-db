@@ -36,5 +36,6 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest2(Test& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest1(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest2(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest3(FileComparisonTest& test);
+TestResult::EOutcome EmbeddedTreeDBNodeAppendTest4(FileComparisonTest& test);
 
 #endif

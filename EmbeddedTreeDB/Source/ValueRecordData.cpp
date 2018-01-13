@@ -58,6 +58,10 @@ void ValueRecordData::write(std::ostream& s,
     if (!error)
     {
         s.write(m_buffer.c_str(), m_buffer.size());
+        if (!s.good())
+        {
+            error = -1;
+        }
     }
 }
 
