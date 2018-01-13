@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_VALUERECORDDATA_H_
 
 #include "RecordData.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBValue.h"
 
 namespace DiplodocusDB
 {
@@ -32,6 +33,7 @@ class ValueRecordData : public RecordData
 {
 public:
     ValueRecordData();
+    ValueRecordData(const TreeDBValue& value);
     ~ValueRecordData() override;
 
     size_t size() const override;
@@ -39,6 +41,10 @@ public:
     void write(std::ostream& s, Ishiko::Error& error) const override;
 
 private:
+    void writeDataType(std::ostream& s, Ishiko::Error& error) const;
+
+private:
+    DataType m_type;
     std::string m_buffer;
 };
 

@@ -39,6 +39,11 @@ const DataType& TreeDBValue::type() const
     return m_type;
 }
 
+const std::string& TreeDBValue::asString() const
+{
+    return m_string;
+}
+
 void TreeDBValue::setString(const std::string& value)
 {
     m_type = EPrimitiveDataType::eUTF8String;

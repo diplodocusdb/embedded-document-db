@@ -37,6 +37,8 @@ public:
 
     const DataType& type() const;
 
+    const std::string& asString() const;
+
     void setString(const std::string& value);
 
 private:

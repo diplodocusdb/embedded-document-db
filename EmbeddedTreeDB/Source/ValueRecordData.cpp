@@ -26,7 +26,14 @@ namespace DiplodocusDB
 {
 
 ValueRecordData::ValueRecordData()
-    : RecordData(Record::ERecordType::eValue)
+    : RecordData(Record::ERecordType::eValue),
+    m_type(EPrimitiveDataType::eNULL)
+{
+}
+
+ValueRecordData::ValueRecordData(const TreeDBValue& value)
+    : RecordData(Record::ERecordType::eValue),
+    m_type(value.type()), m_buffer(value.asString())
 {
 }
 
@@ -36,7 +43,7 @@ ValueRecordData::~ValueRecordData()
 
 size_t ValueRecordData::size() const
 {
-    return m_buffer.size();
+    return (8 + m_buffer.size());
 }
 
 void ValueRecordData::read(const char* buffer,
@@ -47,6 +54,28 @@ void ValueRecordData::read(const char* buffer,
 void ValueRecordData::write(std::ostream& s,
                             Ishiko::Error& error) const
 {
+    writeDataType(s, error);
+    if (!error)
+    {
+        s.write(m_buffer.c_str(), m_buffer.size());
+    }
+}
+
+void ValueRecordData::writeDataType(std::ostream& s,
+                                    Ishiko::Error& error) const
+{
+    uint32_t primitiveType = (uint32_t)m_type.primitiveType();
+    s.write((char*)&primitiveType, 4);
+    if (!s.good())
+    {
+        error = -1;
+    }
+    uint32_t modifier = (uint32_t)m_type.modifier();
+    s.write((char*)&modifier, 4);
+    if (!s.good())
+    {
+        error = -1;
+    }
 }
 
 }

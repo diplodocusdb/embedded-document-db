@@ -108,7 +108,7 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
         {
             if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
             {
-                std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>();
+                std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
                 Record record(recordData);
                 page->appendRecord(record, error);
             }
