@@ -21,3 +21,23 @@
 */
 
 #include "PaginatedFile.h"
+
+namespace DiplodocusDB
+{
+
+PaginatedFile::PaginatedFile(std::fstream& file)
+    : m_pageCache(file)
+{
+}
+
+PaginatedFile::~PaginatedFile()
+{
+}
+
+Page* PaginatedFile::page(size_t i,
+                          Ishiko::Error& error)
+{
+    return m_pageCache.page(i, error);
+}
+
+}

@@ -25,7 +25,7 @@
 
 #include "MasterFileMetadata.h"
 #include "EmbeddedTreeDBNodeImpl.h"
-#include "PageCache.h"
+#include "PaginatedFile.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
@@ -55,7 +55,7 @@ private:
 private:
     std::shared_ptr<MasterFileMetadata> m_metadata;
     std::fstream m_file;
-    PageCache m_pageCache;
+    PaginatedFile m_file2;
 };
 
 }

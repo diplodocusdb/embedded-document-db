@@ -30,7 +30,7 @@ namespace DiplodocusDB
 
 MasterFile::MasterFile()
     : m_metadata(std::make_shared<MasterFileMetadata>()),
-    m_pageCache(m_file)
+   m_file2(m_file)
 {
 }
 
@@ -110,7 +110,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
 void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
                             Ishiko::Error& error)
 {
-    Page* page = m_pageCache.page(0, error);
+    Page* page = m_file2.page(0, error);
     if (!error)
     {
         std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
@@ -139,7 +139,7 @@ std::string MasterFile::readString(size_t& offset,
 {
     std::string result;
 
-    Page* page = m_pageCache.page(0, error);
+    Page* page = m_file2.page(0, error);
     if (!error)
     {
         Record record;
@@ -163,7 +163,7 @@ bool MasterFile::readValue(size_t& offset,
 {
     bool result = false;
 
-    Page* page = m_pageCache.page(0, error);
+    Page* page = m_file2.page(0, error);
     if (!error)
     {
         Record record;

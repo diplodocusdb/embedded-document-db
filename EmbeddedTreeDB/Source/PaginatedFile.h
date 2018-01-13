@@ -23,4 +23,26 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGINATEDFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGINATEDFILE_H_
 
+#include "Page.h"
+#include "PageCache.h"
+#include "Ishiko/Errors/Error.h"
+#include <fstream>
+
+namespace DiplodocusDB
+{
+
+class PaginatedFile
+{
+public:
+    PaginatedFile(std::fstream& file);
+    ~PaginatedFile();
+
+    Page* page(size_t i, Ishiko::Error& error);
+
+private:
+    PageCache m_pageCache;
+};
+
+}
+
 #endif
