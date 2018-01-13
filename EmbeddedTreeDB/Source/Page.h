@@ -24,7 +24,10 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGE_H_
 
 #include "Record.h"
+#include "StartOfPageRecordData.h"
+#include "Ishiko/Errors/Error.h"
 #include <fstream>
+#include <memory>
 
 namespace DiplodocusDB
 {
@@ -37,16 +40,16 @@ public:
 
     char* buffer();
 
-    void appendRecord(const Record& record);
+    void appendRecord(const Record& record, Ishiko::Error& error);
 
-    void save(std::fstream& file);
-    void load(std::fstream& file);
+    void save(std::fstream& file, Ishiko::Error& error);
+    void load(std::fstream& file, Ishiko::Error& error);
 
 private:
     size_t m_index;
     char m_buffer[4096];
     size_t m_bufferSize;
-    Record m_startOfPageRecord;
+    std::shared_ptr<StartOfPageRecordData> m_startOfPageRecordData;
     Record m_endOfPageRecord;
 };
 

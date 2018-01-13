@@ -21,7 +21,6 @@
 */
 
 #include "Page.h"
-#include "StartOfPageRecordData.h"
 #include "EndOfPageRecordData.h"
 #include <sstream>
 
@@ -30,7 +29,7 @@ namespace DiplodocusDB
 
 Page::Page(size_t index)
     : m_index(index), m_bufferSize(0),
-    m_startOfPageRecord(std::make_shared<StartOfPageRecordData>()),
+    m_startOfPageRecordData(std::make_shared<StartOfPageRecordData>()),
     m_endOfPageRecord(std::make_shared<EndOfPageRecordData>())
 {
 }
@@ -44,26 +43,84 @@ char* Page::buffer()
     return m_buffer;
 }
 
-void Page::appendRecord(const Record& record)
+void Page::appendRecord(const Record& record,
+                        Ishiko::Error& error)
 {
     std::stringstream stream;
-    record.save(stream);
-    memcpy(m_buffer + m_bufferSize, stream.str().c_str(), record.size());
-    m_bufferSize += record.size();
+    record.save(stream, error);
+    if (!error)
+    {
+        memcpy(m_buffer + m_bufferSize, stream.str().c_str(), record.size());
+        m_bufferSize += record.size();
+    }
 }
 
-void Page::save(std::fstream& file)
+void Page::save(std::fstream& file,
+                Ishiko::Error& error)
 {
     file.seekp(m_index * 4096);
-    m_startOfPageRecord.save(file);
+    if (!file.good())
+    {
+        error = -1;
+        return;
+    }
+    
+    m_startOfPageRecordData->setSize(m_bufferSize);
+    Record startOfPageRecord(m_startOfPageRecordData);
+    startOfPageRecord.save(file, error);
+    if (error)
+    {
+        return;
+    }
+
     file.write(m_buffer, m_bufferSize);
-    m_endOfPageRecord.save(file);
+    if (!file.good())
+    {
+        error = -1;
+        return;
+    }
+
+    m_endOfPageRecord.save(file, error);
+    if (error)
+    {
+        return;
+    }
+
+    memset(m_buffer + m_bufferSize, 0, 4096 - m_bufferSize - startOfPageRecord.size() - m_endOfPageRecord.size());
+    file.write(m_buffer + m_bufferSize, 4096 - m_bufferSize - startOfPageRecord.size() - m_endOfPageRecord.size());
+    if (!file.good())
+    {
+        error = -1;
+        return;
+    }
 }
 
-void Page::load(std::fstream& file)
+void Page::load(std::fstream& file,
+                Ishiko::Error& error)
 {
     file.seekg(m_index * 4096);
-    file.read(m_buffer, 4096);
+    if (!file.good())
+    {
+        error = -1;
+        return;
+    }
+
+    char buffer[16];
+    file.read(buffer, 16);
+    if (!file.good())
+    {
+        error = -1;
+        return;
+    }
+
+    file.read(m_buffer, 4080);
+    if (!file.good())
+    {
+        error = -1;
+        return;
+    }
+
+    m_bufferSize = *((uint32_t*)(buffer + 12));
 }
 
 }

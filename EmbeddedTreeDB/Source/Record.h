@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
+#include "Ishiko/Errors/Error.h"
 #include <ostream>
 #include <memory>
 
@@ -49,8 +50,10 @@ public:
 
     size_t size() const;
 
-    void load();
-    void save(std::ostream& s) const;
+
+
+    void load(const char* buffer);
+    void save(std::ostream& s, Ishiko::Error& error) const;
 
 private:
     std::shared_ptr<RecordData> m_data;

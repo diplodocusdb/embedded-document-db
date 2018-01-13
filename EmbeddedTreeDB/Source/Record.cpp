@@ -44,17 +44,32 @@ size_t Record::size() const
     return (8 + m_data->size());
 }
 
-void Record::load()
+void Record::load(const char* buffer)
 {
 }
 
-void Record::save(std::ostream& s) const
+void Record::save(std::ostream& s,
+                  Ishiko::Error& error) const
 {
     uint32_t type = (uint32_t)m_data->type();
     s.write((char*)&type, 4);
-    uint32_t size = m_data->size();
-    s.write((char*)&size, 4);
-    m_data->serialize(s);
+    if (!s.good())
+    {
+        error = -1;
+    }
+    else
+    {
+        uint32_t size = m_data->size();
+        s.write((char*)&size, 4);
+        if (!s.good())
+        {
+            error = -1;
+        }
+        else
+        {
+            m_data->serialize(s, error);
+        }
+    }
 }
 
 }

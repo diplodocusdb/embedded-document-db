@@ -34,7 +34,8 @@ PageCache::~PageCache()
 {
 }
 
-Page* PageCache::page(size_t i)
+Page* PageCache::page(size_t i,
+                      Ishiko::Error& error)
 {
     Page* page = nullptr;
     std::map<size_t, std::shared_ptr<Page> >::iterator it = m_pages.find(i);
@@ -44,15 +45,20 @@ Page* PageCache::page(size_t i)
     }
     else
     {
-        page = loadPage(i);
+        page = loadPage(i, error);
     }
     return page;
 }
 
-Page* PageCache::loadPage(size_t i)
+Page* PageCache::loadPage(size_t i,
+                          Ishiko::Error& error)
 {
     std::shared_ptr<Page> page = std::make_shared<Page>(i);
-    page->load(m_file);
+    page->load(m_file, error);
+    if (error)
+    {
+        return nullptr;
+    }
     m_pages.emplace(i, page);
     return page.get();
 }

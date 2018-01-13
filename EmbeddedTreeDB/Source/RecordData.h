@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDDATA_H_
 
 #include "Record.h"
+#include "Ishiko/Errors/Error.h"
 #include <ostream>
 
 namespace DiplodocusDB
@@ -38,7 +39,7 @@ public:
     Record::ERecordType type() const;
 
     virtual size_t size() const = 0;
-    virtual void serialize(std::ostream& s) const = 0;
+    virtual void serialize(std::ostream& s, Ishiko::Error& error) const = 0;
 
 private:
     Record::ERecordType m_type;

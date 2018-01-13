@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGECACHE_H_
 
 #include "Page.h"
+#include "Ishiko/Errors/Error.h"
 #include <fstream>
 #include <map>
 #include <memory>
@@ -37,10 +38,10 @@ public:
     PageCache(std::fstream& file);
     ~PageCache();
 
-    Page* page(size_t i);
+    Page* page(size_t i, Ishiko::Error& error);
 
 private:
-    Page* loadPage(size_t i);
+    Page* loadPage(size_t i, Ishiko::Error& error);
 
 private:
     std::fstream& m_file;
