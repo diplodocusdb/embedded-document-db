@@ -20,47 +20,4 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
-
-#include "Ishiko/Errors/Error.h"
-#include <ostream>
-#include <memory>
-
-namespace DiplodocusDB
-{
-
-class RecordData;
-
-class Record
-{
-public:
-    enum class ERecordType
-    {
-        eInvalid = 0,
-        eMasterFileMetadata = 0x0001,
-        eKey = 0x0002,
-        eValue = 0x003,
-        eChildren = 0x004,
-        eStartOfPage = 0x0F00,
-        eEndOfPage = 0x0F01
-    };
-
-    Record();
-    Record(std::shared_ptr<RecordData> data);
-    ~Record();
-
-    ERecordType type() const;
-    size_t size() const;
-    RecordData* data();
-
-    void read(const char* buffer, Ishiko::Error& error);
-    void write(std::ostream& s, Ishiko::Error& error) const;
-
-private:
-    std::shared_ptr<RecordData> m_data;
-};
-
-}
-
-#endif
+#include "ValueRecordData.h"
