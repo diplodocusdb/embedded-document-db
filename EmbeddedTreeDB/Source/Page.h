@@ -32,12 +32,12 @@
 namespace DiplodocusDB
 {
 
-class PaginatedFile;
+class PageFileRepository;
 
 class Page
 {
 public:
-    Page(PaginatedFile& file, size_t index);
+    Page(PageFileRepository& file, size_t index);
     ~Page();
 
     char* buffer();
@@ -48,7 +48,7 @@ public:
     void load(Ishiko::Error& error);
 
 private:
-    PaginatedFile& m_file;
+    PageFileRepository& m_file;
     size_t m_index;
     char m_buffer[4096];
     size_t m_bufferSize;

@@ -21,14 +21,14 @@
 */
 
 #include "Page.h"
-#include "PaginatedFile.h"
+#include "PageFileRepository.h"
 #include "EndOfPageRecordData.h"
 #include <sstream>
 
 namespace DiplodocusDB
 {
 
-Page::Page(PaginatedFile& file, 
+Page::Page(PageFileRepository& file,
            size_t index)
     : m_file(file), m_index(index), m_bufferSize(0),
     m_startOfPageRecordData(std::make_shared<StartOfPageRecordData>()),

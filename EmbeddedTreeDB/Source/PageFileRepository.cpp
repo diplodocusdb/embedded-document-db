@@ -20,22 +20,22 @@
     IN THE SOFTWARE.
 */
 
-#include "PaginatedFile.h"
+#include "PageFileRepository.h"
 
 namespace DiplodocusDB
 {
 
-PaginatedFile::PaginatedFile()
+PageFileRepository::PageFileRepository()
     : m_pageCache(*this)
 {
 }
 
-PaginatedFile::~PaginatedFile()
+PageFileRepository::~PageFileRepository()
 {
 }
 
-void PaginatedFile::create(const boost::filesystem::path& path,
-                           Ishiko::Error& error)
+void PageFileRepository::create(const boost::filesystem::path& path,
+                                Ishiko::Error& error)
 {
     std::fstream file(path.c_str(), std::fstream::out | std::fstream::binary);
     if (!file.good())
@@ -49,8 +49,8 @@ void PaginatedFile::create(const boost::filesystem::path& path,
     }
 }
 
-void PaginatedFile::open(const boost::filesystem::path& path,
-                         Ishiko::Error& error)
+void PageFileRepository::open(const boost::filesystem::path& path,
+                              Ishiko::Error& error)
 {
     m_file.open(path.c_str(), std::fstream::in | std::fstream::out | std::fstream::binary);
     if (!m_file.good())
@@ -59,18 +59,18 @@ void PaginatedFile::open(const boost::filesystem::path& path,
     }
 }
 
-void PaginatedFile::close()
+void PageFileRepository::close()
 {
     m_file.close();
 }
 
-Page* PaginatedFile::page(size_t i,
-                          Ishiko::Error& error)
+Page* PageFileRepository::page(size_t i,
+                               Ishiko::Error& error)
 {
     return m_pageCache.page(i, error);
 }
 
-std::fstream& PaginatedFile::file()
+std::fstream& PageFileRepository::file()
 {
     return m_file;
 }

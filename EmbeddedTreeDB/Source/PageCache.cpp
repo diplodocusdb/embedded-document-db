@@ -25,7 +25,7 @@
 namespace DiplodocusDB
 {
 
-PageCache::PageCache(PaginatedFile& file)
+PageCache::PageCache(PageFileRepository& file)
     : m_file(file)
 {
 }

@@ -25,7 +25,7 @@
 
 #include "MasterFileMetadata.h"
 #include "EmbeddedTreeDBNodeImpl.h"
-#include "PaginatedFile.h"
+#include "PageFileRepository.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
@@ -53,7 +53,7 @@ private:
     bool readValue(size_t& offset, std::string& value, Ishiko::Error& error);
 
 private:
-    PaginatedFile m_file;
+    PageFileRepository m_repository;
     std::shared_ptr<MasterFileMetadata> m_metadata;
 };
 

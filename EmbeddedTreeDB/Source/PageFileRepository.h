@@ -20,8 +20,8 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGINATEDFILE_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGINATEDFILE_H_
+#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGEFILEREPOSITORY_H_
+#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_PAGEFILEREPOSITORY_H_
 
 #include "Page.h"
 #include "PageCache.h"
@@ -32,11 +32,11 @@
 namespace DiplodocusDB
 {
 
-class PaginatedFile
+class PageFileRepository
 {
 public:
-    PaginatedFile();
-    ~PaginatedFile();
+    PageFileRepository();
+    ~PageFileRepository();
 
     void create(const boost::filesystem::path& path, Ishiko::Error& error);
     void open(const boost::filesystem::path& path, Ishiko::Error& error);

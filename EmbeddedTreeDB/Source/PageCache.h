@@ -32,12 +32,12 @@
 namespace DiplodocusDB
 {
 
-class PaginatedFile;
+class PageFileRepository;
 
 class PageCache
 {
 public:
-    PageCache(PaginatedFile& file);
+    PageCache(PageFileRepository& file);
     ~PageCache();
 
     Page* page(size_t i, Ishiko::Error& error);
@@ -46,7 +46,7 @@ private:
     Page* loadPage(size_t i, Ishiko::Error& error);
 
 private:
-    PaginatedFile& m_file;
+    PageFileRepository& m_file;
     std::map<size_t, std::shared_ptr<Page> > m_pages;
 };
 
