@@ -21,14 +21,16 @@
 */
 
 #include "Page.h"
+#include "PaginatedFile.h"
 #include "EndOfPageRecordData.h"
 #include <sstream>
 
 namespace DiplodocusDB
 {
 
-Page::Page(size_t index)
-    : m_index(index), m_bufferSize(0),
+Page::Page(PaginatedFile& file, 
+           size_t index)
+    : m_file(file), m_index(index), m_bufferSize(0),
     m_startOfPageRecordData(std::make_shared<StartOfPageRecordData>()),
     m_endOfPageRecord(std::make_shared<EndOfPageRecordData>())
 {
@@ -55,9 +57,10 @@ void Page::appendRecord(const Record& record,
     }
 }
 
-void Page::save(std::fstream& file,
-                Ishiko::Error& error)
+void Page::save(Ishiko::Error& error)
 {
+    std::fstream& file = m_file.file();
+
     file.seekp(m_index * 4096);
     if (!file.good())
     {
@@ -95,9 +98,10 @@ void Page::save(std::fstream& file,
     }
 }
 
-void Page::load(std::fstream& file,
-                Ishiko::Error& error)
+void Page::load(Ishiko::Error& error)
 {
+    std::fstream& file = m_file.file();
+
     file.seekg(m_index * 4096);
     if (!file.good())
     {

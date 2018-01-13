@@ -39,7 +39,10 @@ public:
 
     Page* page(size_t i, Ishiko::Error& error);
 
+    std::fstream& file();
+
 private:
+    std::fstream& m_file;
     PageCache m_pageCache;
 };
 

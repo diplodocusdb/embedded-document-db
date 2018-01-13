@@ -25,7 +25,7 @@
 namespace DiplodocusDB
 {
 
-PageCache::PageCache(std::fstream& file)
+PageCache::PageCache(PaginatedFile& file)
     : m_file(file)
 {
 }
@@ -53,8 +53,8 @@ Page* PageCache::page(size_t i,
 Page* PageCache::loadPage(size_t i,
                           Ishiko::Error& error)
 {
-    std::shared_ptr<Page> page = std::make_shared<Page>(i);
-    page->load(m_file, error);
+    std::shared_ptr<Page> page = std::make_shared<Page>(m_file, i);
+    page->load(error);
     if (error)
     {
         return nullptr;

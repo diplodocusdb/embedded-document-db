@@ -32,20 +32,23 @@
 namespace DiplodocusDB
 {
 
+class PaginatedFile;
+
 class Page
 {
 public:
-    Page(size_t index);
+    Page(PaginatedFile& file, size_t index);
     ~Page();
 
     char* buffer();
 
     void appendRecord(const Record& record, Ishiko::Error& error);
 
-    void save(std::fstream& file, Ishiko::Error& error);
-    void load(std::fstream& file, Ishiko::Error& error);
+    void save(Ishiko::Error& error);
+    void load(Ishiko::Error& error);
 
 private:
+    PaginatedFile& m_file;
     size_t m_index;
     char m_buffer[4096];
     size_t m_bufferSize;

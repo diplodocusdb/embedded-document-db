@@ -26,7 +26,7 @@ namespace DiplodocusDB
 {
 
 PaginatedFile::PaginatedFile(std::fstream& file)
-    : m_pageCache(file)
+    : m_file(file), m_pageCache(*this)
 {
 }
 
@@ -38,6 +38,11 @@ Page* PaginatedFile::page(size_t i,
                           Ishiko::Error& error)
 {
     return m_pageCache.page(i, error);
+}
+
+std::fstream& PaginatedFile::file()
+{
+    return m_file;
 }
 
 }

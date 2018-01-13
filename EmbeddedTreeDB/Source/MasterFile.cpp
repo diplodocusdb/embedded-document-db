@@ -30,7 +30,7 @@ namespace DiplodocusDB
 
 MasterFile::MasterFile()
     : m_metadata(std::make_shared<MasterFileMetadata>()),
-   m_file2(m_file)
+    m_file2(m_file)
 {
 }
 
@@ -48,12 +48,13 @@ void MasterFile::create(const boost::filesystem::path& path,
     }
     else
     {
-        Page page(0);
+        PaginatedFile file2(file);
+        Page page(file2, 0);
         Record metadataRecord(m_metadata);
         page.appendRecord(metadataRecord, error);
         if (!error)
         {
-            page.save(file, error);
+            page.save(error);
         }
     }
     file.close();
@@ -128,7 +129,7 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
 
             if (!error)
             {
-                page->save(m_file, error);
+                page->save(error);
             }
         }
     }
