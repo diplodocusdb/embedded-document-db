@@ -23,4 +23,27 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_KEYRECORDDATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_KEYRECORDDATA_H_
 
+#include "RecordData.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
+
+namespace DiplodocusDB
+{
+
+class KeyRecordData : public RecordData
+{
+public:
+    KeyRecordData();
+    KeyRecordData(const TreeDBKey& key);
+    ~KeyRecordData() override;
+
+    size_t size() const override;
+    void read(const char* buffer) override;
+    void write(std::ostream& s, Ishiko::Error& error) const override;
+
+private:
+    std::string m_key;
+};
+
+}
+
 #endif

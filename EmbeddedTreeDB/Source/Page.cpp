@@ -47,7 +47,7 @@ void Page::appendRecord(const Record& record,
                         Ishiko::Error& error)
 {
     std::stringstream stream;
-    record.save(stream, error);
+    record.write(stream, error);
     if (!error)
     {
         memcpy(m_buffer + m_bufferSize, stream.str().c_str(), record.size());
@@ -67,7 +67,7 @@ void Page::save(std::fstream& file,
     
     m_startOfPageRecordData->setSize(m_bufferSize);
     Record startOfPageRecord(m_startOfPageRecordData);
-    startOfPageRecord.save(file, error);
+    startOfPageRecord.write(file, error);
     if (error)
     {
         return;
@@ -80,7 +80,7 @@ void Page::save(std::fstream& file,
         return;
     }
 
-    m_endOfPageRecord.save(file, error);
+    m_endOfPageRecord.write(file, error);
     if (error)
     {
         return;

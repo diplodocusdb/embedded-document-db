@@ -22,6 +22,10 @@
 
 #include "Record.h"
 #include "RecordData.h"
+#include "MasterFileMetadata.h"
+#include "KeyRecordData.h"
+#include "StartOfPageRecordData.h"
+#include "EndOfPageRecordData.h"
 
 namespace DiplodocusDB
 {
@@ -44,12 +48,45 @@ size_t Record::size() const
     return (8 + m_data->size());
 }
 
-void Record::load(const char* buffer)
+void Record::read(const char* buffer,
+                  Ishiko::Error& error)
 {
+    ERecordType type = (ERecordType)(*((uint32_t*)buffer));
+    switch (type)
+    {
+    case ERecordType::eInvalid:
+        error = -1;
+        break;
+
+    case ERecordType::eMasterFileMetadata:
+        m_data = std::make_shared<MasterFileMetadata>();
+        break;
+
+    case ERecordType::eKey:
+        m_data = std::make_shared<KeyRecordData>();
+        break;
+
+    case ERecordType::eStartOfPage:
+        m_data = std::make_shared<StartOfPageRecordData>();
+        break;
+
+    case ERecordType::eEndOfPage:
+        m_data = std::make_shared<EndOfPageRecordData>();
+        break;
+
+    default:
+        error = -1;
+        break;
+    }
+    
+    if (!error)
+    {
+        m_data->read(buffer + 4);
+    }
 }
 
-void Record::save(std::ostream& s,
-                  Ishiko::Error& error) const
+void Record::write(std::ostream& s,
+                   Ishiko::Error& error) const
 {
     uint32_t type = (uint32_t)m_data->type();
     s.write((char*)&type, 4);
@@ -67,7 +104,7 @@ void Record::save(std::ostream& s,
         }
         else
         {
-            m_data->serialize(s, error);
+            m_data->write(s, error);
         }
     }
 }

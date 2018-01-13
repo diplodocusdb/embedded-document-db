@@ -50,10 +50,8 @@ public:
 
     size_t size() const;
 
-
-
-    void load(const char* buffer);
-    void save(std::ostream& s, Ishiko::Error& error) const;
+    void read(const char* buffer, Ishiko::Error& error);
+    void write(std::ostream& s, Ishiko::Error& error) const;
 
 private:
     std::shared_ptr<RecordData> m_data;

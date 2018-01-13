@@ -39,7 +39,8 @@ public:
     Record::ERecordType type() const;
 
     virtual size_t size() const = 0;
-    virtual void serialize(std::ostream& s, Ishiko::Error& error) const = 0;
+    virtual void read(const char* buffer) = 0;
+    virtual void write(std::ostream& s, Ishiko::Error& error) const = 0;
 
 private:
     Record::ERecordType m_type;

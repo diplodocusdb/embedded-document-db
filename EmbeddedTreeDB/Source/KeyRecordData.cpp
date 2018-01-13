@@ -21,3 +21,41 @@
 */
 
 #include "KeyRecordData.h"
+
+namespace DiplodocusDB
+{
+
+KeyRecordData::KeyRecordData()
+    : RecordData(Record::ERecordType::eKey)
+{
+}
+
+KeyRecordData::KeyRecordData(const TreeDBKey& key)
+    : RecordData(Record::ERecordType::eKey), m_key(key.value())
+{
+}
+
+KeyRecordData::~KeyRecordData()
+{
+}
+
+size_t KeyRecordData::size() const
+{
+    return m_key.size();
+}
+
+void KeyRecordData::read(const char* buffer)
+{
+}
+
+void KeyRecordData::write(std::ostream& s,
+                          Ishiko::Error& error) const
+{
+    s.write(m_key.c_str(), m_key.size());
+    if (!s.good())
+    {
+        error = -1;
+    }
+}
+
+}
