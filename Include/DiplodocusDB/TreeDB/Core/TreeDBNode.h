@@ -36,7 +36,7 @@ public:
     TreeDBNode();
     virtual ~TreeDBNode();
 
-    virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key) = 0;
+    virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) = 0;
 
     virtual std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) = 0;
 

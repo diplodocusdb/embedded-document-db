@@ -38,6 +38,7 @@ endif
 # settings:
 #
 #      BOOST_ROOT                Path to the Boost installation
+#      ISHIKO_ERRORS_ROOT        Path to the Ishiko Errors installation
 #      DIPLODOCUSDB_CORE_ROOT    Path to the DiplodocusDB installation
 #      DIPLODOCUSDB_TREEDB_ROOT  Path to the DiplodocusDB installation
 
@@ -68,6 +69,8 @@ endif
 
 # Path to the Boost installation
 BOOST_ROOT ?= $(BOOST)
+# Path to the Ishiko Errors installation
+ISHIKO_ERRORS_ROOT ?= $(ISHIKO)/Errors
 # Path to the DiplodocusDB installation
 DIPLODOCUSDB_CORE_ROOT ?= $(DIPLODOCUSDB)/Core
 # Path to the DiplodocusDB installation
@@ -82,43 +85,43 @@ all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusE
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o: ../../Source/EmbeddedTreeDB.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDB.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDB.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o: ../../Source/EmbeddedTreeDBImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDBImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDBImpl.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o: ../../Source/EmbeddedTreeDBNodeImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDBNodeImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EmbeddedTreeDBNodeImpl.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_Record.o: ../../Source/Record.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/Record.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/Record.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_RecordData.o: ../../Source/RecordData.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/RecordData.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/RecordData.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_KeyRecordData.o: ../../Source/KeyRecordData.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/KeyRecordData.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/KeyRecordData.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_StartOfPageRecordData.o: ../../Source/StartOfPageRecordData.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/StartOfPageRecordData.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/StartOfPageRecordData.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EndOfPageRecordData.o: ../../Source/EndOfPageRecordData.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EndOfPageRecordData.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EndOfPageRecordData.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_Page.o: ../../Source/Page.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/Page.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/Page.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_PageCache.o: ../../Source/PageCache.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/PageCache.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/PageCache.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_MasterFileMetadata.o: ../../Source/MasterFileMetadata.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/MasterFileMetadata.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/MasterFileMetadata.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_MasterFile.o: ../../Source/MasterFile.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/MasterFile.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/MasterFile.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o: ../../Source/KeyCache.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/KeyCache.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/KeyCache.cpp
 
 clean:
 	rm -f $(_builddir)*.o

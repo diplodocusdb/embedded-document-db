@@ -1,3 +1,5 @@
+ishikopath = envvar("ISHIKO");
+import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
 
@@ -7,7 +9,7 @@ setting DIPLODOCUSDB_TREEDB_ROOT
     default = '$(DIPLODOCUSDB)/TreeDB';
 }
 
-template DiplodocusEmbeddedTreeDB : DiplodocusDBCore
+template DiplodocusEmbeddedTreeDB : DiplodocusDBCore, IshikoErrors
 {
     includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Include;
     libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib/$(arch);
