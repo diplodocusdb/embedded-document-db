@@ -22,6 +22,7 @@
 
 #include "MasterFile.h"
 #include "EmbeddedTreeDBNodeImpl.h"
+#include "KeyRecordData.h"
 
 namespace DiplodocusDB
 {
@@ -36,21 +37,35 @@ MasterFile::~MasterFile()
 {
 }
 
-void MasterFile::create(const boost::filesystem::path& path)
+void MasterFile::create(const boost::filesystem::path& path,
+                        Ishiko::Error& error)
 {
     std::fstream file(path.c_str(), std::fstream::out | std::fstream::binary);
-
-    Page page(0);
-    Record metadataRecord(m_metadata);
-    page.appendRecord(metadataRecord);
-    page.save(file);
-
+    if (!file.good())
+    {
+        error = -1;
+    }
+    else
+    {
+        Page page(0);
+        Record metadataRecord(m_metadata);
+        page.appendRecord(metadataRecord, error);
+        if (!error)
+        {
+            page.save(file, error);
+        }
+    }
     file.close();
 }
 
-void MasterFile::open(const boost::filesystem::path& path)
+void MasterFile::open(const boost::filesystem::path& path,
+                      Ishiko::Error& error)
 {
     m_file.open(path.c_str(), std::fstream::in | std::fstream::out | std::fstream::binary);
+    if (!m_file.good())
+    {
+        error = -1;
+    }
 }
 
 void MasterFile::close()
@@ -58,13 +73,18 @@ void MasterFile::close()
     m_file.close();
 }
 
-bool MasterFile::getNode(const TreeDBKey& key)
+bool MasterFile::getNode(const TreeDBKey& key,
+                         Ishiko::Error& error)
 {
     bool result = false;
     size_t offset = 0;
     while (!result)
     {
-        TreeDBKey readKey = readString(offset);
+        TreeDBKey readKey = readString(offset, error);
+        if (error)
+        {
+            break;
+        }
         if (readKey == key)
         {
             result = true;
@@ -73,25 +93,37 @@ bool MasterFile::getNode(const TreeDBKey& key)
     return result;
 }
 
-void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node)
+void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
+                            Ishiko::Error& error)
 {
-    const std::string& keyValue = node.key().value();
-    uint32_t n = keyValue.size();
-    m_file.write((char *)&n, 4);
-    m_file.write(keyValue.c_str(), keyValue.size());
+    Page* page = m_pageCache.page(0, error);
+    if (!error)
+    {
+        std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
+        Record record(recordData);
+
+        page->appendRecord(record, error);
+        if (!error)
+        {
+            page->save(m_file, error);
+        }
+    }
 }
 
-std::string MasterFile::readString(size_t& offset)
+std::string MasterFile::readString(size_t& offset,
+                                   Ishiko::Error& error)
 {
     std::string result;
 
-    Page* page = m_pageCache.page(0);
+    Page* page = m_pageCache.page(0, error);
+    if (!error)
+    {
+        char* ptr = (page->buffer() + offset);
+        uint32_t n = *((uint32_t*)ptr);
+        result.assign(ptr + 4, n);
 
-    char* ptr = (page->buffer() + offset);
-    uint32_t n = *((uint32_t*)ptr);
-    result.assign(ptr + 4, n);
-
-    offset += (4 + n);
+        offset += (4 + n);
+    }
 
     return result;
 }

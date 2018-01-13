@@ -36,7 +36,7 @@ public:
     ~MasterFileMetadata() override;
 
     size_t size() const override;
-    void serialize(std::ostream& s) const override;
+    void serialize(std::ostream& s, Ishiko::Error& error) const override;
 
 private:
     VersionNumber m_fileFormatVersion;
