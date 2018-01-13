@@ -23,6 +23,7 @@
 #include "MasterFile.h"
 #include "EmbeddedTreeDBNodeImpl.h"
 #include "KeyRecordData.h"
+#include "ValueRecordData.h"
 
 namespace DiplodocusDB
 {
@@ -101,11 +102,21 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
     {
         std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
         Record record(recordData);
-
         page->appendRecord(record, error);
+
         if (!error)
         {
-            page->save(m_file, error);
+            if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
+            {
+                std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>();
+                Record record(recordData);
+                page->appendRecord(record, error);
+            }
+
+            if (!error)
+            {
+                page->save(m_file, error);
+            }
         }
     }
 }

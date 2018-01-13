@@ -35,6 +35,8 @@ public:
     TreeDBValue();
     ~TreeDBValue();
 
+    const DataType& type() const;
+
     void setString(const std::string& value);
 
 private:

@@ -21,3 +21,7 @@
 */
 
 #include "ChildrenRecordData.h"
+
+namespace DiplodocusDB
+{
+}

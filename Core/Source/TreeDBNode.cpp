@@ -33,6 +33,11 @@ TreeDBNode::~TreeDBNode()
 {
 }
 
+const TreeDBValue& TreeDBNode::value() const
+{
+    return m_value;
+}
+
 TreeDBValue& TreeDBNode::value()
 {
     return m_value;

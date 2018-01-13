@@ -23,4 +23,25 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_VALUERECORDDATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_VALUERECORDDATA_H_
 
+#include "RecordData.h"
+
+namespace DiplodocusDB
+{
+
+class ValueRecordData : public RecordData
+{
+public:
+    ValueRecordData();
+    ~ValueRecordData() override;
+
+    size_t size() const override;
+    void read(const char* buffer, size_t recordDataSize) override;
+    void write(std::ostream& s, Ishiko::Error& error) const override;
+
+private:
+    std::string m_buffer;
+};
+
+}
+
 #endif

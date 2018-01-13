@@ -24,6 +24,7 @@
 #include "RecordData.h"
 #include "MasterFileMetadata.h"
 #include "KeyRecordData.h"
+#include "ValueRecordData.h"
 #include "StartOfPageRecordData.h"
 #include "EndOfPageRecordData.h"
 
@@ -81,6 +82,10 @@ void Record::read(const char* buffer,
 
     case ERecordType::eKey:
         m_data = std::make_shared<KeyRecordData>();
+        break;
+
+    case ERecordType::eValue:
+        m_data = std::make_shared<ValueRecordData>();
         break;
 
     case ERecordType::eStartOfPage:

@@ -21,3 +21,32 @@
 */
 
 #include "ValueRecordData.h"
+
+namespace DiplodocusDB
+{
+
+ValueRecordData::ValueRecordData()
+    : RecordData(Record::ERecordType::eValue)
+{
+}
+
+ValueRecordData::~ValueRecordData()
+{
+}
+
+size_t ValueRecordData::size() const
+{
+    return m_buffer.size();
+}
+
+void ValueRecordData::read(const char* buffer,
+                           size_t recordDataSize)
+{
+}
+
+void ValueRecordData::write(std::ostream& s,
+                            Ishiko::Error& error) const
+{
+}
+
+}
