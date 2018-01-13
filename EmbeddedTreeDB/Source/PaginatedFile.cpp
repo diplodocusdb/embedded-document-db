@@ -25,13 +25,43 @@
 namespace DiplodocusDB
 {
 
-PaginatedFile::PaginatedFile(std::fstream& file)
-    : m_file(file), m_pageCache(*this)
+PaginatedFile::PaginatedFile()
+    : m_pageCache(*this)
 {
 }
 
 PaginatedFile::~PaginatedFile()
 {
+}
+
+void PaginatedFile::create(const boost::filesystem::path& path,
+                           Ishiko::Error& error)
+{
+    std::fstream file(path.c_str(), std::fstream::out | std::fstream::binary);
+    if (!file.good())
+    {
+        error = -1;
+    }
+    else
+    {
+        file.close();
+        open(path, error);
+    }
+}
+
+void PaginatedFile::open(const boost::filesystem::path& path,
+                         Ishiko::Error& error)
+{
+    m_file.open(path.c_str(), std::fstream::in | std::fstream::out | std::fstream::binary);
+    if (!m_file.good())
+    {
+        error = -1;
+    }
+}
+
+void PaginatedFile::close()
+{
+    m_file.close();
 }
 
 Page* PaginatedFile::page(size_t i,

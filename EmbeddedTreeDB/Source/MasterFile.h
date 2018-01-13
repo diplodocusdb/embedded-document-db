@@ -54,7 +54,6 @@ private:
 
 private:
     std::shared_ptr<MasterFileMetadata> m_metadata;
-    std::fstream m_file;
     PaginatedFile m_file2;
 };
 

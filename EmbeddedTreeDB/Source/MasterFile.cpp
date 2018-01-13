@@ -29,8 +29,7 @@ namespace DiplodocusDB
 {
 
 MasterFile::MasterFile()
-    : m_metadata(std::make_shared<MasterFileMetadata>()),
-    m_file2(m_file)
+    : m_metadata(std::make_shared<MasterFileMetadata>())
 {
 }
 
@@ -41,15 +40,10 @@ MasterFile::~MasterFile()
 void MasterFile::create(const boost::filesystem::path& path,
                         Ishiko::Error& error)
 {
-    std::fstream file(path.c_str(), std::fstream::out | std::fstream::binary);
-    if (!file.good())
+    m_file2.create(path, error);
+    if (!error)
     {
-        error = -1;
-    }
-    else
-    {
-        PaginatedFile file2(file);
-        Page page(file2, 0);
+        Page page(m_file2, 0);
         Record metadataRecord(m_metadata);
         page.appendRecord(metadataRecord, error);
         if (!error)
@@ -57,22 +51,17 @@ void MasterFile::create(const boost::filesystem::path& path,
             page.save(error);
         }
     }
-    file.close();
 }
 
 void MasterFile::open(const boost::filesystem::path& path,
                       Ishiko::Error& error)
 {
-    m_file.open(path.c_str(), std::fstream::in | std::fstream::out | std::fstream::binary);
-    if (!m_file.good())
-    {
-        error = -1;
-    }
+    m_file2.open(path, error);
 }
 
 void MasterFile::close()
 {
-    m_file.close();
+    m_file2.close();
 }
 
 bool MasterFile::findNode(const TreeDBKey& key,

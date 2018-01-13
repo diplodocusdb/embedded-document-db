@@ -40,7 +40,7 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path,
     m_masterFile.create(path, error);
     if (!error)
     {
-        open(path, error);
+        m_root = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "");
     }
 }
 

@@ -26,6 +26,7 @@
 #include "Page.h"
 #include "PageCache.h"
 #include "Ishiko/Errors/Error.h"
+#include <boost/filesystem/path.hpp>
 #include <fstream>
 
 namespace DiplodocusDB
@@ -34,15 +35,19 @@ namespace DiplodocusDB
 class PaginatedFile
 {
 public:
-    PaginatedFile(std::fstream& file);
+    PaginatedFile();
     ~PaginatedFile();
+
+    void create(const boost::filesystem::path& path, Ishiko::Error& error);
+    void open(const boost::filesystem::path& path, Ishiko::Error& error);
+    void close();
 
     Page* page(size_t i, Ishiko::Error& error);
 
     std::fstream& file();
 
 private:
-    std::fstream& m_file;
+    std::fstream m_file;
     PageCache m_pageCache;
 };
 
