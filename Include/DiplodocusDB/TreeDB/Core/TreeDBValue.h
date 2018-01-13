@@ -23,4 +23,25 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
 
+#include "DiplodocusDB/Core/DataType.h"
+#include <string>
+
+namespace DiplodocusDB
+{
+
+class TreeDBValue
+{
+public:
+    TreeDBValue();
+    ~TreeDBValue();
+
+    void setString(const std::string& value);
+
+private:
+    DataType m_type;
+    std::string m_string;
+};
+
+}
+
 #endif

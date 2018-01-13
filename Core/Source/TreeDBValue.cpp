@@ -21,3 +21,23 @@
 */
 
 #include "TreeDBValue.h"
+
+namespace DiplodocusDB
+{
+
+TreeDBValue::TreeDBValue()
+    : m_type(EPrimitiveDataType::eNULL)
+{
+}
+
+TreeDBValue::~TreeDBValue()
+{
+}
+
+void TreeDBValue::setString(const std::string& value)
+{
+    m_type = EPrimitiveDataType::eUTF8String;
+    m_string = value;
+}
+
+}

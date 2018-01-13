@@ -1,5 +1,7 @@
 ishikopath = envvar("ISHIKO");
 import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
 
 toolsets = gnu vs2015 vs2013;
 
@@ -7,7 +9,7 @@ gnu.makefile = ../GNUmakefile/GNUmakefile;
 vs2015.solutionfile = ../VC14/DiplodocusTreeDBCore.sln;
 vs2013.solutionfile = ../VC12/DiplodocusTreeDBCore.sln;
 
-library DiplodocusTreeDBCore : IshikoErrors
+library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors
 {
     archs = x86 x86_64;
    

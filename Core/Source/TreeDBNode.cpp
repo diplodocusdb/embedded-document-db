@@ -33,4 +33,9 @@ TreeDBNode::~TreeDBNode()
 {
 }
 
+TreeDBValue& TreeDBNode::value()
+{
+    return m_value;
+}
+
 }

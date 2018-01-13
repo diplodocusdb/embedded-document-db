@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 
 #include "TreeDBKey.h"
+#include "TreeDBValue.h"
 #include "Ishiko/Errors/Error.h"
 #include <memory>
 
@@ -36,11 +37,14 @@ public:
     TreeDBNode();
     virtual ~TreeDBNode();
 
+    TreeDBValue& value();
+
     virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) = 0;
-
     virtual std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) = 0;
-
     virtual void commit(Ishiko::Error& error) = 0;
+
+private:
+    TreeDBValue m_value;
 };
 
 }
