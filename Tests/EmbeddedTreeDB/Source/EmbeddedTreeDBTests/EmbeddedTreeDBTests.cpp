@@ -50,14 +50,18 @@ TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test)
 
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
 
+    Ishiko::Error error;
+
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath);
+    db.create(outputPath, error);
+    if (!error)
+    {
+        result = TestResult::ePassed;
+    }
     db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
-
-    result = TestResult::ePassed;
 
     return result;
 }
@@ -68,12 +72,19 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test)
 
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest1.dpdb");
 
-    DiplodocusDB::EmbeddedTreeDB db;
-    db.open(inputPath);
+    Ishiko::Error error;
 
-    if (db.root().child("key1"))
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(inputPath, error);
+    if (!error)
     {
-        result = TestResult::ePassed;
+        if (db.root().child("key1", error))
+        {
+            if (!error)
+            {
+                result = TestResult::ePassed;
+            }
+        }
     }
     
     return result;
@@ -86,12 +97,19 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest2(Test& test)
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest2.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.open(inputPath);
 
-    if ((db.root().child("key1")) &&
-        (db.root().child("key2")))
+    Ishiko::Error error;
+    db.open(inputPath, error);
+    if (!error)
     {
-        result = TestResult::ePassed;
+        if ((db.root().child("key1", error)) &&
+            (db.root().child("key2", error)))
+        {
+            if (!error)
+            {
+                result = TestResult::ePassed;
+            }
+        }
     }
 
     return result;
@@ -103,18 +121,24 @@ TestResult::EOutcome EmbeddedTreeDBNodeAppendTest1(FileComparisonTest& test)
 
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeAppendTest1.dpdb");
 
+    Ishiko::Error error;
+
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath);
+    db.create(outputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().append("key1");
+        node->commit(error);
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
 
-    std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().append("key1");
-    node->commit();
-
-    db.close();
+        db.close();
+    }
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest1.dpdb");
-
-    result = TestResult::ePassed;
 
     return result;
 }
@@ -125,20 +149,29 @@ TestResult::EOutcome EmbeddedTreeDBNodeAppendTest2(FileComparisonTest& test)
 
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeAppendTest2.dpdb");
 
+    Ishiko::Error error;
+
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath);
+    db.create(outputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node1 = db.root().append("key1");
+        node1->commit(error);
+        if (!error)
+        {
+            std::shared_ptr<DiplodocusDB::TreeDBNode> node2 = db.root().append("key2");
+            node2->commit(error);
+            if (!error)
+            {
+                result = TestResult::ePassed;
+            }
+        }
 
-    std::shared_ptr<DiplodocusDB::TreeDBNode> node1 = db.root().append("key1");
-    node1->commit();
-    std::shared_ptr<DiplodocusDB::TreeDBNode> node2 = db.root().append("key2");
-    node2->commit();
-
-    db.close();
+        db.close();
+    }
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest2.dpdb");
-
-    result = TestResult::ePassed;
 
     return result;
 }
