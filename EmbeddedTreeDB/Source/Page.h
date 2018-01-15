@@ -45,6 +45,7 @@ public:
     void appendRecord(const Record& record, Ishiko::Error& error);
 
     void save(Ishiko::Error& error);
+    void init();
     void load(Ishiko::Error& error);
 
 private:

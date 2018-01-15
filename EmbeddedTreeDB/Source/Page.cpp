@@ -65,37 +65,22 @@ void Page::save(Ishiko::Error& error)
     
     m_startOfPageRecordData->setSize(m_bufferSize);
     Record startOfPageRecord(m_startOfPageRecordData);
-    char buf[100];
-    startOfPageRecord.write(buf);
-    file.write(buf, startOfPageRecord.size());
-    if (!file.good())
-    {
-        error = -1;
-        return;
-    }
+    startOfPageRecord.write(m_buffer);
 
-    file.write(m_buffer, m_bufferSize);
-    if (!file.good())
-    {
-        error = -1;
-        return;
-    }
+    m_endOfPageRecord.write(m_buffer + m_bufferSize);
 
-    m_endOfPageRecord.write(buf);
-    file.write(buf, m_endOfPageRecord.size());
+    file.write(m_buffer, 4096);
     if (!file.good())
     {
         error = -1;
         return;
     }
+}
 
-    memset(m_buffer + m_bufferSize, 0, 4096 - m_bufferSize - startOfPageRecord.size() - m_endOfPageRecord.size());
-    file.write(m_buffer + m_bufferSize, 4096 - m_bufferSize - startOfPageRecord.size() - m_endOfPageRecord.size());
-    if (!file.good())
-    {
-        error = -1;
-        return;
-    }
+void Page::init()
+{
+    memset(m_buffer, 0, 4096);
+    m_bufferSize = 10;
 }
 
 void Page::load(Ishiko::Error& error)
@@ -109,22 +94,14 @@ void Page::load(Ishiko::Error& error)
         return;
     }
 
-    char buffer[10];
-    file.read(buffer, 10);
+    file.read(m_buffer, 4096);
     if (!file.good())
     {
         error = -1;
         return;
     }
 
-    file.read(m_buffer, 4086);
-    if (!file.good())
-    {
-        error = -1;
-        return;
-    }
-
-    m_bufferSize = *((uint32_t*)(buffer + 6));
+    m_bufferSize = *((uint32_t*)(m_buffer + 6));
 }
 
 }

@@ -136,7 +136,7 @@ std::string MasterFile::readString(size_t& offset,
     if (!error)
     {
         Record record;
-        record.read(page->buffer() + offset, error);
+        record.read(page->buffer() + 10 + offset, error);
         if (!error)
         {
             if (record.type() == Record::ERecordType::eKey)
@@ -160,7 +160,7 @@ bool MasterFile::readValue(size_t& offset,
     if (!error)
     {
         Record record;
-        record.read(page->buffer() + offset, error);
+        record.read(page->buffer() + 10 + offset, error);
         if (!error)
         {
             if (record.type() == Record::ERecordType::eValue)
