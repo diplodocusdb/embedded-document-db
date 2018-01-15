@@ -23,4 +23,16 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_UTILITIES_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_UTILITIES_H_
 
+namespace DiplodocusDB
+{
+
+class Utilities
+{
+public:
+    static size_t encodeSize(size_t value, char* buffer);
+    static size_t decodeSize(const char* buffer, size_t& value);
+};
+
+}
+
 #endif

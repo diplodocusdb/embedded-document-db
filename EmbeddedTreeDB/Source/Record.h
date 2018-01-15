@@ -24,7 +24,6 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
 #include "Ishiko/Errors/Error.h"
-#include <ostream>
 #include <memory>
 
 namespace DiplodocusDB
@@ -55,7 +54,7 @@ public:
     RecordData* data();
 
     void read(const char* buffer, Ishiko::Error& error);
-    void write(std::ostream& s, Ishiko::Error& error) const;
+    void write(char* buffer, Ishiko::Error& error) const;
 
 private:
     std::shared_ptr<RecordData> m_data;

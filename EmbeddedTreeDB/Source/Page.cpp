@@ -48,11 +48,9 @@ char* Page::buffer()
 void Page::appendRecord(const Record& record,
                         Ishiko::Error& error)
 {
-    std::stringstream stream;
-    record.write(stream, error);
+    record.write(m_buffer + m_bufferSize, error);
     if (!error)
     {
-        memcpy(m_buffer + m_bufferSize, stream.str().c_str(), record.size());
         m_bufferSize += record.size();
     }
 }
@@ -70,10 +68,20 @@ void Page::save(Ishiko::Error& error)
     
     m_startOfPageRecordData->setSize(m_bufferSize);
     Record startOfPageRecord(m_startOfPageRecordData);
-    startOfPageRecord.write(file, error);
+    char buf[100];
+    startOfPageRecord.write(buf, error);
     if (error)
     {
         return;
+    }
+    else
+    {
+        file.write(buf, startOfPageRecord.size());
+        if (!file.good())
+        {
+            error = -1;
+            return;
+        }
     }
 
     file.write(m_buffer, m_bufferSize);
@@ -83,10 +91,19 @@ void Page::save(Ishiko::Error& error)
         return;
     }
 
-    m_endOfPageRecord.write(file, error);
+    m_endOfPageRecord.write(buf, error);
     if (error)
     {
         return;
+    }
+    else
+    {
+        file.write(buf, m_endOfPageRecord.size());
+        if (!file.good())
+        {
+            error = -1;
+            return;
+        }
     }
 
     memset(m_buffer + m_bufferSize, 0, 4096 - m_bufferSize - startOfPageRecord.size() - m_endOfPageRecord.size());

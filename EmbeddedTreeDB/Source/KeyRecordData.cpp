@@ -55,14 +55,10 @@ void KeyRecordData::read(const char* buffer,
     m_key.assign(buffer, recordDataSize);
 }
 
-void KeyRecordData::write(std::ostream& s,
+void KeyRecordData::write(char* buffer,
                           Ishiko::Error& error) const
 {
-    s.write(m_key.c_str(), m_key.size());
-    if (!s.good())
-    {
-        error = -1;
-    }
+    memcpy(buffer, m_key.c_str(), m_key.size());
 }
 
 }

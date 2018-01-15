@@ -57,35 +57,22 @@ void ValueRecordData::read(const char* buffer,
     m_buffer.assign(buffer + 8, recordDataSize - 8);
 }
 
-void ValueRecordData::write(std::ostream& s,
+void ValueRecordData::write(char* buffer,
                             Ishiko::Error& error) const
 {
-    writeDataType(s, error);
+    writeDataType(buffer, error);
     if (!error)
     {
-        s.write(m_buffer.c_str(), m_buffer.size());
-        if (!s.good())
-        {
-            error = -1;
-        }
+        memcpy(buffer + 8, m_buffer.c_str(), m_buffer.size());
     }
 }
 
-void ValueRecordData::writeDataType(std::ostream& s,
+void ValueRecordData::writeDataType(char* buffer,
                                     Ishiko::Error& error) const
 {
-    uint32_t primitiveType = (uint32_t)m_type.primitiveType();
-    s.write((char*)&primitiveType, 4);
-    if (!s.good())
-    {
-        error = -1;
-    }
-    uint32_t modifier = (uint32_t)m_type.modifier();
-    s.write((char*)&modifier, 4);
-    if (!s.good())
-    {
-        error = -1;
-    }
+    *((uint32_t*)buffer) = (uint32_t)m_type.primitiveType();
+    *((uint32_t*)(buffer + 4)) = (uint32_t)m_type.modifier();
+    
 }
 
 }

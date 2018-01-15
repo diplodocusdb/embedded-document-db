@@ -27,6 +27,7 @@
 #include "ValueRecordData.h"
 #include "StartOfPageRecordData.h"
 #include "EndOfPageRecordData.h"
+#include "Utilities.h"
 
 namespace DiplodocusDB
 {
@@ -58,7 +59,8 @@ Record::ERecordType Record::type() const
 
 size_t Record::size() const
 {
-    return (2 + m_data->size());
+    size_t dataSize = m_data->size();
+    return (1 + Utilities::encodeSize(dataSize, 0) + dataSize);
 }
 
 RecordData* Record::data()
@@ -108,28 +110,12 @@ void Record::read(const char* buffer,
     }
 }
 
-void Record::write(std::ostream& s,
+void Record::write(char* buffer,
                    Ishiko::Error& error) const
-{
-    uint8_t type = (uint8_t)m_data->type();
-    s.write((char*)&type, 1);
-    if (!s.good())
-    {
-        error = -1;
-    }
-    else
-    {
-        uint8_t size = m_data->size();
-        s.write((char*)&size, 1);
-        if (!s.good())
-        {
-            error = -1;
-        }
-        else
-        {
-            m_data->write(s, error);
-        }
-    }
+{   
+    *((uint8_t*)buffer) = (uint8_t)m_data->type();
+    size_t offset = Utilities::encodeSize(m_data->size(), buffer + 1);
+    m_data->write(buffer + 1 + offset, error);
 }
 
 }

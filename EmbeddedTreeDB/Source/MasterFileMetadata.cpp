@@ -45,17 +45,14 @@ void MasterFileMetadata::read(const char* buffer,
 {
 }
 
-void MasterFileMetadata::write(std::ostream& s,
+void MasterFileMetadata::write(char* buffer,
                                Ishiko::Error& error) const
 {
+    char* pos = buffer;
     for (unsigned int v : m_fileFormatVersion.value())
     {
-        s.write((char*)&v, 4);
-        if (!s.good())
-        {
-            error = -1;
-            break;
-        }
+        *((uint32_t*)pos) = v;
+        pos += 4;
     }
 }
 

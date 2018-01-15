@@ -21,3 +21,25 @@
 */
 
 #include "Utilities.h"
+
+namespace DiplodocusDB
+{
+
+size_t Utilities::encodeSize(size_t value,
+                             char* buffer)
+{
+    if (buffer)
+    {
+        (*buffer) = (value & 0x7F);
+    }
+    return 1;
+}
+
+size_t Utilities::decodeSize(const char* buffer,
+                             size_t& value)
+{
+    value = *((unsigned char*)buffer);
+    return 1;
+}
+
+}

@@ -25,7 +25,6 @@
 
 #include "Record.h"
 #include "Ishiko/Errors/Error.h"
-#include <ostream>
 
 namespace DiplodocusDB
 {
@@ -40,7 +39,7 @@ public:
 
     virtual size_t size() const = 0;
     virtual void read(const char* buffer, size_t recordDataSize) = 0;
-    virtual void write(std::ostream& s, Ishiko::Error& error) const = 0;
+    virtual void write(char* buffer, Ishiko::Error& error) const = 0;
 
 private:
     Record::ERecordType m_type;

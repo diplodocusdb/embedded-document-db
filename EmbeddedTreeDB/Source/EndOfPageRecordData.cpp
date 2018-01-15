@@ -45,14 +45,10 @@ void EndOfPageRecordData::read(const char* buffer,
 {
 }
 
-void EndOfPageRecordData::write(std::ostream& s,
+void EndOfPageRecordData::write(char* buffer,
                                 Ishiko::Error& error) const
 {
-    s.write((char*)&m_nextPage, 4);
-    if (!s.good())
-    {
-        error = -1;
-    }
+    *((uint32_t*)buffer) = m_nextPage;
 }
 
 }
