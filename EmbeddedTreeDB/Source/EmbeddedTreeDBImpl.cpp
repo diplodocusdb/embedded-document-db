@@ -80,6 +80,7 @@ std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::getNode(const TreeDBKey& key,
     {
         result = temp;
     }
+
     return result;
 }
 
