@@ -109,22 +109,22 @@ void Page::load(Ishiko::Error& error)
         return;
     }
 
-    char buffer[16];
-    file.read(buffer, 16);
+    char buffer[10];
+    file.read(buffer, 10);
     if (!file.good())
     {
         error = -1;
         return;
     }
 
-    file.read(m_buffer, 4080);
+    file.read(m_buffer, 4086);
     if (!file.good())
     {
         error = -1;
         return;
     }
 
-    m_bufferSize = *((uint32_t*)(buffer + 12));
+    m_bufferSize = *((uint32_t*)(buffer + 6));
 }
 
 }

@@ -38,12 +38,12 @@ public:
     enum class ERecordType
     {
         eInvalid = 0,
-        eMasterFileMetadata = 0x0001,
-        eKey = 0x0002,
-        eValue = 0x003,
-        eChildren = 0x004,
-        eStartOfPage = 0x0F00,
-        eEndOfPage = 0x0F01
+        eMasterFileMetadata = 0x01,
+        eKey = 0x02,
+        eValue = 0x03,
+        eChildren = 0x04,
+        eStartOfPage = 0xF0,
+        eEndOfPage = 0xF1,
     };
 
     Record();

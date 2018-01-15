@@ -58,7 +58,7 @@ Record::ERecordType Record::type() const
 
 size_t Record::size() const
 {
-    return (8 + m_data->size());
+    return (2 + m_data->size());
 }
 
 RecordData* Record::data()
@@ -69,7 +69,7 @@ RecordData* Record::data()
 void Record::read(const char* buffer,
                   Ishiko::Error& error)
 {
-    ERecordType type = (ERecordType)(*((uint32_t*)buffer));
+    ERecordType type = (ERecordType)(*(uint8_t*)buffer);
     switch (type)
     {
     case ERecordType::eInvalid:
@@ -103,24 +103,24 @@ void Record::read(const char* buffer,
     
     if (!error)
     {
-        uint32_t size = *((uint32_t*)(buffer + 4));
-        m_data->read(buffer + 8, size);
+        uint8_t size = *((uint8_t*)(buffer + 1));
+        m_data->read(buffer + 2, size);
     }
 }
 
 void Record::write(std::ostream& s,
                    Ishiko::Error& error) const
 {
-    uint32_t type = (uint32_t)m_data->type();
-    s.write((char*)&type, 4);
+    uint8_t type = (uint8_t)m_data->type();
+    s.write((char*)&type, 1);
     if (!s.good())
     {
         error = -1;
     }
     else
     {
-        uint32_t size = m_data->size();
-        s.write((char*)&size, 4);
+        uint8_t size = m_data->size();
+        s.write((char*)&size, 1);
         if (!s.good())
         {
             error = -1;
