@@ -54,7 +54,7 @@ public:
     RecordData* data();
 
     void read(const char* buffer, Ishiko::Error& error);
-    void write(char* buffer, Ishiko::Error& error) const;
+    void write(char* buffer) const;
 
 private:
     std::shared_ptr<RecordData> m_data;

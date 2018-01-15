@@ -37,7 +37,7 @@ public:
 
     size_t size() const override;
     void read(const char* buffer, size_t recordDataSize) override;
-    void write(char* buffer, Ishiko::Error& error) const override;
+    void write(char* buffer) const override;
 
 private:
     VersionNumber m_fileFormatVersion;

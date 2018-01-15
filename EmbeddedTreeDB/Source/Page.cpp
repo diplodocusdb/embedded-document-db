@@ -48,11 +48,8 @@ char* Page::buffer()
 void Page::appendRecord(const Record& record,
                         Ishiko::Error& error)
 {
-    record.write(m_buffer + m_bufferSize, error);
-    if (!error)
-    {
-        m_bufferSize += record.size();
-    }
+    record.write(m_buffer + m_bufferSize);
+    m_bufferSize += record.size();
 }
 
 void Page::save(Ishiko::Error& error)
@@ -69,19 +66,12 @@ void Page::save(Ishiko::Error& error)
     m_startOfPageRecordData->setSize(m_bufferSize);
     Record startOfPageRecord(m_startOfPageRecordData);
     char buf[100];
-    startOfPageRecord.write(buf, error);
-    if (error)
+    startOfPageRecord.write(buf);
+    file.write(buf, startOfPageRecord.size());
+    if (!file.good())
     {
+        error = -1;
         return;
-    }
-    else
-    {
-        file.write(buf, startOfPageRecord.size());
-        if (!file.good())
-        {
-            error = -1;
-            return;
-        }
     }
 
     file.write(m_buffer, m_bufferSize);
@@ -91,19 +81,12 @@ void Page::save(Ishiko::Error& error)
         return;
     }
 
-    m_endOfPageRecord.write(buf, error);
-    if (error)
+    m_endOfPageRecord.write(buf);
+    file.write(buf, m_endOfPageRecord.size());
+    if (!file.good())
     {
+        error = -1;
         return;
-    }
-    else
-    {
-        file.write(buf, m_endOfPageRecord.size());
-        if (!file.good())
-        {
-            error = -1;
-            return;
-        }
     }
 
     memset(m_buffer + m_bufferSize, 0, 4096 - m_bufferSize - startOfPageRecord.size() - m_endOfPageRecord.size());

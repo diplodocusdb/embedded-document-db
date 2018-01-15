@@ -50,8 +50,7 @@ void StartOfPageRecordData::read(const char* buffer,
 {
 }
 
-void StartOfPageRecordData::write(char* buffer,
-                                  Ishiko::Error& error) const
+void StartOfPageRecordData::write(char* buffer) const
 {
     *((uint32_t*)buffer) = m_previousPage;
     *((uint32_t*)(buffer + 4)) = m_size;

@@ -45,8 +45,7 @@ void EndOfPageRecordData::read(const char* buffer,
 {
 }
 
-void EndOfPageRecordData::write(char* buffer,
-                                Ishiko::Error& error) const
+void EndOfPageRecordData::write(char* buffer) const
 {
     *((uint32_t*)buffer) = m_nextPage;
 }

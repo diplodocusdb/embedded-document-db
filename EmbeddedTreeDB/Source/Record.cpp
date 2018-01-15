@@ -110,12 +110,11 @@ void Record::read(const char* buffer,
     }
 }
 
-void Record::write(char* buffer,
-                   Ishiko::Error& error) const
+void Record::write(char* buffer) const
 {   
     *((uint8_t*)buffer) = (uint8_t)m_data->type();
     size_t offset = Utilities::encodeSize(m_data->size(), buffer + 1);
-    m_data->write(buffer + 1 + offset, error);
+    m_data->write(buffer + 1 + offset);
 }
 
 }

@@ -57,18 +57,13 @@ void ValueRecordData::read(const char* buffer,
     m_buffer.assign(buffer + 8, recordDataSize - 8);
 }
 
-void ValueRecordData::write(char* buffer,
-                            Ishiko::Error& error) const
+void ValueRecordData::write(char* buffer) const
 {
-    writeDataType(buffer, error);
-    if (!error)
-    {
-        memcpy(buffer + 8, m_buffer.c_str(), m_buffer.size());
-    }
+    writeDataType(buffer);
+    memcpy(buffer + 8, m_buffer.c_str(), m_buffer.size());
 }
 
-void ValueRecordData::writeDataType(char* buffer,
-                                    Ishiko::Error& error) const
+void ValueRecordData::writeDataType(char* buffer) const
 {
     *((uint32_t*)buffer) = (uint32_t)m_type.primitiveType();
     *((uint32_t*)(buffer + 4)) = (uint32_t)m_type.modifier();

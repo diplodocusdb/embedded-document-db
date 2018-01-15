@@ -45,8 +45,7 @@ void MasterFileMetadata::read(const char* buffer,
 {
 }
 
-void MasterFileMetadata::write(char* buffer,
-                               Ishiko::Error& error) const
+void MasterFileMetadata::write(char* buffer) const
 {
     char* pos = buffer;
     for (unsigned int v : m_fileFormatVersion.value())
