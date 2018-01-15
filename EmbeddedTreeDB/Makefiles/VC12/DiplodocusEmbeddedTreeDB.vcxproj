@@ -166,6 +166,7 @@
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
     <ClCompile Include="..\..\Source\KeyCache.cpp" />
+    <ClCompile Include="..\..\Source\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="..\..\Source\MasterFile.h" />
     <ClInclude Include="..\..\Source\MasterFileMetadata.h" />
     <ClInclude Include="..\..\Source\KeyCache.h" />
+    <ClInclude Include="..\..\Source\Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
