@@ -40,10 +40,10 @@ public:
 
     size_t size() const override;
     void read(const char* buffer, size_t recordDataSize) override;
-    void write(char* buffer) const override;
+    void write(Page& page, Ishiko::Error& error) const override;
 
 private:
-    void writeDataType(char* buffer) const;
+    void writeDataType(Page& page, Ishiko::Error& error) const;
 
 private:
     DataType m_type;

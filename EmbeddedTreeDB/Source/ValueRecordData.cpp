@@ -21,6 +21,7 @@
 */
 
 #include "ValueRecordData.h"
+#include "Page.h"
 
 namespace DiplodocusDB
 {
@@ -57,16 +58,26 @@ void ValueRecordData::read(const char* buffer,
     m_buffer.assign(buffer + 2, recordDataSize - 2);
 }
 
-void ValueRecordData::write(char* buffer) const
+void ValueRecordData::write(Page& page,
+                            Ishiko::Error& error) const
 {
-    writeDataType(buffer);
-    memcpy(buffer + 2, m_buffer.c_str(), m_buffer.size());
+    writeDataType(page, error);
+    if (!error)
+    {
+        page.write(m_buffer.c_str(), m_buffer.size(), error);
+    }
 }
 
-void ValueRecordData::writeDataType(char* buffer) const
+void ValueRecordData::writeDataType(Page& page,
+                                    Ishiko::Error& error) const
 {
-    *((uint8_t*)buffer) = (uint8_t)m_type.primitiveType();
-    *((uint8_t*)(buffer + 1)) = (uint8_t)m_type.modifier();
+    uint8_t type = (uint8_t)m_type.primitiveType();
+    page.write((char*)&type, 1, error);
+    if (!error)
+    {
+        uint8_t modifier = (uint8_t)m_type.modifier();
+        page.write((char*)&modifier, 1, error);
+    }
 }
 
 }

@@ -47,7 +47,7 @@ void MasterFile::create(const boost::filesystem::path& path,
         if (!error)
         {
             Record metadataRecord(m_metadata);
-            page->appendRecord(metadataRecord, error);
+            metadataRecord.write(*page, error);
             if (!error)
             {
                 page->save(error);
@@ -108,7 +108,7 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
     {
         std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
         Record record(recordData);
-        page->appendRecord(record, error);
+        record.write(*page, error);
 
         if (!error)
         {
@@ -116,7 +116,7 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
             {
                 std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
                 Record record(recordData);
-                page->appendRecord(record, error);
+                record.write(*page, error);
             }
 
             if (!error)

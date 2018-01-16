@@ -21,6 +21,7 @@
 */
 
 #include "MasterFileMetadata.h"
+#include "Page.h"
 
 namespace DiplodocusDB
 {
@@ -45,13 +46,16 @@ void MasterFileMetadata::read(const char* buffer,
 {
 }
 
-void MasterFileMetadata::write(char* buffer) const
+void MasterFileMetadata::write(Page& page,
+                               Ishiko::Error& error) const
 {
-    char* pos = buffer;
     for (unsigned int v : m_fileFormatVersion.value())
     {
-        *((uint32_t*)pos) = v;
-        pos += 4;
+        page.write((char*)&v, 4, error);
+        if (error)
+        {
+            break;
+        }
     }
 }
 
