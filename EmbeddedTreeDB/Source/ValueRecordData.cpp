@@ -48,26 +48,25 @@ const std::string& ValueRecordData::buffer() const
 
 size_t ValueRecordData::size() const
 {
-    return (8 + m_buffer.size());
+    return (2 + m_buffer.size());
 }
 
 void ValueRecordData::read(const char* buffer,
                            size_t recordDataSize)
 {
-    m_buffer.assign(buffer + 8, recordDataSize - 8);
+    m_buffer.assign(buffer + 2, recordDataSize - 2);
 }
 
 void ValueRecordData::write(char* buffer) const
 {
     writeDataType(buffer);
-    memcpy(buffer + 8, m_buffer.c_str(), m_buffer.size());
+    memcpy(buffer + 2, m_buffer.c_str(), m_buffer.size());
 }
 
 void ValueRecordData::writeDataType(char* buffer) const
 {
-    *((uint32_t*)buffer) = (uint32_t)m_type.primitiveType();
-    *((uint32_t*)(buffer + 4)) = (uint32_t)m_type.modifier();
-    
+    *((uint8_t*)buffer) = (uint8_t)m_type.primitiveType();
+    *((uint8_t*)(buffer + 1)) = (uint8_t)m_type.modifier();
 }
 
 }
