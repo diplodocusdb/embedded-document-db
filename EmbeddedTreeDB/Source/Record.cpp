@@ -27,6 +27,7 @@
 #include "ValueRecordData.h"
 #include "StartOfPageRecordData.h"
 #include "EndOfPageRecordData.h"
+#include "Page.h"
 #include "Utilities.h"
 
 namespace DiplodocusDB
@@ -110,11 +111,21 @@ void Record::read(const char* buffer,
     }
 }
 
-void Record::write(char* buffer) const
-{   
-    *((uint8_t*)buffer) = (uint8_t)m_data->type();
-    size_t offset = Utilities::encodeSize(m_data->size(), buffer + 1);
-    m_data->write(buffer + 1 + offset);
+void Record::write(Page& page,
+                   Ishiko::Error& error) const
+{
+    uint8_t type = (uint8_t)m_data->type();
+    page.write((char*)&type, 1, error);
+    if (!error)
+    {
+        char buffer[20];
+        size_t n = Utilities::encodeSize(m_data->size(), buffer);
+        page.write(buffer, n, error);
+        if (!error)
+        {
+            m_data->write(page, error);
+        }
+    }
 }
 
 }

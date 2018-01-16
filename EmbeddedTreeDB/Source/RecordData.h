@@ -39,7 +39,7 @@ public:
 
     virtual size_t size() const = 0;
     virtual void read(const char* buffer, size_t recordDataSize) = 0;
-    virtual void write(char* buffer) const = 0;
+    virtual void write(Page& page, Ishiko::Error& error) const = 0;
 
 private:
     Record::ERecordType m_type;

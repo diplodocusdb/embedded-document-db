@@ -29,6 +29,7 @@
 namespace DiplodocusDB
 {
 
+class Page;
 class RecordData;
 
 class Record
@@ -54,7 +55,7 @@ public:
     RecordData* data();
 
     void read(const char* buffer, Ishiko::Error& error);
-    void write(char* buffer) const;
+    void write(Page& page, Ishiko::Error& error) const;
 
 private:
     std::shared_ptr<RecordData> m_data;

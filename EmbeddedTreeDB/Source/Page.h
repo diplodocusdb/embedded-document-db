@@ -42,7 +42,7 @@ public:
 
     char* buffer();
 
-    void appendRecord(const Record& record, Ishiko::Error& error);
+    void write(const char* buffer, size_t bufferSize, Ishiko::Error& error);
 
     void save(Ishiko::Error& error);
     void init();

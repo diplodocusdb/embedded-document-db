@@ -45,11 +45,15 @@ char* Page::buffer()
     return m_buffer;
 }
 
-void Page::appendRecord(const Record& record,
-                        Ishiko::Error& error)
+void Page::write(const char* buffer,
+                 size_t bufferSize,
+                 Ishiko::Error& error)
 {
-    record.write(m_buffer + m_bufferSize);
-    m_bufferSize += record.size();
+    if ((m_bufferSize + bufferSize + m_endOfPageRecord.size()) <= (sm_bufferCapacity))
+    {
+        memcpy(m_buffer + m_bufferSize, buffer, bufferSize);
+        m_bufferSize += bufferSize;
+    }
 }
 
 void Page::save(Ishiko::Error& error)
@@ -64,10 +68,15 @@ void Page::save(Ishiko::Error& error)
     }
     
     m_startOfPageRecordData->setSize(m_bufferSize);
-    Record startOfPageRecord(m_startOfPageRecordData);
-    startOfPageRecord.write(m_buffer);
 
-    m_endOfPageRecord.write(m_buffer + m_bufferSize);
+    size_t tempBufferSize = m_bufferSize;
+    m_bufferSize = 0;
+    Record startOfPageRecord(m_startOfPageRecordData);
+    startOfPageRecord.write(*this, error);
+
+    m_bufferSize = tempBufferSize;
+    m_endOfPageRecord.write(*this, error);
+    m_bufferSize = tempBufferSize;
 
     file.write(m_buffer, sm_bufferCapacity);
     if (!file.good())
