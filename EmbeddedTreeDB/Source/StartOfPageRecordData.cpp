@@ -21,6 +21,7 @@
 */
 
 #include "StartOfPageRecordData.h"
+#include "Page.h"
 
 namespace DiplodocusDB
 {
@@ -50,10 +51,14 @@ void StartOfPageRecordData::read(const char* buffer,
 {
 }
 
-void StartOfPageRecordData::write(char* buffer) const
+void StartOfPageRecordData::write(Page& page,
+                                  Ishiko::Error& error) const
 {
-    *((uint32_t*)buffer) = m_previousPage;
-    *((uint32_t*)(buffer + 4)) = m_size;
+    page.write((char*)&m_previousPage, 4, error);
+    if (!error)
+    {
+        page.write((char*)&m_size, 4, error);
+    }
 }
 
 }

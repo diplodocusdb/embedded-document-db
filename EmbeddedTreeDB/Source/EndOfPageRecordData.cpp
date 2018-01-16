@@ -21,6 +21,7 @@
 */
 
 #include "EndOfPageRecordData.h"
+#include "Page.h"
 
 namespace DiplodocusDB
 {
@@ -45,9 +46,10 @@ void EndOfPageRecordData::read(const char* buffer,
 {
 }
 
-void EndOfPageRecordData::write(char* buffer) const
+void EndOfPageRecordData::write(Page& page, 
+                                Ishiko::Error& error) const
 {
-    *((uint32_t*)buffer) = m_nextPage;
+    page.write((char*)&m_nextPage, 4, error);
 }
 
 }

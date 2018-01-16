@@ -40,7 +40,7 @@ public:
 
     size_t size() const override;
     void read(const char* buffer, size_t recordDataSize) override;
-    void write(char* buffer) const override;
+    void write(Page& page, Ishiko::Error& error) const override;
 
 private:
     std::string m_key;

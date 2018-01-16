@@ -21,6 +21,7 @@
 */
 
 #include "KeyRecordData.h"
+#include "Page.h"
 
 namespace DiplodocusDB
 {
@@ -55,9 +56,10 @@ void KeyRecordData::read(const char* buffer,
     m_key.assign(buffer, recordDataSize);
 }
 
-void KeyRecordData::write(char* buffer) const
+void KeyRecordData::write(Page& page,
+                          Ishiko::Error& error) const
 {
-    memcpy(buffer, m_key.c_str(), m_key.size());
+    page.write(m_key.c_str(), m_key.size(), error);
 }
 
 }
