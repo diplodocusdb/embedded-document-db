@@ -56,7 +56,7 @@ void Page::save(Ishiko::Error& error)
 {
     std::fstream& file = m_file.file();
 
-    file.seekp(m_index * 4096);
+    file.seekp(m_index * sm_bufferCapacity);
     if (!file.good())
     {
         error = -1;
@@ -69,7 +69,7 @@ void Page::save(Ishiko::Error& error)
 
     m_endOfPageRecord.write(m_buffer + m_bufferSize);
 
-    file.write(m_buffer, 4096);
+    file.write(m_buffer, sm_bufferCapacity);
     if (!file.good())
     {
         error = -1;
@@ -79,7 +79,7 @@ void Page::save(Ishiko::Error& error)
 
 void Page::init()
 {
-    memset(m_buffer, 0, 4096);
+    memset(m_buffer, 0, sm_bufferCapacity);
     m_bufferSize = 10;
 }
 
@@ -87,14 +87,14 @@ void Page::load(Ishiko::Error& error)
 {
     std::fstream& file = m_file.file();
 
-    file.seekg(m_index * 4096);
+    file.seekg(m_index * sm_bufferCapacity);
     if (!file.good())
     {
         error = -1;
         return;
     }
 
-    file.read(m_buffer, 4096);
+    file.read(m_buffer, sm_bufferCapacity);
     if (!file.good())
     {
         error = -1;

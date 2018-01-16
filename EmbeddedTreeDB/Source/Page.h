@@ -51,7 +51,8 @@ public:
 private:
     PageFileRepository& m_file;
     size_t m_index;
-    char m_buffer[4096];
+    static const size_t sm_bufferCapacity = 4096;
+    char m_buffer[sm_bufferCapacity];
     size_t m_bufferSize;
     std::shared_ptr<StartOfPageRecordData> m_startOfPageRecordData;
     Record m_endOfPageRecord;
