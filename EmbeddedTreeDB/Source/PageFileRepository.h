@@ -28,6 +28,7 @@
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
 #include <fstream>
+#include <set>
 
 namespace DiplodocusDB
 {
@@ -49,6 +50,7 @@ public:
 
 private:
     std::fstream m_file;
+    size_t m_pageCount;
     PageCache m_pageCache;
 };
 

@@ -32,7 +32,8 @@ Page::Page(PageFileRepository& file,
            size_t index)
     : m_file(file), m_index(index), m_bufferSize(0),
     m_startOfPageRecordData(std::make_shared<StartOfPageRecordData>()),
-    m_endOfPageRecord(std::make_shared<EndOfPageRecordData>())
+    m_endOfPageRecord(std::make_shared<EndOfPageRecordData>()),
+    m_disableSpaceCheck(false)
 {
 }
 
@@ -45,14 +46,29 @@ char* Page::buffer()
     return m_buffer;
 }
 
-void Page::write(const char* buffer,
-                 size_t bufferSize,
-                 Ishiko::Error& error)
+Page* Page::write(const char* buffer,
+                  size_t bufferSize,
+                  std::set<size_t>& updatedPages,
+                  Ishiko::Error& error)
 {
-    if ((m_bufferSize + bufferSize + m_endOfPageRecord.size()) <= (sm_bufferCapacity))
+    size_t availableSpace = (sm_size - m_bufferSize - m_endOfPageRecord.size());
+    if ((bufferSize <= availableSpace) || m_disableSpaceCheck)
     {
         memcpy(m_buffer + m_bufferSize, buffer, bufferSize);
         m_bufferSize += bufferSize;
+        updatedPages.insert(m_index);
+        return this;
+    }
+    else
+    {
+        Page* nextPage = m_file.allocatePage(error);
+        if (availableSpace > 0)
+        {
+            memcpy(m_buffer + m_bufferSize, buffer, availableSpace);
+            m_bufferSize += availableSpace;
+            updatedPages.insert(m_index);
+        }
+        return nextPage->write((buffer + availableSpace), (bufferSize - availableSpace), updatedPages, error);
     }
 }
 
@@ -60,25 +76,29 @@ void Page::save(Ishiko::Error& error)
 {
     std::fstream& file = m_file.file();
 
-    file.seekp(m_index * sm_bufferCapacity);
+    file.seekp(m_index * sm_size);
     if (!file.good())
     {
         error = -1;
         return;
     }
+
+    std::set<size_t> updatedPages;
     
     m_startOfPageRecordData->setSize(m_bufferSize);
 
     size_t tempBufferSize = m_bufferSize;
     m_bufferSize = 0;
     Record startOfPageRecord(m_startOfPageRecordData);
-    startOfPageRecord.write(*this, error);
+    startOfPageRecord.write(*this, updatedPages, error);
 
     m_bufferSize = tempBufferSize;
-    m_endOfPageRecord.write(*this, error);
+    m_disableSpaceCheck = true;
+    m_endOfPageRecord.write(*this, updatedPages, error);
+    m_disableSpaceCheck = false;
     m_bufferSize = tempBufferSize;
 
-    file.write(m_buffer, sm_bufferCapacity);
+    file.write(m_buffer, sm_size);
     if (!file.good())
     {
         error = -1;
@@ -88,7 +108,7 @@ void Page::save(Ishiko::Error& error)
 
 void Page::init()
 {
-    memset(m_buffer, 0, sm_bufferCapacity);
+    memset(m_buffer, 0, sm_size);
     m_bufferSize = 10;
 }
 
@@ -96,14 +116,14 @@ void Page::load(Ishiko::Error& error)
 {
     std::fstream& file = m_file.file();
 
-    file.seekg(m_index * sm_bufferCapacity);
+    file.seekg(m_index * sm_size);
     if (!file.good())
     {
         error = -1;
         return;
     }
 
-    file.read(m_buffer, sm_bufferCapacity);
+    file.read(m_buffer, sm_size);
     if (!file.good())
     {
         error = -1;

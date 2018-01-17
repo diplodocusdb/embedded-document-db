@@ -21,12 +21,13 @@
 */
 
 #include "PageFileRepository.h"
+#include <boost/filesystem/operations.hpp>
 
 namespace DiplodocusDB
 {
 
 PageFileRepository::PageFileRepository()
-    : m_pageCache(*this)
+    : m_pageCount(0), m_pageCache(*this)
 {
 }
 
@@ -52,10 +53,20 @@ void PageFileRepository::create(const boost::filesystem::path& path,
 void PageFileRepository::open(const boost::filesystem::path& path,
                               Ishiko::Error& error)
 {
-    m_file.open(path.c_str(), std::fstream::in | std::fstream::out | std::fstream::binary);
-    if (!m_file.good())
+    boost::system::error_code ec;
+    boost::uintmax_t filesize = boost::filesystem::file_size(path, ec);
+    if (ec)
     {
         error = -1;
+    }
+    else
+    {
+        m_file.open(path.c_str(), std::fstream::in | std::fstream::out | std::fstream::binary);
+        if (!m_file.good())
+        {
+            error = -1;
+        }
+        m_pageCount = (filesize / Page::sm_size);
     }
 }
 
@@ -66,7 +77,12 @@ void PageFileRepository::close()
 
 Page* PageFileRepository::allocatePage(Ishiko::Error& error)
 {
-    return m_pageCache.allocatePage(error);
+    Page* page = m_pageCache.allocatePage(m_pageCount, error);
+    if (!error)
+    {
+        ++m_pageCount;
+    }
+    return page;
 }
 
 Page* PageFileRepository::page(size_t i,
