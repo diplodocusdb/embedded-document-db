@@ -22,6 +22,7 @@
 
 #include "EmbeddedTreeDBTests.h"
 #include "DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h"
+#include <sstream>
 
 void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
 {
@@ -40,6 +41,7 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
     new FileComparisonTest("append test 2", EmbeddedTreeDBNodeAppendTest2, embeddedTreeDBTestSequence);
     new FileComparisonTest("append test 3", EmbeddedTreeDBNodeAppendTest3, embeddedTreeDBTestSequence);
     new FileComparisonTest("append test 4", EmbeddedTreeDBNodeAppendTest4, embeddedTreeDBTestSequence);
+    new FileComparisonTest("append test 5", EmbeddedTreeDBNodeAppendTest5, embeddedTreeDBTestSequence);
 }
 
 TestResult::EOutcome EmbeddedTreeDBCreationTest1()
@@ -295,6 +297,43 @@ TestResult::EOutcome EmbeddedTreeDBNodeAppendTest4(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest4.dpdb");
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBNodeAppendTest5(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeAppendTest5.dpdb");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.create(outputPath, error);
+    if (!error)
+    {
+        for (size_t i = 0; i < 523; ++i)
+        {
+            std::stringstream key;
+            key << "key" << i;
+            std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().append(key.str());
+            node->commit(error);
+            if (error)
+            {
+                break;
+            }
+        }
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+
+        db.close();
+    }
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest5.dpdb");
 
     return result;
 }
