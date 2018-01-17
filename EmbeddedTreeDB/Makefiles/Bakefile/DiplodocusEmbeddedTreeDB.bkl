@@ -47,9 +47,6 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, Ishik
         ../../Source/ChildrenRecordData.h
         ../../Source/StartOfPageRecordData.h
         ../../Source/EndOfPageRecordData.h
-        ../../Source/Page.h
-        ../../Source/PageCache.h
-        ../../Source/PageFileRepository.h
         ../../Source/KeyCache.h
         ../../Source/Utilities.h
     }
@@ -65,9 +62,6 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, Ishik
         ../../Source/ChildrenRecordData.cpp
         ../../Source/StartOfPageRecordData.cpp
         ../../Source/EndOfPageRecordData.cpp
-        ../../Source/Page.cpp
-        ../../Source/PageCache.cpp
-        ../../Source/PageFileRepository.cpp
         ../../Source/KeyCache.cpp
         ../../Source/Utilities.cpp
     }

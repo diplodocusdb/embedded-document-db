@@ -80,8 +80,8 @@ DIPLODOCUSDB_TREEDB_ROOT ?= $(DIPLODOCUSDB)/TreeDB
 
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a
 
-../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a: $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_ValueRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_ChildrenRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_StartOfPageRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_EndOfPageRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_Page.o $(_builddir)DiplodocusEmbeddedTreeDB_PageCache.o $(_builddir)DiplodocusEmbeddedTreeDB_PageFileRepository.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o $(_builddir)DiplodocusEmbeddedTreeDB_Utilities.o
-	$(AR) rcu $@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_ValueRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_ChildrenRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_StartOfPageRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_EndOfPageRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_Page.o $(_builddir)DiplodocusEmbeddedTreeDB_PageCache.o $(_builddir)DiplodocusEmbeddedTreeDB_PageFileRepository.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o $(_builddir)DiplodocusEmbeddedTreeDB_Utilities.o
+../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedTreeDB-d,DiplodocusEmbeddedTreeDB).a: $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_ValueRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_ChildrenRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_StartOfPageRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_EndOfPageRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o $(_builddir)DiplodocusEmbeddedTreeDB_Utilities.o
+	$(AR) rcu $@ $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_ValueRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_ChildrenRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_StartOfPageRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_EndOfPageRecordData.o $(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o $(_builddir)DiplodocusEmbeddedTreeDB_Utilities.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EmbeddedTreeDB.o: ../../Source/EmbeddedTreeDB.cpp
@@ -107,15 +107,6 @@ $(_builddir)DiplodocusEmbeddedTreeDB_StartOfPageRecordData.o: ../../Source/Start
 
 $(_builddir)DiplodocusEmbeddedTreeDB_EndOfPageRecordData.o: ../../Source/EndOfPageRecordData.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/EndOfPageRecordData.cpp
-
-$(_builddir)DiplodocusEmbeddedTreeDB_Page.o: ../../Source/Page.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/Page.cpp
-
-$(_builddir)DiplodocusEmbeddedTreeDB_PageCache.o: ../../Source/PageCache.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/PageCache.cpp
-
-$(_builddir)DiplodocusEmbeddedTreeDB_PageFileRepository.o: ../../Source/PageFileRepository.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/PageFileRepository.cpp
 
 $(_builddir)DiplodocusEmbeddedTreeDB_KeyCache.o: ../../Source/KeyCache.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB -std=c++11 ../../Source/KeyCache.cpp
