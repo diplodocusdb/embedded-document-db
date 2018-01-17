@@ -57,9 +57,10 @@ void KeyRecordData::read(const char* buffer,
 }
 
 void KeyRecordData::write(Page& page,
+                          std::set<size_t>& updatedPages, 
                           Ishiko::Error& error) const
 {
-    page.write(m_key.c_str(), m_key.size(), error);
+    page.write(m_key.c_str(), m_key.size(), updatedPages, error);
 }
 
 }

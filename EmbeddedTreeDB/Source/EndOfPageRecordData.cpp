@@ -47,9 +47,10 @@ void EndOfPageRecordData::read(const char* buffer,
 }
 
 void EndOfPageRecordData::write(Page& page, 
+                                std::set<size_t>& updatedPages, 
                                 Ishiko::Error& error) const
 {
-    page.write((char*)&m_nextPage, 4, error);
+    page.write((char*)&m_nextPage, 4, updatedPages, error);
 }
 
 }

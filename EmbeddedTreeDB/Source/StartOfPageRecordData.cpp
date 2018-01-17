@@ -52,12 +52,13 @@ void StartOfPageRecordData::read(const char* buffer,
 }
 
 void StartOfPageRecordData::write(Page& page,
+                                  std::set<size_t>& updatedPages,
                                   Ishiko::Error& error) const
 {
-    page.write((char*)&m_previousPage, 4, error);
+    page.write((char*)&m_previousPage, 4, updatedPages, error);
     if (!error)
     {
-        page.write((char*)&m_size, 4, error);
+        page.write((char*)&m_size, 4, updatedPages, error);
     }
 }
 

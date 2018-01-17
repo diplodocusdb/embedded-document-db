@@ -38,7 +38,7 @@ public:
 
     size_t size() const override;
     void read(const char* buffer, size_t recordDataSize) override;
-    void write(Page& page, Ishiko::Error& error) const override;
+    void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const override;
 
 private:
     size_t m_previousPage;
