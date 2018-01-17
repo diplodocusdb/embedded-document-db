@@ -47,11 +47,12 @@ void MasterFileMetadata::read(const char* buffer,
 }
 
 void MasterFileMetadata::write(Page& page,
+                               std::set<size_t>& updatedPages,
                                Ishiko::Error& error) const
 {
     for (unsigned int v : m_fileFormatVersion.value())
     {
-        page.write((char*)&v, 4, error);
+        page.write((char*)&v, 4, updatedPages, error);
         if (error)
         {
             break;
