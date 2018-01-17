@@ -112,18 +112,19 @@ void Record::read(const char* buffer,
 }
 
 void Record::write(Page& page,
+                   std::set<size_t>& updatedPages,
                    Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_data->type();
-    page.write((char*)&type, 1, error);
+    Page* page1 = page.write((char*)&type, 1, updatedPages, error);
     if (!error)
     {
         char buffer[20];
         size_t n = Utilities::encodeSize(m_data->size(), buffer);
-        page.write(buffer, n, error);
+        page1 = page1->write(buffer, n, updatedPages, error);
         if (!error)
         {
-            m_data->write(page, error);
+            m_data->write(*page1, updatedPages, error);
         }
     }
 }

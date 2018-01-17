@@ -59,25 +59,28 @@ void ValueRecordData::read(const char* buffer,
 }
 
 void ValueRecordData::write(Page& page,
+                            std::set<size_t>& updatedPages,
                             Ishiko::Error& error) const
 {
-    writeDataType(page, error);
+    Page* page1 = writeDataType(page, updatedPages, error);
     if (!error)
     {
-        page.write(m_buffer.c_str(), m_buffer.size(), error);
+        page1->write(m_buffer.c_str(), m_buffer.size(), updatedPages, error);
     }
 }
 
-void ValueRecordData::writeDataType(Page& page,
-                                    Ishiko::Error& error) const
+Page* ValueRecordData::writeDataType(Page& page,
+                                     std::set<size_t>& updatedPages,
+                                     Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_type.primitiveType();
-    page.write((char*)&type, 1, error);
+    Page* page1 = page.write((char*)&type, 1, updatedPages, error);
     if (!error)
     {
         uint8_t modifier = (uint8_t)m_type.modifier();
-        page.write((char*)&modifier, 1, error);
+        page1->write((char*)&modifier, 1, updatedPages, error);
     }
+    return page1;
 }
 
 }
