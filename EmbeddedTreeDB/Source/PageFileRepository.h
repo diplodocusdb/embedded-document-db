@@ -28,7 +28,6 @@
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
 #include <fstream>
-#include <set>
 
 namespace DiplodocusDB
 {
