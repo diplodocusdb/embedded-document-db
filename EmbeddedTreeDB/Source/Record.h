@@ -20,27 +20,46 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
+#ifndef _DIPLODOCUSDB_PHYSICALSTORAGE_PAGEREPOSITORY_RECORD_H_
+#define _DIPLODOCUSDB_PHYSICALSTORAGE_PAGEREPOSITORY_RECORD_H_
 
-#include "RecordData.h"
-#include "DiplodocusDB/Core/VersionNumber.h"
+#include "Ishiko/Errors/Error.h"
+#include <set>
+#include <memory>
 
 namespace DiplodocusDB
 {
 
-class MasterFileMetadata : public RecordData
+class Page;
+class RecordData;
+
+class Record
 {
 public:
-    MasterFileMetadata();
-    ~MasterFileMetadata() override;
+    enum class ERecordType
+    {
+        eInvalid = 0,
+        eMasterFileMetadata = 0x01,
+        eKey = 0x02,
+        eValue = 0x03,
+        eChildren = 0x04,
+        eStartOfPage = 0xF0,
+        eEndOfPage = 0xF1,
+    };
 
-    size_t size() const override;
-    void read(const char* buffer, size_t recordDataSize) override;
-    void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const override;
+    Record();
+    Record(std::shared_ptr<RecordData> data);
+    ~Record();
+
+    ERecordType type() const;
+    size_t size() const;
+    RecordData* data();
+
+    void read(const char* buffer, Ishiko::Error& error);
+    void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const;
 
 private:
-    VersionNumber m_fileFormatVersion;
+    std::shared_ptr<RecordData> m_data;
 };
 
 }

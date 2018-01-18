@@ -20,27 +20,34 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
+#ifndef _DIPLODOCUSDB_PHYSICALSTORAGE_PAGEREPOSITORY_VALUERECORDDATA_H_
+#define _DIPLODOCUSDB_PHYSICALSTORAGE_PAGEREPOSITORY_VALUERECORDDATA_H_
 
 #include "RecordData.h"
-#include "DiplodocusDB/Core/VersionNumber.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBValue.h"
 
 namespace DiplodocusDB
 {
 
-class MasterFileMetadata : public RecordData
+class ValueRecordData : public RecordData
 {
 public:
-    MasterFileMetadata();
-    ~MasterFileMetadata() override;
+    ValueRecordData();
+    ValueRecordData(const TreeDBValue& value);
+    ~ValueRecordData() override;
+
+    const std::string& buffer() const;
 
     size_t size() const override;
     void read(const char* buffer, size_t recordDataSize) override;
     void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const override;
 
 private:
-    VersionNumber m_fileFormatVersion;
+    Page* writeDataType(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const;
+
+private:
+    DataType m_type;
+    std::string m_buffer;
 };
 
 }

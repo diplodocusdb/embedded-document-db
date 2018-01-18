@@ -20,29 +20,23 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
-
 #include "RecordData.h"
-#include "DiplodocusDB/Core/VersionNumber.h"
 
 namespace DiplodocusDB
 {
 
-class MasterFileMetadata : public RecordData
+RecordData::RecordData(Record::ERecordType type)
+    : m_type(type)
 {
-public:
-    MasterFileMetadata();
-    ~MasterFileMetadata() override;
-
-    size_t size() const override;
-    void read(const char* buffer, size_t recordDataSize) override;
-    void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const override;
-
-private:
-    VersionNumber m_fileFormatVersion;
-};
-
 }
 
-#endif
+RecordData::~RecordData()
+{
+}
+
+Record::ERecordType RecordData::type() const
+{
+    return m_type;
+}
+
+}

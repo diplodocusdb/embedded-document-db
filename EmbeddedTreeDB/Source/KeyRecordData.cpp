@@ -20,29 +20,47 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
-
-#include "RecordData.h"
-#include "DiplodocusDB/Core/VersionNumber.h"
+#include "KeyRecordData.h"
+#include "Page.h"
 
 namespace DiplodocusDB
 {
 
-class MasterFileMetadata : public RecordData
+KeyRecordData::KeyRecordData()
+    : RecordData(Record::ERecordType::eKey)
 {
-public:
-    MasterFileMetadata();
-    ~MasterFileMetadata() override;
-
-    size_t size() const override;
-    void read(const char* buffer, size_t recordDataSize) override;
-    void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const override;
-
-private:
-    VersionNumber m_fileFormatVersion;
-};
-
 }
 
-#endif
+KeyRecordData::KeyRecordData(const TreeDBKey& key)
+    : RecordData(Record::ERecordType::eKey), m_key(key.value())
+{
+}
+
+KeyRecordData::~KeyRecordData()
+{
+}
+
+const std::string& KeyRecordData::key() const
+{
+    return m_key;
+}
+
+size_t KeyRecordData::size() const
+{
+    return m_key.size();
+}
+
+void KeyRecordData::read(const char* buffer,
+                         size_t recordDataSize)
+{
+    m_key.assign(buffer, recordDataSize);
+}
+
+void KeyRecordData::write(Page& page,
+                          std::set<size_t>& updatedPages, 
+                          Ishiko::Error& error) const
+{
+    page.write(m_key.c_str(), m_key.size(), updatedPages, error);
+}
+
+}
