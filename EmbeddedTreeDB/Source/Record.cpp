@@ -25,8 +25,8 @@
 #include "MasterFileMetadata.h"
 #include "KeyRecordData.h"
 #include "ValueRecordData.h"
-#include "Page.h"
 #include "Utilities.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/Page.h"
 
 namespace DiplodocusDB
 {
@@ -87,14 +87,6 @@ void Record::read(const char* buffer,
 
     case ERecordType::eValue:
         m_data = std::make_shared<ValueRecordData>();
-        break;
-
-    case ERecordType::eStartOfPage:
-        m_data = std::make_shared<StartOfPageRecordData>();
-        break;
-
-    case ERecordType::eEndOfPage:
-        m_data = std::make_shared<EndOfPageRecordData>();
         break;
 
     default:

@@ -21,7 +21,7 @@
 */
 
 #include "ValueRecordData.h"
-#include "Page.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/Page.h"
 
 namespace DiplodocusDB
 {

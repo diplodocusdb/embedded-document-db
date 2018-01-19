@@ -25,8 +25,8 @@
 
 #include "MasterFileMetadata.h"
 #include "EmbeddedTreeDBNodeImpl.h"
-#include "PageFileRepository.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
 #include <fstream>
