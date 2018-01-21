@@ -48,6 +48,8 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
         ../../Source/KeyCache.h
         ../../Source/Record.h
         ../../Source/RecordData.h
+        ../../Source/DataStartRecordData.h
+        ../../Source/DataEndRecordData.h
         ../../Source/KeyRecordData.h
         ../../Source/ValueRecordData.h
         ../../Source/ChildrenRecordData.h
@@ -65,6 +67,8 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
         ../../Source/KeyCache.cpp
         ../../Source/Record.cpp
         ../../Source/RecordData.cpp
+        ../../Source/DataStartRecordData.cpp
+        ../../Source/DataEndRecordData.cpp
         ../../Source/KeyRecordData.cpp
         ../../Source/ValueRecordData.cpp
         ../../Source/ChildrenRecordData.cpp
