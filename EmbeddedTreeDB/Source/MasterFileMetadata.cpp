@@ -41,18 +41,20 @@ size_t MasterFileMetadata::size() const
     return 12;
 }
 
-void MasterFileMetadata::read(const char* buffer,
-                              size_t recordDataSize)
+void MasterFileMetadata::load(PageRepositoryReader& reader,
+                              size_t recordDataSize,
+                              Ishiko::Error& error)
 {
+    char buffer[12];
+    reader.read(buffer, 12, error);
 }
 
-void MasterFileMetadata::write(Page& page,
-                               std::set<size_t>& updatedPages,
-                               Ishiko::Error& error) const
+void MasterFileMetadata::save(PageRepositoryWriter& writer,
+                              Ishiko::Error& error) const
 {
     for (unsigned int v : m_fileFormatVersion.value())
     {
-        page.write((char*)&v, 4, updatedPages, error);
+        writer.write((char*)&v, 4, error);
         if (error)
         {
             break;
