@@ -23,14 +23,14 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include "Ishiko/Errors/Error.h"
-#include <set>
 #include <memory>
 
 namespace DiplodocusDB
 {
 
-class Page;
 class RecordData;
 
 class Record
@@ -40,9 +40,11 @@ public:
     {
         eInvalid = 0,
         eMasterFileMetadata = 0x01,
-        eKey = 0x02,
-        eValue = 0x03,
-        eChildren = 0x04
+        eDataStart = 0x02,
+        eDataEnd = 0x03,
+        eKey = 0x04,
+        eValue = 0x05,
+        eChildren = 0x06
     };
 
     Record();
@@ -53,8 +55,8 @@ public:
     size_t size() const;
     RecordData* data();
 
-    void read(const char* buffer, Ishiko::Error& error);
-    void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const;
+    void load(PageRepositoryReader& reader, Ishiko::Error& error);
+    void save(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     std::shared_ptr<RecordData> m_data;

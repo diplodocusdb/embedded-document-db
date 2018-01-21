@@ -23,6 +23,8 @@
 #include "Record.h"
 #include "RecordData.h"
 #include "MasterFileMetadata.h"
+#include "DataStartRecordData.h"
+#include "DataEndRecordData.h"
 #include "KeyRecordData.h"
 #include "ValueRecordData.h"
 #include "Utilities.h"
@@ -67,11 +69,17 @@ RecordData* Record::data()
     return m_data.get();
 }
 
-void Record::read(const char* buffer,
+void Record::load(PageRepositoryReader& reader,
                   Ishiko::Error& error)
 {
-    ERecordType type = (ERecordType)(*(uint8_t*)buffer);
-    switch (type)
+    uint8_t type;
+    reader.read((char*)&type, 1, error);
+    if (error)
+    {
+        return;
+    }
+
+    switch ((ERecordType)type)
     {
     case ERecordType::eInvalid:
         error = -1;
@@ -79,6 +87,14 @@ void Record::read(const char* buffer,
 
     case ERecordType::eMasterFileMetadata:
         m_data = std::make_shared<MasterFileMetadata>();
+        break;
+
+    case ERecordType::eDataStart:
+        m_data = std::make_shared<DataStartRecordData>();
+        break;
+
+    case ERecordType::eDataEnd:
+        m_data = std::make_shared<DataEndRecordData>();
         break;
 
     case ERecordType::eKey:
@@ -96,25 +112,28 @@ void Record::read(const char* buffer,
     
     if (!error)
     {
-        uint8_t size = *((uint8_t*)(buffer + 1));
-        m_data->read(buffer + 2, size);
+        uint8_t size;
+        reader.read((char*)&size, 1, error);
+        if (!error)
+        {
+            m_data->load(reader, size, error);
+        }
     }
 }
 
-void Record::write(Page& page,
-                   std::set<size_t>& updatedPages,
-                   Ishiko::Error& error) const
+void Record::save(PageRepositoryWriter& writer,
+                  Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_data->type();
-    Page* page1 = page.write((char*)&type, 1, updatedPages, error);
+    writer.write((char*)&type, 1, error);
     if (!error)
     {
         char buffer[20];
         size_t n = Utilities::encodeSize(m_data->size(), buffer);
-        page1 = page1->write(buffer, n, updatedPages, error);
+        writer.write(buffer, n, error);
         if (!error)
         {
-            m_data->write(*page1, updatedPages, error);
+            m_data->save(writer, error);
         }
     }
 }

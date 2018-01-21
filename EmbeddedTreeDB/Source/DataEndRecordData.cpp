@@ -21,3 +21,33 @@
 */
 
 #include "DataEndRecordData.h"
+
+namespace DiplodocusDB
+{
+
+DataEndRecordData::DataEndRecordData()
+    : RecordData(Record::ERecordType::eDataEnd)
+{
+}
+
+DataEndRecordData::~DataEndRecordData()
+{
+}
+
+size_t DataEndRecordData::size() const
+{
+    return 0;
+}
+
+void DataEndRecordData::load(PageRepositoryReader& reader,
+                             size_t recordDataSize,
+                             Ishiko::Error& error)
+{
+}
+
+void DataEndRecordData::save(PageRepositoryWriter& writer,
+                             Ishiko::Error& error) const
+{
+}
+
+}

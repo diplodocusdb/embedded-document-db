@@ -24,6 +24,8 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDDATA_H_
 
 #include "Record.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include "Ishiko/Errors/Error.h"
 
 namespace DiplodocusDB
@@ -38,8 +40,8 @@ public:
     Record::ERecordType type() const;
 
     virtual size_t size() const = 0;
-    virtual void read(const char* buffer, size_t recordDataSize) = 0;
-    virtual void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const = 0;
+    virtual void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error) = 0;
+    virtual void save(PageRepositoryWriter& writer, Ishiko::Error& error) const = 0;
 
 private:
     Record::ERecordType m_type;
