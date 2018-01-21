@@ -50,17 +50,18 @@ size_t KeyRecordData::size() const
     return m_key.size();
 }
 
-void KeyRecordData::read(const char* buffer,
-                         size_t recordDataSize)
+void KeyRecordData::load(PageRepositoryReader& reader,
+                         size_t recordDataSize,
+                         Ishiko::Error& error)
 {
-    m_key.assign(buffer, recordDataSize);
+    m_key.resize(recordDataSize);
+    reader.read(&m_key[0], recordDataSize, error);
 }
 
-void KeyRecordData::write(Page& page,
-                          std::set<size_t>& updatedPages, 
-                          Ishiko::Error& error) const
+void KeyRecordData::save(PageRepositoryWriter& writer,
+                         Ishiko::Error& error) const
 {
-    page.write(m_key.c_str(), m_key.size(), updatedPages, error);
+    writer.write(m_key.c_str(), m_key.size(), error);
 }
 
 }

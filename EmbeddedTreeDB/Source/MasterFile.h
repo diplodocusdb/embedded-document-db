@@ -51,6 +51,8 @@ public:
 private:
     PageFileRepository m_repository;
     std::shared_ptr<MasterFileMetadata> m_metadata;
+    size_t m_dataStartOffset;
+    size_t m_dataEndOffset;
 };
 
 }

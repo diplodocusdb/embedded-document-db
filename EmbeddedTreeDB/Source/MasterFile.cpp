@@ -31,7 +31,8 @@ namespace DiplodocusDB
 {
 
 MasterFile::MasterFile()
-    : m_metadata(std::make_shared<MasterFileMetadata>())
+    : m_metadata(std::make_shared<MasterFileMetadata>()),
+    m_dataStartOffset(0), m_dataEndOffset(0)
 {
 }
 
@@ -55,10 +56,12 @@ void MasterFile::create(const boost::filesystem::path& path,
                 metadataRecord.save(writer, error);
                 if (!error)
                 {
+                    m_dataStartOffset = page->dataSize();
                     Record dataStartRecord(std::make_shared<DataStartRecordData>());
                     dataStartRecord.save(writer, error);
                     if (!error)
                     {
+                        m_dataEndOffset = page->dataSize();
                         Record dataEndRecord(std::make_shared<DataEndRecordData>());
                         dataEndRecord.save(writer, error);
                         if (!error)
@@ -76,6 +79,7 @@ void MasterFile::open(const boost::filesystem::path& path,
                       Ishiko::Error& error)
 {
     m_repository.open(path, error);
+    m_dataStartOffset = 14;
 }
 
 void MasterFile::close()
@@ -89,7 +93,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
 {
     bool result = false;
 
-    PageRepositoryReader reader = m_repository.read(0, 0, error);
+    PageRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 2, error);
     while (!result && !error)
     {
         Record record;
@@ -100,7 +104,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
             {
                 Record valueRecord;
                 valueRecord.load(reader, error);
-                if (!error && (record.type() == Record::ERecordType::eValue))
+                if (!error && (valueRecord.type() == Record::ERecordType::eValue))
                 {
                     const std::string& value = static_cast<ValueRecordData*>(valueRecord.data())->buffer();
                     node.value().setString(value);
@@ -120,7 +124,7 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
     std::shared_ptr<Page> page = m_repository.page(0, error);
     if (!error)
     {
-        PageRepositoryWriter writer = m_repository.insert(page, 0, error);
+        PageRepositoryWriter writer = m_repository.insert(page, m_dataEndOffset, error);
         if (!error)
         {
             std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
@@ -139,6 +143,10 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
                 if (!error)
                 {
                     writer.save(error);
+                    if (!error)
+                    {
+                        m_dataEndOffset = (page->dataSize() - 2);
+                    }
                 }
             }
         }
