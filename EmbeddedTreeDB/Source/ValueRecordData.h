@@ -39,11 +39,11 @@ public:
     const std::string& buffer() const;
 
     size_t size() const override;
-    void read(const char* buffer, size_t recordDataSize) override;
-    void write(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const override;
+    void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error) override;
+    void save(PageRepositoryWriter& writer, Ishiko::Error& error) const override;
 
 private:
-    Page* writeDataType(Page& page, std::set<size_t>& updatedPages, Ishiko::Error& error) const;
+    void saveDataType(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     DataType m_type;

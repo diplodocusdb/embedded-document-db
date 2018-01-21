@@ -52,35 +52,34 @@ size_t ValueRecordData::size() const
     return (2 + m_buffer.size());
 }
 
-void ValueRecordData::read(const char* buffer,
-                           size_t recordDataSize)
+void ValueRecordData::load(PageRepositoryReader& reader,
+                           size_t recordDataSize,
+                           Ishiko::Error& error)
 {
-    m_buffer.assign(buffer + 2, recordDataSize - 2);
+    m_buffer.resize(recordDataSize - 2);
+    reader.read(&m_buffer[0], recordDataSize - 2, error);
 }
 
-void ValueRecordData::write(Page& page,
-                            std::set<size_t>& updatedPages,
-                            Ishiko::Error& error) const
+void ValueRecordData::save(PageRepositoryWriter& writer,
+                           Ishiko::Error& error) const
 {
-    Page* page1 = writeDataType(page, updatedPages, error);
+    saveDataType(writer, error);
     if (!error)
     {
-        page1->write(m_buffer.c_str(), m_buffer.size(), updatedPages, error);
+        writer.write(m_buffer.c_str(), m_buffer.size(), error);
     }
 }
 
-Page* ValueRecordData::writeDataType(Page& page,
-                                     std::set<size_t>& updatedPages,
-                                     Ishiko::Error& error) const
+void ValueRecordData::saveDataType(PageRepositoryWriter& writer,
+                                   Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_type.primitiveType();
-    Page* page1 = page.write((char*)&type, 1, updatedPages, error);
+    writer.write((char*)&type, 1, error);
     if (!error)
     {
         uint8_t modifier = (uint8_t)m_type.modifier();
-        page1->write((char*)&modifier, 1, updatedPages, error);
+        writer.write((char*)&modifier, 1, error);
     }
-    return page1;
 }
 
 }
