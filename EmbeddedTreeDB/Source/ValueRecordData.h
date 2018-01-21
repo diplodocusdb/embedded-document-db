@@ -43,6 +43,7 @@ public:
     void save(PageRepositoryWriter& writer, Ishiko::Error& error) const override;
 
 private:
+    void loadDataType(PageRepositoryReader& reader, Ishiko::Error& error);
     void saveDataType(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:

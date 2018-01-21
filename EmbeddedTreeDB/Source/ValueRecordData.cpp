@@ -56,8 +56,12 @@ void ValueRecordData::load(PageRepositoryReader& reader,
                            size_t recordDataSize,
                            Ishiko::Error& error)
 {
-    m_buffer.resize(recordDataSize - 2);
-    reader.read(&m_buffer[0], recordDataSize - 2, error);
+    loadDataType(reader, error);
+    if (!error)
+    {
+        m_buffer.resize(recordDataSize - 2);
+        reader.read(&m_buffer[0], recordDataSize - 2, error);
+    }
 }
 
 void ValueRecordData::save(PageRepositoryWriter& writer,
@@ -68,6 +72,13 @@ void ValueRecordData::save(PageRepositoryWriter& writer,
     {
         writer.write(m_buffer.c_str(), m_buffer.size(), error);
     }
+}
+
+void ValueRecordData::loadDataType(PageRepositoryReader& reader,
+                                   Ishiko::Error& error)
+{
+    char buffer[2];
+    reader.read(buffer, 2, error);
 }
 
 void ValueRecordData::saveDataType(PageRepositoryWriter& writer,
