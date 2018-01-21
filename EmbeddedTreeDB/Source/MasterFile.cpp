@@ -22,6 +22,8 @@
 
 #include "MasterFile.h"
 #include "EmbeddedTreeDBNodeImpl.h"
+#include "DataStartRecordData.h"
+#include "DataEndRecordData.h"
 #include "KeyRecordData.h"
 #include "ValueRecordData.h"
 
@@ -43,15 +45,28 @@ void MasterFile::create(const boost::filesystem::path& path,
     m_repository.create(path, error);
     if (!error)
     {
-        Page* page = m_repository.allocatePage(error);
+        std::shared_ptr<Page> page = m_repository.allocatePage(error);
         if (!error)
         {
-            Record metadataRecord(m_metadata);
-            std::set<size_t> updatedPages;
-            metadataRecord.write(*page, updatedPages, error);
+            PageRepositoryWriter writer = m_repository.insert(page, 0, error);
             if (!error)
             {
-                page->save(error);
+                Record metadataRecord(m_metadata);
+                metadataRecord.save(writer, error);
+                if (!error)
+                {
+                    Record dataStartRecord(std::make_shared<DataStartRecordData>());
+                    dataStartRecord.save(writer, error);
+                    if (!error)
+                    {
+                        Record dataEndRecord(std::make_shared<DataEndRecordData>());
+                        dataEndRecord.save(writer, error);
+                        if (!error)
+                        {
+                            page->save(error);
+                        }
+                    }
+                }
             }
         }
     }
@@ -73,120 +88,61 @@ bool MasterFile::findNode(const TreeDBKey& key,
                           Ishiko::Error& error)
 {
     bool result = false;
-    size_t offset = 0;
-    while (!result)
+
+    PageRepositoryReader reader = m_repository.read(0, 0, error);
+    while (!result && !error)
     {
-        TreeDBKey readKey = readString(offset, error);
-        if (error)
+        Record record;
+        record.load(reader, error);
+        if (!error && (record.type() == Record::ERecordType::eKey))
         {
-            break;
-        }
-        if (readKey == key)
-        {
-            std::string value;
-            bool found = readValue(offset, value, error);
-            if (error)
+            if (static_cast<KeyRecordData*>(record.data())->key() == key.value())
             {
-                break;
+                Record valueRecord;
+                valueRecord.load(reader, error);
+                if (!error && (record.type() == Record::ERecordType::eValue))
+                {
+                    const std::string& value = static_cast<ValueRecordData*>(valueRecord.data())->buffer();
+                    node.value().setString(value);
+                }
+                
+                result = true;
             }
-
-            if (found)
-            {
-                node.value().setString(value);
-            }
-
-            result = true;
         }
     }
+
     return result;
 }
 
 void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
                             Ishiko::Error& error)
 {
-    Page* page = m_repository.page(0, error);
+    std::shared_ptr<Page> page = m_repository.page(0, error);
     if (!error)
     {
-        std::set<size_t> updatedPages;
-
-        std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
-        Record record(recordData);
-        record.write(*page, updatedPages, error);
-
+        PageRepositoryWriter writer = m_repository.insert(page, 0, error);
         if (!error)
         {
-            if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
-            {
-                std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
-                Record record(recordData);
-                record.write(*page, updatedPages, error);
-            }
+            std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
+            Record record(recordData);
+            record.save(writer, error);
 
             if (!error)
             {
-                for (size_t i : updatedPages)
+                if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
                 {
-                    Page* page = m_repository.page(i, error);
-                    if (!error)
-                    {
-                        page->save(error);
-                    }
-                    if (error)
-                    {
-                        break;
-                    }
+                    std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
+                    Record record(recordData);
+                    record.save(writer, error);
+                }
+
+                if (!error)
+                {
+                    writer.save(error);
                 }
             }
         }
     }
-}
-
-std::string MasterFile::readString(size_t& offset,
-                                   Ishiko::Error& error)
-{
-    std::string result;
-
-    Page* page = m_repository.page(0, error);
-    if (!error)
-    {
-        Record record;
-        record.read(page->buffer() + 10 + offset, error);
-        if (!error)
-        {
-            if (record.type() == Record::ERecordType::eKey)
-            {
-                result = (static_cast<KeyRecordData*>(record.data()))->key();
-            }
-            offset += record.size();
-        }
-    }
-
-    return result;
-}
-
-bool MasterFile::readValue(size_t& offset,
-                           std::string& value,
-                           Ishiko::Error& error)
-{
-    bool result = false;
-
-    Page* page = m_repository.page(0, error);
-    if (!error)
-    {
-        Record record;
-        record.read(page->buffer() + 10 + offset, error);
-        if (!error)
-        {
-            if (record.type() == Record::ERecordType::eValue)
-            {
-                value = (static_cast<ValueRecordData*>(record.data()))->buffer();
-                result = true;
-            }
-            offset += record.size();
-        }
-    }
-
-    return result;
 }
 
 }

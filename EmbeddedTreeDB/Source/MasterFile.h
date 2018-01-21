@@ -49,10 +49,6 @@ public:
     void commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
 
 private:
-    std::string readString(size_t& offset, Ishiko::Error& error);
-    bool readValue(size_t& offset, std::string& value, Ishiko::Error& error);
-
-private:
     PageFileRepository m_repository;
     std::shared_ptr<MasterFileMetadata> m_metadata;
 };
