@@ -61,6 +61,7 @@ void MasterFile::create(const boost::filesystem::path& path,
                     dataStartRecord.save(writer, error);
                     if (!error)
                     {
+                        m_dataEndPage = page;
                         m_dataEndOffset = page->dataSize();
                         Record dataEndRecord(std::make_shared<DataEndRecordData>());
                         dataEndRecord.save(writer, error);
@@ -121,32 +122,29 @@ bool MasterFile::findNode(const TreeDBKey& key,
 void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
                             Ishiko::Error& error)
 {
-    std::shared_ptr<Page> page = m_repository.page(0, error);
+    PageRepositoryWriter writer = m_repository.insert(m_dataEndPage, m_dataEndOffset, error);
     if (!error)
     {
-        PageRepositoryWriter writer = m_repository.insert(page, m_dataEndOffset, error);
+        std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
+        Record record(recordData);
+        record.save(writer, error);
+
         if (!error)
         {
-            std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
-            Record record(recordData);
-            record.save(writer, error);
+            if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
+            {
+                std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
+                Record record(recordData);
+                record.save(writer, error);
+            }
 
             if (!error)
             {
-                if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
-                {
-                    std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
-                    Record record(recordData);
-                    record.save(writer, error);
-                }
-
+                writer.save(error);
                 if (!error)
                 {
-                    writer.save(error);
-                    if (!error)
-                    {
-                        m_dataEndOffset = (page->dataSize() - 2);
-                    }
+                    m_dataEndPage = writer.currentPage();
+                    m_dataEndOffset = (m_dataEndPage->dataSize() - 2);
                 }
             }
         }
