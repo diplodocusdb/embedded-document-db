@@ -40,7 +40,8 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path,
     m_masterFile.create(path, error);
     if (!error)
     {
-        m_root = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "");
+        m_root = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "", m_masterFile.rootNodePosition());
+        m_uncommittedNodes = std::make_shared<UncommittedNodes>(shared_from_this());
     }
 }
 
@@ -50,7 +51,8 @@ void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path,
     m_masterFile.open(path, error);
     if (!error)
     {
-        m_root = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "");
+        m_root = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "", m_masterFile.rootNodePosition());
+        m_uncommittedNodes = std::make_shared<UncommittedNodes>(shared_from_this());
     }
 }
 
@@ -64,17 +66,12 @@ TreeDBNode& EmbeddedTreeDBImpl::root()
     return *m_root;
 }
 
-std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::createNode(const TreeDBKey& key)
-{
-    return std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key);
-}
-
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::getNode(const TreeDBKey& key,
                                                         Ishiko::Error& error)
 {
     std::shared_ptr<TreeDBNode> result;
 
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key);
+    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key, PageRepositoryPosition(0, 0));
     bool found = m_masterFile.findNode(key, *temp, error);
     if (!error && found)
     {
@@ -84,10 +81,27 @@ std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::getNode(const TreeDBKey& key,
     return result;
 }
 
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::insertNode(const TreeDBKey& key,
+                                                           const PageRepositoryPosition& pos)
+{
+    return m_uncommittedNodes->createNode(key, pos);
+}
+
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBImpl::appendNode(const TreeDBKey& key)
+{
+    return m_uncommittedNodes->createNode(key, m_masterFile.dataEndPosition());
+}
+
+bool EmbeddedTreeDBImpl::removeNode(const TreeDBKey& key,
+                                    Ishiko::Error& error)
+{
+    return m_masterFile.removeNode(key, error);
+}
+
 void EmbeddedTreeDBImpl::commitNode(const EmbeddedTreeDBNodeImpl& node,
                                     Ishiko::Error& error)
 {
-    m_masterFile.commitNode(node, error);
+    m_masterFile.addNode(node, error);
 }
 
 }

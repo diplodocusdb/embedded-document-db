@@ -26,9 +26,10 @@
 namespace DiplodocusDB
 {
 
-EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db,
-                                               const TreeDBKey& key)
-    : m_db(db), m_key(key)
+EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db,   
+                                               const TreeDBKey& key,
+                                               const PageRepositoryPosition& position)
+    : m_db(db), m_key(key), m_position(position)
 {
 }
 
@@ -42,9 +43,33 @@ std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key,
     return m_db->getNode(key, error);
 }
 
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insert(const TreeDBKey& key,
+                                                           size_t index)
+{
+    return m_db->appendNode(key);
+}
+
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insertBefore(const TreeDBKey& key,
+                                                                 std::shared_ptr<TreeDBNode> child)
+{
+    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child)->position());
+}
+
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insertAfter(const TreeDBKey& key,
+                                                                std::shared_ptr<TreeDBNode> child)
+{
+    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child)->position());
+}
+
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
 {
-    return m_db->createNode(key);
+    return m_db->appendNode(key);
+}
+
+bool EmbeddedTreeDBNodeImpl::remove(const TreeDBKey& key,
+                                    Ishiko::Error& error)
+{
+    return m_db->removeNode(key, error);
 }
 
 void EmbeddedTreeDBNodeImpl::commit(Ishiko::Error& error)
@@ -55,6 +80,16 @@ void EmbeddedTreeDBNodeImpl::commit(Ishiko::Error& error)
 const TreeDBKey& EmbeddedTreeDBNodeImpl::key() const
 {
     return m_key;
+}
+
+const PageRepositoryPosition& EmbeddedTreeDBNodeImpl::position() const
+{
+    return m_position;
+}
+
+void EmbeddedTreeDBNodeImpl::setPosition(const PageRepositoryPosition& pos)
+{
+    m_position = pos;
 }
 
 }

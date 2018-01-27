@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryPosition.h"
 
 namespace DiplodocusDB
 {
@@ -33,20 +34,26 @@ class EmbeddedTreeDBImpl;
 class EmbeddedTreeDBNodeImpl : public TreeDBNode
 {
 public:
-    EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key);
+    EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key,
+        const PageRepositoryPosition& position);
     ~EmbeddedTreeDBNodeImpl() override;
 
     std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) override;
-
+    std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index) override;
+    std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) override;
+    std::shared_ptr<TreeDBNode> insertAfter(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) override;
     std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) override;
-
+    bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
     void commit(Ishiko::Error& error) override;
 
     const TreeDBKey& key() const;
-
+    const PageRepositoryPosition& position() const;
+    void setPosition(const PageRepositoryPosition& pos);
+    
 private:
     std::shared_ptr<EmbeddedTreeDBImpl> m_db;
     TreeDBKey m_key;
+    PageRepositoryPosition m_position;
 };
 
 }
