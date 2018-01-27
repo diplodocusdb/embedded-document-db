@@ -46,7 +46,8 @@ public:
     void close();
 
     bool findNode(const TreeDBKey& key, EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
-    void commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
+    void insertNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
+    bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
 
 private:
     PageFileRepository m_repository;

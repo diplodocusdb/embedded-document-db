@@ -81,6 +81,12 @@ void MasterFile::open(const boost::filesystem::path& path,
 {
     m_repository.open(path, error);
     m_dataStartOffset = 14;
+    m_dataEndPage = m_repository.page(m_repository.pageCount() - 1, error);
+    if (!error)
+    {
+        // Deduct 2 for the end of data record
+        m_dataEndOffset = (m_dataEndPage->dataSize() - 2);
+    }
 }
 
 void MasterFile::close()
@@ -119,7 +125,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
     return result;
 }
 
-void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
+void MasterFile::insertNode(const EmbeddedTreeDBNodeImpl& node,
                             Ishiko::Error& error)
 {
     PageRepositoryWriter writer = m_repository.insert(m_dataEndPage, m_dataEndOffset, error);
@@ -149,6 +155,13 @@ void MasterFile::commitNode(const EmbeddedTreeDBNodeImpl& node,
             }
         }
     }
+}
+
+bool MasterFile::removeNode(const TreeDBKey& key,
+                            Ishiko::Error& error)
+{
+    error = -1;
+    return false;
 }
 
 }
