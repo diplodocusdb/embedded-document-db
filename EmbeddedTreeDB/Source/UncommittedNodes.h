@@ -25,6 +25,7 @@
 
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryPosition.h"
 #include <memory>
 
 namespace DiplodocusDB
@@ -38,7 +39,7 @@ public:
     UncommittedNodes(std::shared_ptr<EmbeddedTreeDBImpl> db);
     ~UncommittedNodes();
 
-    std::shared_ptr<TreeDBNode> createNode(const TreeDBKey& key);
+    std::shared_ptr<TreeDBNode> createNode(const TreeDBKey& key, const PageRepositoryPosition& pos);
 
 private:
     std::shared_ptr<EmbeddedTreeDBImpl> m_db;

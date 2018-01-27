@@ -35,9 +35,10 @@ UncommittedNodes::~UncommittedNodes()
 {
 }
 
-std::shared_ptr<TreeDBNode> UncommittedNodes::createNode(const TreeDBKey& key)
+std::shared_ptr<TreeDBNode> UncommittedNodes::createNode(const TreeDBKey& key,
+                                                         const PageRepositoryPosition& pos)
 {
-    return std::make_shared<EmbeddedTreeDBNodeImpl>(m_db, key);
+    return std::make_shared<EmbeddedTreeDBNodeImpl>(m_db, key, pos);
 }
 
 }

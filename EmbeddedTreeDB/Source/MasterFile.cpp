@@ -94,6 +94,16 @@ void MasterFile::close()
     m_repository.close();
 }
 
+PageRepositoryPosition MasterFile::rootNodePosition() const
+{
+    return PageRepositoryPosition(0, m_dataStartOffset + 2);
+}
+
+PageRepositoryPosition MasterFile::dataEndPosition() const
+{
+    return PageRepositoryPosition(m_dataEndPage->index(), m_dataEndOffset);
+}
+
 bool MasterFile::findNode(const TreeDBKey& key,
                           EmbeddedTreeDBNodeImpl& node,
                           Ishiko::Error& error)
@@ -103,6 +113,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
     PageRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 2, error);
     while (!result && !error)
     {
+        PageRepositoryPosition currentNodeStartPosition = reader.currentPosition();
         Record record;
         record.load(reader, error);
         if (!error && (record.type() == Record::ERecordType::eKey))
@@ -111,13 +122,17 @@ bool MasterFile::findNode(const TreeDBKey& key,
             {
                 Record valueRecord;
                 valueRecord.load(reader, error);
-                if (!error && (valueRecord.type() == Record::ERecordType::eValue))
+                if (!error)
                 {
-                    const std::string& value = static_cast<ValueRecordData*>(valueRecord.data())->buffer();
-                    node.value().setString(value);
+                    if (valueRecord.type() == Record::ERecordType::eValue)
+                    {
+                        const std::string& value = static_cast<ValueRecordData*>(valueRecord.data())->buffer();
+                        node.value().setString(value);
+                    }
+
+                    node.setPosition(currentNodeStartPosition);
+                    result = true;
                 }
-                
-                result = true;
             }
         }
     }
@@ -125,10 +140,10 @@ bool MasterFile::findNode(const TreeDBKey& key,
     return result;
 }
 
-void MasterFile::insertNode(const EmbeddedTreeDBNodeImpl& node,
-                            Ishiko::Error& error)
+void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
+                         Ishiko::Error& error)
 {
-    PageRepositoryWriter writer = m_repository.insert(m_dataEndPage, m_dataEndOffset, error);
+    PageRepositoryWriter writer = m_repository.insert(node.position(), error);
     if (!error)
     {
         std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
