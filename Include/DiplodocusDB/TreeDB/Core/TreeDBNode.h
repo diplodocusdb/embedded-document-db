@@ -41,8 +41,16 @@ public:
     TreeDBValue& value();
 
     virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) = 0;
+    virtual std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index) = 0;
+    virtual std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) = 0;
+    virtual std::shared_ptr<TreeDBNode> insertAfter(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) = 0;
     virtual std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) = 0;
+    virtual bool remove(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual void commit(Ishiko::Error& error) = 0;
+
+private:
+    TreeDBNode(const TreeDBNode& other) = delete;
+    TreeDBNode& operator =(const TreeDBNode& other) = delete;
 
 private:
     TreeDBValue m_value;
