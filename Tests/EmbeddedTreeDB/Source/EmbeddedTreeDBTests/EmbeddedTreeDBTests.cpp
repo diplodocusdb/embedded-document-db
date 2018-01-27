@@ -41,6 +41,7 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
     new FileComparisonTest("insert test 1", EmbeddedTreeDBNodeInsertTest1, embeddedTreeDBTestSequence);
 
     new FileComparisonTest("insertBefore test 1", EmbeddedTreeDBNodeInsertBeforeTest1, embeddedTreeDBTestSequence);
+    new FileComparisonTest("insertBefore test 2", EmbeddedTreeDBNodeInsertBeforeTest2, embeddedTreeDBTestSequence);
 
     new FileComparisonTest("insertAfter test 1", EmbeddedTreeDBNodeInsertAfterTest1, embeddedTreeDBTestSequence);
     new FileComparisonTest("insertAfter test 2", EmbeddedTreeDBNodeInsertAfterTest2, embeddedTreeDBTestSequence);
@@ -198,7 +199,7 @@ TestResult::EOutcome EmbeddedTreeDBNodeInsertTest1(FileComparisonTest& test)
     db.create(outputPath, error);
     if (!error)
     {
-        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().append("key1");
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().insert("key1", 0);
         node->commit(error);
         if (!error)
         {
@@ -247,6 +248,51 @@ TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest1(FileComparisonTest& tes
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest1.dpdb");
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest2(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
+
+    boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(outputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().child("key2", error);
+        if (node && !error)
+        {
+            std::shared_ptr<DiplodocusDB::TreeDBNode> newNode1 = node->insertBefore("key1", node);
+            if (newNode1)
+            {
+                std::shared_ptr<DiplodocusDB::TreeDBNode> newNode2 = node->insertBefore("key0", newNode1);
+                if (newNode2)
+                {
+                    newNode1->commit(error);
+                    if (!error)
+                    {
+                        newNode2->commit(error);
+                        if (!error)
+                        {
+                            result = TestResult::ePassed;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
 
     return result;
 }

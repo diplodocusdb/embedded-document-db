@@ -37,6 +37,7 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest3(Test& test);
 TestResult::EOutcome EmbeddedTreeDBOpenTest4(Test& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertTest1(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest1(FileComparisonTest& test);
+TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest2(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertAfterTest1(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertAfterTest2(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest1(FileComparisonTest& test);
