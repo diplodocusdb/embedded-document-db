@@ -163,6 +163,7 @@
     <ClCompile Include="..\..\Source\KeyRecordData.cpp" />
     <ClCompile Include="..\..\Source\ValueRecordData.cpp" />
     <ClCompile Include="..\..\Source\ChildrenRecordData.cpp" />
+    <ClCompile Include="..\..\Source\RecordMarker.cpp" />
     <ClCompile Include="..\..\Source\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +182,7 @@
     <ClInclude Include="..\..\Source\KeyRecordData.h" />
     <ClInclude Include="..\..\Source\ValueRecordData.h" />
     <ClInclude Include="..\..\Source\ChildrenRecordData.h" />
+    <ClInclude Include="..\..\Source\RecordMarker.h" />
     <ClInclude Include="..\..\Source\Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
