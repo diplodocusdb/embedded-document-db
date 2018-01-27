@@ -22,6 +22,7 @@
 
 #include "EmbeddedTreeDBTests.h"
 #include "DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h"
+#include <boost/filesystem/operations.hpp>
 #include <sstream>
 
 void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
@@ -37,11 +38,20 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("open test 3", EmbeddedTreeDBOpenTest3, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 4", EmbeddedTreeDBOpenTest4, embeddedTreeDBTestSequence);
 
+    new FileComparisonTest("insert test 1", EmbeddedTreeDBNodeInsertTest1, embeddedTreeDBTestSequence);
+
+    new FileComparisonTest("insertBefore test 1", EmbeddedTreeDBNodeInsertBeforeTest1, embeddedTreeDBTestSequence);
+
+    new FileComparisonTest("insertAfter test 1", EmbeddedTreeDBNodeInsertAfterTest1, embeddedTreeDBTestSequence);
+    new FileComparisonTest("insertAfter test 2", EmbeddedTreeDBNodeInsertAfterTest2, embeddedTreeDBTestSequence);
+
     new FileComparisonTest("append test 1", EmbeddedTreeDBNodeAppendTest1, embeddedTreeDBTestSequence);
     new FileComparisonTest("append test 2", EmbeddedTreeDBNodeAppendTest2, embeddedTreeDBTestSequence);
     new FileComparisonTest("append test 3", EmbeddedTreeDBNodeAppendTest3, embeddedTreeDBTestSequence);
     new FileComparisonTest("append test 4", EmbeddedTreeDBNodeAppendTest4, embeddedTreeDBTestSequence);
     new FileComparisonTest("append test 5", EmbeddedTreeDBNodeAppendTest5, embeddedTreeDBTestSequence);
+
+    new FileComparisonTest("remove test 1", EmbeddedTreeDBNodeRemoveTest1, embeddedTreeDBTestSequence);
 }
 
 TestResult::EOutcome EmbeddedTreeDBCreationTest1()
@@ -172,6 +182,145 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest4(Test& test)
             }
         }
     }
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBNodeInsertTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertTest1.dpdb");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.create(outputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().append("key1");
+        node->commit(error);
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+
+        db.close();
+    }
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertTest1.dpdb");
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest1.dpdb");
+
+    boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(outputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().child("key1", error);
+        if (node && !error)
+        {
+            std::shared_ptr<DiplodocusDB::TreeDBNode> newNode = node->insertBefore("key0", node);
+            if (newNode)
+            {
+                newNode->commit(error);
+                if (!error)
+                {
+                    result = TestResult::ePassed;
+                }
+            }
+        }
+    }
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest1.dpdb");
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBNodeInsertAfterTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertAfterTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertAfterTest1.dpdb");
+
+    boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(outputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().child("key1", error);
+        if (node && !error)
+        {
+            std::shared_ptr<DiplodocusDB::TreeDBNode> newNode = node->insertAfter("key2", node);
+            if (newNode)
+            {
+                newNode->commit(error);
+                if (!error)
+                {
+                    result = TestResult::ePassed;
+                }
+            }
+        }
+    }
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertAfterTest1.dpdb");
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBNodeInsertAfterTest2(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertAfterTest2.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertAfterTest2.dpdb");
+
+    boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(outputPath, error);
+    if (!error)
+    {
+        std::shared_ptr<DiplodocusDB::TreeDBNode> node = db.root().child("key1", error);
+        if (node && !error)
+        {
+            std::shared_ptr<DiplodocusDB::TreeDBNode> newNode = node->insertAfter("key2", node);
+            if (newNode)
+            {
+                newNode->commit(error);
+                if (!error)
+                {
+                    result = TestResult::ePassed;
+                }
+            }
+        }
+    }
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertAfterTest2.dpdb");
 
     return result;
 }
@@ -334,6 +483,34 @@ TestResult::EOutcome EmbeddedTreeDBNodeAppendTest5(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest5.dpdb");
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBNodeRemoveTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
+
+    boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(outputPath, error);
+    if (!error)
+    {
+        db.root().remove("key1", error);
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+    }
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
 
     return result;
 }
