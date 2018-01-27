@@ -20,17 +20,28 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_KEYCACHE_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_KEYCACHE_H_
+#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_UNCOMMITTEDNODES_H_
+#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_UNCOMMITTEDNODES_H_
+
+#include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
+#include <memory>
 
 namespace DiplodocusDB
 {
 
-class KeyCache
+class EmbeddedTreeDBImpl;
+
+class UncommittedNodes
 {
 public:
-    KeyCache();
-    ~KeyCache();
+    UncommittedNodes(std::shared_ptr<EmbeddedTreeDBImpl> db);
+    ~UncommittedNodes();
+
+    std::shared_ptr<TreeDBNode> createNode(const TreeDBKey& key);
+
+private:
+    std::shared_ptr<EmbeddedTreeDBImpl> m_db;
 };
 
 }

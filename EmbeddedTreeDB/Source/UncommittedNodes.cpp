@@ -20,17 +20,24 @@
     IN THE SOFTWARE.
 */
 
-#include "KeyCache.h"
+#include "UncommittedNodes.h"
+#include "EmbeddedTreeDBNodeImpl.h"
 
 namespace DiplodocusDB
 {
 
-KeyCache::KeyCache()
+UncommittedNodes::UncommittedNodes(std::shared_ptr<EmbeddedTreeDBImpl> db)
+    : m_db(db)
 {
 }
 
-KeyCache::~KeyCache()
+UncommittedNodes::~UncommittedNodes()
 {
+}
+
+std::shared_ptr<TreeDBNode> UncommittedNodes::createNode(const TreeDBKey& key)
+{
+    return std::make_shared<EmbeddedTreeDBNodeImpl>(m_db, key);
 }
 
 }
