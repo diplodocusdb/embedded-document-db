@@ -26,6 +26,7 @@
 #include "TreeDBKey.h"
 #include "TreeDBValue.h"
 #include "Ishiko/Errors/Error.h"
+#include <vector>
 #include <memory>
 
 namespace DiplodocusDB
@@ -40,6 +41,7 @@ public:
     const TreeDBValue& value() const;
     TreeDBValue& value();
 
+    virtual void children(std::vector<std::shared_ptr<TreeDBNode> >& children, Ishiko::Error& error) = 0;
     virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index) = 0;
     virtual std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) = 0;
