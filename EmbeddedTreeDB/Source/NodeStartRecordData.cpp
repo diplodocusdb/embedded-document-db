@@ -21,3 +21,33 @@
 */
 
 #include "NodeStartRecordData.h"
+
+namespace DiplodocusDB
+{
+
+NodeStartRecordData::NodeStartRecordData()
+    : RecordData(Record::ERecordType::eNodeStart)
+{
+}
+
+NodeStartRecordData::~NodeStartRecordData()
+{
+}
+
+size_t NodeStartRecordData::size() const
+{
+    return 0;
+}
+
+void NodeStartRecordData::load(PageRepositoryReader& reader,
+                               size_t recordDataSize,
+                               Ishiko::Error& error)
+{
+}
+
+void NodeStartRecordData::save(PageRepositoryWriter& writer,
+                               Ishiko::Error& error) const
+{
+}
+
+}

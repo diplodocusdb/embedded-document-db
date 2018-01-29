@@ -25,6 +25,8 @@
 #include "MasterFileMetadata.h"
 #include "DataStartRecordData.h"
 #include "DataEndRecordData.h"
+#include "NodeStartRecordData.h"
+#include "NodeEndRecordData.h"
 #include "KeyRecordData.h"
 #include "ValueRecordData.h"
 #include "Utilities.h"
@@ -95,6 +97,14 @@ void Record::load(PageRepositoryReader& reader,
 
     case ERecordType::eDataEnd:
         m_data = std::make_shared<DataEndRecordData>();
+        break;
+
+    case ERecordType::eNodeStart:
+        m_data = std::make_shared<NodeStartRecordData>();
+        break;
+
+    case ERecordType::eNodeEnd:
+        m_data = std::make_shared<NodeEndRecordData>();
         break;
 
     case ERecordType::eKey:

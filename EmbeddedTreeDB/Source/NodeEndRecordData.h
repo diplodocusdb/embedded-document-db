@@ -23,4 +23,22 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_NODEENDRECORDDATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_NODEENDRECORDDATA_H_
 
+#include "RecordData.h"
+
+namespace DiplodocusDB
+{
+
+class NodeEndRecordData : public RecordData
+{
+public:
+    NodeEndRecordData();
+    ~NodeEndRecordData() override;
+
+    size_t size() const override;
+    void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error) override;
+    void save(PageRepositoryWriter& writer, Ishiko::Error& error) const override;
+};
+
+}
+
 #endif

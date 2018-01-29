@@ -42,9 +42,10 @@ public:
         eMasterFileMetadata = 0x01,
         eDataStart = 0x02,
         eDataEnd = 0x03,
-        eKey = 0x04,
-        eValue = 0x05,
-        eChildren = 0x06
+        eNodeStart = 0x04,
+        eNodeEnd = 0x05,
+        eKey = 0x06,
+        eValue = 0x07
     };
 
     Record();
