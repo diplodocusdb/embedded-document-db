@@ -29,4 +29,6 @@ using namespace Ishiko::TestFramework;
 
 void AddTreeDBKeyTests(TestHarness& theTestHarness);
 
+TestResult::EOutcome TreeDBKeyCreationTest1();
+
 #endif

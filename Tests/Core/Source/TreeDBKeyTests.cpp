@@ -21,8 +21,24 @@
 */
 
 #include "TreeDBKeyTests.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 
 void AddTreeDBKeyTests(TestHarness& theTestHarness)
 {
     TestSequence& keyTestSequence = theTestHarness.appendTestSequence("TreeDBKey tests");
+
+    new HeapAllocationErrorsTest("Creation test 1", TreeDBKeyCreationTest1, keyTestSequence);
+}
+
+TestResult::EOutcome TreeDBKeyCreationTest1()
+{
+    DiplodocusDB::TreeDBKey key("/");
+    if (key.value() == "/")
+    {
+        return TestResult::ePassed;
+    }
+    else
+    {
+        return TestResult::eFailed;
+    }
 }
