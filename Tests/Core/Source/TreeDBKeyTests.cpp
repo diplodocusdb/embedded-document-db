@@ -21,13 +21,8 @@
 */
 
 #include "TreeDBKeyTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-int main(int argc, char* argv[])
+void AddTreeDBKeyTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("DiplodocusTreeDBCore");
-
-    AddTreeDBKeyTests(theTestHarness);
-
-    return theTestHarness.run();
+    TestSequence& keyTestSequence = theTestHarness.appendTestSequence("TreeDBKey tests");
 }

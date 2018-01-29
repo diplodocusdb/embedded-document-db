@@ -20,14 +20,13 @@
     IN THE SOFTWARE.
 */
 
-#include "TreeDBKeyTests.h"
+#ifndef _DIPLODOCUSDB_TEST_TREEDB_CORE_TREEDBKEYTESTS_H_
+#define _DIPLODOCUSDB_TEST_TREEDB_CORE_TREEDBKEYTESTS_H_
+
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-int main(int argc, char* argv[])
-{
-    Ishiko::TestFramework::TestHarness theTestHarness("DiplodocusTreeDBCore");
+using namespace Ishiko::TestFramework;
 
-    AddTreeDBKeyTests(theTestHarness);
+void AddTreeDBKeyTests(TestHarness& theTestHarness);
 
-    return theTestHarness.run();
-}
+#endif
