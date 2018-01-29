@@ -24,6 +24,8 @@
 #include "EmbeddedTreeDBNodeImpl.h"
 #include "DataStartRecordData.h"
 #include "DataEndRecordData.h"
+#include "NodeStartRecordData.h"
+#include "NodeEndRecordData.h"
 #include "KeyRecordData.h"
 #include "ValueRecordData.h"
 
@@ -94,14 +96,14 @@ void MasterFile::close()
     m_repository.close();
 }
 
-PageRepositoryPosition MasterFile::rootNodePosition() const
+RecordMarker MasterFile::rootNodePosition() const
 {
-    return PageRepositoryPosition(0, m_dataStartOffset + 2);
+    return RecordMarker(PageRepositoryPosition(0, m_dataStartOffset + 2));
 }
 
-PageRepositoryPosition MasterFile::dataEndPosition() const
+RecordMarker MasterFile::dataEndPosition() const
 {
-    return PageRepositoryPosition(m_dataEndPage->index(), m_dataEndOffset);
+    return RecordMarker(PageRepositoryPosition(m_dataEndPage->index(), m_dataEndOffset));
 }
 
 bool MasterFile::findNode(const TreeDBKey& key,
@@ -130,7 +132,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
                         node.value().setString(value);
                     }
 
-                    node.setPosition(currentNodeStartPosition);
+                    node.setMarker(RecordMarker(currentNodeStartPosition));
                     result = true;
                 }
             }
@@ -143,33 +145,55 @@ bool MasterFile::findNode(const TreeDBKey& key,
 void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
                          Ishiko::Error& error)
 {
-    PageRepositoryWriter writer = m_repository.insert(node.position(), error);
-    if (!error)
+    PageRepositoryWriter writer = m_repository.insert(node.marker().position(), error);
+    if (error)
     {
-        std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
+        return;
+    }
+
+    std::shared_ptr<NodeStartRecordData> nodeStartRecordData = std::make_shared<NodeStartRecordData>();
+    Record nodeStartRecord(nodeStartRecordData);
+    nodeStartRecord.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+
+    std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
+    Record record(recordData);
+    record.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+
+    if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
+    {
+        std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
         Record record(recordData);
         record.save(writer, error);
-
-        if (!error)
+        if (error)
         {
-            if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
-            {
-                std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
-                Record record(recordData);
-                record.save(writer, error);
-            }
-
-            if (!error)
-            {
-                writer.save(error);
-                if (!error)
-                {
-                    m_dataEndPage = writer.currentPage();
-                    m_dataEndOffset = (m_dataEndPage->dataSize() - 2);
-                }
-            }
+            return;
         }
     }
+
+    std::shared_ptr<NodeEndRecordData> nodeEndRecordData = std::make_shared<NodeEndRecordData>();
+    Record nodeEndRecord(nodeEndRecordData);
+    nodeEndRecord.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+
+    writer.save(error);
+    if (error)
+    {
+        return;
+    }
+
+    m_dataEndPage = writer.currentPage();
+    m_dataEndOffset = (m_dataEndPage->dataSize() - 2);
 }
 
 bool MasterFile::removeNode(const TreeDBKey& key,

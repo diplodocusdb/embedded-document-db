@@ -25,9 +25,9 @@
 
 #include "MasterFileMetadata.h"
 #include "EmbeddedTreeDBNodeImpl.h"
+#include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryPosition.h"
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
 #include <fstream>
@@ -46,8 +46,8 @@ public:
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
-    PageRepositoryPosition rootNodePosition() const;
-    PageRepositoryPosition dataEndPosition() const;
+    RecordMarker rootNodePosition() const;
+    RecordMarker dataEndPosition() const;
     bool findNode(const TreeDBKey& key, EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
     void addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
