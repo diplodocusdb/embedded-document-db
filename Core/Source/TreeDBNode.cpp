@@ -50,42 +50,42 @@ bool TreeDBNode::isRoot() const
     return m_impl->isRoot();
 }
 
-std::shared_ptr<TreeDBNode> TreeDBNode::parent(Ishiko::Error& error)
+TreeDBNode TreeDBNode::parent(Ishiko::Error& error)
 {
     return m_impl->parent(error);
 }
 
-void TreeDBNode::children(std::vector<std::shared_ptr<TreeDBNode> >& children,
+void TreeDBNode::children(std::vector<TreeDBNode>& children,
                           Ishiko::Error& error)
 {
     m_impl->children(children, error);
 }
 
-std::shared_ptr<TreeDBNode> TreeDBNode::child(const TreeDBKey& key,
-                                              Ishiko::Error& error)
+TreeDBNode TreeDBNode::child(const TreeDBKey& key,
+                             Ishiko::Error& error)
 {
     return m_impl->child(key, error);
 }
 
-std::shared_ptr<TreeDBNode> TreeDBNode::insert(const TreeDBKey& key,
-                                               size_t index)
+TreeDBNode TreeDBNode::insert(const TreeDBKey& key,
+                              size_t index)
 {
     return m_impl->insert(key, index);
 }
 
-std::shared_ptr<TreeDBNode> TreeDBNode::insertBefore(const TreeDBKey& key,
-                                                     std::shared_ptr<TreeDBNode> child)
+TreeDBNode TreeDBNode::insertBefore(const TreeDBKey& key,
+                                    TreeDBNode& child)
 {
     return m_impl->insertBefore(key, child);
 }
 
-std::shared_ptr<TreeDBNode> TreeDBNode::insertAfter(const TreeDBKey& key,
-                                                    std::shared_ptr<TreeDBNode> child)
+TreeDBNode TreeDBNode::insertAfter(const TreeDBKey& key,
+                                   TreeDBNode& child)
 {
     return m_impl->insertAfter(key, child);
 }
 
-std::shared_ptr<TreeDBNode> TreeDBNode::append(const TreeDBKey& key)
+TreeDBNode TreeDBNode::append(const TreeDBKey& key)
 {
     return m_impl->append(key);
 }

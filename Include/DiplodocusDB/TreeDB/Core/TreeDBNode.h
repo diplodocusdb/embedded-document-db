@@ -44,13 +44,13 @@ public:
     TreeDBValue& value();
 
     bool isRoot() const;
-    std::shared_ptr<TreeDBNode> parent(Ishiko::Error& error);
-    void children(std::vector<std::shared_ptr<TreeDBNode> >& children, Ishiko::Error& error);
-    std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error);
-    std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index);
-    std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child);
-    std::shared_ptr<TreeDBNode> insertAfter(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child);
-    std::shared_ptr<TreeDBNode> append(const TreeDBKey& key);
+    TreeDBNode parent(Ishiko::Error& error);
+    void children(std::vector<TreeDBNode>& children, Ishiko::Error& error);
+    TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode insert(const TreeDBKey& key, size_t index);
+    TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child);
+    TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child);
+    TreeDBNode append(const TreeDBKey& key);
     bool remove(const TreeDBKey& key, Ishiko::Error& error);
     void commit(Ishiko::Error& error);
 
