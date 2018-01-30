@@ -14,6 +14,8 @@ program DiplodocusEmbeddedTreeDBTests : DiplodocusEmbeddedTreeDB, IshikoTestFram
 
     headers
     {
+        ../../Source/KeyCacheTests.h
+        ../../Source/MasterFileTests/MasterFileTests.h
         ../../Source/EmbeddedTreeDBTests/EmbeddedTreeDBTests.h
     }
 
@@ -21,6 +23,8 @@ program DiplodocusEmbeddedTreeDBTests : DiplodocusEmbeddedTreeDB, IshikoTestFram
     {
         ../../Source/main.cpp
 
+        ../../Source/KeyCacheTests.cpp
+        ../../Source/MasterFileTests/MasterFileTests.cpp
         ../../Source/EmbeddedTreeDBTests/EmbeddedTreeDBTests.cpp
     }
 }

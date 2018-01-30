@@ -20,24 +20,9 @@
     IN THE SOFTWARE.
 */
 
-#include "KeyCacheTests.h"
-#include "MasterFileTests/MasterFileTests.h"
-#include "EmbeddedTreeDBTests/EmbeddedTreeDBTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
-#include <boost/filesystem/operations.hpp>
+#include "MasterFileTests.h"
 
-int main(int argc, char* argv[])
+void AddMasterFileTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("DiplodocusEmbeddedTreeDB");
-
-    theTestHarness.environment().setTestDataDirectory("../../TestData");
-    theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
-    boost::filesystem::create_directories("../../TestOutput");
-    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
-
-    AddKeyCacheTests(theTestHarness);
-    AddMasterFileTests(theTestHarness);
-    AddEmbeddedTreeDBTests(theTestHarness);
-
-    return theTestHarness.run();
+    TestSequence& masterFileTestSequence = theTestHarness.appendTestSequence("MasterFile tests");
 }
