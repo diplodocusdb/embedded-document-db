@@ -46,36 +46,54 @@ void MasterFile::create(const boost::filesystem::path& path,
                         Ishiko::Error& error)
 {
     m_repository.create(path, error);
-    if (!error)
+    if (error)
     {
-        std::shared_ptr<Page> page = m_repository.allocatePage(error);
-        if (!error)
-        {
-            PageRepositoryWriter writer = m_repository.insert(page, 0, error);
-            if (!error)
-            {
-                Record metadataRecord(m_metadata);
-                metadataRecord.save(writer, error);
-                if (!error)
-                {
-                    m_dataStartOffset = page->dataSize();
-                    Record dataStartRecord(std::make_shared<DataStartRecordData>());
-                    dataStartRecord.save(writer, error);
-                    if (!error)
-                    {
-                        m_dataEndPage = page;
-                        m_dataEndOffset = page->dataSize();
-                        Record dataEndRecord(std::make_shared<DataEndRecordData>());
-                        dataEndRecord.save(writer, error);
-                        if (!error)
-                        {
-                            page->save(error);
-                        }
-                    }
-                }
-            }
-        }
+        return;
     }
+    
+    std::shared_ptr<Page> page = m_repository.allocatePage(error);
+    if (error)
+    {
+        return;
+    }
+    
+    PageRepositoryWriter writer = m_repository.insert(page, 0, error);
+    if (error)
+    {
+        return;
+    }
+
+    Record metadataRecord(m_metadata);
+    metadataRecord.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+    
+    m_dataStartOffset = page->dataSize();
+    Record dataStartRecord(std::make_shared<DataStartRecordData>());
+    dataStartRecord.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+    
+    createRootNode(writer, error);
+    if (error)
+    {
+        return;
+    }
+
+    m_dataEndPage = page;
+    m_dataEndOffset = page->dataSize();
+    Record dataEndRecord(std::make_shared<DataEndRecordData>());
+    dataEndRecord.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+    
+    page->save(error);
 }
 
 void MasterFile::open(const boost::filesystem::path& path,
@@ -201,6 +219,38 @@ bool MasterFile::removeNode(const TreeDBKey& key,
 {
     error = -1;
     return false;
+}
+
+void MasterFile::createRootNode(PageRepositoryWriter& writer,
+                                Ishiko::Error& error)
+{
+    std::shared_ptr<NodeStartRecordData> nodeStartRecordData = std::make_shared<NodeStartRecordData>();
+    Record nodeStartRecord(nodeStartRecordData);
+    nodeStartRecord.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+
+    std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>("/");
+    Record record(recordData);
+    record.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+
+    std::shared_ptr<NodeEndRecordData> nodeEndRecordData = std::make_shared<NodeEndRecordData>();
+    Record nodeEndRecord(nodeEndRecordData);
+    nodeEndRecord.save(writer, error);
+    if (error)
+    {
+        return;
+    }
+}
+
+void MasterFile::findChildren()
+{
 }
 
 }

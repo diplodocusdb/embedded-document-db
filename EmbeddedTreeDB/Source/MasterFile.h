@@ -28,6 +28,7 @@
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
 #include <fstream>
@@ -51,6 +52,10 @@ public:
     bool findNode(const TreeDBKey& key, EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
     void addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
+
+private:
+    static void createRootNode(PageRepositoryWriter& writer, Ishiko::Error& error);
+    void findChildren();
 
 private:
     PageFileRepository m_repository;
