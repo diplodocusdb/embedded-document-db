@@ -35,9 +35,12 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test);
 TestResult::EOutcome EmbeddedTreeDBOpenTest2(Test& test);
 TestResult::EOutcome EmbeddedTreeDBOpenTest3(Test& test);
 TestResult::EOutcome EmbeddedTreeDBOpenTest4(Test& test);
+TestResult::EOutcome EmbeddedTreeDBChildrenTest1(Test& test);
+TestResult::EOutcome EmbeddedTreeDBChildrenTest2(Test& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertTest1(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest1(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest2(FileComparisonTest& test);
+TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest3(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertAfterTest1(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeInsertAfterTest2(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest1(FileComparisonTest& test);
@@ -45,6 +48,7 @@ TestResult::EOutcome EmbeddedTreeDBNodeAppendTest2(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest3(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest4(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeAppendTest5(FileComparisonTest& test);
+TestResult::EOutcome EmbeddedTreeDBNodeAppendTest6(FileComparisonTest& test);
 TestResult::EOutcome EmbeddedTreeDBNodeRemoveTest1(FileComparisonTest& test);
 
 #endif
