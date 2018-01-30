@@ -33,10 +33,10 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
 
     new FileComparisonTest("create test 1", EmbeddedTreeDBCreateTest1, embeddedTreeDBTestSequence);
 
-    new HeapAllocationErrorsTest("open test 1", EmbeddedTreeDBOpenTest1, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 2", EmbeddedTreeDBOpenTest2, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 3", EmbeddedTreeDBOpenTest3, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 4", EmbeddedTreeDBOpenTest4, embeddedTreeDBTestSequence);
+    new HeapAllocationErrorsTest("open test 5", EmbeddedTreeDBOpenTest5, embeddedTreeDBTestSequence);
 
     new HeapAllocationErrorsTest("children test 1", EmbeddedTreeDBChildrenTest1, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("children test 2", EmbeddedTreeDBChildrenTest2, embeddedTreeDBTestSequence);
@@ -88,11 +88,11 @@ TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test)
+TestResult::EOutcome EmbeddedTreeDBOpenTest2(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest1.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest2.dpdb");
 
     Ishiko::Error error;
 
@@ -113,11 +113,11 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test)
     return result;
 }
 
-TestResult::EOutcome EmbeddedTreeDBOpenTest2(Test& test)
+TestResult::EOutcome EmbeddedTreeDBOpenTest3(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest2.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest3.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 
@@ -140,11 +140,11 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest2(Test& test)
     return result;
 }
 
-TestResult::EOutcome EmbeddedTreeDBOpenTest3(Test& test)
+TestResult::EOutcome EmbeddedTreeDBOpenTest4(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest3.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest4.dpdb");
 
     Ishiko::Error error;
 
@@ -165,11 +165,11 @@ TestResult::EOutcome EmbeddedTreeDBOpenTest3(Test& test)
     return result;
 }
 
-TestResult::EOutcome EmbeddedTreeDBOpenTest4(Test& test)
+TestResult::EOutcome EmbeddedTreeDBOpenTest5(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest4.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest5.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 
