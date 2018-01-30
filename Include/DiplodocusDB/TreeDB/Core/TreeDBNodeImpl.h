@@ -23,4 +23,44 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODEIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODEIMPL_H_
 
+#include "TreeDBKey.h"
+#include "TreeDBValue.h"
+#include "TreeDBNode.h"
+#include "Ishiko/Errors/Error.h"
+#include <vector>
+#include <memory>
+
+namespace DiplodocusDB
+{
+
+class TreeDBNodeImpl
+{
+public:
+    TreeDBNodeImpl();
+    virtual ~TreeDBNodeImpl();
+
+    const TreeDBValue& value() const;
+    TreeDBValue& value();
+
+    virtual bool isRoot() const = 0;
+    virtual std::shared_ptr<TreeDBNode> parent(Ishiko::Error& error) = 0;
+    virtual void children(std::vector<std::shared_ptr<TreeDBNode> >& children, Ishiko::Error& error) = 0;
+    virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) = 0;
+    virtual std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index) = 0;
+    virtual std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) = 0;
+    virtual std::shared_ptr<TreeDBNode> insertAfter(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) = 0;
+    virtual std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) = 0;
+    virtual bool remove(const TreeDBKey& key, Ishiko::Error& error) = 0;
+    virtual void commit(Ishiko::Error& error) = 0;
+
+private:
+    TreeDBNodeImpl(const TreeDBNodeImpl& other) = delete;
+    TreeDBNodeImpl& operator =(const TreeDBNodeImpl& other) = delete;
+
+private:
+    TreeDBValue m_value;
+};
+
+}
+
 #endif

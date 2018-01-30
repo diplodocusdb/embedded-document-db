@@ -21,3 +21,26 @@
 */
 
 #include "TreeDBNodeImpl.h"
+
+namespace DiplodocusDB
+{
+
+TreeDBNodeImpl::TreeDBNodeImpl()
+{
+}
+
+TreeDBNodeImpl::~TreeDBNodeImpl()
+{
+}
+
+const TreeDBValue& TreeDBNodeImpl::value() const
+{
+    return m_value;
+}
+
+TreeDBValue& TreeDBNodeImpl::value()
+{
+    return m_value;
+}
+
+}

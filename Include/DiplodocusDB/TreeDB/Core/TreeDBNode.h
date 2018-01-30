@@ -32,32 +32,30 @@
 namespace DiplodocusDB
 {
 
+class TreeDBNodeImpl;
+
 class TreeDBNode
 {
 public:
-    TreeDBNode();
-    virtual ~TreeDBNode();
+    TreeDBNode(std::shared_ptr<TreeDBNodeImpl>& impl);
+    ~TreeDBNode();
 
     const TreeDBValue& value() const;
     TreeDBValue& value();
 
-    virtual bool isRoot() const = 0;
-    virtual std::shared_ptr<TreeDBNode> parent(Ishiko::Error& error) = 0;
-    virtual void children(std::vector<std::shared_ptr<TreeDBNode> >& children, Ishiko::Error& error) = 0;
-    virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) = 0;
-    virtual std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index) = 0;
-    virtual std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) = 0;
-    virtual std::shared_ptr<TreeDBNode> insertAfter(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) = 0;
-    virtual std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) = 0;
-    virtual bool remove(const TreeDBKey& key, Ishiko::Error& error) = 0;
-    virtual void commit(Ishiko::Error& error) = 0;
+    bool isRoot() const;
+    std::shared_ptr<TreeDBNode> parent(Ishiko::Error& error);
+    void children(std::vector<std::shared_ptr<TreeDBNode> >& children, Ishiko::Error& error);
+    std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error);
+    std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index);
+    std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child);
+    std::shared_ptr<TreeDBNode> insertAfter(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child);
+    std::shared_ptr<TreeDBNode> append(const TreeDBKey& key);
+    bool remove(const TreeDBKey& key, Ishiko::Error& error);
+    void commit(Ishiko::Error& error);
 
 private:
-    TreeDBNode(const TreeDBNode& other) = delete;
-    TreeDBNode& operator =(const TreeDBNode& other) = delete;
-
-private:
-    TreeDBValue m_value;
+    std::shared_ptr<TreeDBNodeImpl> m_impl;
 };
 
 }

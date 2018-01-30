@@ -21,11 +21,13 @@
 */
 
 #include "TreeDBNode.h"
+#include "TreeDBNodeImpl.h"
 
 namespace DiplodocusDB
 {
 
-TreeDBNode::TreeDBNode()
+TreeDBNode::TreeDBNode(std::shared_ptr<TreeDBNodeImpl>& impl)
+    : m_impl(impl)
 {
 }
 
@@ -35,12 +37,68 @@ TreeDBNode::~TreeDBNode()
 
 const TreeDBValue& TreeDBNode::value() const
 {
-    return m_value;
+    return m_impl->value();
 }
 
 TreeDBValue& TreeDBNode::value()
 {
-    return m_value;
+    return m_impl->value();
+}
+
+bool TreeDBNode::isRoot() const
+{
+    return m_impl->isRoot();
+}
+
+std::shared_ptr<TreeDBNode> TreeDBNode::parent(Ishiko::Error& error)
+{
+    return m_impl->parent(error);
+}
+
+void TreeDBNode::children(std::vector<std::shared_ptr<TreeDBNode> >& children,
+                          Ishiko::Error& error)
+{
+    m_impl->children(children, error);
+}
+
+std::shared_ptr<TreeDBNode> TreeDBNode::child(const TreeDBKey& key,
+                                              Ishiko::Error& error)
+{
+    return m_impl->child(key, error);
+}
+
+std::shared_ptr<TreeDBNode> TreeDBNode::insert(const TreeDBKey& key,
+                                               size_t index)
+{
+    return m_impl->insert(key, index);
+}
+
+std::shared_ptr<TreeDBNode> TreeDBNode::insertBefore(const TreeDBKey& key,
+                                                     std::shared_ptr<TreeDBNode> child)
+{
+    return m_impl->insertBefore(key, child);
+}
+
+std::shared_ptr<TreeDBNode> TreeDBNode::insertAfter(const TreeDBKey& key,
+                                                    std::shared_ptr<TreeDBNode> child)
+{
+    return m_impl->insertAfter(key, child);
+}
+
+std::shared_ptr<TreeDBNode> TreeDBNode::append(const TreeDBKey& key)
+{
+    return m_impl->append(key);
+}
+
+bool TreeDBNode::remove(const TreeDBKey& key,
+                        Ishiko::Error& error)
+{
+    return m_impl->remove(key, error);
+}
+
+void TreeDBNode::commit(Ishiko::Error& error)
+{
+    m_impl->commit(error);
 }
 
 }
