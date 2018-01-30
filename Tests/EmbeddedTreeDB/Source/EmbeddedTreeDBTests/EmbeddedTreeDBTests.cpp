@@ -33,6 +33,7 @@ void AddEmbeddedTreeDBTests(TestHarness& theTestHarness)
 
     new FileComparisonTest("create test 1", EmbeddedTreeDBCreateTest1, embeddedTreeDBTestSequence);
 
+    new HeapAllocationErrorsTest("open test 1", EmbeddedTreeDBOpenTest1, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 2", EmbeddedTreeDBOpenTest2, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 3", EmbeddedTreeDBOpenTest3, embeddedTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 4", EmbeddedTreeDBOpenTest4, embeddedTreeDBTestSequence);
@@ -84,6 +85,33 @@ TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
+
+    return result;
+}
+
+TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyEmbeddedTreeDB.dpdb");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode& node = db.root();
+        if (node.isRoot())
+        {
+            std::vector<std::shared_ptr<DiplodocusDB::TreeDBNode> > children;
+            node.children(children, error);
+            if (!error && (children.size() == 0))
+            {
+                result = TestResult::ePassed;
+            }
+        }
+    }
 
     return result;
 }
