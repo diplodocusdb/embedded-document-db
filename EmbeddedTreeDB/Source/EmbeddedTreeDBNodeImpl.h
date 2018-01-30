@@ -23,8 +23,8 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 
+#include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryPosition.h"
 
 namespace DiplodocusDB
 {
@@ -35,9 +35,12 @@ class EmbeddedTreeDBNodeImpl : public TreeDBNode
 {
 public:
     EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key,
-        const PageRepositoryPosition& position);
+        const RecordMarker& nodeMarker, const RecordMarker& childrenMarker);
     ~EmbeddedTreeDBNodeImpl() override;
 
+    bool isRoot() const override;
+    std::shared_ptr<TreeDBNode> parent(Ishiko::Error& error) override;
+    void children(std::vector<std::shared_ptr<TreeDBNode> >& children, Ishiko::Error& error) override;
     std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) override;
     std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index) override;
     std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) override;
@@ -47,13 +50,15 @@ public:
     void commit(Ishiko::Error& error) override;
 
     const TreeDBKey& key() const;
-    const PageRepositoryPosition& position() const;
-    void setPosition(const PageRepositoryPosition& pos);
+    const RecordMarker& marker() const;
+    void setMarker(const RecordMarker& marker);
     
 private:
     std::shared_ptr<EmbeddedTreeDBImpl> m_db;
     TreeDBKey m_key;
-    PageRepositoryPosition m_position;
+    std::vector<std::pair<std::string, std::shared_ptr<EmbeddedTreeDBNodeImpl> > > m_children;
+    RecordMarker m_nodeMarker;
+    RecordMarker m_childrenMarker;
 };
 
 }

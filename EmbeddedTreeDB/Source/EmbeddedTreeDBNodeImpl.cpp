@@ -28,13 +28,35 @@ namespace DiplodocusDB
 
 EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db,   
                                                const TreeDBKey& key,
-                                               const PageRepositoryPosition& position)
-    : m_db(db), m_key(key), m_position(position)
+                                               const RecordMarker& nodeMarker,
+                                               const RecordMarker& childrenMarker)
+    : m_db(db), m_key(key), m_nodeMarker(nodeMarker),
+    m_childrenMarker(childrenMarker)
 {
 }
 
 EmbeddedTreeDBNodeImpl::~EmbeddedTreeDBNodeImpl()
 {
+}
+
+bool EmbeddedTreeDBNodeImpl::isRoot() const
+{
+    return m_key.isRoot();
+}
+
+std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::parent(Ishiko::Error& error)
+{
+    std::shared_ptr<TreeDBNode> result;
+    return result;
+}
+
+void EmbeddedTreeDBNodeImpl::children(std::vector<std::shared_ptr<TreeDBNode> >& children,
+                                      Ishiko::Error& error)
+{
+    for (std::pair<std::string, std::shared_ptr<TreeDBNode> > item : m_children)
+    {
+
+    }
 }
 
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key,
@@ -46,24 +68,24 @@ std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key,
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insert(const TreeDBKey& key,
                                                            size_t index)
 {
-    return m_db->appendNode(key);
+    return m_db->appendNode(*this, key);
 }
 
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insertBefore(const TreeDBKey& key,
                                                                  std::shared_ptr<TreeDBNode> child)
 {
-    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child)->position());
+    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child)->marker());
 }
 
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insertAfter(const TreeDBKey& key,
                                                                 std::shared_ptr<TreeDBNode> child)
 {
-    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child)->position());
+    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child)->marker());
 }
 
 std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
 {
-    return m_db->appendNode(key);
+    return m_db->appendNode(*this, key);
 }
 
 bool EmbeddedTreeDBNodeImpl::remove(const TreeDBKey& key,
@@ -82,14 +104,14 @@ const TreeDBKey& EmbeddedTreeDBNodeImpl::key() const
     return m_key;
 }
 
-const PageRepositoryPosition& EmbeddedTreeDBNodeImpl::position() const
+const RecordMarker& EmbeddedTreeDBNodeImpl::marker() const
 {
-    return m_position;
+    return m_nodeMarker;
 }
 
-void EmbeddedTreeDBNodeImpl::setPosition(const PageRepositoryPosition& pos)
+void EmbeddedTreeDBNodeImpl::setMarker(const RecordMarker& marker)
 {
-    m_position = pos;
+    m_nodeMarker = marker;
 }
 
 }

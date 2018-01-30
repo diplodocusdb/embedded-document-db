@@ -41,6 +41,8 @@ public:
     const TreeDBValue& value() const;
     TreeDBValue& value();
 
+    virtual bool isRoot() const = 0;
+    virtual std::shared_ptr<TreeDBNode> parent(Ishiko::Error& error) = 0;
     virtual void children(std::vector<std::shared_ptr<TreeDBNode> >& children, Ishiko::Error& error) = 0;
     virtual std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index) = 0;
