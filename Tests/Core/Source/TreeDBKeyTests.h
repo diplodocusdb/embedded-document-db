@@ -30,5 +30,8 @@ using namespace Ishiko::TestFramework;
 void AddTreeDBKeyTests(TestHarness& theTestHarness);
 
 TestResult::EOutcome TreeDBKeyCreationTest1();
+TestResult::EOutcome TreeDBKeyParentKeyTest1();
+TestResult::EOutcome TreeDBKeyParentKeyTest2();
+TestResult::EOutcome TreeDBKeyParentKeyTest3();
 
 #endif

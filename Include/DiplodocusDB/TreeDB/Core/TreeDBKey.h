@@ -37,6 +37,9 @@ public:
 
     const std::string& value() const;
 
+    bool isRoot() const;
+    bool isNull() const;
+    TreeDBKey parentKey() const;
     bool operator ==(const TreeDBKey& other) const;
     bool operator !=(const TreeDBKey& other) const;
     bool operator <(const TreeDBKey& other) const;

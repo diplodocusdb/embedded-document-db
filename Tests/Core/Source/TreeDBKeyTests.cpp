@@ -28,12 +28,55 @@ void AddTreeDBKeyTests(TestHarness& theTestHarness)
     TestSequence& keyTestSequence = theTestHarness.appendTestSequence("TreeDBKey tests");
 
     new HeapAllocationErrorsTest("Creation test 1", TreeDBKeyCreationTest1, keyTestSequence);
+
+    new HeapAllocationErrorsTest("parentKey test 1", TreeDBKeyParentKeyTest1, keyTestSequence);
+    new HeapAllocationErrorsTest("parentKey test 2", TreeDBKeyParentKeyTest2, keyTestSequence);
+    new HeapAllocationErrorsTest("parentKey test 3", TreeDBKeyParentKeyTest3, keyTestSequence);
 }
 
 TestResult::EOutcome TreeDBKeyCreationTest1()
 {
     DiplodocusDB::TreeDBKey key("/");
     if (key.value() == "/")
+    {
+        return TestResult::ePassed;
+    }
+    else
+    {
+        return TestResult::eFailed;
+    }
+}
+
+TestResult::EOutcome TreeDBKeyParentKeyTest1()
+{
+    DiplodocusDB::TreeDBKey key("/key1/key2");
+    if (key.parentKey() == "/key1")
+    {
+        return TestResult::ePassed;
+    }
+    else
+    {
+        return TestResult::eFailed;
+    }
+}
+
+TestResult::EOutcome TreeDBKeyParentKeyTest2()
+{
+    DiplodocusDB::TreeDBKey key("/key1");
+    if (key.parentKey() == "/")
+    {
+        return TestResult::ePassed;
+    }
+    else
+    {
+        return TestResult::eFailed;
+    }
+}
+
+TestResult::EOutcome TreeDBKeyParentKeyTest3()
+{
+    DiplodocusDB::TreeDBKey key("/");
+    if (key.parentKey().isNull())
     {
         return TestResult::ePassed;
     }
