@@ -21,8 +21,17 @@
 */
 
 #include "KeyCacheTests.h"
+#include "KeyCache.h"
 
 void AddKeyCacheTests(TestHarness& theTestHarness)
 {
     TestSequence& keyCacheTestSequence = theTestHarness.appendTestSequence("KeyCache tests");
+
+    new HeapAllocationErrorsTest("Creation test 1", KeyCacheCreationTest1, keyCacheTestSequence);
+}
+
+TestResult::EOutcome KeyCacheCreationTest1()
+{
+    DiplodocusDB::KeyCache cache;
+    return TestResult::ePassed;
 }

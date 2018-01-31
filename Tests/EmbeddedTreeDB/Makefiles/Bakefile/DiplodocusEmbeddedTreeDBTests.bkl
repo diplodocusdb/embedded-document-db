@@ -12,6 +12,8 @@ program DiplodocusEmbeddedTreeDBTests : DiplodocusEmbeddedTreeDB, IshikoTestFram
 {
     archs = x86 x86_64;
 
+    includedirs += ../../../../EmbeddedTreeDB/Source;
+
     headers
     {
         ../../Source/KeyCacheTests.h

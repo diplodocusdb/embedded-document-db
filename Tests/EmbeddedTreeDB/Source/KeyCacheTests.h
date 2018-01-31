@@ -29,4 +29,6 @@ using namespace Ishiko::TestFramework;
 
 void AddKeyCacheTests(TestHarness& theTestHarness);
 
+TestResult::EOutcome KeyCacheCreationTest1();
+
 #endif
