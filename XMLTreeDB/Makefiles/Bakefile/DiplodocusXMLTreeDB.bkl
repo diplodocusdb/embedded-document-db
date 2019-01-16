@@ -1,0 +1,34 @@
+toolsets = gnu vs2017 vs2015 vs2013;
+
+gnu.makefile = ../GNUmakefile/GNUmakefile;
+vs2017.solutionfile = ../VC15/DiplodocusXMLTreeDB.sln;
+vs2015.solutionfile = ../VC14/DiplodocusXMLTreeDB.sln;
+vs2013.solutionfile = ../VC12/DiplodocusXMLTreeDB.sln;
+
+library DiplodocusXMLTreeDB
+{
+    archs = x86 x86_64;
+   
+    includedirs += ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB;
+
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        outputdir = ../../../Lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        outputdir = ../../../Lib/$(arch);
+    }
+
+    if ($(config) == Debug)
+    {
+        basename = DiplodocusXMLTreeDB-d;
+    }
+
+    headers
+    {
+        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB.h
+    }
+}
