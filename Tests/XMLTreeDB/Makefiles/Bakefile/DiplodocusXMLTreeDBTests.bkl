@@ -11,8 +11,15 @@ program DiplodocusXMLTreeDBTests : IshikoTestFrameworkCore
 {
     archs = x86 x86_64;
 
+    headers
+    {
+        ../../Source/XMLTreeDBTests/XMLTreeDBTests.h
+    }
+
     sources
     {
         ../../Source/main.cpp
+
+        ../../Source/XMLTreeDBTests/XMLTreeDBTests.cpp
     }
 }
