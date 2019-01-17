@@ -20,14 +20,11 @@
     IN THE SOFTWARE.
 */
 
-#include "XMLTreeDBTests/XMLTreeDBTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include "XMLTreeDBTests.h"
 
-int main(int argc, char* argv[])
+using namespace Ishiko::TestFramework;
+
+void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("DiplodocusXMLTreeDB");
-
-    XMLTreeDBTests::AddTests(theTestHarness);
-
-    return theTestHarness.run();
+    TestSequence& xmlTreeDBTestSequence = theTestHarness.appendTestSequence("XMLTreeDB tests");
 }
