@@ -6,9 +6,10 @@ import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
 import $(diplodocusdbpath)/PhysicalStorage/Include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
 import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 
-toolsets = gnu vs2015 vs2013;
+toolsets = gnu vs2017 vs2015 vs2013;
 
 gnu.makefile = ../GNUmakefile/GNUmakefile;
+vs2017.solutionfile = ../VC15/DiplodocusEmbeddedTreeDB.sln;
 vs2015.solutionfile = ../VC14/DiplodocusEmbeddedTreeDB.sln;
 vs2013.solutionfile = ../VC12/DiplodocusEmbeddedTreeDB.sln;
 
