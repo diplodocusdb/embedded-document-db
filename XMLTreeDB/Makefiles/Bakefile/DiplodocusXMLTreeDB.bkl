@@ -30,5 +30,13 @@ library DiplodocusXMLTreeDB
     headers
     {
         ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB.h
+
+        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h
+        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
+    }
+
+    sources
+    {
+        ../../Source/XMLTreeDB.cpp
     }
 }
