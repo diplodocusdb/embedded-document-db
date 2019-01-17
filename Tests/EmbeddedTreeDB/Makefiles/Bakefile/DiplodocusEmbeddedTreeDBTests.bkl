@@ -3,8 +3,9 @@ import $(ishikopath)/TestFramework/Include/Ishiko/TestFramework/TestFrameworkCor
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/EmbeddedTreeDB.bkl;
 
-toolsets = vs2015 vs2013;
+toolsets = vs2017 vs2015 vs2013;
 
+vs2017.solutionfile = ../VC15/DiplodocusEmbeddedTreeDBTests.sln;
 vs2015.solutionfile = ../VC14/DiplodocusEmbeddedTreeDBTests.sln;
 vs2013.solutionfile = ../VC12/DiplodocusEmbeddedTreeDBTests.sln;
 
