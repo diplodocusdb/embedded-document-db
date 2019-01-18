@@ -4,8 +4,10 @@
 *.sdf
 *.suo
 *.vc.db
+*.vcxproj.user
 .vs
 Debug/
 Release/
 Lib/
 Tests/EmbeddedTreeDB/TestOutput
+Tests/XMLTreeDB/TestOutput
