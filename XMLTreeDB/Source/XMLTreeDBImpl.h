@@ -35,6 +35,9 @@ class XMLTreeDBImpl
 public:
     void create(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
+
+private:
+    pugi::xml_document m_document;
 };
 
 }

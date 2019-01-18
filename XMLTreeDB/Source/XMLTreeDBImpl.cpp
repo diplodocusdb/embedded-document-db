@@ -21,12 +21,21 @@
 */
 
 #include "XMLTreeDBImpl.h"
+#include <fstream>
 
 namespace DiplodocusDB
 {
 
+static const char* rootElementName = "diplodocusdb-xmltreedb";
+
 void XMLTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& error)
 {
+    pugi::xml_node rootNode = m_document.append_child(rootElementName);
+    if (rootNode)
+    {
+        std::ofstream file(path.string());
+        m_document.save(file);
+    }
 }
 
 void XMLTreeDBImpl::close()
