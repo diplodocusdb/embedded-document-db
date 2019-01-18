@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
 
 #include "Ishiko/Errors/Error.h"
+#include <pugixml.hpp>
 #include <boost/filesystem/path.hpp>
 
 namespace DiplodocusDB
