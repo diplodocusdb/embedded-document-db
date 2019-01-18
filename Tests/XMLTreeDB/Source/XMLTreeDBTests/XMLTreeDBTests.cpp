@@ -30,10 +30,34 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
     TestSequence& xmlTreeDBTestSequence = theTestHarness.appendTestSequence("XMLTreeDB tests");
 
     new HeapAllocationErrorsTest("Creation test 1", CreationTest1, xmlTreeDBTestSequence);
+
+    new FileComparisonTest("create test 1", CreateTest1, xmlTreeDBTestSequence);
 }
 
 TestResult::EOutcome XMLTreeDBTests::CreationTest1()
 {
     DiplodocusDB::XMLTreeDB db;
     return TestResult::ePassed;
+}
+
+TestResult::EOutcome XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_CreateTest1.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.create(outputPath, error);
+    if (!error)
+    {
+        result = TestResult::ePassed;
+    }
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_CreateTest1.xml");
+
+    return result;
 }

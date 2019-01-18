@@ -33,6 +33,12 @@ override CXXFLAGS += -O2
 else ifneq (,$(config))
 $(warning Unknown configuration "$(config)")
 endif
+#
+# Additionally, this makefile is customizable with the following
+# settings:
+#
+#      BOOST_ROOT          Path to the Boost installation
+#      ISHIKO_ERRORS_ROOT  Path to the Ishiko Errors installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -54,6 +60,18 @@ _builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(bui
 _builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
 $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
 endif
+
+# ------------
+# Configurable settings:
+# 
+
+# Path to the Boost installation
+BOOST_ROOT ?= $(BOOST)
+# Path to the Ishiko Errors installation
+ISHIKO_ERRORS_ROOT ?= $(ISHIKO)/Errors
+
+# ------------
+
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusXMLTreeDB-d,DiplodocusXMLTreeDB).a
 
 ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusXMLTreeDB-d,DiplodocusXMLTreeDB).a: $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o
@@ -61,10 +79,10 @@ all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusX
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o: ../../Source/XMLTreeDB.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../Source/XMLTreeDB.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../Source/XMLTreeDB.cpp
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o: ../../Source/XMLTreeDBImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../Source/XMLTreeDBImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../Source/XMLTreeDBImpl.cpp
 
 clean:
 	rm -f $(_builddir)*.o

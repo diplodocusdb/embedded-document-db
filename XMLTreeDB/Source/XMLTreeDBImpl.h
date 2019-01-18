@@ -23,11 +23,17 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
 
+#include "Ishiko/Errors/Error.h"
+#include <boost/filesystem/path.hpp>
+
 namespace DiplodocusDB
 {
 
 class XMLTreeDBImpl
 {
+public:
+    void create(const boost::filesystem::path& path, Ishiko::Error& error);
+    void close();
 };
 
 }

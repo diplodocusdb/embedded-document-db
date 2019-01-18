@@ -21,3 +21,16 @@
 */
 
 #include "XMLTreeDBImpl.h"
+
+namespace DiplodocusDB
+{
+
+void XMLTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& error)
+{
+}
+
+void XMLTreeDBImpl::close()
+{
+}
+
+}

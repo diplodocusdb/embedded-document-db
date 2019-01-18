@@ -35,4 +35,14 @@ XMLTreeDB::~XMLTreeDB()
 {
 }
 
+void XMLTreeDB::create(const boost::filesystem::path& path, Ishiko::Error& error)
+{
+    m_impl->create(path, error);
+}
+
+void XMLTreeDB::close()
+{
+    m_impl->close();
+}
+
 }
