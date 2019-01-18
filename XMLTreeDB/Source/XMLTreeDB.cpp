@@ -21,3 +21,18 @@
 */
 
 #include "XMLTreeDB.h"
+#include "XMLTreeDBImpl.h"
+
+namespace DiplodocusDB
+{
+
+XMLTreeDB::XMLTreeDB()
+    : m_impl(std::make_unique<XMLTreeDBImpl>())
+{
+}
+
+XMLTreeDB::~XMLTreeDB()
+{
+}
+
+}

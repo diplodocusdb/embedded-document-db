@@ -23,13 +23,25 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDB_H_
 
+#include <memory>
+
 namespace DiplodocusDB
 {
 
+class XMLTreeDBImpl;
+
 class XMLTreeDB
 {
+public:
+    XMLTreeDB();
+    ~XMLTreeDB();
+
+private:
+    std::unique_ptr<XMLTreeDBImpl> m_impl;
 };
 
 }
+
+#include "linkoptions.h"
 
 #endif

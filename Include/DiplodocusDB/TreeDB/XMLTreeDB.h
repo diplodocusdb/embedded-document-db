@@ -25,4 +25,6 @@
 
 #include "XMLTreeDB/XMLTreeDB.h"
 
+#include "XMLTreeDB/linkoptions.h"
+
 #endif

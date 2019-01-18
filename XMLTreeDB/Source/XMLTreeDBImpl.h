@@ -23,4 +23,13 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
 
+namespace DiplodocusDB
+{
+
+class XMLTreeDBImpl
+{
+};
+
+}
+
 #endif
