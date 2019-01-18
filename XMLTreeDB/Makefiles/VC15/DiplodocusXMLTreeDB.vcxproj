@@ -152,12 +152,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\XMLTreeDB.cpp" />
     <ClCompile Include="..\..\Source\XMLTreeDBImpl.cpp" />
+    <ClCompile Include="..\..\Source\XMLTreeDBNodeImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\Source\XMLTreeDBImpl.h" />
+    <ClInclude Include="..\..\Source\XMLTreeDBNodeImpl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

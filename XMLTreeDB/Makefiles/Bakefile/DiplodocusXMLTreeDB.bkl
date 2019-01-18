@@ -43,6 +43,7 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErro
         ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
 
         ../../Source/XMLTreeDBImpl.h
+        ../../Source/XMLTreeDBNodeImpl.h
     }
 
     sources
@@ -50,5 +51,6 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErro
         ../../Source/XMLTreeDB.cpp
 
         ../../Source/XMLTreeDBImpl.cpp
+        ../../Source/XMLTreeDBNodeImpl.cpp
     }
 }

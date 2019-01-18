@@ -46,4 +46,8 @@ void XMLTreeDBImpl::close()
 {
 }
 
+TreeDBNode& XMLTreeDBImpl::root()
+{
+}
+
 }

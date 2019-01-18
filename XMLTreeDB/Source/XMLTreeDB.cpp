@@ -50,4 +50,9 @@ void XMLTreeDB::close()
     m_impl->close();
 }
 
+TreeDBNode& XMLTreeDB::root()
+{
+    return m_impl->root();
+}
+
 }

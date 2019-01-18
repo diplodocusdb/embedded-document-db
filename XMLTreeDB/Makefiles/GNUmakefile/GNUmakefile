@@ -83,8 +83,8 @@ DIPLODOCUSDB_TREEDB_ROOT ?= $(DIPLODOCUSDB)/TreeDB
 
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusXMLTreeDB-d,DiplodocusXMLTreeDB).a
 
-../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusXMLTreeDB-d,DiplodocusXMLTreeDB).a: $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o
-	$(AR) rc $@ $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o
+../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusXMLTreeDB-d,DiplodocusXMLTreeDB).a: $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBNodeImpl.o
+	$(AR) rc $@ $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBNodeImpl.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o: ../../Source/XMLTreeDB.cpp
@@ -92,6 +92,9 @@ $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o: ../../Source/XMLTreeDB.cpp
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o: ../../Source/XMLTreeDBImpl.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(PUGIXML_ROOT)/src -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../Source/XMLTreeDBImpl.cpp
+
+$(_builddir)DiplodocusXMLTreeDB_XMLTreeDBNodeImpl.o: ../../Source/XMLTreeDBNodeImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(PUGIXML_ROOT)/src -I$(BOOST_ROOT) -I../../../Include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../Source/XMLTreeDBNodeImpl.cpp
 
 clean:
 	rm -f $(_builddir)*.o

@@ -43,6 +43,8 @@ public:
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
+    TreeDBNode& root();
+
 private:
     std::unique_ptr<XMLTreeDBImpl> m_impl;
 };
