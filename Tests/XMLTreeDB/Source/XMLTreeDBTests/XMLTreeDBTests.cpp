@@ -21,10 +21,19 @@
 */
 
 #include "XMLTreeDBTests.h"
+#include "DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h"
 
 using namespace Ishiko::TestFramework;
 
 void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
 {
     TestSequence& xmlTreeDBTestSequence = theTestHarness.appendTestSequence("XMLTreeDB tests");
+
+    new HeapAllocationErrorsTest("Creation test 1", CreationTest1, xmlTreeDBTestSequence);
+}
+
+TestResult::EOutcome XMLTreeDBTests::CreationTest1()
+{
+    DiplodocusDB::XMLTreeDB db;
+    return TestResult::ePassed;
 }

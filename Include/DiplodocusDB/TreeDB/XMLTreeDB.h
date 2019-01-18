@@ -23,4 +23,6 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_H_
 
+#include "XMLTreeDB/XMLTreeDB.h"
+
 #endif
