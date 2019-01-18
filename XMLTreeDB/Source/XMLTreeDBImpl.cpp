@@ -38,6 +38,10 @@ void XMLTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& e
     }
 }
 
+void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
+{
+}
+
 void XMLTreeDBImpl::close()
 {
 }
