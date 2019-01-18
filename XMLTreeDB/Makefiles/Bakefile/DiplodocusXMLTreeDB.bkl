@@ -33,10 +33,14 @@ library DiplodocusXMLTreeDB
 
         ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h
         ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
+
+        ../../Source/XMLTreeDBImpl.h
     }
 
     sources
     {
         ../../Source/XMLTreeDB.cpp
+
+        ../../Source/XMLTreeDBImpl.cpp
     }
 }

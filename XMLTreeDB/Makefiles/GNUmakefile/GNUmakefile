@@ -56,12 +56,15 @@ $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_er
 endif
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusXMLTreeDB-d,DiplodocusXMLTreeDB).a
 
-../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusXMLTreeDB-d,DiplodocusXMLTreeDB).a: $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o
-	$(AR) rc $@ $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o
+../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusXMLTreeDB-d,DiplodocusXMLTreeDB).a: $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o
+	$(AR) rc $@ $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o: ../../Source/XMLTreeDB.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../Source/XMLTreeDB.cpp
+
+$(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o: ../../Source/XMLTreeDBImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../Source/XMLTreeDBImpl.cpp
 
 clean:
 	rm -f $(_builddir)*.o
