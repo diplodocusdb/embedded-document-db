@@ -34,6 +34,9 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
     new FileComparisonTest("create test 1", CreateTest1, xmlTreeDBTestSequence);
 
     new HeapAllocationErrorsTest("open test 1", OpenTest1, xmlTreeDBTestSequence);
+    new HeapAllocationErrorsTest("open test 2", OpenTest2, xmlTreeDBTestSequence);
+
+    new FileComparisonTest("insert test 1", InsertTest1, xmlTreeDBTestSequence);
 }
 
 TestResult::EOutcome XMLTreeDBTests::CreationTest1()
@@ -87,6 +90,59 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest1(Test& test)
             }
         }
     }
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::OpenTest2(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest2.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+        if (!error)
+        {
+            if (node.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL)
+            {
+                result = TestResult::ePassed;
+            }
+        }
+    }
+    
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_InsertTest1.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.create(outputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode node = db.root().insert("key1", 0);
+        node.commit(error);
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+
+        db.close();
+    }
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_InsertTest1.xml");
 
     return result;
 }

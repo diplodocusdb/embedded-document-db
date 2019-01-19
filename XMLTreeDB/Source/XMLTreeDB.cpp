@@ -27,7 +27,7 @@ namespace DiplodocusDB
 {
 
 XMLTreeDB::XMLTreeDB()
-    : m_impl(std::make_unique<XMLTreeDBImpl>())
+    : m_impl(std::make_shared<XMLTreeDBImpl>())
 {
 }
 

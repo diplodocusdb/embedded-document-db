@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
 
+#include "XMLTreeDBNodeImpl.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include "Ishiko/Errors/Error.h"
 #include <pugixml.hpp>
@@ -31,7 +32,7 @@
 namespace DiplodocusDB
 {
 
-class XMLTreeDBImpl
+class XMLTreeDBImpl : public std::enable_shared_from_this<XMLTreeDBImpl>
 {
 public:
     void create(const boost::filesystem::path& path, Ishiko::Error& error);
@@ -40,7 +41,10 @@ public:
 
     TreeDBNode& root();
 
+    void commitNode(const XMLTreeDBNodeImpl& node, Ishiko::Error& error);
+
 private:
+    boost::filesystem::path m_path;
     pugi::xml_document m_document;
     TreeDBNode m_root;
 };

@@ -21,9 +21,19 @@
 */
 
 #include "XMLTreeDBNodeImpl.h"
+#include "XMLTreeDBImpl.h"
 
 namespace DiplodocusDB
 {
+
+XMLTreeDBNodeImpl::XMLTreeDBNodeImpl(std::shared_ptr<XMLTreeDBImpl> db, pugi::xml_node node)
+    : m_db(db), m_node(node)
+{
+}
+
+XMLTreeDBNodeImpl::~XMLTreeDBNodeImpl()
+{
+}
 
 bool XMLTreeDBNodeImpl::isRoot() const
 {
@@ -43,13 +53,14 @@ void XMLTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Erro
 TreeDBNode XMLTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
 {
     TreeDBNode result;
+    error = -1;
     return result;
 }
 
 TreeDBNode XMLTreeDBNodeImpl::insert(const TreeDBKey& key, size_t index)
 {
-    TreeDBNode result;
-    return result;
+    pugi::xml_node newNode = m_node.append_child(key.value().c_str());
+    return TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, newNode));
 }
 
 TreeDBNode XMLTreeDBNodeImpl::insertBefore(const TreeDBKey& key, TreeDBNode& child)
@@ -77,6 +88,7 @@ bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
 
 void XMLTreeDBNodeImpl::commit(Ishiko::Error& error)
 {
+    m_db->commitNode(*this, error);
 }
 
 }

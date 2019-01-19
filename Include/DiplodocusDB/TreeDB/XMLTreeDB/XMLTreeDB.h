@@ -46,7 +46,7 @@ public:
     TreeDBNode& root();
 
 private:
-    std::unique_ptr<XMLTreeDBImpl> m_impl;
+    std::shared_ptr<XMLTreeDBImpl> m_impl;
 };
 
 }

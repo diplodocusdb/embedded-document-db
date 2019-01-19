@@ -24,13 +24,19 @@
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBNODEIMPL_H_
 
 #include "DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h"
+#include <pugixml.hpp>
 
 namespace DiplodocusDB
 {
 
+class XMLTreeDBImpl;
+
 class XMLTreeDBNodeImpl : public TreeDBNodeImpl
 {
 public:
+    XMLTreeDBNodeImpl(std::shared_ptr<XMLTreeDBImpl> db, pugi::xml_node node);
+    ~XMLTreeDBNodeImpl() override;
+
     bool isRoot() const override;
     TreeDBNode parent(Ishiko::Error& error) override;
     void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
@@ -41,6 +47,10 @@ public:
     TreeDBNode append(const TreeDBKey& key) override;
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
     void commit(Ishiko::Error& error) override;
+
+private:
+    std::shared_ptr<XMLTreeDBImpl> m_db;
+    pugi::xml_node m_node;
 };
 
 }

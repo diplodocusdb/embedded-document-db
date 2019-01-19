@@ -31,17 +31,21 @@ static const char* rootElementName = "diplodocusdb-xmltreedb";
 
 void XMLTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& error)
 {
+    m_path = path;
     pugi::xml_node rootNode = m_document.append_child(rootElementName);
     if (rootNode)
     {
-        std::ofstream file(path.string());
+        m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(shared_from_this(), rootNode));
+
+        std::ofstream file(m_path.string());
         m_document.save(file);
     }
 }
 
 void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
-    m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>());
+    m_document.load_file(path.string().c_str());
+    m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(shared_from_this(), m_document.child(rootElementName)));
 }
 
 void XMLTreeDBImpl::close()
@@ -51,6 +55,12 @@ void XMLTreeDBImpl::close()
 TreeDBNode& XMLTreeDBImpl::root()
 {
     return m_root;
+}
+
+void XMLTreeDBImpl::commitNode(const XMLTreeDBNodeImpl& node, Ishiko::Error& error)
+{
+    std::ofstream file(m_path.string());
+    m_document.save(file);
 }
 
 }
