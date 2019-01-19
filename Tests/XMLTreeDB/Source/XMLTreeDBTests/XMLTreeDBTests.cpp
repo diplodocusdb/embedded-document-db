@@ -36,8 +36,11 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("open test 1", OpenTest1, xmlTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 2", OpenTest2, xmlTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 3", OpenTest3, xmlTreeDBTestSequence);
+    new HeapAllocationErrorsTest("open test 4", OpenTest4, xmlTreeDBTestSequence);
 
     new FileComparisonTest("insert test 1", InsertTest1, xmlTreeDBTestSequence);
+
+    new FileComparisonTest("append test 1", AppendTest1, xmlTreeDBTestSequence);
 }
 
 TestResult::EOutcome XMLTreeDBTests::CreationTest1()
@@ -150,6 +153,31 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest3(Test& test)
     return result;
 }
 
+TestResult::EOutcome XMLTreeDBTests::OpenTest4(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+        if (!error)
+        {
+            if (node.value().asString() == "value1")
+            {
+                result = TestResult::ePassed;
+            }
+        }
+    }
+
+    return result;
+}
+
 TestResult::EOutcome XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
@@ -174,6 +202,34 @@ TestResult::EOutcome XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_InsertTest1.xml");
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::AppendTest1(Ishiko::TestFramework::FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendTest1.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.create(outputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode node = db.root().append("key1");
+        node.commit(error);
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+
+        db.close();
+    }
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest1.xml");
 
     return result;
 }

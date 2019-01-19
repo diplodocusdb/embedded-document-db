@@ -80,8 +80,8 @@ TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBKey& key, TreeDBNode& chil
 
 TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key)
 {
-    TreeDBNode result;
-    return result;
+    pugi::xml_node newNode = m_node.append_child(key.value().c_str());
+    return TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, newNode));
 }
 
 bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
