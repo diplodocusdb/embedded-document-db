@@ -37,7 +37,8 @@ class TreeDBNodeImpl;
 class TreeDBNode
 {
 public:
-    TreeDBNode(std::shared_ptr<TreeDBNodeImpl>& impl);
+    TreeDBNode();
+    TreeDBNode(std::shared_ptr<TreeDBNodeImpl> impl);
     ~TreeDBNode();
 
     const TreeDBValue& value() const;
@@ -53,6 +54,8 @@ public:
     TreeDBNode append(const TreeDBKey& key);
     bool remove(const TreeDBKey& key, Ishiko::Error& error);
     void commit(Ishiko::Error& error);
+
+    std::shared_ptr<TreeDBNodeImpl>& impl();
 
 private:
     std::shared_ptr<TreeDBNodeImpl> m_impl;

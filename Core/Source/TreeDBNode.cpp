@@ -26,7 +26,11 @@
 namespace DiplodocusDB
 {
 
-TreeDBNode::TreeDBNode(std::shared_ptr<TreeDBNodeImpl>& impl)
+TreeDBNode::TreeDBNode()
+{
+}
+
+TreeDBNode::TreeDBNode(std::shared_ptr<TreeDBNodeImpl> impl)
     : m_impl(impl)
 {
 }
@@ -99,6 +103,11 @@ bool TreeDBNode::remove(const TreeDBKey& key,
 void TreeDBNode::commit(Ishiko::Error& error)
 {
     m_impl->commit(error);
+}
+
+std::shared_ptr<TreeDBNodeImpl>& TreeDBNode::impl()
+{
+    return m_impl;
 }
 
 }
