@@ -42,6 +42,7 @@ public:
 
 private:
     pugi::xml_document m_document;
+    TreeDBNode m_root;
 };
 
 }

@@ -75,7 +75,7 @@ DIPLODOCUSDB_CORE_ROOT ?= $(DIPLODOCUSDB)/Core
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a
 
 ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a: $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o
-	$(AR) rcu $@ $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o
+	$(AR) rc $@ $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o: ../../Source/TreeDBKey.cpp

@@ -3,9 +3,10 @@ import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
 
-toolsets = gnu vs2015 vs2013;
+toolsets = gnu vs2017 vs2015 vs2013;
 
 gnu.makefile = ../GNUmakefile/GNUmakefile;
+vs2017.solutionfile = ../VC15/DiplodocusTreeDBCore.sln;
 vs2015.solutionfile = ../VC14/DiplodocusTreeDBCore.sln;
 vs2013.solutionfile = ../VC12/DiplodocusTreeDBCore.sln;
 

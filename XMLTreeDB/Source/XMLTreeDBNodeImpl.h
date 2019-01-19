@@ -23,4 +23,26 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBNODEIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBNODEIMPL_H_
 
+#include "DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h"
+
+namespace DiplodocusDB
+{
+
+class XMLTreeDBNodeImpl : public TreeDBNodeImpl
+{
+public:
+    bool isRoot() const override;
+    TreeDBNode parent(Ishiko::Error& error) override;
+    void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
+    TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode insert(const TreeDBKey& key, size_t index) override;
+    TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child) override;
+    TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child) override;
+    TreeDBNode append(const TreeDBKey& key) override;
+    bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
+    void commit(Ishiko::Error& error) override;
+};
+
+}
+
 #endif

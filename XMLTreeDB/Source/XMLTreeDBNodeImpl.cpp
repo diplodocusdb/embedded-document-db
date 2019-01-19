@@ -21,3 +21,62 @@
 */
 
 #include "XMLTreeDBNodeImpl.h"
+
+namespace DiplodocusDB
+{
+
+bool XMLTreeDBNodeImpl::isRoot() const
+{
+    return true;
+}
+
+TreeDBNode XMLTreeDBNodeImpl::parent(Ishiko::Error& error)
+{
+    TreeDBNode result;
+    return result;
+}
+
+void XMLTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Error& error)
+{
+}
+
+TreeDBNode XMLTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
+{
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode XMLTreeDBNodeImpl::insert(const TreeDBKey& key, size_t index)
+{
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode XMLTreeDBNodeImpl::insertBefore(const TreeDBKey& key, TreeDBNode& child)
+{
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBKey& key, TreeDBNode& child)
+{
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key)
+{
+    TreeDBNode result;
+    return result;
+}
+
+bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
+{
+    return false;
+}
+
+void XMLTreeDBNodeImpl::commit(Ishiko::Error& error)
+{
+}
+
+}

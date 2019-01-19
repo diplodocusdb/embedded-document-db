@@ -1,14 +1,11 @@
 ishikopath = envvar("ISHIKO");
 import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/Boost.bkl;
 import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
+import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 
-setting DIPLODOCUSDB_TREEDB_ROOT
-{
-    help = "Path to the DiplodocusDB installation";
-    default = '$(DIPLODOCUSDB)/TreeDB';
-}
-
-template DiplodocusXMLTreeDB : IshikoErrors, Boost
+template DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErrors, Boost
 {
     includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Include;
     libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib/$(arch);

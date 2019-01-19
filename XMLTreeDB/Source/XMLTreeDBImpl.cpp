@@ -21,6 +21,7 @@
 */
 
 #include "XMLTreeDBImpl.h"
+#include "XMLTreeDBNodeImpl.h"
 #include <fstream>
 
 namespace DiplodocusDB
@@ -40,6 +41,7 @@ void XMLTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& e
 
 void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
+    m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>());
 }
 
 void XMLTreeDBImpl::close()
@@ -48,6 +50,7 @@ void XMLTreeDBImpl::close()
 
 TreeDBNode& XMLTreeDBImpl::root()
 {
+    return m_root;
 }
 
 }
