@@ -35,6 +35,7 @@ private:
     static Ishiko::TestFramework::TestResult::EOutcome CreateTest1(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome OpenTest1(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome OpenTest2(Ishiko::TestFramework::Test& test);
+    static Ishiko::TestFramework::TestResult::EOutcome OpenTest3(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome InsertTest1(Ishiko::TestFramework::FileComparisonTest& test);
 };
 

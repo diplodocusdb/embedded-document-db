@@ -35,6 +35,7 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
 
     new HeapAllocationErrorsTest("open test 1", OpenTest1, xmlTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 2", OpenTest2, xmlTreeDBTestSequence);
+    new HeapAllocationErrorsTest("open test 3", OpenTest3, xmlTreeDBTestSequence);
 
     new FileComparisonTest("insert test 1", InsertTest1, xmlTreeDBTestSequence);
 }
@@ -116,6 +117,36 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest2(Test& test)
         }
     }
     
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::OpenTest3(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
+
+    DiplodocusDB::XMLTreeDB db;
+
+    Ishiko::Error error;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode node1 = db.root().child("key1", error);
+        if (!error)
+        {
+            DiplodocusDB::TreeDBNode node2 = db.root().child("key2", error);
+            if (!error)
+            {
+                if ((node1.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL) &&
+                    (node2.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL))
+                {
+                    result = TestResult::ePassed;
+                }
+            }
+        }
+    }
+
     return result;
 }
 

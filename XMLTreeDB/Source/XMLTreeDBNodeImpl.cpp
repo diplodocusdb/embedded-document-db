@@ -53,6 +53,10 @@ void XMLTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Erro
 TreeDBNode XMLTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
 {
     pugi::xml_node childNode = m_node.child(key.value().c_str());
+    if (!childNode)
+    {
+        error = -1;
+    }
     return TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, childNode));
 }
 
