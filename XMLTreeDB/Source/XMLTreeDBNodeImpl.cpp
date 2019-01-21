@@ -52,12 +52,38 @@ void XMLTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Erro
 
 TreeDBNode XMLTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
 {
+    TreeDBNode result;
     pugi::xml_node childNode = m_node.child(key.value().c_str());
-    if (!childNode)
+    if (childNode)
+    {
+        pugi::xml_attribute dataTypeAttribute = childNode.attribute("data-type");
+        if (dataTypeAttribute)
+        {
+            if (strcmp(dataTypeAttribute.as_string(), "null") == 0)
+            {
+                result = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, childNode));
+            }
+            else if (strcmp(dataTypeAttribute.as_string(), "utf8string") == 0)
+            {
+                result = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, childNode));
+                result.value().setString(childNode.child_value());
+            }
+            else
+            {
+                error = -1;
+            }
+        }
+        else
+        {
+            error = -1;
+        }
+    }
+    else
     {
         error = -1;
     }
-    return TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, childNode));
+
+    return result;
 }
 
 TreeDBNode XMLTreeDBNodeImpl::insert(const TreeDBKey& key, size_t index)
