@@ -22,6 +22,7 @@
 
 #include "XMLTreeDBTests.h"
 #include "DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h"
+#include <sstream>
 
 using namespace Ishiko::TestFramework;
 
@@ -44,6 +45,7 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
     new FileComparisonTest("append test 2", AppendTest2, xmlTreeDBTestSequence);
     new FileComparisonTest("append test 3", AppendTest3, xmlTreeDBTestSequence);
     new FileComparisonTest("append test 4", AppendTest4, xmlTreeDBTestSequence);
+    new FileComparisonTest("append test 5", AppendTest5, xmlTreeDBTestSequence);
 }
 
 TestResult::EOutcome XMLTreeDBTests::CreationTest1()
@@ -330,6 +332,43 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest4(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest4.xml");
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::AppendTest5(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendTest5.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.create(outputPath, error);
+    if (!error)
+    {
+        for (size_t i = 0; i < 523; ++i)
+        {
+            std::stringstream key;
+            key << "key" << i;
+            DiplodocusDB::TreeDBNode node = db.root().append(key.str());
+            node.commit(error);
+            if (error)
+            {
+                break;
+            }
+        }
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+
+        db.close();
+    }
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest5.xml");
 
     return result;
 }
