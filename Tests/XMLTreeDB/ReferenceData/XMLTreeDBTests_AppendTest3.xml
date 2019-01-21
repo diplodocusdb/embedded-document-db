@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <diplodocusdb-xmltreedb>
-	<key1>value1</key1>
+	<key1 data-type="utf8string">value1</key1>
 </diplodocusdb-xmltreedb>

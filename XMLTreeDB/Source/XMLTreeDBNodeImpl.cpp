@@ -92,8 +92,13 @@ bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
 void XMLTreeDBNodeImpl::commit(Ishiko::Error& error)
 {
     const TreeDBValue& v = value();
-    if (v.type() != EPrimitiveDataType::eNULL)
+    if (v.type() == EPrimitiveDataType::eNULL)
     {
+        m_node.append_attribute("data-type").set_value("null");
+    }
+    else if (v.type() != EPrimitiveDataType::eNULL)
+    {
+        m_node.append_attribute("data-type").set_value("utf8string");
         m_node.append_child(pugi::node_pcdata).set_value(v.asString().c_str());
     }
     m_db->commitNode(*this, error);
