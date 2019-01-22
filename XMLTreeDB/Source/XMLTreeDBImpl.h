@@ -41,7 +41,7 @@ public:
 
     TreeDBNode& root();
 
-    void commitNode(const XMLTreeDBNodeImpl& node, Ishiko::Error& error);
+    void commitNode(XMLTreeDBNodeImpl& node, Ishiko::Error& error);
 
 private:
     boost::filesystem::path m_path;

@@ -48,9 +48,12 @@ public:
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
     void commit(Ishiko::Error& error) override;
 
+    void updateValue();
+
 private:
     std::shared_ptr<XMLTreeDBImpl> m_db;
     pugi::xml_node m_node;
+    std::vector<std::shared_ptr<XMLTreeDBNodeImpl>> m_children;
 };
 
 }

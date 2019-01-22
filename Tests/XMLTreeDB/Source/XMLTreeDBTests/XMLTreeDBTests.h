@@ -43,6 +43,7 @@ private:
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest3(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest4(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest5(Ishiko::TestFramework::FileComparisonTest& test);
+    static Ishiko::TestFramework::TestResult::EOutcome AppendTest6(Ishiko::TestFramework::FileComparisonTest& test);
 };
 
 #endif

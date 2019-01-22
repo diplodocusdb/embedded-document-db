@@ -22,6 +22,7 @@
 
 #include "XMLTreeDBTests.h"
 #include "DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h"
+#include <boost/filesystem/operations.hpp>
 #include <sstream>
 
 using namespace Ishiko::TestFramework;
@@ -46,6 +47,7 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
     new FileComparisonTest("append test 3", AppendTest3, xmlTreeDBTestSequence);
     new FileComparisonTest("append test 4", AppendTest4, xmlTreeDBTestSequence);
     new FileComparisonTest("append test 5", AppendTest5, xmlTreeDBTestSequence);
+    new FileComparisonTest("append test 6", AppendTest6, xmlTreeDBTestSequence);
 }
 
 TestResult::EOutcome XMLTreeDBTests::CreationTest1()
@@ -369,6 +371,37 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest5(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest5.xml");
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::AppendTest6(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendTest6.xml");
+
+    boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(outputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
+        DiplodocusDB::TreeDBNode node2 = node1.append("key2");
+        node1.commit(error);
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+    }
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest6.xml");
 
     return result;
 }

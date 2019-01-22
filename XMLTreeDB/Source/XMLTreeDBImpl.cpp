@@ -44,7 +44,8 @@ void XMLTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& e
 
 void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
-    m_document.load_file(path.string().c_str());
+    m_path = path;
+    m_document.load_file(m_path.string().c_str());
     m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(shared_from_this(), m_document.child(rootElementName)));
 }
 
@@ -57,8 +58,9 @@ TreeDBNode& XMLTreeDBImpl::root()
     return m_root;
 }
 
-void XMLTreeDBImpl::commitNode(const XMLTreeDBNodeImpl& node, Ishiko::Error& error)
+void XMLTreeDBImpl::commitNode(XMLTreeDBNodeImpl& node, Ishiko::Error& error)
 {
+    node.updateValue();
     std::ofstream file(m_path.string());
     m_document.save(file);
 }

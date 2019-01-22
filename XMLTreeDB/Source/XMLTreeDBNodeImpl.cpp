@@ -89,7 +89,8 @@ TreeDBNode XMLTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
 TreeDBNode XMLTreeDBNodeImpl::insert(const TreeDBKey& key, size_t index)
 {
     pugi::xml_node newNode = m_node.append_child(key.value().c_str());
-    return TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, newNode));
+    m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, newNode));
+    return TreeDBNode(m_children.back());
 }
 
 TreeDBNode XMLTreeDBNodeImpl::insertBefore(const TreeDBKey& key, TreeDBNode& child)
@@ -107,7 +108,8 @@ TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBKey& key, TreeDBNode& chil
 TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key)
 {
     pugi::xml_node newNode = m_node.append_child(key.value().c_str());
-    return TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, newNode));
+    m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, newNode));
+    return TreeDBNode(m_children.back());
 }
 
 bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
@@ -116,6 +118,11 @@ bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
 }
 
 void XMLTreeDBNodeImpl::commit(Ishiko::Error& error)
+{
+    m_db->commitNode(*this, error);
+}
+
+void XMLTreeDBNodeImpl::updateValue()
 {
     const TreeDBValue& v = value();
     if (v.type() == EPrimitiveDataType::eNULL)
@@ -127,7 +134,10 @@ void XMLTreeDBNodeImpl::commit(Ishiko::Error& error)
         m_node.append_attribute("data-type").set_value("utf8string");
         m_node.append_child(pugi::node_pcdata).set_value(v.asString().c_str());
     }
-    m_db->commitNode(*this, error);
+    for (size_t i = 0; i < m_children.size(); ++i)
+    {
+        m_children[i]->updateValue();
+    }
 }
 
 }
