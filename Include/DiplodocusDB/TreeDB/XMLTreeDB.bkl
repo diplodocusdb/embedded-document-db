@@ -8,5 +8,14 @@ import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 template DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErrors, Boost
 {
     includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Include;
-    libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib/$(arch);
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib/$(arch);
+    }
 }

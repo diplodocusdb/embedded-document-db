@@ -7,5 +7,14 @@ setting DIPLODOCUSDB_TREEDB_ROOT
 template DiplodocusTreeDBCore
 {
     includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Include;
-    libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib/$(arch);
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib/$(arch);
+    }
 }
