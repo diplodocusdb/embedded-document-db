@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -39,6 +39,16 @@ TreeDBNode::~TreeDBNode()
 {
 }
 
+TreeDBNode::operator bool() const
+{
+    return static_cast<bool>(m_impl);
+}
+
+bool TreeDBNode::operator !() const
+{
+    return !m_impl;
+}
+
 const TreeDBValue& TreeDBNode::value() const
 {
     return m_impl->value();
@@ -71,6 +81,16 @@ TreeDBNode TreeDBNode::child(const TreeDBKey& key,
     return m_impl->child(key, error);
 }
 
+TreeDBNode TreeDBNode::previousSibling()
+{
+    return m_impl->previousSibling();
+}
+
+TreeDBNode TreeDBNode::nextSibling()
+{
+    return m_impl->nextSibling();
+}
+
 TreeDBNode TreeDBNode::insert(const TreeDBKey& key,
                               size_t index)
 {
@@ -92,6 +112,11 @@ TreeDBNode TreeDBNode::insertAfter(const TreeDBKey& key,
 TreeDBNode TreeDBNode::append(const TreeDBKey& key)
 {
     return m_impl->append(key);
+}
+
+TreeDBNode TreeDBNode::set(const TreeDBKey& key)
+{
+    return m_impl->set(key);
 }
 
 bool TreeDBNode::remove(const TreeDBKey& key,

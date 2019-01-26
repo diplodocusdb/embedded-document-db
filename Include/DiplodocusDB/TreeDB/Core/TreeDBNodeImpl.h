@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -45,10 +45,13 @@ public:
     virtual TreeDBNode parent(Ishiko::Error& error) = 0;
     virtual void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) = 0;
     virtual TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error) = 0;
+    virtual TreeDBNode previousSibling() = 0;
+    virtual TreeDBNode nextSibling() = 0;
     virtual TreeDBNode insert(const TreeDBKey& key, size_t index) = 0;
     virtual TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child) = 0;
     virtual TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child) = 0;
     virtual TreeDBNode append(const TreeDBKey& key) = 0;
+    virtual TreeDBNode set(const TreeDBKey& key) = 0;
     virtual bool remove(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual void commit(Ishiko::Error& error) = 0;
 

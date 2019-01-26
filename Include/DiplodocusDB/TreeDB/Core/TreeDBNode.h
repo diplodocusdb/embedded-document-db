@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -41,6 +41,9 @@ public:
     TreeDBNode(std::shared_ptr<TreeDBNodeImpl> impl);
     ~TreeDBNode();
 
+    explicit operator bool() const;
+    bool operator !() const;
+
     const TreeDBValue& value() const;
     TreeDBValue& value();
 
@@ -48,10 +51,13 @@ public:
     TreeDBNode parent(Ishiko::Error& error);
     void children(std::vector<TreeDBNode>& children, Ishiko::Error& error);
     TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode previousSibling();
+    TreeDBNode nextSibling();
     TreeDBNode insert(const TreeDBKey& key, size_t index);
     TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child);
     TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child);
     TreeDBNode append(const TreeDBKey& key);
+    TreeDBNode set(const TreeDBKey& key);
     bool remove(const TreeDBKey& key, Ishiko::Error& error);
     void commit(Ishiko::Error& error);
 
