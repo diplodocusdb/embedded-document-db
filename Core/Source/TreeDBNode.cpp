@@ -86,9 +86,19 @@ TreeDBNode TreeDBNode::previousSibling()
     return m_impl->previousSibling();
 }
 
+TreeDBNode TreeDBNode::previousSibling(const TreeDBKey& key)
+{
+    return m_impl->previousSibling(key);
+}
+
 TreeDBNode TreeDBNode::nextSibling()
 {
     return m_impl->nextSibling();
+}
+
+TreeDBNode TreeDBNode::nextSibling(const TreeDBKey& key)
+{
+    return m_impl->nextSibling(key);
 }
 
 TreeDBNode TreeDBNode::insert(const TreeDBKey& key,

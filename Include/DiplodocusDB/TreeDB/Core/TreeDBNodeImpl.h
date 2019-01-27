@@ -46,7 +46,9 @@ public:
     virtual void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) = 0;
     virtual TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual TreeDBNode previousSibling() = 0;
+    virtual TreeDBNode previousSibling(const TreeDBKey& key) = 0;
     virtual TreeDBNode nextSibling() = 0;
+    virtual TreeDBNode nextSibling(const TreeDBKey& key) = 0;
     virtual TreeDBNode insert(const TreeDBKey& key, size_t index) = 0;
     virtual TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child) = 0;
     virtual TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child) = 0;

@@ -92,7 +92,19 @@ TreeDBNode XMLTreeDBNodeImpl::previousSibling()
     return result;
 }
 
+TreeDBNode XMLTreeDBNodeImpl::previousSibling(const TreeDBKey& key)
+{
+    TreeDBNode result;
+    return result;
+}
+
 TreeDBNode XMLTreeDBNodeImpl::nextSibling()
+{
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode XMLTreeDBNodeImpl::nextSibling(const TreeDBKey& key)
 {
     TreeDBNode result;
     return result;
@@ -147,12 +159,28 @@ void XMLTreeDBNodeImpl::updateValue()
     const TreeDBValue& v = value();
     if (v.type() == EPrimitiveDataType::eNULL)
     {
-        m_node.append_attribute("data-type").set_value("null");
+        pugi::xml_attribute attributeNode = m_node.attribute("data-type");
+        if (attributeNode)
+        {
+            attributeNode.set_value("null");
+        }
+        else
+        {
+            m_node.append_attribute("data-type").set_value("null");
+        }
     }
     else if (v.type() != EPrimitiveDataType::eNULL)
     {
-        m_node.append_attribute("data-type").set_value("utf8string");
-        m_node.append_child(pugi::node_pcdata).set_value(v.asString().c_str());
+        pugi::xml_attribute attributeNode = m_node.attribute("data-type");
+        if (attributeNode)
+        {
+            attributeNode.set_value("utf8string");
+        }
+        else
+        {
+            m_node.append_attribute("data-type").set_value("utf8string");
+        }
+        m_node.text().set(v.asString().c_str());
     }
     for (size_t i = 0; i < m_children.size(); ++i)
     {

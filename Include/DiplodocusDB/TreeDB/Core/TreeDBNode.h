@@ -52,7 +52,9 @@ public:
     void children(std::vector<TreeDBNode>& children, Ishiko::Error& error);
     TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode previousSibling();
+    TreeDBNode previousSibling(const TreeDBKey& key);
     TreeDBNode nextSibling();
+    TreeDBNode nextSibling(const TreeDBKey& key);
     TreeDBNode insert(const TreeDBKey& key, size_t index);
     TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child);
     TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child);

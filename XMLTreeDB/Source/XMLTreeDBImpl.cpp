@@ -62,7 +62,7 @@ void XMLTreeDBImpl::commitNode(XMLTreeDBNodeImpl& node, Ishiko::Error& error)
 {
     node.updateValue();
     std::ofstream file(m_path.string());
-    m_document.save(file);
+    m_document.save(file, "  ");
 }
 
 }
