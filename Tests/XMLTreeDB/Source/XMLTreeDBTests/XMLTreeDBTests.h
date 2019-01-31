@@ -38,6 +38,11 @@ private:
     static Ishiko::TestFramework::TestResult::EOutcome OpenTest3(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome OpenTest4(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome OpenTest5(Ishiko::TestFramework::Test& test);
+    static Ishiko::TestFramework::TestResult::EOutcome ChildrenTest1(Ishiko::TestFramework::Test& test);
+    static Ishiko::TestFramework::TestResult::EOutcome ChildrenTest2(Ishiko::TestFramework::Test& test);
+    static Ishiko::TestFramework::TestResult::EOutcome NextSiblingTest1(Ishiko::TestFramework::Test& test);
+    static Ishiko::TestFramework::TestResult::EOutcome NextSiblingTest2(Ishiko::TestFramework::Test& test);
+    static Ishiko::TestFramework::TestResult::EOutcome NextSiblingTest3(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome InsertTest1(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest1(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest2(Ishiko::TestFramework::FileComparisonTest& test);
@@ -45,6 +50,9 @@ private:
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest4(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest5(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest6(Ishiko::TestFramework::FileComparisonTest& test);
+    static Ishiko::TestFramework::TestResult::EOutcome SetTest1(Ishiko::TestFramework::FileComparisonTest& test);
+    static Ishiko::TestFramework::TestResult::EOutcome SetTest2(Ishiko::TestFramework::FileComparisonTest& test);
 };
 
 #endif
+

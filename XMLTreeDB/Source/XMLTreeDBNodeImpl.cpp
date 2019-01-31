@@ -149,10 +149,19 @@ TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key)
 
 TreeDBNode XMLTreeDBNodeImpl::set(const TreeDBKey& key)
 {
-    // TODO
-    pugi::xml_node newNode = m_node.append_child(key.value().c_str());
-    m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, newNode));
-    return TreeDBNode(m_children.back());
+    pugi::xml_node existingNode = m_node.child(key.value().c_str());
+    if (existingNode)
+    {
+        // TODO : we need to load the children else we are going to have the same
+        // node represented by different XMLTreeDBNodeImpl instance
+        return TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, existingNode));
+    }
+    else
+    {
+        pugi::xml_node newNode = m_node.append_child(key.value().c_str());
+        m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, newNode));
+        return TreeDBNode(m_children.back());
+    }
 }
 
 bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
