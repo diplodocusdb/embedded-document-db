@@ -27,7 +27,7 @@ namespace DiplodocusDB
 {
 
 XMLTreeDBNodeImpl::XMLTreeDBNodeImpl(std::shared_ptr<XMLTreeDBImpl> db, pugi::xml_node node)
-    : m_db(db), m_node(node)
+    : TreeDBNodeImpl(node.name()), m_db(db), m_node(node)
 {
 }
 

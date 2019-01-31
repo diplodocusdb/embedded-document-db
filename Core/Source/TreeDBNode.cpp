@@ -49,6 +49,11 @@ bool TreeDBNode::operator !() const
     return !m_impl;
 }
 
+const TreeDBKey& TreeDBNode::key() const
+{
+    return m_impl->key();
+}
+
 const TreeDBValue& TreeDBNode::value() const
 {
     return m_impl->value();

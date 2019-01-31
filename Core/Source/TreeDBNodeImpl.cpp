@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -25,12 +25,18 @@
 namespace DiplodocusDB
 {
 
-TreeDBNodeImpl::TreeDBNodeImpl()
+TreeDBNodeImpl::TreeDBNodeImpl(const TreeDBKey& key)
+    : m_key(key)
 {
 }
 
 TreeDBNodeImpl::~TreeDBNodeImpl()
 {
+}
+
+const TreeDBKey& TreeDBNodeImpl::key() const
+{
+    return m_key;
 }
 
 const TreeDBValue& TreeDBNodeImpl::value() const

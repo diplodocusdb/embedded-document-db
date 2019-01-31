@@ -35,9 +35,10 @@ namespace DiplodocusDB
 class TreeDBNodeImpl
 {
 public:
-    TreeDBNodeImpl();
+    TreeDBNodeImpl(const TreeDBKey& key);
     virtual ~TreeDBNodeImpl();
 
+    const TreeDBKey& key() const;
     const TreeDBValue& value() const;
     TreeDBValue& value();
 
@@ -62,6 +63,7 @@ private:
     TreeDBNodeImpl& operator =(const TreeDBNodeImpl& other) = delete;
 
 private:
+    TreeDBKey m_key;
     TreeDBValue m_value;
 };
 

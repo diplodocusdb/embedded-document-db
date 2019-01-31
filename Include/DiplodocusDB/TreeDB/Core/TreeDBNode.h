@@ -44,6 +44,7 @@ public:
     explicit operator bool() const;
     bool operator !() const;
 
+    const TreeDBKey& key() const;
     const TreeDBValue& value() const;
     TreeDBValue& value();
 
