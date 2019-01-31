@@ -41,6 +41,9 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("open test 4", OpenTest4, xmlTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 5", OpenTest5, xmlTreeDBTestSequence);
 
+    new HeapAllocationErrorsTest("children test 1", ChildrenTest1, xmlTreeDBTestSequence);
+    new HeapAllocationErrorsTest("children test 2", ChildrenTest2, xmlTreeDBTestSequence);
+
     new FileComparisonTest("insert test 1", InsertTest1, xmlTreeDBTestSequence);
 
     new FileComparisonTest("append test 1", AppendTest1, xmlTreeDBTestSequence);
@@ -210,6 +213,54 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest5(Test& test)
                     result = TestResult::ePassed;
                 }
             }
+        }
+    }
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::ChildrenTest1(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+
+    DiplodocusDB::XMLTreeDB db;
+
+    Ishiko::Error error;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        Ishiko::Error error;
+        std::vector<DiplodocusDB::TreeDBNode> children;
+        db.root().children(children, error);
+        if (!error && children.empty())
+        {
+            result = TestResult::ePassed;
+        }
+    }
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::ChildrenTest2(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_ChildrenTest2.xml");
+
+    DiplodocusDB::XMLTreeDB db;
+
+    Ishiko::Error error;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        Ishiko::Error error;
+        std::vector<DiplodocusDB::TreeDBNode> children;
+        db.root().children(children, error);
+        if (!error && (children.size() == 1))
+        {
+            result = TestResult::ePassed;
         }
     }
 
