@@ -74,52 +74,47 @@ TreeDBNode TreeDBNode::parent(Ishiko::Error& error)
     return m_impl->parent(error);
 }
 
-void TreeDBNode::children(std::vector<TreeDBNode>& children,
-                          Ishiko::Error& error)
+void TreeDBNode::children(std::vector<TreeDBNode>& children, Ishiko::Error& error)
 {
     m_impl->children(children, error);
 }
 
-TreeDBNode TreeDBNode::child(const TreeDBKey& key,
-                             Ishiko::Error& error)
+TreeDBNode TreeDBNode::child(const TreeDBKey& key, Ishiko::Error& error)
 {
     return m_impl->child(key, error);
 }
 
-TreeDBNode TreeDBNode::previousSibling()
+TreeDBNode TreeDBNode::previousSibling(Ishiko::Error& error)
 {
-    return m_impl->previousSibling();
+    return m_impl->previousSibling(error);
 }
 
-TreeDBNode TreeDBNode::previousSibling(const TreeDBKey& key)
+TreeDBNode TreeDBNode::previousSibling(const TreeDBKey& key, Ishiko::Error& error)
 {
-    return m_impl->previousSibling(key);
+    return m_impl->previousSibling(key, error);
 }
 
-TreeDBNode TreeDBNode::nextSibling()
+TreeDBNode TreeDBNode::nextSibling(Ishiko::Error& error)
 {
-    return m_impl->nextSibling();
+    return m_impl->nextSibling(error);
 }
 
-TreeDBNode TreeDBNode::nextSibling(const TreeDBKey& key)
+TreeDBNode TreeDBNode::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
 {
-    return m_impl->nextSibling(key);
+    return m_impl->nextSibling(key, error);
 }
 
-TreeDBNode TreeDBNode::insert(const TreeDBKey& key,
-                              size_t index)
+TreeDBNode TreeDBNode::insert(const TreeDBKey& key, size_t index)
 {
     return m_impl->insert(key, index);
 }
 
-TreeDBNode TreeDBNode::insertBefore(const TreeDBKey& key,
-                                    TreeDBNode& child)
+TreeDBNode TreeDBNode::insertBefore(const TreeDBKey& key, TreeDBNode& child)
 {
     return m_impl->insertBefore(key, child);
 }
 
-TreeDBNode TreeDBNode::insertAfter(const TreeDBKey& key,
-                                   TreeDBNode& child)
+TreeDBNode TreeDBNode::insertAfter(const TreeDBKey& key, TreeDBNode& child)
 {
     return m_impl->insertAfter(key, child);
 }
@@ -134,8 +129,7 @@ TreeDBNode TreeDBNode::set(const TreeDBKey& key)
     return m_impl->set(key);
 }
 
-bool TreeDBNode::remove(const TreeDBKey& key,
-                        Ishiko::Error& error)
+bool TreeDBNode::remove(const TreeDBKey& key, Ishiko::Error& error)
 {
     return m_impl->remove(key, error);
 }
