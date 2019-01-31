@@ -41,10 +41,10 @@ public:
     TreeDBNode parent(Ishiko::Error& error) override;
     void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
     TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error) override;
-    TreeDBNode previousSibling() override;
-    TreeDBNode previousSibling(const TreeDBKey& key) override;
-    TreeDBNode nextSibling() override;
-    TreeDBNode nextSibling(const TreeDBKey& key) override;
+    TreeDBNode previousSibling(Ishiko::Error& error) override;
+    TreeDBNode previousSibling(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode nextSibling(Ishiko::Error& error) override;
+    TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error) override;
     TreeDBNode insert(const TreeDBKey& key, size_t index) override;
     TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child) override;
     TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child) override;
@@ -54,6 +54,9 @@ public:
     void commit(Ishiko::Error& error) override;
 
     void updateValue();
+
+private:
+    void loadChildren(Ishiko::Error& error);
 
 private:
     std::shared_ptr<XMLTreeDBImpl> m_db;
