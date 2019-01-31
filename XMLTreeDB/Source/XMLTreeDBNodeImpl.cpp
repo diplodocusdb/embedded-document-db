@@ -107,6 +107,11 @@ TreeDBNode XMLTreeDBNodeImpl::previousSibling(const TreeDBKey& key)
 TreeDBNode XMLTreeDBNodeImpl::nextSibling()
 {
     TreeDBNode result;
+    pugi::xml_node sibling = m_node.next_sibling();
+    if (sibling)
+    {
+        result = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, sibling));
+    }
     return result;
 }
 
