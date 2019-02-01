@@ -31,10 +31,10 @@ namespace DiplodocusDB
 
 class XMLTreeDBImpl;
 
-class XMLTreeDBNodeImpl : public TreeDBNodeImpl
+class XMLTreeDBNodeImpl : public TreeDBNodeImpl, public std::enable_shared_from_this<XMLTreeDBNodeImpl>
 {
 public:
-    XMLTreeDBNodeImpl(std::shared_ptr<XMLTreeDBImpl> db, pugi::xml_node node);
+    XMLTreeDBNodeImpl(std::shared_ptr<XMLTreeDBImpl> db, XMLTreeDBNodeImpl* parent, pugi::xml_node node);
     ~XMLTreeDBNodeImpl() override;
 
     bool isRoot() const override;
@@ -60,6 +60,7 @@ private:
 
 private:
     std::shared_ptr<XMLTreeDBImpl> m_db;
+    XMLTreeDBNodeImpl* m_parent;
     pugi::xml_node m_node;
     std::vector<std::shared_ptr<XMLTreeDBNodeImpl>> m_children;
 };

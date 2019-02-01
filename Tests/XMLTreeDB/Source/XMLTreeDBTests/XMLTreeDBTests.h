@@ -38,6 +38,8 @@ private:
     static Ishiko::TestFramework::TestResult::EOutcome OpenTest3(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome OpenTest4(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome OpenTest5(Ishiko::TestFramework::Test& test);
+    static Ishiko::TestFramework::TestResult::EOutcome ParentTest1(Ishiko::TestFramework::Test& test);
+    static Ishiko::TestFramework::TestResult::EOutcome ParentTest2(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome ChildrenTest1(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome ChildrenTest2(Ishiko::TestFramework::Test& test);
     static Ishiko::TestFramework::TestResult::EOutcome NextSiblingTest1(Ishiko::TestFramework::Test& test);

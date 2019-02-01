@@ -35,7 +35,7 @@ void XMLTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& e
     pugi::xml_node rootNode = m_document.append_child(rootElementName);
     if (rootNode)
     {
-        m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(shared_from_this(), rootNode));
+        m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(shared_from_this(), nullptr, rootNode));
 
         std::ofstream file(m_path.string());
         m_document.save(file);
@@ -46,7 +46,7 @@ void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& err
 {
     m_path = path;
     m_document.load_file(m_path.string().c_str());
-    m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(shared_from_this(), m_document.child(rootElementName)));
+    m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(shared_from_this(), nullptr, m_document.child(rootElementName)));
 }
 
 void XMLTreeDBImpl::close()

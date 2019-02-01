@@ -41,6 +41,9 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("open test 4", OpenTest4, xmlTreeDBTestSequence);
     new HeapAllocationErrorsTest("open test 5", OpenTest5, xmlTreeDBTestSequence);
 
+    new HeapAllocationErrorsTest("parent test 1", ParentTest1, xmlTreeDBTestSequence);
+    new HeapAllocationErrorsTest("parent test 2", ParentTest2, xmlTreeDBTestSequence);
+
     new HeapAllocationErrorsTest("children test 1", ChildrenTest1, xmlTreeDBTestSequence);
     new HeapAllocationErrorsTest("children test 2", ChildrenTest2, xmlTreeDBTestSequence);
 
@@ -226,6 +229,54 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest5(Test& test)
     return result;
 }
 
+TestResult::EOutcome XMLTreeDBTests::ParentTest1(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+
+    DiplodocusDB::XMLTreeDB db;
+
+    Ishiko::Error error;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode parent = db.root().parent(error);
+        if (!error && !parent)
+        {
+            result = TestResult::ePassed;
+        }
+    }
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::ParentTest2(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_ParentTest2.xml");
+
+    DiplodocusDB::XMLTreeDB db;
+
+    Ishiko::Error error;
+    db.open(inputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode childNode = db.root().child("key1", error);
+        if (!error && childNode)
+        {
+            DiplodocusDB::TreeDBNode parentNode = childNode.parent(error);
+            if (parentNode == db.root())
+            {
+                result = TestResult::ePassed;
+            }
+        }
+    }
+
+    return result;
+}
+
 TestResult::EOutcome XMLTreeDBTests::ChildrenTest1(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
@@ -284,7 +335,7 @@ TestResult::EOutcome XMLTreeDBTests::NextSiblingTest1(Test& test)
     db.open(inputPath, error);
     if (!error)
     {
-        DiplodocusDB::TreeDBNode nextSibling = db.root().nextSibling();
+        DiplodocusDB::TreeDBNode nextSibling = db.root().nextSibling(error);
         if (!error && !nextSibling)
         {
             result = TestResult::ePassed;
@@ -309,7 +360,7 @@ TestResult::EOutcome XMLTreeDBTests::NextSiblingTest2(Test& test)
         DiplodocusDB::TreeDBNode key1Node = db.root().child("key1", error);
         if (!error && key1Node)
         {
-            DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling();
+            DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling(error);
             if (!nextSibling)
             {
                 result = TestResult::ePassed;
@@ -335,10 +386,10 @@ TestResult::EOutcome XMLTreeDBTests::NextSiblingTest3(Test& test)
         DiplodocusDB::TreeDBNode key1Node = db.root().child("key1", error);
         if (!error && key1Node)
         {
-            DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling();
+            DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling(error);
             if (nextSibling && (nextSibling.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL))
             {
-                nextSibling = nextSibling.nextSibling();
+                nextSibling = nextSibling.nextSibling(error);
                 if (!nextSibling)
                 {
                     result = TestResult::ePassed;

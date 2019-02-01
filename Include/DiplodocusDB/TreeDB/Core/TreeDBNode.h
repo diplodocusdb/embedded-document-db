@@ -43,6 +43,8 @@ public:
 
     explicit operator bool() const;
     bool operator !() const;
+    bool operator ==(const TreeDBNode& other) const;
+    bool operator !=(const TreeDBNode& other) const;
 
     const TreeDBKey& key() const;
     const TreeDBValue& value() const;

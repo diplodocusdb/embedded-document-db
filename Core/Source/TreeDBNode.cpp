@@ -49,6 +49,16 @@ bool TreeDBNode::operator !() const
     return !m_impl;
 }
 
+bool TreeDBNode::operator ==(const TreeDBNode& other) const
+{
+    return (m_impl == other.m_impl);
+}
+
+bool TreeDBNode::operator !=(const TreeDBNode& other) const
+{
+    return (m_impl != other.m_impl);
+}
+
 const TreeDBKey& TreeDBNode::key() const
 {
     return m_impl->key();
