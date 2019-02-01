@@ -62,6 +62,8 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
 
     new FileComparisonTest("set test 1", SetTest1, xmlTreeDBTestSequence);
     new FileComparisonTest("set test 2", SetTest2, xmlTreeDBTestSequence);
+
+    new FileComparisonTest("removeAll test 1", RemoveAllTest1, xmlTreeDBTestSequence);
 }
 
 TestResult::EOutcome XMLTreeDBTests::CreationTest1()
@@ -634,7 +636,7 @@ TestResult::EOutcome XMLTreeDBTests::SetTest1(FileComparisonTest& test)
     db.create(outputPath, error);
     if (!error)
     {
-        DiplodocusDB::TreeDBNode node = db.root().set("key1");
+        DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
         node.commit(error);
         if (!error)
         {
@@ -662,11 +664,11 @@ TestResult::EOutcome XMLTreeDBTests::SetTest2(FileComparisonTest& test)
     db.create(outputPath, error);
     if (!error)
     {
-        DiplodocusDB::TreeDBNode node = db.root().set("key1");
+        DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
         node.commit(error);
         if (!error)
         {
-            DiplodocusDB::TreeDBNode node = db.root().set("key1");
+            DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
             node.commit(error);
             if (!error)
             {
@@ -679,6 +681,36 @@ TestResult::EOutcome XMLTreeDBTests::SetTest2(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetTest2.xml");
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::RemoveAllTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
+
+    boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(outputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode node = db.root();
+        node.removeAll(error);
+        node.commit(error);
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+    }
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
 
     return result;
 }

@@ -49,8 +49,9 @@ public:
     TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child) override;
     TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child) override;
     TreeDBNode append(const TreeDBKey& key) override;
-    TreeDBNode set(const TreeDBKey& key) override;
+    TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) override;
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
+    void removeAll(Ishiko::Error& error) override;
     void commit(Ishiko::Error& error) override;
 
     void updateValue();

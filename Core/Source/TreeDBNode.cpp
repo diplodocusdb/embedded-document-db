@@ -134,14 +134,19 @@ TreeDBNode TreeDBNode::append(const TreeDBKey& key)
     return m_impl->append(key);
 }
 
-TreeDBNode TreeDBNode::set(const TreeDBKey& key)
+TreeDBNode TreeDBNode::set(const TreeDBKey& key, Ishiko::Error& error)
 {
-    return m_impl->set(key);
+    return m_impl->set(key, error);
 }
 
 bool TreeDBNode::remove(const TreeDBKey& key, Ishiko::Error& error)
 {
     return m_impl->remove(key, error);
+}
+
+void TreeDBNode::removeAll(Ishiko::Error& error)
+{
+    m_impl->removeAll(error);
 }
 
 void TreeDBNode::commit(Ishiko::Error& error)

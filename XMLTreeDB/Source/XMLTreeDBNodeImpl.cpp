@@ -91,11 +91,23 @@ TreeDBNode XMLTreeDBNodeImpl::previousSibling(const TreeDBKey& key, Ishiko::Erro
 TreeDBNode XMLTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
 {
     TreeDBNode result;
-    pugi::xml_node sibling = m_node.next_sibling();
-    if (sibling)
+
+    if (m_parent)
     {
-        result = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, m_parent, sibling));
+        for (size_t i = 0; i < m_parent->m_children.size(); ++i)
+        {
+            if (m_parent->m_children[i].get() == this)
+            {
+                ++i;
+                if (i < m_parent->m_children.size())
+                {
+                    result = TreeDBNode(m_parent->m_children[i]);
+                }
+                break;
+            }
+        }
     }
+
     return result;
 }
 
@@ -131,26 +143,42 @@ TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key)
     return TreeDBNode(m_children.back());
 }
 
-TreeDBNode XMLTreeDBNodeImpl::set(const TreeDBKey& key)
+TreeDBNode XMLTreeDBNodeImpl::set(const TreeDBKey& key, Ishiko::Error& error)
 {
-    pugi::xml_node existingNode = m_node.child(key.value().c_str());
-    if (existingNode)
+    TreeDBNode result;
+
+    loadChildren(error);
+    for (size_t i = 0; i < m_children.size(); ++i)
     {
-        // TODO : we need to load the children else we are going to have the same
-        // node represented by different XMLTreeDBNodeImpl instance
-        return TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(m_db, this, existingNode));
+        if (m_children[i]->key() == key)
+        {
+            result = TreeDBNode(m_children[i]);
+            break;
+        }
     }
-    else
+    if (!result)
     {
         pugi::xml_node newNode = m_node.append_child(key.value().c_str());
         m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, this, newNode));
-        return TreeDBNode(m_children.back());
+        result = TreeDBNode(m_children.back());
     }
+
+    return result;
 }
 
 bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
 {
     return false;
+}
+
+void XMLTreeDBNodeImpl::removeAll(Ishiko::Error& error)
+{
+    loadChildren(error);
+    for (std::shared_ptr<XMLTreeDBNodeImpl>& child : m_children)
+    {
+        m_node.remove_child(child->m_node);
+    }
+    m_children.clear();
 }
 
 void XMLTreeDBNodeImpl::commit(Ishiko::Error& error)

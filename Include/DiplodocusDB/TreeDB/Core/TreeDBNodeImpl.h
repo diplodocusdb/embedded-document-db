@@ -54,8 +54,9 @@ public:
     virtual TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child) = 0;
     virtual TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child) = 0;
     virtual TreeDBNode append(const TreeDBKey& key) = 0;
-    virtual TreeDBNode set(const TreeDBKey& key) = 0;
+    virtual TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual bool remove(const TreeDBKey& key, Ishiko::Error& error) = 0;
+    virtual void removeAll(Ishiko::Error& error) = 0;
     virtual void commit(Ishiko::Error& error) = 0;
 
 private:
