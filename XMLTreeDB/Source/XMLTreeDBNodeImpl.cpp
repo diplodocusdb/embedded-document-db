@@ -191,15 +191,11 @@ void XMLTreeDBNodeImpl::updateValue()
     const TreeDBValue& v = value();
     if (v.type() == EPrimitiveDataType::eNULL)
     {
-        pugi::xml_attribute attributeNode = m_node.attribute("data-type");
-        if (attributeNode)
-        {
-            attributeNode.set_value("null");
-        }
-        else
-        {
-            m_node.append_attribute("data-type").set_value("null");
-        }
+        // The data type of a node is null by default. If we didn't do that
+        // then all the intermediate nodes without any value would have a
+        // data-type attribute which would be cumbersome to write manually.
+
+        m_node.remove_attribute("data-type");
     }
     else if (v.type() != EPrimitiveDataType::eNULL)
     {
@@ -218,7 +214,7 @@ void XMLTreeDBNodeImpl::updateValue()
         }
         else
         {
-            pugi::xml_node valueNode = m_node.prepend_child("value");
+            pugi::xml_node valueNode = m_node.prepend_child("data");
             valueNode.append_child(pugi::node_pcdata).set_value(v.asString().c_str());
         }
     }
