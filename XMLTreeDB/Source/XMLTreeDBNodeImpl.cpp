@@ -212,7 +212,15 @@ void XMLTreeDBNodeImpl::updateValue()
         {
             m_node.append_attribute("data-type").set_value("utf8string");
         }
-        m_node.text().set(v.asString().c_str());
+        if (m_children.empty())
+        {
+            m_node.prepend_child(pugi::node_pcdata).set_value(v.asString().c_str());
+        }
+        else
+        {
+            pugi::xml_node valueNode = m_node.prepend_child("value");
+            valueNode.append_child(pugi::node_pcdata).set_value(v.asString().c_str());
+        }
     }
     for (size_t i = 0; i < m_children.size(); ++i)
     {

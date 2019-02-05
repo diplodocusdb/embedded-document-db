@@ -59,6 +59,7 @@ void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
     new FileComparisonTest("append test 4", AppendTest4, xmlTreeDBTestSequence);
     new FileComparisonTest("append test 5", AppendTest5, xmlTreeDBTestSequence);
     new FileComparisonTest("append test 6", AppendTest6, xmlTreeDBTestSequence);
+    new FileComparisonTest("append test 7", AppendTest7, xmlTreeDBTestSequence);
 
     new FileComparisonTest("set test 1", SetTest1, xmlTreeDBTestSequence);
     new FileComparisonTest("set test 2", SetTest2, xmlTreeDBTestSequence);
@@ -620,6 +621,36 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest6(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest6.xml");
+
+    return result;
+}
+
+TestResult::EOutcome XMLTreeDBTests::AppendTest7(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendTest7.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.create(outputPath, error);
+    if (!error)
+    {
+        DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
+        node1.value().setString("value1");
+        DiplodocusDB::TreeDBNode node2 = node1.append("key2");
+        db.root().commit(error);
+        if (!error)
+        {
+            result = TestResult::ePassed;
+        }
+
+        db.close();
+    }
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest7.xml");
 
     return result;
 }

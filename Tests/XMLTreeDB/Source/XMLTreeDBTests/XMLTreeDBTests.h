@@ -52,10 +52,10 @@ private:
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest4(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest5(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome AppendTest6(Ishiko::TestFramework::FileComparisonTest& test);
+    static Ishiko::TestFramework::TestResult::EOutcome AppendTest7(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome SetTest1(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome SetTest2(Ishiko::TestFramework::FileComparisonTest& test);
     static Ishiko::TestFramework::TestResult::EOutcome RemoveAllTest1(Ishiko::TestFramework::FileComparisonTest& test);
 };
 
 #endif
-

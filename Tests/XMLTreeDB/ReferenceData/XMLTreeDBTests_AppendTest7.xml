@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<diplodocusdb-xmltreedb data-type="null">
+  <key1 data-type="utf8string">
+    <value>value1</value>
+    <key2 data-type="null" />
+  </key1>
+</diplodocusdb-xmltreedb>
