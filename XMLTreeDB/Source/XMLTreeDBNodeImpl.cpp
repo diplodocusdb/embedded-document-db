@@ -210,7 +210,12 @@ void XMLTreeDBNodeImpl::updateValue()
         }
         if (m_children.empty())
         {
-            m_node.prepend_child(pugi::node_pcdata).set_value(v.asString().c_str());
+            pugi::xml_node pcdataNode = m_node.first_child();
+            if (!pcdataNode || (pcdataNode.type() != pugi::node_pcdata))
+            {
+                pcdataNode = m_node.prepend_child(pugi::node_pcdata);
+            }
+            pcdataNode.set_value(v.asString().c_str());
         }
         else
         {
