@@ -251,12 +251,13 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
                 }
                 else
                 {
-                    error = -1;
+                    error.fail(-1, "Unknown data type encountered while loading child node", __FILE__, __LINE__);
                 }
             }
             else
             {
-                error = -1;
+                // TODO : I have to changed this I think as having no data-type attribute is now equivalent to null
+                error.fail(-1);
             }
             childNode = childNode.next_sibling();
         }
