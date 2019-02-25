@@ -3,11 +3,13 @@
 *.opensdf
 *.sdf
 *.suo
-*.vc.db
+*.VC.db
 *.vcxproj.user
-.vs
+.vs/
 Debug/
 Release/
-Lib/
+/Lib/*
+!/Lib/README.md
 Tests/EmbeddedTreeDB/TestOutput
+
 Tests/XMLTreeDB/TestOutput
