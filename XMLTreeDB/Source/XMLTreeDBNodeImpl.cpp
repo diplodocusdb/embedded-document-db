@@ -26,7 +26,7 @@
 namespace DiplodocusDB
 {
 
-XMLTreeDBNodeImpl::XMLTreeDBNodeImpl(std::shared_ptr<XMLTreeDBImpl> db, XMLTreeDBNodeImpl* parent, pugi::xml_node node)
+XMLTreeDBNodeImpl::XMLTreeDBNodeImpl(std::weak_ptr<XMLTreeDBImpl> db, XMLTreeDBNodeImpl* parent, pugi::xml_node node)
     : TreeDBNodeImpl(node.name()), m_db(db), m_parent(parent), m_node(node)
 {
 }
@@ -183,7 +183,11 @@ void XMLTreeDBNodeImpl::removeAll(Ishiko::Error& error)
 
 void XMLTreeDBNodeImpl::commit(Ishiko::Error& error)
 {
-    m_db->commitNode(*this, error);
+    std::shared_ptr<XMLTreeDBImpl> db = m_db.lock();
+    if (db)
+    {
+        db->commitNode(*this, error);
+    }
 }
 
 void XMLTreeDBNodeImpl::updateValue()
