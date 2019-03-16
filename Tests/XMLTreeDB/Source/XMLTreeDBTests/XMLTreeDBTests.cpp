@@ -34,6 +34,7 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<FileComparisonTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
+    append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
     append<HeapAllocationErrorsTest>("open test 4", OpenTest4);
     append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
     append<HeapAllocationErrorsTest>("open test 6", OpenTest6);
@@ -124,34 +125,45 @@ void XMLTreeDBTests::OpenTest2(Test& test)
     ISHTF_PASS();
 }
 
+void XMLTreeDBTests::OpenTest3(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(node.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHTF_PASS();
+}
+
 void XMLTreeDBTests::OpenTest4(Test& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
     Ishiko::Error error(0);
     db.open(inputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node1 = db.root().child("key1", error);
-        if (!error)
-        {
-            DiplodocusDB::TreeDBNode node2 = db.root().child("key2", error);
-            if (!error)
-            {
-                if ((node1.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL) &&
-                    (node2.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL))
-                {
-                    result = TestResult::ePassed;
-                }
-            }
-        }
-    }
 
-    return result;
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode node1 = db.root().child("key1", error);
+
+    ISHTF_FAIL_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode node2 = db.root().child("key2", error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(node1.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHTF_FAIL_UNLESS(node2.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::OpenTest5(Test& test)
