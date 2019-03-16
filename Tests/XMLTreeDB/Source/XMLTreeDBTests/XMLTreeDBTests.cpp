@@ -250,182 +250,158 @@ void XMLTreeDBTests::ParentTest2(Test& test)
 
 void XMLTreeDBTests::ChildrenTest1(Test& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
     Ishiko::Error error(0);
     db.open(inputPath, error);
-    if (!error)
-    {
-        std::vector<DiplodocusDB::TreeDBNode> children;
-        db.root().children(children, error);
-        if (!error && children.empty())
-        {
-            result = TestResult::ePassed;
-        }
-    }
 
-    return result;
+    ISHTF_ABORT_IF((bool)error);
+    
+    std::vector<DiplodocusDB::TreeDBNode> children;
+    db.root().children(children, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(children.empty());
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::ChildrenTest2(Test& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_ChildrenTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
     Ishiko::Error error(0);
     db.open(inputPath, error);
-    if (!error)
-    {
-        std::vector<DiplodocusDB::TreeDBNode> children;
-        db.root().children(children, error);
-        if (!error && (children.size() == 1))
-        {
-            result = TestResult::ePassed;
-        }
-    }
 
-    return result;
+    ISHTF_ABORT_IF((bool)error);
+    
+    std::vector<DiplodocusDB::TreeDBNode> children;
+    db.root().children(children, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(children.size() == 1);
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::NextSiblingTest1(Test& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
     Ishiko::Error error(0);
     db.open(inputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode nextSibling = db.root().nextSibling(error);
-        if (!error && !nextSibling)
-        {
-            result = TestResult::ePassed;
-        }
-    }
 
-    return result;
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode nextSibling = db.root().nextSibling(error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_IF((bool)nextSibling);
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::NextSiblingTest2(Test& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_NextSiblingTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
     Ishiko::Error error(0);
     db.open(inputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode key1Node = db.root().child("key1", error);
-        if (!error && key1Node)
-        {
-            DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling(error);
-            if (!nextSibling)
-            {
-                result = TestResult::ePassed;
-            }
-        }
-    }
 
-    return result;
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode key1Node = db.root().child("key1", error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS((bool)key1Node);
+
+    DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling(error);
+    
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_IF((bool)nextSibling);
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::NextSiblingTest3(Test& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_NextSiblingTest3.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
     Ishiko::Error error(0);
     db.open(inputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode key1Node = db.root().child("key1", error);
-        if (!error && key1Node)
-        {
-            DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling(error);
-            if (nextSibling && (nextSibling.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL))
-            {
-                nextSibling = nextSibling.nextSibling(error);
-                if (!nextSibling)
-                {
-                    result = TestResult::ePassed;
-                }
-            }
-        }
-    }
 
-    return result;
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode key1Node = db.root().child("key1", error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(key1Node);
+
+    DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling(error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(nextSibling);
+    ISHTF_FAIL_UNLESS(nextSibling.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+    
+    nextSibling = nextSibling.nextSibling(error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_IF((bool)nextSibling);
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_InsertTest1.xml");
 
     Ishiko::Error error(0);
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node = db.root().insert("key1", 0);
-        node.commit(error);
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
 
-        db.close();
-    }
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::TreeDBNode node = db.root().insert("key1", 0);
+    node.commit(error);
+    
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_InsertTest1.xml");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::AppendTest1(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendTest1.xml");
 
     Ishiko::Error error(0);
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node = db.root().append("key1");
-        node.commit(error);
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
 
-        db.close();
-    }
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode node = db.root().append("key1");
+    node.commit(error);
+        
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest1.xml");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::AppendTest2(FileComparisonTest& test)
