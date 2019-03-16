@@ -34,9 +34,9 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<FileComparisonTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
-    append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
     append<HeapAllocationErrorsTest>("open test 4", OpenTest4);
     append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
+    append<HeapAllocationErrorsTest>("open test 6", OpenTest6);
     append<HeapAllocationErrorsTest>("parent test 1", ParentTest1);
     append<HeapAllocationErrorsTest>("parent test 2", ParentTest2);
     append<HeapAllocationErrorsTest>("children test 1", ChildrenTest1);
@@ -85,61 +85,50 @@ void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
 
 void XMLTreeDBTests::OpenTest1(Test& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
     Ishiko::Error error(0);
 
     DiplodocusDB::XMLTreeDB db;
     db.open(inputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode& node = db.root();
-        if (node.isRoot())
-        {
-            std::vector<DiplodocusDB::TreeDBNode> children;
-            node.children(children, error);
-            if (!error && (children.size() == 0))
-            {
-                result = TestResult::ePassed;
-            }
-        }
-    }
 
-    return result;
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode& node = db.root();
+
+    ISHTF_FAIL_UNLESS(node.isRoot());
+
+    std::vector<DiplodocusDB::TreeDBNode> children;
+    node.children(children, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(children.size() == 0);
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::OpenTest2(Test& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest2.xml");
 
     Ishiko::Error error(0);
 
     DiplodocusDB::XMLTreeDB db;
     db.open(inputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
-        if (!error)
-        {
-            if (node.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL)
-            {
-                result = TestResult::ePassed;
-            }
-        }
-    }
+
+    ISHTF_ABORT_IF((bool)error);
     
-    return result;
+    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(node.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHTF_PASS();
 }
 
-void XMLTreeDBTests::OpenTest3(Test& test)
+void XMLTreeDBTests::OpenTest4(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -165,11 +154,11 @@ void XMLTreeDBTests::OpenTest3(Test& test)
     return result;
 }
 
-void XMLTreeDBTests::OpenTest4(Test& test)
+void XMLTreeDBTests::OpenTest5(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest5.xml");
 
     Ishiko::Error error(0);
 
@@ -190,11 +179,11 @@ void XMLTreeDBTests::OpenTest4(Test& test)
     return result;
 }
 
-void XMLTreeDBTests::OpenTest5(Test& test)
+void XMLTreeDBTests::OpenTest6(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest5.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest6.xml");
 
     DiplodocusDB::XMLTreeDB db;
 

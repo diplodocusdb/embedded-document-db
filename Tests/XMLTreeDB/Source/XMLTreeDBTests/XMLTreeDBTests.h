@@ -35,9 +35,9 @@ private:
     static void CreateTest1(Ishiko::Tests::FileComparisonTest& test);
     static void OpenTest1(Ishiko::Tests::Test& test);
     static void OpenTest2(Ishiko::Tests::Test& test);
-    static void OpenTest3(Ishiko::Tests::Test& test);
     static void OpenTest4(Ishiko::Tests::Test& test);
     static void OpenTest5(Ishiko::Tests::Test& test);
+    static void OpenTest6(Ishiko::Tests::Test& test);
     static void ParentTest1(Ishiko::Tests::Test& test);
     static void ParentTest2(Ishiko::Tests::Test& test);
     static void ChildrenTest1(Ishiko::Tests::Test& test);
