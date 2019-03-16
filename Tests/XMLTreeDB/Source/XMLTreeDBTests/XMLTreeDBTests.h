@@ -25,37 +25,37 @@
 
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-class XMLTreeDBTests
+class XMLTreeDBTests : public Ishiko::Tests::TestSequence
 {
 public:
-    static void AddTests(Ishiko::TestFramework::TestHarness& theTestHarness);
+    XMLTreeDBTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
 
 private:
-    static Ishiko::TestFramework::TestResult::EOutcome CreationTest1();
-    static Ishiko::TestFramework::TestResult::EOutcome CreateTest1(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome OpenTest1(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome OpenTest2(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome OpenTest3(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome OpenTest4(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome OpenTest5(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome ParentTest1(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome ParentTest2(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome ChildrenTest1(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome ChildrenTest2(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome NextSiblingTest1(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome NextSiblingTest2(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome NextSiblingTest3(Ishiko::TestFramework::Test& test);
-    static Ishiko::TestFramework::TestResult::EOutcome InsertTest1(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome AppendTest1(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome AppendTest2(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome AppendTest3(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome AppendTest4(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome AppendTest5(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome AppendTest6(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome AppendTest7(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome SetTest1(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome SetTest2(Ishiko::TestFramework::FileComparisonTest& test);
-    static Ishiko::TestFramework::TestResult::EOutcome RemoveAllTest1(Ishiko::TestFramework::FileComparisonTest& test);
+    static void CreationTest1(Ishiko::Tests::Test& test);
+    static void CreateTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void OpenTest1(Ishiko::Tests::Test& test);
+    static void OpenTest2(Ishiko::Tests::Test& test);
+    static void OpenTest3(Ishiko::Tests::Test& test);
+    static void OpenTest4(Ishiko::Tests::Test& test);
+    static void OpenTest5(Ishiko::Tests::Test& test);
+    static void ParentTest1(Ishiko::Tests::Test& test);
+    static void ParentTest2(Ishiko::Tests::Test& test);
+    static void ChildrenTest1(Ishiko::Tests::Test& test);
+    static void ChildrenTest2(Ishiko::Tests::Test& test);
+    static void NextSiblingTest1(Ishiko::Tests::Test& test);
+    static void NextSiblingTest2(Ishiko::Tests::Test& test);
+    static void NextSiblingTest3(Ishiko::Tests::Test& test);
+    static void InsertTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest3(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest4(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest5(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest6(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest7(Ishiko::Tests::FileComparisonTest& test);
+    static void SetTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void SetTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void RemoveAllTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif

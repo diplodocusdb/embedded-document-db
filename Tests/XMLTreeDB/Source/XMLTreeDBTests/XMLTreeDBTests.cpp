@@ -25,68 +25,65 @@
 #include <boost/filesystem/operations.hpp>
 #include <sstream>
 
-using namespace Ishiko::TestFramework;
+using namespace Ishiko::Tests;
 
-void XMLTreeDBTests::AddTests(TestHarness& theTestHarness)
+XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& environment)
+    : TestSequence(number, "XMLTreeDB tests", environment)
 {
-    TestSequence& testSequence = theTestHarness.appendTestSequence("XMLTreeDB tests");
-
-    testSequence.append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
-    testSequence.append<FileComparisonTest>("create test 1", CreateTest1);
-    testSequence.append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
-    testSequence.append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
-    testSequence.append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
-    testSequence.append<HeapAllocationErrorsTest>("open test 4", OpenTest4);
-    testSequence.append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
-    testSequence.append<HeapAllocationErrorsTest>("parent test 1", ParentTest1);
-    testSequence.append<HeapAllocationErrorsTest>("parent test 2", ParentTest2);
-    testSequence.append<HeapAllocationErrorsTest>("children test 1", ChildrenTest1);
-    testSequence.append<HeapAllocationErrorsTest>("children test 2", ChildrenTest2);
-    testSequence.append<HeapAllocationErrorsTest>("nextSibling test 1", NextSiblingTest1);
-    testSequence.append<HeapAllocationErrorsTest>("nextSibling test 2", NextSiblingTest2);
-    testSequence.append<HeapAllocationErrorsTest>("nextSibling test 3", NextSiblingTest3);
-    testSequence.append<FileComparisonTest>("insert test 1", InsertTest1);
-    testSequence.append<FileComparisonTest>("append test 1", AppendTest1);
-    testSequence.append<FileComparisonTest>("append test 2", AppendTest2);
-    testSequence.append<FileComparisonTest>("append test 3", AppendTest3);
-    testSequence.append<FileComparisonTest>("append test 4", AppendTest4);
-    testSequence.append<FileComparisonTest>("append test 5", AppendTest5);
-    testSequence.append<FileComparisonTest>("append test 6", AppendTest6);
-    testSequence.append<FileComparisonTest>("append test 7", AppendTest7);
-    testSequence.append<FileComparisonTest>("set test 1", SetTest1);
-    testSequence.append<FileComparisonTest>("set test 2", SetTest2);
-    testSequence.append<FileComparisonTest>("removeAll test 1", RemoveAllTest1);
+    append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
+    append<FileComparisonTest>("create test 1", CreateTest1);
+    append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
+    append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
+    append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
+    append<HeapAllocationErrorsTest>("open test 4", OpenTest4);
+    append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
+    append<HeapAllocationErrorsTest>("parent test 1", ParentTest1);
+    append<HeapAllocationErrorsTest>("parent test 2", ParentTest2);
+    append<HeapAllocationErrorsTest>("children test 1", ChildrenTest1);
+    append<HeapAllocationErrorsTest>("children test 2", ChildrenTest2);
+    append<HeapAllocationErrorsTest>("nextSibling test 1", NextSiblingTest1);
+    append<HeapAllocationErrorsTest>("nextSibling test 2", NextSiblingTest2);
+    append<HeapAllocationErrorsTest>("nextSibling test 3", NextSiblingTest3);
+    append<FileComparisonTest>("insert test 1", InsertTest1);
+    append<FileComparisonTest>("append test 1", AppendTest1);
+    append<FileComparisonTest>("append test 2", AppendTest2);
+    append<FileComparisonTest>("append test 3", AppendTest3);
+    append<FileComparisonTest>("append test 4", AppendTest4);
+    append<FileComparisonTest>("append test 5", AppendTest5);
+    append<FileComparisonTest>("append test 6", AppendTest6);
+    append<FileComparisonTest>("append test 7", AppendTest7);
+    append<FileComparisonTest>("set test 1", SetTest1);
+    append<FileComparisonTest>("set test 2", SetTest2);
+    append<FileComparisonTest>("removeAll test 1", RemoveAllTest1);
 }
 
-TestResult::EOutcome XMLTreeDBTests::CreationTest1()
+void XMLTreeDBTests::CreationTest1(Test& test)
 {
     DiplodocusDB::XMLTreeDB db;
-    return TestResult::ePassed;
+
+    ISHTF_PASS();
 }
 
-TestResult::EOutcome XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
+void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_CreateTest1.xml");
 
     Ishiko::Error error(0);
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        result = TestResult::ePassed;
-    }
+
+    ISHTF_FAIL_IF((bool)error);
+    
     db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_CreateTest1.xml");
 
-    return result;
+    ISHTF_PASS();
 }
 
-TestResult::EOutcome XMLTreeDBTests::OpenTest1(Test& test)
+void XMLTreeDBTests::OpenTest1(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -113,7 +110,7 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest1(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::OpenTest2(Test& test)
+void XMLTreeDBTests::OpenTest2(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -138,7 +135,7 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest2(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::OpenTest3(Test& test)
+void XMLTreeDBTests::OpenTest3(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -168,7 +165,7 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest3(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::OpenTest4(Test& test)
+void XMLTreeDBTests::OpenTest4(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -193,7 +190,7 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest4(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::OpenTest5(Test& test)
+void XMLTreeDBTests::OpenTest5(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -223,7 +220,7 @@ TestResult::EOutcome XMLTreeDBTests::OpenTest5(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::ParentTest1(Test& test)
+void XMLTreeDBTests::ParentTest1(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -245,7 +242,7 @@ TestResult::EOutcome XMLTreeDBTests::ParentTest1(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::ParentTest2(Test& test)
+void XMLTreeDBTests::ParentTest2(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -271,7 +268,7 @@ TestResult::EOutcome XMLTreeDBTests::ParentTest2(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::ChildrenTest1(Test& test)
+void XMLTreeDBTests::ChildrenTest1(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -294,7 +291,7 @@ TestResult::EOutcome XMLTreeDBTests::ChildrenTest1(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::ChildrenTest2(Test& test)
+void XMLTreeDBTests::ChildrenTest2(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -317,7 +314,7 @@ TestResult::EOutcome XMLTreeDBTests::ChildrenTest2(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::NextSiblingTest1(Test& test)
+void XMLTreeDBTests::NextSiblingTest1(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -339,7 +336,7 @@ TestResult::EOutcome XMLTreeDBTests::NextSiblingTest1(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::NextSiblingTest2(Test& test)
+void XMLTreeDBTests::NextSiblingTest2(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -365,7 +362,7 @@ TestResult::EOutcome XMLTreeDBTests::NextSiblingTest2(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::NextSiblingTest3(Test& test)
+void XMLTreeDBTests::NextSiblingTest3(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -395,7 +392,7 @@ TestResult::EOutcome XMLTreeDBTests::NextSiblingTest3(Test& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
+void XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -423,7 +420,7 @@ TestResult::EOutcome XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::AppendTest1(FileComparisonTest& test)
+void XMLTreeDBTests::AppendTest1(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -451,7 +448,7 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest1(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::AppendTest2(FileComparisonTest& test)
+void XMLTreeDBTests::AppendTest2(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -484,7 +481,7 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest2(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::AppendTest3(FileComparisonTest& test)
+void XMLTreeDBTests::AppendTest3(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -513,7 +510,7 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest3(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::AppendTest4(FileComparisonTest& test)
+void XMLTreeDBTests::AppendTest4(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -548,7 +545,7 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest4(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::AppendTest5(FileComparisonTest& test)
+void XMLTreeDBTests::AppendTest5(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -585,7 +582,7 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest5(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::AppendTest6(FileComparisonTest& test)
+void XMLTreeDBTests::AppendTest6(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -616,7 +613,7 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest6(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::AppendTest7(FileComparisonTest& test)
+void XMLTreeDBTests::AppendTest7(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -646,7 +643,7 @@ TestResult::EOutcome XMLTreeDBTests::AppendTest7(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::SetTest1(FileComparisonTest& test)
+void XMLTreeDBTests::SetTest1(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -674,7 +671,7 @@ TestResult::EOutcome XMLTreeDBTests::SetTest1(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::SetTest2(FileComparisonTest& test)
+void XMLTreeDBTests::SetTest2(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
@@ -707,7 +704,7 @@ TestResult::EOutcome XMLTreeDBTests::SetTest2(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome XMLTreeDBTests::RemoveAllTest1(FileComparisonTest& test)
+void XMLTreeDBTests::RemoveAllTest1(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
