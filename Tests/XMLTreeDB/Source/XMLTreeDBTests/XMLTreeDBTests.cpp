@@ -553,99 +553,85 @@ void XMLTreeDBTests::AppendTest6(FileComparisonTest& test)
 
 void XMLTreeDBTests::AppendTest7(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendTest7.xml");
 
     Ishiko::Error error(0);
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
-        node1.value().setString("value1");
-        DiplodocusDB::TreeDBNode node2 = node1.append("key2");
-        db.root().commit(error);
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
 
-        db.close();
-    }
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
+    node1.value().setString("value1");
+    DiplodocusDB::TreeDBNode node2 = node1.append("key2");
+    db.root().commit(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendTest7.xml");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::SetTest1(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetTest1.xml");
 
     Ishiko::Error error(0);
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
-        node.commit(error);
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
 
-        db.close();
-    }
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
+    node.commit(error);
+        
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetTest1.xml");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::SetTest2(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetTest2.xml");
 
     Ishiko::Error error(0);
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
-        node.commit(error);
-        if (!error)
-        {
-            DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
-            node.commit(error);
-            if (!error)
-            {
-                result = TestResult::ePassed;
-            }
-        }
 
-        db.close();
-    }
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode node1 = db.root().set("key1", error);
+    node1.commit(error);
+
+    ISHTF_FAIL_IF((bool)error);
+        
+    DiplodocusDB::TreeDBNode node2 = db.root().set("key1", error);
+    node2.commit(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetTest2.xml");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void XMLTreeDBTests::RemoveAllTest1(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
 
@@ -655,19 +641,22 @@ void XMLTreeDBTests::RemoveAllTest1(FileComparisonTest& test)
 
     DiplodocusDB::XMLTreeDB db;
     db.open(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node = db.root();
-        node.removeAll(error);
-        node.commit(error);
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
-    }
+
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode node = db.root();
+    node.removeAll(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    node.commit(error);
+        
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
 
-    return result;
+    ISHTF_PASS();
 }
