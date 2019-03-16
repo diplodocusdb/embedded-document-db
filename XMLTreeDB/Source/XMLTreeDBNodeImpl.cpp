@@ -260,8 +260,8 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
             }
             else
             {
-                // TODO : I have to changed this I think as having no data-type attribute is now equivalent to null
-                error.fail(-1);
+                // No data-type attribute is equivalent to null
+                m_children.push_back(newNode);
             }
             childNode = childNode.next_sibling();
         }
