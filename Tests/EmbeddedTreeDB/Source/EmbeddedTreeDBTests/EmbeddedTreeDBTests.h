@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -25,31 +25,34 @@
 
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-using namespace Ishiko::TestFramework;
+class EmbeddedTreeDBTests : public Ishiko::Tests::TestSequence
+{
+public:
+    EmbeddedTreeDBTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
 
-void AddEmbeddedTreeDBTests(TestHarness& theTestHarness);
-
-TestResult::EOutcome EmbeddedTreeDBCreationTest1();
-TestResult::EOutcome EmbeddedTreeDBCreateTest1(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBOpenTest1(Test& test);
-TestResult::EOutcome EmbeddedTreeDBOpenTest2(Test& test);
-TestResult::EOutcome EmbeddedTreeDBOpenTest3(Test& test);
-TestResult::EOutcome EmbeddedTreeDBOpenTest4(Test& test);
-TestResult::EOutcome EmbeddedTreeDBOpenTest5(Test& test);
-TestResult::EOutcome EmbeddedTreeDBChildrenTest1(Test& test);
-TestResult::EOutcome EmbeddedTreeDBChildrenTest2(Test& test);
-TestResult::EOutcome EmbeddedTreeDBNodeInsertTest1(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest1(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest2(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeInsertBeforeTest3(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeInsertAfterTest1(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeInsertAfterTest2(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeAppendTest1(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeAppendTest2(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeAppendTest3(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeAppendTest4(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeAppendTest5(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeAppendTest6(FileComparisonTest& test);
-TestResult::EOutcome EmbeddedTreeDBNodeRemoveTest1(FileComparisonTest& test);
+private:
+    static void CreationTest1(Ishiko::Tests::Test& test);
+    static void CreateTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void OpenTest1(Ishiko::Tests::Test& test);
+    static void OpenTest2(Ishiko::Tests::Test& test);
+    static void OpenTest3(Ishiko::Tests::Test& test);
+    static void OpenTest4(Ishiko::Tests::Test& test);
+    static void OpenTest5(Ishiko::Tests::Test& test);
+    static void ChildrenTest1(Ishiko::Tests::Test& test);
+    static void ChildrenTest2(Ishiko::Tests::Test& test);
+    static void InsertTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertBeforeTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertBeforeTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertBeforeTest3(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertAfterTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertAfterTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest3(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest4(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest5(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendTest6(Ishiko::Tests::FileComparisonTest& test);
+    static void RemoveTest1(Ishiko::Tests::FileComparisonTest& test);
+};
 
 #endif
