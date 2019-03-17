@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -25,10 +25,21 @@
 
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-using namespace Ishiko::TestFramework;
+class KeyCacheTests : public Ishiko::Tests::TestSequence
+{
+public:
+    KeyCacheTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
 
-void AddKeyCacheTests(TestHarness& theTestHarness);
-
-TestResult::EOutcome KeyCacheCreationTest1();
+private:
+    static void CreationTest1(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest1(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest2(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest3(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest4(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest5(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest6(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest7(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest8(Ishiko::Tests::Test& test);
+};
 
 #endif
