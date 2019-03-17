@@ -217,7 +217,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
 bool MasterFile::removeNode(const TreeDBKey& key,
                             Ishiko::Error& error)
 {
-    error = -1;
+    error.fail(-1);
     return false;
 }
 

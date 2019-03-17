@@ -84,7 +84,8 @@ void Record::load(PageRepositoryReader& reader,
     switch ((ERecordType)type)
     {
     case ERecordType::eInvalid:
-        error = -1;
+        // TODO : add details
+        error.fail(-1, "Invalid record type", __FILE__, __LINE__);
         break;
 
     case ERecordType::eMasterFileMetadata:
@@ -116,7 +117,8 @@ void Record::load(PageRepositoryReader& reader,
         break;
 
     default:
-        error = -1;
+        // TODO : add details
+        error.fail(-1, "Invalid record type", __FILE__, __LINE__);
         break;
     }
     

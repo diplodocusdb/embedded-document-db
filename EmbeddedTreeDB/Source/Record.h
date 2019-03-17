@@ -44,8 +44,9 @@ public:
         eDataEnd = 0x03,
         eNodeStart = 0x04,
         eNodeEnd = 0x05,
-        eKey = 0x06,
-        eValue = 0x07
+        eParentKey = 0x06,
+        eKey = 0x07,
+        eValue = 0x08
     };
 
     Record();
