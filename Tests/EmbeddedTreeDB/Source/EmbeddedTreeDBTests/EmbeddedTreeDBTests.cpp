@@ -30,7 +30,7 @@ using namespace Ishiko::Tests;
 EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestEnvironment& environment)
     : TestSequence(number, "EmbeddedTreeDB tests", environment)
 {
-    append<HeapAllocationErrorsTest>("Creation test 1");
+    append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
     append<FileComparisonTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
@@ -65,7 +65,7 @@ void EmbeddedTreeDBTests::CreateTest1(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath, error);
@@ -84,7 +84,7 @@ void EmbeddedTreeDBTests::OpenTest1(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyEmbeddedTreeDB.dpdb");
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.open(inputPath, error);
@@ -107,7 +107,7 @@ void EmbeddedTreeDBTests::OpenTest2(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest2.dpdb");
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.open(inputPath, error);
@@ -127,7 +127,7 @@ void EmbeddedTreeDBTests::OpenTest3(Test& test)
 
     DiplodocusDB::EmbeddedTreeDB db;
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
     db.open(inputPath, error);
 
     ISHTF_ABORT_IF((bool)error);
@@ -469,109 +469,95 @@ void EmbeddedTreeDBTests::AppendTest2(FileComparisonTest& test)
 
 void EmbeddedTreeDBTests::AppendTest3(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeAppendTest3.dpdb");
 
     Ishiko::Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node = db.root().append("key1");
-        node.value().setString("value1");
-        node.commit(error);
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
 
-        db.close();
-    }
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::TreeDBNode node = db.root().append("key1");
+    node.value().setString("value1");
+    node.commit(error);
+    
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest3.dpdb");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void EmbeddedTreeDBTests::AppendTest4(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeAppendTest4.dpdb");
 
     Ishiko::Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
-        node1.value().setString("value1");
-        node1.commit(error);
-        if (!error)
-        {
-            DiplodocusDB::TreeDBNode node2 = db.root().append("key2");
-            node2.value().setString("value2");
-            node2.commit(error);
-            if (!error)
-            {
-                result = TestResult::ePassed;
-            }
-        }
 
-        db.close();
-    }
+    ISHTF_ABORT_IF((bool)error);
+    
+    DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
+    node1.value().setString("value1");
+    node1.commit(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    DiplodocusDB::TreeDBNode node2 = db.root().append("key2");
+    node2.value().setString("value2");
+    node2.commit(error);
+    
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest4.dpdb");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void EmbeddedTreeDBTests::AppendTest5(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeAppendTest5.dpdb");
 
     Ishiko::Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath, error);
-    if (!error)
-    {
-        for (size_t i = 0; i < 523; ++i)
-        {
-            std::stringstream key;
-            key << "key" << i;
-            DiplodocusDB::TreeDBNode node = db.root().append(key.str());
-            node.commit(error);
-            if (error)
-            {
-                break;
-            }
-        }
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
 
-        db.close();
+    ISHTF_ABORT_IF((bool)error);
+    
+    for (size_t i = 0; i < 523; ++i)
+    {
+        std::stringstream key;
+        key << "key" << i;
+        DiplodocusDB::TreeDBNode node = db.root().append(key.str());
+        node.commit(error);
+        if (error)
+        {
+            break;
+        }
     }
+    
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest5.dpdb");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void EmbeddedTreeDBTests::AppendTest6(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyEmbeddedTreeDB.dpdb");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeAppendTest6.dpdb");
 
@@ -581,28 +567,25 @@ void EmbeddedTreeDBTests::AppendTest6(FileComparisonTest& test)
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.open(outputPath, error);
-    if (!error)
-    {
-        DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
-        DiplodocusDB::TreeDBNode node2 = node1.append("key2");
-        node1.commit(error);
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
-    }
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
+    DiplodocusDB::TreeDBNode node2 = node1.append("key2");
+    node1.commit(error);
+    
+    ISHTF_FAIL_IF((bool)error);
+
     db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeAppendTest5.dpdb");
 
-    return result;
+    ISHTF_PASS();
 }
 
 void EmbeddedTreeDBTests::RemoveTest1(FileComparisonTest& test)
 {
-    TestResult::EOutcome result = TestResult::eFailed;
-
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
 
@@ -612,17 +595,15 @@ void EmbeddedTreeDBTests::RemoveTest1(FileComparisonTest& test)
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.open(outputPath, error);
-    if (!error)
-    {
-        db.root().remove("key1", error);
-        if (!error)
-        {
-            result = TestResult::ePassed;
-        }
-    }
+
+    ISHTF_ABORT_IF((bool)error);
+    
+    db.root().remove("key1", error);
+    
+    ISHTF_FAIL_IF((bool)error);
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
 
-    return result;
+    ISHTF_PASS();
 }

@@ -116,8 +116,8 @@ void KeyCacheTests::SubscriptOperatorTest5(Test& test)
         key << "/key" << i;
         DiplodocusDB::CachedKeyId id = cache[key.str()];
 
-        ISHTF_ABORT_UNLESS(id != ids[i]);
-        ISHTF_ABORT_UNLESS(cache.key(id).value() != key.str());
+        ISHTF_ABORT_UNLESS(id == ids[i]);
+        ISHTF_ABORT_UNLESS(cache.key(id).value() == key.str());
     }
 
     ISHTF_PASS();
