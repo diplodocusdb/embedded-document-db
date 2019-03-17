@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -26,12 +26,9 @@
 namespace DiplodocusDB
 {
 
-EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db,   
-                                               const TreeDBKey& key,
-                                               const RecordMarker& nodeMarker,
-                                               const RecordMarker& childrenMarker)
-    : m_db(db), m_key(key), m_nodeMarker(nodeMarker),
-    m_childrenMarker(childrenMarker)
+EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key,
+    const RecordMarker& nodeMarker, const RecordMarker& childrenMarker)
+    : TreeDBNodeImpl(key), m_db(db), m_nodeMarker(nodeMarker), m_childrenMarker(childrenMarker)
 {
 }
 
@@ -41,51 +38,84 @@ EmbeddedTreeDBNodeImpl::~EmbeddedTreeDBNodeImpl()
 
 bool EmbeddedTreeDBNodeImpl::isRoot() const
 {
-    return m_key.isRoot();
+    return key().isRoot();
 }
 
-std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::parent(Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBNodeImpl::parent(Ishiko::Error& error)
 {
-    std::shared_ptr<TreeDBNode> result;
+    // TODO
+    TreeDBNode result;
     return result;
 }
 
-void EmbeddedTreeDBNodeImpl::children(std::vector<std::shared_ptr<TreeDBNode> >& children,
+void EmbeddedTreeDBNodeImpl::children(std::vector<TreeDBNode>& children,
                                       Ishiko::Error& error)
 {
-    for (std::pair<std::string, std::shared_ptr<TreeDBNode> > item : m_children)
+    for (std::pair<std::string, std::shared_ptr<TreeDBNodeImpl> > item : m_children)
     {
 
     }
 }
 
-std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key,
-                                                          Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
 {
     return m_db->getNode(key, error);
 }
 
-std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insert(const TreeDBKey& key,
-                                                           size_t index)
+TreeDBNode EmbeddedTreeDBNodeImpl::previousSibling(Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBNodeImpl::previousSibling(const TreeDBKey& key, Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBNodeImpl::insert(const TreeDBKey& key, size_t index)
 {
     return m_db->appendNode(*this, key);
 }
 
-std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insertBefore(const TreeDBKey& key,
-                                                                 std::shared_ptr<TreeDBNode> child)
+TreeDBNode EmbeddedTreeDBNodeImpl::insertBefore(const TreeDBKey& key, TreeDBNode& child)
 {
-    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child)->marker());
+    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child.impl())->marker());
 }
 
-std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::insertAfter(const TreeDBKey& key,
-                                                                std::shared_ptr<TreeDBNode> child)
+TreeDBNode EmbeddedTreeDBNodeImpl::insertAfter(const TreeDBKey& key,
+                                               TreeDBNode& child)
 {
-    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child)->marker());
+    return m_db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child.impl())->marker());
 }
 
-std::shared_ptr<TreeDBNode> EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
+TreeDBNode EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
 {
     return m_db->appendNode(*this, key);
+}
+
+TreeDBNode EmbeddedTreeDBNodeImpl::set(const TreeDBKey& key, Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
 }
 
 bool EmbeddedTreeDBNodeImpl::remove(const TreeDBKey& key,
@@ -94,14 +124,13 @@ bool EmbeddedTreeDBNodeImpl::remove(const TreeDBKey& key,
     return m_db->removeNode(key, error);
 }
 
+void EmbeddedTreeDBNodeImpl::removeAll(Ishiko::Error& error)
+{
+}
+
 void EmbeddedTreeDBNodeImpl::commit(Ishiko::Error& error)
 {
     m_db->commitNode(*this, error);
-}
-
-const TreeDBKey& EmbeddedTreeDBNodeImpl::key() const
-{
-    return m_key;
 }
 
 const RecordMarker& EmbeddedTreeDBNodeImpl::marker() const

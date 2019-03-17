@@ -24,9 +24,10 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
 #include "MasterFile.h"
+#include "KeyCache.h"
 #include "UncommittedNodes.h"
+#include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryPosition.h"
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
 
@@ -45,16 +46,17 @@ public:
 
     TreeDBNode& root();
 
-    std::shared_ptr<TreeDBNode> getNode(const TreeDBKey& key, Ishiko::Error& error);
-    std::shared_ptr<TreeDBNode> insertNode(const TreeDBKey& key, const PageRepositoryPosition& pos);
-    std::shared_ptr<TreeDBNode> appendNode(const TreeDBKey& key);
+    TreeDBNode getNode(const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode insertNode(const TreeDBKey& key, const RecordMarker& marker);
+    TreeDBNode appendNode(const EmbeddedTreeDBNodeImpl& parentNode, const TreeDBKey& key);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
     void commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
 
 private:
     MasterFile m_masterFile;
+    KeyCache m_keyCache;
     std::shared_ptr<UncommittedNodes> m_uncommittedNodes;
-    std::shared_ptr<TreeDBNode> m_root;
+    TreeDBNode m_root;
 };
 
 }

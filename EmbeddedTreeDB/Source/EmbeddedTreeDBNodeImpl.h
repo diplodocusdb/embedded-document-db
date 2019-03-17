@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -24,14 +24,14 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 
 #include "RecordMarker.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h"
 
 namespace DiplodocusDB
 {
 
 class EmbeddedTreeDBImpl;
 
-class EmbeddedTreeDBNodeImpl : public TreeDBNode
+class EmbeddedTreeDBNodeImpl : public TreeDBNodeImpl
 {
 public:
     EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key,
@@ -39,23 +39,27 @@ public:
     ~EmbeddedTreeDBNodeImpl() override;
 
     bool isRoot() const override;
-    std::shared_ptr<TreeDBNode> parent(Ishiko::Error& error) override;
-    void children(std::vector<std::shared_ptr<TreeDBNode> >& children, Ishiko::Error& error) override;
-    std::shared_ptr<TreeDBNode> child(const TreeDBKey& key, Ishiko::Error& error) override;
-    std::shared_ptr<TreeDBNode> insert(const TreeDBKey& key, size_t index) override;
-    std::shared_ptr<TreeDBNode> insertBefore(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) override;
-    std::shared_ptr<TreeDBNode> insertAfter(const TreeDBKey& key, std::shared_ptr<TreeDBNode> child) override;
-    std::shared_ptr<TreeDBNode> append(const TreeDBKey& key) override;
+    TreeDBNode parent(Ishiko::Error& error) override;
+    void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
+    TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode previousSibling(Ishiko::Error& error) override;
+    TreeDBNode previousSibling(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode nextSibling(Ishiko::Error& error) override;
+    TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode insert(const TreeDBKey& key, size_t index) override;
+    TreeDBNode insertBefore(const TreeDBKey& key, TreeDBNode& child) override;
+    TreeDBNode insertAfter(const TreeDBKey& key, TreeDBNode& child) override;
+    TreeDBNode append(const TreeDBKey& key) override;
+    TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) override;
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
+    void removeAll(Ishiko::Error& error) override;
     void commit(Ishiko::Error& error) override;
 
-    const TreeDBKey& key() const;
     const RecordMarker& marker() const;
     void setMarker(const RecordMarker& marker);
     
 private:
     std::shared_ptr<EmbeddedTreeDBImpl> m_db;
-    TreeDBKey m_key;
     std::vector<std::pair<std::string, std::shared_ptr<EmbeddedTreeDBNodeImpl> > > m_children;
     RecordMarker m_nodeMarker;
     RecordMarker m_childrenMarker;
