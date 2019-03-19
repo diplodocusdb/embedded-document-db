@@ -25,14 +25,6 @@
 namespace DiplodocusDB
 {
 
-NodeStartRecordData::NodeStartRecordData()
-{
-}
-
-NodeStartRecordData::~NodeStartRecordData()
-{
-}
-
 size_t NodeStartRecordData::size() const
 {
     return 0;

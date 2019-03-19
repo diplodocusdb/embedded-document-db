@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -31,9 +31,6 @@ namespace DiplodocusDB
 class NodeStartRecordData : public RecordData
 {
 public:
-    NodeStartRecordData();
-    ~NodeStartRecordData() override;
-
     size_t size() const override;
     void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error) override;
     void save(PageRepositoryWriter& writer, Ishiko::Error& error) const override;
