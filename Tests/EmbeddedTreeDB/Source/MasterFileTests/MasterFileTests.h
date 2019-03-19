@@ -29,6 +29,9 @@ class MasterFileTests : public Ishiko::Tests::TestSequence
 {
 public:
     MasterFileTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+
+private:
+    static void ConstructionTest1(Ishiko::Tests::Test& test);
 };
 
 #endif

@@ -31,7 +31,7 @@ public:
     KeyCacheTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
 
 private:
-    static void CreationTest1(Ishiko::Tests::Test& test);
+    static void ConstructionTest1(Ishiko::Tests::Test& test);
     static void SubscriptOperatorTest1(Ishiko::Tests::Test& test);
     static void SubscriptOperatorTest2(Ishiko::Tests::Test& test);
     static void SubscriptOperatorTest3(Ishiko::Tests::Test& test);

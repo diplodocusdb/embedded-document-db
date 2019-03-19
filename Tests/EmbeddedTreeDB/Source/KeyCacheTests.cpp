@@ -30,7 +30,7 @@ using namespace Ishiko::Tests;
 KeyCacheTests::KeyCacheTests(const TestNumber& number, const TestEnvironment& environment)
     : TestSequence(number, "KeyCache tests", environment)
 {
-    append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
     append<HeapAllocationErrorsTest>("operator[] test 1", SubscriptOperatorTest1);
     append<HeapAllocationErrorsTest>("operator[] test 2", SubscriptOperatorTest2);
     append<HeapAllocationErrorsTest>("operator[] test 3", SubscriptOperatorTest3);
@@ -41,7 +41,7 @@ KeyCacheTests::KeyCacheTests(const TestNumber& number, const TestEnvironment& en
     append<HeapAllocationErrorsTest>("operator[] test 8", SubscriptOperatorTest8);
 }
 
-void KeyCacheTests::CreationTest1(Test& test)
+void KeyCacheTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::KeyCache cache;
 

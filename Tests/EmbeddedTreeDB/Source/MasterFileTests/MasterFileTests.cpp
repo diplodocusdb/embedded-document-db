@@ -21,10 +21,19 @@
 */
 
 #include "MasterFileTests.h"
+#include "MasterFile.h"
 
 using namespace Ishiko::Tests;
 
 MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment& environment)
     : TestSequence(number, "MasterFile tests", environment)
 {
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+}
+
+void MasterFileTests::ConstructionTest1(Test& test)
+{
+    DiplodocusDB::MasterFile masterFile;
+
+    ISHTF_PASS();
 }
