@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -24,8 +24,6 @@
 #include "EmbeddedTreeDBNodeImpl.h"
 #include "DataStartRecordData.h"
 #include "DataEndRecordData.h"
-#include "NodeStartRecordData.h"
-#include "NodeEndRecordData.h"
 #include "KeyRecordData.h"
 #include "ValueRecordData.h"
 
@@ -63,7 +61,7 @@ void MasterFile::create(const boost::filesystem::path& path,
         return;
     }
 
-    Record metadataRecord(m_metadata);
+    Record metadataRecord(Record::ERecordType::eMasterFileMetadata, m_metadata);
     metadataRecord.save(writer, error);
     if (error)
     {
@@ -71,7 +69,7 @@ void MasterFile::create(const boost::filesystem::path& path,
     }
     
     m_dataStartOffset = page->dataSize();
-    Record dataStartRecord(std::make_shared<DataStartRecordData>());
+    Record dataStartRecord(Record::ERecordType::eDataStart, std::make_shared<DataStartRecordData>());
     dataStartRecord.save(writer, error);
     if (error)
     {
@@ -86,7 +84,7 @@ void MasterFile::create(const boost::filesystem::path& path,
 
     m_dataEndPage = page;
     m_dataEndOffset = page->dataSize();
-    Record dataEndRecord(std::make_shared<DataEndRecordData>());
+    Record dataEndRecord(Record::ERecordType::eDataEnd, std::make_shared<DataEndRecordData>());
     dataEndRecord.save(writer, error);
     if (error)
     {
@@ -134,13 +132,13 @@ bool MasterFile::findNode(const TreeDBKey& key,
     while (!result && !error)
     {
         PageRepositoryPosition currentNodeStartPosition = reader.currentPosition();
-        Record record;
+        Record record(Record::ERecordType::eInvalid);
         record.load(reader, error);
         if (!error && (record.type() == Record::ERecordType::eKey))
         {
             if (static_cast<KeyRecordData*>(record.data())->key() == key.value())
             {
-                Record valueRecord;
+                Record valueRecord(Record::ERecordType::eValue);
                 valueRecord.load(reader, error);
                 if (!error)
                 {
@@ -169,8 +167,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
         return;
     }
 
-    std::shared_ptr<NodeStartRecordData> nodeStartRecordData = std::make_shared<NodeStartRecordData>();
-    Record nodeStartRecord(nodeStartRecordData);
+    Record nodeStartRecord(Record::ERecordType::eNodeStart);
     nodeStartRecord.save(writer, error);
     if (error)
     {
@@ -178,7 +175,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
     }
 
     std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
-    Record record(recordData);
+    Record record(Record::ERecordType::eKey, recordData);
     record.save(writer, error);
     if (error)
     {
@@ -188,7 +185,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
     if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
     {
         std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
-        Record record(recordData);
+        Record record(Record::ERecordType::eValue, recordData);
         record.save(writer, error);
         if (error)
         {
@@ -196,8 +193,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
         }
     }
 
-    std::shared_ptr<NodeEndRecordData> nodeEndRecordData = std::make_shared<NodeEndRecordData>();
-    Record nodeEndRecord(nodeEndRecordData);
+    Record nodeEndRecord(Record::ERecordType::eNodeEnd);
     nodeEndRecord.save(writer, error);
     if (error)
     {
@@ -224,8 +220,7 @@ bool MasterFile::removeNode(const TreeDBKey& key,
 void MasterFile::createRootNode(PageRepositoryWriter& writer,
                                 Ishiko::Error& error)
 {
-    std::shared_ptr<NodeStartRecordData> nodeStartRecordData = std::make_shared<NodeStartRecordData>();
-    Record nodeStartRecord(nodeStartRecordData);
+    Record nodeStartRecord(Record::ERecordType::eNodeStart);
     nodeStartRecord.save(writer, error);
     if (error)
     {
@@ -233,15 +228,14 @@ void MasterFile::createRootNode(PageRepositoryWriter& writer,
     }
 
     std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>("/");
-    Record record(recordData);
+    Record record(Record::ERecordType::eKey, recordData);
     record.save(writer, error);
     if (error)
     {
         return;
     }
 
-    std::shared_ptr<NodeEndRecordData> nodeEndRecordData = std::make_shared<NodeEndRecordData>();
-    Record nodeEndRecord(nodeEndRecordData);
+    Record nodeEndRecord(Record::ERecordType::eNodeEnd);
     nodeEndRecord.save(writer, error);
     if (error)
     {
