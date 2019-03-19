@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -34,17 +34,12 @@ namespace DiplodocusDB
 class RecordData
 {
 public:
-    RecordData(Record::ERecordType type);
+    RecordData();
     virtual ~RecordData();
-
-    Record::ERecordType type() const;
 
     virtual size_t size() const = 0;
     virtual void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error) = 0;
     virtual void save(PageRepositoryWriter& writer, Ishiko::Error& error) const = 0;
-
-private:
-    Record::ERecordType m_type;
 };
 
 }

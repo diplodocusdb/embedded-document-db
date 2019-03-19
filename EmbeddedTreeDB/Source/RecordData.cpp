@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -25,18 +25,12 @@
 namespace DiplodocusDB
 {
 
-RecordData::RecordData(Record::ERecordType type)
-    : m_type(type)
+RecordData::RecordData()
 {
 }
 
 RecordData::~RecordData()
 {
-}
-
-Record::ERecordType RecordData::type() const
-{
-    return m_type;
 }
 
 }

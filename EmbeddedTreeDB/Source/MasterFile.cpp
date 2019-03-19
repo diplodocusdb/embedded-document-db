@@ -100,8 +100,8 @@ void MasterFile::open(const boost::filesystem::path& path,
     m_dataEndPage = m_repository.page(m_repository.pageCount() - 1, error);
     if (!error)
     {
-        // Deduct 2 for the end of data record
-        m_dataEndOffset = (m_dataEndPage->dataSize() - 2);
+        // Deduct 1 for the end of data record
+        m_dataEndOffset = (m_dataEndPage->dataSize() - 1);
     }
 }
 
@@ -126,7 +126,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
 {
     bool result = false;
 
-    PageRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 2, error);
+    PageRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
     while (!result && !error)
     {
         PageRepositoryPosition currentNodeStartPosition = reader.currentPosition();
@@ -205,7 +205,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
     }
 
     m_dataEndPage = writer.currentPage();
-    m_dataEndOffset = (m_dataEndPage->dataSize() - 2);
+    m_dataEndOffset = (m_dataEndPage->dataSize() - 1);
 }
 
 bool MasterFile::removeNode(const TreeDBKey& key,
