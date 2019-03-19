@@ -104,11 +104,11 @@ void Record::load(PageRepositoryReader& reader,
         break;
     }
     
-    if (!error)
+    if (!error && m_data)
     {
         uint8_t size;
         reader.read((char*)&size, 1, error);
-        if (!error && m_data)
+        if (!error)
         {
             m_data->load(reader, size, error);
         }
@@ -120,21 +120,14 @@ void Record::save(PageRepositoryWriter& writer,
 {
     uint8_t type = (uint8_t)m_type;
     writer.write((char*)&type, 1, error);
-    if (!error)
+    if (!error && m_data)
     {
-        if (m_data)
+        char buffer[20];
+        size_t n = Utilities::encodeSize(m_data->size(), buffer);
+        writer.write(buffer, n, error);
+        if (!error)
         {
-            char buffer[20];
-            size_t n = Utilities::encodeSize(m_data->size(), buffer);
-            writer.write(buffer, n, error);
-            if (!error)
-            {
-                m_data->save(writer, error);
-            }
-        }
-        else
-        {
-            writer.write("\0", 1, error);
+            m_data->save(writer, error);
         }
     }
 }
