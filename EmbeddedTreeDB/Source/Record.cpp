@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,10 +23,6 @@
 #include "Record.h"
 #include "RecordData.h"
 #include "MasterFileMetadata.h"
-#include "DataStartRecordData.h"
-#include "DataEndRecordData.h"
-#include "NodeStartRecordData.h"
-#include "NodeEndRecordData.h"
 #include "KeyRecordData.h"
 #include "ValueRecordData.h"
 #include "Utilities.h"
@@ -35,12 +31,13 @@
 namespace DiplodocusDB
 {
 
-Record::Record()
+Record::Record(ERecordType type)
+    : m_type(type)
 {
 }
 
-Record::Record(std::shared_ptr<RecordData> data)
-    : m_data(data)
+Record::Record(ERecordType type, std::shared_ptr<RecordData> data)
+    : m_type(type), m_data(data)
 {
 }
 
@@ -50,14 +47,7 @@ Record::~Record()
 
 Record::ERecordType Record::type() const
 {
-    if (m_data)
-    {
-        return m_data->type();
-    }
-    else
-    {
-        return ERecordType::eInvalid;
-    }
+    return m_type;
 }
 
 size_t Record::size() const
@@ -81,7 +71,9 @@ void Record::load(PageRepositoryReader& reader,
         return;
     }
 
-    switch ((ERecordType)type)
+    m_type = (ERecordType)type;
+
+    switch (m_type)
     {
     case ERecordType::eInvalid:
         // TODO : add details
@@ -93,19 +85,9 @@ void Record::load(PageRepositoryReader& reader,
         break;
 
     case ERecordType::eDataStart:
-        m_data = std::make_shared<DataStartRecordData>();
-        break;
-
     case ERecordType::eDataEnd:
-        m_data = std::make_shared<DataEndRecordData>();
-        break;
-
     case ERecordType::eNodeStart:
-        m_data = std::make_shared<NodeStartRecordData>();
-        break;
-
     case ERecordType::eNodeEnd:
-        m_data = std::make_shared<NodeEndRecordData>();
         break;
 
     case ERecordType::eKey:
@@ -126,7 +108,7 @@ void Record::load(PageRepositoryReader& reader,
     {
         uint8_t size;
         reader.read((char*)&size, 1, error);
-        if (!error)
+        if (!error && m_data)
         {
             m_data->load(reader, size, error);
         }
@@ -136,16 +118,23 @@ void Record::load(PageRepositoryReader& reader,
 void Record::save(PageRepositoryWriter& writer,
                   Ishiko::Error& error) const
 {
-    uint8_t type = (uint8_t)m_data->type();
+    uint8_t type = (uint8_t)m_type;
     writer.write((char*)&type, 1, error);
     if (!error)
     {
-        char buffer[20];
-        size_t n = Utilities::encodeSize(m_data->size(), buffer);
-        writer.write(buffer, n, error);
-        if (!error)
+        if (m_data)
         {
-            m_data->save(writer, error);
+            char buffer[20];
+            size_t n = Utilities::encodeSize(m_data->size(), buffer);
+            writer.write(buffer, n, error);
+            if (!error)
+            {
+                m_data->save(writer, error);
+            }
+        }
+        else
+        {
+            writer.write("\0", 1, error);
         }
     }
 }

@@ -22,8 +22,6 @@
 
 #include "MasterFile.h"
 #include "EmbeddedTreeDBNodeImpl.h"
-#include "DataStartRecordData.h"
-#include "DataEndRecordData.h"
 #include "KeyRecordData.h"
 #include "ValueRecordData.h"
 
@@ -69,7 +67,7 @@ void MasterFile::create(const boost::filesystem::path& path,
     }
     
     m_dataStartOffset = page->dataSize();
-    Record dataStartRecord(Record::ERecordType::eDataStart, std::make_shared<DataStartRecordData>());
+    Record dataStartRecord(Record::ERecordType::eDataStart);
     dataStartRecord.save(writer, error);
     if (error)
     {
@@ -84,7 +82,7 @@ void MasterFile::create(const boost::filesystem::path& path,
 
     m_dataEndPage = page;
     m_dataEndOffset = page->dataSize();
-    Record dataEndRecord(Record::ERecordType::eDataEnd, std::make_shared<DataEndRecordData>());
+    Record dataEndRecord(Record::ERecordType::eDataEnd);
     dataEndRecord.save(writer, error);
     if (error)
     {

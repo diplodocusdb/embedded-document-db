@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -49,8 +49,8 @@ public:
         eValue = 0x08
     };
 
-    Record();
-    Record(std::shared_ptr<RecordData> data);
+    Record(ERecordType type);
+    Record(ERecordType type, std::shared_ptr<RecordData> data);
     ~Record();
 
     ERecordType type() const;
@@ -61,6 +61,7 @@ public:
     void save(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
+    Record::ERecordType m_type;
     std::shared_ptr<RecordData> m_data;
 };
 
