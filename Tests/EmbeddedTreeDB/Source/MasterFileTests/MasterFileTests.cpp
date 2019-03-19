@@ -69,5 +69,16 @@ void MasterFileTests::OpenTest1(Test& test)
     masterFile.open(inputPath, error);
 
     ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::RecordMarker rootMarker = masterFile.rootNodePosition();
+
+    ISHTF_FAIL_UNLESS(rootMarker.position().page() == 0);
+    ISHTF_FAIL_UNLESS(rootMarker.position().offset() == 15);
+
+    DiplodocusDB::RecordMarker dataEndMarker = masterFile.dataEndPosition();
+
+    ISHTF_FAIL_UNLESS(dataEndMarker.position().page() == 0);
+    ISHTF_FAIL_UNLESS(dataEndMarker.position().offset() == 20);
+
     ISHTF_PASS();
 }

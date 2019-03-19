@@ -34,7 +34,7 @@ class EmbeddedTreeDBImpl;
 class EmbeddedTreeDBNodeImpl : public TreeDBNodeImpl
 {
 public:
-    EmbeddedTreeDBNodeImpl(std::shared_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key,
+    EmbeddedTreeDBNodeImpl(std::weak_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key,
         const RecordMarker& nodeMarker, const RecordMarker& childrenMarker);
     ~EmbeddedTreeDBNodeImpl() override;
 
@@ -59,7 +59,7 @@ public:
     void setMarker(const RecordMarker& marker);
     
 private:
-    std::shared_ptr<EmbeddedTreeDBImpl> m_db;
+    std::weak_ptr<EmbeddedTreeDBImpl> m_db;
     std::vector<std::pair<std::string, std::shared_ptr<EmbeddedTreeDBNodeImpl> > > m_children;
     RecordMarker m_nodeMarker;
     RecordMarker m_childrenMarker;
