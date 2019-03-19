@@ -112,7 +112,7 @@ void MasterFile::close()
 
 RecordMarker MasterFile::rootNodePosition() const
 {
-    return RecordMarker(PageRepositoryPosition(0, m_dataStartOffset + 2));
+    return RecordMarker(PageRepositoryPosition(0, m_dataStartOffset + 1));
 }
 
 RecordMarker MasterFile::dataEndPosition() const
