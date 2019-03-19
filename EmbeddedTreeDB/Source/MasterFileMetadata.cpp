@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -27,8 +27,7 @@ namespace DiplodocusDB
 {
 
 MasterFileMetadata::MasterFileMetadata()
-    : RecordData(Record::ERecordType::eMasterFileMetadata),
-    m_fileFormatVersion(1, 0, 0)
+    : m_fileFormatVersion(1, 0, 0)
 {
 }
 

@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -27,12 +27,11 @@ namespace DiplodocusDB
 {
 
 KeyRecordData::KeyRecordData()
-    : RecordData(Record::ERecordType::eKey)
 {
 }
 
 KeyRecordData::KeyRecordData(const TreeDBKey& key)
-    : RecordData(Record::ERecordType::eKey), m_key(key.value())
+    : m_key(key.value())
 {
 }
 
