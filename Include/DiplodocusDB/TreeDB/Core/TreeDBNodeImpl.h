@@ -57,7 +57,6 @@ public:
     virtual TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual bool remove(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual void removeAll(Ishiko::Error& error) = 0;
-    virtual void commit(Ishiko::Error& error) = 0;
 
 private:
     TreeDBNodeImpl(const TreeDBNodeImpl& other) = delete;

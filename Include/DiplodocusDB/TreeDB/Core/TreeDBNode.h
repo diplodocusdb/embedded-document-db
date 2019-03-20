@@ -65,7 +65,6 @@ public:
     TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error);
     bool remove(const TreeDBKey& key, Ishiko::Error& error);
     void removeAll(Ishiko::Error& error);
-    void commit(Ishiko::Error& error);
 
     std::shared_ptr<TreeDBNodeImpl>& impl();
 

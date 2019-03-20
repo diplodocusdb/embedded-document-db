@@ -149,11 +149,6 @@ void TreeDBNode::removeAll(Ishiko::Error& error)
     m_impl->removeAll(error);
 }
 
-void TreeDBNode::commit(Ishiko::Error& error)
-{
-    m_impl->commit(error);
-}
-
 std::shared_ptr<TreeDBNodeImpl>& TreeDBNode::impl()
 {
     return m_impl;
