@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,11 +23,14 @@
 #include "TreeDBKeyTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
+using namespace Ishiko::Tests;
+
 int main(int argc, char* argv[])
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("DiplodocusTreeDBCore");
+    TestHarness theTestHarness("DiplodocusTreeDBCore");
 
-    AddTreeDBKeyTests(theTestHarness);
+    TestSequence& theTests = theTestHarness.tests();
+    theTests.append<TreeDBKeyTests>();
 
     return theTestHarness.run();
 }

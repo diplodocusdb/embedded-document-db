@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,65 +23,45 @@
 #include "TreeDBKeyTests.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 
-void AddTreeDBKeyTests(TestHarness& theTestHarness)
+using namespace Ishiko::Tests;
+
+TreeDBKeyTests::TreeDBKeyTests(const TestNumber& number, const TestEnvironment& environment)
+    : TestSequence(number, "TreeDBKey tests", environment)
 {
-    TestSequence& keyTestSequence = theTestHarness.appendTestSequence("TreeDBKey tests");
-
-    new HeapAllocationErrorsTest("Creation test 1", TreeDBKeyCreationTest1, keyTestSequence);
-
-    new HeapAllocationErrorsTest("parentKey test 1", TreeDBKeyParentKeyTest1, keyTestSequence);
-    new HeapAllocationErrorsTest("parentKey test 2", TreeDBKeyParentKeyTest2, keyTestSequence);
-    new HeapAllocationErrorsTest("parentKey test 3", TreeDBKeyParentKeyTest3, keyTestSequence);
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<HeapAllocationErrorsTest>("parentKey test 1", ParentKeyTest1);
+    append<HeapAllocationErrorsTest>("parentKey test 2", ParentKeyTest2);
+    append<HeapAllocationErrorsTest>("parentKey test 3", ParentKeyTest3);
 }
 
-TestResult::EOutcome TreeDBKeyCreationTest1()
+void TreeDBKeyTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
-    if (key.value() == "/")
-    {
-        return TestResult::ePassed;
-    }
-    else
-    {
-        return TestResult::eFailed;
-    }
+
+    ISHTF_FAIL_UNLESS(key.value() == "/");
+    ISHTF_PASS();
 }
 
-TestResult::EOutcome TreeDBKeyParentKeyTest1()
+void TreeDBKeyTests::ParentKeyTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1/key2");
-    if (key.parentKey() == "/key1")
-    {
-        return TestResult::ePassed;
-    }
-    else
-    {
-        return TestResult::eFailed;
-    }
+
+    ISHTF_FAIL_UNLESS(key.parentKey() == "/key1");
+    ISHTF_PASS();
 }
 
-TestResult::EOutcome TreeDBKeyParentKeyTest2()
+void TreeDBKeyTests::ParentKeyTest2(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1");
-    if (key.parentKey() == "/")
-    {
-        return TestResult::ePassed;
-    }
-    else
-    {
-        return TestResult::eFailed;
-    }
+
+    ISHTF_FAIL_UNLESS(key.parentKey() == "/");
+    ISHTF_PASS();
 }
 
-TestResult::EOutcome TreeDBKeyParentKeyTest3()
+void TreeDBKeyTests::ParentKeyTest3(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
-    if (key.parentKey().isNull())
-    {
-        return TestResult::ePassed;
-    }
-    else
-    {
-        return TestResult::eFailed;
-    }
+
+    ISHTF_FAIL_UNLESS(key.parentKey().isNull());
+    ISHTF_PASS();
 }

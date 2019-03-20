@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -25,13 +25,16 @@
 
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-using namespace Ishiko::TestFramework;
+class TreeDBKeyTests : public Ishiko::Tests::TestSequence
+{
+public:
+    TreeDBKeyTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
 
-void AddTreeDBKeyTests(TestHarness& theTestHarness);
-
-TestResult::EOutcome TreeDBKeyCreationTest1();
-TestResult::EOutcome TreeDBKeyParentKeyTest1();
-TestResult::EOutcome TreeDBKeyParentKeyTest2();
-TestResult::EOutcome TreeDBKeyParentKeyTest3();
+private:
+    static void ConstructionTest1(Ishiko::Tests::Test& test);
+    static void ParentKeyTest1(Ishiko::Tests::Test& test);
+    static void ParentKeyTest2(Ishiko::Tests::Test& test);
+    static void ParentKeyTest3(Ishiko::Tests::Test& test);
+};
 
 #endif
