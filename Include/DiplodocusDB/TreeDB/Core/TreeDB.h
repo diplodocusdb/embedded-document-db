@@ -23,4 +23,15 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDB_H_
 
+namespace DiplodocusDB
+{
+
+class TreeDB
+{
+public:
+    virtual ~TreeDB() = default;
+};
+
+}
+
 #endif

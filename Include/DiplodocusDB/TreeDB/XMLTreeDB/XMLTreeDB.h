@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDB_H_
 
+#include "DiplodocusDB/TreeDB/Core/TreeDB.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
@@ -33,7 +34,7 @@ namespace DiplodocusDB
 
 class XMLTreeDBImpl;
 
-class XMLTreeDB
+class XMLTreeDB : public TreeDB
 {
 public:
     XMLTreeDB();
