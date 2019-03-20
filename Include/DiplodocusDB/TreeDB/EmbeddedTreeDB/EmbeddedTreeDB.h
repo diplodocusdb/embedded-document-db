@@ -44,7 +44,7 @@ public:
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
-    TreeDBNode& root();
+    TreeDBNode& root() override;
 
 private:
     std::shared_ptr<EmbeddedTreeDBImpl> m_impl;

@@ -34,6 +34,8 @@ class TreeDB
 public:
     virtual ~TreeDB() = default;
 
+    virtual TreeDBNode& root() = 0;
+
     // TODO : this is temporary until I have migrated all the node functions here
     virtual void commitNode(TreeDBNode& node, Ishiko::Error& error) = 0;
 };

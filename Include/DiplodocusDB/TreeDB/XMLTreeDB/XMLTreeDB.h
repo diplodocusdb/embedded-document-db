@@ -44,7 +44,7 @@ public:
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
-    TreeDBNode& root();
+    TreeDBNode& root() override;
 
     void commitNode(TreeDBNode& node, Ishiko::Error& error) override;
 
