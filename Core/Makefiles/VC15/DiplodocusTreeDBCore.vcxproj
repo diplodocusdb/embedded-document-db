@@ -154,6 +154,7 @@
     <ClCompile Include="..\..\Source\TreeDBValue.cpp" />
     <ClCompile Include="..\..\Source\TreeDBNode.cpp" />
     <ClCompile Include="..\..\Source\TreeDBNodeImpl.cpp" />
+    <ClCompile Include="..\..\Source\TreeDB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\TreeDBCore.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBValue.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBNode.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBNodeImpl.h" />
+    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDB.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\linkoptions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

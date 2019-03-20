@@ -52,7 +52,6 @@ public:
     TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) override;
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
     void removeAll(Ishiko::Error& error) override;
-    void commit(Ishiko::Error& error) override;
 
     void updateValue();
 

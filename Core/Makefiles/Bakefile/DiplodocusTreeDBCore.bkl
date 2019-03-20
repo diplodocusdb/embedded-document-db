@@ -40,6 +40,7 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBValue.h
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBNode.h
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h
+        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDB.h
         ../../../Include/DiplodocusDB/TreeDB/Core/linkoptions.h
     }
 
@@ -49,5 +50,6 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors
         ../../Source/TreeDBValue.cpp
         ../../Source/TreeDBNode.cpp
         ../../Source/TreeDBNodeImpl.cpp
+        ../../Source/TreeDB.cpp
     }
 }

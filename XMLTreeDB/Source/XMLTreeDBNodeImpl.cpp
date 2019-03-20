@@ -181,15 +181,6 @@ void XMLTreeDBNodeImpl::removeAll(Ishiko::Error& error)
     m_children.clear();
 }
 
-void XMLTreeDBNodeImpl::commit(Ishiko::Error& error)
-{
-    std::shared_ptr<XMLTreeDBImpl> db = m_db.lock();
-    if (db)
-    {
-        db->commitNode(*this, error);
-    }
-}
-
 void XMLTreeDBNodeImpl::updateValue()
 {
     const TreeDBValue& v = value();
