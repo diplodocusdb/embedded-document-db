@@ -31,6 +31,7 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
     append<FileComparisonTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
+    append<FileComparisonTest>("append test 1", AddNodeTest1);
 }
 
 void MasterFileTests::ConstructionTest1(Test& test)
@@ -79,6 +80,31 @@ void MasterFileTests::OpenTest1(Test& test)
 
     ISHTF_FAIL_UNLESS(dataEndMarker.position().page() == 0);
     ISHTF_FAIL_UNLESS(dataEndMarker.position().offset() == 20);
+
+    ISHTF_PASS();
+}
+
+void MasterFileTests::AddNodeTest1(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddNodeTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode("/key1", masterFile.dataEndPosition(), 
+        DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    masterFile.addNode(newNode, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddNodeTest1.dpdb");
 
     ISHTF_PASS();
 }

@@ -171,12 +171,33 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
         return;
     }
 
-    std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
-    Record record(Record::ERecordType::eKey, recordData);
-    record.save(writer, error);
-    if (error)
+    if (node.isRoot())
     {
-        return;
+        std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
+        Record record(Record::ERecordType::eKey, recordData);
+        record.save(writer, error);
+        if (error)
+        {
+            return;
+        }
+    }
+    else
+    {
+        std::shared_ptr<KeyRecordData> parentRecordData = std::make_shared<KeyRecordData>(node.key().parentKey());
+        Record parentRecord(Record::ERecordType::eParentKey, parentRecordData);
+        parentRecord.save(writer, error);
+        if (error)
+        {
+            return;
+        }
+
+        std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key().base());
+        Record record(Record::ERecordType::eKey, recordData);
+        record.save(writer, error);
+        if (error)
+        {
+            return;
+        }
     }
 
     if (node.value().type() != DataType(EPrimitiveDataType::eNULL))

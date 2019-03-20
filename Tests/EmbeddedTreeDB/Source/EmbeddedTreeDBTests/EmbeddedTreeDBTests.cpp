@@ -149,7 +149,7 @@ void EmbeddedTreeDBTests::OpenTest4(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest4.dpdb");
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.open(inputPath, error);
@@ -169,7 +169,7 @@ void EmbeddedTreeDBTests::OpenTest5(Test& test)
 
     DiplodocusDB::EmbeddedTreeDB db;
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
     db.open(inputPath, error);
 
     ISHTF_ABORT_IF((bool)error);
@@ -193,7 +193,7 @@ void EmbeddedTreeDBTests::ChildrenTest1(Test& test)
 
     DiplodocusDB::EmbeddedTreeDB db;
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
     db.open(inputPath, error);
 
     ISHTF_ABORT_IF((bool)error);
@@ -237,7 +237,7 @@ void EmbeddedTreeDBTests::InsertTest1(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
     
     DiplodocusDB::TreeDBNode node = db.root().insert("key1", 0);
-    node.commit(error);
+    db.commitNode(node, error);
         
     ISHTF_FAIL_IF((bool)error);
 
@@ -268,7 +268,7 @@ void EmbeddedTreeDBTests::InsertBeforeTest1(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
         
     DiplodocusDB::TreeDBNode newNode = node.insertBefore("key0", node);
-    newNode.commit(error);
+    db.commitNode(newNode, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -300,11 +300,11 @@ void EmbeddedTreeDBTests::InsertBeforeTest2(FileComparisonTest& test)
         
     DiplodocusDB::TreeDBNode newNode1 = node.insertBefore("key1", node);
     DiplodocusDB::TreeDBNode newNode2 = node.insertBefore("key0", newNode1);
-    newNode1.commit(error);
+    db.commitNode(newNode1, error);
 
     ISHTF_FAIL_IF((bool)error);
             
-    newNode2.commit(error);
+    db.commitNode(newNode2, error);
     
     ISHTF_FAIL_IF((bool)error);
 
@@ -336,11 +336,11 @@ void EmbeddedTreeDBTests::InsertBeforeTest3(FileComparisonTest& test)
     
     DiplodocusDB::TreeDBNode newNode1 = node.insertBefore("key1", node);
     DiplodocusDB::TreeDBNode newNode2 = node.insertBefore("key0", newNode1);
-    newNode2.commit(error);
+    db.commitNode(newNode2, error);
 
     ISHTF_FAIL_IF((bool)error);
     
-    newNode1.commit(error);
+    db.commitNode(newNode1, error);
  
     ISHTF_FAIL_IF((bool)error);
 
@@ -371,7 +371,7 @@ void EmbeddedTreeDBTests::InsertAfterTest1(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
 
     DiplodocusDB::TreeDBNode newNode = node.insertAfter("key2", node);
-    newNode.commit(error);
+    db.commitNode(newNode, error);
     
     ISHTF_FAIL_IF((bool)error);
 
@@ -402,7 +402,7 @@ void EmbeddedTreeDBTests::InsertAfterTest2(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
 
     DiplodocusDB::TreeDBNode newNode = node.insertAfter("key2", node);
-    newNode.commit(error);
+    db.commitNode(newNode, error);
     
     ISHTF_FAIL_IF((bool)error);
 
@@ -426,7 +426,7 @@ void EmbeddedTreeDBTests::AppendTest1(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
 
     DiplodocusDB::TreeDBNode node = db.root().append("key1");
-    node.commit(error);
+    db.commitNode(node, error);
 
     ISHTF_FAIL_IF((bool)error);
     
@@ -450,12 +450,12 @@ void EmbeddedTreeDBTests::AppendTest2(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
     
     DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
-    node1.commit(error);
+    db.commitNode(node1, error);
 
     ISHTF_FAIL_IF((bool)error);
 
     DiplodocusDB::TreeDBNode node2 = db.root().append("key2");
-    node2.commit(error);
+    db.commitNode(node2, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -480,7 +480,7 @@ void EmbeddedTreeDBTests::AppendTest3(FileComparisonTest& test)
 
     DiplodocusDB::TreeDBNode node = db.root().append("key1");
     node.value().setString("value1");
-    node.commit(error);
+    db.commitNode(node, error);
     
     ISHTF_FAIL_IF((bool)error);
 
@@ -505,13 +505,13 @@ void EmbeddedTreeDBTests::AppendTest4(FileComparisonTest& test)
     
     DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
     node1.value().setString("value1");
-    node1.commit(error);
+    db.commitNode(node1, error);
 
     ISHTF_FAIL_IF((bool)error);
 
     DiplodocusDB::TreeDBNode node2 = db.root().append("key2");
     node2.value().setString("value2");
-    node2.commit(error);
+    db.commitNode(node2, error);
     
     ISHTF_FAIL_IF((bool)error);
 
@@ -539,7 +539,7 @@ void EmbeddedTreeDBTests::AppendTest5(FileComparisonTest& test)
         std::stringstream key;
         key << "key" << i;
         DiplodocusDB::TreeDBNode node = db.root().append(key.str());
-        node.commit(error);
+        db.commitNode(node, error);
         if (error)
         {
             break;
@@ -572,7 +572,7 @@ void EmbeddedTreeDBTests::AppendTest6(FileComparisonTest& test)
 
     DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
     DiplodocusDB::TreeDBNode node2 = node1.append("key2");
-    node1.commit(error);
+    db.commitNode(node1, error);
     
     ISHTF_FAIL_IF((bool)error);
 
