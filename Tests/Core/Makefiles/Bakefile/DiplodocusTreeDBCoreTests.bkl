@@ -3,8 +3,10 @@ import $(ishikopath)/TestFramework/Include/Ishiko/TestFramework/TestFrameworkCor
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 
-toolsets = vs2015 vs2013;
+toolsets = gnu vs2017 vs2015 vs2013;
 
+gnu.makefile = ../GNUmakefile/GNUmakefile;
+vs2017.solutionfile = ../VC15/DiplodocusTreeDBCoreTests.sln;
 vs2015.solutionfile = ../VC14/DiplodocusTreeDBCoreTests.sln;
 vs2013.solutionfile = ../VC12/DiplodocusTreeDBCoreTests.sln;
 
