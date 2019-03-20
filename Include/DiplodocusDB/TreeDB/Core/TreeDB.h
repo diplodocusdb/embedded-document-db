@@ -23,6 +23,9 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDB_H_
 
+#include "TreeDBNode.h"
+#include "Ishiko/Errors/Error.h"
+
 namespace DiplodocusDB
 {
 
@@ -30,6 +33,9 @@ class TreeDB
 {
 public:
     virtual ~TreeDB() = default;
+
+    // TODO : this is temporary until I have migrated all the node functions here
+    virtual void commitNode(TreeDBNode& node, Ishiko::Error& error) = 0;
 };
 
 }

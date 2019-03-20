@@ -368,7 +368,7 @@ void XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
 
     DiplodocusDB::TreeDBNode node = db.root().insert("key1", 0);
-    node.commit(error);
+    db.commitNode(node, error);
     
     ISHTF_FAIL_IF((bool)error);
 
@@ -392,7 +392,7 @@ void XMLTreeDBTests::AppendTest1(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
     
     DiplodocusDB::TreeDBNode node = db.root().append("key1");
-    node.commit(error);
+    db.commitNode(node, error);
         
     ISHTF_FAIL_IF((bool)error);
 
@@ -416,12 +416,12 @@ void XMLTreeDBTests::AppendTest2(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
     
     DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
-    node1.commit(error);
+    db.commitNode(node1, error);
 
     ISHTF_FAIL_IF((bool)error);
         
     DiplodocusDB::TreeDBNode node2 = db.root().append("key2");
-    node2.commit(error);
+    db.commitNode(node2, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -446,7 +446,7 @@ void XMLTreeDBTests::AppendTest3(FileComparisonTest& test)
     
     DiplodocusDB::TreeDBNode node = db.root().append("key1");
     node.value().setString("value1");
-    node.commit(error);
+    db.commitNode(node, error);
 
     ISHTF_FAIL_IF((bool)error);
    
@@ -472,13 +472,13 @@ void XMLTreeDBTests::AppendTest4(FileComparisonTest& test)
     
     DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
     node1.value().setString("value1");
-    node1.commit(error);
+    db.commitNode(node1, error);
 
     ISHTF_FAIL_IF((bool)error);
         
     DiplodocusDB::TreeDBNode node2 = db.root().append("key2");
     node2.value().setString("value2");
-    node2.commit(error);
+    db.commitNode(node2, error);
     
     ISHTF_FAIL_IF((bool)error);
 
@@ -506,7 +506,7 @@ void XMLTreeDBTests::AppendTest5(FileComparisonTest& test)
         std::stringstream key;
         key << "key" << i;
         DiplodocusDB::TreeDBNode node = db.root().append(key.str());
-        node.commit(error);
+        db.commitNode(node, error);
         if (error)
         {
             break;
@@ -539,7 +539,7 @@ void XMLTreeDBTests::AppendTest6(FileComparisonTest& test)
     
     DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
     DiplodocusDB::TreeDBNode node2 = node1.append("key2");
-    node1.commit(error);
+    db.commitNode(node1, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -565,7 +565,7 @@ void XMLTreeDBTests::AppendTest7(FileComparisonTest& test)
     DiplodocusDB::TreeDBNode node1 = db.root().append("key1");
     node1.value().setString("value1");
     DiplodocusDB::TreeDBNode node2 = node1.append("key2");
-    db.root().commit(error);
+    db.commitNode(db.root(), error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -589,7 +589,7 @@ void XMLTreeDBTests::SetTest1(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
     
     DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
-    node.commit(error);
+    db.commitNode(node, error);
         
     ISHTF_FAIL_IF((bool)error);
 
@@ -613,12 +613,12 @@ void XMLTreeDBTests::SetTest2(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
     
     DiplodocusDB::TreeDBNode node1 = db.root().set("key1", error);
-    node1.commit(error);
+    db.commitNode(node1, error);
 
     ISHTF_FAIL_IF((bool)error);
         
     DiplodocusDB::TreeDBNode node2 = db.root().set("key1", error);
-    node2.commit(error);
+    db.commitNode(node2, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -649,7 +649,7 @@ void XMLTreeDBTests::RemoveAllTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    node.commit(error);
+    db.commitNode(node, error);
         
     ISHTF_FAIL_IF((bool)error);
 

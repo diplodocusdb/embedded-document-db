@@ -55,4 +55,9 @@ TreeDBNode& XMLTreeDB::root()
     return m_impl->root();
 }
 
+void XMLTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
+{
+    m_impl->commitNode(static_cast<XMLTreeDBNodeImpl&>(*node.impl()), error);
+}
+
 }

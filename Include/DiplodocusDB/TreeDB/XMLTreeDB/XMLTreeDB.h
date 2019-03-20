@@ -46,6 +46,8 @@ public:
 
     TreeDBNode& root();
 
+    void commitNode(TreeDBNode& node, Ishiko::Error& error) override;
+
 private:
     std::shared_ptr<XMLTreeDBImpl> m_impl;
 };
