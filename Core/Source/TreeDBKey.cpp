@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -65,6 +65,21 @@ TreeDBKey TreeDBKey::parentKey() const
     else if (pos != std::string::npos)
     {
         result = TreeDBKey(m_value.substr(0, pos));
+    }
+    return result;
+}
+
+std::string TreeDBKey::base() const
+{
+    std::string result;
+    size_t pos = m_value.rfind('/');
+    if (pos != std::string::npos)
+    {
+        result = m_value.substr(pos + 1);
+    }
+    else
+    {
+        result = m_value;
     }
     return result;
 }

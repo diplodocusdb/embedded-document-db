@@ -32,6 +32,10 @@ TreeDBKeyTests::TreeDBKeyTests(const TestNumber& number, const TestEnvironment& 
     append<HeapAllocationErrorsTest>("parentKey test 1", ParentKeyTest1);
     append<HeapAllocationErrorsTest>("parentKey test 2", ParentKeyTest2);
     append<HeapAllocationErrorsTest>("parentKey test 3", ParentKeyTest3);
+    append<HeapAllocationErrorsTest>("base test 1", BaseTest1);
+    append<HeapAllocationErrorsTest>("base test 2", BaseTest2);
+    append<HeapAllocationErrorsTest>("base test 3", BaseTest3);
+    append<HeapAllocationErrorsTest>("base test 4", BaseTest4);
 }
 
 void TreeDBKeyTests::ConstructionTest1(Test& test)
@@ -63,5 +67,37 @@ void TreeDBKeyTests::ParentKeyTest3(Test& test)
     DiplodocusDB::TreeDBKey key("/");
 
     ISHTF_FAIL_UNLESS(key.parentKey().isNull());
+    ISHTF_PASS();
+}
+
+void TreeDBKeyTests::BaseTest1(Test& test)
+{
+    DiplodocusDB::TreeDBKey key("/key1/key2");
+
+    ISHTF_FAIL_UNLESS(key.base() == "key2");
+    ISHTF_PASS();
+}
+
+void TreeDBKeyTests::BaseTest2(Test& test)
+{
+    DiplodocusDB::TreeDBKey key("/key1");
+
+    ISHTF_FAIL_UNLESS(key.base() == "key1");
+    ISHTF_PASS();
+}
+
+void TreeDBKeyTests::BaseTest3(Test& test)
+{
+    DiplodocusDB::TreeDBKey key("/");
+
+    ISHTF_FAIL_UNLESS(key.base() == "");
+    ISHTF_PASS();
+}
+
+void TreeDBKeyTests::BaseTest4(Test& test)
+{
+    DiplodocusDB::TreeDBKey key("key1");
+
+    ISHTF_FAIL_UNLESS(key.base() == "key1");
     ISHTF_PASS();
 }
