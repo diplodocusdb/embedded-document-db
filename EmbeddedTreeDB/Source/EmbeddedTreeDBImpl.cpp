@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -92,8 +92,7 @@ bool EmbeddedTreeDBImpl::removeNode(const TreeDBKey& key,
     return m_masterFile.removeNode(key, error);
 }
 
-void EmbeddedTreeDBImpl::commitNode(const EmbeddedTreeDBNodeImpl& node,
-                                    Ishiko::Error& error)
+void EmbeddedTreeDBImpl::commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error)
 {
     m_masterFile.addNode(node, error);
 }

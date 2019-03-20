@@ -156,8 +156,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
     return result;
 }
 
-void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node,
-                         Ishiko::Error& error)
+void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error)
 {
     PageRepositoryWriter writer = m_repository.insert(node.marker().position(), error);
     if (error)

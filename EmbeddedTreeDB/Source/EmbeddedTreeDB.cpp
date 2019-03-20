@@ -57,4 +57,9 @@ TreeDBNode& EmbeddedTreeDB::root()
     return m_impl->root();
 }
 
+void EmbeddedTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
+{
+    m_impl->commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl()), error);
+}
+
 }

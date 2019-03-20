@@ -46,6 +46,8 @@ public:
 
     TreeDBNode& root() override;
 
+    void commitNode(TreeDBNode& node, Ishiko::Error& error) override;
+
 private:
     std::shared_ptr<EmbeddedTreeDBImpl> m_impl;
 };

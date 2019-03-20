@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,9 +23,9 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_UNCOMMITTEDNODES_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_UNCOMMITTEDNODES_H_
 
+#include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryPosition.h"
 #include <memory>
 
 namespace DiplodocusDB
@@ -39,10 +39,10 @@ public:
     UncommittedNodes(std::shared_ptr<EmbeddedTreeDBImpl> db);
     ~UncommittedNodes();
 
-    std::shared_ptr<TreeDBNode> createNode(const TreeDBKey& key, const PageRepositoryPosition& pos);
+    TreeDBNode createNode(const TreeDBKey& key, const RecordMarker& marker);
 
 private:
-    std::shared_ptr<EmbeddedTreeDBImpl> m_db;
+    std::weak_ptr<EmbeddedTreeDBImpl> m_db;
 };
 
 }
