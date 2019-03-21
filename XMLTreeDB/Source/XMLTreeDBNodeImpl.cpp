@@ -117,20 +117,20 @@ TreeDBNode XMLTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Error& e
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::insert(size_t index, const TreeDBKey& key)
+TreeDBNode XMLTreeDBNodeImpl::insert(size_t index, const TreeDBKey& key, Ishiko::Error& error)
 {
     pugi::xml_node newNode = m_node.append_child(key.value().c_str());
     m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, this, newNode));
     return TreeDBNode(m_children.back());
 }
 
-TreeDBNode XMLTreeDBNodeImpl::insertBefore(const TreeDBNode& child, const TreeDBKey& key)
+TreeDBNode XMLTreeDBNodeImpl::insertBefore(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
 {
     TreeDBNode result;
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBNode& child, const TreeDBKey& key)
+TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
 {
     TreeDBNode result;
     return result;
