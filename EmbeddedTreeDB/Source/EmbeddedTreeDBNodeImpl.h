@@ -34,8 +34,7 @@ class EmbeddedTreeDBImpl;
 class EmbeddedTreeDBNodeImpl : public TreeDBNodeImpl
 {
 public:
-    EmbeddedTreeDBNodeImpl(std::weak_ptr<EmbeddedTreeDBImpl> db, const TreeDBKey& key,
-        const RecordMarker& nodeMarker, const RecordMarker& childrenMarker);
+    EmbeddedTreeDBNodeImpl(const TreeDBKey& key, const RecordMarker& nodeMarker, const RecordMarker& childrenMarker);
     ~EmbeddedTreeDBNodeImpl() override;
 
     bool isRoot() const override;
@@ -53,14 +52,11 @@ public:
     TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) override;
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
     void removeAll(Ishiko::Error& error) override;
-    void commit(Ishiko::Error& error) override;
 
     const RecordMarker& marker() const;
     void setMarker(const RecordMarker& marker);
     
 private:
-    std::weak_ptr<EmbeddedTreeDBImpl> m_db;
-    std::vector<std::pair<std::string, std::shared_ptr<EmbeddedTreeDBNodeImpl> > > m_children;
     RecordMarker m_nodeMarker;
     RecordMarker m_childrenMarker;
 };

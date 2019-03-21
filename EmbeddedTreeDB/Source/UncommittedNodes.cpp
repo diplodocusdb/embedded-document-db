@@ -38,7 +38,8 @@ UncommittedNodes::~UncommittedNodes()
 TreeDBNode UncommittedNodes::createNode(const TreeDBKey& key,
                                         const RecordMarker& marker)
 {
-    return TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(m_db, key, marker, RecordMarker(PageRepositoryPosition(0, 0))));
+    return TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(key, marker,
+        RecordMarker(PageRepositoryPosition(0, 0))));
 }
 
 }
