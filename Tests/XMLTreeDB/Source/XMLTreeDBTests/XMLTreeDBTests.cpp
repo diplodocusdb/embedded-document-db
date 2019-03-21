@@ -367,8 +367,7 @@ void XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node = db.root().insert("key1", 0);
-    db.commitNode(node, error);
+    DiplodocusDB::TreeDBNode node = db.insert(db.root(), 0, "key1", error);
     
     ISHTF_FAIL_IF((bool)error);
 
