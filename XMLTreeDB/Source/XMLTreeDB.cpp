@@ -55,6 +55,21 @@ TreeDBNode& XMLTreeDB::root()
     return m_impl->root();
 }
 
+TreeDBNode XMLTreeDB::insert(TreeDBNode& parent, size_t index, const TreeDBKey& key)
+{
+    return m_impl->insert(parent, index, key);
+}
+
+TreeDBNode XMLTreeDB::insertBefore(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key)
+{
+    return m_impl->insertBefore(parent, child, key);
+}
+
+TreeDBNode XMLTreeDB::insertAfter(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key)
+{
+    return m_impl->insertAfter(parent, child, key);
+}
+
 void XMLTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
 {
     m_impl->commitNode(static_cast<XMLTreeDBNodeImpl&>(*node.impl()), error);
