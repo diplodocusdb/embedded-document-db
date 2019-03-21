@@ -34,25 +34,21 @@ EmbeddedTreeDBImpl::~EmbeddedTreeDBImpl()
 {
 }
 
-void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path,
-                                Ishiko::Error& error)
+void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_masterFile.create(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "/", m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
-        m_uncommittedNodes = std::make_shared<UncommittedNodes>(shared_from_this());
+        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>("/", m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
     }
 }
 
-void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path,
-                              Ishiko::Error& error)
+void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_masterFile.open(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), "/", m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
-        m_uncommittedNodes = std::make_shared<UncommittedNodes>(shared_from_this());
+        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>("/", m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
     }
 }
 
@@ -66,24 +62,22 @@ TreeDBNode& EmbeddedTreeDBImpl::root()
     return m_root;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::getNode(const TreeDBKey& key,
-                                       Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBImpl::getNode(const TreeDBKey& key, Ishiko::Error& error)
 {
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(shared_from_this(), key, PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
+    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(key,
+        PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
     bool found = m_masterFile.findNode(key, *temp, error);
     return TreeDBNode(temp);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertNode(const TreeDBKey& key,
-                                          const RecordMarker& marker)
+TreeDBNode EmbeddedTreeDBImpl::insertNode(const TreeDBKey& key, const RecordMarker& marker)
 {
-    return m_uncommittedNodes->createNode(key, marker);
+    return m_uncommittedNodes.createNode(key, marker);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendNode(const EmbeddedTreeDBNodeImpl& parentNode,
-                                          const TreeDBKey& key)
+TreeDBNode EmbeddedTreeDBImpl::appendNode(const EmbeddedTreeDBNodeImpl& parentNode, const TreeDBKey& key)
 {
-    return m_uncommittedNodes->createNode(key, m_masterFile.dataEndPosition());
+    return m_uncommittedNodes.createNode(key, m_masterFile.dataEndPosition());
 }
 
 bool EmbeddedTreeDBImpl::removeNode(const TreeDBKey& key,

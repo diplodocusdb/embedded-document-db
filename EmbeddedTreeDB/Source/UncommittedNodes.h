@@ -26,23 +26,17 @@
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
-#include <memory>
 
 namespace DiplodocusDB
 {
 
-class EmbeddedTreeDBImpl;
-
 class UncommittedNodes
 {
 public:
-    UncommittedNodes(std::shared_ptr<EmbeddedTreeDBImpl> db);
+    UncommittedNodes();
     ~UncommittedNodes();
 
     TreeDBNode createNode(const TreeDBKey& key, const RecordMarker& marker);
-
-private:
-    std::weak_ptr<EmbeddedTreeDBImpl> m_db;
 };
 
 }

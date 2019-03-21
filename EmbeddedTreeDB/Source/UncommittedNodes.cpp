@@ -26,8 +26,7 @@
 namespace DiplodocusDB
 {
 
-UncommittedNodes::UncommittedNodes(std::shared_ptr<EmbeddedTreeDBImpl> db)
-    : m_db(db)
+UncommittedNodes::UncommittedNodes()
 {
 }
 

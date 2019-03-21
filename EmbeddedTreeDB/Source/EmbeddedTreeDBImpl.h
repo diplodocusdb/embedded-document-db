@@ -34,7 +34,7 @@
 namespace DiplodocusDB
 {
 
-class EmbeddedTreeDBImpl : public std::enable_shared_from_this<EmbeddedTreeDBImpl>
+class EmbeddedTreeDBImpl
 {
 public:
     EmbeddedTreeDBImpl();
@@ -55,7 +55,7 @@ public:
 private:
     MasterFile m_masterFile;
     KeyCache m_keyCache;
-    std::shared_ptr<UncommittedNodes> m_uncommittedNodes;
+    UncommittedNodes m_uncommittedNodes;
     TreeDBNode m_root;
 };
 
