@@ -114,21 +114,6 @@ TreeDBNode TreeDBNode::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
     return m_impl->nextSibling(key, error);
 }
 
-TreeDBNode TreeDBNode::insert(const TreeDBKey& key, size_t index)
-{
-    return m_impl->insert(key, index);
-}
-
-TreeDBNode TreeDBNode::insertBefore(const TreeDBKey& key, TreeDBNode& child)
-{
-    return m_impl->insertBefore(key, child);
-}
-
-TreeDBNode TreeDBNode::insertAfter(const TreeDBKey& key, TreeDBNode& child)
-{
-    return m_impl->insertAfter(key, child);
-}
-
 TreeDBNode TreeDBNode::append(const TreeDBKey& key)
 {
     return m_impl->append(key);
