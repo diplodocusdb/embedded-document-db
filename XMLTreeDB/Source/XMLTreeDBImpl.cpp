@@ -60,35 +60,35 @@ TreeDBNode& XMLTreeDBImpl::root()
 
 TreeDBNode XMLTreeDBImpl::insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error)
 {
-    TreeDBNodeImpl& parentNodeImpl = *parent.impl();
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
     TreeDBNode result = parentNodeImpl.insert(index, key, error);
-    commitNode(static_cast<XMLTreeDBNodeImpl&>(parentNodeImpl), error);
+    commitNode(parentNodeImpl, error);
     return result;
 }
 
 TreeDBNode XMLTreeDBImpl::insertBefore(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
     Ishiko::Error& error)
 {
-    TreeDBNodeImpl& parentNodeImpl = *parent.impl();
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
     TreeDBNode result = parentNodeImpl.insertBefore(child, key, error);
-    commitNode(static_cast<XMLTreeDBNodeImpl&>(parentNodeImpl), error);
+    commitNode(parentNodeImpl, error);
     return result;
 }
 
 TreeDBNode XMLTreeDBImpl::insertAfter(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
     Ishiko::Error& error)
 {
-    TreeDBNodeImpl& parentNodeImpl = *parent.impl();
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
     TreeDBNode result = parentNodeImpl.insertAfter(child, key, error);
-    commitNode(static_cast<XMLTreeDBNodeImpl&>(parentNodeImpl), error);
+    commitNode(parentNodeImpl, error);
     return result;
 }
 
 TreeDBNode XMLTreeDBImpl::append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error)
 {
-    TreeDBNodeImpl& parentNodeImpl = *parent.impl();
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
     TreeDBNode result = parentNodeImpl.append(key, error);
-    commitNode(static_cast<XMLTreeDBNodeImpl&>(parentNodeImpl), error);
+    commitNode(parentNodeImpl, error);
     return result;
 }
 
