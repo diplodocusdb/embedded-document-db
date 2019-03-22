@@ -10,5 +10,7 @@ Debug/
 Release/
 /Lib/*
 !/Lib/README.md
+Documentation/Doxygen/html
+Documentation/Doxygen/latex
 Tests/EmbeddedTreeDB/TestOutput
 Tests/XMLTreeDB/TestOutput
