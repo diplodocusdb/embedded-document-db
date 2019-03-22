@@ -29,14 +29,31 @@
 namespace DiplodocusDB
 {
 
+/// Base class for the different hierarchical databases.
+/**
+    This class defines a common API for all the DiplodocusDB hierarchical databases.
+*/
 class TreeDB
 {
 public:
+    /// Destructor.
     virtual ~TreeDB() = default;
 
+    /// Returns the root of the tree.
     virtual TreeDBNode& root() = 0;
 
-    virtual TreeDBNode insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error) = 0;
+    /// Inserts a new child node at a given position and returns a handle to the new child.
+    /**
+        The new node has no value.
+        This operation commits the new node to the database immediately.
+        @param parent The parent of the new child node.
+        @param index The position of the new child node in the sequence of existing children.
+        @param name The name of the new child node. This is not a complete key, only the name of the new child since
+        we specify the parent in another argument.
+        @param error The result of the operation.
+        @returns A handle to new child node.
+    */
+    virtual TreeDBNode insert(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error) = 0;
     virtual TreeDBNode insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
         Ishiko::Error& error) = 0;
     virtual TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
