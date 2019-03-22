@@ -46,9 +46,13 @@ public:
 
     TreeDBNode& root();
 
+    TreeDBNode insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
+
     TreeDBNode getNode(const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode insertNode(const TreeDBKey& key, const RecordMarker& marker);
-    TreeDBNode appendNode(const EmbeddedTreeDBNodeImpl& parentNode, const TreeDBKey& key);
+    TreeDBNode appendNode(const TreeDBKey& key);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
     void commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
 

@@ -57,6 +57,23 @@ TreeDBNode& EmbeddedTreeDB::root()
     return m_impl->root();
 }
 
+TreeDBNode EmbeddedTreeDB::insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error)
+{
+    return m_impl->insert(parent, index, key, error);
+}
+
+TreeDBNode EmbeddedTreeDB::insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
+    Ishiko::Error& error)
+{
+    return m_impl->insertBefore(parent, child, key, error);
+}
+
+TreeDBNode EmbeddedTreeDB::insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
+    Ishiko::Error& error)
+{
+    return m_impl->insertAfter(parent, child, key, error);
+}
+
 void EmbeddedTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
 {
     m_impl->commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl()), error);

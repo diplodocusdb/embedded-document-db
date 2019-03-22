@@ -62,6 +62,31 @@ TreeDBNode& EmbeddedTreeDBImpl::root()
     return m_root;
 }
 
+TreeDBNode EmbeddedTreeDBImpl::insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error)
+{
+    TreeDBNode result = appendNode(key);
+    commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl()), error);
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBImpl::insertBefore(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
+    Ishiko::Error& error)
+{
+    // TODO : does this work?
+    TreeDBNode result = insertNode(key, static_cast<EmbeddedTreeDBNodeImpl&>(child.impl())->marker());
+    commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl()), error);
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBImpl::insertAfter(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
+    Ishiko::Error& error)
+{
+    // TODO : does this work?
+    TreeDBNode result = insertNode(key, static_cast<EmbeddedTreeDBNodeImpl&>(child.impl())->marker());
+    commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl()), error);
+    return result;
+}
+
 TreeDBNode EmbeddedTreeDBImpl::getNode(const TreeDBKey& key, Ishiko::Error& error)
 {
     std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(key,
@@ -75,7 +100,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertNode(const TreeDBKey& key, const RecordMark
     return m_uncommittedNodes.createNode(key, marker);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendNode(const EmbeddedTreeDBNodeImpl& parentNode, const TreeDBKey& key)
+TreeDBNode EmbeddedTreeDBImpl::appendNode(const TreeDBKey& key)
 {
     return m_uncommittedNodes.createNode(key, m_masterFile.dataEndPosition());
 }

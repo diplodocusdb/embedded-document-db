@@ -94,44 +94,19 @@ TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Err
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::insert(const TreeDBKey& key, size_t index)
+TreeDBNode EmbeddedTreeDBNodeImpl::insert(size_t index, const TreeDBKey& key, Ishiko::Error& error)
 {
-    std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
-    if (db)
-    {
-        return db->appendNode(*this, key);
-    }
-
-    // TODO
-    TreeDBNode result;
-    return result;
+    // Unused base function
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::insertBefore(const TreeDBKey& key, TreeDBNode& child)
+TreeDBNode EmbeddedTreeDBNodeImpl::insertBefore(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
 {
-    std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
-    if (db)
-    {
-        return db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child.impl())->marker());
-    }
-
-    // TODO
-    TreeDBNode result;
-    return result;
+    // Unused base function
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::insertAfter(const TreeDBKey& key,
-                                               TreeDBNode& child)
+TreeDBNode EmbeddedTreeDBNodeImpl::insertAfter(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
 {
-    std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
-    if (db)
-    {
-        return db->insertNode(key, std::static_pointer_cast<EmbeddedTreeDBNodeImpl>(child.impl())->marker());
-    }
-
-    // TODO
-    TreeDBNode result;
-    return result;
+    // Unused base function
 }
 
 TreeDBNode EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
@@ -139,7 +114,7 @@ TreeDBNode EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
     std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
     if (db)
     {
-        return db->appendNode(*this, key);
+        return db->appendNode(key);
     }
 
     // TODO
