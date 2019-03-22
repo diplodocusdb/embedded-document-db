@@ -114,11 +114,6 @@ TreeDBNode TreeDBNode::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
     return m_impl->nextSibling(key, error);
 }
 
-TreeDBNode TreeDBNode::append(const TreeDBKey& key)
-{
-    return m_impl->append(key);
-}
-
 TreeDBNode TreeDBNode::set(const TreeDBKey& key, Ishiko::Error& error)
 {
     return m_impl->set(key, error);

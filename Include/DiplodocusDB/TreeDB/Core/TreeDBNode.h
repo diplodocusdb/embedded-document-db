@@ -59,7 +59,6 @@ public:
     TreeDBNode nextSibling(Ishiko::Error& error);
     TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error);
 
-    TreeDBNode append(const TreeDBKey& key);
     TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error);
     bool remove(const TreeDBKey& key, Ishiko::Error& error);
     void removeAll(Ishiko::Error& error);

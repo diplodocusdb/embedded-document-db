@@ -55,11 +55,12 @@ void EmbeddedTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko:
 
 TreeDBNode EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
 {
+    /*
     std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
     if (db)
     {
         return db->getNode(key, error);
-    }
+    }*/
 
     // TODO : error
     TreeDBNode result;

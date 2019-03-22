@@ -41,6 +41,7 @@ public:
         Ishiko::Error& error) = 0;
     virtual TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
         Ishiko::Error& error) = 0;
+    virtual TreeDBNode append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error) = 0;
 
     // TODO : this is temporary until I have migrated all the node functions here
     virtual void commitNode(TreeDBNode& node, Ishiko::Error& error) = 0;
