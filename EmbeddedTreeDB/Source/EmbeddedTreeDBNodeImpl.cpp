@@ -98,26 +98,30 @@ TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Err
 TreeDBNode EmbeddedTreeDBNodeImpl::insert(size_t index, const TreeDBKey& key, Ishiko::Error& error)
 {
     // Unused base function
+    // TODO
+    TreeDBNode result;
+    return result;
 }
 
 TreeDBNode EmbeddedTreeDBNodeImpl::insertBefore(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
 {
     // Unused base function
+    // TODO
+    TreeDBNode result;
+    return result;
 }
 
 TreeDBNode EmbeddedTreeDBNodeImpl::insertAfter(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
 {
     // Unused base function
+    // TODO
+    TreeDBNode result;
+    return result;
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key)
+TreeDBNode EmbeddedTreeDBNodeImpl::append(const TreeDBKey& key, Ishiko::Error& error)
 {
-    std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
-    if (db)
-    {
-        return db->appendNode(key);
-    }
-
+    // Unused base function
     // TODO
     TreeDBNode result;
     return result;
@@ -133,11 +137,12 @@ TreeDBNode EmbeddedTreeDBNodeImpl::set(const TreeDBKey& key, Ishiko::Error& erro
 bool EmbeddedTreeDBNodeImpl::remove(const TreeDBKey& key,
                                     Ishiko::Error& error)
 {
+    /*
     std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
     if (db)
     {
         return db->removeNode(key, error);
-    }
+    }*/
 
     // TODO
     return false;

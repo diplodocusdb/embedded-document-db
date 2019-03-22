@@ -48,7 +48,7 @@ public:
     TreeDBNode insert(size_t index, const TreeDBKey& key, Ishiko::Error& error) override;
     TreeDBNode insertBefore(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error) override;
     TreeDBNode insertAfter(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error) override;
-    TreeDBNode append(const TreeDBKey& key) override;
+    TreeDBNode append(const TreeDBKey& key, Ishiko::Error& error) override;
     TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) override;
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
     void removeAll(Ishiko::Error& error) override;

@@ -49,6 +49,7 @@ public:
     TreeDBNode insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error);
 
     TreeDBNode getNode(const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode insertNode(const TreeDBKey& key, const RecordMarker& marker);

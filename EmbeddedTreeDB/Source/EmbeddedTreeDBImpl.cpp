@@ -69,20 +69,27 @@ TreeDBNode EmbeddedTreeDBImpl::insert(TreeDBNode& parent, size_t index, const Tr
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertBefore(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
+TreeDBNode EmbeddedTreeDBImpl::insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
     Ishiko::Error& error)
 {
     // TODO : does this work?
-    TreeDBNode result = insertNode(key, static_cast<EmbeddedTreeDBNodeImpl&>(child.impl())->marker());
+    TreeDBNode result = insertNode(key, static_cast<EmbeddedTreeDBNodeImpl&>(*child.impl()).marker());
     commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl()), error);
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertAfter(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
+TreeDBNode EmbeddedTreeDBImpl::insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
     Ishiko::Error& error)
 {
     // TODO : does this work?
-    TreeDBNode result = insertNode(key, static_cast<EmbeddedTreeDBNodeImpl&>(child.impl())->marker());
+    TreeDBNode result = insertNode(key, static_cast<EmbeddedTreeDBNodeImpl&>(*child.impl()).marker());
+    commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl()), error);
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBImpl::append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error)
+{
+    TreeDBNode result = appendNode(key);
     commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl()), error);
     return result;
 }

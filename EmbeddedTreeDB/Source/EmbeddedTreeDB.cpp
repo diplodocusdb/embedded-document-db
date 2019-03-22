@@ -74,6 +74,11 @@ TreeDBNode EmbeddedTreeDB::insertAfter(TreeDBNode& parent, TreeDBNode& child, co
     return m_impl->insertAfter(parent, child, key, error);
 }
 
+TreeDBNode EmbeddedTreeDB::append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error)
+{
+    return m_impl->append(parent, key, error);
+}
+
 void EmbeddedTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
 {
     m_impl->commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl()), error);
