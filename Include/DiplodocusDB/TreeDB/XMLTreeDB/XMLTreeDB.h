@@ -46,6 +46,11 @@ public:
 
     TreeDBNode& root() override;
 
+    TreeDBNode insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
+        Ishiko::Error& error) override;
+    TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error) override;
+
     void commitNode(TreeDBNode& node, Ishiko::Error& error) override;
 
 private:

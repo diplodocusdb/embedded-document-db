@@ -37,9 +37,9 @@ public:
     virtual TreeDBNode& root() = 0;
 
     virtual TreeDBNode insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error) = 0;
-    virtual TreeDBNode insertBefore(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
+    virtual TreeDBNode insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
         Ishiko::Error& error) = 0;
-    virtual TreeDBNode insertAfter(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
+    virtual TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
         Ishiko::Error& error) = 0;
 
     // TODO : this is temporary until I have migrated all the node functions here
