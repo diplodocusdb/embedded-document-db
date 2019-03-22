@@ -58,10 +58,11 @@ TreeDBNode& XMLTreeDBImpl::root()
     return m_root;
 }
 
-TreeDBNode XMLTreeDBImpl::insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
+    Ishiko::Error& error)
 {
     XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = parentNodeImpl.insert(index, key, error);
+    TreeDBNode result = parentNodeImpl.insertChildNode(index, name, error);
     commitNode(parentNodeImpl, error);
     return result;
 }

@@ -53,7 +53,8 @@ public:
         @param error The result of the operation.
         @returns A handle to new child node.
     */
-    virtual TreeDBNode insert(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error) = 0;
+    virtual TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
+        Ishiko::Error& error) = 0;
     virtual TreeDBNode insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
         Ishiko::Error& error) = 0;
     virtual TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
