@@ -136,7 +136,7 @@ TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBNode& child, const TreeDBK
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key)
+TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key, Ishiko::Error& error)
 {
     pugi::xml_node newNode = m_node.append_child(key.value().c_str());
     m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, this, newNode));

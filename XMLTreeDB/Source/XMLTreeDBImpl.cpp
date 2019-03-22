@@ -84,6 +84,14 @@ TreeDBNode XMLTreeDBImpl::insertAfter(TreeDBNode& parent, const TreeDBNode& chil
     return result;
 }
 
+TreeDBNode XMLTreeDBImpl::append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error)
+{
+    TreeDBNodeImpl& parentNodeImpl = *parent.impl();
+    TreeDBNode result = parentNodeImpl.append(key, error);
+    commitNode(static_cast<XMLTreeDBNodeImpl&>(parentNodeImpl), error);
+    return result;
+}
+
 void XMLTreeDBImpl::commitNode(XMLTreeDBNodeImpl& node, Ishiko::Error& error)
 {
     node.updateValue();

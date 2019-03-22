@@ -53,7 +53,7 @@ public:
     virtual TreeDBNode insert(size_t index, const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual TreeDBNode insertBefore(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual TreeDBNode insertAfter(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error) = 0;
-    virtual TreeDBNode append(const TreeDBKey& key) = 0;
+    virtual TreeDBNode append(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual bool remove(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual void removeAll(Ishiko::Error& error) = 0;

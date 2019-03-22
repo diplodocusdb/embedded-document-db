@@ -44,6 +44,7 @@ public:
     TreeDBNode insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode insertBefore(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode insertAfter(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error);
 
     void commitNode(XMLTreeDBNodeImpl& node, Ishiko::Error& error);
 
