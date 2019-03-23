@@ -95,10 +95,6 @@ TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Err
     return result;
 }
 
-void EmbeddedTreeDBNodeImpl::removeAll(Ishiko::Error& error)
-{
-}
-
 const RecordMarker& EmbeddedTreeDBNodeImpl::marker() const
 {
     return m_nodeMarker;

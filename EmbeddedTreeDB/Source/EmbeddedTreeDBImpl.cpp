@@ -132,6 +132,12 @@ bool EmbeddedTreeDBImpl::removeNode(const TreeDBKey& key,
     return m_masterFile.removeNode(key, error);
 }
 
+size_t EmbeddedTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error)
+{
+    // TODO
+    return 0;
+}
+
 void EmbeddedTreeDBImpl::commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error)
 {
     m_masterFile.addNode(node, error);
