@@ -46,7 +46,7 @@ private:
     static void NextSiblingTest1(Ishiko::Tests::Test& test);
     static void NextSiblingTest2(Ishiko::Tests::Test& test);
     static void NextSiblingTest3(Ishiko::Tests::Test& test);
-    static void InsertTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertChildNodeTest1(Ishiko::Tests::FileComparisonTest& test);
     static void AppendTest1(Ishiko::Tests::FileComparisonTest& test);
     static void AppendTest2(Ishiko::Tests::FileComparisonTest& test);
     static void AppendTest3(Ishiko::Tests::FileComparisonTest& test);

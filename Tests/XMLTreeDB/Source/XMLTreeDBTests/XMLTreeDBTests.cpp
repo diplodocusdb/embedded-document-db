@@ -45,7 +45,7 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<HeapAllocationErrorsTest>("nextSibling test 1", NextSiblingTest1);
     append<HeapAllocationErrorsTest>("nextSibling test 2", NextSiblingTest2);
     append<HeapAllocationErrorsTest>("nextSibling test 3", NextSiblingTest3);
-    append<FileComparisonTest>("insert test 1", InsertTest1);
+    append<FileComparisonTest>("insert test 1", InsertChildNodeTest1);
     append<FileComparisonTest>("append test 1", AppendTest1);
     append<FileComparisonTest>("append test 2", AppendTest2);
     append<FileComparisonTest>("append test 3", AppendTest3);
@@ -356,9 +356,9 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
     ISHTF_PASS();
 }
 
-void XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
+void XMLTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_InsertTest1.xml");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
 
     Ishiko::Error error(0);
 
@@ -367,14 +367,14 @@ void XMLTreeDBTests::InsertTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node = db.insert(db.root(), 0, "key1", error);
+    DiplodocusDB::TreeDBNode node = db.insertChildNode(db.root(), 0, "key1", error);
     
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_InsertTest1.xml");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
 
     ISHTF_PASS();
 }
