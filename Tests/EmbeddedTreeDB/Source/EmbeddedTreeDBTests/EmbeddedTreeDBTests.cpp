@@ -51,7 +51,7 @@ EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestEnv
     append<FileComparisonTest>("appendChildNode test 4", AppendChildNodeTest4);
     append<FileComparisonTest>("appendChildNode test 5", AppendChildNodeTest5);
     append<FileComparisonTest>("appendChildNode test 6", AppendChildNodeTest6);
-    append<FileComparisonTest>("remove test 1", RemoveTest1);
+    append<FileComparisonTest>("removeChildNode test 1", RemoveChildNodeTest1);
 }
 
 void EmbeddedTreeDBTests::CreationTest1(Test& test)
@@ -574,10 +574,10 @@ void EmbeddedTreeDBTests::AppendChildNodeTest6(FileComparisonTest& test)
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::RemoveTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::RemoveChildNodeTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_RemoveChildNodeTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_RemoveChildNodeTest1.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -588,12 +588,12 @@ void EmbeddedTreeDBTests::RemoveTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    db.root().remove("key1", error);
+    db.removeChildNode(db.root(), "key1", error);
     
     ISHTF_FAIL_IF((bool)error);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeRemoveTest1.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_RemoveChildNodeTest1.dpdb");
 
     ISHTF_PASS();
 }

@@ -52,7 +52,7 @@ private:
     static void AppendChildNodeTest4(Ishiko::Tests::FileComparisonTest& test);
     static void AppendChildNodeTest5(Ishiko::Tests::FileComparisonTest& test);
     static void AppendChildNodeTest6(Ishiko::Tests::FileComparisonTest& test);
-    static void RemoveTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void RemoveChildNodeTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif
