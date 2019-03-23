@@ -1,7 +1,8 @@
-ishikopath = envvar("ISHIKO");
-import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
+ishikopath = envvar("ISHIKO");
+import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
+import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/Boost.bkl;
 
 toolsets = gnu vs2017 vs2015 vs2013;
 
@@ -10,7 +11,7 @@ vs2017.solutionfile = ../VC15/DiplodocusTreeDBCore.sln;
 vs2015.solutionfile = ../VC14/DiplodocusTreeDBCore.sln;
 vs2013.solutionfile = ../VC12/DiplodocusTreeDBCore.sln;
 
-library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors
+library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
 {
     archs = x86 x86_64;
    

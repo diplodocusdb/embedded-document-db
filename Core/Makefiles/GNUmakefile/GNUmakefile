@@ -37,8 +37,9 @@ endif
 # Additionally, this makefile is customizable with the following
 # settings:
 #
-#      ISHIKO_ERRORS_ROOT      Path to the Ishiko Errors installation
 #      DIPLODOCUSDB_CORE_ROOT  Path to the DiplodocusDB installation
+#      ISHIKO_ERRORS_ROOT      Path to the Ishiko Errors installation
+#      BOOST_ROOT              Path to the Boost installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -65,10 +66,12 @@ endif
 # Configurable settings:
 # 
 
-# Path to the Ishiko Errors installation
-ISHIKO_ERRORS_ROOT ?= $(ISHIKO)/Errors
 # Path to the DiplodocusDB installation
 DIPLODOCUSDB_CORE_ROOT ?= $(DIPLODOCUSDB)/Core
+# Path to the Ishiko Errors installation
+ISHIKO_ERRORS_ROOT ?= $(ISHIKO)/Errors
+# Path to the Boost installation
+BOOST_ROOT ?= $(BOOST)
 
 # ------------
 
@@ -79,19 +82,19 @@ all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusT
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o: ../../Source/TreeDBKey.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBKey.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT)/include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBKey.cpp
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o: ../../Source/TreeDBValue.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBValue.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT)/include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBValue.cpp
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o: ../../Source/TreeDBNode.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBNode.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT)/include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBNode.cpp
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o: ../../Source/TreeDBNodeImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBNodeImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT)/include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBNodeImpl.cpp
 
 $(_builddir)DiplodocusTreeDBCore_TreeDB.o: ../../Source/TreeDB.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDB.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT)/include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDB.cpp
 
 clean:
 	rm -f $(_builddir)*.o
