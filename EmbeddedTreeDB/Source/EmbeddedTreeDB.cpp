@@ -85,6 +85,11 @@ TreeDBNode EmbeddedTreeDB::setChildNode(TreeDBNode& parent, const std::string& n
     return m_impl->setChildNode(parent, name, error);
 }
 
+size_t EmbeddedTreeDB::removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->removeChildNode(parent, name, error);
+}
+
 void EmbeddedTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
 {
     m_impl->commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl()), error);

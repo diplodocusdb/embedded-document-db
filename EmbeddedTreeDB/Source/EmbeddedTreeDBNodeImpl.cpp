@@ -95,20 +95,6 @@ TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Err
     return result;
 }
 
-bool EmbeddedTreeDBNodeImpl::remove(const TreeDBKey& key,
-                                    Ishiko::Error& error)
-{
-    /*
-    std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
-    if (db)
-    {
-        return db->removeNode(key, error);
-    }*/
-
-    // TODO
-    return false;
-}
-
 void EmbeddedTreeDBNodeImpl::removeAll(Ishiko::Error& error)
 {
 }

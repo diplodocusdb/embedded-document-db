@@ -102,6 +102,12 @@ TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::strin
     return result;
 }
 
+size_t EmbeddedTreeDBImpl::removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    // TODO
+    return 0;
+}
+
 TreeDBNode EmbeddedTreeDBImpl::getNode(const TreeDBKey& key, Ishiko::Error& error)
 {
     std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(key,
