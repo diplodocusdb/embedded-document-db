@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
 
 #include "DiplodocusDB/Core/DataType.h"
+#include <boost/any.hpp>
 #include <string>
 
 namespace DiplodocusDB
@@ -37,13 +38,15 @@ public:
 
     const DataType& type() const;
 
-    const std::string& asString() const;
+    int32_t asInt32() const;
+    const std::string& asUTF8String() const;
 
-    void setString(const std::string& value);
+    void setInt32(int32_t value);
+    void setUTF8String(const std::string& value);
 
 private:
     DataType m_type;
-    std::string m_string;
+    boost::any m_data;
 };
 
 }

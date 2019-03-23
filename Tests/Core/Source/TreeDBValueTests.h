@@ -32,6 +32,8 @@ public:
 
 private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
+    static void SetInt32Test1(Ishiko::Tests::Test& test);
+    static void SetUTF8StringTest1(Ishiko::Tests::Test& test);
 };
 
 #endif

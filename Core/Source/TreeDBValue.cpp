@@ -39,15 +39,26 @@ const DataType& TreeDBValue::type() const
     return m_type;
 }
 
-const std::string& TreeDBValue::asString() const
+int32_t TreeDBValue::asInt32() const
 {
-    return m_string;
+    return boost::any_cast<int32_t>(m_data);
 }
 
-void TreeDBValue::setString(const std::string& value)
+const std::string& TreeDBValue::asUTF8String() const
+{
+    return boost::any_cast<const std::string&>(m_data);
+}
+
+void TreeDBValue::setInt32(int32_t value)
+{
+    m_type = EPrimitiveDataType::eInt32;
+    m_data = value;
+}
+
+void TreeDBValue::setUTF8String(const std::string& value)
 {
     m_type = EPrimitiveDataType::eUTF8String;
-    m_string = value;
+    m_data = value;
 }
 
 }
