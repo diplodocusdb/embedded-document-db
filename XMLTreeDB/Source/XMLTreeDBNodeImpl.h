@@ -34,7 +34,7 @@ class XMLTreeDBImpl;
 class XMLTreeDBNodeImpl : public TreeDBNodeImpl, public std::enable_shared_from_this<XMLTreeDBNodeImpl>
 {
 public:
-    XMLTreeDBNodeImpl(std::weak_ptr<XMLTreeDBImpl> db, XMLTreeDBNodeImpl* parent, pugi::xml_node node);
+    XMLTreeDBNodeImpl(XMLTreeDBNodeImpl* parent, pugi::xml_node node);
     ~XMLTreeDBNodeImpl() override;
 
     bool isRoot() const override;
@@ -47,7 +47,7 @@ public:
     TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error) override;
     TreeDBNode insertChildNode(size_t index, const std::string& name, Ishiko::Error& error);
     TreeDBNode insertChildNodeBefore(const TreeDBNode& child, const std::string& name, Ishiko::Error& error);
-    TreeDBNode insertAfter(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode insertChildNodeAfter(const TreeDBNode& child, const std::string& name, Ishiko::Error& error);
     TreeDBNode append(const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) override;
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
@@ -59,7 +59,6 @@ private:
     void loadChildren(Ishiko::Error& error);
 
 private:
-    std::weak_ptr<XMLTreeDBImpl> m_db;
     XMLTreeDBNodeImpl* m_parent;
     pugi::xml_node m_node;
     std::vector<std::shared_ptr<XMLTreeDBNodeImpl>> m_children;

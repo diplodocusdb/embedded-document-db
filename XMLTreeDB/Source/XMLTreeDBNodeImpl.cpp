@@ -26,8 +26,8 @@
 namespace DiplodocusDB
 {
 
-XMLTreeDBNodeImpl::XMLTreeDBNodeImpl(std::weak_ptr<XMLTreeDBImpl> db, XMLTreeDBNodeImpl* parent, pugi::xml_node node)
-    : TreeDBNodeImpl(node.name()), m_db(db), m_parent(parent), m_node(node)
+XMLTreeDBNodeImpl::XMLTreeDBNodeImpl(XMLTreeDBNodeImpl* parent, pugi::xml_node node)
+    : TreeDBNodeImpl(node.name()), m_parent(parent), m_node(node)
 {
 }
 
@@ -121,7 +121,7 @@ TreeDBNode XMLTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Error& e
 TreeDBNode XMLTreeDBNodeImpl::insertChildNode(size_t index, const std::string& name, Ishiko::Error& error)
 {
     pugi::xml_node newNode = m_node.append_child(name.c_str());
-    m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, this, newNode));
+    m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(this, newNode));
     return TreeDBNode(m_children.back());
 }
 
@@ -133,7 +133,8 @@ TreeDBNode XMLTreeDBNodeImpl::insertChildNodeBefore(const TreeDBNode& child, con
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::insertChildNodeAfter(const TreeDBNode& child, const std::string& name,
+    Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
@@ -143,7 +144,7 @@ TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBNode& child, const TreeDBK
 TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key, Ishiko::Error& error)
 {
     pugi::xml_node newNode = m_node.append_child(key.value().c_str());
-    m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, this, newNode));
+    m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(this, newNode));
     return TreeDBNode(m_children.back());
 }
 
@@ -163,7 +164,7 @@ TreeDBNode XMLTreeDBNodeImpl::set(const TreeDBKey& key, Ishiko::Error& error)
     if (!result)
     {
         pugi::xml_node newNode = m_node.append_child(key.value().c_str());
-        m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(m_db, this, newNode));
+        m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(this, newNode));
         result = TreeDBNode(m_children.back());
     }
 
@@ -235,7 +236,7 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
         pugi::xml_node childNode = m_node.first_child();
         while (childNode)
         {
-            std::shared_ptr<XMLTreeDBNodeImpl> newNode = std::make_shared<XMLTreeDBNodeImpl>(m_db, this, childNode);
+            std::shared_ptr<XMLTreeDBNodeImpl> newNode = std::make_shared<XMLTreeDBNodeImpl>(this, childNode);
             pugi::xml_attribute dataTypeAttribute = childNode.attribute("data-type");
             if (dataTypeAttribute)
             {

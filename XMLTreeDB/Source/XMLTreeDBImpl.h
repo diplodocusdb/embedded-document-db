@@ -44,7 +44,8 @@ public:
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error);
     TreeDBNode insertChildNodeBefore(TreeDBNode& parent, const TreeDBNode& child, const std::string& name,
         Ishiko::Error& error);
-    TreeDBNode insertAfter(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode insertChildNodeAfter(TreeDBNode& parent, const TreeDBNode& child, const std::string& name,
+        Ishiko::Error& error);
     TreeDBNode append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error);
 
     void commitNode(XMLTreeDBNodeImpl& node, Ishiko::Error& error);
