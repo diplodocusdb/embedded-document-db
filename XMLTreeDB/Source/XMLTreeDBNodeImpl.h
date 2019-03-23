@@ -50,7 +50,7 @@ public:
     TreeDBNode insertChildNodeAfter(const TreeDBNode& previousChild, const std::string& name, Ishiko::Error& error);
     TreeDBNode appendChildNode(const std::string& name, Ishiko::Error& error);
     TreeDBNode setChildNode(const std::string& name, Ishiko::Error& error);
-    bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
+    size_t removeChildNode(const std::string& name, Ishiko::Error& error);
     void removeAll(Ishiko::Error& error) override;
 
     void updateValue();

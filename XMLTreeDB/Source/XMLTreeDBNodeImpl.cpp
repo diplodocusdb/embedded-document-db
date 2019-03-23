@@ -171,7 +171,7 @@ TreeDBNode XMLTreeDBNodeImpl::setChildNode(const std::string& name, Ishiko::Erro
     return result;
 }
 
-bool XMLTreeDBNodeImpl::remove(const TreeDBKey& key, Ishiko::Error& error)
+size_t XMLTreeDBNodeImpl::removeChildNode(const std::string& name, Ishiko::Error& error)
 {
     return false;
 }

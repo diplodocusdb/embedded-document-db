@@ -82,6 +82,11 @@ TreeDBNode XMLTreeDB::setChildNode(TreeDBNode& parent, const std::string& name, 
     return m_impl->setChildNode(parent, name, error);
 }
 
+size_t XMLTreeDB::removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->removeChildNode(parent, name, error);
+}
+
 void XMLTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
 {
     m_impl->commitNode(static_cast<XMLTreeDBNodeImpl&>(*node.impl()), error);
