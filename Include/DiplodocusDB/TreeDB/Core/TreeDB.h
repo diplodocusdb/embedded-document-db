@@ -45,6 +45,7 @@ public:
     /// Inserts a new child node at a given position and returns a handle to the new child.
     /**
         The new node has no value.
+
         This operation commits the new node to the database immediately.
         @param parent The parent of the new child node.
         @param index The position of the new child node in the sequence of existing children.
@@ -58,6 +59,7 @@ public:
     /// Inserts a new child node before an existing child node and returns a handle to the new child.
     /**
         The new node has no value.
+
         This operation commits the new node to the database immediately.
         @param parent The parent of the new child node.
         @param nextChild The new node will be inserted before this child.
@@ -71,6 +73,7 @@ public:
     /// Inserts a new child node after an existing child node and returns a handle to the new child.
     /**
         The new node has no value.
+
         This operation commits the new node to the database immediately.
         @param parent The parent of the new child node.
         @param previousChild The new node will be inserted after this child.
@@ -84,6 +87,7 @@ public:
     /// Inserts a new child node after the last existing child node and returns a handle to the new child.
     /**
         The new node has no value.
+
         This operation commits the new node to the database immediately.
         @param parent The parent of the new child node.
         @param name The name of the new child node. This is not a complete key, only the name of the new child since
@@ -92,6 +96,21 @@ public:
         @returns A handle to the new child node.
     */
     virtual TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
+    /// Clears the value of the node with the given name or appends a new node if no node with this name exists.
+    /**
+        If a node with the given name exists then its value is cleared and a handle to this node is returned. If
+        multiple nodes with the same name exists then only the first node is taken into account.
+
+        If no node with the given name exists then this function is equivalent to appendChildNode().
+
+        This operation commits the changes to the database immediately.
+        @param parent The parent of the child node.
+        @param name The name of the child node. This is not a complete key, only the name of the new child since
+        we specify the parent in another argument.
+        @param error The result of the operation.
+        @returns A handle to the new child node.
+    */
+    virtual TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
 
     // TODO : this is temporary until I have migrated all the node functions here
     virtual void commitNode(TreeDBNode& node, Ishiko::Error& error) = 0;
