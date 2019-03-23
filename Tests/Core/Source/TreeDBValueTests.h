@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,19 +20,18 @@
     IN THE SOFTWARE.
 */
 
-#include "TreeDBKeyTests.h"
-#include "TreeDBValueTests.h"
+#ifndef _DIPLODOCUSDB_TEST_TREEDB_CORE_TREEDBVALUETESTS_H_
+#define _DIPLODOCUSDB_TEST_TREEDB_CORE_TREEDBVALUETESTS_H_
+
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-using namespace Ishiko::Tests;
-
-int main(int argc, char* argv[])
+class TreeDBValueTests : public Ishiko::Tests::TestSequence
 {
-    TestHarness theTestHarness("DiplodocusTreeDBCore");
+public:
+    TreeDBValueTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
 
-    TestSequence& theTests = theTestHarness.tests();
-    theTests.append<TreeDBKeyTests>();
-    theTests.append<TreeDBValueTests>();
+private:
+    static void ConstructionTest1(Ishiko::Tests::Test& test);
+};
 
-    return theTestHarness.run();
-}
+#endif

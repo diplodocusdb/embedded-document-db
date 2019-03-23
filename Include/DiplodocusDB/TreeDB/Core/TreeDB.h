@@ -140,9 +140,6 @@ public:
         @returns The number of nodes removed.
     */
     virtual size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error) = 0;
-
-    // TODO : this is temporary until I have migrated all the node functions here
-    virtual void commitNode(TreeDBNode& node, Ishiko::Error& error) = 0;
 };
 
 }

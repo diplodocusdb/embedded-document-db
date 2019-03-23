@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,19 +20,22 @@
     IN THE SOFTWARE.
 */
 
-#include "TreeDBKeyTests.h"
 #include "TreeDBValueTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBValue.h"
 
 using namespace Ishiko::Tests;
 
-int main(int argc, char* argv[])
+TreeDBValueTests::TreeDBValueTests(const TestNumber& number, const TestEnvironment& environment)
+    : TestSequence(number, "TreeDBValue tests", environment)
 {
-    TestHarness theTestHarness("DiplodocusTreeDBCore");
+    append<HeapAllocationErrorsTest>("Construction test 1", ConstructionTest1);
+}
 
-    TestSequence& theTests = theTestHarness.tests();
-    theTests.append<TreeDBKeyTests>();
-    theTests.append<TreeDBValueTests>();
+void TreeDBValueTests::ConstructionTest1(Test& test)
+{
+    DiplodocusDB::TreeDBValue value;
 
-    return theTestHarness.run();
+    ISHTF_FAIL_UNLESS(value.type().primitiveType() == DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHTF_FAIL_UNLESS(value.type().modifier() == DiplodocusDB::EDataTypeModifier::eNone);
+    ISHTF_PASS();
 }

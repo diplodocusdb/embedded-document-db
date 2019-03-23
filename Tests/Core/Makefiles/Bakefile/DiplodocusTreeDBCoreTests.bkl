@@ -17,11 +17,13 @@ program DiplodocusTreeDBCoreTests : DiplodocusTreeDBCore, IshikoTestFrameworkCor
     headers
     {
         ../../Source/TreeDBKeyTests.h
+        ../../Source/TreeDBValueTests.h
     }
 
     sources
     {
         ../../Source/main.cpp
         ../../Source/TreeDBKeyTests.cpp
+        ../../Source/TreeDBValueTests.cpp
     }
 }

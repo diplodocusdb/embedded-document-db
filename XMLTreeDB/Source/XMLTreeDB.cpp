@@ -92,9 +92,4 @@ size_t XMLTreeDB::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error)
     return m_impl->removeAllChildNodes(parent, error);
 }
 
-void XMLTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
-{
-    m_impl->commitNode(static_cast<XMLTreeDBNodeImpl&>(*node.impl()), error);
-}
-
 }

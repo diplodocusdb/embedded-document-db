@@ -28,7 +28,7 @@ using namespace Ishiko::Tests;
 TreeDBKeyTests::TreeDBKeyTests(const TestNumber& number, const TestEnvironment& environment)
     : TestSequence(number, "TreeDBKey tests", environment)
 {
-    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<HeapAllocationErrorsTest>("Construction test 1", ConstructionTest1);
     append<HeapAllocationErrorsTest>("parentKey test 1", ParentKeyTest1);
     append<HeapAllocationErrorsTest>("parentKey test 2", ParentKeyTest2);
     append<HeapAllocationErrorsTest>("parentKey test 3", ParentKeyTest3);

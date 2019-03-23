@@ -1,10 +1,13 @@
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
+
 setting DIPLODOCUSDB_TREEDB_ROOT
 {
     help = "Path to the DiplodocusDB installation";
     default = '$(DIPLODOCUSDB)/TreeDB';
 }
 
-template DiplodocusTreeDBCore
+template DiplodocusTreeDBCore : DiplodocusDBCore
 {
     includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Include;
 
