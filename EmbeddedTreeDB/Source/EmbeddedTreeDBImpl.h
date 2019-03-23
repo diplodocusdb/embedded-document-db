@@ -46,10 +46,12 @@ public:
 
     TreeDBNode& root();
 
-    TreeDBNode insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error);
-    TreeDBNode insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
-    TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error);
-    TreeDBNode append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error);
+    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
+        Ishiko::Error& error);
+    TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
+        Ishiko::Error& error);
+    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
 
     TreeDBNode getNode(const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode insertNode(const TreeDBKey& key, const RecordMarker& marker);
