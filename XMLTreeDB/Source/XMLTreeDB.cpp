@@ -72,9 +72,9 @@ TreeDBNode XMLTreeDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& child
     return m_impl->insertChildNodeAfter(parent, child, name, error);
 }
 
-TreeDBNode XMLTreeDB::append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDB::appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    return m_impl->append(parent, key, error);
+    return m_impl->appendChildNode(parent, name, error);
 }
 
 void XMLTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)

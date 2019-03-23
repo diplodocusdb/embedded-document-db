@@ -141,9 +141,9 @@ TreeDBNode XMLTreeDBNodeImpl::insertChildNodeAfter(const TreeDBNode& child, cons
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::append(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::appendChildNode(const std::string& name, Ishiko::Error& error)
 {
-    pugi::xml_node newNode = m_node.append_child(key.value().c_str());
+    pugi::xml_node newNode = m_node.append_child(name.c_str());
     m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(this, newNode));
     return TreeDBNode(m_children.back());
 }

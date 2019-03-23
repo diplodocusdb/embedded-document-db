@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,7 +23,10 @@
 #ifndef _DIPLODOCUSDB_TREEDB_TREEDBCORE_H_
 #define _DIPLODOCUSDB_TREEDB_TREEDBCORE_H_
 
+#include "Core/TreeDB.h"
 #include "Core/TreeDBNode.h"
+#include "Core/TreeDBKey.h"
+#include "Core/TreeDBValue.h"
 
 #include "Core/linkoptions.h"
 

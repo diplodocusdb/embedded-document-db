@@ -52,7 +52,7 @@ public:
         Ishiko::Error& error) override;
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& child, const std::string& name,
         Ishiko::Error& error) override;
-    TreeDBNode append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
 
     void commitNode(TreeDBNode& node, Ishiko::Error& error) override;
 

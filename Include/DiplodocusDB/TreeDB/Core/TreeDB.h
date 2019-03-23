@@ -81,7 +81,17 @@ public:
     */
     virtual TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         Ishiko::Error& error) = 0;
-    virtual TreeDBNode append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error) = 0;
+    /// Inserts a new child node after the last existing child node and returns a handle to the new child.
+    /**
+        The new node has no value.
+        This operation commits the new node to the database immediately.
+        @param parent The parent of the new child node.
+        @param name The name of the new child node. This is not a complete key, only the name of the new child since
+        we specify the parent in another argument.
+        @param error The result of the operation.
+        @returns A handle to the new child node.
+    */
+    virtual TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
 
     // TODO : this is temporary until I have migrated all the node functions here
     virtual void commitNode(TreeDBNode& node, Ishiko::Error& error) = 0;
