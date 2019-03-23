@@ -46,12 +46,12 @@ private:
     static void InsertChildNodeBeforeTest3(Ishiko::Tests::FileComparisonTest& test);
     static void InsertChildNodeAfterTest1(Ishiko::Tests::FileComparisonTest& test);
     static void InsertChildNodeAfterTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void AppendTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void AppendTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void AppendTest3(Ishiko::Tests::FileComparisonTest& test);
-    static void AppendTest4(Ishiko::Tests::FileComparisonTest& test);
-    static void AppendTest5(Ishiko::Tests::FileComparisonTest& test);
-    static void AppendTest6(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendChildNodeTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendChildNodeTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendChildNodeTest3(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendChildNodeTest4(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendChildNodeTest5(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendChildNodeTest6(Ishiko::Tests::FileComparisonTest& test);
     static void RemoveTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
