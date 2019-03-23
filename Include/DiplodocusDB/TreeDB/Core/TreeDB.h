@@ -42,6 +42,16 @@ public:
     /// Returns the root of the tree.
     virtual TreeDBNode& root() = 0;
 
+    /// Sets the value of the node.
+    /**
+        This operation commits the changes to the database immediately.
+
+        @param node The node to update.
+        @param value The new value of the node.
+        @param error The result of the operation.
+    */
+    virtual void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error) = 0;
+
     /// Inserts a new child node at a given position and returns a handle to the new child.
     /**
         The new node has no value.
