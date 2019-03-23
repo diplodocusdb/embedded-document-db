@@ -52,6 +52,7 @@ public:
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
+    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
 
     TreeDBNode getNode(const TreeDBKey& key, Ishiko::Error& error);
     TreeDBNode insertNode(const TreeDBKey& key, const RecordMarker& marker);

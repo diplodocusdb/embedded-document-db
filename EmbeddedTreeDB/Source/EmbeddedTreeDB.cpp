@@ -80,6 +80,11 @@ TreeDBNode EmbeddedTreeDB::appendChildNode(TreeDBNode& parent, const std::string
     return m_impl->appendChildNode(parent, name, error);
 }
 
+TreeDBNode EmbeddedTreeDB::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->setChildNode(parent, name, error);
+}
+
 void EmbeddedTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)
 {
     m_impl->commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl()), error);

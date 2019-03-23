@@ -95,13 +95,6 @@ TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Err
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::set(const TreeDBKey& key, Ishiko::Error& error)
-{
-    // TODO
-    TreeDBNode result;
-    return result;
-}
-
 bool EmbeddedTreeDBNodeImpl::remove(const TreeDBKey& key,
                                     Ishiko::Error& error)
 {

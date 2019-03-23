@@ -45,7 +45,6 @@ public:
     TreeDBNode previousSibling(const TreeDBKey& key, Ishiko::Error& error) override;
     TreeDBNode nextSibling(Ishiko::Error& error) override;
     TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error) override;
-    TreeDBNode set(const TreeDBKey& key, Ishiko::Error& error) override;
     bool remove(const TreeDBKey& key, Ishiko::Error& error) override;
     void removeAll(Ishiko::Error& error) override;
 
