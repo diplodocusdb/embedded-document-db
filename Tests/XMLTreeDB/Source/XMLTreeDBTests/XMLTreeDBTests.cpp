@@ -55,7 +55,7 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<FileComparisonTest>("appendChildNode test 7", AppendChildNodeTest7);
     append<FileComparisonTest>("setChildNode test 1", SetChildNodeTest1);
     append<FileComparisonTest>("setChildNode test 2", SetChildNodeTest2);
-    append<FileComparisonTest>("removeAll test 1", RemoveAllTest1);
+    append<FileComparisonTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
 }
 
 void XMLTreeDBTests::CreationTest1(Test& test)
@@ -626,10 +626,10 @@ void XMLTreeDBTests::SetChildNodeTest2(FileComparisonTest& test)
     ISHTF_PASS();
 }
 
-void XMLTreeDBTests::RemoveAllTest1(FileComparisonTest& test)
+void XMLTreeDBTests::RemoveAllChildNodesTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -640,19 +640,14 @@ void XMLTreeDBTests::RemoveAllTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node = db.root();
-    node.removeAll(error);
+    db.removeAllChildNodes(db.root(), error);
 
-    ISHTF_FAIL_IF((bool)error);
-
-    db.commitNode(node, error);
-        
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_RemoveAllTest1.xml");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
 
     ISHTF_PASS();
 }
