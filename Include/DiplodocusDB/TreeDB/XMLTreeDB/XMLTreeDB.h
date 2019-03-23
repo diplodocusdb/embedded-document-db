@@ -55,6 +55,7 @@ public:
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
+    size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error) override;
 
     void commitNode(TreeDBNode& node, Ishiko::Error& error) override;
 

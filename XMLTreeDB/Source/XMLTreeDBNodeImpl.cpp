@@ -176,14 +176,17 @@ size_t XMLTreeDBNodeImpl::removeChildNode(const std::string& name, Ishiko::Error
     return false;
 }
 
-void XMLTreeDBNodeImpl::removeAll(Ishiko::Error& error)
+size_t XMLTreeDBNodeImpl::removeAllChildNodes(Ishiko::Error& error)
 {
     loadChildren(error);
     for (std::shared_ptr<XMLTreeDBNodeImpl>& child : m_children)
     {
         m_node.remove_child(child->m_node);
     }
+
+    size_t result = m_children.size();
     m_children.clear();
+    return result;
 }
 
 void XMLTreeDBNodeImpl::updateValue()
