@@ -48,9 +48,9 @@ public:
 
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
         Ishiko::Error& error) override;
-    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& child, const std::string& name,
+    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
         Ishiko::Error& error) override;
-    TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& child, const std::string& name,
+    TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         Ishiko::Error& error) override;
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
 

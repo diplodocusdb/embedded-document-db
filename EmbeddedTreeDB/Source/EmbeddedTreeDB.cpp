@@ -57,26 +57,27 @@ TreeDBNode& EmbeddedTreeDB::root()
     return m_impl->root();
 }
 
-TreeDBNode EmbeddedTreeDB::insert(TreeDBNode& parent, size_t index, const TreeDBKey& key, Ishiko::Error& error)
-{
-    return m_impl->insert(parent, index, key, error);
-}
-
-TreeDBNode EmbeddedTreeDB::insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
+TreeDBNode EmbeddedTreeDB::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
     Ishiko::Error& error)
 {
-    return m_impl->insertBefore(parent, child, key, error);
+    return m_impl->insertChildNode(parent, index, name, error);
 }
 
-TreeDBNode EmbeddedTreeDB::insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
+TreeDBNode EmbeddedTreeDB::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
     Ishiko::Error& error)
 {
-    return m_impl->insertAfter(parent, child, key, error);
+    return m_impl->insertChildNodeBefore(parent, nextChild, name, error);
 }
 
-TreeDBNode EmbeddedTreeDB::append(TreeDBNode& parent, const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
+    Ishiko::Error& error)
 {
-    return m_impl->append(parent, key, error);
+    return m_impl->insertChildNodeAfter(parent, previousChild, name, error);
+}
+
+TreeDBNode EmbeddedTreeDB::appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->appendChildNode(parent, name, error);
 }
 
 void EmbeddedTreeDB::commitNode(TreeDBNode& node, Ishiko::Error& error)

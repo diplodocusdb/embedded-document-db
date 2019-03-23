@@ -60,16 +60,16 @@ TreeDBNode XMLTreeDB::insertChildNode(TreeDBNode& parent, size_t index, const st
     return m_impl->insertChildNode(parent, index, name, error);
 }
 
-TreeDBNode XMLTreeDB::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& child, const std::string& name,
+TreeDBNode XMLTreeDB::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
     Ishiko::Error& error)
 {
-    return m_impl->insertChildNodeBefore(parent, child, name, error);
+    return m_impl->insertChildNodeBefore(parent, nextChild, name, error);
 }
 
-TreeDBNode XMLTreeDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& child, const std::string& name,
+TreeDBNode XMLTreeDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
     Ishiko::Error& error)
 {
-    return m_impl->insertChildNodeAfter(parent, child, name, error);
+    return m_impl->insertChildNodeAfter(parent, previousChild, name, error);
 }
 
 TreeDBNode XMLTreeDB::appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)

@@ -42,9 +42,9 @@ public:
     TreeDBNode& root();
 
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error);
-    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, const TreeDBNode& child, const std::string& name,
+    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, const TreeDBNode& nextChild, const std::string& name,
         Ishiko::Error& error);
-    TreeDBNode insertChildNodeAfter(TreeDBNode& parent, const TreeDBNode& child, const std::string& name,
+    TreeDBNode insertChildNodeAfter(TreeDBNode& parent, const TreeDBNode& previousChild, const std::string& name,
         Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
 
