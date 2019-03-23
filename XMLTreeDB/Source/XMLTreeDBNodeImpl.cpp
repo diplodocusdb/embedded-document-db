@@ -148,14 +148,14 @@ TreeDBNode XMLTreeDBNodeImpl::appendChildNode(const std::string& name, Ishiko::E
     return TreeDBNode(m_children.back());
 }
 
-TreeDBNode XMLTreeDBNodeImpl::set(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::setChildNode(const std::string& name, Ishiko::Error& error)
 {
     TreeDBNode result;
 
     loadChildren(error);
     for (size_t i = 0; i < m_children.size(); ++i)
     {
-        if (m_children[i]->key() == key)
+        if (m_children[i]->key() == name)
         {
             result = TreeDBNode(m_children[i]);
             break;
@@ -163,7 +163,7 @@ TreeDBNode XMLTreeDBNodeImpl::set(const TreeDBKey& key, Ishiko::Error& error)
     }
     if (!result)
     {
-        pugi::xml_node newNode = m_node.append_child(key.value().c_str());
+        pugi::xml_node newNode = m_node.append_child(name.c_str());
         m_children.push_back(std::make_shared<XMLTreeDBNodeImpl>(this, newNode));
         result = TreeDBNode(m_children.back());
     }

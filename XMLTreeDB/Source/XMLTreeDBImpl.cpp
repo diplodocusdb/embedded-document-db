@@ -93,6 +93,14 @@ TreeDBNode XMLTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string&
     return result;
 }
 
+TreeDBNode XMLTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result = parentNodeImpl.setChildNode(name, error);
+    commitNode(parentNodeImpl, error);
+    return result;
+}
+
 void XMLTreeDBImpl::commitNode(XMLTreeDBNodeImpl& node, Ishiko::Error& error)
 {
     node.updateValue();
