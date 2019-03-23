@@ -45,16 +45,16 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<HeapAllocationErrorsTest>("nextSibling test 1", NextSiblingTest1);
     append<HeapAllocationErrorsTest>("nextSibling test 2", NextSiblingTest2);
     append<HeapAllocationErrorsTest>("nextSibling test 3", NextSiblingTest3);
-    append<FileComparisonTest>("insert test 1", InsertChildNodeTest1);
-    append<FileComparisonTest>("append test 1", AppendChildNodeTest1);
-    append<FileComparisonTest>("append test 2", AppendChildNodeTest2);
-    append<FileComparisonTest>("append test 3", AppendChildNodeTest3);
-    append<FileComparisonTest>("append test 4", AppendChildNodeTest4);
-    append<FileComparisonTest>("append test 5", AppendChildNodeTest5);
-    append<FileComparisonTest>("append test 6", AppendChildNodeTest6);
-    append<FileComparisonTest>("append test 7", AppendChildNodeTest7);
-    append<FileComparisonTest>("set test 1", SetTest1);
-    append<FileComparisonTest>("set test 2", SetTest2);
+    append<FileComparisonTest>("insertChildNode test 1", InsertChildNodeTest1);
+    append<FileComparisonTest>("appendChildNode test 1", AppendChildNodeTest1);
+    append<FileComparisonTest>("appendChildNode test 2", AppendChildNodeTest2);
+    append<FileComparisonTest>("appendChildNode test 3", AppendChildNodeTest3);
+    append<FileComparisonTest>("appendChildNode test 4", AppendChildNodeTest4);
+    append<FileComparisonTest>("appendChildNode test 5", AppendChildNodeTest5);
+    append<FileComparisonTest>("appendChildNode test 6", AppendChildNodeTest6);
+    append<FileComparisonTest>("appendChildNode test 7", AppendChildNodeTest7);
+    append<FileComparisonTest>("setChildNode test 1", SetChildNodeTest1);
+    append<FileComparisonTest>("setChildNode test 2", SetChildNodeTest2);
     append<FileComparisonTest>("removeAll test 1", RemoveAllTest1);
 }
 
@@ -576,9 +576,9 @@ void XMLTreeDBTests::AppendChildNodeTest7(FileComparisonTest& test)
     ISHTF_PASS();
 }
 
-void XMLTreeDBTests::SetTest1(FileComparisonTest& test)
+void XMLTreeDBTests::SetChildNodeTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetTest1.xml");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
 
     Ishiko::Error error(0);
 
@@ -587,22 +587,21 @@ void XMLTreeDBTests::SetTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node = db.root().set("key1", error);
-    db.commitNode(node, error);
+    DiplodocusDB::TreeDBNode node = db.setChildNode(db.root(), "key1", error);
         
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetTest1.xml");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
 
     ISHTF_PASS();
 }
 
-void XMLTreeDBTests::SetTest2(FileComparisonTest& test)
+void XMLTreeDBTests::SetChildNodeTest2(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetTest2.xml");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
 
     Ishiko::Error error(0);
 
@@ -611,20 +610,18 @@ void XMLTreeDBTests::SetTest2(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node1 = db.root().set("key1", error);
-    db.commitNode(node1, error);
-
+    DiplodocusDB::TreeDBNode node1 = db.setChildNode(db.root(), "key1", error);
+   
     ISHTF_FAIL_IF((bool)error);
         
-    DiplodocusDB::TreeDBNode node2 = db.root().set("key1", error);
-    db.commitNode(node2, error);
-
+    DiplodocusDB::TreeDBNode node2 = db.setChildNode(db.root(), "key1", error);
+    
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetTest2.xml");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
 
     ISHTF_PASS();
 }
