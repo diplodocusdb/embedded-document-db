@@ -40,12 +40,12 @@ private:
     static void OpenTest5(Ishiko::Tests::Test& test);
     static void ChildrenTest1(Ishiko::Tests::Test& test);
     static void ChildrenTest2(Ishiko::Tests::Test& test);
-    static void InsertTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void InsertBeforeTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void InsertBeforeTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void InsertBeforeTest3(Ishiko::Tests::FileComparisonTest& test);
-    static void InsertAfterTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void InsertAfterTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertChildNodeTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertChildNodeBeforeTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertChildNodeBeforeTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertChildNodeBeforeTest3(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertChildNodeAfterTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void InsertChildNodeAfterTest2(Ishiko::Tests::FileComparisonTest& test);
     static void AppendTest1(Ishiko::Tests::FileComparisonTest& test);
     static void AppendTest2(Ishiko::Tests::FileComparisonTest& test);
     static void AppendTest3(Ishiko::Tests::FileComparisonTest& test);

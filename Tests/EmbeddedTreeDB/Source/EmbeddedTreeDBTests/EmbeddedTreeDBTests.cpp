@@ -39,12 +39,12 @@ EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestEnv
     append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
     append<HeapAllocationErrorsTest>("children test 1", ChildrenTest1);
     append<HeapAllocationErrorsTest>("children test 2", ChildrenTest2);
-    append<FileComparisonTest>("insert test 1", InsertTest1);
-    append<FileComparisonTest>("insertBefore test 1", InsertBeforeTest1);
-    append<FileComparisonTest>("insertBefore test 2", InsertBeforeTest2);
-    append<FileComparisonTest>("insertBefore test 3", InsertBeforeTest3);
-    append<FileComparisonTest>("insertAfter test 1", InsertAfterTest1);
-    append<FileComparisonTest>("insertAfter test 2", InsertAfterTest2);
+    append<FileComparisonTest>("insertChildNode test 1", InsertChildNodeTest1);
+    append<FileComparisonTest>("insertChildNodeBefore test 1", InsertChildNodeBeforeTest1);
+    append<FileComparisonTest>("insertChildNodeBefore test 2", InsertChildNodeBeforeTest2);
+    append<FileComparisonTest>("insertChildNodeBefore test 3", InsertChildNodeBeforeTest3);
+    append<FileComparisonTest>("insertChildNodeAfter test 1", InsertChildNodeAfterTest1);
+    append<FileComparisonTest>("insertChildNodeAfter test 2", InsertChildNodeAfterTest2);
     append<FileComparisonTest>("append test 1", AppendTest1);
     append<FileComparisonTest>("append test 2", AppendTest2);
     append<FileComparisonTest>("append test 3", AppendTest3);
@@ -225,9 +225,9 @@ void EmbeddedTreeDBTests::ChildrenTest2(Test& test)
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeTest1.dpdb");
 
     Ishiko::Error error;
 
@@ -236,22 +236,22 @@ void EmbeddedTreeDBTests::InsertTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node = db.insert(db.root(), 0, "key1", error);
+    DiplodocusDB::TreeDBNode node = db.insertChildNode(db.root(), 0, "key1", error);
         
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertTest1.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeTest1.dpdb");
 
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertBeforeTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest1.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest1.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -266,19 +266,19 @@ void EmbeddedTreeDBTests::InsertBeforeTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
         
-    DiplodocusDB::TreeDBNode newNode = db.insertBefore(db.root(), node, "key0", error);
+    DiplodocusDB::TreeDBNode newNode = db.insertChildNodeBefore(db.root(), node, "key0", error);
     
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest1.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
 
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertBeforeTest2(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(FileComparisonTest& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
@@ -312,7 +312,7 @@ void EmbeddedTreeDBTests::InsertBeforeTest2(FileComparisonTest& test)
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertBeforeTest3(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(FileComparisonTest& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest3.dpdb");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest3.dpdb");
@@ -346,7 +346,7 @@ void EmbeddedTreeDBTests::InsertBeforeTest3(FileComparisonTest& test)
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertAfterTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeAfterTest1(FileComparisonTest& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertAfterTest1.dpdb");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertAfterTest1.dpdb");
@@ -376,7 +376,7 @@ void EmbeddedTreeDBTests::InsertAfterTest1(FileComparisonTest& test)
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertAfterTest2(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeAfterTest2(FileComparisonTest& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertAfterTest2.dpdb");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertAfterTest2.dpdb");
