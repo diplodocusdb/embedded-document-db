@@ -67,11 +67,11 @@ TreeDBNode XMLTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, cons
     return result;
 }
 
-TreeDBNode XMLTreeDBImpl::insertBefore(TreeDBNode& parent, const TreeDBNode& child, const TreeDBKey& key,
+TreeDBNode XMLTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, const TreeDBNode& child, const std::string& name,
     Ishiko::Error& error)
 {
     XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = parentNodeImpl.insertBefore(child, key, error);
+    TreeDBNode result = parentNodeImpl.insertChildNodeBefore(child, name, error);
     commitNode(parentNodeImpl, error);
     return result;
 }

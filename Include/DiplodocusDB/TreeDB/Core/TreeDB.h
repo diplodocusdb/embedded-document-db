@@ -51,11 +51,22 @@ public:
         @param name The name of the new child node. This is not a complete key, only the name of the new child since
         we specify the parent in another argument.
         @param error The result of the operation.
-        @returns A handle to new child node.
+        @returns A handle to the new child node.
     */
     virtual TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
         Ishiko::Error& error) = 0;
-    virtual TreeDBNode insertBefore(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
+    /// Inserts a new child node before an existing child node and returns a handle to the new child.
+    /**
+        The new node has no value.
+        This operation commits the new node to the database immediately.
+        @param parent The parent of the new child node.
+        @param nextChild The new node will be inserted before this child.
+        @param name The name of the new child node. This is not a complete key, only the name of the new child since
+        we specify the parent in another argument.
+        @param error The result of the operation.
+        @returns A handle to the new child node.
+    */
+    virtual TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
         Ishiko::Error& error) = 0;
     virtual TreeDBNode insertAfter(TreeDBNode& parent, TreeDBNode& child, const TreeDBKey& key,
         Ishiko::Error& error) = 0;

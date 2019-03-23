@@ -113,6 +113,7 @@ TreeDBNode XMLTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
 
 TreeDBNode XMLTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
 {
+    // TODO
     TreeDBNode result;
     return result;
 }
@@ -124,14 +125,17 @@ TreeDBNode XMLTreeDBNodeImpl::insertChildNode(size_t index, const std::string& n
     return TreeDBNode(m_children.back());
 }
 
-TreeDBNode XMLTreeDBNodeImpl::insertBefore(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::insertChildNodeBefore(const TreeDBNode& child, const std::string& name,
+    Ishiko::Error& error)
 {
+    // TODO
     TreeDBNode result;
     return result;
 }
 
 TreeDBNode XMLTreeDBNodeImpl::insertAfter(const TreeDBNode& child, const TreeDBKey& key, Ishiko::Error& error)
 {
+    // TODO
     TreeDBNode result;
     return result;
 }
