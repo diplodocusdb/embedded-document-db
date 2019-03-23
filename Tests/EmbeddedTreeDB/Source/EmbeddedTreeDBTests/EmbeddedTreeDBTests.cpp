@@ -280,8 +280,8 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(FileComparisonTest& test)
 
 void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(FileComparisonTest& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -296,26 +296,26 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
         
-    DiplodocusDB::TreeDBNode newNode1 = db.insertBefore(db.root(), node, "key1", error);
+    DiplodocusDB::TreeDBNode newNode1 = db.insertChildNodeBefore(db.root(), node, "key1", error);
     
     ISHTF_ABORT_IF((bool)error);
             
-    DiplodocusDB::TreeDBNode newNode2 = db.insertBefore(db.root(), newNode1, "key0", error);
+    DiplodocusDB::TreeDBNode newNode2 = db.insertChildNodeBefore(db.root(), newNode1, "key0", error);
 
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
 
     ISHTF_PASS();
 }
 
 void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(FileComparisonTest& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest3.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest3.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -330,18 +330,18 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode newNode1 = db.insertBefore(db.root(), node, "key1", error);
+    DiplodocusDB::TreeDBNode newNode1 = db.insertChildNodeBefore(db.root(), node, "key1", error);
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode newNode2 = db.insertBefore(db.root(), newNode1, "key0", error);
+    DiplodocusDB::TreeDBNode newNode2 = db.insertChildNodeBefore(db.root(), newNode1, "key0", error);
     
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBNodeInsertBeforeTest2.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
 
     ISHTF_PASS();
 }
