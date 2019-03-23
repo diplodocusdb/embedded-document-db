@@ -114,11 +114,6 @@ TreeDBNode TreeDBNode::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
     return m_impl->nextSibling(key, error);
 }
 
-void TreeDBNode::removeAll(Ishiko::Error& error)
-{
-    m_impl->removeAll(error);
-}
-
 std::shared_ptr<TreeDBNodeImpl>& TreeDBNode::impl()
 {
     return m_impl;

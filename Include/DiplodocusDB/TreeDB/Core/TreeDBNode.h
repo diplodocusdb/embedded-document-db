@@ -59,8 +59,6 @@ public:
     TreeDBNode nextSibling(Ishiko::Error& error);
     TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error);
 
-    void removeAll(Ishiko::Error& error);
-
     std::shared_ptr<TreeDBNodeImpl>& impl();
 
 private:
