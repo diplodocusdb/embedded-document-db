@@ -50,7 +50,6 @@ public:
     virtual TreeDBNode previousSibling(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual TreeDBNode nextSibling(Ishiko::Error& error) = 0;
     virtual TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error) = 0;
-    virtual bool remove(const TreeDBKey& key, Ishiko::Error& error) = 0;
     virtual void removeAll(Ishiko::Error& error) = 0;
 
 private:

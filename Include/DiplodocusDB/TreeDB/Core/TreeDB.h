@@ -111,6 +111,20 @@ public:
         @returns A handle to the new child node.
     */
     virtual TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
+    /// Removes all the child nodes with the given name.
+    /**
+        If no nodes with this name exists then this function does nothing and no error is reported.
+
+        If multiple children with the same name exist they are all removed.
+
+        This operation removes the node(s) from the database immediately.
+        @param parent The parent of the child node.
+        @param name The name of the child node. This is not a complete key, only the name of the new child since
+        we specify the parent in another argument.
+        @param error The result of the operation.
+        @returns The number of nodes removed.
+    */
+    virtual size_t removeChildNodes(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
 
     // TODO : this is temporary until I have migrated all the node functions here
     virtual void commitNode(TreeDBNode& node, Ishiko::Error& error) = 0;
