@@ -192,6 +192,18 @@ size_t XMLTreeDBNodeImpl::removeAllChildNodes(Ishiko::Error& error)
 void XMLTreeDBNodeImpl::updateValue()
 {
     // Remove any current data
+    pugi::xml_node pcdataNode = m_node.first_child();
+    if (pcdataNode.type() == pugi::node_pcdata)
+    {
+        m_node.remove_child(pcdataNode);
+    }
+    pugi::xml_node valueNode = m_node.child("data");
+    if (valueNode)
+    {
+        m_node.remove_child(valueNode);
+    }
+
+    // Set the new data
     const TreeDBValue& v = value();
     if (v.type() == EPrimitiveDataType::eNULL)
     {
