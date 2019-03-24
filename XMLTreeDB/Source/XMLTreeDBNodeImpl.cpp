@@ -191,6 +191,7 @@ size_t XMLTreeDBNodeImpl::removeAllChildNodes(Ishiko::Error& error)
 
 void XMLTreeDBNodeImpl::updateValue()
 {
+    // Remove any current data
     const TreeDBValue& v = value();
     if (v.type() == EPrimitiveDataType::eNULL)
     {
@@ -218,12 +219,12 @@ void XMLTreeDBNodeImpl::updateValue()
             {
                 pcdataNode = m_node.prepend_child(pugi::node_pcdata);
             }
-            pcdataNode.set_value(v.asString().c_str());
+            pcdataNode.set_value(v.asUTF8String().c_str());
         }
         else
         {
             pugi::xml_node valueNode = m_node.prepend_child("data");
-            valueNode.append_child(pugi::node_pcdata).set_value(v.asString().c_str());
+            valueNode.append_child(pugi::node_pcdata).set_value(v.asUTF8String().c_str());
         }
     }
     for (size_t i = 0; i < m_children.size(); ++i)
@@ -249,7 +250,7 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
                 }
                 else if (strcmp(dataTypeAttribute.as_string(), "utf8string") == 0)
                 {
-                    newNode->value().setString(childNode.child_value());
+                    newNode->value().setUTF8String(childNode.child_value());
                     m_children.push_back(newNode);
                 }
                 else

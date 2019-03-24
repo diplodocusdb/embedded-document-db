@@ -58,6 +58,13 @@ TreeDBNode& XMLTreeDBImpl::root()
     return m_root;
 }
 
+void XMLTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)
+{
+    XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
+    nodeImpl.value() = value;
+    commitNode(nodeImpl, error);
+}
+
 TreeDBNode XMLTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
     Ishiko::Error& error)
 {
