@@ -30,17 +30,17 @@ TreeDBValue::TreeDBValue()
 {
 }
 
-TreeDBValue TreeDBValue::Int32(int32_t value)
+TreeDBValue TreeDBValue::Int32(int32_t data)
 {
     TreeDBValue result;
-    result.setInt32(value);
+    result.setInt32(data);
     return result;
 }
 
-TreeDBValue TreeDBValue::UTF8String(const std::string& value)
+TreeDBValue TreeDBValue::UTF8String(const std::string& data)
 {
     TreeDBValue result;
-    result.setUTF8String(value);
+    result.setUTF8String(data);
     return result;
 }
 

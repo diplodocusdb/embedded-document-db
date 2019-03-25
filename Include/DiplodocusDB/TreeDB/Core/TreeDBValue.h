@@ -30,13 +30,27 @@
 namespace DiplodocusDB
 {
 
+/// The data stored in a node and its type.
 class TreeDBValue
 {
 public:
+    /// Constructor.
+    /**
+        The default constructor creates a value of type NULL.
+    */
     TreeDBValue();
-    static TreeDBValue Int32(int32_t value);
-    static TreeDBValue UTF8String(const std::string& value);
+    /// Returns a value of type Int32.
+    /**
+        @param data The data to store in the value.
+    */
+    static TreeDBValue Int32(int32_t data);
+    /// Returns a value of type UTF8String.
+    /**
+        @param data The data to store in the value.
+    */
+    static TreeDBValue UTF8String(const std::string& data);
     
+    /// Returns the type of the data.
     const DataType& type() const;
 
     int32_t asInt32() const;
