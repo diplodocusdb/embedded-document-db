@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -28,6 +28,13 @@ namespace DiplodocusDB
 TreeDBValue::TreeDBValue()
     : m_type(EPrimitiveDataType::eNULL)
 {
+}
+
+TreeDBValue TreeDBValue::Int32(int32_t value)
+{
+    TreeDBValue result;
+    result.setInt32(value);
+    return result;
 }
 
 TreeDBValue::~TreeDBValue()

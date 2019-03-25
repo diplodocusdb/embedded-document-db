@@ -34,6 +34,7 @@ class TreeDBValue
 {
 public:
     TreeDBValue();
+    static TreeDBValue Int32(int32_t value);
     ~TreeDBValue();
 
     const DataType& type() const;

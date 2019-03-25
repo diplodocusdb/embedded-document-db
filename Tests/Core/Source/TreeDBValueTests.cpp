@@ -29,6 +29,7 @@ TreeDBValueTests::TreeDBValueTests(const TestNumber& number, const TestEnvironme
     : TestSequence(number, "TreeDBValue tests", environment)
 {
     append<HeapAllocationErrorsTest>("Construction test 1", ConstructionTest1);
+    append<HeapAllocationErrorsTest>("Int32 test 1", Int32Test1);
     append<HeapAllocationErrorsTest>("setInt32 test 1", SetInt32Test1);
     append<HeapAllocationErrorsTest>("setUTF8String test 1", SetUTF8StringTest1);
 }
@@ -39,6 +40,16 @@ void TreeDBValueTests::ConstructionTest1(Test& test)
 
     ISHTF_FAIL_UNLESS(value.type().primitiveType() == DiplodocusDB::EPrimitiveDataType::eNULL);
     ISHTF_FAIL_UNLESS(value.type().modifier() == DiplodocusDB::EDataTypeModifier::eNone);
+    ISHTF_PASS();
+}
+
+void TreeDBValueTests::Int32Test1(Test& test)
+{
+    DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Int32(123);
+
+    ISHTF_ABORT_UNLESS(value.type().primitiveType() == DiplodocusDB::EPrimitiveDataType::eInt32);
+    ISHTF_ABORT_UNLESS(value.type().modifier() == DiplodocusDB::EDataTypeModifier::eNone);
+    ISHTF_FAIL_UNLESS(value.asInt32() == 123);
     ISHTF_PASS();
 }
 
