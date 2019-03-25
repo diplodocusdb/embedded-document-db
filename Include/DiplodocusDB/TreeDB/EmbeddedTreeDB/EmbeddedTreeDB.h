@@ -46,6 +46,8 @@ public:
 
     TreeDBNode& root() override;
 
+    void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error) override;
+
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
         Ishiko::Error& error) override;
     TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
@@ -56,8 +58,6 @@ public:
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error) override;
-
-    void commitNode(TreeDBNode& node, Ishiko::Error& error) override;
 
 private:
     std::shared_ptr<EmbeddedTreeDBImpl> m_impl;

@@ -32,7 +32,7 @@ ValueRecordData::ValueRecordData()
 }
 
 ValueRecordData::ValueRecordData(const TreeDBValue& value)
-    : m_type(value.type()), m_buffer(value.asString())
+    : m_type(value.type()), m_buffer(value.asUTF8String())
 {
 }
 

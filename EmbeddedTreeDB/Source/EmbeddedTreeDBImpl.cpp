@@ -62,6 +62,13 @@ TreeDBNode& EmbeddedTreeDBImpl::root()
     return m_root;
 }
 
+void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)
+{
+    EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
+    nodeImpl.value() = value;
+    commitNode(nodeImpl, error);
+}
+
 TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
     Ishiko::Error& error)
 {

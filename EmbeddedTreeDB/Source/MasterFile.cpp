@@ -143,7 +143,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
                     if (valueRecord.type() == Record::ERecordType::eValue)
                     {
                         const std::string& value = static_cast<ValueRecordData*>(valueRecord.data())->buffer();
-                        node.value().setString(value);
+                        node.value().setUTF8String(value);
                     }
 
                     node.setMarker(RecordMarker(currentNodeStartPosition));
