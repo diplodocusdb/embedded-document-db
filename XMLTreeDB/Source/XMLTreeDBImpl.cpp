@@ -69,16 +69,36 @@ TreeDBNode XMLTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, cons
     Ishiko::Error& error)
 {
     XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = parentNodeImpl.insertChildNode(index, name, error);
+    TreeDBValue value;
+    TreeDBNode result = parentNodeImpl.insertChildNode(index, name, value,  error);
     commitNode(parentNodeImpl, error);
     return result;
 }
 
-TreeDBNode XMLTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, const TreeDBNode& nextChild,
+TreeDBNode XMLTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
+    const TreeDBValue& value, Ishiko::Error& error)
+{
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result = parentNodeImpl.insertChildNode(index, name, value, error);
+    commitNode(parentNodeImpl, error);
+    return result;
+}
+
+TreeDBNode XMLTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild,
     const std::string& name, Ishiko::Error& error)
 {
     XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = parentNodeImpl.insertChildNodeBefore(nextChild, name, error);
+    TreeDBValue value;
+    TreeDBNode result = parentNodeImpl.insertChildNodeBefore(nextChild, name, value, error);
+    commitNode(parentNodeImpl, error);
+    return result;
+}
+
+TreeDBNode XMLTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild,
+    const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+{
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result = parentNodeImpl.insertChildNodeBefore(nextChild, name, value, error);
     commitNode(parentNodeImpl, error);
     return result;
 }

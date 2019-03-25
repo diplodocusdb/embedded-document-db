@@ -44,8 +44,12 @@ public:
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error);
 
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error);
-    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, const TreeDBNode& nextChild, const std::string& name,
+    TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error);
+    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
+        Ishiko::Error& error);
+    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
+        const TreeDBValue& value, Ishiko::Error& error);
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, const TreeDBNode& previousChild, const std::string& name,
         Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
