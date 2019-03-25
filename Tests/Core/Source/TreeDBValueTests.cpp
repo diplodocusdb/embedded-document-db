@@ -30,6 +30,7 @@ TreeDBValueTests::TreeDBValueTests(const TestNumber& number, const TestEnvironme
 {
     append<HeapAllocationErrorsTest>("Construction test 1", ConstructionTest1);
     append<HeapAllocationErrorsTest>("Int32 test 1", Int32Test1);
+    append<HeapAllocationErrorsTest>("UTF8String test 1", UTF8StringTest1);
     append<HeapAllocationErrorsTest>("setInt32 test 1", SetInt32Test1);
     append<HeapAllocationErrorsTest>("setUTF8String test 1", SetUTF8StringTest1);
 }
@@ -50,6 +51,16 @@ void TreeDBValueTests::Int32Test1(Test& test)
     ISHTF_ABORT_UNLESS(value.type().primitiveType() == DiplodocusDB::EPrimitiveDataType::eInt32);
     ISHTF_ABORT_UNLESS(value.type().modifier() == DiplodocusDB::EDataTypeModifier::eNone);
     ISHTF_FAIL_UNLESS(value.asInt32() == 123);
+    ISHTF_PASS();
+}
+
+void TreeDBValueTests::UTF8StringTest1(Test& test)
+{
+    DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::UTF8String("string1");
+
+    ISHTF_ABORT_UNLESS(value.type().primitiveType() == DiplodocusDB::EPrimitiveDataType::eUTF8String);
+    ISHTF_ABORT_UNLESS(value.type().modifier() == DiplodocusDB::EDataTypeModifier::eNone);
+    ISHTF_FAIL_UNLESS(value.asUTF8String() == "string1");
     ISHTF_PASS();
 }
 

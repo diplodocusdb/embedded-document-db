@@ -35,8 +35,8 @@ class TreeDBValue
 public:
     TreeDBValue();
     static TreeDBValue Int32(int32_t value);
-    ~TreeDBValue();
-
+    static TreeDBValue UTF8String(const std::string& value);
+    
     const DataType& type() const;
 
     int32_t asInt32() const;

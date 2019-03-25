@@ -37,8 +37,11 @@ TreeDBValue TreeDBValue::Int32(int32_t value)
     return result;
 }
 
-TreeDBValue::~TreeDBValue()
+TreeDBValue TreeDBValue::UTF8String(const std::string& value)
 {
+    TreeDBValue result;
+    result.setUTF8String(value);
+    return result;
 }
 
 const DataType& TreeDBValue::type() const
