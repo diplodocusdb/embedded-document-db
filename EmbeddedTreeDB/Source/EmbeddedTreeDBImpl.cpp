@@ -107,20 +107,45 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
 TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild,
     const std::string& name, Ishiko::Error& error)
 {
+    TreeDBValue value;
+    return insertChildNodeAfter(parent, previousChild, name, value, error);
+}
+
+TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild,
+    const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+{
     // TODO : does this work?
     TreeDBNode result = insertNode(name, static_cast<EmbeddedTreeDBNodeImpl&>(*previousChild.impl()).marker());
-    commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl()), error);
+    EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
+    nodeImpl.value() = value;
+    commitNode(nodeImpl, error);
     return result;
 }
 
 TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
+    TreeDBValue value;
+    return appendChildNode(parent, name, value, error);
+}
+
+TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    Ishiko::Error& error)
+{
     TreeDBNode result = appendNode(name);
-    commitNode(static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl()), error);
+    EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
+    nodeImpl.value() = value;
+    commitNode(nodeImpl, error);
     return result;
 }
 
 TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    TreeDBValue value;
+    return setChildNode(parent, name, value, error);
+}
+
+TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;

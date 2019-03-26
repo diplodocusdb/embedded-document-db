@@ -50,7 +50,7 @@ public:
         Ishiko::Error& error);
     TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
         const TreeDBValue& value, Ishiko::Error& error);
-    TreeDBNode insertChildNodeAfter(TreeDBNode& parent, const TreeDBNode& previousChild, const std::string& name,
+    TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         Ishiko::Error& error);
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         const TreeDBValue& value, Ishiko::Error& error);

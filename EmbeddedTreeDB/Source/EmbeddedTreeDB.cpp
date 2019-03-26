@@ -92,14 +92,32 @@ TreeDBNode EmbeddedTreeDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& 
     return m_impl->insertChildNodeAfter(parent, previousChild, name, error);
 }
 
+TreeDBNode EmbeddedTreeDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
+    const TreeDBValue& value, Ishiko::Error& error)
+{
+    return m_impl->insertChildNodeAfter(parent, previousChild, name, value, error);
+}
+
 TreeDBNode EmbeddedTreeDB::appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     return m_impl->appendChildNode(parent, name, error);
 }
 
+TreeDBNode EmbeddedTreeDB::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    Ishiko::Error& error)
+{
+    return m_impl->appendChildNode(parent, name, value, error);
+}
+
 TreeDBNode EmbeddedTreeDB::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     return m_impl->setChildNode(parent, name, error);
+}
+
+TreeDBNode EmbeddedTreeDB::setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    Ishiko::Error& error)
+{
+    return m_impl->setChildNode(parent, name, value, error);
 }
 
 size_t EmbeddedTreeDB::removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
