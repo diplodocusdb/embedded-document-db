@@ -90,7 +90,7 @@ void Record::load(PageRepositoryReader& reader,
     case ERecordType::eNodeEnd:
         break;
 
-    case ERecordType::eKey:
+    case ERecordType::eNodeName:
         m_data = std::make_shared<KeyRecordData>();
         break;
 

@@ -132,7 +132,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
         PageRepositoryPosition currentNodeStartPosition = reader.currentPosition();
         Record record(Record::ERecordType::eInvalid);
         record.load(reader, error);
-        if (!error && (record.type() == Record::ERecordType::eKey))
+        if (!error && (record.type() == Record::ERecordType::eNodeName))
         {
             if (static_cast<KeyRecordData*>(record.data())->key() == key.value())
             {
@@ -174,7 +174,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
     if (node.isRoot())
     {
         std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
-        Record record(Record::ERecordType::eKey, recordData);
+        Record record(Record::ERecordType::eNodeName, recordData);
         record.save(writer, error);
         if (error)
         {
@@ -184,7 +184,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
     else
     {
         std::shared_ptr<KeyRecordData> parentRecordData = std::make_shared<KeyRecordData>(node.key().parentKey());
-        Record parentRecord(Record::ERecordType::eParentKey, parentRecordData);
+        Record parentRecord(Record::ERecordType::eParentNode, parentRecordData);
         parentRecord.save(writer, error);
         if (error)
         {
@@ -192,7 +192,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
         }
 
         std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key().base());
-        Record record(Record::ERecordType::eKey, recordData);
+        Record record(Record::ERecordType::eNodeName, recordData);
         record.save(writer, error);
         if (error)
         {
@@ -246,7 +246,7 @@ void MasterFile::createRootNode(PageRepositoryWriter& writer,
     }
 
     std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>("/");
-    Record record(Record::ERecordType::eKey, recordData);
+    Record record(Record::ERecordType::eNodeName, recordData);
     record.save(writer, error);
     if (error)
     {

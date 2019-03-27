@@ -33,19 +33,26 @@ namespace DiplodocusDB
 
 class RecordData;
 
+/// A record in physical storage.
+/**
+    The data in the physical storage of an EmbeddedTreeDB is stored as a series of records.
+*/
 class Record
 {
 public:
+    /// The type of the record.
     enum class ERecordType
     {
+        /// Invalid record. 
         eInvalid = 0,
+        /// Master file metadata record.
         eMasterFileMetadata = 0x01,
         eDataStart = 0x02,
         eDataEnd = 0x03,
         eNodeStart = 0x04,
         eNodeEnd = 0x05,
-        eParentKey = 0x06,
-        eKey = 0x07,
+        eParentNode = 0x06,
+        eNodeName = 0x07,
         eValue = 0x08
     };
 
