@@ -467,14 +467,9 @@ void EmbeddedTreeDBTests::AppendChildNodeTest3(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1", error);
+    DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1",
+        DiplodocusDB::TreeDBValue::UTF8String("value1"), error);
 
-    ISHTF_ABORT_IF((bool)error);
-
-    DiplodocusDB::TreeDBValue value;
-    value.setUTF8String("value1");
-    db.setValue(node, value, error);
-    
     ISHTF_FAIL_IF((bool)error);
 
     db.close();
@@ -496,23 +491,13 @@ void EmbeddedTreeDBTests::AppendChildNodeTest4(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
-
-    ISHTF_ABORT_IF((bool)error);
-
-    DiplodocusDB::TreeDBValue value1;
-    value1.setUTF8String("value1");
-    db.setValue(node1, value1, error);
+    DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", 
+        DiplodocusDB::TreeDBValue::UTF8String("value1"), error);
 
     ISHTF_FAIL_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node2 = db.appendChildNode(db.root(), "key2", error);
-
-    ISHTF_ABORT_IF((bool)error);
-
-    DiplodocusDB::TreeDBValue value2;
-    value2.setUTF8String("value2");
-    db.setValue(node2, value2, error);
+    DiplodocusDB::TreeDBNode node2 = db.appendChildNode(db.root(), "key2", 
+        DiplodocusDB::TreeDBValue::UTF8String("value2"), error);
 
     ISHTF_FAIL_IF((bool)error);
 
