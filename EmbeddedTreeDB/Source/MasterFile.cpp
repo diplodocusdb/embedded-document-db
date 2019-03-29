@@ -184,7 +184,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
     else
     {
         std::shared_ptr<KeyRecordData> parentRecordData = std::make_shared<KeyRecordData>(node.key().parentKey());
-        Record parentRecord(Record::ERecordType::eParentNodeId, parentRecordData);
+        Record parentRecord(Record::ERecordType::eParentNodeID, parentRecordData);
         parentRecord.save(writer, error);
         if (error)
         {

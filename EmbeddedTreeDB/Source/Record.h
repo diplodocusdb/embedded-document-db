@@ -58,12 +58,42 @@ public:
         eNodeStart = 0x04,
         /// End of node marker record.
         eNodeEnd = 0x05,
-        eParentNodeId = 0x06,
+        /// Parent node ID record.
+        /**
+            This record specifies the ID of the parent of the current node. This record is present in every node
+            except the root node.
+        */
+        eParentNodeID = 0x06,
+        /// Node name record.
         eNodeName = 0x07,
-        eNodeId = 0x08,
+        /// Node ID record.
+        eNodeID = 0x08,
+        /// Value record.
+        /**
+            In this case the value is stored directly in the record itself. This is in general
+            more suitable for values that do not take up too much storage space.
+        */
         eInlineValue = 0x09,
+        /// Value record.
+        /**
+            In this case the first bytes of the value are stored directly in the record itself
+            but subsequent bytes are stored in another record that will have to be fetched separately if the entire
+            value is needed.
+
+            This type of value record provides a performance compromise between eInlineValue and eRemoteValue.
+        */
         ePartialInlineValue = 0x10,
+        /// Record marking that there is a value but it is stored in another record.
+        /**
+            This record is used to distinguish between the case where there is no value at all and the case where the
+            value is stored elsewhere.
+        */
         eRemoteValueMarker = 0x11,
+        /// A value record that is stored on its own.
+        /**
+            This kind of record will contain the ID of the node as well as the value. It is typically used for values
+            that take up a large amount of storage space.
+        */
         eRemoteValue = 0x12
     };
 
