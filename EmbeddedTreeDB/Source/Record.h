@@ -41,19 +41,30 @@ class Record
 {
 public:
     /// The type of the record.
+    /**
+        The values of this enumeration can't be changed as they are used as identifiers in the physical file.
+    */
     enum class ERecordType
     {
         /// Invalid record. 
         eInvalid = 0,
         /// Master file metadata record.
         eMasterFileMetadata = 0x01,
+        /// Start of data marker record.
         eDataStart = 0x02,
+        /// End of data marker record.
         eDataEnd = 0x03,
+        /// Start of node marker record.
         eNodeStart = 0x04,
+        /// End of node marker record.
         eNodeEnd = 0x05,
-        eParentNode = 0x06,
+        eParentNodeId = 0x06,
         eNodeName = 0x07,
-        eValue = 0x08
+        eNodeId = 0x08,
+        eInlineValue = 0x09,
+        ePartialInlineValue = 0x10,
+        eRemoteValueMarker = 0x11,
+        eRemoteValue = 0x12
     };
 
     Record(ERecordType type);

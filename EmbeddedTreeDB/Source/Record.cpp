@@ -94,7 +94,7 @@ void Record::load(PageRepositoryReader& reader,
         m_data = std::make_shared<KeyRecordData>();
         break;
 
-    case ERecordType::eValue:
+    case ERecordType::eInlineValue:
         m_data = std::make_shared<ValueRecordData>();
         break;
 

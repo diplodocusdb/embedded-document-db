@@ -136,11 +136,11 @@ bool MasterFile::findNode(const TreeDBKey& key,
         {
             if (static_cast<KeyRecordData*>(record.data())->key() == key.value())
             {
-                Record valueRecord(Record::ERecordType::eValue);
+                Record valueRecord(Record::ERecordType::eInlineValue);
                 valueRecord.load(reader, error);
                 if (!error)
                 {
-                    if (valueRecord.type() == Record::ERecordType::eValue)
+                    if (valueRecord.type() == Record::ERecordType::eInlineValue)
                     {
                         const std::string& value = static_cast<ValueRecordData*>(valueRecord.data())->buffer();
                         node.value().setUTF8String(value);
@@ -184,7 +184,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
     else
     {
         std::shared_ptr<KeyRecordData> parentRecordData = std::make_shared<KeyRecordData>(node.key().parentKey());
-        Record parentRecord(Record::ERecordType::eParentNode, parentRecordData);
+        Record parentRecord(Record::ERecordType::eParentNodeId, parentRecordData);
         parentRecord.save(writer, error);
         if (error)
         {
@@ -203,7 +203,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
     if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
     {
         std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
-        Record record(Record::ERecordType::eValue, recordData);
+        Record record(Record::ERecordType::eInlineValue, recordData);
         record.save(writer, error);
         if (error)
         {
