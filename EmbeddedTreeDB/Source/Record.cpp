@@ -36,12 +36,14 @@ Record::Record(ERecordType type)
 {
 }
 
-Record::Record(ERecordType type, std::shared_ptr<RecordData> data)
-    : m_type(type), m_data(data)
+Record::Record(const MasterFileMetadata& data)
+    : m_type(ERecordType::eMasterFileMetadata)
 {
+    m_data2 = data;
 }
 
-Record::~Record()
+Record::Record(ERecordType type, std::shared_ptr<RecordData> data)
+    : m_type(type), m_data(data)
 {
 }
 
@@ -61,8 +63,7 @@ RecordData* Record::data()
     return m_data.get();
 }
 
-void Record::load(PageRepositoryReader& reader,
-                  Ishiko::Error& error)
+void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     uint8_t type;
     reader.read((char*)&type, 1, error);
@@ -81,7 +82,7 @@ void Record::load(PageRepositoryReader& reader,
         break;
 
     case ERecordType::eMasterFileMetadata:
-        m_data = std::make_shared<MasterFileMetadata>();
+        m_data2 = MasterFileMetadata();
         break;
 
     case ERecordType::eDataStart:
@@ -115,8 +116,7 @@ void Record::load(PageRepositoryReader& reader,
     }
 }
 
-void Record::save(PageRepositoryWriter& writer,
-                  Ishiko::Error& error) const
+void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_type;
     writer.write((char*)&type, 1, error);
@@ -129,6 +129,20 @@ void Record::save(PageRepositoryWriter& writer,
         {
             m_data->save(writer, error);
         }
+    }
+    switch (type)
+    {
+    case ERecordType::eMasterFileMetadata:
+        {
+            char buffer[20];
+            size_t n = Utilities::encodeSize(boost::get<MasterFileMetadata>(m_data2).size(), buffer);
+            writer.write(buffer, n, error);
+            if (!error)
+            {
+                boost::get<MasterFileMetadata>(m_data2).write(writer, error);
+            }
+        }
+        break;
     }
 }
 

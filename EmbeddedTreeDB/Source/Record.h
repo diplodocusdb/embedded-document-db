@@ -23,9 +23,11 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
+#include "MasterFileMetadata.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include "Ishiko/Errors/Error.h"
+#include <boost/variant.hpp>
 #include <memory>
 
 namespace DiplodocusDB
@@ -111,18 +113,19 @@ public:
     };
 
     Record(ERecordType type);
+    Record(const MasterFileMetadata& data);
     Record(ERecordType type, std::shared_ptr<RecordData> data);
-    ~Record();
 
     ERecordType type() const;
     size_t size() const;
     RecordData* data();
 
-    void load(PageRepositoryReader& reader, Ishiko::Error& error);
-    void save(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void read(PageRepositoryReader& reader, Ishiko::Error& error);
+    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     Record::ERecordType m_type;
+    boost::variant<MasterFileMetadata> m_data2;
     std::shared_ptr<RecordData> m_data;
 };
 

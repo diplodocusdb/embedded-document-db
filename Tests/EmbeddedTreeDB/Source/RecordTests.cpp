@@ -22,6 +22,7 @@
 
 #include "RecordTests.h"
 #include "Record.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 
 using namespace Ishiko::Tests;
 
@@ -29,11 +30,46 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     : TestSequence(number, "Record tests", environment)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<FileComparisonTest>("write test 1", WriteTest1);
 }
 
 void RecordTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+
+    ISHTF_PASS();
+}
+
+void RecordTests::WriteTest1(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "RecordTests_WriteTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eMasterFileMetadata);
+    record.write(writer, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    page->save(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "RecordTests_WriteTest1.dpdb");
 
     ISHTF_PASS();
 }

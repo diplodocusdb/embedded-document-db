@@ -31,25 +31,18 @@ MasterFileMetadata::MasterFileMetadata()
 {
 }
 
-MasterFileMetadata::~MasterFileMetadata()
-{
-}
-
 size_t MasterFileMetadata::size() const
 {
     return 12;
 }
 
-void MasterFileMetadata::load(PageRepositoryReader& reader,
-                              size_t recordDataSize,
-                              Ishiko::Error& error)
+void MasterFileMetadata::read(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error)
 {
     char buffer[12];
     reader.read(buffer, 12, error);
 }
 
-void MasterFileMetadata::save(PageRepositoryWriter& writer,
-                              Ishiko::Error& error) const
+void MasterFileMetadata::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     for (unsigned int v : m_fileFormatVersion.value())
     {

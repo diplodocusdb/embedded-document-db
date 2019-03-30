@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,21 +23,21 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 
-#include "RecordData.h"
 #include "DiplodocusDB/Core/VersionNumber.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 
 namespace DiplodocusDB
 {
 
-class MasterFileMetadata : public RecordData
+class MasterFileMetadata
 {
 public:
     MasterFileMetadata();
-    ~MasterFileMetadata() override;
 
-    size_t size() const override;
-    void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error) override;
-    void save(PageRepositoryWriter& writer, Ishiko::Error& error) const override;
+    size_t size() const;
+    void read(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error);
+    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     VersionNumber m_fileFormatVersion;

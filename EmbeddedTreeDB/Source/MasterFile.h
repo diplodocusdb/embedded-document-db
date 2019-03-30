@@ -23,7 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 
-#include "MasterFileMetadata.h"
+#include "Record.h"
 #include "EmbeddedTreeDBNodeImpl.h"
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
@@ -117,7 +117,7 @@ private:
 
 private:
     PageFileRepository m_repository;
-    std::shared_ptr<MasterFileMetadata> m_metadata;
+    Record m_metadataRecord;
     size_t m_dataStartOffset;
     std::shared_ptr<Page> m_dataEndPage;
     size_t m_dataEndOffset;
