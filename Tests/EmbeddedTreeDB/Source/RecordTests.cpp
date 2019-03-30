@@ -30,8 +30,8 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     : TestSequence(number, "Record tests", environment)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
-    append<HeapAllocationErrorsTest>("read test 1", ReadTest1);
-    append<FileComparisonTest>("write test 1", WriteTest1);
+    append<HeapAllocationErrorsTest>("read (eMasterFileMetadata) test 1", ReadMasterFileMetadataTest1);
+    append<FileComparisonTest>("write (eMasterFileMetadata) test 1", WriteMasterFileMetadataTest1);
 }
 
 void RecordTests::ConstructionTest1(Test& test)
@@ -41,9 +41,10 @@ void RecordTests::ConstructionTest1(Test& test)
     ISHTF_PASS();
 }
 
-void RecordTests::ReadTest1(Test& test)
+void RecordTests::ReadMasterFileMetadataTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "RecordTests_ReadTest1.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+        / "RecordTests_ReadMasterFileMetadataTest1.dpdb");
 
     Ishiko::Error error(0);
 
@@ -63,9 +64,10 @@ void RecordTests::ReadTest1(Test& test)
     ISHTF_PASS();
 }
 
-void RecordTests::WriteTest1(FileComparisonTest& test)
+void RecordTests::WriteMasterFileMetadataTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "RecordTests_WriteTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "RecordTests_WriteMasterFileMetadataTest1.dpdb");
 
     Ishiko::Error error(0);
 
@@ -92,7 +94,8 @@ void RecordTests::WriteTest1(FileComparisonTest& test)
     ISHTF_FAIL_IF((bool)error);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "RecordTests_WriteTest1.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "RecordTests_WriteMasterFileMetadataTest1.dpdb");
 
     ISHTF_PASS();
 }
