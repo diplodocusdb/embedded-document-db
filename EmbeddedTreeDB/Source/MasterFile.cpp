@@ -34,10 +34,6 @@ MasterFile::MasterFile()
 {
 }
 
-MasterFile::~MasterFile()
-{
-}
-
 void MasterFile::create(const boost::filesystem::path& path,
                         Ishiko::Error& error)
 {

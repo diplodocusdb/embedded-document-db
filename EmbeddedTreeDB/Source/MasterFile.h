@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -37,11 +37,68 @@
 namespace DiplodocusDB
 {
 
+/// The master file where the database contents are physically stored.
+/**
+    The master file's low level format is built on top of the PageFileRepository class. This is essentially a series of
+    pages of fixed size stored in a file. These pages are used to stored a series of records.
+
+    The records are organized as shown in the tables below. The records are listed in the order in which they appear in
+    the file.
+
+    Top level file organization
+    ---------------------------
+
+    Records              | Description
+    -------------------- | ----------------------------------------
+    Master File Metadata | Information about the master file itself
+    Data Start           | Indicates the start of the section containing the data for the nodes stored in the database
+    Data section records | See the Data Section organization table below
+    Data End             | Indicates the end of the section started by the Data Start record
+
+    Data Section organization
+    -------------------------
+
+    The Data Section contains a series of records describing the nodes of the database. These records are organized in
+    groups. The Data Section may contain zero or more of these groups. Each group has the format described in the table
+    below.
+
+    Records                   | Description
+    ------------------------- | -----------------------------
+    Node Start                | Indicates the start of a node
+    Parent Node ID (optional) | Specifies the ID of the parent of the current node
+    Node data records         | See the Node Data organization table below
+    Node End                  | Indicates the end of a node
+
+    The Parent Node ID is only omitted for the root node which by definition has no parent.
+
+    Node Data organization
+    ----------------------
+
+    The Node Data contains a series of records describing the nodes that have the same parent node i.e. siblings. These
+    records are organized in groups. The Node Data contains one or more of these groups. Each group has the format
+    described in the table below.
+
+    Records                         | Description
+    ------------------------------- | -----------------------------
+    Node Name                       | The name of the node
+    Node ID (optional)              | The ID of the node
+    Inline Value (optional)         | The value of the node (directly inlined in the node)
+    Partial Inline Value (optional) | The value of the node (partially inlined)
+    Remote Value Marker (optional)  | A marker indicating the value of the node is stored in another record
+
+    Every node has a unique ID. The Node ID record is only omitted if this ID can be deduced without explicitly
+    recording it in the file.
+
+    At most one of the Inline Value, Partial Inline Value or Remote Value Marker records can be present. If none are
+    present it means the node has no associated value (the value has type NULL).
+
+    @see PageFileRepository
+*/
 class MasterFile
 {
 public:
+    /// Constructor.
     MasterFile();
-    ~MasterFile();
 
     void create(const boost::filesystem::path& path, Ishiko::Error& error);
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
