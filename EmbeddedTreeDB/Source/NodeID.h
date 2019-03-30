@@ -23,4 +23,13 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_NODEID_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_NODEID_H_
 
+namespace DiplodocusDB
+{
+
+class NodeID
+{
+};
+
+}
+
 #endif

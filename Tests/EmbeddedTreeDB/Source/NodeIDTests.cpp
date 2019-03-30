@@ -21,10 +21,19 @@
 */
 
 #include "NodeIDTests.h"
+#include "NodeID.h"
 
 using namespace Ishiko::Tests;
 
 NodeIDTests::NodeIDTests(const TestNumber& number, const TestEnvironment& environment)
     : TestSequence(number, "NodeID tests", environment)
 {
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+}
+
+void NodeIDTests::ConstructionTest1(Test& test)
+{
+    DiplodocusDB::NodeID id;
+
+    ISHTF_PASS();
 }
