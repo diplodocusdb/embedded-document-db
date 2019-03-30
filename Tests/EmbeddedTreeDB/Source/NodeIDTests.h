@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,29 +20,15 @@
     IN THE SOFTWARE.
 */
 
-#include "NodeIDTests.h"
-#include "KeyCacheTests.h"
-#include "MasterFileTests/MasterFileTests.h"
-#include "EmbeddedTreeDBTests/EmbeddedTreeDBTests.h"
+#ifndef _DIPLODOCUSDB_TEST_TREEDB_MASTERFILETESTS_NODEIDTESTS_H_
+#define _DIPLODOCUSDB_TEST_TREEDB_MASTERFILETESTS_NODEIDTESTS_H_
+
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
-#include <boost/filesystem/operations.hpp>
 
-using namespace Ishiko::Tests;
-
-int main(int argc, char* argv[])
+class NodeIDTests : public Ishiko::Tests::TestSequence
 {
-    TestHarness theTestHarness("DiplodocusEmbeddedTreeDB");
+public:
+    NodeIDTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+};
 
-    theTestHarness.environment().setTestDataDirectory("../../TestData");
-    theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
-    boost::filesystem::create_directories("../../TestOutput");
-    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
-
-    TestSequence& theTests = theTestHarness.tests();
-    theTests.append<NodeIDTests>();
-    theTests.append<KeyCacheTests>();
-    theTests.append<MasterFileTests>();
-    theTests.append<EmbeddedTreeDBTests>();
-
-    return theTestHarness.run();
-}
+#endif

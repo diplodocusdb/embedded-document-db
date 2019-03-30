@@ -153,11 +153,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp" />
+    <ClCompile Include="..\..\Source\NodeIDTests.cpp" />
     <ClCompile Include="..\..\Source\KeyCacheTests.cpp" />
     <ClCompile Include="..\..\Source\MasterFileTests\MasterFileTests.cpp" />
     <ClCompile Include="..\..\Source\EmbeddedTreeDBTests\EmbeddedTreeDBTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\NodeIDTests.h" />
     <ClInclude Include="..\..\Source\KeyCacheTests.h" />
     <ClInclude Include="..\..\Source\MasterFileTests\MasterFileTests.h" />
     <ClInclude Include="..\..\Source\EmbeddedTreeDBTests\EmbeddedTreeDBTests.h" />
