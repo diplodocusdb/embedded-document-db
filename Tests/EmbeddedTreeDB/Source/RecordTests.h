@@ -33,6 +33,10 @@ public:
 private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
     static void ReadMasterFileMetadataTest1(Ishiko::Tests::Test& test);
+    static void ReadDataStartTest1(Ishiko::Tests::Test& test);
+    static void ReadDataEndTest1(Ishiko::Tests::Test& test);
+    static void ReadNodeStartTest1(Ishiko::Tests::Test& test);
+    static void ReadNodeEndTest1(Ishiko::Tests::Test& test);
     static void WriteMasterFileMetadataTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteDataStartTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteDataEndTest1(Ishiko::Tests::FileComparisonTest& test);
