@@ -86,8 +86,9 @@ namespace DiplodocusDB
     Partial Inline Value (optional) | The value of the node (partially inlined)
     Remote Value Marker (optional)  | A marker indicating the value of the node is stored in another record
 
-    Every node has a unique ID. The Node ID record is only omitted if this ID can be deduced without explicitly
-    recording it in the file.
+    The Node ID record can be omitted if the node doesn't need an ID or its ID can be deduced without explicitly
+    recording it in the file. For instance the root node always has ID 0 and nodes that do not have children and whose
+    value is stored entirely inline may not need an ID.
 
     At most one of the Inline Value, Partial Inline Value or Remote Value Marker records can be present. If none are
     present it means the node has no associated value (the value has type NULL).

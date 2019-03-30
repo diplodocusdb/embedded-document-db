@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TreeDBKey.cpp" />
+    <ClCompile Include="..\..\Source\TreeDBPersistentNodeID.cpp" />
     <ClCompile Include="..\..\Source\TreeDBValue.cpp" />
     <ClCompile Include="..\..\Source\TreeDBNode.cpp" />
     <ClCompile Include="..\..\Source\TreeDBNodeImpl.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\TreeDBCore.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBKey.h" />
+    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBPersistentNodeID.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBValue.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBNode.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBNodeImpl.h" />

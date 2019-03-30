@@ -23,6 +23,9 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBKey.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBPersistentNodeID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -41,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\TreeDBKey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TreeDBPersistentNodeID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TreeDBValue.cpp">
