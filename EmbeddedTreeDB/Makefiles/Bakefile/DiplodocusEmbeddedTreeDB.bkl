@@ -44,6 +44,7 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
 
         ../../Source/EmbeddedTreeDBImpl.h
         ../../Source/EmbeddedTreeDBNodeImpl.h
+        ../../Source/NodeID.h
         ../../Source/KeyCache.h
         ../../Source/UncommittedNodes.h
         ../../Source/MasterFile.h
@@ -63,6 +64,7 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
 
         ../../Source/EmbeddedTreeDBImpl.cpp
         ../../Source/EmbeddedTreeDBNodeImpl.cpp
+        ../../Source/NodeID.cpp
         ../../Source/KeyCache.cpp
         ../../Source/UncommittedNodes.cpp
         ../../Source/MasterFileMetadata.cpp

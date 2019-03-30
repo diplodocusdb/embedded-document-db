@@ -88,7 +88,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(BOOST);$(DIPLODOCUSDB)/PhysicalStorage\Include;$(DIPLODOCUSDB)/Core\Include;..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(BOOST);$(DIPLODOCUSDB)/PhysicalStorage\Include;..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(BOOST);$(DIPLODOCUSDB)/PhysicalStorage\Include;$(DIPLODOCUSDB)/Core\Include;..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(BOOST);$(DIPLODOCUSDB)/PhysicalStorage\Include;..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(BOOST);$(DIPLODOCUSDB)/PhysicalStorage\Include;$(DIPLODOCUSDB)/Core\Include;..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(BOOST);$(DIPLODOCUSDB)/PhysicalStorage\Include;..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -139,7 +139,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(BOOST);$(DIPLODOCUSDB)/PhysicalStorage\Include;$(DIPLODOCUSDB)/Core\Include;..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(BOOST);$(DIPLODOCUSDB)/PhysicalStorage\Include;..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\Source\EmbeddedTreeDB.cpp" />
     <ClCompile Include="..\..\Source\EmbeddedTreeDBImpl.cpp" />
     <ClCompile Include="..\..\Source\EmbeddedTreeDBNodeImpl.cpp" />
+    <ClCompile Include="..\..\Source\NodeID.cpp" />
     <ClCompile Include="..\..\Source\KeyCache.cpp" />
     <ClCompile Include="..\..\Source\UncommittedNodes.cpp" />
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\Source\EmbeddedTreeDBImpl.h" />
     <ClInclude Include="..\..\Source\EmbeddedTreeDBNodeImpl.h" />
+    <ClInclude Include="..\..\Source\NodeID.h" />
     <ClInclude Include="..\..\Source\KeyCache.h" />
     <ClInclude Include="..\..\Source\UncommittedNodes.h" />
     <ClInclude Include="..\..\Source\MasterFile.h" />
