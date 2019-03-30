@@ -38,6 +38,7 @@ size_t MasterFileMetadata::size() const
 
 void MasterFileMetadata::read(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error)
 {
+    // TODO
     char buffer[12];
     reader.read(buffer, 12, error);
 }

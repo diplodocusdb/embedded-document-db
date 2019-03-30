@@ -82,7 +82,15 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eMasterFileMetadata:
-        m_data2 = MasterFileMetadata();
+        {
+            uint8_t size;
+            reader.read((char*)&size, 1, error);
+            if (!error)
+            {
+                m_data2 = MasterFileMetadata();
+                boost::get<MasterFileMetadata>(m_data2).read(reader, size, error);
+            }
+        }
         break;
 
     case ERecordType::eDataStart:

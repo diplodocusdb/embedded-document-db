@@ -30,6 +30,7 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     : TestSequence(number, "Record tests", environment)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<HeapAllocationErrorsTest>("read test 1", ReadTest1);
     append<FileComparisonTest>("write test 1", WriteTest1);
 }
 
@@ -37,6 +38,28 @@ void RecordTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
 
+    ISHTF_PASS();
+}
+
+void RecordTests::ReadTest1(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "RecordTests_ReadTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    record.read(reader, error);
+
+    ISHTF_ABORT_IF((bool)error);
     ISHTF_PASS();
 }
 
