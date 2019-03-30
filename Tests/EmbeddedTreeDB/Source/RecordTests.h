@@ -34,6 +34,8 @@ private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
     static void ReadMasterFileMetadataTest1(Ishiko::Tests::Test& test);
     static void WriteMasterFileMetadataTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteDataStartTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteDataEndTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif
