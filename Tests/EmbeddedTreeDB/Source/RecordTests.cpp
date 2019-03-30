@@ -20,18 +20,20 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDTESTS_H_
-#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDTESTS_H_
+#include "RecordTests.h"
+#include "Record.h"
 
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+using namespace Ishiko::Tests;
 
-class NodeIDTests : public Ishiko::Tests::TestSequence
+RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& environment)
+    : TestSequence(number, "Record tests", environment)
 {
-public:
-    NodeIDTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+}
 
-private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-};
+void RecordTests::ConstructionTest1(Test& test)
+{
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
 
-#endif
+    ISHTF_PASS();
+}

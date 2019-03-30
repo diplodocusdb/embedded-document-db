@@ -21,6 +21,7 @@
 */
 
 #include "NodeIDTests.h"
+#include "RecordTests.h"
 #include "KeyCacheTests.h"
 #include "MasterFileTests/MasterFileTests.h"
 #include "EmbeddedTreeDBTests/EmbeddedTreeDBTests.h"
@@ -40,6 +41,7 @@ int main(int argc, char* argv[])
 
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<NodeIDTests>();
+    theTests.append<RecordTests>();
     theTests.append<KeyCacheTests>();
     theTests.append<MasterFileTests>();
     theTests.append<EmbeddedTreeDBTests>();

@@ -20,15 +20,15 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDTESTS_H_
-#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDTESTS_H_
+#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_RECORDTESTS_H_
+#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_RECORDTESTS_H_
 
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-class NodeIDTests : public Ishiko::Tests::TestSequence
+class RecordTests : public Ishiko::Tests::TestSequence
 {
 public:
-    NodeIDTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    RecordTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
 
 private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
