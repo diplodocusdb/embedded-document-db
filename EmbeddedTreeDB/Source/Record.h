@@ -67,13 +67,26 @@ public:
         /// Node name record.
         eNodeName = 0x07,
         /// Node ID record.
+        /**
+            Note that the ID is not guaranteed to be constant during the lifetime of the node.
+        */
         eNodeID = 0x08,
+        /// Persistent node ID record.
+        /**
+            The ePersistentNodeID record is used instead of the eNodeID record when the node ID must not change during
+            the lifetime of the node.
+
+            By default node IDs are not guaranteed to stay the same during the lifetime of the node. There are cases
+            where the implementation may change the ID of a node (for instance during a database rebuild or to optimize
+            disk usage).
+        */
+        ePersistentNodeID = 0x09,
         /// Value record.
         /**
             In this case the value is stored directly in the record itself. This is in general
             more suitable for values that do not take up too much storage space.
         */
-        eInlineValue = 0x09,
+        eInlineValue = 0x10,
         /// Value record.
         /**
             In this case the first bytes of the value are stored directly in the record itself
@@ -82,19 +95,19 @@ public:
 
             This type of value record provides a performance compromise between eInlineValue and eRemoteValue.
         */
-        ePartialInlineValue = 0x10,
+        ePartialInlineValue = 0x11,
         /// Record marking that there is a value but it is stored in another record.
         /**
             This record is used to distinguish between the case where there is no value at all and the case where the
             value is stored elsewhere.
         */
-        eRemoteValueMarker = 0x11,
+        eRemoteValueMarker = 0x12,
         /// A value record that is stored on its own.
         /**
             This kind of record will contain the ID of the node as well as the value. It is typically used for values
             that take up a large amount of storage space.
         */
-        eRemoteValue = 0x12
+        eRemoteValue = 0x13
     };
 
     Record(ERecordType type);
