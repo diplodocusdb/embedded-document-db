@@ -30,6 +30,13 @@ TreeDBValue::TreeDBValue()
 {
 }
 
+TreeDBValue TreeDBValue::Int8(int8_t data)
+{
+    TreeDBValue result;
+    result.setInt8(data);
+    return result;
+}
+
 TreeDBValue TreeDBValue::Int32(int32_t data)
 {
     TreeDBValue result;
@@ -49,14 +56,25 @@ const DataType& TreeDBValue::type() const
     return m_type;
 }
 
+int8_t TreeDBValue::asInt8() const
+{
+    return boost::get<int8_t>(m_data);
+}
+
 int32_t TreeDBValue::asInt32() const
 {
-    return boost::any_cast<int32_t>(m_data);
+    return boost::get<int32_t>(m_data);
 }
 
 const std::string& TreeDBValue::asUTF8String() const
 {
-    return boost::any_cast<const std::string&>(m_data);
+    return boost::get<std::string>(m_data);
+}
+
+void TreeDBValue::setInt8(int8_t value)
+{
+    m_type = EPrimitiveDataType::eInt8;
+    m_data = value;
 }
 
 void TreeDBValue::setInt32(int32_t value)

@@ -24,7 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
 
 #include "DiplodocusDB/Core/DataType.h"
-#include <boost/any.hpp>
+#include <boost/variant.hpp>
 #include <string>
 
 namespace DiplodocusDB
@@ -39,6 +39,11 @@ public:
         The default constructor creates a value of type NULL.
     */
     TreeDBValue();
+    /// Returns a value of type Int8.
+    /**
+        @param data The data to store in the value.
+    */
+    static TreeDBValue Int8(int8_t data);
     /// Returns a value of type Int32.
     /**
         @param data The data to store in the value.
@@ -53,15 +58,17 @@ public:
     /// Returns the type of the data.
     const DataType& type() const;
 
+    int8_t asInt8() const;
     int32_t asInt32() const;
     const std::string& asUTF8String() const;
 
+    void setInt8(int8_t value);
     void setInt32(int32_t value);
     void setUTF8String(const std::string& value);
 
 private:
     DataType m_type;
-    boost::any m_data;
+    boost::variant<int8_t, int32_t, std::string> m_data;
 };
 
 }
