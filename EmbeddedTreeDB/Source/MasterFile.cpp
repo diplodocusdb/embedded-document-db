@@ -168,8 +168,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
 
     if (node.isRoot())
     {
-        std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key());
-        Record record(Record::ERecordType::eNodeName, recordData);
+        Record record(node.name());
         record.write(writer, error);
         if (error)
         {
@@ -178,16 +177,14 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
     }
     else
     {
-        std::shared_ptr<KeyRecordData> parentRecordData = std::make_shared<KeyRecordData>(node.key().parentKey());
-        Record parentRecord(Record::ERecordType::eParentNodeID, parentRecordData);
+        Record parentRecord(Record::ERecordType::eParentNodeID, node.parentNodeID());
         parentRecord.write(writer, error);
         if (error)
         {
             return;
         }
 
-        std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>(node.key().base());
-        Record record(Record::ERecordType::eNodeName, recordData);
+        Record record(node.name());
         record.write(writer, error);
         if (error)
         {
@@ -223,15 +220,13 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
     m_dataEndOffset = (m_dataEndPage->dataSize() - 1);
 }
 
-bool MasterFile::removeNode(const TreeDBKey& key,
-                            Ishiko::Error& error)
+bool MasterFile::removeNode(const TreeDBKey& key, Ishiko::Error& error)
 {
     error.fail(-1);
     return false;
 }
 
-void MasterFile::createRootNode(PageRepositoryWriter& writer,
-                                Ishiko::Error& error)
+void MasterFile::createRootNode(PageRepositoryWriter& writer, Ishiko::Error& error)
 {
     Record nodeStartRecord(Record::ERecordType::eNodeStart);
     nodeStartRecord.write(writer, error);
@@ -240,8 +235,7 @@ void MasterFile::createRootNode(PageRepositoryWriter& writer,
         return;
     }
 
-    std::shared_ptr<KeyRecordData> recordData = std::make_shared<KeyRecordData>("/");
-    Record record(Record::ERecordType::eNodeName, recordData);
+    Record record("/");
     record.write(writer, error);
     if (error)
     {
