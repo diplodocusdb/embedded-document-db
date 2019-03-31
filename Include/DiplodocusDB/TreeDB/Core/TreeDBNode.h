@@ -23,9 +23,9 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 
-#include "TreeDBKey.h"
 #include "TreeDBValue.h"
 #include "Ishiko/Errors/Error.h"
+#include <string>
 #include <vector>
 #include <memory>
 
@@ -46,18 +46,18 @@ public:
     bool operator ==(const TreeDBNode& other) const;
     bool operator !=(const TreeDBNode& other) const;
 
-    const TreeDBKey& key() const;
+    const std::string& name() const;
     const TreeDBValue& value() const;
     TreeDBValue& value();
 
     bool isRoot() const;
     TreeDBNode parent(Ishiko::Error& error);
     void children(std::vector<TreeDBNode>& children, Ishiko::Error& error);
-    TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode child(const std::string& name, Ishiko::Error& error);
     TreeDBNode previousSibling(Ishiko::Error& error);
-    TreeDBNode previousSibling(const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error);
     TreeDBNode nextSibling(Ishiko::Error& error);
-    TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error);
 
     std::shared_ptr<TreeDBNodeImpl>& impl();
 

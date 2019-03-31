@@ -59,9 +59,9 @@ bool TreeDBNode::operator !=(const TreeDBNode& other) const
     return (m_impl != other.m_impl);
 }
 
-const TreeDBKey& TreeDBNode::key() const
+const std::string& TreeDBNode::name() const
 {
-    return m_impl->key();
+    return m_impl->name();
 }
 
 const TreeDBValue& TreeDBNode::value() const
@@ -89,9 +89,9 @@ void TreeDBNode::children(std::vector<TreeDBNode>& children, Ishiko::Error& erro
     m_impl->children(children, error);
 }
 
-TreeDBNode TreeDBNode::child(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode TreeDBNode::child(const std::string& name, Ishiko::Error& error)
 {
-    return m_impl->child(key, error);
+    return m_impl->child(name, error);
 }
 
 TreeDBNode TreeDBNode::previousSibling(Ishiko::Error& error)
@@ -99,9 +99,9 @@ TreeDBNode TreeDBNode::previousSibling(Ishiko::Error& error)
     return m_impl->previousSibling(error);
 }
 
-TreeDBNode TreeDBNode::previousSibling(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode TreeDBNode::previousSibling(const std::string& name, Ishiko::Error& error)
 {
-    return m_impl->previousSibling(key, error);
+    return m_impl->previousSibling(name, error);
 }
 
 TreeDBNode TreeDBNode::nextSibling(Ishiko::Error& error)
@@ -109,9 +109,9 @@ TreeDBNode TreeDBNode::nextSibling(Ishiko::Error& error)
     return m_impl->nextSibling(error);
 }
 
-TreeDBNode TreeDBNode::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode TreeDBNode::nextSibling(const std::string& name, Ishiko::Error& error)
 {
-    return m_impl->nextSibling(key, error);
+    return m_impl->nextSibling(name, error);
 }
 
 std::shared_ptr<TreeDBNodeImpl>& TreeDBNode::impl()

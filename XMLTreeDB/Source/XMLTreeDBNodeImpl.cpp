@@ -59,14 +59,14 @@ void XMLTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Erro
     }
 }
 
-TreeDBNode XMLTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::child(const std::string& name, Ishiko::Error& error)
 {
     TreeDBNode result;
 
     loadChildren(error);
     for (std::shared_ptr<XMLTreeDBNodeImpl>& child : m_children)
     {
-        if (child->key() == key)
+        if (child->name() == name)
         {
             result = TreeDBNode(child);
             break;
@@ -82,7 +82,7 @@ TreeDBNode XMLTreeDBNodeImpl::previousSibling(Ishiko::Error& error)
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::previousSibling(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::previousSibling(const std::string& name, Ishiko::Error& error)
 {
     TreeDBNode result;
     return result;
@@ -111,7 +111,7 @@ TreeDBNode XMLTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::nextSibling(const std::string& name, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
@@ -160,7 +160,7 @@ TreeDBNode XMLTreeDBNodeImpl::setChildNode(const std::string& name, const TreeDB
     loadChildren(error);
     for (size_t i = 0; i < m_children.size(); ++i)
     {
-        if (m_children[i]->key() == name)
+        if (m_children[i]->name() == name)
         {
             result = TreeDBNode(m_children[i]);
             m_children[i]->value() = value;

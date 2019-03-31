@@ -40,11 +40,11 @@ public:
     bool isRoot() const override;
     TreeDBNode parent(Ishiko::Error& error) override;
     void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
-    TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode child(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode previousSibling(Ishiko::Error& error) override;
-    TreeDBNode previousSibling(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode nextSibling(Ishiko::Error& error) override;
-    TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode insertChildNode(size_t index, const std::string& name, const TreeDBValue& value, Ishiko::Error& error);
     TreeDBNode insertChildNodeBefore(const TreeDBNode& nextChild, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error);

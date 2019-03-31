@@ -22,7 +22,6 @@
 
 #include "MasterFile.h"
 #include "EmbeddedTreeDBNodeImpl.h"
-#include "KeyRecordData.h"
 #include "ValueRecordData.h"
 
 namespace DiplodocusDB
@@ -128,6 +127,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
         record.read(reader, error);
         if (!error && (record.type() == Record::ERecordType::eNodeName))
         {
+            /* TODO
             if (static_cast<KeyRecordData*>(record.data())->key() == key.value())
             {
                 Record valueRecord(Record::ERecordType::eInlineValue);
@@ -144,6 +144,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
                     result = true;
                 }
             }
+            */
         }
     }
 

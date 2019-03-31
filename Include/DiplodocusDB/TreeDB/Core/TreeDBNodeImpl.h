@@ -23,7 +23,6 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODEIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODEIMPL_H_
 
-#include "TreeDBKey.h"
 #include "TreeDBValue.h"
 #include "TreeDBNode.h"
 #include "Ishiko/Errors/Error.h"
@@ -35,28 +34,28 @@ namespace DiplodocusDB
 class TreeDBNodeImpl
 {
 public:
-    TreeDBNodeImpl(const TreeDBKey& key);
+    TreeDBNodeImpl(const std::string& name);
     virtual ~TreeDBNodeImpl();
 
-    const TreeDBKey& key() const;
+    const std::string& name() const;
     const TreeDBValue& value() const;
     TreeDBValue& value();
 
     virtual bool isRoot() const = 0;
     virtual TreeDBNode parent(Ishiko::Error& error) = 0;
     virtual void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) = 0;
-    virtual TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error) = 0;
+    virtual TreeDBNode child(const std::string& name, Ishiko::Error& error) = 0;
     virtual TreeDBNode previousSibling(Ishiko::Error& error) = 0;
-    virtual TreeDBNode previousSibling(const TreeDBKey& key, Ishiko::Error& error) = 0;
+    virtual TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error) = 0;
     virtual TreeDBNode nextSibling(Ishiko::Error& error) = 0;
-    virtual TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error) = 0;
+    virtual TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error) = 0;
 
 private:
     TreeDBNodeImpl(const TreeDBNodeImpl& other) = delete;
     TreeDBNodeImpl& operator =(const TreeDBNodeImpl& other) = delete;
 
 private:
-    TreeDBKey m_key;
+    std::string m_name;
     TreeDBValue m_value;
 };
 

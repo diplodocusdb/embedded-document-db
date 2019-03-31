@@ -25,8 +25,8 @@
 namespace DiplodocusDB
 {
 
-TreeDBNodeImpl::TreeDBNodeImpl(const TreeDBKey& key)
-    : m_key(key)
+TreeDBNodeImpl::TreeDBNodeImpl(const std::string& name)
+    : m_name(name)
 {
 }
 
@@ -34,9 +34,9 @@ TreeDBNodeImpl::~TreeDBNodeImpl()
 {
 }
 
-const TreeDBKey& TreeDBNodeImpl::key() const
+const std::string& TreeDBNodeImpl::name() const
 {
-    return m_key;
+    return m_name;
 }
 
 const TreeDBValue& TreeDBNodeImpl::value() const

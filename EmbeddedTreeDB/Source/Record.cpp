@@ -23,7 +23,6 @@
 #include "Record.h"
 #include "RecordData.h"
 #include "MasterFileMetadata.h"
-#include "KeyRecordData.h"
 #include "ValueRecordData.h"
 #include "Utilities.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/Page.h"
@@ -109,7 +108,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eNodeName:
-        m_data = std::make_shared<KeyRecordData>();
+        // TODO
         break;
 
     case ERecordType::eInlineValue:
