@@ -202,10 +202,52 @@ void RecordTests::ReadParentNodeIDTest1(Test& test)
 
 void RecordTests::ReadNodeNameTest1(Test& test)
 {
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+        / "RecordTests_ReadNodeNameTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    record.read(reader, error);
+
+    ISHTF_ABORT_IF((bool)error);
+    ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eNodeName);
+    ISHTF_FAIL_UNLESS(record.asString() == "key1");
+    ISHTF_PASS();
 }
 
 void RecordTests::ReadNodeIDTest1(Test& test)
 {
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+        / "RecordTests_ReadNodeIDTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    record.read(reader, error);
+
+    ISHTF_ABORT_IF((bool)error);
+    ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eNodeID);
+    ISHTF_FAIL_UNLESS(record.asNodeID() == DiplodocusDB::NodeID(123));
+    ISHTF_PASS();
 }
 
 void RecordTests::WriteMasterFileMetadataTest1(FileComparisonTest& test)

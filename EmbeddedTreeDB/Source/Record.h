@@ -121,6 +121,7 @@ public:
 
     ERecordType type() const;
     const NodeID& asNodeID() const;
+    const std::string& asString() const;
     size_t size() const;
     RecordData* data();
 

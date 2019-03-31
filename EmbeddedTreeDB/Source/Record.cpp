@@ -65,6 +65,11 @@ const NodeID& Record::asNodeID() const
     return boost::get<NodeID>(m_data2);
 }
 
+const std::string& Record::asString() const
+{
+    return boost::get<std::string>(m_data2);
+}
+
 size_t Record::size() const
 {
     size_t dataSize = m_data->size();
@@ -114,6 +119,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eParentNodeID:
+    case ERecordType::eNodeID:
         {
             m_data2 = NodeID();
             boost::get<NodeID>(m_data2).read(reader, error);
@@ -121,7 +127,18 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eNodeName:
-        // TODO
+        {
+            // TODO: this needs to decode LEB128
+            uint8_t size;
+            reader.read((char*)&size, 1, error);
+            if (!error)
+            {
+                std::string name;
+                name.resize(size);
+                reader.read(&name[0], size, error);
+                m_data2 = name;
+            }
+        }
         break;
 
     case ERecordType::eInlineValue:
