@@ -43,6 +43,8 @@ private:
     static void WriteNodeStartTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteNodeEndTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteParentNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteNodeNameTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif

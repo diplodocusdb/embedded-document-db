@@ -46,6 +46,11 @@ Record::Record(const MasterFileMetadata& data)
 {
 }
 
+Record::Record(const std::string& data)
+    : m_type(ERecordType::eNodeName), m_data2(data)
+{
+}
+
 Record::Record(ERecordType type, std::shared_ptr<RecordData> data)
     : m_type(type), m_data(data)
 {
@@ -158,9 +163,23 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
         break;
 
     case ERecordType::eParentNodeID:
+    case ERecordType::eNodeID:
         {
             const NodeID& id = boost::get<NodeID>(m_data2);
             id.save(writer, error);
+        }
+        break;
+
+    case ERecordType::eNodeName:
+        {
+            const std::string& name = boost::get<std::string>(m_data2);
+            char buffer[20];
+            size_t n = Utilities::encodeLEB128(name.size(), buffer);
+            writer.write(buffer, n, error);
+            if (!error)
+            {
+                writer.write(name.c_str(), name.size(), error);
+            }
         }
         break;
     }

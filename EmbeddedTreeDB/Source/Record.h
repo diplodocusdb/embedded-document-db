@@ -116,6 +116,7 @@ public:
     Record(ERecordType type);
     Record(ERecordType type, const NodeID& data);
     Record(const MasterFileMetadata& data);
+    Record(const std::string& data);
     Record(ERecordType type, std::shared_ptr<RecordData> data);
 
     ERecordType type() const;
@@ -127,7 +128,7 @@ public:
 
 private:
     Record::ERecordType m_type;
-    boost::variant<MasterFileMetadata, NodeID> m_data2;
+    boost::variant<MasterFileMetadata, NodeID, std::string> m_data2;
     std::shared_ptr<RecordData> m_data;
 };
 
