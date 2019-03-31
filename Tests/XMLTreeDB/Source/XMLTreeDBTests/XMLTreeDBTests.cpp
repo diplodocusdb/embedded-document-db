@@ -218,7 +218,7 @@ void XMLTreeDBTests::ParentTest1(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode parent = db.root().parent(error);
+    DiplodocusDB::TreeDBNode parent = db.parent(db.root(), error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_IF((bool)parent);
@@ -241,7 +241,7 @@ void XMLTreeDBTests::ParentTest2(Test& test)
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(childNode);
     
-    DiplodocusDB::TreeDBNode parentNode = childNode.parent(error);
+    DiplodocusDB::TreeDBNode parentNode = db.parent(childNode, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(parentNode == db.root());

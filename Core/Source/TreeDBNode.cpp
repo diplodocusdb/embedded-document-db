@@ -79,11 +79,6 @@ bool TreeDBNode::isRoot() const
     return m_impl->isRoot();
 }
 
-TreeDBNode TreeDBNode::parent(Ishiko::Error& error)
-{
-    return m_impl->parent(error);
-}
-
 void TreeDBNode::children(std::vector<TreeDBNode>& children, Ishiko::Error& error)
 {
     m_impl->children(children, error);

@@ -166,9 +166,9 @@ TreeDBNode EmbeddedTreeDBImpl::getNode(const TreeDBKey& key, Ishiko::Error& erro
     return TreeDBNode(temp);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertNode(const TreeDBKey& key, const RecordMarker& marker)
+TreeDBNode EmbeddedTreeDBImpl::insertNode(const std::string& name, const RecordMarker& marker)
 {
-    return m_uncommittedNodes.createNode(key, marker);
+    return m_uncommittedNodes.createNode(name, marker);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::appendNode(const TreeDBKey& key)

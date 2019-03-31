@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 
+#include "NodeID.h"
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h"
 
@@ -34,22 +35,23 @@ class EmbeddedTreeDBImpl;
 class EmbeddedTreeDBNodeImpl : public TreeDBNodeImpl
 {
 public:
-    EmbeddedTreeDBNodeImpl(const TreeDBKey& key, const RecordMarker& nodeMarker, const RecordMarker& childrenMarker);
+    EmbeddedTreeDBNodeImpl(const std::string& name, const RecordMarker& nodeMarker, const RecordMarker& childrenMarker);
     ~EmbeddedTreeDBNodeImpl() override;
 
     bool isRoot() const override;
     TreeDBNode parent(Ishiko::Error& error) override;
     void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
-    TreeDBNode child(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode child(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode previousSibling(Ishiko::Error& error) override;
-    TreeDBNode previousSibling(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode nextSibling(Ishiko::Error& error) override;
-    TreeDBNode nextSibling(const TreeDBKey& key, Ishiko::Error& error) override;
+    TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error) override;
 
     const RecordMarker& marker() const;
     void setMarker(const RecordMarker& marker);
     
 private:
+    NodeID m_parentNodeID;
     RecordMarker m_nodeMarker;
     RecordMarker m_childrenMarker;
 };

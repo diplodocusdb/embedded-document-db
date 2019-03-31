@@ -38,7 +38,7 @@ public:
     ~XMLTreeDBNodeImpl() override;
 
     bool isRoot() const override;
-    TreeDBNode parent(Ishiko::Error& error) override;
+    TreeDBNode parent(Ishiko::Error& error);
     void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
     TreeDBNode child(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode previousSibling(Ishiko::Error& error) override;

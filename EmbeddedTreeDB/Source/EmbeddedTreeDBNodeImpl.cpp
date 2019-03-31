@@ -26,9 +26,9 @@
 namespace DiplodocusDB
 {
 
-EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(const TreeDBKey& key, const RecordMarker& nodeMarker,
+EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(const std::string& name, const RecordMarker& nodeMarker,
     const RecordMarker& childrenMarker)
-    : TreeDBNodeImpl(key), m_nodeMarker(nodeMarker), m_childrenMarker(childrenMarker)
+    : TreeDBNodeImpl(name), m_nodeMarker(nodeMarker), m_childrenMarker(childrenMarker)
 {
 }
 
