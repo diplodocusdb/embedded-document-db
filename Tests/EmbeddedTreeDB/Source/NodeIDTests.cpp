@@ -33,7 +33,7 @@ NodeIDTests::NodeIDTests(const TestNumber& number, const TestEnvironment& enviro
 
 void NodeIDTests::ConstructionTest1(Test& test)
 {
-    DiplodocusDB::NodeID id;
+    DiplodocusDB::NodeID id(0);
 
     ISHTF_PASS();
 }

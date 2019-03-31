@@ -23,11 +23,22 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_NODEID_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_NODEID_H_
 
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
+
 namespace DiplodocusDB
 {
 
 class NodeID
 {
+public:
+    NodeID(size_t value);
+
+    void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error);
+    void save(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+
+private:
+    size_t m_value;
 };
 
 }

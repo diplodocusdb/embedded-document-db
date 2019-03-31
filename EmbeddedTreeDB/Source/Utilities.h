@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -29,8 +29,8 @@ namespace DiplodocusDB
 class Utilities
 {
 public:
-    static size_t encodeSize(size_t value, char* buffer);
-    static size_t decodeSize(const char* buffer, size_t& value);
+    static size_t encodeLEB128(size_t value, char* buffer);
+    static size_t decodeLEB128(const char* buffer, size_t& value);
 };
 
 }

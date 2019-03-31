@@ -21,3 +21,25 @@
 */
 
 #include "NodeID.h"
+#include "Utilities.h"
+
+namespace DiplodocusDB
+{
+
+NodeID::NodeID(size_t value)
+    : m_value(value)
+{
+}
+
+void NodeID::load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error)
+{
+}
+
+void NodeID::save(PageRepositoryWriter& writer, Ishiko::Error& error) const
+{
+    char buffer[20];
+    size_t n = Utilities::encodeLEB128(m_value, buffer);
+    writer.write(buffer, n, error);
+}
+
+}

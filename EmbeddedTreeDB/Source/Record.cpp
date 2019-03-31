@@ -36,10 +36,14 @@ Record::Record(ERecordType type)
 {
 }
 
-Record::Record(const MasterFileMetadata& data)
-    : m_type(ERecordType::eMasterFileMetadata)
+Record::Record(ERecordType type, const NodeID& data)
+    : m_type(type), m_data2(data)
 {
-    m_data2 = data;
+}
+
+Record::Record(const MasterFileMetadata& data)
+    : m_type(ERecordType::eMasterFileMetadata), m_data2(data)
+{
 }
 
 Record::Record(ERecordType type, std::shared_ptr<RecordData> data)
@@ -55,7 +59,7 @@ Record::ERecordType Record::type() const
 size_t Record::size() const
 {
     size_t dataSize = m_data->size();
-    return (1 + Utilities::encodeSize(dataSize, 0) + dataSize);
+    return (1 + Utilities::encodeLEB128(dataSize, 0) + dataSize);
 }
 
 RecordData* Record::data()
@@ -131,7 +135,7 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
     if (!error && m_data)
     {
         char buffer[20];
-        size_t n = Utilities::encodeSize(m_data->size(), buffer);
+        size_t n = Utilities::encodeLEB128(m_data->size(), buffer);
         writer.write(buffer, n, error);
         if (!error)
         {
@@ -142,13 +146,21 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
     {
     case ERecordType::eMasterFileMetadata:
         {
+            const MasterFileMetadata& metadata = boost::get<MasterFileMetadata>(m_data2);
             char buffer[20];
-            size_t n = Utilities::encodeSize(boost::get<MasterFileMetadata>(m_data2).size(), buffer);
+            size_t n = Utilities::encodeLEB128(metadata.size(), buffer);
             writer.write(buffer, n, error);
             if (!error)
             {
-                boost::get<MasterFileMetadata>(m_data2).write(writer, error);
+                metadata.write(writer, error);
             }
+        }
+        break;
+
+    case ERecordType::eParentNodeID:
+        {
+            const NodeID& id = boost::get<NodeID>(m_data2);
+            id.save(writer, error);
         }
         break;
     }

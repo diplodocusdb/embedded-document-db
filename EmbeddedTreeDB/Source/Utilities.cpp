@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -25,8 +25,7 @@
 namespace DiplodocusDB
 {
 
-size_t Utilities::encodeSize(size_t value,
-                             char* buffer)
+size_t Utilities::encodeLEB128(size_t value, char* buffer)
 {
     if (buffer)
     {
@@ -35,8 +34,7 @@ size_t Utilities::encodeSize(size_t value,
     return 1;
 }
 
-size_t Utilities::decodeSize(const char* buffer,
-                             size_t& value)
+size_t Utilities::decodeLEB128(const char* buffer, size_t& value)
 {
     value = *((unsigned char*)buffer);
     return 1;
