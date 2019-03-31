@@ -41,13 +41,6 @@ bool EmbeddedTreeDBNodeImpl::isRoot() const
     return key().isRoot();
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::parent(Ishiko::Error& error)
-{
-    // TODO
-    TreeDBNode result;
-    return result;
-}
-
 void EmbeddedTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Error& error)
 {
     // TODO

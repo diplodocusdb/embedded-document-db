@@ -46,6 +46,8 @@ public:
 
     TreeDBNode& root() override;
 
+    TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) override;
+
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error) override;
 
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
