@@ -25,7 +25,6 @@
 
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 
 namespace DiplodocusDB
 {
@@ -36,7 +35,7 @@ public:
     UncommittedNodes();
     ~UncommittedNodes();
 
-    TreeDBNode createNode(const TreeDBKey& key, const RecordMarker& marker);
+    TreeDBNode createNode(const std::string& name, const RecordMarker& marker);
 };
 
 }

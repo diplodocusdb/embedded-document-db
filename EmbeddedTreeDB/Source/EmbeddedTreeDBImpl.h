@@ -70,9 +70,9 @@ public:
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
 
-    TreeDBNode getNode(const TreeDBKey& key, Ishiko::Error& error);
+    TreeDBNode getNode(const std::string& name, Ishiko::Error& error);
     TreeDBNode insertNode(const std::string& name, const RecordMarker& marker);
-    TreeDBNode appendNode(const TreeDBKey& key);
+    TreeDBNode appendNode(const std::string& name);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
     void commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
 

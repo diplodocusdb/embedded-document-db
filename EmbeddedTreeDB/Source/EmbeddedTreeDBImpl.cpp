@@ -165,11 +165,11 @@ size_t EmbeddedTreeDBImpl::removeChildNode(TreeDBNode& parent, const std::string
     return 0;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::getNode(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBImpl::getNode(const std::string& name, Ishiko::Error& error)
 {
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(key,
+    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(name,
         PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
-    bool found = m_masterFile.findNode(key, *temp, error);
+    bool found = m_masterFile.findNode(name, *temp, error);
     return TreeDBNode(temp);
 }
 
@@ -178,9 +178,9 @@ TreeDBNode EmbeddedTreeDBImpl::insertNode(const std::string& name, const RecordM
     return m_uncommittedNodes.createNode(name, marker);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendNode(const TreeDBKey& key)
+TreeDBNode EmbeddedTreeDBImpl::appendNode(const std::string& name)
 {
-    return m_uncommittedNodes.createNode(key, m_masterFile.dataEndPosition());
+    return m_uncommittedNodes.createNode(name, m_masterFile.dataEndPosition());
 }
 
 bool EmbeddedTreeDBImpl::removeNode(const TreeDBKey& key,

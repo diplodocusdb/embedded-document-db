@@ -38,7 +38,7 @@ EmbeddedTreeDBNodeImpl::~EmbeddedTreeDBNodeImpl()
 
 bool EmbeddedTreeDBNodeImpl::isRoot() const
 {
-    return key().isRoot();
+    return (name() == "/");
 }
 
 void EmbeddedTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Error& error)
@@ -46,7 +46,7 @@ void EmbeddedTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko:
     // TODO
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::child(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBNodeImpl::child(const std::string& name, Ishiko::Error& error)
 {
     /*
     std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
@@ -67,7 +67,7 @@ TreeDBNode EmbeddedTreeDBNodeImpl::previousSibling(Ishiko::Error& error)
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::previousSibling(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBNodeImpl::previousSibling(const std::string& name, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
@@ -81,11 +81,16 @@ TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const TreeDBKey& key, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const std::string& name, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
     return result;
+}
+
+const NodeID& EmbeddedTreeDBNodeImpl::parentNodeID() const
+{
+    return m_parentNodeID;
 }
 
 const RecordMarker& EmbeddedTreeDBNodeImpl::marker() const

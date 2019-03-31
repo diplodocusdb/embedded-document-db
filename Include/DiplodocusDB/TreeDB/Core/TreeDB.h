@@ -42,6 +42,8 @@ public:
     /// Returns the root of the tree.
     virtual TreeDBNode& root() = 0;
 
+    virtual TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) = 0;
+
     /// Sets the value of the node.
     /**
         This operation commits the changes to the database immediately.

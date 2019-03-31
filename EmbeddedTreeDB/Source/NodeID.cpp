@@ -26,6 +26,11 @@
 namespace DiplodocusDB
 {
 
+NodeID::NodeID()
+    : m_value(0)
+{
+}
+
 NodeID::NodeID(size_t value)
     : m_value(value)
 {

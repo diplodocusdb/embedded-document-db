@@ -32,6 +32,7 @@ namespace DiplodocusDB
 class NodeID
 {
 public:
+    NodeID();
     NodeID(size_t value);
 
     void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error);
