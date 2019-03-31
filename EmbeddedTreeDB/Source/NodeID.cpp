@@ -36,11 +36,28 @@ NodeID::NodeID(size_t value)
 {
 }
 
-void NodeID::load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error)
+bool NodeID::operator ==(const NodeID& other) const
 {
+    return (m_value == other.m_value);
 }
 
-void NodeID::save(PageRepositoryWriter& writer, Ishiko::Error& error) const
+bool NodeID::operator !=(const NodeID& other) const
+{
+    return (m_value != other.m_value);
+}
+
+void NodeID::read(PageRepositoryReader& reader, Ishiko::Error& error)
+{
+    // TODO: this needs to decode LEB128
+    uint8_t id;
+    reader.read((char*)&id, 1, error);
+    if (!error)
+    {
+        m_value = id;
+    }
+}
+
+void NodeID::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     char buffer[20];
     size_t n = Utilities::encodeLEB128(m_value, buffer);

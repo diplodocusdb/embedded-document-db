@@ -35,8 +35,11 @@ public:
     NodeID();
     NodeID(size_t value);
 
-    void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error);
-    void save(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    bool operator ==(const NodeID& other) const;
+    bool operator !=(const NodeID& other) const;
+
+    void read(PageRepositoryReader& reader, Ishiko::Error& error);
+    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     size_t m_value;

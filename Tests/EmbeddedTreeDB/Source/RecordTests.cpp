@@ -35,6 +35,9 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<HeapAllocationErrorsTest>("read (eDataEnd) test 1", ReadDataEndTest1);
     append<HeapAllocationErrorsTest>("read (eNodeStart) test 1", ReadNodeStartTest1);
     append<HeapAllocationErrorsTest>("read (eNodeEnd) test 1", ReadNodeEndTest1);
+    append<HeapAllocationErrorsTest>("read (eParentNodeID) test 1", ReadParentNodeIDTest1);
+    append<HeapAllocationErrorsTest>("read (eNodeName) test 1", ReadNodeNameTest1);
+    append<HeapAllocationErrorsTest>("read (eNodeID) test 1", ReadNodeIDTest1);
     append<FileComparisonTest>("write (eMasterFileMetadata) test 1", WriteMasterFileMetadataTest1);
     append<FileComparisonTest>("write (eDataStart) test 1", WriteDataStartTest1);
     append<FileComparisonTest>("write (eDataEnd) test 1", WriteDataEndTest1);
@@ -170,6 +173,39 @@ void RecordTests::ReadNodeEndTest1(Test& test)
     ISHTF_ABORT_IF((bool)error);
     ISHTF_FAIL_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eNodeEnd);
     ISHTF_PASS();
+}
+
+void RecordTests::ReadParentNodeIDTest1(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+        / "RecordTests_ReadParentNodeIDTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    record.read(reader, error);
+
+    ISHTF_ABORT_IF((bool)error);
+    ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eParentNodeID);
+    ISHTF_FAIL_UNLESS(record.asNodeID() == DiplodocusDB::NodeID(123));
+    ISHTF_PASS();
+}
+
+void RecordTests::ReadNodeNameTest1(Test& test)
+{
+}
+
+void RecordTests::ReadNodeIDTest1(Test& test)
+{
 }
 
 void RecordTests::WriteMasterFileMetadataTest1(FileComparisonTest& test)

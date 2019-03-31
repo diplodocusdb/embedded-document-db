@@ -120,6 +120,7 @@ public:
     Record(ERecordType type, std::shared_ptr<RecordData> data);
 
     ERecordType type() const;
+    const NodeID& asNodeID() const;
     size_t size() const;
     RecordData* data();
 

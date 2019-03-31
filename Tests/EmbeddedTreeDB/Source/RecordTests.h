@@ -37,6 +37,9 @@ private:
     static void ReadDataEndTest1(Ishiko::Tests::Test& test);
     static void ReadNodeStartTest1(Ishiko::Tests::Test& test);
     static void ReadNodeEndTest1(Ishiko::Tests::Test& test);
+    static void ReadParentNodeIDTest1(Ishiko::Tests::Test& test);
+    static void ReadNodeNameTest1(Ishiko::Tests::Test& test);
+    static void ReadNodeIDTest1(Ishiko::Tests::Test& test);
     static void WriteMasterFileMetadataTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteDataStartTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteDataEndTest1(Ishiko::Tests::FileComparisonTest& test);

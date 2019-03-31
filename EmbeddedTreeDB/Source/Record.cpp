@@ -60,6 +60,11 @@ Record::ERecordType Record::type() const
     return m_type;
 }
 
+const NodeID& Record::asNodeID() const
+{
+    return boost::get<NodeID>(m_data2);
+}
+
 size_t Record::size() const
 {
     size_t dataSize = m_data->size();
@@ -91,6 +96,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
 
     case ERecordType::eMasterFileMetadata:
         {
+            // TODO: this needs to decode LEB128
             uint8_t size;
             reader.read((char*)&size, 1, error);
             if (!error)
@@ -105,6 +111,13 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
     case ERecordType::eDataEnd:
     case ERecordType::eNodeStart:
     case ERecordType::eNodeEnd:
+        break;
+
+    case ERecordType::eParentNodeID:
+        {
+            m_data2 = NodeID();
+            boost::get<NodeID>(m_data2).read(reader, error);
+        }
         break;
 
     case ERecordType::eNodeName:
@@ -165,7 +178,7 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
     case ERecordType::eNodeID:
         {
             const NodeID& id = boost::get<NodeID>(m_data2);
-            id.save(writer, error);
+            id.write(writer, error);
         }
         break;
 
