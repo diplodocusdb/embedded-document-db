@@ -26,16 +26,8 @@
 namespace DiplodocusDB
 {
 
-TreeDBNode::TreeDBNode()
-{
-}
-
 TreeDBNode::TreeDBNode(std::shared_ptr<TreeDBNodeImpl> impl)
     : m_impl(impl)
-{
-}
-
-TreeDBNode::~TreeDBNode()
 {
 }
 

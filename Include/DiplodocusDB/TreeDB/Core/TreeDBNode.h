@@ -37,9 +37,8 @@ class TreeDBNodeImpl;
 class TreeDBNode
 {
 public:
-    TreeDBNode();
+    TreeDBNode() = default;
     TreeDBNode(std::shared_ptr<TreeDBNodeImpl> impl);
-    ~TreeDBNode();
 
     explicit operator bool() const;
     bool operator !() const;

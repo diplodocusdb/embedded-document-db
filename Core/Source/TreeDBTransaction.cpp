@@ -21,3 +21,18 @@
 */
 
 #include "TreeDBTransaction.h"
+
+namespace DiplodocusDB
+{
+
+TreeDBTransaction::TreeDBTransaction(std::shared_ptr<TreeDBTransactionImpl> impl)
+    : m_impl(impl)
+{
+}
+
+std::shared_ptr<TreeDBTransactionImpl>& TreeDBTransaction::impl()
+{
+    return m_impl;
+}
+
+}

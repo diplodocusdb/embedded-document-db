@@ -23,4 +23,26 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBTRANSACTION_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBTRANSACTION_H_
 
+#include <memory>
+
+namespace DiplodocusDB
+{
+
+class TreeDBTransactionImpl;
+
+class TreeDBTransaction
+{
+public:
+    TreeDBTransaction(std::shared_ptr<TreeDBTransactionImpl> impl);
+
+    std::shared_ptr<TreeDBTransactionImpl>& impl();
+
+private:
+    std::shared_ptr<TreeDBTransactionImpl> m_impl;
+};
+
+}
+
+#include "linkoptions.h"
+
 #endif

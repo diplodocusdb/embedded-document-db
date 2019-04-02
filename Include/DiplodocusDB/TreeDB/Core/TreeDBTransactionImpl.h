@@ -23,4 +23,13 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBTRANSACTIONIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBTRANSACTIONIMPL_H_
 
+namespace DiplodocusDB
+{
+
+class TreeDBTransactionImpl
+{
+};
+
+}
+
 #endif

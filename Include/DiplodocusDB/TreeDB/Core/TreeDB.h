@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDB_H_
 
 #include "TreeDBNode.h"
+#include "TreeDBTransaction.h"
 #include "Ishiko/Errors/Error.h"
 
 namespace DiplodocusDB
@@ -43,6 +44,10 @@ public:
     virtual TreeDBNode& root() = 0;
 
     virtual TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) = 0;
+
+    virtual TreeDBTransaction createTransaction() = 0;
+    virtual TreeDBTransaction commitTransaction(TreeDBTransaction& transaction) = 0;
+    virtual TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction) = 0;
 
     /// Sets the value of the node.
     /**
