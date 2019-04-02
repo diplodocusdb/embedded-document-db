@@ -18,6 +18,7 @@ program DiplodocusEmbeddedTreeDBTests : DiplodocusEmbeddedTreeDB, IshikoTestFram
     headers
     {
         ../../Source/NodeIDTests.h
+        ../../Source/NodeIDAllocatorTests.h
         ../../Source/RecordTests.h
         ../../Source/KeyCacheTests.h
         ../../Source/MasterFileTests/MasterFileTests.h
@@ -28,6 +29,7 @@ program DiplodocusEmbeddedTreeDBTests : DiplodocusEmbeddedTreeDB, IshikoTestFram
     {
         ../../Source/main.cpp
         ../../Source/NodeIDTests.cpp
+        ../../Source/NodeIDAllocatorTests.cpp
         ../../Source/RecordTests.cpp
         ../../Source/KeyCacheTests.cpp
         ../../Source/MasterFileTests/MasterFileTests.cpp

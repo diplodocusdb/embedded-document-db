@@ -20,16 +20,18 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_NODEIDALLOCATOR_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_NODEIDALLOCATOR_H_
+#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDALLOCARORTESTS_H_
+#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDALLOCARORTESTS_H_
 
-namespace DiplodocusDB
-{
+#include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-class NodeIDAllocator
+class NodeIDAllocatorTests : public Ishiko::Tests::TestSequence
 {
+public:
+    NodeIDAllocatorTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+
+private:
+    static void ConstructionTest1(Ishiko::Tests::Test& test);
 };
-
-}
 
 #endif
