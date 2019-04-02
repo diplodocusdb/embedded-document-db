@@ -88,7 +88,7 @@
       <PreprocessorDefinitions>PUGIXML_HEADER_ONLY;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(DIPLODOCUSDB)/Core\Include;$(ISHIKO)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>PUGIXML_HEADER_ONLY;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(DIPLODOCUSDB)/Core\Include;$(ISHIKO)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>PUGIXML_HEADER_ONLY;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(DIPLODOCUSDB)/Core\Include;$(ISHIKO)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -139,7 +139,7 @@
       <PreprocessorDefinitions>PUGIXML_HEADER_ONLY;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/TreeDB\Include;$(DIPLODOCUSDB)/Core\Include;$(ISHIKO)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\Source\XMLTreeDB.cpp" />
     <ClCompile Include="..\..\Source\XMLTreeDBImpl.cpp" />
     <ClCompile Include="..\..\Source\XMLTreeDBNodeImpl.cpp" />
+    <ClCompile Include="..\..\Source\XMLTreeDBTransactionImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\Source\XMLTreeDBImpl.h" />
     <ClInclude Include="..\..\Source\XMLTreeDBNodeImpl.h" />
+    <ClInclude Include="..\..\Source\XMLTreeDBTransactionImpl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

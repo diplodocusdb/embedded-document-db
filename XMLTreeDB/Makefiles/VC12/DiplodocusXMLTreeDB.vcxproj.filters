@@ -32,6 +32,9 @@
     <ClInclude Include="..\..\Source\XMLTreeDBNodeImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\XMLTreeDBTransactionImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\XMLTreeDB.cpp">
@@ -41,6 +44,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\XMLTreeDBNodeImpl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\XMLTreeDBTransactionImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

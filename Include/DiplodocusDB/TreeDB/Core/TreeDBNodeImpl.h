@@ -35,7 +35,7 @@ class TreeDBNodeImpl
 {
 public:
     TreeDBNodeImpl(const std::string& name);
-    virtual ~TreeDBNodeImpl();
+    virtual ~TreeDBNodeImpl() noexcept = default;
 
     const std::string& name() const;
     const TreeDBValue& value() const;

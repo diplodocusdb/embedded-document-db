@@ -30,10 +30,6 @@ TreeDBNodeImpl::TreeDBNodeImpl(const std::string& name)
 {
 }
 
-TreeDBNodeImpl::~TreeDBNodeImpl()
-{
-}
-
 const std::string& TreeDBNodeImpl::name() const
 {
     return m_name;
