@@ -42,6 +42,8 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBValue.h
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBNode.h
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h
+        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBTransaction.h
+        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBTransactionImpl.h
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDB.h
         ../../../Include/DiplodocusDB/TreeDB/Core/linkoptions.h
     }
@@ -53,6 +55,6 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
         ../../Source/TreeDBValue.cpp
         ../../Source/TreeDBNode.cpp
         ../../Source/TreeDBNodeImpl.cpp
-        ../../Source/TreeDB.cpp
+        ../../Source/TreeDBTransaction.cpp
     }
 }

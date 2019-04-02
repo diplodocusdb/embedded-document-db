@@ -35,6 +35,12 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBNodeImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBTransaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBTransactionImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -58,7 +64,7 @@
     <ClCompile Include="..\..\Source\TreeDBNodeImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TreeDB.cpp">
+    <ClCompile Include="..\..\Source\TreeDBTransaction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -77,8 +77,8 @@ BOOST_ROOT ?= $(BOOST)
 
 all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a
 
-../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a: $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBPersistentNodeID.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o $(_builddir)DiplodocusTreeDBCore_TreeDB.o
-	$(AR) rc $@ $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBPersistentNodeID.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o $(_builddir)DiplodocusTreeDBCore_TreeDB.o
+../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),DiplodocusTreeDBCore-d,DiplodocusTreeDBCore).a: $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBPersistentNodeID.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o $(_builddir)DiplodocusTreeDBCore_TreeDBTransaction.o
+	$(AR) rc $@ $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o $(_builddir)DiplodocusTreeDBCore_TreeDBPersistentNodeID.o $(_builddir)DiplodocusTreeDBCore_TreeDBValue.o $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o $(_builddir)DiplodocusTreeDBCore_TreeDBTransaction.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusTreeDBCore_TreeDBKey.o: ../../Source/TreeDBKey.cpp
@@ -96,8 +96,8 @@ $(_builddir)DiplodocusTreeDBCore_TreeDBNode.o: ../../Source/TreeDBNode.cpp
 $(_builddir)DiplodocusTreeDBCore_TreeDBNodeImpl.o: ../../Source/TreeDBNodeImpl.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT)/include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBNodeImpl.cpp
 
-$(_builddir)DiplodocusTreeDBCore_TreeDB.o: ../../Source/TreeDB.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT)/include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDB.cpp
+$(_builddir)DiplodocusTreeDBCore_TreeDBTransaction.o: ../../Source/TreeDBTransaction.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(ISHIKO_ERRORS_ROOT)/Include -I$(BOOST_ROOT)/include -I../../../Include/DiplodocusDB/TreeDB/Core -std=c++11 ../../Source/TreeDBTransaction.cpp
 
 clean:
 	rm -f $(_builddir)*.o
