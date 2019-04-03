@@ -25,6 +25,7 @@
 
 #include "XMLTreeDBNodeImpl.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBTransaction.h"
 #include "Ishiko/Errors/Error.h"
 #include <pugixml.hpp>
 #include <boost/filesystem/path.hpp>
@@ -32,7 +33,7 @@
 namespace DiplodocusDB
 {
 
-class XMLTreeDBImpl : public std::enable_shared_from_this<XMLTreeDBImpl>
+class XMLTreeDBImpl
 {
 public:
     void create(const boost::filesystem::path& path, Ishiko::Error& error);
@@ -42,6 +43,10 @@ public:
     TreeDBNode& root();
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error);
+
+    TreeDBTransaction createTransaction();
+    TreeDBTransaction commitTransaction(TreeDBTransaction& transaction);
+    TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction);
 
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error);
 

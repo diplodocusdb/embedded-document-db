@@ -22,6 +22,7 @@
 
 #include "XMLTreeDBImpl.h"
 #include "XMLTreeDBNodeImpl.h"
+#include "XMLTreeDBTransactionImpl.h"
 #include <fstream>
 
 namespace DiplodocusDB
@@ -62,6 +63,24 @@ TreeDBNode XMLTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
 {
     XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
     return nodeImpl.parent(error);
+}
+
+TreeDBTransaction XMLTreeDBImpl::createTransaction()
+{
+    // TODO
+    return TreeDBTransaction(std::make_shared<XMLTreeDBTransactionImpl>());
+}
+
+TreeDBTransaction XMLTreeDBImpl::commitTransaction(TreeDBTransaction& transaction)
+{
+    // TODO
+    return TreeDBTransaction(std::make_shared<XMLTreeDBTransactionImpl>());
+}
+
+TreeDBTransaction XMLTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
+{
+    // TODO
+    return TreeDBTransaction(std::make_shared<XMLTreeDBTransactionImpl>());
 }
 
 void XMLTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)

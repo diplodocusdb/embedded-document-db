@@ -48,6 +48,10 @@ public:
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) override;
 
+    TreeDBTransaction createTransaction() override;
+    TreeDBTransaction commitTransaction(TreeDBTransaction& transaction) override;
+    TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction) override;
+
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error) override;
 
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
