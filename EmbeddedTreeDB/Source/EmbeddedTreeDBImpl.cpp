@@ -91,6 +91,34 @@ TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& node, const std::string& name, 
     return result;
 }
 
+TreeDBNode EmbeddedTreeDBImpl::previousSibling(TreeDBNode& node, Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBImpl::previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBImpl::nextSibling(TreeDBNode& node, Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBImpl::nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+{
+    // TODO
+    TreeDBNode result;
+    return result;
+}
+
 TreeDBTransaction EmbeddedTreeDBImpl::createTransaction()
 {
     // TODO

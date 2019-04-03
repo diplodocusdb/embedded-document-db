@@ -50,6 +50,10 @@ public:
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error);
     std::vector<TreeDBNode> childNodes(TreeDBNode& node, Ishiko::Error& error);
     TreeDBNode child(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
+    TreeDBNode previousSibling(TreeDBNode& node, Ishiko::Error& error);
+    TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
+    TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error);
+    TreeDBNode nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
 
     TreeDBTransaction createTransaction();
     TreeDBTransaction commitTransaction(TreeDBTransaction& transaction);

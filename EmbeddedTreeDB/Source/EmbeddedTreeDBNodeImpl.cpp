@@ -41,34 +41,6 @@ bool EmbeddedTreeDBNodeImpl::isRoot() const
     return (name() == "/");
 }
 
-TreeDBNode EmbeddedTreeDBNodeImpl::previousSibling(Ishiko::Error& error)
-{
-    // TODO
-    TreeDBNode result;
-    return result;
-}
-
-TreeDBNode EmbeddedTreeDBNodeImpl::previousSibling(const std::string& name, Ishiko::Error& error)
-{
-    // TODO
-    TreeDBNode result;
-    return result;
-}
-
-TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
-{
-    // TODO
-    TreeDBNode result;
-    return result;
-}
-
-TreeDBNode EmbeddedTreeDBNodeImpl::nextSibling(const std::string& name, Ishiko::Error& error)
-{
-    // TODO
-    TreeDBNode result;
-    return result;
-}
-
 const NodeID& EmbeddedTreeDBNodeImpl::parentNodeID() const
 {
     return m_parentNodeID;
