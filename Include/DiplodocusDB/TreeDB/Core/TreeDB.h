@@ -44,6 +44,8 @@ public:
     virtual TreeDBNode& root() = 0;
 
     virtual TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) = 0;
+    virtual std::vector<TreeDBNode> childNodes(TreeDBNode& node, Ishiko::Error& error) = 0;
+    virtual TreeDBNode child(TreeDBNode& node, const std::string& name, Ishiko::Error& error) = 0;
 
     virtual TreeDBTransaction createTransaction() = 0;
     virtual TreeDBTransaction commitTransaction(TreeDBTransaction& transaction) = 0;

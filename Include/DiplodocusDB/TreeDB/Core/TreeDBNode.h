@@ -50,8 +50,7 @@ public:
     TreeDBValue& value();
 
     bool isRoot() const;
-    void children(std::vector<TreeDBNode>& children, Ishiko::Error& error);
-    TreeDBNode child(const std::string& name, Ishiko::Error& error);
+    
     TreeDBNode previousSibling(Ishiko::Error& error);
     TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error);
     TreeDBNode nextSibling(Ishiko::Error& error);
