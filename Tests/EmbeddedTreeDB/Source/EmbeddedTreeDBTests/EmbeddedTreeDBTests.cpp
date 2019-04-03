@@ -37,8 +37,8 @@ EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestEnv
     append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
     append<HeapAllocationErrorsTest>("open test 4", OpenTest4);
     append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
-    append<HeapAllocationErrorsTest>("children test 1", ChildrenTest1);
-    append<HeapAllocationErrorsTest>("children test 2", ChildrenTest2);
+    append<HeapAllocationErrorsTest>("childNodes test 1", ChildNodesTest1);
+    append<HeapAllocationErrorsTest>("childNodes test 2", ChildNodesTest2);
     append<FileComparisonTest>("insertChildNode test 1", InsertChildNodeTest1);
     append<FileComparisonTest>("insertChildNodeBefore test 1", InsertChildNodeBeforeTest1);
     append<FileComparisonTest>("insertChildNodeBefore test 2", InsertChildNodeBeforeTest2);
@@ -95,8 +95,7 @@ void EmbeddedTreeDBTests::OpenTest1(Test& test)
 
     ISHTF_FAIL_UNLESS(node.isRoot());
    
-    std::vector<DiplodocusDB::TreeDBNode> children;
-    node.children(children, error);
+    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(node, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.size() == 0);
@@ -114,7 +113,7 @@ void EmbeddedTreeDBTests::OpenTest2(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
@@ -132,12 +131,12 @@ void EmbeddedTreeDBTests::OpenTest3(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node1 = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node1.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
 
-    DiplodocusDB::TreeDBNode node2 = db.root().child("key2", error);
+    DiplodocusDB::TreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node2.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
@@ -156,7 +155,7 @@ void EmbeddedTreeDBTests::OpenTest4(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node.value().asUTF8String() == "value1");
@@ -174,12 +173,12 @@ void EmbeddedTreeDBTests::OpenTest5(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node1 = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node1.value().asUTF8String() == "value1");
     
-    DiplodocusDB::TreeDBNode node2 = db.root().child("key2", error);
+    DiplodocusDB::TreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node2.value().asUTF8String() == "value2");
@@ -187,7 +186,7 @@ void EmbeddedTreeDBTests::OpenTest5(Test& test)
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::ChildrenTest1(Test& test)
+void EmbeddedTreeDBTests::ChildNodesTest1(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyEmbeddedTreeDB.dpdb");
 
@@ -198,15 +197,14 @@ void EmbeddedTreeDBTests::ChildrenTest1(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    std::vector<DiplodocusDB::TreeDBNode> children;
-    db.root().children(children, error);
+    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(db.root(), error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.size() == 0);
     ISHTF_PASS();
 }
 
-void EmbeddedTreeDBTests::ChildrenTest2(Test& test)
+void EmbeddedTreeDBTests::ChildNodesTest2(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOneNullKey.dpdb");
 
@@ -217,8 +215,7 @@ void EmbeddedTreeDBTests::ChildrenTest2(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    std::vector<DiplodocusDB::TreeDBNode> children;
-    db.root().children(children, error);
+    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(db.root(), error);
  
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.size() == 1);
@@ -262,7 +259,7 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHTF_ABORT_IF((bool)error);
         
@@ -292,7 +289,7 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node = db.root().child("key2", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key2", error);
 
     ISHTF_ABORT_IF((bool)error);
         
@@ -326,7 +323,7 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node = db.root().child("key2", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key2", error);
 
     ISHTF_ABORT_IF((bool)error);
     
@@ -360,7 +357,7 @@ void EmbeddedTreeDBTests::InsertChildNodeAfterTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
     
     ISHTF_ABORT_IF((bool)error);
 
@@ -390,7 +387,7 @@ void EmbeddedTreeDBTests::InsertChildNodeAfterTest2(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
     
     ISHTF_ABORT_IF((bool)error);
 

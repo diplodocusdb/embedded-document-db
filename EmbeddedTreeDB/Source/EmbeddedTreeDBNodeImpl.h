@@ -39,8 +39,6 @@ public:
     ~EmbeddedTreeDBNodeImpl() override;
 
     bool isRoot() const override;
-    void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
-    TreeDBNode child(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode previousSibling(Ishiko::Error& error) override;
     TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode nextSibling(Ishiko::Error& error) override;

@@ -62,6 +62,16 @@ TreeDBNode EmbeddedTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)
     return m_impl->parent(node, error);
 }
 
+std::vector<TreeDBNode> EmbeddedTreeDB::childNodes(TreeDBNode& node, Ishiko::Error& error)
+{
+    return m_impl->childNodes(node, error);
+}
+
+TreeDBNode EmbeddedTreeDB::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->child(node, name, error);
+}
+
 TreeDBTransaction EmbeddedTreeDB::createTransaction()
 {
     return m_impl->createTransaction();

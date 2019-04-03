@@ -41,25 +41,6 @@ bool EmbeddedTreeDBNodeImpl::isRoot() const
     return (name() == "/");
 }
 
-void EmbeddedTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Error& error)
-{
-    // TODO
-}
-
-TreeDBNode EmbeddedTreeDBNodeImpl::child(const std::string& name, Ishiko::Error& error)
-{
-    /*
-    std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
-    if (db)
-    {
-        return db->getNode(key, error);
-    }*/
-
-    // TODO : error
-    TreeDBNode result;
-    return result;
-}
-
 TreeDBNode EmbeddedTreeDBNodeImpl::previousSibling(Ishiko::Error& error)
 {
     // TODO

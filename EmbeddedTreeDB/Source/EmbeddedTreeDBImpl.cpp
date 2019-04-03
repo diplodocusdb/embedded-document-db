@@ -70,6 +70,27 @@ TreeDBNode EmbeddedTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
     return result;
 }
 
+std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& node, Ishiko::Error& error)
+{
+    // TODO
+    std::vector<TreeDBNode> result;
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+{
+    /*
+    std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
+    if (db)
+    {
+        return db->getNode(key, error);
+    }*/
+
+    // TODO : error
+    TreeDBNode result;
+    return result;
+}
+
 TreeDBTransaction EmbeddedTreeDBImpl::createTransaction()
 {
     // TODO

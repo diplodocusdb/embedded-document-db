@@ -38,8 +38,8 @@ private:
     static void OpenTest3(Ishiko::Tests::Test& test);
     static void OpenTest4(Ishiko::Tests::Test& test);
     static void OpenTest5(Ishiko::Tests::Test& test);
-    static void ChildrenTest1(Ishiko::Tests::Test& test);
-    static void ChildrenTest2(Ishiko::Tests::Test& test);
+    static void ChildNodesTest1(Ishiko::Tests::Test& test);
+    static void ChildNodesTest2(Ishiko::Tests::Test& test);
     static void InsertChildNodeTest1(Ishiko::Tests::FileComparisonTest& test);
     static void InsertChildNodeBeforeTest1(Ishiko::Tests::FileComparisonTest& test);
     static void InsertChildNodeBeforeTest2(Ishiko::Tests::FileComparisonTest& test);
