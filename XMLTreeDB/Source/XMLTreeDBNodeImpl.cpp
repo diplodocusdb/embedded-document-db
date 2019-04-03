@@ -50,13 +50,15 @@ TreeDBNode XMLTreeDBNodeImpl::parent(Ishiko::Error& error)
     return result;
 }
 
-void XMLTreeDBNodeImpl::children(std::vector<TreeDBNode>& children, Ishiko::Error& error)
+std::vector<TreeDBNode> XMLTreeDBNodeImpl::childNodes(Ishiko::Error& error)
 {
+    std::vector<TreeDBNode> result;
     loadChildren(error);
     for (std::shared_ptr<XMLTreeDBNodeImpl>& child : m_children)
     {
-        children.push_back(TreeDBNode(child));
+        result.push_back(TreeDBNode(child));
     }
+    return result;
 }
 
 TreeDBNode XMLTreeDBNodeImpl::child(const std::string& name, Ishiko::Error& error)

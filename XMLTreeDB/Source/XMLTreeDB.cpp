@@ -60,6 +60,16 @@ TreeDBNode XMLTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)
     return m_impl->parent(node, error);
 }
 
+std::vector<TreeDBNode> XMLTreeDB::childNodes(TreeDBNode& node, Ishiko::Error& error)
+{
+    return m_impl->childNodes(node, error);
+}
+
+TreeDBNode XMLTreeDB::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->child(node, name, error);
+}
+
 TreeDBTransaction XMLTreeDB::createTransaction()
 {
     return m_impl->createTransaction();

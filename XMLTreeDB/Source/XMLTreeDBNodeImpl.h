@@ -39,8 +39,8 @@ public:
 
     bool isRoot() const override;
     TreeDBNode parent(Ishiko::Error& error);
-    void children(std::vector<TreeDBNode>& children, Ishiko::Error& error) override;
-    TreeDBNode child(const std::string& name, Ishiko::Error& error) override;
+    std::vector<TreeDBNode> childNodes(Ishiko::Error& error);
+    TreeDBNode child(const std::string& name, Ishiko::Error& error);
     TreeDBNode previousSibling(Ishiko::Error& error) override;
     TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error) override;
     TreeDBNode nextSibling(Ishiko::Error& error) override;

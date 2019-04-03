@@ -65,6 +65,18 @@ TreeDBNode XMLTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
     return nodeImpl.parent(error);
 }
 
+std::vector<TreeDBNode> XMLTreeDBImpl::childNodes(TreeDBNode& node, Ishiko::Error& error)
+{
+    XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
+    return nodeImpl.childNodes(error);
+}
+
+TreeDBNode XMLTreeDBImpl::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+{
+    XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
+    return nodeImpl.child(name, error);
+}
+
 TreeDBTransaction XMLTreeDBImpl::createTransaction()
 {
     // TODO

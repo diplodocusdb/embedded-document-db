@@ -41,8 +41,8 @@ private:
     static void OpenTest6(Ishiko::Tests::Test& test);
     static void ParentTest1(Ishiko::Tests::Test& test);
     static void ParentTest2(Ishiko::Tests::Test& test);
-    static void ChildrenTest1(Ishiko::Tests::Test& test);
-    static void ChildrenTest2(Ishiko::Tests::Test& test);
+    static void ChildNodesTest1(Ishiko::Tests::Test& test);
+    static void ChildNodesTest2(Ishiko::Tests::Test& test);
     static void NextSiblingTest1(Ishiko::Tests::Test& test);
     static void NextSiblingTest2(Ishiko::Tests::Test& test);
     static void NextSiblingTest3(Ishiko::Tests::Test& test);

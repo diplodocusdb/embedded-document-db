@@ -47,6 +47,8 @@ public:
     TreeDBNode& root() override;
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) override;
+    std::vector<TreeDBNode> childNodes(TreeDBNode& node, Ishiko::Error& error) override;
+    TreeDBNode child(TreeDBNode& node, const std::string& name, Ishiko::Error& error) override;
 
     TreeDBTransaction createTransaction() override;
     TreeDBTransaction commitTransaction(TreeDBTransaction& transaction) override;

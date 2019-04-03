@@ -40,8 +40,8 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<HeapAllocationErrorsTest>("open test 6", OpenTest6);
     append<HeapAllocationErrorsTest>("parent test 1", ParentTest1);
     append<HeapAllocationErrorsTest>("parent test 2", ParentTest2);
-    append<HeapAllocationErrorsTest>("children test 1", ChildrenTest1);
-    append<HeapAllocationErrorsTest>("children test 2", ChildrenTest2);
+    append<HeapAllocationErrorsTest>("childNodes test 1", ChildNodesTest1);
+    append<HeapAllocationErrorsTest>("childNodes test 2", ChildNodesTest2);
     append<HeapAllocationErrorsTest>("nextSibling test 1", NextSiblingTest1);
     append<HeapAllocationErrorsTest>("nextSibling test 2", NextSiblingTest2);
     append<HeapAllocationErrorsTest>("nextSibling test 3", NextSiblingTest3);
@@ -99,8 +99,7 @@ void XMLTreeDBTests::OpenTest1(Test& test)
 
     ISHTF_FAIL_UNLESS(node.isRoot());
 
-    std::vector<DiplodocusDB::TreeDBNode> children;
-    node.children(children, error);
+    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(node, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.size() == 0);
@@ -118,7 +117,7 @@ void XMLTreeDBTests::OpenTest2(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
@@ -136,7 +135,7 @@ void XMLTreeDBTests::OpenTest3(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
@@ -154,11 +153,11 @@ void XMLTreeDBTests::OpenTest4(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node1 = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node2 = db.root().child("key2", error);
+    DiplodocusDB::TreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node1.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
@@ -177,7 +176,7 @@ void XMLTreeDBTests::OpenTest5(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node.value().asUTF8String() == "value1");
@@ -195,11 +194,11 @@ void XMLTreeDBTests::OpenTest6(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node1 = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode node2 = db.root().child("key2", error);
+    DiplodocusDB::TreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(node1.value().asUTF8String() == "value1");
@@ -236,7 +235,7 @@ void XMLTreeDBTests::ParentTest2(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode childNode = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode childNode = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(childNode);
@@ -248,7 +247,7 @@ void XMLTreeDBTests::ParentTest2(Test& test)
     ISHTF_PASS();
 }
 
-void XMLTreeDBTests::ChildrenTest1(Test& test)
+void XMLTreeDBTests::ChildNodesTest1(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
@@ -259,17 +258,16 @@ void XMLTreeDBTests::ChildrenTest1(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    std::vector<DiplodocusDB::TreeDBNode> children;
-    db.root().children(children, error);
+    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(db.root(), error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.empty());
     ISHTF_PASS();
 }
 
-void XMLTreeDBTests::ChildrenTest2(Test& test)
+void XMLTreeDBTests::ChildNodesTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_ChildrenTest2.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_ChildNodesTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -278,8 +276,7 @@ void XMLTreeDBTests::ChildrenTest2(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    std::vector<DiplodocusDB::TreeDBNode> children;
-    db.root().children(children, error);
+    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(db.root(), error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.size() == 1);
@@ -315,7 +312,7 @@ void XMLTreeDBTests::NextSiblingTest2(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode key1Node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode key1Node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS((bool)key1Node);
@@ -338,7 +335,7 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode key1Node = db.root().child("key1", error);
+    DiplodocusDB::TreeDBNode key1Node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(key1Node);
