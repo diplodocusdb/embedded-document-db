@@ -41,10 +41,10 @@ public:
     TreeDBNode parent(Ishiko::Error& error);
     std::vector<TreeDBNode> childNodes(Ishiko::Error& error);
     TreeDBNode child(const std::string& name, Ishiko::Error& error);
-    TreeDBNode previousSibling(Ishiko::Error& error) override;
-    TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error) override;
-    TreeDBNode nextSibling(Ishiko::Error& error) override;
-    TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error) override;
+    TreeDBNode previousSibling(Ishiko::Error& error);
+    TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error);
+    TreeDBNode nextSibling(Ishiko::Error& error);
+    TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error);
     TreeDBNode insertChildNode(size_t index, const std::string& name, const TreeDBValue& value, Ishiko::Error& error);
     TreeDBNode insertChildNodeBefore(const TreeDBNode& nextChild, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error);

@@ -294,7 +294,7 @@ void XMLTreeDBTests::NextSiblingTest1(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     
-    DiplodocusDB::TreeDBNode nextSibling = db.root().nextSibling(error);
+    DiplodocusDB::TreeDBNode nextSibling = db.nextSibling(db.root(), error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_IF((bool)nextSibling);
@@ -317,7 +317,7 @@ void XMLTreeDBTests::NextSiblingTest2(Test& test)
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS((bool)key1Node);
 
-    DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling(error);
+    DiplodocusDB::TreeDBNode nextSibling = db.nextSibling(key1Node, error);
     
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_IF((bool)nextSibling);
@@ -340,13 +340,13 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(key1Node);
 
-    DiplodocusDB::TreeDBNode nextSibling = key1Node.nextSibling(error);
+    DiplodocusDB::TreeDBNode nextSibling = db.nextSibling(key1Node, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(nextSibling);
     ISHTF_FAIL_UNLESS(nextSibling.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
     
-    nextSibling = nextSibling.nextSibling(error);
+    nextSibling = db.nextSibling(nextSibling, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_IF((bool)nextSibling);

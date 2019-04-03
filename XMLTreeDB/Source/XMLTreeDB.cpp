@@ -70,6 +70,26 @@ TreeDBNode XMLTreeDB::child(TreeDBNode& node, const std::string& name, Ishiko::E
     return m_impl->child(node, name, error);
 }
 
+TreeDBNode XMLTreeDB::previousSibling(TreeDBNode& node, Ishiko::Error& error)
+{
+    return m_impl->previousSibling(node, error);
+}
+
+TreeDBNode XMLTreeDB::previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->previousSibling(node, name, error);
+}
+
+TreeDBNode XMLTreeDB::nextSibling(TreeDBNode& node, Ishiko::Error& error)
+{
+    return m_impl->nextSibling(node, error);
+}
+
+TreeDBNode XMLTreeDB::nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->nextSibling(node, name, error);
+}
+
 TreeDBTransaction XMLTreeDB::createTransaction()
 {
     return m_impl->createTransaction();
