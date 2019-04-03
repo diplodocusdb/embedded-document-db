@@ -62,6 +62,21 @@ TreeDBNode EmbeddedTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)
     return m_impl->parent(node, error);
 }
 
+TreeDBTransaction EmbeddedTreeDB::createTransaction()
+{
+    return m_impl->createTransaction();
+}
+
+TreeDBTransaction EmbeddedTreeDB::commitTransaction(TreeDBTransaction& transaction)
+{
+    return m_impl->commitTransaction(transaction);
+}
+
+TreeDBTransaction EmbeddedTreeDB::rollbackTransaction(TreeDBTransaction& transaction)
+{
+    return m_impl->rollbackTransaction(transaction);
+}
+
 void EmbeddedTreeDB::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)
 {
     m_impl->setValue(node, value, error);

@@ -22,6 +22,7 @@
 
 #include "EmbeddedTreeDBImpl.h"
 #include "EmbeddedTreeDBNodeImpl.h"
+#include "EmbeddedTreeDBTransactionImpl.h"
 
 namespace DiplodocusDB
 {
@@ -67,6 +68,24 @@ TreeDBNode EmbeddedTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
     // TODO
     TreeDBNode result;
     return result;
+}
+
+TreeDBTransaction EmbeddedTreeDBImpl::createTransaction()
+{
+    // TODO
+    return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
+}
+
+TreeDBTransaction EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction)
+{
+    // TODO
+    return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
+}
+
+TreeDBTransaction EmbeddedTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
+{
+    // TODO
+    return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
 }
 
 void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)
