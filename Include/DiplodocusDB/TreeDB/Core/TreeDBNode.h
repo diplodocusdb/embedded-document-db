@@ -50,11 +50,6 @@ public:
     TreeDBValue& value();
 
     bool isRoot() const;
-    
-    TreeDBNode previousSibling(Ishiko::Error& error);
-    TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error);
-    TreeDBNode nextSibling(Ishiko::Error& error);
-    TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error);
 
     std::shared_ptr<TreeDBNodeImpl>& impl();
 

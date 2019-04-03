@@ -42,10 +42,6 @@ public:
     TreeDBValue& value();
 
     virtual bool isRoot() const = 0;
-    virtual TreeDBNode previousSibling(Ishiko::Error& error) = 0;
-    virtual TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error) = 0;
-    virtual TreeDBNode nextSibling(Ishiko::Error& error) = 0;
-    virtual TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error) = 0;
 
 private:
     TreeDBNodeImpl(const TreeDBNodeImpl& other) = delete;

@@ -71,26 +71,6 @@ bool TreeDBNode::isRoot() const
     return m_impl->isRoot();
 }
 
-TreeDBNode TreeDBNode::previousSibling(Ishiko::Error& error)
-{
-    return m_impl->previousSibling(error);
-}
-
-TreeDBNode TreeDBNode::previousSibling(const std::string& name, Ishiko::Error& error)
-{
-    return m_impl->previousSibling(name, error);
-}
-
-TreeDBNode TreeDBNode::nextSibling(Ishiko::Error& error)
-{
-    return m_impl->nextSibling(error);
-}
-
-TreeDBNode TreeDBNode::nextSibling(const std::string& name, Ishiko::Error& error)
-{
-    return m_impl->nextSibling(name, error);
-}
-
 std::shared_ptr<TreeDBNodeImpl>& TreeDBNode::impl()
 {
     return m_impl;
