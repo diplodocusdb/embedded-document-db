@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_UNCOMMITTEDNODES_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_UNCOMMITTEDNODES_H_
 
+#include "NodeID.h"
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 
@@ -35,7 +36,7 @@ public:
     UncommittedNodes();
     ~UncommittedNodes();
 
-    TreeDBNode createNode(const std::string& name, const RecordMarker& marker);
+    TreeDBNode createNode(const NodeID& parentNodeID, const std::string& name, const RecordMarker& marker);
 };
 
 }

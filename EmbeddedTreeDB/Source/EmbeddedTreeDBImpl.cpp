@@ -40,7 +40,8 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Err
     m_masterFile.create(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>("/", m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
+        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), "/", m_masterFile.rootNodePosition(),
+            RecordMarker(PageRepositoryPosition(0, 0))));
     }
 }
 
@@ -49,7 +50,8 @@ void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error
     m_masterFile.open(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>("/", m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
+        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), "/", m_masterFile.rootNodePosition(),
+            RecordMarker(PageRepositoryPosition(0, 0))));
     }
 }
 
@@ -160,7 +162,8 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index,
 TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
     const TreeDBValue& value, Ishiko::Error& error)
 {
-    TreeDBNode result = appendNode(name);
+    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result = appendNode(parentNodeImpl.parentNodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     commitNode(nodeImpl, error);
@@ -178,7 +181,9 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
     const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
 {
     // TODO : does this work?
-    TreeDBNode result = insertNode(name, static_cast<EmbeddedTreeDBNodeImpl&>(*nextChild.impl()).marker());
+    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result = insertNode(parentNodeImpl.parentNodeID(), name,
+        static_cast<EmbeddedTreeDBNodeImpl&>(*nextChild.impl()).marker());
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     commitNode(nodeImpl, error);
@@ -196,7 +201,9 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNo
     const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
 {
     // TODO : does this work?
-    TreeDBNode result = insertNode(name, static_cast<EmbeddedTreeDBNodeImpl&>(*previousChild.impl()).marker());
+    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result = insertNode(parentNodeImpl.parentNodeID(), name,
+        static_cast<EmbeddedTreeDBNodeImpl&>(*previousChild.impl()).marker());
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     commitNode(nodeImpl, error);
@@ -212,7 +219,8 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
 TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
     Ishiko::Error& error)
 {
-    TreeDBNode result = appendNode(name);
+    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result = appendNode(parentNodeImpl.parentNodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     commitNode(nodeImpl, error);
@@ -241,20 +249,21 @@ size_t EmbeddedTreeDBImpl::removeChildNode(TreeDBNode& parent, const std::string
 
 TreeDBNode EmbeddedTreeDBImpl::getNode(const std::string& name, Ishiko::Error& error)
 {
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(name,
+    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), name,
         PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
     bool found = m_masterFile.findNode(name, *temp, error);
     return TreeDBNode(temp);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertNode(const std::string& name, const RecordMarker& marker)
+TreeDBNode EmbeddedTreeDBImpl::insertNode(const NodeID& parentNodeID, const std::string& name,
+    const RecordMarker& marker)
 {
-    return m_uncommittedNodes.createNode(name, marker);
+    return m_uncommittedNodes.createNode(parentNodeID, name, marker);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendNode(const std::string& name)
+TreeDBNode EmbeddedTreeDBImpl::appendNode(const NodeID& parentNodeID, const std::string& name)
 {
-    return m_uncommittedNodes.createNode(name, m_masterFile.dataEndPosition());
+    return m_uncommittedNodes.createNode(parentNodeID, name, m_masterFile.dataEndPosition());
 }
 
 bool EmbeddedTreeDBImpl::removeNode(const TreeDBKey& key,

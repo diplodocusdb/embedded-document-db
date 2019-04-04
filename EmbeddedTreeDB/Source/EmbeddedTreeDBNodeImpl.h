@@ -35,8 +35,8 @@ class EmbeddedTreeDBImpl;
 class EmbeddedTreeDBNodeImpl : public TreeDBNodeImpl
 {
 public:
-    EmbeddedTreeDBNodeImpl(const std::string& name, const RecordMarker& nodeMarker, const RecordMarker& childrenMarker);
-    ~EmbeddedTreeDBNodeImpl() override;
+    EmbeddedTreeDBNodeImpl(const NodeID& parentNodeID, const std::string& name, const RecordMarker& nodeMarker,
+        const RecordMarker& childrenMarker);
 
     bool isRoot() const override;
 
