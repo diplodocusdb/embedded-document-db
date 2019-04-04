@@ -92,6 +92,12 @@ TreeDBNode EmbeddedTreeDB::nextSibling(TreeDBNode& node, const std::string& name
     return m_impl->nextSibling(node, name, error);
 }
 
+void EmbeddedTreeDB::traverse(TreeDBNode& node, ETreeTraversalOrder order,
+    void (*callback)(TreeDB& db, TreeDBNode& node), void* callbackData)
+{
+    return m_impl->traverse(node, order, callback, callbackData);
+}
+
 TreeDBTransaction EmbeddedTreeDB::createTransaction()
 {
     return m_impl->createTransaction();
