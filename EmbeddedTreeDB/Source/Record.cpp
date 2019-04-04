@@ -114,8 +114,8 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
 
     case ERecordType::eDataStart:
     case ERecordType::eDataEnd:
-    case ERecordType::eNodeStart:
-    case ERecordType::eNodeEnd:
+    case ERecordType::eSiblingNodesStart:
+    case ERecordType::eSiblingNodesEnd:
         break;
 
     case ERecordType::eParentNodeID:

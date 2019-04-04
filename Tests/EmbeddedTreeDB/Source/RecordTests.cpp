@@ -147,7 +147,7 @@ void RecordTests::ReadNodeStartTest1(Test& test)
     record.read(reader, error);
 
     ISHTF_ABORT_IF((bool)error);
-    ISHTF_FAIL_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eNodeStart);
+    ISHTF_FAIL_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eSiblingNodesStart);
     ISHTF_PASS();
 }
 
@@ -171,7 +171,7 @@ void RecordTests::ReadNodeEndTest1(Test& test)
     record.read(reader, error);
 
     ISHTF_ABORT_IF((bool)error);
-    ISHTF_FAIL_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eNodeEnd);
+    ISHTF_FAIL_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eSiblingNodesEnd);
     ISHTF_PASS();
 }
 
@@ -378,7 +378,7 @@ void RecordTests::WriteNodeStartTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eNodeStart);
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eSiblingNodesStart);
     record.write(writer, error);
 
     ISHTF_FAIL_IF((bool)error);
@@ -414,7 +414,7 @@ void RecordTests::WriteNodeEndTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eNodeEnd);
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eSiblingNodesEnd);
     record.write(writer, error);
 
     ISHTF_FAIL_IF((bool)error);

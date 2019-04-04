@@ -57,10 +57,10 @@ public:
         eDataStart = 0x02,
         /// End of data marker record.
         eDataEnd = 0x03,
-        /// Start of node marker record.
-        eNodeStart = 0x04,
-        /// End of node marker record.
-        eNodeEnd = 0x05,
+        /// Start marker for a series of sibling nodes record.
+        eSiblingNodesStart = 0x04,
+        /// End marker for a series of sibling nodes record.
+        eSiblingNodesEnd = 0x05,
         /// Parent node ID record.
         /**
             This record specifies the ID of the parent of the current node. This record is present in every node

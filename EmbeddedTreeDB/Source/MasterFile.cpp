@@ -159,7 +159,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
         return;
     }
 
-    Record nodeStartRecord(Record::ERecordType::eNodeStart);
+    Record nodeStartRecord(Record::ERecordType::eSiblingNodesStart);
     nodeStartRecord.write(writer, error);
     if (error)
     {
@@ -203,7 +203,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
         }
     }
 
-    Record nodeEndRecord(Record::ERecordType::eNodeEnd);
+    Record nodeEndRecord(Record::ERecordType::eSiblingNodesEnd);
     nodeEndRecord.write(writer, error);
     if (error)
     {
@@ -228,7 +228,7 @@ bool MasterFile::removeNode(const TreeDBKey& key, Ishiko::Error& error)
 
 void MasterFile::createRootNode(PageRepositoryWriter& writer, Ishiko::Error& error)
 {
-    Record nodeStartRecord(Record::ERecordType::eNodeStart);
+    Record nodeStartRecord(Record::ERecordType::eSiblingNodesStart);
     nodeStartRecord.write(writer, error);
     if (error)
     {
@@ -242,7 +242,7 @@ void MasterFile::createRootNode(PageRepositoryWriter& writer, Ishiko::Error& err
         return;
     }
 
-    Record nodeEndRecord(Record::ERecordType::eNodeEnd);
+    Record nodeEndRecord(Record::ERecordType::eSiblingNodesEnd);
     nodeEndRecord.write(writer, error);
     if (error)
     {
