@@ -24,8 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
 
 #include "XMLTreeDBNodeImpl.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBTransaction.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDB.h"
 #include "Ishiko/Errors/Error.h"
 #include <pugixml.hpp>
 #include <boost/filesystem/path.hpp>
@@ -49,6 +48,9 @@ public:
     TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
     TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error);
     TreeDBNode nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
+
+    void traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*callback)(TreeDB& db, TreeDBNode& node),
+        void* callbackData);
 
     TreeDBTransaction createTransaction();
     TreeDBTransaction commitTransaction(TreeDBTransaction& transaction);

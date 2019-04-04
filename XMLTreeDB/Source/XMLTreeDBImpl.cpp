@@ -101,6 +101,12 @@ TreeDBNode XMLTreeDBImpl::nextSibling(TreeDBNode& node, const std::string& name,
     return nodeImpl.nextSibling(name, error);
 }
 
+void XMLTreeDBImpl::traverse(TreeDBNode& node, ETreeTraversalOrder order,
+    void(*callback)(TreeDB& db, TreeDBNode& node), void* callbackData)
+{
+    // TODO
+}
+
 TreeDBTransaction XMLTreeDBImpl::createTransaction()
 {
     // TODO

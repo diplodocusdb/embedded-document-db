@@ -30,6 +30,14 @@
 namespace DiplodocusDB
 {
 
+enum ETreeTraversalOrder
+{
+    eDepthFirstInorderTraversal,
+    eDepthFirstPreorderTraversal,
+    eDepthFirstPostorderTraversal,
+    eBreadthFirstTraversal
+};
+
 /// Base class for the different hierarchical databases.
 /**
     This class defines a common API for all the DiplodocusDB hierarchical databases.
@@ -50,6 +58,9 @@ public:
     virtual TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error) = 0;
     virtual TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error) = 0;
     virtual TreeDBNode nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error) = 0;
+
+    virtual void traverse(TreeDBNode& node, ETreeTraversalOrder order,  void (*callback)(TreeDB& db, TreeDBNode& node),
+        void* callbackData) = 0;
 
     virtual TreeDBTransaction createTransaction() = 0;
     virtual TreeDBTransaction commitTransaction(TreeDBTransaction& transaction) = 0;

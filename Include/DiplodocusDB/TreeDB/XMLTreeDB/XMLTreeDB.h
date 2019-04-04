@@ -54,6 +54,9 @@ public:
     TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error) override;
     TreeDBNode nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error) override;
 
+    void traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*callback)(TreeDB& db, TreeDBNode& node),
+        void* callbackData) override;
+
     TreeDBTransaction createTransaction() override;
     TreeDBTransaction commitTransaction(TreeDBTransaction& transaction) override;
     TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction) override;
