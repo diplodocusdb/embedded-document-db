@@ -33,22 +33,22 @@ Record::Record(ERecordType type)
 }
 
 Record::Record(ERecordType type, const NodeID& data)
-    : m_type(type), m_data2(data)
+    : m_type(type), m_data(data)
 {
 }
 
 Record::Record(ERecordType type, const TreeDBValue& data)
-    : m_type(type), m_data2(data)
+    : m_type(type), m_data(data)
 {
 }
 
 Record::Record(const MasterFileMetadata& data)
-    : m_type(ERecordType::eMasterFileMetadata), m_data2(data)
+    : m_type(ERecordType::eMasterFileMetadata), m_data(data)
 {
 }
 
 Record::Record(const std::string& data)
-    : m_type(ERecordType::eNodeName), m_data2(data)
+    : m_type(ERecordType::eNodeName), m_data(data)
 {
 }
 
@@ -59,12 +59,12 @@ Record::ERecordType Record::type() const
 
 const NodeID& Record::asNodeID() const
 {
-    return boost::get<NodeID>(m_data2);
+    return boost::get<NodeID>(m_data);
 }
 
 const std::string& Record::asString() const
 {
-    return boost::get<std::string>(m_data2);
+    return boost::get<std::string>(m_data);
 }
 
 void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
@@ -92,8 +92,8 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
             reader.read((char*)&size, 1, error);
             if (!error)
             {
-                m_data2 = MasterFileMetadata();
-                boost::get<MasterFileMetadata>(m_data2).read(reader, size, error);
+                m_data = MasterFileMetadata();
+                boost::get<MasterFileMetadata>(m_data).read(reader, size, error);
             }
         }
         break;
@@ -108,8 +108,8 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
     case ERecordType::eNodeID:
     case ERecordType::ePersistentNodeID:
         {
-            m_data2 = NodeID();
-            boost::get<NodeID>(m_data2).read(reader, error);
+            m_data = NodeID();
+            boost::get<NodeID>(m_data).read(reader, error);
         }
         break;
 
@@ -123,7 +123,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
                 std::string name;
                 name.resize(size);
                 reader.read(&name[0], size, error);
-                m_data2 = name;
+                m_data = name;
             }
         }
         break;
@@ -148,7 +148,7 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
     {
     case ERecordType::eMasterFileMetadata:
         {
-            const MasterFileMetadata& metadata = boost::get<MasterFileMetadata>(m_data2);
+            const MasterFileMetadata& metadata = boost::get<MasterFileMetadata>(m_data);
             char buffer[20];
             size_t n = Utilities::encodeLEB128(metadata.size(), buffer);
             writer.write(buffer, n, error);
@@ -163,14 +163,14 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
     case ERecordType::eNodeID:
     case ERecordType::ePersistentNodeID:
         {
-            const NodeID& id = boost::get<NodeID>(m_data2);
+            const NodeID& id = boost::get<NodeID>(m_data);
             id.write(writer, error);
         }
         break;
 
     case ERecordType::eNodeName:
         {
-            const std::string& name = boost::get<std::string>(m_data2);
+            const std::string& name = boost::get<std::string>(m_data);
             char buffer[20];
             size_t n = Utilities::encodeLEB128(name.size(), buffer);
             writer.write(buffer, n, error);

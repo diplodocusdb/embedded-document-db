@@ -129,7 +129,7 @@ public:
 
 private:
     Record::ERecordType m_type;
-    boost::variant<MasterFileMetadata, NodeID, std::string, TreeDBValue> m_data2;
+    boost::variant<MasterFileMetadata, NodeID, std::string, TreeDBValue> m_data;
 };
 
 }
