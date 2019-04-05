@@ -40,8 +40,8 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Err
     m_masterFile.create(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), "/", m_masterFile.rootNodePosition(),
-            RecordMarker(PageRepositoryPosition(0, 0))));
+        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(1), "/",
+            m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
     }
 }
 
@@ -50,8 +50,8 @@ void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error
     m_masterFile.open(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), "/", m_masterFile.rootNodePosition(),
-            RecordMarker(PageRepositoryPosition(0, 0))));
+        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(1), "/",
+            m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
     }
 }
 
@@ -249,7 +249,7 @@ size_t EmbeddedTreeDBImpl::removeChildNode(TreeDBNode& parent, const std::string
 
 TreeDBNode EmbeddedTreeDBImpl::getNode(const std::string& name, Ishiko::Error& error)
 {
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), name,
+    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(0), name,
         PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
     bool found = m_masterFile.findNode(name, *temp, error);
     return TreeDBNode(temp);

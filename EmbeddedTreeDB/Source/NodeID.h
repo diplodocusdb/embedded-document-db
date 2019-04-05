@@ -35,6 +35,8 @@ public:
     NodeID();
     NodeID(size_t value);
 
+    bool isNull() const;
+
     bool operator ==(const NodeID& other) const;
     bool operator !=(const NodeID& other) const;
 

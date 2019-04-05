@@ -168,8 +168,8 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
 
     if (node.isRoot())
     {
-        Record record(node.name());
-        record.write(writer, error);
+        Record nameRecord(node.name());
+        nameRecord.write(writer, error);
         if (error)
         {
             return;
@@ -184,11 +184,21 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
             return;
         }
 
-        Record record(node.name());
-        record.write(writer, error);
+        Record nameRecord(node.name());
+        nameRecord.write(writer, error);
         if (error)
         {
             return;
+        }
+
+        if (!node.nodeID().isNull())
+        {
+            Record idRecord(Record::ERecordType::eNodeID, node.nodeID());
+            idRecord.write(writer, error);
+            if (error)
+            {
+                return;
+            }
         }
     }
 
