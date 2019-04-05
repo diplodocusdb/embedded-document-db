@@ -21,9 +21,6 @@
 */
 
 #include "Record.h"
-#include "RecordData.h"
-#include "MasterFileMetadata.h"
-#include "ValueRecordData.h"
 #include "Utilities.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/Page.h"
 
@@ -40,6 +37,11 @@ Record::Record(ERecordType type, const NodeID& data)
 {
 }
 
+Record::Record(ERecordType type, const TreeDBValue& data)
+    : m_type(type), m_data2(data)
+{
+}
+
 Record::Record(const MasterFileMetadata& data)
     : m_type(ERecordType::eMasterFileMetadata), m_data2(data)
 {
@@ -47,11 +49,6 @@ Record::Record(const MasterFileMetadata& data)
 
 Record::Record(const std::string& data)
     : m_type(ERecordType::eNodeName), m_data2(data)
-{
-}
-
-Record::Record(ERecordType type, std::shared_ptr<RecordData> data)
-    : m_type(type), m_data(data)
 {
 }
 
@@ -68,17 +65,6 @@ const NodeID& Record::asNodeID() const
 const std::string& Record::asString() const
 {
     return boost::get<std::string>(m_data2);
-}
-
-size_t Record::size() const
-{
-    size_t dataSize = m_data->size();
-    return (1 + Utilities::encodeLEB128(dataSize, 0) + dataSize);
-}
-
-RecordData* Record::data()
-{
-    return m_data.get();
 }
 
 void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
@@ -143,7 +129,8 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eInlineValue:
-        m_data = std::make_shared<ValueRecordData>();
+        {
+        }
         break;
 
     default:
@@ -151,32 +138,12 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         error.fail(-1, "Invalid record type", __FILE__, __LINE__);
         break;
     }
-    
-    if (!error && m_data)
-    {
-        uint8_t size;
-        reader.read((char*)&size, 1, error);
-        if (!error)
-        {
-            m_data->load(reader, size, error);
-        }
-    }
 }
 
 void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_type;
     writer.write((char*)&type, 1, error);
-    if (!error && m_data)
-    {
-        char buffer[20];
-        size_t n = Utilities::encodeLEB128(m_data->size(), buffer);
-        writer.write(buffer, n, error);
-        if (!error)
-        {
-            m_data->save(writer, error);
-        }
-    }
     switch (type)
     {
     case ERecordType::eMasterFileMetadata:

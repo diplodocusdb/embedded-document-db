@@ -25,6 +25,7 @@
 
 #include "MasterFileMetadata.h"
 #include "NodeID.h"
+#include "DiplodocusDB/TreeDB/Core/TreeDBValue.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include "Ishiko/Errors/Error.h"
@@ -115,23 +116,20 @@ public:
 
     Record(ERecordType type);
     Record(ERecordType type, const NodeID& data);
+    Record(ERecordType type, const TreeDBValue& data);
     Record(const MasterFileMetadata& data);
     Record(const std::string& data);
-    Record(ERecordType type, std::shared_ptr<RecordData> data);
 
     ERecordType type() const;
     const NodeID& asNodeID() const;
     const std::string& asString() const;
-    size_t size() const;
-    RecordData* data();
 
     void read(PageRepositoryReader& reader, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     Record::ERecordType m_type;
-    boost::variant<MasterFileMetadata, NodeID, std::string> m_data2;
-    std::shared_ptr<RecordData> m_data;
+    boost::variant<MasterFileMetadata, NodeID, std::string, TreeDBValue> m_data2;
 };
 
 }
