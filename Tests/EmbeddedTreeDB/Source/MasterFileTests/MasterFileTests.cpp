@@ -22,6 +22,7 @@
 
 #include "MasterFileTests.h"
 #include "MasterFile.h"
+#include <sstream>
 
 using namespace Ishiko::Tests;
 
@@ -33,6 +34,8 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<FileComparisonTest>("addNode test 1", AddNodeTest1);
     append<FileComparisonTest>("addNode test 2", AddNodeTest2);
+    append<FileComparisonTest>("addNode test 3", AddNodeTest3);
+    append<FileComparisonTest>("addNode test 4", AddNodeTest4);
 }
 
 void MasterFileTests::ConstructionTest1(Test& test)
@@ -96,8 +99,9 @@ void MasterFileTests::AddNodeTest1(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode("/key1", masterFile.dataEndPosition(), 
-        DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    // Create a node whose parent is the root (ID 1)
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1",
+        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
     masterFile.addNode(newNode, error);
 
     ISHTF_FAIL_IF((bool)error);
@@ -121,20 +125,98 @@ void MasterFileTests::AddNodeTest2(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1("/key1", masterFile.dataEndPosition(),
-        DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    // Create a node whose parent is the root (ID 1) and has a node ID as it will be the parent of another node
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(2), "key1",
+        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
     masterFile.addNode(newNode1, error);
 
     ISHTF_FAIL_IF((bool)error);
 
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2("/key1/key1_1", masterFile.dataEndPosition(),
-        DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(2), DiplodocusDB::NodeID(0), "key1_1",
+        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
     masterFile.addNode(newNode2, error);
+
+    ISHTF_FAIL_IF((bool)error);
 
     masterFile.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddNodeTest2.dpdb");
+
+    ISHTF_PASS();
+}
+
+void MasterFileTests::AddNodeTest3(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddNodeTest3.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    // Create a node whose parent is the root (ID 1)
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1",
+        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    masterFile.addNode(newNode1, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    // Create a second node whose parent is the root (ID 1)
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key2",
+        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    masterFile.addNode(newNode2, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddNodeTest3.dpdb");
+
+    ISHTF_PASS();
+}
+
+/// This test fills a page up to the last byte
+void MasterFileTests::AddNodeTest4(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddNodeTest4.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    for (size_t i = 0; i < 346; ++i)
+    {
+        std::stringstream key;
+        key << "key" << i;
+        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str(),
+            masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+        masterFile.addNode(newNode, error);
+        if (error)
+        {
+            break;
+        }
+    }
+
+    ISHTF_FAIL_IF((bool)error);
+
+    // The name length is exactly the number of characters needed to fill the page
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key34612345",
+        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    masterFile.addNode(newNode, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddNodeTest4.dpdb");
 
     ISHTF_PASS();
 }
