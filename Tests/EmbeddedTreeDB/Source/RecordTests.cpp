@@ -38,6 +38,7 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<HeapAllocationErrorsTest>("read (eParentNodeID) test 1", ReadParentNodeIDTest1);
     append<HeapAllocationErrorsTest>("read (eNodeName) test 1", ReadNodeNameTest1);
     append<HeapAllocationErrorsTest>("read (eNodeID) test 1", ReadNodeIDTest1);
+    append<HeapAllocationErrorsTest>("read (ePersistentNodeID) test 1", ReadPersistentNodeIDTest1);
     append<FileComparisonTest>("write (eMasterFileMetadata) test 1", WriteMasterFileMetadataTest1);
     append<FileComparisonTest>("write (eDataStart) test 1", WriteDataStartTest1);
     append<FileComparisonTest>("write (eDataEnd) test 1", WriteDataEndTest1);
@@ -46,6 +47,7 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<FileComparisonTest>("write (eParentNodeID) test 1", WriteParentNodeIDTest1);
     append<FileComparisonTest>("write (eNodeName) test 1", WriteNodeNameTest1);
     append<FileComparisonTest>("write (eNodeID) test 1", WriteNodeIDTest1);
+    append<FileComparisonTest>("write (ePersistentNodeID) test 1", WritePersistentNodeIDTest1);
 }
 
 void RecordTests::ConstructionTest1(Test& test)
@@ -246,6 +248,31 @@ void RecordTests::ReadNodeIDTest1(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
     ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eNodeID);
+    ISHTF_FAIL_UNLESS(record.asNodeID() == DiplodocusDB::NodeID(123));
+    ISHTF_PASS();
+}
+
+void RecordTests::ReadPersistentNodeIDTest1(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+        / "RecordTests_ReadPersistentNodeIDTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    record.read(reader, error);
+
+    ISHTF_ABORT_IF((bool)error);
+    ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::ePersistentNodeID);
     ISHTF_FAIL_UNLESS(record.asNodeID() == DiplodocusDB::NodeID(123));
     ISHTF_PASS();
 }
@@ -534,6 +561,42 @@ void RecordTests::WriteNodeIDTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WriteNodeIDTest1.dpdb");
+
+    ISHTF_PASS();
+}
+
+void RecordTests::WritePersistentNodeIDTest1(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "RecordTests_WritePersistentNodeIDTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::ePersistentNodeID, DiplodocusDB::NodeID(123));
+    record.write(writer, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    page->save(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "RecordTests_WritePersistentNodeIDTest1.dpdb");
 
     ISHTF_PASS();
 }

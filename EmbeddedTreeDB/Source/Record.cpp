@@ -120,6 +120,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
 
     case ERecordType::eParentNodeID:
     case ERecordType::eNodeID:
+    case ERecordType::ePersistentNodeID:
         {
             m_data2 = NodeID();
             boost::get<NodeID>(m_data2).read(reader, error);
@@ -193,6 +194,7 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 
     case ERecordType::eParentNodeID:
     case ERecordType::eNodeID:
+    case ERecordType::ePersistentNodeID:
         {
             const NodeID& id = boost::get<NodeID>(m_data2);
             id.write(writer, error);
