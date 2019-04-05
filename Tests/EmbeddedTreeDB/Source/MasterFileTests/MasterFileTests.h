@@ -38,6 +38,7 @@ private:
     static void AddNodeTest2(Ishiko::Tests::FileComparisonTest& test);
     static void AddNodeTest3(Ishiko::Tests::FileComparisonTest& test);
     static void AddNodeTest4(Ishiko::Tests::FileComparisonTest& test);
+    static void AddNodeTest5(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif

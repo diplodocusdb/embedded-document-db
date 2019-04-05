@@ -36,6 +36,7 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<FileComparisonTest>("addNode test 2", AddNodeTest2);
     append<FileComparisonTest>("addNode test 3", AddNodeTest3);
     append<FileComparisonTest>("addNode test 4", AddNodeTest4);
+    append<FileComparisonTest>("addNode test 5", AddNodeTest5);
 }
 
 void MasterFileTests::ConstructionTest1(Test& test)
@@ -217,6 +218,48 @@ void MasterFileTests::AddNodeTest4(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddNodeTest4.dpdb");
+
+    ISHTF_PASS();
+}
+
+/// This test uses just one byte more than can be stored in a page
+void MasterFileTests::AddNodeTest5(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddNodeTest5.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    for (size_t i = 0; i < 346; ++i)
+    {
+        std::stringstream key;
+        key << "key" << i;
+        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str(),
+            masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+        masterFile.addNode(newNode, error);
+        if (error)
+        {
+            break;
+        }
+    }
+
+    ISHTF_FAIL_IF((bool)error);
+
+    // The name length is exactly the number of characters needed to fill the page plus one byte
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key346123456",
+        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    masterFile.addNode(newNode, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddNodeTest5.dpdb");
 
     ISHTF_PASS();
 }
