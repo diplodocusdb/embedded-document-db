@@ -161,7 +161,6 @@
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
     <ClCompile Include="..\..\Source\Record.cpp" />
-    <ClCompile Include="..\..\Source\RecordData.cpp" />
     <ClCompile Include="..\..\Source\ValueRecordData.cpp" />
     <ClCompile Include="..\..\Source\ChildrenRecordData.cpp" />
     <ClCompile Include="..\..\Source\RecordMarker.cpp" />
@@ -181,7 +180,6 @@
     <ClInclude Include="..\..\Source\MasterFile.h" />
     <ClInclude Include="..\..\Source\MasterFileMetadata.h" />
     <ClInclude Include="..\..\Source\Record.h" />
-    <ClInclude Include="..\..\Source\RecordData.h" />
     <ClInclude Include="..\..\Source\ValueRecordData.h" />
     <ClInclude Include="..\..\Source\ChildrenRecordData.h" />
     <ClInclude Include="..\..\Source\RecordMarker.h" />
