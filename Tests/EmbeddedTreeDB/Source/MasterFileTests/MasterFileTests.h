@@ -34,6 +34,9 @@ private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
     static void CreateTest1(Ishiko::Tests::FileComparisonTest& test);
     static void OpenTest1(Ishiko::Tests::Test& test);
+    static void AddNodeTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void AddNodeTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void AddNodeTest3(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif
