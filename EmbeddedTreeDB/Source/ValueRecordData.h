@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,28 +23,28 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_VALUERECORDDATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_VALUERECORDDATA_H_
 
-#include "RecordData.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBValue.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 
 namespace DiplodocusDB
 {
 
-class ValueRecordData : public RecordData
+class ValueRecordData
 {
 public:
     ValueRecordData();
     ValueRecordData(const TreeDBValue& value);
-    ~ValueRecordData() override;
 
     const std::string& buffer() const;
 
-    size_t size() const override;
-    void load(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error) override;
-    void save(PageRepositoryWriter& writer, Ishiko::Error& error) const override;
+    size_t size() const;
+    void read(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error);
+    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
-    void loadDataType(PageRepositoryReader& reader, Ishiko::Error& error);
-    void saveDataType(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void readDataType(PageRepositoryReader& reader, Ishiko::Error& error);
+    void writeDataType(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     DataType m_type;

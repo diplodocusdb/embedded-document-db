@@ -36,10 +36,6 @@ ValueRecordData::ValueRecordData(const TreeDBValue& value)
 {
 }
 
-ValueRecordData::~ValueRecordData()
-{
-}
-
 const std::string& ValueRecordData::buffer() const
 {
     return m_buffer;
@@ -50,11 +46,9 @@ size_t ValueRecordData::size() const
     return (2 + m_buffer.size());
 }
 
-void ValueRecordData::load(PageRepositoryReader& reader,
-                           size_t recordDataSize,
-                           Ishiko::Error& error)
+void ValueRecordData::read(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error)
 {
-    loadDataType(reader, error);
+    readDataType(reader, error);
     if (!error)
     {
         m_buffer.resize(recordDataSize - 2);
@@ -62,25 +56,22 @@ void ValueRecordData::load(PageRepositoryReader& reader,
     }
 }
 
-void ValueRecordData::save(PageRepositoryWriter& writer,
-                           Ishiko::Error& error) const
+void ValueRecordData::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
-    saveDataType(writer, error);
+    writeDataType(writer, error);
     if (!error)
     {
         writer.write(m_buffer.c_str(), m_buffer.size(), error);
     }
 }
 
-void ValueRecordData::loadDataType(PageRepositoryReader& reader,
-                                   Ishiko::Error& error)
+void ValueRecordData::readDataType(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     char buffer[2];
     reader.read(buffer, 2, error);
 }
 
-void ValueRecordData::saveDataType(PageRepositoryWriter& writer,
-                                   Ishiko::Error& error) const
+void ValueRecordData::writeDataType(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_type.primitiveType();
     writer.write((char*)&type, 1, error);
