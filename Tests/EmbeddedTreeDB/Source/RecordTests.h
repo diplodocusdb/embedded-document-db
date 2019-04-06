@@ -53,9 +53,9 @@ private:
     static void WriteNodeNameTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WritePersistentNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteInlineValueTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteInlineValueTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteInlineValueTest3(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteInlineValueBinaryTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteInlineValueBooleanTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteInlineValueUTF8StringTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif

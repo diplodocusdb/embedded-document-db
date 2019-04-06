@@ -51,9 +51,9 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<FileComparisonTest>("write (eNodeName) test 1", WriteNodeNameTest1);
     append<FileComparisonTest>("write (eNodeID) test 1", WriteNodeIDTest1);
     append<FileComparisonTest>("write (ePersistentNodeID) test 1", WritePersistentNodeIDTest1);
-    append<FileComparisonTest>("write (eInlineValue) test 1", WriteInlineValueTest1);
-    append<FileComparisonTest>("write (eInlineValue) test 2", WriteInlineValueTest2);
-    append<FileComparisonTest>("write (eInlineValue) test 3", WriteInlineValueTest3);
+    append<FileComparisonTest>("write (eInlineValue, eBinary) test 1", WriteInlineValueBinaryTest1);
+    append<FileComparisonTest>("write (eInlineValue, eBoolean) test 1", WriteInlineValueBooleanTest1);
+    append<FileComparisonTest>("write (eInlineValue, eUTF8String) test 3", WriteInlineValueUTF8StringTest1);
 }
 
 void RecordTests::ConstructionTest1(Test& test)
@@ -619,18 +619,18 @@ void RecordTests::WritePersistentNodeIDTest1(FileComparisonTest& test)
     ISHTF_PASS();
 }
 
-void RecordTests::WriteInlineValueTest1(FileComparisonTest& test)
+void RecordTests::WriteInlineValueBinaryTest1(FileComparisonTest& test)
 {
 }
 
-void RecordTests::WriteInlineValueTest2(FileComparisonTest& test)
+void RecordTests::WriteInlineValueBooleanTest1(FileComparisonTest& test)
 {
 }
 
-void RecordTests::WriteInlineValueTest3(FileComparisonTest& test)
+void RecordTests::WriteInlineValueUTF8StringTest1(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "RecordTests_WriteInlineValueTest3.dpdb");
+        / "RecordTests_WriteInlineValueUTF8StringTest1.dpdb");
 
     Ishiko::Error error(0);
 
@@ -659,7 +659,7 @@ void RecordTests::WriteInlineValueTest3(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "RecordTests_WriteInlineValueTest3.dpdb");
+        / "RecordTests_WriteInlineValueUTF8StringTest1.dpdb");
 
     ISHTF_PASS();
 }
