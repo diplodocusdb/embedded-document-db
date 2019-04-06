@@ -84,14 +84,29 @@ const DataType& TreeDBValue::type() const
     return m_type;
 }
 
+bool TreeDBValue::asBoolean() const
+{
+    return boost::get<bool>(m_data);
+}
+
 int8_t TreeDBValue::asInt8() const
 {
     return boost::get<int8_t>(m_data);
 }
 
+int16_t TreeDBValue::asInt16() const
+{
+    return boost::get<int16_t>(m_data);
+}
+
 int32_t TreeDBValue::asInt32() const
 {
     return boost::get<int32_t>(m_data);
+}
+
+int64_t TreeDBValue::asInt64() const
+{
+    return boost::get<int64_t>(m_data);
 }
 
 const std::string& TreeDBValue::asUTF8String() const

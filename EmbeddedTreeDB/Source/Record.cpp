@@ -206,12 +206,30 @@ void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& v
     writeDataType(writer, value.type(), error);
     if (!error)
     {
-        char buffer[20];
-        size_t n = Utilities::encodeLEB128(value.asUTF8String().size(), buffer);
-        writer.write(buffer, n, error);
-        if (!error)
+        switch (value.type().primitiveType())
         {
-            writer.write(value.asUTF8String().c_str(), value.asUTF8String().size(), error);
+        case EPrimitiveDataType::eBoolean:
+            if (value.asBoolean())
+            {
+                writer.write("\x1", 1, error);
+            }
+            else
+            {
+                writer.write("\x0", 1, error);
+            }
+            break;
+
+        case EPrimitiveDataType::eUTF8String:
+            {
+                char buffer[20];
+                size_t n = Utilities::encodeLEB128(value.asUTF8String().size(), buffer);
+                writer.write(buffer, n, error);
+                if (!error)
+                {
+                    writer.write(value.asUTF8String().c_str(), value.asUTF8String().size(), error);
+                }
+            }
+            break;
         }
     }
 }

@@ -62,8 +62,11 @@ public:
     /// Returns the type of the data.
     const DataType& type() const;
 
+    bool asBoolean() const;
     int8_t asInt8() const;
+    int16_t asInt16() const;
     int32_t asInt32() const;
+    int64_t asInt64() const;
     const std::string& asUTF8String() const;
 
     bool operator ==(const TreeDBValue& other) const;
