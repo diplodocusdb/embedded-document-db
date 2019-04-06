@@ -91,16 +91,8 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eMasterFileMetadata:
-        {
-            // TODO: this needs to decode LEB128
-            uint8_t size;
-            reader.read((char*)&size, 1, error);
-            if (!error)
-            {
-                m_data = MasterFileMetadata();
-                boost::get<MasterFileMetadata>(m_data).read(reader, size, error);
-            }
-        }
+        m_data = MasterFileMetadata();
+        boost::get<MasterFileMetadata>(m_data).read(reader, error);
         break;
 
     case ERecordType::eDataStart:
@@ -112,10 +104,8 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
     case ERecordType::eParentNodeID:
     case ERecordType::eNodeID:
     case ERecordType::ePersistentNodeID:
-        {
-            m_data = NodeID();
-            boost::get<NodeID>(m_data).read(reader, error);
-        }
+        m_data = NodeID();
+        boost::get<NodeID>(m_data).read(reader, error);
         break;
 
     case ERecordType::eNodeName:

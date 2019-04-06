@@ -32,11 +32,17 @@ MasterFileMetadata::MasterFileMetadata()
 {
 }
 
-void MasterFileMetadata::read(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error)
+void MasterFileMetadata::read(PageRepositoryReader& reader, Ishiko::Error& error)
 {
-    // TODO
-    char buffer[12];
-    reader.read(buffer, 12, error);
+    // TODO: this needs to decode LEB128
+    uint8_t size;
+    reader.read((char*)&size, 1, error);
+    if (!error)
+    {
+        // TODO
+        char buffer[12];
+        reader.read(buffer, 12, error);
+    }
 }
 
 void MasterFileMetadata::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
