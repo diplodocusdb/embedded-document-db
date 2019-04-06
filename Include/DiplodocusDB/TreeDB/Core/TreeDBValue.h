@@ -39,21 +39,25 @@ public:
         The default constructor creates a value of type NULL.
     */
     TreeDBValue();
+    static TreeDBValue Boolean(bool data);
     /// Returns a value of type Int8.
     /**
         @param data The data to store in the value.
     */
     static TreeDBValue Int8(int8_t data);
+    static TreeDBValue Int16(int16_t data);
     /// Returns a value of type Int32.
     /**
         @param data The data to store in the value.
     */
     static TreeDBValue Int32(int32_t data);
+    static TreeDBValue Int64(int64_t data);
     /// Returns a value of type UTF8String.
     /**
         @param data The data to store in the value.
     */
     static TreeDBValue UTF8String(const std::string& data);
+    static TreeDBValue Binary(const std::string& data);
     
     /// Returns the type of the data.
     const DataType& type() const;
@@ -62,13 +66,17 @@ public:
     int32_t asInt32() const;
     const std::string& asUTF8String() const;
 
-    void setInt8(int8_t value);
-    void setInt32(int32_t value);
-    void setUTF8String(const std::string& value);
+    void setBoolean(bool data);
+    void setInt8(int8_t data);
+    void setInt16(int16_t data);
+    void setInt32(int32_t data);
+    void setInt64(int64_t data);
+    void setUTF8String(const std::string& data);
+    void setBinary(const std::string& data);
 
 private:
     DataType m_type;
-    boost::variant<int8_t, int32_t, std::string> m_data;
+    boost::variant<bool, int8_t, int16_t,int32_t, int64_t, std::string> m_data;
 };
 
 }

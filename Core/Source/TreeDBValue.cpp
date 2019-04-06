@@ -30,10 +30,24 @@ TreeDBValue::TreeDBValue()
 {
 }
 
+TreeDBValue TreeDBValue::Boolean(bool data)
+{
+    TreeDBValue result;
+    result.setBoolean(data);
+    return result;
+}
+
 TreeDBValue TreeDBValue::Int8(int8_t data)
 {
     TreeDBValue result;
     result.setInt8(data);
+    return result;
+}
+
+TreeDBValue TreeDBValue::Int16(int16_t data)
+{
+    TreeDBValue result;
+    result.setInt16(data);
     return result;
 }
 
@@ -44,10 +58,24 @@ TreeDBValue TreeDBValue::Int32(int32_t data)
     return result;
 }
 
+TreeDBValue TreeDBValue::Int64(int64_t data)
+{
+    TreeDBValue result;
+    result.setInt64(data);
+    return result;
+}
+
 TreeDBValue TreeDBValue::UTF8String(const std::string& data)
 {
     TreeDBValue result;
     result.setUTF8String(data);
+    return result;
+}
+
+TreeDBValue TreeDBValue::Binary(const std::string& data)
+{
+    TreeDBValue result;
+    result.setBinary(data);
     return result;
 }
 
@@ -71,22 +99,46 @@ const std::string& TreeDBValue::asUTF8String() const
     return boost::get<std::string>(m_data);
 }
 
-void TreeDBValue::setInt8(int8_t value)
+void TreeDBValue::setBoolean(bool data)
+{
+    m_type = EPrimitiveDataType::eBoolean;
+    m_data = data;
+}
+
+void TreeDBValue::setInt8(int8_t data)
 {
     m_type = EPrimitiveDataType::eInt8;
-    m_data = value;
+    m_data = data;
 }
 
-void TreeDBValue::setInt32(int32_t value)
+void TreeDBValue::setInt16(int16_t data)
+{
+    m_type = EPrimitiveDataType::eInt16;
+    m_data = data;
+}
+
+void TreeDBValue::setInt32(int32_t data)
 {
     m_type = EPrimitiveDataType::eInt32;
-    m_data = value;
+    m_data = data;
 }
 
-void TreeDBValue::setUTF8String(const std::string& value)
+void TreeDBValue::setInt64(int64_t data)
+{
+    m_type = EPrimitiveDataType::eInt64;
+    m_data = data;
+}
+
+void TreeDBValue::setUTF8String(const std::string& data)
 {
     m_type = EPrimitiveDataType::eUTF8String;
-    m_data = value;
+    m_data = data;
+}
+
+void TreeDBValue::setBinary(const std::string& data)
+{
+    m_type = EPrimitiveDataType::eBinary;
+    m_data = data;
 }
 
 }
