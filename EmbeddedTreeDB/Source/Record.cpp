@@ -67,6 +67,11 @@ const std::string& Record::asString() const
     return boost::get<std::string>(m_data);
 }
 
+const TreeDBValue& Record::asValue() const
+{
+    return boost::get<TreeDBValue>(m_data);
+}
+
 void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     uint8_t type;
@@ -129,8 +134,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eInlineValue:
-        {
-        }
+        m_data = readInlineValue(reader, error);
         break;
 
     default:
@@ -177,6 +181,26 @@ void Record::writeNodeName(PageRepositoryWriter& writer, const std::string& name
     }
 }
 
+TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error)
+{
+    TreeDBValue result;
+    DataType type = readDataType(reader, error);
+    if (!error)
+    {
+        // TODO: this needs to decode LEB128
+        uint8_t size;
+        reader.read((char*)&size, 1, error);
+        if (!error)
+        {
+            std::string data;
+            data.resize(size);
+            reader.read(&data[0], size, error);
+            result.setUTF8String(data);
+        }
+    }
+    return result;
+}
+
 void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& value, Ishiko::Error& error)
 {
     writeDataType(writer, value.type(), error);
@@ -190,6 +214,18 @@ void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& v
             writer.write(value.asUTF8String().c_str(), value.asUTF8String().size(), error);
         }
     }
+}
+
+DataType Record::readDataType(PageRepositoryReader& reader, Ishiko::Error& error)
+{
+    DataType result(EPrimitiveDataType::eNULL);
+    char buffer;
+    reader.read(&buffer, 1, error);
+    if (!error)
+    {
+        result = DataType((EPrimitiveDataType)(buffer & 0x3F), (EDataTypeModifier)(buffer >> 6));
+    }
+    return result;
 }
 
 void Record::writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error)

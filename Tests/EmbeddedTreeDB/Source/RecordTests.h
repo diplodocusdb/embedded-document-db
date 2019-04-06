@@ -41,9 +41,9 @@ private:
     static void ReadNodeNameTest1(Ishiko::Tests::Test& test);
     static void ReadNodeIDTest1(Ishiko::Tests::Test& test);
     static void ReadPersistentNodeIDTest1(Ishiko::Tests::Test& test);
-    static void ReadInlineValueTest1(Ishiko::Tests::Test& test);
-    static void ReadInlineValueTest2(Ishiko::Tests::Test& test);
-    static void ReadInlineValueTest3(Ishiko::Tests::Test& test);
+    static void ReadInlineValueBinaryTest1(Ishiko::Tests::Test& test);
+    static void ReadInlineValueBooleanTest1(Ishiko::Tests::Test& test);
+    static void ReadInlineValueUTF8StringTest1(Ishiko::Tests::Test& test);
     static void WriteMasterFileMetadataTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteDataStartTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteDataEndTest1(Ishiko::Tests::FileComparisonTest& test);

@@ -123,13 +123,16 @@ public:
     ERecordType type() const;
     const NodeID& asNodeID() const;
     const std::string& asString() const;
+    const TreeDBValue& asValue() const;
 
     void read(PageRepositoryReader& reader, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     static void writeNodeName(PageRepositoryWriter& writer, const std::string& name, Ishiko::Error& error);
+    static TreeDBValue readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& value, Ishiko::Error& error);
+    static DataType readDataType(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error);
 
 private:

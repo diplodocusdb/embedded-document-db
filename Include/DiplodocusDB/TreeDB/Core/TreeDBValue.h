@@ -66,6 +66,9 @@ public:
     int32_t asInt32() const;
     const std::string& asUTF8String() const;
 
+    bool operator ==(const TreeDBValue& other) const;
+    bool operator !=(const TreeDBValue& other) const;
+
     void setBoolean(bool data);
     void setInt8(int8_t data);
     void setInt16(int16_t data);

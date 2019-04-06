@@ -39,9 +39,9 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<HeapAllocationErrorsTest>("read (eNodeName) test 1", ReadNodeNameTest1);
     append<HeapAllocationErrorsTest>("read (eNodeID) test 1", ReadNodeIDTest1);
     append<HeapAllocationErrorsTest>("read (ePersistentNodeID) test 1", ReadPersistentNodeIDTest1);
-    append<HeapAllocationErrorsTest>("read (eInlineValue) test 1", ReadInlineValueTest1);
-    append<HeapAllocationErrorsTest>("read (eInlineValue) test 2", ReadInlineValueTest2);
-    append<HeapAllocationErrorsTest>("read (eInlineValue) test 3", ReadInlineValueTest3);
+    append<HeapAllocationErrorsTest>("read (eInlineValue, eBinary) test 1", ReadInlineValueBinaryTest1);
+    append<HeapAllocationErrorsTest>("read (eInlineValue, eBoolean) test 1", ReadInlineValueBooleanTest1);
+    append<HeapAllocationErrorsTest>("read (eInlineValue, eUTF8String) test 1", ReadInlineValueUTF8StringTest1);
     append<FileComparisonTest>("write (eMasterFileMetadata) test 1", WriteMasterFileMetadataTest1);
     append<FileComparisonTest>("write (eDataStart) test 1", WriteDataStartTest1);
     append<FileComparisonTest>("write (eDataEnd) test 1", WriteDataEndTest1);
@@ -53,7 +53,7 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<FileComparisonTest>("write (ePersistentNodeID) test 1", WritePersistentNodeIDTest1);
     append<FileComparisonTest>("write (eInlineValue, eBinary) test 1", WriteInlineValueBinaryTest1);
     append<FileComparisonTest>("write (eInlineValue, eBoolean) test 1", WriteInlineValueBooleanTest1);
-    append<FileComparisonTest>("write (eInlineValue, eUTF8String) test 3", WriteInlineValueUTF8StringTest1);
+    append<FileComparisonTest>("write (eInlineValue, eUTF8String) test 1", WriteInlineValueUTF8StringTest1);
 }
 
 void RecordTests::ConstructionTest1(Test& test)
@@ -283,16 +283,37 @@ void RecordTests::ReadPersistentNodeIDTest1(Test& test)
     ISHTF_PASS();
 }
 
-void RecordTests::ReadInlineValueTest1(Test& test)
+void RecordTests::ReadInlineValueBinaryTest1(Test& test)
 {
 }
 
-void RecordTests::ReadInlineValueTest2(Test& test)
+void RecordTests::ReadInlineValueBooleanTest1(Test& test)
 {
 }
 
-void RecordTests::ReadInlineValueTest3(Test& test)
+void RecordTests::ReadInlineValueUTF8StringTest1(Test& test)
 {
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+        / "RecordTests_ReadInlineValueUTF8StringTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    record.read(reader, error);
+
+    ISHTF_ABORT_IF((bool)error);
+    ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eInlineValue);
+    ISHTF_FAIL_UNLESS(record.asValue() == DiplodocusDB::TreeDBValue::UTF8String("text"));
+    ISHTF_PASS();
 }
 
 void RecordTests::WriteMasterFileMetadataTest1(FileComparisonTest& test)

@@ -99,6 +99,16 @@ const std::string& TreeDBValue::asUTF8String() const
     return boost::get<std::string>(m_data);
 }
 
+bool TreeDBValue::operator ==(const TreeDBValue& other) const
+{
+    return ((m_type == other.m_type) && (m_data == other.m_data));
+}
+
+bool TreeDBValue::operator !=(const TreeDBValue& other) const
+{
+    return !(*this == other);
+}
+
 void TreeDBValue::setBoolean(bool data)
 {
     m_type = EPrimitiveDataType::eBoolean;
