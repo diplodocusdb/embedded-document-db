@@ -169,34 +169,38 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
         break;
 
     case ERecordType::eNodeName:
-        {
-            const std::string& name = boost::get<std::string>(m_data);
-            char buffer[20];
-            size_t n = Utilities::encodeLEB128(name.size(), buffer);
-            writer.write(buffer, n, error);
-            if (!error)
-            {
-                writer.write(name.c_str(), name.size(), error);
-            }
-        }
+        writeNodeName(writer, boost::get<std::string>(m_data), error);
         break;
 
     case ERecordType::eInlineValue:
-        {
-            const TreeDBValue& value = boost::get<TreeDBValue>(m_data);
-            writeDataType(writer, value.type(), error);
-            if (!error)
-            {
-                char buffer[20];
-                size_t n = Utilities::encodeLEB128(value.asUTF8String().size(), buffer);
-                writer.write(buffer, n, error);
-                if (!error)
-                {
-                    writer.write(value.asUTF8String().c_str(), value.asUTF8String().size(), error);
-                }
-            }
-        }
+        writeInlineValue(writer, boost::get<TreeDBValue>(m_data), error);
         break;
+    }
+}
+
+void Record::writeNodeName(PageRepositoryWriter& writer, const std::string& name, Ishiko::Error& error)
+{
+    char buffer[20];
+    size_t n = Utilities::encodeLEB128(name.size(), buffer);
+    writer.write(buffer, n, error);
+    if (!error)
+    {
+        writer.write(name.c_str(), name.size(), error);
+    }
+}
+
+void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& value, Ishiko::Error& error)
+{
+    writeDataType(writer, value.type(), error);
+    if (!error)
+    {
+        char buffer[20];
+        size_t n = Utilities::encodeLEB128(value.asUTF8String().size(), buffer);
+        writer.write(buffer, n, error);
+        if (!error)
+        {
+            writer.write(value.asUTF8String().c_str(), value.asUTF8String().size(), error);
+        }
     }
 }
 
