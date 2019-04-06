@@ -129,6 +129,7 @@ public:
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
+    static std::string readNodeName(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeNodeName(PageRepositoryWriter& writer, const std::string& name, Ishiko::Error& error);
     static TreeDBValue readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& value, Ishiko::Error& error);

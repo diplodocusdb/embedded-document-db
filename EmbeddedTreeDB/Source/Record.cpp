@@ -119,18 +119,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eNodeName:
-        {
-            // TODO: this needs to decode LEB128
-            uint8_t size;
-            reader.read((char*)&size, 1, error);
-            if (!error)
-            {
-                std::string name;
-                name.resize(size);
-                reader.read(&name[0], size, error);
-                m_data = name;
-            }
-        }
+        m_data = readNodeName(reader, error);
         break;
 
     case ERecordType::eInlineValue:
@@ -168,6 +157,20 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
         writeInlineValue(writer, boost::get<TreeDBValue>(m_data), error);
         break;
     }
+}
+
+std::string Record::readNodeName(PageRepositoryReader& reader, Ishiko::Error& error)
+{
+    std::string name;
+    // TODO: this needs to decode LEB128
+    uint8_t size;
+    reader.read((char*)&size, 1, error);
+    if (!error)
+    {
+        name.resize(size);
+        reader.read(&name[0], size, error);
+    }
+    return name;
 }
 
 void Record::writeNodeName(PageRepositoryWriter& writer, const std::string& name, Ishiko::Error& error)
