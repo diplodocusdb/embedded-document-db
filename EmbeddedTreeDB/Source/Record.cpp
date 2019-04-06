@@ -180,15 +180,28 @@ TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error&
     DataType type = readDataType(reader, error);
     if (!error)
     {
-        // TODO: this needs to decode LEB128
-        uint8_t size;
-        reader.read((char*)&size, 1, error);
-        if (!error)
+        switch (type.primitiveType())
         {
-            std::string data;
-            data.resize(size);
-            reader.read(&data[0], size, error);
-            result.setUTF8String(data);
+        case EPrimitiveDataType::eBoolean:
+            char data;
+            reader.read(&data, 1, error);
+            result.setBoolean(data);
+            break;
+
+        case EPrimitiveDataType::eUTF8String:
+            {
+                // TODO: this needs to decode LEB128
+                uint8_t size;
+                reader.read((char*)&size, 1, error);
+                if (!error)
+                {
+                    std::string data;
+                    data.resize(size);
+                    reader.read(&data[0], size, error);
+                    result.setUTF8String(data);
+                }
+            }
+            break;
         }
     }
     return result;
