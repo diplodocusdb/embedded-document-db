@@ -35,7 +35,6 @@ class MasterFileMetadata
 public:
     MasterFileMetadata();
 
-    size_t size() const;
     void read(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 

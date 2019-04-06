@@ -22,7 +22,6 @@
 
 #include "MasterFile.h"
 #include "EmbeddedTreeDBNodeImpl.h"
-#include "ValueRecordData.h"
 
 namespace DiplodocusDB
 {
@@ -204,8 +203,7 @@ void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& erro
 
     if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
     {
-        std::shared_ptr<ValueRecordData> recordData = std::make_shared<ValueRecordData>(node.value());
-        Record record(Record::ERecordType::eInlineValue, recordData);
+        Record record(Record::ERecordType::eInlineValue, node.value());
         record.write(writer, error);
         if (error)
         {

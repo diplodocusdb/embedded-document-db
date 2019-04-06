@@ -21,6 +21,7 @@
 */
 
 #include "MasterFileMetadata.h"
+#include "Utilities.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/Page.h"
 
 namespace DiplodocusDB
@@ -29,11 +30,6 @@ namespace DiplodocusDB
 MasterFileMetadata::MasterFileMetadata()
     : m_fileFormatVersion(1, 0, 0)
 {
-}
-
-size_t MasterFileMetadata::size() const
-{
-    return 12;
 }
 
 void MasterFileMetadata::read(PageRepositoryReader& reader, size_t recordDataSize, Ishiko::Error& error)
@@ -45,12 +41,18 @@ void MasterFileMetadata::read(PageRepositoryReader& reader, size_t recordDataSiz
 
 void MasterFileMetadata::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
-    for (unsigned int v : m_fileFormatVersion.value())
+    char buffer[20];
+    size_t n = Utilities::encodeLEB128(12, buffer);
+    writer.write(buffer, n, error);
+    if (!error)
     {
-        writer.write((char*)&v, 4, error);
-        if (error)
+        for (unsigned int v : m_fileFormatVersion.value())
         {
-            break;
+            writer.write((char*)&v, 4, error);
+            if (error)
+            {
+                break;
+            }
         }
     }
 }

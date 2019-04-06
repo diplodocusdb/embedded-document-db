@@ -147,25 +147,13 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
     switch (type)
     {
     case ERecordType::eMasterFileMetadata:
-        {
-            const MasterFileMetadata& metadata = boost::get<MasterFileMetadata>(m_data);
-            char buffer[20];
-            size_t n = Utilities::encodeLEB128(metadata.size(), buffer);
-            writer.write(buffer, n, error);
-            if (!error)
-            {
-                metadata.write(writer, error);
-            }
-        }
+        boost::get<MasterFileMetadata>(m_data).write(writer, error);
         break;
 
     case ERecordType::eParentNodeID:
     case ERecordType::eNodeID:
     case ERecordType::ePersistentNodeID:
-        {
-            const NodeID& id = boost::get<NodeID>(m_data);
-            id.write(writer, error);
-        }
+        boost::get<NodeID>(m_data).write(writer, error);
         break;
 
     case ERecordType::eNodeName:
