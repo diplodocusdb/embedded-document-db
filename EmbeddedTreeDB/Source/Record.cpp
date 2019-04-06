@@ -180,7 +180,32 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
             }
         }
         break;
+
+    case ERecordType::eInlineValue:
+        {
+            const TreeDBValue& value = boost::get<TreeDBValue>(m_data);
+            writeDataType(writer, value.type(), error);
+            if (!error)
+            {
+                char buffer[20];
+                size_t n = Utilities::encodeLEB128(value.asUTF8String().size(), buffer);
+                writer.write(buffer, n, error);
+                if (!error)
+                {
+                    writer.write(value.asUTF8String().c_str(), value.asUTF8String().size(), error);
+                }
+            }
+        }
+        break;
     }
+}
+
+void Record::writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error)
+{
+    uint8_t primitiveType = (uint8_t)dataType.primitiveType();
+    uint8_t typeModifier = (uint8_t)dataType.modifier();
+    uint8_t type = ((primitiveType & 0x3F) | (typeModifier << 6));
+    writer.write((char*)&type, 1, error);
 }
 
 }

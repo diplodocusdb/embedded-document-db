@@ -128,6 +128,9 @@ public:
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
+    static void writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error);
+
+private:
     Record::ERecordType m_type;
     boost::variant<MasterFileMetadata, NodeID, std::string, TreeDBValue> m_data;
 };

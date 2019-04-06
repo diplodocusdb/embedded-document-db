@@ -41,6 +41,9 @@ private:
     static void ReadNodeNameTest1(Ishiko::Tests::Test& test);
     static void ReadNodeIDTest1(Ishiko::Tests::Test& test);
     static void ReadPersistentNodeIDTest1(Ishiko::Tests::Test& test);
+    static void ReadInlineValueTest1(Ishiko::Tests::Test& test);
+    static void ReadInlineValueTest2(Ishiko::Tests::Test& test);
+    static void ReadInlineValueTest3(Ishiko::Tests::Test& test);
     static void WriteMasterFileMetadataTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteDataStartTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteDataEndTest1(Ishiko::Tests::FileComparisonTest& test);
@@ -50,6 +53,9 @@ private:
     static void WriteNodeNameTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WriteNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
     static void WritePersistentNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteInlineValueTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteInlineValueTest2(Ishiko::Tests::FileComparisonTest& test);
+    static void WriteInlineValueTest3(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif

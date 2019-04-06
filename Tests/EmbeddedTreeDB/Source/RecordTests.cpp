@@ -39,6 +39,9 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<HeapAllocationErrorsTest>("read (eNodeName) test 1", ReadNodeNameTest1);
     append<HeapAllocationErrorsTest>("read (eNodeID) test 1", ReadNodeIDTest1);
     append<HeapAllocationErrorsTest>("read (ePersistentNodeID) test 1", ReadPersistentNodeIDTest1);
+    append<HeapAllocationErrorsTest>("read (eInlineValue) test 1", ReadInlineValueTest1);
+    append<HeapAllocationErrorsTest>("read (eInlineValue) test 2", ReadInlineValueTest2);
+    append<HeapAllocationErrorsTest>("read (eInlineValue) test 3", ReadInlineValueTest3);
     append<FileComparisonTest>("write (eMasterFileMetadata) test 1", WriteMasterFileMetadataTest1);
     append<FileComparisonTest>("write (eDataStart) test 1", WriteDataStartTest1);
     append<FileComparisonTest>("write (eDataEnd) test 1", WriteDataEndTest1);
@@ -48,6 +51,9 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<FileComparisonTest>("write (eNodeName) test 1", WriteNodeNameTest1);
     append<FileComparisonTest>("write (eNodeID) test 1", WriteNodeIDTest1);
     append<FileComparisonTest>("write (ePersistentNodeID) test 1", WritePersistentNodeIDTest1);
+    append<FileComparisonTest>("write (eInlineValue) test 1", WriteInlineValueTest1);
+    append<FileComparisonTest>("write (eInlineValue) test 2", WriteInlineValueTest2);
+    append<FileComparisonTest>("write (eInlineValue) test 3", WriteInlineValueTest3);
 }
 
 void RecordTests::ConstructionTest1(Test& test)
@@ -275,6 +281,18 @@ void RecordTests::ReadPersistentNodeIDTest1(Test& test)
     ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::ePersistentNodeID);
     ISHTF_FAIL_UNLESS(record.asNodeID() == DiplodocusDB::NodeID(123));
     ISHTF_PASS();
+}
+
+void RecordTests::ReadInlineValueTest1(Test& test)
+{
+}
+
+void RecordTests::ReadInlineValueTest2(Test& test)
+{
+}
+
+void RecordTests::ReadInlineValueTest3(Test& test)
+{
 }
 
 void RecordTests::WriteMasterFileMetadataTest1(FileComparisonTest& test)
@@ -597,6 +615,51 @@ void RecordTests::WritePersistentNodeIDTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WritePersistentNodeIDTest1.dpdb");
+
+    ISHTF_PASS();
+}
+
+void RecordTests::WriteInlineValueTest1(FileComparisonTest& test)
+{
+}
+
+void RecordTests::WriteInlineValueTest2(FileComparisonTest& test)
+{
+}
+
+void RecordTests::WriteInlineValueTest3(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "RecordTests_WriteInlineValueTest3.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInlineValue, 
+        DiplodocusDB::TreeDBValue::UTF8String("text"));
+    record.write(writer, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    page->save(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "RecordTests_WriteInlineValueTest3.dpdb");
 
     ISHTF_PASS();
 }
