@@ -109,7 +109,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eNodeName:
-        m_data = readNodeName(reader, error);
+        m_data = readString(reader, error);
         break;
 
     case ERecordType::eInlineValue:
@@ -140,37 +140,12 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
         break;
 
     case ERecordType::eNodeName:
-        writeNodeName(writer, boost::get<std::string>(m_data), error);
+        writeString(writer, boost::get<std::string>(m_data), error);
         break;
 
     case ERecordType::eInlineValue:
         writeInlineValue(writer, boost::get<TreeDBValue>(m_data), error);
         break;
-    }
-}
-
-std::string Record::readNodeName(PageRepositoryReader& reader, Ishiko::Error& error)
-{
-    std::string name;
-    // TODO: this needs to decode LEB128
-    uint8_t size;
-    reader.read((char*)&size, 1, error);
-    if (!error)
-    {
-        name.resize(size);
-        reader.read(&name[0], size, error);
-    }
-    return name;
-}
-
-void Record::writeNodeName(PageRepositoryWriter& writer, const std::string& name, Ishiko::Error& error)
-{
-    char buffer[20];
-    size_t n = Utilities::encodeLEB128(name.size(), buffer);
-    writer.write(buffer, n, error);
-    if (!error)
-    {
-        writer.write(name.c_str(), name.size(), error);
     }
 }
 
@@ -285,6 +260,31 @@ void Record::writeDataType(PageRepositoryWriter& writer, const DataType& dataTyp
     uint8_t typeModifier = (uint8_t)dataType.modifier();
     uint8_t type = ((primitiveType & 0x3F) | (typeModifier << 6));
     writer.write((char*)&type, 1, error);
+}
+
+std::string Record::readString(PageRepositoryReader& reader, Ishiko::Error& error)
+{
+    std::string name;
+    // TODO: this needs to decode LEB128
+    uint8_t size;
+    reader.read((char*)&size, 1, error);
+    if (!error)
+    {
+        name.resize(size);
+        reader.read(&name[0], size, error);
+    }
+    return name;
+}
+
+void Record::writeString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error)
+{
+    char buffer[20];
+    size_t n = Utilities::encodeLEB128(data.size(), buffer);
+    writer.write(buffer, n, error);
+    if (!error)
+    {
+        writer.write(data.c_str(), data.size(), error);
+    }
 }
 
 }

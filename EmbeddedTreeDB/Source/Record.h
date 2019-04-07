@@ -129,12 +129,12 @@ public:
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
-    static std::string readNodeName(PageRepositoryReader& reader, Ishiko::Error& error);
-    static void writeNodeName(PageRepositoryWriter& writer, const std::string& name, Ishiko::Error& error);
     static TreeDBValue readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& value, Ishiko::Error& error);
     static DataType readDataType(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error);
+    static std::string readString(PageRepositoryReader& reader, Ishiko::Error& error);
+    static void writeString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error);
 
 private:
     Record::ERecordType m_type;
