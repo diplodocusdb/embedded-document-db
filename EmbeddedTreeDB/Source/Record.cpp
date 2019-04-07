@@ -158,18 +158,7 @@ TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error&
         switch (type.primitiveType())
         {
         case EPrimitiveDataType::eBinary:
-            {
-                // TODO: this needs to decode LEB128
-                uint8_t size;
-                reader.read((char*)&size, 1, error);
-                if (!error)
-                {
-                    std::string data;
-                    data.resize(size);
-                    reader.read(&data[0], size, error);
-                    result.setBinary(data);
-                }
-            }
+            result.setBinary(readString(reader, error));
             break;
 
         case EPrimitiveDataType::eBoolean:
@@ -179,18 +168,7 @@ TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error&
             break;
 
         case EPrimitiveDataType::eUTF8String:
-            {
-                // TODO: this needs to decode LEB128
-                uint8_t size;
-                reader.read((char*)&size, 1, error);
-                if (!error)
-                {
-                    std::string data;
-                    data.resize(size);
-                    reader.read(&data[0], size, error);
-                    result.setUTF8String(data);
-                }
-            }
+            result.setUTF8String(readString(reader, error));
             break;
         }
     }
@@ -205,15 +183,7 @@ void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& v
         switch (value.type().primitiveType())
         {
         case EPrimitiveDataType::eBinary:
-            {
-                char buffer[20];
-                size_t n = Utilities::encodeLEB128(value.asBinary().size(), buffer);
-                writer.write(buffer, n, error);
-                if (!error)
-                {
-                    writer.write(value.asUTF8String().c_str(), value.asBinary().size(), error);
-                }
-            }
+            writeString(writer, value.asBinary(), error);
             break;
 
         case EPrimitiveDataType::eBoolean:
@@ -228,15 +198,7 @@ void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& v
             break;
 
         case EPrimitiveDataType::eUTF8String:
-            {
-                char buffer[20];
-                size_t n = Utilities::encodeLEB128(value.asUTF8String().size(), buffer);
-                writer.write(buffer, n, error);
-                if (!error)
-                {
-                    writer.write(value.asUTF8String().c_str(), value.asUTF8String().size(), error);
-                }
-            }
+            writeString(writer, value.asUTF8String(), error);
             break;
         }
     }
