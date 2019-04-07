@@ -182,6 +182,21 @@ TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error&
     {
         switch (type.primitiveType())
         {
+        case EPrimitiveDataType::eBinary:
+            {
+                // TODO: this needs to decode LEB128
+                uint8_t size;
+                reader.read((char*)&size, 1, error);
+                if (!error)
+                {
+                    std::string data;
+                    data.resize(size);
+                    reader.read(&data[0], size, error);
+                    result.setBinary(data);
+                }
+            }
+            break;
+
         case EPrimitiveDataType::eBoolean:
             char data;
             reader.read(&data, 1, error);

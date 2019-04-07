@@ -285,6 +285,27 @@ void RecordTests::ReadPersistentNodeIDTest1(Test& test)
 
 void RecordTests::ReadInlineValueBinaryTest1(Test& test)
 {
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+        / "RecordTests_ReadInlineValueBinaryTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    record.read(reader, error);
+
+    ISHTF_ABORT_IF((bool)error);
+    ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eInlineValue);
+    ISHTF_FAIL_UNLESS(record.asValue() == DiplodocusDB::TreeDBValue::Binary("binary"));
+    ISHTF_PASS();
 }
 
 void RecordTests::ReadInlineValueBooleanTest1(Test& test)
