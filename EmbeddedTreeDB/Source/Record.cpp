@@ -214,6 +214,18 @@ void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& v
     {
         switch (value.type().primitiveType())
         {
+        case EPrimitiveDataType::eBinary:
+            {
+                char buffer[20];
+                size_t n = Utilities::encodeLEB128(value.asBinary().size(), buffer);
+                writer.write(buffer, n, error);
+                if (!error)
+                {
+                    writer.write(value.asUTF8String().c_str(), value.asBinary().size(), error);
+                }
+            }
+            break;
+
         case EPrimitiveDataType::eBoolean:
             if (value.asBoolean())
             {

@@ -68,6 +68,7 @@ public:
     int32_t asInt32() const;
     int64_t asInt64() const;
     const std::string& asUTF8String() const;
+    const std::string& asBinary() const;
 
     bool operator ==(const TreeDBValue& other) const;
     bool operator !=(const TreeDBValue& other) const;

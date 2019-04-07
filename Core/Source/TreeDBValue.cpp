@@ -114,6 +114,11 @@ const std::string& TreeDBValue::asUTF8String() const
     return boost::get<std::string>(m_data);
 }
 
+const std::string& TreeDBValue::asBinary() const
+{
+    return boost::get<std::string>(m_data);
+}
+
 bool TreeDBValue::operator ==(const TreeDBValue& other) const
 {
     return ((m_type == other.m_type) && (m_data == other.m_data));
