@@ -133,6 +133,8 @@ private:
     static void writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& value, Ishiko::Error& error);
     static DataType readDataType(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error);
+    static bool readBoolean(PageRepositoryReader& reader, Ishiko::Error& error);
+    static void writeBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error& error);
     static std::string readString(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error);
 

@@ -162,9 +162,7 @@ TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error&
             break;
 
         case EPrimitiveDataType::eBoolean:
-            char data;
-            reader.read(&data, 1, error);
-            result.setBoolean(data);
+            result.setBoolean(readBoolean(reader, error));
             break;
 
         case EPrimitiveDataType::eUTF8String:
@@ -187,14 +185,7 @@ void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& v
             break;
 
         case EPrimitiveDataType::eBoolean:
-            if (value.asBoolean())
-            {
-                writer.write("\x1", 1, error);
-            }
-            else
-            {
-                writer.write("\x0", 1, error);
-            }
+            writeBoolean(writer, value.asBoolean(), error);
             break;
 
         case EPrimitiveDataType::eUTF8String:
@@ -222,6 +213,25 @@ void Record::writeDataType(PageRepositoryWriter& writer, const DataType& dataTyp
     uint8_t typeModifier = (uint8_t)dataType.modifier();
     uint8_t type = ((primitiveType & 0x3F) | (typeModifier << 6));
     writer.write((char*)&type, 1, error);
+}
+
+bool Record::readBoolean(PageRepositoryReader& reader, Ishiko::Error& error)
+{
+    char data;
+    reader.read(&data, 1, error);
+    return data;
+}
+
+void Record::writeBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error& error)
+{
+    if (data)
+    {
+        writer.write("\x1", 1, error);
+    }
+    else
+    {
+        writer.write("\x0", 1, error);
+    }
 }
 
 std::string Record::readString(PageRepositoryReader& reader, Ishiko::Error& error)
