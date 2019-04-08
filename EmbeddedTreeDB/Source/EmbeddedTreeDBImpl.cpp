@@ -81,16 +81,7 @@ std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& node, Ishiko:
 
 TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
 {
-    /*
-    std::shared_ptr<EmbeddedTreeDBImpl> db = m_db.lock();
-    if (db)
-    {
-        return db->getNode(key, error);
-    }*/
-
-    // TODO : error
-    TreeDBNode result;
-    return result;
+    return getNode(name, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::previousSibling(TreeDBNode& node, Ishiko::Error& error)
