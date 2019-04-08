@@ -52,7 +52,6 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
         ../../Source/MasterFile.h
         ../../Source/MasterFileMetadata.h
         ../../Source/Record.h
-        ../../Source/ChildrenRecordData.h
         ../../Source/RecordMarker.h
         ../../Source/Utilities.h
     }
@@ -71,7 +70,6 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
         ../../Source/MasterFileMetadata.cpp
         ../../Source/MasterFile.cpp
         ../../Source/Record.cpp
-        ../../Source/ChildrenRecordData.cpp
         ../../Source/RecordMarker.cpp
         ../../Source/Utilities.cpp
     }
