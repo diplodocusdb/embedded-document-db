@@ -63,7 +63,7 @@ void EmbeddedTreeDBTests::CreationTest1(Test& test)
 
 void EmbeddedTreeDBTests::CreateTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_CreateTest1.dpdb");
 
     Ishiko::Error error(0);
 
@@ -75,7 +75,7 @@ void EmbeddedTreeDBTests::CreateTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBCreateTest1.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_CreateTest1.dpdb");
 
     ISHTF_PASS();
 }
