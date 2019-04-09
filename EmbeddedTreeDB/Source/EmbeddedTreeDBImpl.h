@@ -85,9 +85,8 @@ public:
     TreeDBNode getNode(const std::string& name, Ishiko::Error& error);
     TreeDBNode insertNode(const NodeID& parentNodeID, const std::string& name, const RecordMarker& marker);
     TreeDBNode appendNode(const NodeID& parentNodeID, const std::string& name);
-    bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
-    void commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
-
+    //bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
+    
 private:
     MasterFile m_masterFile;
     UncommittedNodes m_uncommittedNodes;
