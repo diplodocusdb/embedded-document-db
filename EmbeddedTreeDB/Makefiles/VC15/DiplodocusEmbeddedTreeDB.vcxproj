@@ -156,6 +156,7 @@
     <ClCompile Include="..\..\Source\EmbeddedTreeDBTransactionImpl.cpp" />
     <ClCompile Include="..\..\Source\NodeID.cpp" />
     <ClCompile Include="..\..\Source\NodeIDAllocator.cpp" />
+    <ClCompile Include="..\..\Source\SiblingNodesRecordGroup.cpp" />
     <ClCompile Include="..\..\Source\UncommittedNodes.cpp" />
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="..\..\Source\EmbeddedTreeDBTransactionImpl.h" />
     <ClInclude Include="..\..\Source\NodeID.h" />
     <ClInclude Include="..\..\Source\NodeIDAllocator.h" />
+    <ClInclude Include="..\..\Source\SiblingNodesRecordGroup.h" />
     <ClInclude Include="..\..\Source\UncommittedNodes.h" />
     <ClInclude Include="..\..\Source\MasterFile.h" />
     <ClInclude Include="..\..\Source\MasterFileMetadata.h" />
