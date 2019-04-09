@@ -24,7 +24,6 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
 #include "MasterFile.h"
-#include "KeyCache.h"
 #include "UncommittedNodes.h"
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDB.h"
@@ -91,7 +90,6 @@ public:
 
 private:
     MasterFile m_masterFile;
-    KeyCache m_keyCache;
     UncommittedNodes m_uncommittedNodes;
     TreeDBNode m_root;
 };
