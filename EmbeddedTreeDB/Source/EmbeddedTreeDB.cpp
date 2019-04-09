@@ -69,7 +69,7 @@ std::vector<TreeDBNode> EmbeddedTreeDB::childNodes(TreeDBNode& parent, Ishiko::E
 
 TreeDBNode EmbeddedTreeDB::child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    return m_impl->child(node, name, error);
+    return m_impl->child(parent, name, error);
 }
 
 TreeDBNode EmbeddedTreeDB::previousSibling(TreeDBNode& node, Ishiko::Error& error)

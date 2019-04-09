@@ -83,10 +83,10 @@ TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name
 {
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
 
-
+    // TODO : this doesn't work
     std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(0), name,
         PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
-    bool found = m_masterFile.findSiblingNodesRecordGroup(name, *temp, error);
+    bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), *temp, error);
     return TreeDBNode(temp);
 }
 
