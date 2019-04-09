@@ -26,9 +26,6 @@
     <ClInclude Include="..\..\Source\RecordTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\KeyCacheTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\MasterFileTests\MasterFileTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -47,9 +44,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\RecordTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\KeyCacheTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\MasterFileTests\MasterFileTests.cpp">
