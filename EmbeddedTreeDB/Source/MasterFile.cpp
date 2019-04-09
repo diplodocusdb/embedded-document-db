@@ -112,9 +112,8 @@ RecordMarker MasterFile::dataEndPosition() const
     return RecordMarker(PageRepositoryPosition(m_dataEndPage->index(), m_dataEndOffset));
 }
 
-bool MasterFile::findNode(const TreeDBKey& key,
-                          EmbeddedTreeDBNodeImpl& node,
-                          Ishiko::Error& error)
+bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, EmbeddedTreeDBNodeImpl& node,
+    Ishiko::Error& error)
 {
     bool result = false;
 
@@ -150,7 +149,7 @@ bool MasterFile::findNode(const TreeDBKey& key,
     return result;
 }
 
-void MasterFile::addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error)
+void MasterFile::addSiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error)
 {
     PageRepositoryWriter writer = m_repository.insert(node.marker().position(), error);
     if (error)
@@ -256,10 +255,6 @@ void MasterFile::createRootNode(PageRepositoryWriter& writer, Ishiko::Error& err
     {
         return;
     }
-}
-
-void MasterFile::findChildren()
-{
 }
 
 }

@@ -242,7 +242,7 @@ TreeDBNode EmbeddedTreeDBImpl::getNode(const std::string& name, Ishiko::Error& e
 {
     std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(0), name,
         PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
-    bool found = m_masterFile.findNode(name, *temp, error);
+    bool found = m_masterFile.findSiblingNodesRecordGroup(name, *temp, error);
     return TreeDBNode(temp);
 }
 
@@ -271,7 +271,7 @@ size_t EmbeddedTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error
 
 void EmbeddedTreeDBImpl::commitNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error)
 {
-    m_masterFile.addNode(node, error);
+    m_masterFile.addSiblingNodesRecordGroup(node, error);
 }
 
 }

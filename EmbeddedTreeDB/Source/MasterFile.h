@@ -107,13 +107,12 @@ public:
 
     RecordMarker rootNodePosition() const;
     RecordMarker dataEndPosition() const;
-    bool findNode(const TreeDBKey& key, EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
-    void addNode(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
+    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
+    void addSiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
 
 private:
     static void createRootNode(PageRepositoryWriter& writer, Ishiko::Error& error);
-    void findChildren();
 
 private:
     PageFileRepository m_repository;
