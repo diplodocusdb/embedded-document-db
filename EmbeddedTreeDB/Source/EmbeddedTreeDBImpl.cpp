@@ -72,16 +72,22 @@ TreeDBNode EmbeddedTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
     return result;
 }
 
-std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& node, Ishiko::Error& error)
+std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& parent, Ishiko::Error& error)
 {
     // TODO
     std::vector<TreeDBNode> result;
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    return getNode(name, error);
+    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
+
+
+    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(0), name,
+        PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
+    bool found = m_masterFile.findSiblingNodesRecordGroup(name, *temp, error);
+    return TreeDBNode(temp);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::previousSibling(TreeDBNode& node, Ishiko::Error& error)
@@ -247,14 +253,6 @@ size_t EmbeddedTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error
 {
     // TODO
     return 0;
-}
-
-TreeDBNode EmbeddedTreeDBImpl::getNode(const std::string& name, Ishiko::Error& error)
-{
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(0), name,
-        PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
-    bool found = m_masterFile.findSiblingNodesRecordGroup(name, *temp, error);
-    return TreeDBNode(temp);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::insertNode(const NodeID& parentNodeID, const std::string& name,

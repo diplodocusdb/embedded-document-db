@@ -60,14 +60,14 @@ TreeDBNode XMLTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)
     return m_impl->parent(node, error);
 }
 
-std::vector<TreeDBNode> XMLTreeDB::childNodes(TreeDBNode& node, Ishiko::Error& error)
+std::vector<TreeDBNode> XMLTreeDB::childNodes(TreeDBNode& parent, Ishiko::Error& error)
 {
-    return m_impl->childNodes(node, error);
+    return m_impl->childNodes(parent, error);
 }
 
-TreeDBNode XMLTreeDB::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+TreeDBNode XMLTreeDB::child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    return m_impl->child(node, name, error);
+    return m_impl->child(parent, name, error);
 }
 
 TreeDBNode XMLTreeDB::previousSibling(TreeDBNode& node, Ishiko::Error& error)

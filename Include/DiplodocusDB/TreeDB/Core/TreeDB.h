@@ -52,8 +52,8 @@ public:
     virtual TreeDBNode& root() = 0;
 
     virtual TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) = 0;
-    virtual std::vector<TreeDBNode> childNodes(TreeDBNode& node, Ishiko::Error& error) = 0;
-    virtual TreeDBNode child(TreeDBNode& node, const std::string& name, Ishiko::Error& error) = 0;
+    virtual std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error) = 0;
+    virtual TreeDBNode child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
     virtual TreeDBNode previousSibling(TreeDBNode& node, Ishiko::Error& error) = 0;
     virtual TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error) = 0;
     virtual TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error) = 0;

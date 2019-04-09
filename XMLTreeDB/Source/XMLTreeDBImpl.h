@@ -42,8 +42,8 @@ public:
     TreeDBNode& root();
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error);
-    std::vector<TreeDBNode> childNodes(TreeDBNode& node, Ishiko::Error& error);
-    TreeDBNode child(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
+    std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error);
+    TreeDBNode child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     TreeDBNode previousSibling(TreeDBNode& node, Ishiko::Error& error);
     TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
     TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error);

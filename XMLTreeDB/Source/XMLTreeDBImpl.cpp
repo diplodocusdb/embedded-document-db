@@ -65,16 +65,16 @@ TreeDBNode XMLTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
     return nodeImpl.parent(error);
 }
 
-std::vector<TreeDBNode> XMLTreeDBImpl::childNodes(TreeDBNode& node, Ishiko::Error& error)
+std::vector<TreeDBNode> XMLTreeDBImpl::childNodes(TreeDBNode& parent, Ishiko::Error& error)
 {
-    XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
-    return nodeImpl.childNodes(error);
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
+    return parentNodeImpl.childNodes(error);
 }
 
-TreeDBNode XMLTreeDBImpl::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+TreeDBNode XMLTreeDBImpl::child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
-    return nodeImpl.child(name, error);
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
+    return parentNodeImpl.child(name, error);
 }
 
 TreeDBNode XMLTreeDBImpl::previousSibling(TreeDBNode& node, Ishiko::Error& error)

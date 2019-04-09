@@ -47,8 +47,8 @@ public:
     TreeDBNode& root() override;
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) override;
-    std::vector<TreeDBNode> childNodes(TreeDBNode& node, Ishiko::Error& error) override;
-    TreeDBNode child(TreeDBNode& node, const std::string& name, Ishiko::Error& error) override;
+    std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error) override;
+    TreeDBNode child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
     TreeDBNode previousSibling(TreeDBNode& node, Ishiko::Error& error) override;
     TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error) override;
     TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error) override;

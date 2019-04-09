@@ -46,8 +46,8 @@ public:
     TreeDBNode& root();
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error);
-    std::vector<TreeDBNode> childNodes(TreeDBNode& node, Ishiko::Error& error);
-    TreeDBNode child(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
+    std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error);
+    TreeDBNode child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     TreeDBNode previousSibling(TreeDBNode& node, Ishiko::Error& error);
     TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
     TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error);
@@ -82,10 +82,9 @@ public:
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
 
-    TreeDBNode getNode(const std::string& name, Ishiko::Error& error);
+private:
     TreeDBNode insertNode(const NodeID& parentNodeID, const std::string& name, const RecordMarker& marker);
     TreeDBNode appendNode(const NodeID& parentNodeID, const std::string& name);
-    //bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
     
 private:
     MasterFile m_masterFile;

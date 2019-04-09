@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018 Xavier Leclercq
+    Copyright (c) 2018-2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -62,12 +62,12 @@ TreeDBNode EmbeddedTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)
     return m_impl->parent(node, error);
 }
 
-std::vector<TreeDBNode> EmbeddedTreeDB::childNodes(TreeDBNode& node, Ishiko::Error& error)
+std::vector<TreeDBNode> EmbeddedTreeDB::childNodes(TreeDBNode& parent, Ishiko::Error& error)
 {
-    return m_impl->childNodes(node, error);
+    return m_impl->childNodes(parent, error);
 }
 
-TreeDBNode EmbeddedTreeDB::child(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDB::child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     return m_impl->child(node, name, error);
 }
