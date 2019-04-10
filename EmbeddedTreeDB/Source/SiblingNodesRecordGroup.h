@@ -39,6 +39,9 @@ public:
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
+    static void writeNode(PageRepositoryWriter& writer, const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
+
+private:
     std::vector<EmbeddedTreeDBNodeImpl> m_siblings;
 };
 

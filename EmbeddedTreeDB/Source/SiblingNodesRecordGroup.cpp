@@ -40,7 +40,22 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
         return;
     }
 
-    const EmbeddedTreeDBNodeImpl& node = m_siblings[0];
+    for (const EmbeddedTreeDBNodeImpl& node : m_siblings)
+    {
+        writeNode(writer, node, error);
+        if (error)
+        {
+            return;
+        }
+    }
+
+    Record nodeEndRecord(Record::ERecordType::eSiblingNodesEnd);
+    nodeEndRecord.write(writer, error);
+}
+
+void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const EmbeddedTreeDBNodeImpl& node,
+    Ishiko::Error& error)
+{
 
     if (node.isRoot())
     {
@@ -87,9 +102,6 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
             return;
         }
     }
-
-    Record nodeEndRecord(Record::ERecordType::eSiblingNodesEnd);
-    nodeEndRecord.write(writer, error);
 }
 
 }
