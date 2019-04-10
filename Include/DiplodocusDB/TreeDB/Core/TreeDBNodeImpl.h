@@ -44,10 +44,6 @@ public:
     virtual bool isRoot() const = 0;
 
 private:
-    TreeDBNodeImpl(const TreeDBNodeImpl& other) = delete;
-    TreeDBNodeImpl& operator =(const TreeDBNodeImpl& other) = delete;
-
-private:
     std::string m_name;
     TreeDBValue m_value;
 };
