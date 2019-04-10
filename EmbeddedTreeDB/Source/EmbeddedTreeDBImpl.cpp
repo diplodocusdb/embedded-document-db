@@ -40,8 +40,7 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Err
     m_masterFile.create(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(1), "/",
-            m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
+        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(1), "/"));
     }
 }
 
@@ -50,8 +49,7 @@ void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error
     m_masterFile.open(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(1), "/",
-            m_masterFile.rootNodePosition(), RecordMarker(PageRepositoryPosition(0, 0))));
+        m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(1), "/"));
     }
 }
 
@@ -84,9 +82,9 @@ TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
 
     // TODO : this doesn't work
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(0), name,
-        PageRepositoryPosition(0, 0), PageRepositoryPosition(0, 0));
-    bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), *temp, error);
+    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(0), name);
+    SiblingNodesRecordGroup siblingNodesRecordGroup;
+    bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
     return TreeDBNode(temp);
 }
 
@@ -147,7 +145,8 @@ void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Is
     // TODO : this can't be working, it re-adds the node, surely that creates duplicate nodes
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
     nodeImpl.value() = value;
-    m_masterFile.addSiblingNodesRecordGroup(nodeImpl, error);
+    SiblingNodesRecordGroup siblings(nodeImpl);
+    m_masterFile.addSiblingNodesRecordGroup(siblings, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
@@ -165,7 +164,8 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index,
     TreeDBNode result = appendNode(parentNodeImpl.parentNodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    m_masterFile.addSiblingNodesRecordGroup(nodeImpl, error);
+    SiblingNodesRecordGroup siblings(nodeImpl);
+    m_masterFile.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
 
@@ -182,11 +182,11 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = insertNode(parentNodeImpl.parentNodeID(), name,
-        static_cast<EmbeddedTreeDBNodeImpl&>(*nextChild.impl()).marker());
+    TreeDBNode result = insertNode(parentNodeImpl.parentNodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    m_masterFile.addSiblingNodesRecordGroup(nodeImpl, error);
+    SiblingNodesRecordGroup siblings(nodeImpl);
+    m_masterFile.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
 
@@ -203,11 +203,11 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNo
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = insertNode(parentNodeImpl.parentNodeID(), name,
-        static_cast<EmbeddedTreeDBNodeImpl&>(*previousChild.impl()).marker());
+    TreeDBNode result = insertNode(parentNodeImpl.parentNodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    m_masterFile.addSiblingNodesRecordGroup(nodeImpl, error);
+    SiblingNodesRecordGroup siblings(nodeImpl);
+    m_masterFile.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
 
@@ -225,7 +225,8 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
     TreeDBNode result = appendNode(parentNodeImpl.parentNodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    m_masterFile.addSiblingNodesRecordGroup(nodeImpl, error);
+    SiblingNodesRecordGroup siblings(nodeImpl);
+    m_masterFile.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
 
@@ -255,15 +256,14 @@ size_t EmbeddedTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error
     return 0;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertNode(const NodeID& parentNodeID, const std::string& name,
-    const RecordMarker& marker)
+TreeDBNode EmbeddedTreeDBImpl::insertNode(const NodeID& parentNodeID, const std::string& name)
 {
-    return m_uncommittedNodes.createNode(parentNodeID, name, marker);
+    return m_uncommittedNodes.createNode(parentNodeID, name);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::appendNode(const NodeID& parentNodeID, const std::string& name)
 {
-    return m_uncommittedNodes.createNode(parentNodeID, name, m_masterFile.dataEndPosition());
+    return m_uncommittedNodes.createNode(parentNodeID, name);
 }
 
 }

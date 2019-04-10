@@ -83,7 +83,7 @@ public:
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
 
 private:
-    TreeDBNode insertNode(const NodeID& parentNodeID, const std::string& name, const RecordMarker& marker);
+    TreeDBNode insertNode(const NodeID& parentNodeID, const std::string& name);
     TreeDBNode appendNode(const NodeID& parentNodeID, const std::string& name);
     
 private:
