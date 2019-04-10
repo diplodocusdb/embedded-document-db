@@ -36,7 +36,7 @@ public:
     UncommittedNodes();
     ~UncommittedNodes();
 
-    TreeDBNode createNode(const NodeID& parentNodeID, const std::string& name, const RecordMarker& marker);
+    TreeDBNode createNode(const NodeID& parentNodeID, const std::string& name);
 };
 
 }
