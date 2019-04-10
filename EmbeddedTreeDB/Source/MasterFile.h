@@ -24,7 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 
 #include "Record.h"
-#include "EmbeddedTreeDBNodeImpl.h"
+#include "SiblingNodesRecordGroup.h"
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
@@ -107,8 +107,9 @@ public:
 
     RecordMarker rootNodePosition() const;
     RecordMarker dataEndPosition() const;
-    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
-    void addSiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
+    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
+        Ishiko::Error& error);
+    void addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
 
 private:

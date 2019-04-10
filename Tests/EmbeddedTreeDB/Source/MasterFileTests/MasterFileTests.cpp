@@ -102,8 +102,7 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest1(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
 
     // Create a node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1",
-        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
     masterFile.addSiblingNodesRecordGroup(newNode, error);
 
     ISHTF_FAIL_IF((bool)error);
@@ -128,14 +127,12 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest2(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
 
     // Create a node whose parent is the root (ID 1) and has a node ID as it will be the parent of another node
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(2), "key1",
-        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(2), "key1");
     masterFile.addSiblingNodesRecordGroup(newNode1, error);
 
     ISHTF_FAIL_IF((bool)error);
 
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(2), DiplodocusDB::NodeID(0), "key1_1",
-        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(2), DiplodocusDB::NodeID(0), "key1_1");
     masterFile.addSiblingNodesRecordGroup(newNode2, error);
 
     ISHTF_FAIL_IF((bool)error);
@@ -160,15 +157,13 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest3(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
 
     // Create a node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1",
-        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
     masterFile.addSiblingNodesRecordGroup(newNode1, error);
 
     ISHTF_FAIL_IF((bool)error);
 
     // Create a second node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key2",
-        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key2");
     masterFile.addSiblingNodesRecordGroup(newNode2, error);
 
     ISHTF_FAIL_IF((bool)error);
@@ -197,8 +192,7 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest4(FileComparisonTest& test)
     {
         std::stringstream key;
         key << "key" << i;
-        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str(),
-            masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
         masterFile.addSiblingNodesRecordGroup(newNode, error);
         if (error)
         {
@@ -209,8 +203,7 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest4(FileComparisonTest& test)
     ISHTF_FAIL_IF((bool)error);
 
     // The name length is exactly the number of characters needed to fill the page
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key34612345",
-        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key34612345");
     masterFile.addSiblingNodesRecordGroup(newNode, error);
 
     ISHTF_FAIL_IF((bool)error);
@@ -239,8 +232,7 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest5(FileComparisonTest& test)
     {
         std::stringstream key;
         key << "key" << i;
-        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str(),
-            masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
         masterFile.addSiblingNodesRecordGroup(newNode, error);
         if (error)
         {
@@ -251,8 +243,7 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest5(FileComparisonTest& test)
     ISHTF_FAIL_IF((bool)error);
 
     // The name length is exactly the number of characters needed to fill the page plus one byte
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key346123456",
-        masterFile.dataEndPosition(), DiplodocusDB::RecordMarker(DiplodocusDB::PageRepositoryPosition(0, 0)));
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key346123456");
     masterFile.addSiblingNodesRecordGroup(newNode, error);
 
     ISHTF_FAIL_IF((bool)error);
@@ -276,5 +267,9 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest1(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    bool found = masterFile.findSiblingNodesRecordGroup();
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = masterFile.findSiblingNodesRecordGroup(1, siblingsNodesRecordGroup, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(found);
 }

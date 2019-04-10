@@ -112,7 +112,7 @@ RecordMarker MasterFile::dataEndPosition() const
     return RecordMarker(PageRepositoryPosition(m_dataEndPage->index(), m_dataEndOffset));
 }
 
-bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, EmbeddedTreeDBNodeImpl& node,
+bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
     Ishiko::Error& error)
 {
     bool result = false;
@@ -149,74 +149,20 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Embedde
     return result;
 }
 
-void MasterFile::addSiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error)
+void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
 {
-    PageRepositoryWriter writer = m_repository.insert(node.marker().position(), error);
+    PageRepositoryWriter writer = m_repository.insert(dataEndPosition().position(), error);
     if (error)
     {
         return;
     }
 
-    Record nodeStartRecord(Record::ERecordType::eSiblingNodesStart);
-    nodeStartRecord.write(writer, error);
+    siblingNodes.write(writer, error);
     if (error)
     {
         return;
     }
-
-    if (node.isRoot())
-    {
-        Record nameRecord(node.name());
-        nameRecord.write(writer, error);
-        if (error)
-        {
-            return;
-        }
-    }
-    else
-    {
-        Record parentRecord(Record::ERecordType::eParentNodeID, node.parentNodeID());
-        parentRecord.write(writer, error);
-        if (error)
-        {
-            return;
-        }
-
-        Record nameRecord(node.name());
-        nameRecord.write(writer, error);
-        if (error)
-        {
-            return;
-        }
-
-        if (!node.nodeID().isNull())
-        {
-            Record idRecord(Record::ERecordType::eNodeID, node.nodeID());
-            idRecord.write(writer, error);
-            if (error)
-            {
-                return;
-            }
-        }
-    }
-
-    if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
-    {
-        Record record(Record::ERecordType::eInlineValue, node.value());
-        record.write(writer, error);
-        if (error)
-        {
-            return;
-        }
-    }
-
-    Record nodeEndRecord(Record::ERecordType::eSiblingNodesEnd);
-    nodeEndRecord.write(writer, error);
-    if (error)
-    {
-        return;
-    }
-
+    
     writer.save(error);
     if (error)
     {
