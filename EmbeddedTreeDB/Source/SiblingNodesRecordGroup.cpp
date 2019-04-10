@@ -21,3 +21,75 @@
 */
 
 #include "SiblingNodesRecordGroup.h"
+#include "Record.h"
+
+namespace DiplodocusDB
+{
+
+SiblingNodesRecordGroup::SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node)
+{
+    m_siblings.emplace_back(node);
+}
+
+void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
+{
+    Record nodeStartRecord(Record::ERecordType::eSiblingNodesStart);
+    nodeStartRecord.write(writer, error);
+    if (error)
+    {
+        return;
+    }
+
+    const EmbeddedTreeDBNodeImpl& node = m_siblings[0];
+
+    if (node.isRoot())
+    {
+        Record nameRecord(node.name());
+        nameRecord.write(writer, error);
+        if (error)
+        {
+            return;
+        }
+    }
+    else
+    {
+        Record parentRecord(Record::ERecordType::eParentNodeID, node.parentNodeID());
+        parentRecord.write(writer, error);
+        if (error)
+        {
+            return;
+        }
+
+        Record nameRecord(node.name());
+        nameRecord.write(writer, error);
+        if (error)
+        {
+            return;
+        }
+
+        if (!node.nodeID().isNull())
+        {
+            Record idRecord(Record::ERecordType::eNodeID, node.nodeID());
+            idRecord.write(writer, error);
+            if (error)
+            {
+                return;
+            }
+        }
+    }
+
+    if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
+    {
+        Record record(Record::ERecordType::eInlineValue, node.value());
+        record.write(writer, error);
+        if (error)
+        {
+            return;
+        }
+    }
+
+    Record nodeEndRecord(Record::ERecordType::eSiblingNodesEnd);
+    nodeEndRecord.write(writer, error);
+}
+
+}
