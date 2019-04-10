@@ -21,3 +21,22 @@
 */
 
 #include "RecordMarker.h"
+
+namespace DiplodocusDB
+{
+
+RecordMarker::RecordMarker(const PageRepositoryPosition& pos)
+    : m_position(pos)
+{
+}
+
+RecordMarker::~RecordMarker()
+{
+}
+
+const PageRepositoryPosition& RecordMarker::position() const
+{
+    return m_position;
+}
+
+}

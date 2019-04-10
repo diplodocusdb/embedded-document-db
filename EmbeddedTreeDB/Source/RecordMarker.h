@@ -23,4 +23,23 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDMARKER_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDMARKER_H_
 
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryPosition.h"
+
+namespace DiplodocusDB
+{
+
+class RecordMarker
+{
+public:
+    RecordMarker(const PageRepositoryPosition& pos);
+    ~RecordMarker();
+
+    const PageRepositoryPosition& position() const;
+
+private:
+    PageRepositoryPosition m_position;
+};
+
+}
+
 #endif
