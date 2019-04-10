@@ -22,6 +22,7 @@
 
 #include "SiblingNodesRecordGroupTests.h"
 #include "SiblingNodesRecordGroup.h"
+#include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 
 using namespace Ishiko::Tests;
 
@@ -30,11 +31,125 @@ SiblingNodesRecordGroupTests::SiblingNodesRecordGroupTests(const TestNumber& num
     : TestSequence(number, "SiblingNodesRecordGroup tests", environment)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<FileComparisonTest>("write test 1", WriteTest1);
+    append<FileComparisonTest>("write test 2", WriteTest2);
+    append<FileComparisonTest>("write test 3", WriteTest3);
 }
 
 void SiblingNodesRecordGroupTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup;
+
+    ISHTF_PASS();
+}
+
+void SiblingNodesRecordGroupTests::WriteTest1(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "SiblingNodesRecordGroupTests_WriteTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup;
+    siblingNodesRecordGroup.write(writer, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    page->save(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "SiblingNodesRecordGroupTests_WriteTest1.dpdb");
+
+    ISHTF_PASS();
+}
+
+void SiblingNodesRecordGroupTests::WriteTest2(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "SiblingNodesRecordGroupTests_WriteTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    // Create a root node
+    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(0, 1, "/");
+    DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl);
+    siblingNodesRecordGroup.write(writer, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    page->save(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "SiblingNodesRecordGroupTests_WriteTest2.dpdb");
+
+    ISHTF_PASS();
+}
+
+void SiblingNodesRecordGroupTests::WriteTest3(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "SiblingNodesRecordGroupTests_WriteTest3.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(1, 0, "name1");
+    DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl);
+    siblingNodesRecordGroup.write(writer, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    page->save(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "SiblingNodesRecordGroupTests_WriteTest3.dpdb");
 
     ISHTF_PASS();
 }
