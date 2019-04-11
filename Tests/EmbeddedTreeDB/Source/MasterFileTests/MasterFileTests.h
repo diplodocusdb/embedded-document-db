@@ -34,12 +34,14 @@ private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
     static void CreateTest1(Ishiko::Tests::FileComparisonTest& test);
     static void OpenTest1(Ishiko::Tests::Test& test);
+    static void OpenTest2(Ishiko::Tests::Test& test);
     static void AddSiblingNodesRecordGroupTest1(Ishiko::Tests::FileComparisonTest& test);
     static void AddSiblingNodesRecordGroupTest2(Ishiko::Tests::FileComparisonTest& test);
     static void AddSiblingNodesRecordGroupTest3(Ishiko::Tests::FileComparisonTest& test);
     static void AddSiblingNodesRecordGroupTest4(Ishiko::Tests::FileComparisonTest& test);
     static void AddSiblingNodesRecordGroupTest5(Ishiko::Tests::FileComparisonTest& test);
     static void FindSiblingNodesRecordGroupTest1(Ishiko::Tests::Test& test);
+    static void FindSiblingNodesRecordGroupTest2(Ishiko::Tests::Test& test);
 };
 
 #endif

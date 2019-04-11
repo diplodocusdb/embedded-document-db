@@ -28,7 +28,40 @@ namespace DiplodocusDB
 
 SiblingNodesRecordGroup::SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node)
 {
+    m_parentNodeID = node.parentNodeID();
     m_siblings.emplace_back(node);
+}
+
+const NodeID& SiblingNodesRecordGroup::parentNodeID() const
+{
+    return m_parentNodeID;
+}
+
+void SiblingNodesRecordGroup::readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error)
+{
+    Record nextRecord(Record::ERecordType::eInvalid);
+    while (true)
+    {
+        nextRecord.read(reader, error);
+        if (error)
+        {
+            return;
+        }
+        if (nextRecord.type() == Record::ERecordType::eSiblingNodesEnd)
+        {
+            break;
+        }
+        else
+        {
+            if (nextRecord.type() == Record::ERecordType::eParentNodeID)
+            {
+                m_parentNodeID = nextRecord.asNodeID();
+            }
+            else if (nextRecord.type() == Record::ERecordType::eNodeName)
+            {
+            }
+        }
+    }
 }
 
 void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error& error) const

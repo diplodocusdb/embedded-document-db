@@ -120,29 +120,32 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
     PageRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
     while (!result && !error)
     {
-        PageRepositoryPosition currentNodeStartPosition = reader.currentPosition();
-        Record record(Record::ERecordType::eInvalid);
-        record.read(reader, error);
-        if (!error && (record.type() == Record::ERecordType::eNodeName))
+        Record nextRecord(Record::ERecordType::eInvalid);
+        nextRecord.read(reader, error);
+        if (error)
         {
-            /* TODO
-            if (static_cast<KeyRecordData*>(record.data())->key() == key.value())
+            break;
+        }
+        if (nextRecord.type() == Record::ERecordType::eSiblingNodesStart)
+        {
+            SiblingNodesRecordGroup siblingNodesRecordGroup;
+            siblingNodesRecordGroup.readWithoutType(reader, error);
+            if (siblingNodesRecordGroup.parentNodeID() == parentNodeID)
             {
-                Record valueRecord(Record::ERecordType::eInlineValue);
-                valueRecord.read(reader, error);
-                if (!error)
-                {
-                    if (valueRecord.type() == Record::ERecordType::eInlineValue)
-                    {
-                        const std::string& value = static_cast<ValueRecordData*>(valueRecord.data())->buffer();
-                        node.value().setUTF8String(value);
-                    }
-
-                    node.setMarker(RecordMarker(currentNodeStartPosition));
-                    result = true;
-                }
+                siblingNodes = siblingNodesRecordGroup;
+                result = true;
+                break;
             }
-            */
+        }
+        else if (nextRecord.type() == Record::ERecordType::eDataEnd)
+        {
+            break;
+        }
+        else
+        {
+            // TODO : more precise error
+            error.fail(-1, "TODO", __FILE__, __LINE__);
+            break;
         }
     }
 
@@ -175,6 +178,7 @@ void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& sibli
 
 bool MasterFile::removeNode(const TreeDBKey& key, Ishiko::Error& error)
 {
+    // TODO
     error.fail(-1);
     return false;
 }

@@ -32,12 +32,14 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
     append<FileComparisonTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
+    append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 1", AddSiblingNodesRecordGroupTest1);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 2", AddSiblingNodesRecordGroupTest2);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 3", AddSiblingNodesRecordGroupTest3);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 4", AddSiblingNodesRecordGroupTest4);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 5", AddSiblingNodesRecordGroupTest5);
-    append<HeapAllocationErrorsTest>("findNode test 1", FindSiblingNodesRecordGroupTest1);
+    append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
+    append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
 }
 
 void MasterFileTests::ConstructionTest1(Test& test)
@@ -49,7 +51,8 @@ void MasterFileTests::ConstructionTest1(Test& test)
 
 void MasterFileTests::CreateTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_CreateTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_CreateTest1.dpdb");
 
     Ishiko::Error error(0);
 
@@ -90,9 +93,34 @@ void MasterFileTests::OpenTest1(Test& test)
     ISHTF_PASS();
 }
 
+void MasterFileTests::OpenTest2(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::RecordMarker rootMarker = masterFile.rootNodePosition();
+
+    ISHTF_FAIL_UNLESS(rootMarker.position().page() == 0);
+    ISHTF_FAIL_UNLESS(rootMarker.position().offset() == 15);
+
+    DiplodocusDB::RecordMarker dataEndMarker = masterFile.dataEndPosition();
+
+    ISHTF_FAIL_UNLESS(dataEndMarker.position().page() == 0);
+    ISHTF_FAIL_UNLESS(dataEndMarker.position().offset() == 30);
+
+    ISHTF_PASS();
+}
+
 void MasterFileTests::AddSiblingNodesRecordGroupTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest1.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest1.dpdb");
 
     Ishiko::Error error(0);
 
@@ -110,14 +138,16 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest1(FileComparisonTest& test)
     masterFile.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest1.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest1.dpdb");
 
     ISHTF_PASS();
 }
 
 void MasterFileTests::AddSiblingNodesRecordGroupTest2(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest2.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest2.dpdb");
 
     Ishiko::Error error(0);
 
@@ -140,14 +170,16 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest2(FileComparisonTest& test)
     masterFile.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest2.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest2.dpdb");
 
     ISHTF_PASS();
 }
 
 void MasterFileTests::AddSiblingNodesRecordGroupTest3(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest3.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest3.dpdb");
 
     Ishiko::Error error(0);
 
@@ -171,7 +203,8 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest3(FileComparisonTest& test)
     masterFile.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest3.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest3.dpdb");
 
     ISHTF_PASS();
 }
@@ -179,7 +212,8 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest3(FileComparisonTest& test)
 /// This test fills a page up to the last byte
 void MasterFileTests::AddSiblingNodesRecordGroupTest4(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest4.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest4.dpdb");
 
     Ishiko::Error error(0);
 
@@ -211,7 +245,8 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest4(FileComparisonTest& test)
     masterFile.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest4.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest4.dpdb");
 
     ISHTF_PASS();
 }
@@ -219,7 +254,8 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest4(FileComparisonTest& test)
 /// This test uses just one byte more than can be stored in a page
 void MasterFileTests::AddSiblingNodesRecordGroupTest5(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest5.dpdb");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest5.dpdb");
 
     Ishiko::Error error(0);
 
@@ -251,7 +287,8 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest5(FileComparisonTest& test)
     masterFile.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_AddSiblingNodesRecordGroupTest5.dpdb");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest5.dpdb");
 
     ISHTF_PASS();
 }
@@ -267,9 +304,31 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest1(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
 
+    // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
+    // The record group can be found by passing 0 as the parent Node ID.
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = masterFile.findSiblingNodesRecordGroup(0, siblingsNodesRecordGroup, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(found);
+    ISHTF_PASS();
+}
+
+void MasterFileTests::FindSiblingNodesRecordGroupTest2(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
     DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
     bool found = masterFile.findSiblingNodesRecordGroup(1, siblingsNodesRecordGroup, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(found);
+    ISHTF_PASS();
 }

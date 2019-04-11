@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUP_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUP_H_
 
+#include "NodeID.h"
 #include "EmbeddedTreeDBNodeImpl.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include <vector>
@@ -36,12 +37,16 @@ public:
     SiblingNodesRecordGroup() = default;
     SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node);
 
+    const NodeID& parentNodeID() const;
+
+    void readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     static void writeNode(PageRepositoryWriter& writer, const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
 
 private:
+    NodeID m_parentNodeID;
     std::vector<EmbeddedTreeDBNodeImpl> m_siblings;
 };
 
