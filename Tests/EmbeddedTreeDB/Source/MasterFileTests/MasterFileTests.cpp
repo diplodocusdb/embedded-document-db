@@ -40,6 +40,7 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 5", AddSiblingNodesRecordGroupTest5);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
+    append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
 }
 
 void MasterFileTests::ConstructionTest1(Test& test)
@@ -334,5 +335,24 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest2(Test& test)
     ISHTF_FAIL_UNLESS(found);
     ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup.size() == 1);
     ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup[0].name() == "key1");
+    ISHTF_PASS();
+}
+
+void MasterFileTests::FindSiblingNodesRecordGroupTest3(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = masterFile.findSiblingNodesRecordGroup(3, siblingsNodesRecordGroup, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(!found);
     ISHTF_PASS();
 }
