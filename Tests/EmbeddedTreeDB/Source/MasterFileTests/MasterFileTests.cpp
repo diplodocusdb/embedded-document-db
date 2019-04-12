@@ -308,7 +308,7 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest1(Test& test)
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
     DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = masterFile.findSiblingNodesRecordGroup(0, siblingsNodesRecordGroup, error);
+    bool found = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(found);
@@ -329,7 +329,7 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest2(Test& test)
     ISHTF_ABORT_IF((bool)error);
 
     DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = masterFile.findSiblingNodesRecordGroup(1, siblingsNodesRecordGroup, error);
+    bool found = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(found);
@@ -350,7 +350,7 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest3(Test& test)
     ISHTF_ABORT_IF((bool)error);
 
     DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = masterFile.findSiblingNodesRecordGroup(3, siblingsNodesRecordGroup, error);
+    bool found = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(3), siblingsNodesRecordGroup, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(!found);

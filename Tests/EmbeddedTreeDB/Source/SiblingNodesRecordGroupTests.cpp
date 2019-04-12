@@ -100,7 +100,7 @@ void SiblingNodesRecordGroupTests::WriteTest2(FileComparisonTest& test)
     ISHTF_ABORT_IF((bool)error);
 
     // Create a root node
-    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(0, 1, "/");
+    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(DiplodocusDB::NodeID(0), DiplodocusDB::NodeID(1), "/");
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl);
     siblingNodesRecordGroup.write(writer, error);
 
@@ -137,7 +137,7 @@ void SiblingNodesRecordGroupTests::WriteTest3(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(1, 0, "name1");
+    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "name1");
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl);
     siblingNodesRecordGroup.write(writer, error);
 

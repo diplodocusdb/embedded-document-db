@@ -33,7 +33,7 @@ class NodeID
 {
 public:
     NodeID();
-    NodeID(size_t value);
+    explicit NodeID(size_t value);
 
     bool isNull() const;
 
