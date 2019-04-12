@@ -38,6 +38,8 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 3", AddSiblingNodesRecordGroupTest3);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 4", AddSiblingNodesRecordGroupTest4);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 5", AddSiblingNodesRecordGroupTest5);
+    append<FileComparisonTest>("addSiblingNodesRecordGroup test 6", AddSiblingNodesRecordGroupTest6);
+    append<FileComparisonTest>("addSiblingNodesRecordGroup test 7", AddSiblingNodesRecordGroupTest7);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
@@ -290,6 +292,76 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest5(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "MasterFileTests_AddSiblingNodesRecordGroupTest5.dpdb");
+
+    ISHTF_PASS();
+}
+
+void MasterFileTests::AddSiblingNodesRecordGroupTest6(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest6.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    for (size_t i = 0; i < 10000; ++i)
+    {
+        std::stringstream key;
+        key << "key" << i;
+        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
+        masterFile.addSiblingNodesRecordGroup(newNode, error);
+        if (error)
+        {
+            break;
+        }
+    }
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest6.dpdb");
+
+    ISHTF_PASS();
+}
+
+void MasterFileTests::AddSiblingNodesRecordGroupTest7(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest7.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    for (size_t i = 0; i < 100000; ++i)
+    {
+        std::stringstream key;
+        key << "key" << i;
+        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
+        masterFile.addSiblingNodesRecordGroup(newNode, error);
+        if (error)
+        {
+            break;
+        }
+    }
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest7.dpdb");
 
     ISHTF_PASS();
 }
