@@ -38,6 +38,9 @@ public:
     SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node);
 
     const NodeID& parentNodeID() const;
+    const EmbeddedTreeDBNodeImpl& operator[](size_t pos) const;
+    size_t size() const noexcept;
+
 
     void readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;

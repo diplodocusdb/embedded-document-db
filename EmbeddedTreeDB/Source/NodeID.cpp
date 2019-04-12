@@ -41,12 +41,12 @@ bool NodeID::isNull() const
     return (m_value == 0);
 }
 
-bool NodeID::operator ==(const NodeID& other) const
+bool NodeID::operator==(const NodeID& other) const
 {
     return (m_value == other.m_value);
 }
 
-bool NodeID::operator !=(const NodeID& other) const
+bool NodeID::operator!=(const NodeID& other) const
 {
     return (m_value != other.m_value);
 }

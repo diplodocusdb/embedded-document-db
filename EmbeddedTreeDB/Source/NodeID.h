@@ -37,8 +37,8 @@ public:
 
     bool isNull() const;
 
-    bool operator ==(const NodeID& other) const;
-    bool operator !=(const NodeID& other) const;
+    bool operator==(const NodeID& other) const;
+    bool operator!=(const NodeID& other) const;
 
     void read(PageRepositoryReader& reader, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;

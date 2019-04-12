@@ -311,6 +311,8 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest1(Test& test)
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(found);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup.size() == 1);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup[0].name() == "/");
     ISHTF_PASS();
 }
 
@@ -330,5 +332,7 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest2(Test& test)
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(found);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup.size() == 1);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup[0].name() == "key1");
     ISHTF_PASS();
 }
