@@ -40,6 +40,7 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 5", AddSiblingNodesRecordGroupTest5);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 6", AddSiblingNodesRecordGroupTest6);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 7", AddSiblingNodesRecordGroupTest7);
+    append<FileComparisonTest>("addSiblingNodesRecordGroup test 8", AddSiblingNodesRecordGroupTest8);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
@@ -362,6 +363,34 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest7(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "MasterFileTests_AddSiblingNodesRecordGroupTest7.dpdb");
+
+    ISHTF_PASS();
+}
+
+void MasterFileTests::AddSiblingNodesRecordGroupTest8(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    // Create a node whose parent is the root (ID 1)
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
+    newNode.value() = DiplodocusDB::TreeDBValue::UTF8String("value1");
+    masterFile.addSiblingNodesRecordGroup(newNode, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
 
     ISHTF_PASS();
 }
