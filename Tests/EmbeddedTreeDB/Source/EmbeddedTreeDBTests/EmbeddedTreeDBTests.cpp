@@ -122,7 +122,7 @@ void EmbeddedTreeDBTests::OpenTest2(Test& test)
 
 void EmbeddedTreeDBTests::OpenTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest3.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest3.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 
