@@ -79,13 +79,24 @@ std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& parent, Ishik
 
 TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result;
 
-    // TODO : this doesn't work
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> temp = std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(0), name);
+    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
     SiblingNodesRecordGroup siblingNodesRecordGroup;
     bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
-    return TreeDBNode(temp);
+    if (!error && found)
+    {
+        EmbeddedTreeDBNodeImpl node;
+        found = siblingNodesRecordGroup.find(name, node);
+        if (found)
+        {
+            // TODO : this doesn't work because we take a copy of the node so modifications will casuse
+            // inconsistencies
+            result = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(node));
+        }
+    }
+
+    return result;
 }
 
 TreeDBNode EmbeddedTreeDBImpl::previousSibling(TreeDBNode& node, Ishiko::Error& error)
