@@ -266,25 +266,22 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest5(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    for (size_t i = 0; i < 346; ++i)
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    for (size_t i = 0; i < 520; ++i)
     {
         std::stringstream key;
         key << "key" << i;
         DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
-        masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode), error);
-        if (error)
-        {
-            break;
-        }
+        siblingsNodesRecordGroup.push_back(newNode);
     }
 
     ISHTF_FAIL_IF((bool)error);
 
     // The name length is exactly the number of characters needed to fill the page plus one byte
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key346123456");
-    masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode), error);
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "k123");
+    siblingsNodesRecordGroup.push_back(newNode);
 
-    ISHTF_FAIL_IF((bool)error);
+    masterFile.addSiblingNodesRecordGroup(siblingsNodesRecordGroup, error);
 
     masterFile.close();
 
