@@ -304,17 +304,16 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest6(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
     for (size_t i = 0; i < 10000; ++i)
     {
         std::stringstream key;
         key << "key" << i;
         DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
-        masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode), error);
-        if (error)
-        {
-            break;
-        }
+        siblingsNodesRecordGroup.push_back(newNode);
     }
+
+    masterFile.addSiblingNodesRecordGroup(siblingsNodesRecordGroup, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -339,17 +338,16 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest7(FileComparisonTest& test)
 
     ISHTF_ABORT_IF((bool)error);
 
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
     for (size_t i = 0; i < 100000; ++i)
     {
         std::stringstream key;
         key << "key" << i;
         DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
-        masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode), error);
-        if (error)
-        {
-            break;
-        }
+        siblingsNodesRecordGroup.push_back(newNode);
     }
+
+    masterFile.addSiblingNodesRecordGroup(siblingsNodesRecordGroup, error);
 
     ISHTF_FAIL_IF((bool)error);
 
