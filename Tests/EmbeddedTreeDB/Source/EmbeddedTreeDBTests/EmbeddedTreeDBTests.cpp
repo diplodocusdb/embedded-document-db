@@ -146,7 +146,7 @@ void EmbeddedTreeDBTests::OpenTest3(Test& test)
 
 void EmbeddedTreeDBTests::OpenTest4(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest4.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest4.dpdb");
 
     Ishiko::Error error(0);
 

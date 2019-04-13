@@ -49,6 +49,10 @@ size_t SiblingNodesRecordGroup::size() const noexcept
 
 void SiblingNodesRecordGroup::push_back(const EmbeddedTreeDBNodeImpl& value)
 {
+    if (m_siblings.size() == 0)
+    {
+        m_parentNodeID = value.parentNodeID();
+    }
     m_siblings.push_back(value);
 }
 
@@ -108,6 +112,16 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
         return;
     }
 
+    if (!m_parentNodeID.isNull())
+    {
+        Record parentRecord(Record::ERecordType::eParentNodeID, m_parentNodeID);
+        parentRecord.write(writer, error);
+        if (error)
+        {
+            return;
+        }
+    }
+
     for (const EmbeddedTreeDBNodeImpl& node : m_siblings)
     {
         writeNode(writer, node, error);
@@ -124,7 +138,6 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
 void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const EmbeddedTreeDBNodeImpl& node,
     Ishiko::Error& error)
 {
-
     if (node.isRoot())
     {
         Record nameRecord(node.name());
@@ -136,13 +149,6 @@ void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const Embe
     }
     else
     {
-        Record parentRecord(Record::ERecordType::eParentNodeID, node.parentNodeID());
-        parentRecord.write(writer, error);
-        if (error)
-        {
-            return;
-        }
-
         Record nameRecord(node.name());
         nameRecord.write(writer, error);
         if (error)

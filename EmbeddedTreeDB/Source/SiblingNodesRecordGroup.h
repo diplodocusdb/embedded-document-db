@@ -35,7 +35,7 @@ class SiblingNodesRecordGroup
 {
 public:
     SiblingNodesRecordGroup() = default;
-    SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node);
+    explicit SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node);
 
     const NodeID& parentNodeID() const;
     const EmbeddedTreeDBNodeImpl& operator[](size_t pos) const;
