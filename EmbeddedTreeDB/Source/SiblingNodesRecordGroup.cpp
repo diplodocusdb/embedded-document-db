@@ -47,6 +47,26 @@ size_t SiblingNodesRecordGroup::size() const noexcept
     return m_siblings.size();
 }
 
+void SiblingNodesRecordGroup::push_back(const EmbeddedTreeDBNodeImpl& value)
+{
+    m_siblings.push_back(value);
+}
+
+bool SiblingNodesRecordGroup::find(const std::string& name, EmbeddedTreeDBNodeImpl& node)
+{
+    bool result = false;
+    for (EmbeddedTreeDBNodeImpl n : m_siblings)
+    {
+        if (n.name() == name)
+        {
+            node = n;
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
 void SiblingNodesRecordGroup::readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     Record nextRecord(Record::ERecordType::eInvalid);
@@ -70,6 +90,10 @@ void SiblingNodesRecordGroup::readWithoutType(PageRepositoryReader& reader, Ishi
             else if (nextRecord.type() == Record::ERecordType::eNodeName)
             {
                 m_siblings.emplace_back(m_parentNodeID, NodeID(0), nextRecord.asString());
+            }
+            else if (nextRecord.type() == Record::ERecordType::eInlineValue)
+            {
+                m_siblings.back().value() = nextRecord.asValue();
             }
         }
     }
