@@ -38,6 +38,7 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<HeapAllocationErrorsTest>("read (eParentNodeID) test 1", ReadParentNodeIDTest1);
     append<HeapAllocationErrorsTest>("read (eNodeName) test 1", ReadNodeNameTest1);
     append<HeapAllocationErrorsTest>("read (eNodeID) test 1", ReadNodeIDTest1);
+    append<HeapAllocationErrorsTest>("read (eNodeID) test 2", ReadNodeIDTest2);
     append<HeapAllocationErrorsTest>("read (ePersistentNodeID) test 1", ReadPersistentNodeIDTest1);
     append<HeapAllocationErrorsTest>("read (eInlineValue, eBinary) test 1", ReadInlineValueBinaryTest1);
     append<HeapAllocationErrorsTest>("read (eInlineValue, eBoolean) test 1", ReadInlineValueBooleanTest1);
@@ -256,6 +257,31 @@ void RecordTests::ReadNodeIDTest1(Test& test)
     ISHTF_ABORT_IF((bool)error);
     ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eNodeID);
     ISHTF_FAIL_UNLESS(record.asNodeID() == DiplodocusDB::NodeID(123));
+    ISHTF_PASS();
+}
+
+void RecordTests::ReadNodeIDTest2(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+        / "RecordTests_ReadNodeIDTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.open(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    record.read(reader, error);
+
+    ISHTF_ABORT_IF((bool)error);
+    ISHTF_ABORT_UNLESS(record.type() == DiplodocusDB::Record::ERecordType::eNodeID);
+    ISHTF_FAIL_UNLESS(record.asNodeID() == DiplodocusDB::NodeID(200));
     ISHTF_PASS();
 }
 

@@ -40,6 +40,7 @@ private:
     static void ReadParentNodeIDTest1(Ishiko::Tests::Test& test);
     static void ReadNodeNameTest1(Ishiko::Tests::Test& test);
     static void ReadNodeIDTest1(Ishiko::Tests::Test& test);
+    static void ReadNodeIDTest2(Ishiko::Tests::Test& test);
     static void ReadPersistentNodeIDTest1(Ishiko::Tests::Test& test);
     static void ReadInlineValueBinaryTest1(Ishiko::Tests::Test& test);
     static void ReadInlineValueBooleanTest1(Ishiko::Tests::Test& test);
