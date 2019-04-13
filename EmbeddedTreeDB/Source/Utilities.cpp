@@ -27,11 +27,29 @@ namespace DiplodocusDB
 
 size_t Utilities::encodeLEB128(size_t value, char* buffer)
 {
-    if (buffer)
+    size_t result = 0;
+    while (true)
     {
-        (*buffer) = (value & 0x7F);
+        if (buffer)
+        {
+            *buffer = (value & 0x7F);
+        }
+        ++result;
+        value >>= 7;
+        if (value == 0)
+        {
+            break;
+        }
+        else
+        {
+            if (buffer)
+            {
+                *buffer = (*buffer | 0x80);
+                ++buffer;
+            }
+        }
     }
-    return 1;
+    return result;
 }
 
 size_t Utilities::decodeLEB128(const char* buffer, size_t& value)

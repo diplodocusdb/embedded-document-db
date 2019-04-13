@@ -50,6 +50,7 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<FileComparisonTest>("write (eParentNodeID) test 1", WriteParentNodeIDTest1);
     append<FileComparisonTest>("write (eNodeName) test 1", WriteNodeNameTest1);
     append<FileComparisonTest>("write (eNodeID) test 1", WriteNodeIDTest1);
+    append<FileComparisonTest>("write (eNodeID) test 2", WriteNodeIDTest2);
     append<FileComparisonTest>("write (ePersistentNodeID) test 1", WritePersistentNodeIDTest1);
     append<FileComparisonTest>("write (eInlineValue, eBinary) test 1", WriteInlineValueBinaryTest1);
     append<FileComparisonTest>("write (eInlineValue, eBoolean) test 1", WriteInlineValueBooleanTest1);
@@ -642,6 +643,42 @@ void RecordTests::WriteNodeIDTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WriteNodeIDTest1.dpdb");
+
+    ISHTF_PASS();
+}
+
+void RecordTests::WriteNodeIDTest2(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "RecordTests_WriteNodeIDTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::PageFileRepository repository;
+    repository.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eNodeID, DiplodocusDB::NodeID(200));
+    record.write(writer, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    page->save(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "RecordTests_WriteNodeIDTest2.dpdb");
 
     ISHTF_PASS();
 }
