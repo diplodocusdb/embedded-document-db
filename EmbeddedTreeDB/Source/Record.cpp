@@ -21,7 +21,6 @@
 */
 
 #include "Record.h"
-#include "Utilities.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/Page.h"
 
 namespace DiplodocusDB
@@ -250,9 +249,7 @@ std::string Record::readString(PageRepositoryReader& reader, Ishiko::Error& erro
 
 void Record::writeString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error)
 {
-    char buffer[20];
-    size_t n = Utilities::encodeLEB128(data.size(), buffer);
-    writer.write(buffer, n, error);
+    writer.writeLEB128(data.size(), error);
     if (!error)
     {
         writer.write(data.c_str(), data.size(), error);

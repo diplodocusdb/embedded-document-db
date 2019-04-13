@@ -21,7 +21,6 @@
 */
 
 #include "MasterFileMetadata.h"
-#include "Utilities.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/Page.h"
 
 namespace DiplodocusDB
@@ -47,9 +46,7 @@ void MasterFileMetadata::read(PageRepositoryReader& reader, Ishiko::Error& error
 
 void MasterFileMetadata::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
-    char buffer[20];
-    size_t n = Utilities::encodeLEB128(12, buffer);
-    writer.write(buffer, n, error);
+    writer.writeLEB128(12, error);
     if (!error)
     {
         for (unsigned int v : m_fileFormatVersion.value())

@@ -21,7 +21,6 @@
 */
 
 #include "NodeID.h"
-#include "Utilities.h"
 
 namespace DiplodocusDB
 {
@@ -64,9 +63,7 @@ void NodeID::read(PageRepositoryReader& reader, Ishiko::Error& error)
 
 void NodeID::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
-    char buffer[20];
-    size_t n = Utilities::encodeLEB128(m_value, buffer);
-    writer.write(buffer, n, error);
+    writer.writeLEB128(m_value, error);
 }
 
 }
