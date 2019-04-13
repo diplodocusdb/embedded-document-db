@@ -54,7 +54,6 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
         ../../Source/DataFile.h
         ../../Source/Record.h
         ../../Source/RecordMarker.h
-        ../../Source/Utilities.h
     }
 
     sources
@@ -73,6 +72,5 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
         ../../Source/DataFile.cpp
         ../../Source/Record.cpp
         ../../Source/RecordMarker.cpp
-        ../../Source/Utilities.cpp
     }
 }
