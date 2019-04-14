@@ -185,7 +185,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index,
 {
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = appendNode(parentNodeImpl.parentNodeID(), name);
+    TreeDBNode result = appendNode(parentNodeImpl.nodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
@@ -206,7 +206,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = insertNode(parentNodeImpl.parentNodeID(), name);
+    TreeDBNode result = insertNode(parentNodeImpl.nodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
@@ -227,7 +227,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNo
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = insertNode(parentNodeImpl.parentNodeID(), name);
+    TreeDBNode result = insertNode(parentNodeImpl.nodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
@@ -246,7 +246,7 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
 {
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = appendNode(parentNodeImpl.parentNodeID(), name);
+    TreeDBNode result = appendNode(parentNodeImpl.nodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
