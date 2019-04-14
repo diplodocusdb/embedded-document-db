@@ -206,11 +206,11 @@ void EmbeddedTreeDBTests::ChildNodesTest1(Test& test)
 
 void EmbeddedTreeDBTests::ChildNodesTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOneNullKey.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_ChildNodesTest2.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
     db.open(inputPath, error);
 
     ISHTF_ABORT_IF((bool)error);
@@ -219,6 +219,7 @@ void EmbeddedTreeDBTests::ChildNodesTest2(Test& test)
  
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.size() == 1);
+    ISHTF_FAIL_UNLESS(children[0].name() == "key1");
     ISHTF_PASS();
 }
 

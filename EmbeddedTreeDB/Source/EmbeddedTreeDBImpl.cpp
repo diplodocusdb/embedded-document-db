@@ -72,8 +72,21 @@ TreeDBNode EmbeddedTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
 
 std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& parent, Ishiko::Error& error)
 {
-    // TODO
     std::vector<TreeDBNode> result;
+
+    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
+    SiblingNodesRecordGroup siblingNodesRecordGroup;
+    bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
+    if (!error && found)
+    {
+        // TODO: use iterator, also need to check the impact of copying these things around
+        for (size_t i = 0; i < siblingNodesRecordGroup.size(); ++i)
+        {
+            // TODO: this looks pretty horrible conversion wise
+            result.push_back(TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(siblingNodesRecordGroup[i])));
+        }
+    }
+
     return result;
 }
 
