@@ -164,7 +164,7 @@ void EmbeddedTreeDBTests::OpenTest4(Test& test)
 
 void EmbeddedTreeDBTests::OpenTest5(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBOpenTest5.dpdb");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest5.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 

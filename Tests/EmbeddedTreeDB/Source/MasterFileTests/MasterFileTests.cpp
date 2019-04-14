@@ -41,6 +41,7 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 6", AddSiblingNodesRecordGroupTest6);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 7", AddSiblingNodesRecordGroupTest7);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 8", AddSiblingNodesRecordGroupTest8);
+    append<FileComparisonTest>("addSiblingNodesRecordGroup test 9", AddSiblingNodesRecordGroupTest9);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
@@ -384,6 +385,39 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest8(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
+
+    ISHTF_PASS();
+}
+
+void MasterFileTests::AddSiblingNodesRecordGroupTest9(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    // Create a node whose parent is the root (ID 1)
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
+    newNode1.value() = DiplodocusDB::TreeDBValue::UTF8String("value1");
+    // Create a second node whose parent is the root (ID 1)
+    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key2");
+    newNode2.value() = DiplodocusDB::TreeDBValue::UTF8String("value2");
+    DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(newNode1);
+    siblingNodesRecordGroup.push_back(newNode2);
+    masterFile.addSiblingNodesRecordGroup(siblingNodesRecordGroup, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb");
 
     ISHTF_PASS();
 }
