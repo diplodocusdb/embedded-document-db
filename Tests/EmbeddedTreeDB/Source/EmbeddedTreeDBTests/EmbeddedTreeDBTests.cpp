@@ -431,7 +431,7 @@ void EmbeddedTreeDBTests::AppendChildNodeTest2(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest2.dpdb");
 
-    Ishiko::Error error;
+    Ishiko::Error error(0);
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath, error);

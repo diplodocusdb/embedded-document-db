@@ -176,6 +176,11 @@ void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& sibli
     m_dataEndOffset = (m_dataEndPage->dataSize() - 1);
 }
 
+void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
+{
+    // TODO
+}
+
 bool MasterFile::removeNode(const TreeDBKey& key, Ishiko::Error& error)
 {
     // TODO

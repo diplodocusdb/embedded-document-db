@@ -64,10 +64,10 @@ namespace DiplodocusDB
 
     Records                   | Description
     ------------------------- | -----------------------------
-    Node Start                | Indicates the start of a node
-    Parent Node ID (optional) | Specifies the ID of the parent of the current node
+    Sibling Nodes Start       | Indicates the start of a series of nodes that have the same parent
+    Parent Node ID (optional) | Specifies the ID of the parent for the nodes
     Node data records         | See the Node Data organization table below
-    Node End                  | Indicates the end of a node
+    Sibling Nodes End         | Indicates the end of a series of nodes that have the same parent
 
     The Parent Node ID is only omitted for the root node which by definition has no parent.
 
@@ -110,6 +110,7 @@ public:
     bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
         Ishiko::Error& error);
     void addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
+    void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
 
 private:

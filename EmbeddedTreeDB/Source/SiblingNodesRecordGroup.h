@@ -31,6 +31,10 @@
 namespace DiplodocusDB
 {
 
+/// A list of records storing sibling nodes.
+/**
+    This class represents a series of records used in the database to store the nodes that have the same parent.
+*/
 class SiblingNodesRecordGroup
 {
 public:
