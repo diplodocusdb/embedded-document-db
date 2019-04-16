@@ -85,6 +85,10 @@ public:
             disk usage).
         */
         ePersistentNodeID = 0x09,
+        /// Start marker for a series of sibling nodes record that has been deleted.
+        eDeletedSiblingNodesStart = 0x0C,
+        /// Node name record for a node that has been deleted.
+        eDeletedNodeName = 0x0F,
         /// Value record.
         /**
             In this case the value is stored directly in the record itself. This is in general
@@ -111,7 +115,24 @@ public:
             This kind of record will contain the ID of the node as well as the value. It is typically used for values
             that take up a large amount of storage space.
         */
-        eRemoteValue = 0x13
+        eRemoteValue = 0x13,
+        /// A series of free bytes.
+        /**
+            This record is used to occupy space in the file. It can be used to fill the space left by deleted records.
+            It is followed by a count of the number of free bytes.
+        */
+        eFreeBytes = 0xFD,
+        /// A single free byte.
+        /**
+            This record is used to occupy space in the file. It can be used to fill the space left by deleted records.
+        */
+        eFreeByte = 0xFE,
+        /// Reserved for future use.
+        /**
+            This is meant as a way to encode the record type over 2 bytes in the unlikely event we need more types than
+            can be encoded on a single byte.
+        */
+        eExtension = 0xFF
     };
 
     Record(ERecordType type);
