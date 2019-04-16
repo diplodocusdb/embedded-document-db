@@ -109,7 +109,20 @@ public:
     RecordMarker dataEndPosition() const;
     bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
         Ishiko::Error& error);
+    /// Adds a sibling nodes record group to the file.
+    /**
+        This is a low-level function used to write a new record group to the file. This function should not be called
+        if a record group with the same parent node ID is already present in the database.
+
+        @param siblingNodes The data to store in the master file.
+        @param error The result of the operation.
+    */
     void addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
+    /// Updates a sibling nodes record group.
+    /**
+        @param siblingNodes The data to store in the master file.
+        @param error The result of the operation.
+    */
     void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
 
