@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2019 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,35 +20,16 @@
     IN THE SOFTWARE.
 */
 
-#include "NodeIDTests.h"
-#include "NodeIDAllocatorTests.h"
-#include "RecordTests.h"
-#include "SiblingNodesRecordGroupTests.h"
-#include "MasterFileTests.h"
 #include "SecondaryFileTests.h"
-#include "EmbeddedTreeDBTests/EmbeddedTreeDBTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
-#include <boost/filesystem/operations.hpp>
 
 using namespace Ishiko::Tests;
 
-int main(int argc, char* argv[])
+SecondaryFileTests::SecondaryFileTests(const TestNumber& number, const TestEnvironment& environment)
+    : TestSequence(number, "SecondaryFile tests", environment)
 {
-    TestHarness theTestHarness("DiplodocusEmbeddedTreeDB");
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+}
 
-    theTestHarness.environment().setTestDataDirectory("../../TestData");
-    theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
-    boost::filesystem::create_directories("../../TestOutput");
-    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
-
-    TestSequence& theTests = theTestHarness.tests();
-    theTests.append<NodeIDTests>();
-    theTests.append<NodeIDAllocatorTests>();
-    theTests.append<RecordTests>();
-    theTests.append<SiblingNodesRecordGroupTests>();
-    theTests.append<MasterFileTests>();
-    theTests.append<SecondaryFileTests>();
-    theTests.append<EmbeddedTreeDBTests>();
-
-    return theTestHarness.run();
+void SecondaryFileTests::ConstructionTest1(Test& test)
+{
 }
