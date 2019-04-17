@@ -26,7 +26,7 @@
 #include "SiblingNodesRecordGroupTests.h"
 #include "MasterFileTests.h"
 #include "SecondaryFileTests.h"
-#include "EmbeddedTreeDBTests/EmbeddedTreeDBTests.h"
+#include "EmbeddedTreeDBTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 #include <boost/filesystem/operations.hpp>
 

@@ -29,13 +29,19 @@
     <ClInclude Include="..\..\Source\SiblingNodesRecordGroupTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\SiblingNodesRecordGroupCacheTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\MasterFileTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\SecondaryFileTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\EmbeddedTreeDBTests\EmbeddedTreeDBTests.h">
+    <ClInclude Include="..\..\Source\EmbeddedTreeDBTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\TransactionTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -55,13 +61,19 @@
     <ClCompile Include="..\..\Source\SiblingNodesRecordGroupTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\SiblingNodesRecordGroupCacheTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\MasterFileTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\SecondaryFileTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\EmbeddedTreeDBTests\EmbeddedTreeDBTests.cpp">
+    <ClCompile Include="..\..\Source\EmbeddedTreeDBTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TransactionTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

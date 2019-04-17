@@ -157,18 +157,22 @@
     <ClCompile Include="..\..\Source\NodeIDAllocatorTests.cpp" />
     <ClCompile Include="..\..\Source\RecordTests.cpp" />
     <ClCompile Include="..\..\Source\SiblingNodesRecordGroupTests.cpp" />
+    <ClCompile Include="..\..\Source\SiblingNodesRecordGroupCacheTests.cpp" />
     <ClCompile Include="..\..\Source\MasterFileTests.cpp" />
     <ClCompile Include="..\..\Source\SecondaryFileTests.cpp" />
-    <ClCompile Include="..\..\Source\EmbeddedTreeDBTests\EmbeddedTreeDBTests.cpp" />
+    <ClCompile Include="..\..\Source\EmbeddedTreeDBTests.cpp" />
+    <ClCompile Include="..\..\Source\TransactionTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\NodeIDTests.h" />
     <ClInclude Include="..\..\Source\NodeIDAllocatorTests.h" />
     <ClInclude Include="..\..\Source\RecordTests.h" />
     <ClInclude Include="..\..\Source\SiblingNodesRecordGroupTests.h" />
+    <ClInclude Include="..\..\Source\SiblingNodesRecordGroupCacheTests.h" />
     <ClInclude Include="..\..\Source\MasterFileTests.h" />
     <ClInclude Include="..\..\Source\SecondaryFileTests.h" />
-    <ClInclude Include="..\..\Source\EmbeddedTreeDBTests\EmbeddedTreeDBTests.h" />
+    <ClInclude Include="..\..\Source\EmbeddedTreeDBTests.h" />
+    <ClInclude Include="..\..\Source\TransactionTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
