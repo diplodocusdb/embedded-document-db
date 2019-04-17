@@ -157,7 +157,8 @@
     <ClCompile Include="..\..\Source\NodeIDAllocatorTests.cpp" />
     <ClCompile Include="..\..\Source\RecordTests.cpp" />
     <ClCompile Include="..\..\Source\SiblingNodesRecordGroupTests.cpp" />
-    <ClCompile Include="..\..\Source\MasterFileTests\MasterFileTests.cpp" />
+    <ClCompile Include="..\..\Source\MasterFileTests.cpp" />
+    <ClCompile Include="..\..\Source\SecondaryFileTests.cpp" />
     <ClCompile Include="..\..\Source\EmbeddedTreeDBTests\EmbeddedTreeDBTests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +166,8 @@
     <ClInclude Include="..\..\Source\NodeIDAllocatorTests.h" />
     <ClInclude Include="..\..\Source\RecordTests.h" />
     <ClInclude Include="..\..\Source\SiblingNodesRecordGroupTests.h" />
-    <ClInclude Include="..\..\Source\MasterFileTests\MasterFileTests.h" />
+    <ClInclude Include="..\..\Source\MasterFileTests.h" />
+    <ClInclude Include="..\..\Source\SecondaryFileTests.h" />
     <ClInclude Include="..\..\Source\EmbeddedTreeDBTests\EmbeddedTreeDBTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
