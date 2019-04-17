@@ -24,9 +24,11 @@
 #include "NodeIDAllocatorTests.h"
 #include "RecordTests.h"
 #include "SiblingNodesRecordGroupTests.h"
+#include "SiblingNodesRecordGroupCacheTests.h"
 #include "MasterFileTests.h"
 #include "SecondaryFileTests.h"
 #include "EmbeddedTreeDBTests.h"
+#include "TransactionTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 #include <boost/filesystem/operations.hpp>
 
@@ -46,9 +48,11 @@ int main(int argc, char* argv[])
     theTests.append<NodeIDAllocatorTests>();
     theTests.append<RecordTests>();
     theTests.append<SiblingNodesRecordGroupTests>();
+    theTests.append<SiblingNodesRecordGroupCacheTests>();
     theTests.append<MasterFileTests>();
     theTests.append<SecondaryFileTests>();
     theTests.append<EmbeddedTreeDBTests>();
+    theTests.append<TransactionTests>();
 
     return theTestHarness.run();
 }
