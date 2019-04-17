@@ -43,6 +43,7 @@ public:
 
     const NodeID& parentNodeID() const;
     const EmbeddedTreeDBNodeImpl& operator[](size_t pos) const;
+    /// Returns the number of sibling nodes in the record group.
     size_t size() const noexcept;
     void push_back(const EmbeddedTreeDBNodeImpl& value);
     bool find(const std::string& name, EmbeddedTreeDBNodeImpl& node);

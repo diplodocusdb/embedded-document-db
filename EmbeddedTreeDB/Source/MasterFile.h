@@ -23,6 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 
+#include "RecordFile.h"
 #include "Record.h"
 #include "SiblingNodesRecordGroup.h"
 #include "RecordMarker.h"
@@ -95,7 +96,7 @@ namespace DiplodocusDB
 
     @see PageFileRepository
 */
-class MasterFile
+class MasterFile : public RecordFile
 {
 public:
     /// Constructor.
@@ -120,10 +121,10 @@ public:
     void addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     /// Updates a sibling nodes record group.
     /**
-        @param siblingNodes The data to store in the master file.
         @param error The result of the operation.
     */
-    void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
+    void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& existingSiblingNodes,
+        const SiblingNodesRecordGroup& newSiblingNodes, Ishiko::Error& error);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
 
 private:

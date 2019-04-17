@@ -23,4 +23,15 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDFILE_H_
 
+namespace DiplodocusDB
+{
+
+class RecordFile
+{
+public:
+    virtual ~RecordFile() noexcept = default;
+};
+
+}
+
 #endif
