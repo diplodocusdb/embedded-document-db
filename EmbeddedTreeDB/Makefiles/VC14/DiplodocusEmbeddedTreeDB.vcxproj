@@ -159,9 +159,10 @@
     <ClCompile Include="..\..\Source\SiblingNodesRecordGroup.cpp" />
     <ClCompile Include="..\..\Source\SiblingNodesRecordGroupCache.cpp" />
     <ClCompile Include="..\..\Source\UncommittedNodes.cpp" />
+    <ClCompile Include="..\..\Source\RecordFile.cpp" />
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
-    <ClCompile Include="..\..\Source\DataFile.cpp" />
+    <ClCompile Include="..\..\Source\SecondaryFile.cpp" />
     <ClCompile Include="..\..\Source\Record.cpp" />
     <ClCompile Include="..\..\Source\RecordMarker.cpp" />
   </ItemGroup>
@@ -177,9 +178,10 @@
     <ClInclude Include="..\..\Source\SiblingNodesRecordGroup.h" />
     <ClInclude Include="..\..\Source\SiblingNodesRecordGroupCache.h" />
     <ClInclude Include="..\..\Source\UncommittedNodes.h" />
+    <ClInclude Include="..\..\Source\RecordFile.h" />
     <ClInclude Include="..\..\Source\MasterFile.h" />
     <ClInclude Include="..\..\Source\MasterFileMetadata.h" />
-    <ClInclude Include="..\..\Source\DataFile.h" />
+    <ClInclude Include="..\..\Source\SecondaryFile.h" />
     <ClInclude Include="..\..\Source\Record.h" />
     <ClInclude Include="..\..\Source\RecordMarker.h" />
   </ItemGroup>
