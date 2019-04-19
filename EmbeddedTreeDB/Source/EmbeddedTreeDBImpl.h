@@ -24,7 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
 #include "SiblingNodesRecordGroupCache.h"
-#include "MasterFile.h"
+#include "RecordFilesSet.h"
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDB.h"
 #include "Ishiko/Errors/Error.h"
@@ -86,12 +86,9 @@ public:
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
 
-    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
-        Ishiko::Error& error);
-    
 private:
     SiblingNodesRecordGroupCache m_siblingNodesRecordGroupCache;
-    MasterFile m_masterFile;
+    RecordFilesSet m_recordFiles;
     TreeDBNode m_root;
 };
 
