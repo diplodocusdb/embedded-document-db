@@ -21,15 +21,35 @@
 */
 
 #include "TransactionTests.h"
+#include "DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h"
 
 using namespace Ishiko::Tests;
 
 TransactionTests::TransactionTests(const TestNumber& number, const TestEnvironment& environment)
     : TestSequence(number, "Transaction tests", environment)
 {
-    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<FileComparisonTest>("createTransaction test 1", CreateTransactionTest1);
 }
 
-void TransactionTests::ConstructionTest1(Test& test)
+void TransactionTests::CreateTransactionTest1(FileComparisonTest& test)
 {
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "TransactionTests_CreateTransactionTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.create(outputPath, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction();
+
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "TransactionTests_CreateTransactionTest1.dpdb");
+
+    ISHTF_PASS();
 }

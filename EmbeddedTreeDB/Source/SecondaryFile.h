@@ -23,4 +23,15 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SECONDARYFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SECONDARYFILE_H_
 
+#include "RecordFile.h"
+
+namespace DiplodocusDB
+{
+
+class SecondaryFile : public RecordFile
+{
+};
+
+}
+
 #endif

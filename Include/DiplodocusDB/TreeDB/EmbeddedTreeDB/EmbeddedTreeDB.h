@@ -38,7 +38,6 @@ class EmbeddedTreeDB : public TreeDB
 {
 public:
     EmbeddedTreeDB();
-    ~EmbeddedTreeDB();
 
     void create(const boost::filesystem::path& path, Ishiko::Error& error);
     void open(const boost::filesystem::path& path, Ishiko::Error& error);

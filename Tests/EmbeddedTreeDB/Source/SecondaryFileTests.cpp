@@ -21,6 +21,7 @@
 */
 
 #include "SecondaryFileTests.h"
+#include "SecondaryFile.h"
 
 using namespace Ishiko::Tests;
 
@@ -32,4 +33,7 @@ SecondaryFileTests::SecondaryFileTests(const TestNumber& number, const TestEnvir
 
 void SecondaryFileTests::ConstructionTest1(Test& test)
 {
+    DiplodocusDB::SecondaryFile secondaryFile;
+
+    ISHTF_PASS();
 }

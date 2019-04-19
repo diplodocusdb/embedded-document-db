@@ -21,6 +21,7 @@
 */
 
 #include "SiblingNodesRecordGroupCacheTests.h"
+#include "SiblingNodesRecordGroupCache.h"
 
 using namespace Ishiko::Tests;
 
@@ -33,4 +34,7 @@ SiblingNodesRecordGroupCacheTests::SiblingNodesRecordGroupCacheTests(const TestN
 
 void SiblingNodesRecordGroupCacheTests::ConstructionTest1(Test& test)
 {
+    DiplodocusDB::SiblingNodesRecordGroupCache cache;
+
+    ISHTF_PASS();
 }

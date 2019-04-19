@@ -31,7 +31,7 @@ public:
     TransactionTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
 
 private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
+    static void CreateTransactionTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif
