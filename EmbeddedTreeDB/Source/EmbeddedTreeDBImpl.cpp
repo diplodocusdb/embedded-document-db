@@ -154,7 +154,7 @@ TreeDBTransaction EmbeddedTreeDBImpl::createTransaction(Ishiko::Error& error)
 void EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
     EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
-    transactionImpl.commit(error);
+    transactionImpl.commit(m_recordFiles, error);
 }
 
 void EmbeddedTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)

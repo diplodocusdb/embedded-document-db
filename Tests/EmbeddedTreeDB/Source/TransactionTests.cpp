@@ -30,6 +30,7 @@ TransactionTests::TransactionTests(const TestNumber& number, const TestEnvironme
 {
     append<FileComparisonTest>("createTransaction test 1", CreateTransactionTest1);
     append<FileComparisonTest>("commitTransaction test 1", CommitTransactionTest1);
+    append<FileComparisonTest>("appendChildNode test 1", AppendChildNodeTest1);
     append<FileComparisonTest>("rollbackTransaction test 1", RollbackTransactionTest1);
 }
 
@@ -45,7 +46,9 @@ void TransactionTests::CreateTransactionTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction();
+    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
+
+    ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
@@ -68,14 +71,52 @@ void TransactionTests::CommitTransactionTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction();
-    db.commitTransaction(transaction);
+    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    db.commitTransaction(transaction, error);
+
+    ISHTF_FAIL_IF((bool)error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "TransactionTests_CommitTransactionTest1.dpdb");
+
+    ISHTF_PASS();
+}
+
+void TransactionTests::AppendChildNodeTest1(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "TransactionTests_AppendChildNodeTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::EmbeddedTreeDB db;
+    db.create(outputPath, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    db.appendChildNode(transaction, db.root(), "key1", error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    db.commitTransaction(transaction, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "TransactionTests_AppendChildNodeTest1.dpdb");
 
     ISHTF_PASS();
 }
@@ -92,7 +133,10 @@ void TransactionTests::RollbackTransactionTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction();
+    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
+
+    ISHTF_FAIL_IF((bool)error);
+
     db.rollbackTransaction(transaction);
 
     db.close();

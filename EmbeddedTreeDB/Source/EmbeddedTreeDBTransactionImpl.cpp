@@ -21,3 +21,55 @@
 */
 
 #include "EmbeddedTreeDBTransactionImpl.h"
+#include "EmbeddedTreeDBImpl.h"
+
+namespace DiplodocusDB
+{
+
+TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(RecordFilesSet& recordFiles, TreeDBNode& parent,
+    const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+{
+    TreeDBNode result;
+
+    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
+    result = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
+    EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
+    nodeImpl.value() = value;
+
+    SiblingNodesRecordGroup existingSiblingNodesRecordGroup;
+    bool found = recordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), existingSiblingNodesRecordGroup,
+        error);
+    if (!error)
+    {
+        if (found)
+        {
+            // TODO
+        }
+        else
+        {
+            m_updatedSiblingNodesRecordGroup.emplace_back(nodeImpl);
+        }
+    }
+
+    return result;
+}
+
+void EmbeddedTreeDBTransactionImpl::commit(RecordFilesSet& recordFiles, Ishiko::Error& error)
+{
+    for (const SiblingNodesRecordGroup& siblingNodes : m_updatedSiblingNodesRecordGroup)
+    {
+        // TODO : distinguish between new siblings and updated siblings
+        recordFiles.addSiblingNodesRecordGroup(siblingNodes, error);
+        if (error)
+        {
+            break;
+        }
+    }
+}
+
+void EmbeddedTreeDBTransactionImpl::rollback()
+{
+    // TODO
+}
+
+}

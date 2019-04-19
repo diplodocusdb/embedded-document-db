@@ -24,12 +24,24 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBTRANSACTIONIMPL_H_
 
 #include "DiplodocusDB/TreeDB/Core/TreeDBTransactionImpl.h"
+#include "RecordFilesSet.h"
+#include "SiblingNodesRecordGroup.h"
+#include <vector>
 
 namespace DiplodocusDB
 {
 
 class EmbeddedTreeDBTransactionImpl : public TreeDBTransactionImpl
 {
+public:
+    TreeDBNode appendChildNode(RecordFilesSet& recordFiles, TreeDBNode& parent, const std::string& name,
+        const TreeDBValue& value, Ishiko::Error& error);
+
+    void commit(RecordFilesSet& recordFiles, Ishiko::Error& error);
+    void rollback();
+
+private:
+    std::vector<SiblingNodesRecordGroup> m_updatedSiblingNodesRecordGroup;
 };
 
 }
