@@ -57,8 +57,8 @@ public:
         void* callbackData) override;
 
     TreeDBTransaction createTransaction(Ishiko::Error& error) override;
-    TreeDBTransaction commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error) override;
-    TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction) override;
+    void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error) override;
+    void rollbackTransaction(TreeDBTransaction& transaction) override;
 
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error) override;
 

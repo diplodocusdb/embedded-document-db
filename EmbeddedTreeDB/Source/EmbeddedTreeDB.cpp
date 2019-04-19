@@ -97,14 +97,14 @@ TreeDBTransaction EmbeddedTreeDB::createTransaction(Ishiko::Error& error)
     return m_impl->createTransaction(error);
 }
 
-TreeDBTransaction EmbeddedTreeDB::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
+void EmbeddedTreeDB::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
-    return m_impl->commitTransaction(transaction, error);
+    m_impl->commitTransaction(transaction, error);
 }
 
-TreeDBTransaction EmbeddedTreeDB::rollbackTransaction(TreeDBTransaction& transaction)
+void EmbeddedTreeDB::rollbackTransaction(TreeDBTransaction& transaction)
 {
-    return m_impl->rollbackTransaction(transaction);
+    m_impl->rollbackTransaction(transaction);
 }
 
 void EmbeddedTreeDB::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)

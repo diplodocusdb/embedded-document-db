@@ -63,8 +63,8 @@ public:
         void* callbackData) = 0;
 
     virtual TreeDBTransaction createTransaction(Ishiko::Error& error) = 0;
-    virtual TreeDBTransaction commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error) = 0;
-    virtual TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction) = 0;
+    virtual void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error) = 0;
+    virtual void rollbackTransaction(TreeDBTransaction& transaction) = 0;
 
     /// Sets the value of the node.
     /**

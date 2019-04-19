@@ -148,20 +148,17 @@ void EmbeddedTreeDBImpl::traverse(TreeDBNode& node, ETreeTraversalOrder order,
 
 TreeDBTransaction EmbeddedTreeDBImpl::createTransaction(Ishiko::Error& error)
 {
-    // TODO
     return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
 }
 
-TreeDBTransaction EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
+void EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
     // TODO
-    return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
 }
 
-TreeDBTransaction EmbeddedTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
+void EmbeddedTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
 {
     // TODO
-    return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
 }
 
 void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)

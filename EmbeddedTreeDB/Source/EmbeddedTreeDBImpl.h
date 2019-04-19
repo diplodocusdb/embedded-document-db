@@ -57,8 +57,8 @@ public:
         void* callbackData);
 
     TreeDBTransaction createTransaction(Ishiko::Error& error);
-    TreeDBTransaction commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error);
-    TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction);
+    void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error);
+    void rollbackTransaction(TreeDBTransaction& transaction);
 
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error);
 
