@@ -50,6 +50,7 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
         ../../Source/SiblingNodesRecordGroup.h
         ../../Source/SiblingNodesRecordGroupCache.h
         ../../Source/RecordFile.h
+        ../../Source/RecordFilesSet.h
         ../../Source/MasterFile.h
         ../../Source/MasterFileMetadata.h
         ../../Source/SecondaryFile.h
@@ -69,6 +70,7 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
         ../../Source/SiblingNodesRecordGroup.cpp
         ../../Source/SiblingNodesRecordGroupCache.cpp
         ../../Source/RecordFile.cpp
+        ../../Source/RecordFilesSet.cpp
         ../../Source/MasterFileMetadata.cpp
         ../../Source/MasterFile.cpp
         ../../Source/SecondaryFile.cpp

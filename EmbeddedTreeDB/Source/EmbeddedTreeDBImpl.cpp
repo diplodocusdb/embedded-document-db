@@ -153,12 +153,14 @@ TreeDBTransaction EmbeddedTreeDBImpl::createTransaction(Ishiko::Error& error)
 
 void EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
-    // TODO
+    EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
+    transactionImpl.commit(error);
 }
 
 void EmbeddedTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
 {
-    // TODO
+    EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
+    transactionImpl.rollback();
 }
 
 void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)
