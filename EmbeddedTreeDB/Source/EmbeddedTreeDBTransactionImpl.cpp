@@ -47,7 +47,7 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(RecordFilesSet& record
         }
         else
         {
-            m_updatedSiblingNodesRecordGroup.emplace_back(nodeImpl);
+            m_newSiblingNodesRecordGroup.emplace_back(nodeImpl);
         }
     }
 
@@ -56,9 +56,10 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(RecordFilesSet& record
 
 void EmbeddedTreeDBTransactionImpl::commit(RecordFilesSet& recordFiles, Ishiko::Error& error)
 {
-    for (const SiblingNodesRecordGroup& siblingNodes : m_updatedSiblingNodesRecordGroup)
+    // TODO : updated siblings
+
+    for (const SiblingNodesRecordGroup& siblingNodes : m_newSiblingNodesRecordGroup)
     {
-        // TODO : distinguish between new siblings and updated siblings
         recordFiles.addSiblingNodesRecordGroup(siblingNodes, error);
         if (error)
         {

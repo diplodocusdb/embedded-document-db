@@ -41,6 +41,7 @@ public:
     void rollback();
 
 private:
+    std::vector<SiblingNodesRecordGroup> m_newSiblingNodesRecordGroup;
     std::vector<SiblingNodesRecordGroup> m_updatedSiblingNodesRecordGroup;
 };
 
