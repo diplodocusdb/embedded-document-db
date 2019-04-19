@@ -47,9 +47,6 @@
     <ClInclude Include="..\..\Source\SiblingNodesRecordGroupCache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\UncommittedNodes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\RecordFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -92,9 +89,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\SiblingNodesRecordGroupCache.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\UncommittedNodes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\RecordFile.cpp">

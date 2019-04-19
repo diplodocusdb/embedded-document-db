@@ -158,7 +158,6 @@
     <ClCompile Include="..\..\Source\NodeIDAllocator.cpp" />
     <ClCompile Include="..\..\Source\SiblingNodesRecordGroup.cpp" />
     <ClCompile Include="..\..\Source\SiblingNodesRecordGroupCache.cpp" />
-    <ClCompile Include="..\..\Source\UncommittedNodes.cpp" />
     <ClCompile Include="..\..\Source\RecordFile.cpp" />
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\Source\MasterFile.cpp" />
@@ -177,7 +176,6 @@
     <ClInclude Include="..\..\Source\NodeIDAllocator.h" />
     <ClInclude Include="..\..\Source\SiblingNodesRecordGroup.h" />
     <ClInclude Include="..\..\Source\SiblingNodesRecordGroupCache.h" />
-    <ClInclude Include="..\..\Source\UncommittedNodes.h" />
     <ClInclude Include="..\..\Source\RecordFile.h" />
     <ClInclude Include="..\..\Source\MasterFile.h" />
     <ClInclude Include="..\..\Source\MasterFileMetadata.h" />
