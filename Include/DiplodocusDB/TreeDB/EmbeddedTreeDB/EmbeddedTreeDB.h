@@ -75,8 +75,12 @@ public:
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         const TreeDBValue& value, Ishiko::Error& error) override;
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
+    TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+        Ishiko::Error& error) override;
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error) override;
+    TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+        const TreeDBValue& value, Ishiko::Error& error) override;
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error) override;

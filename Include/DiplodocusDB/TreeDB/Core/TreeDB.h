@@ -176,6 +176,8 @@ public:
         @returns A handle to the new child node.
     */
     virtual TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
+    virtual TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+        Ishiko::Error& error) = 0;
     /// Inserts a new child node after the last existing child node and returns a handle to the new child.
     /**
         This operation commits the changes to the database immediately.
@@ -189,6 +191,8 @@ public:
     */
     virtual TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error) = 0;
+    virtual TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+        const TreeDBValue& value, Ishiko::Error& error) = 0;
     /// Clears the value of the first node with the given name or appends a new node if no node with this name exists.
     /**
         If a node with the given name exists then its value is cleared and a handle to this node is returned. If

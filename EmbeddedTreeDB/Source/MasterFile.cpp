@@ -176,8 +176,7 @@ void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& sibli
     m_dataEndOffset = (m_dataEndPage->dataSize() - 1);
 }
 
-void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& existingSiblingNodes,
-    const SiblingNodesRecordGroup& newSiblingNodes, Ishiko::Error& error)
+void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
 {
     // TODO
 }

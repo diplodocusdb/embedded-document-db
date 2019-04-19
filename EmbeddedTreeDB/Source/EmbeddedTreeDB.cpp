@@ -31,14 +31,12 @@ EmbeddedTreeDB::EmbeddedTreeDB()
 {
 }
 
-void EmbeddedTreeDB::create(const boost::filesystem::path& path,
-                            Ishiko::Error& error)
+void EmbeddedTreeDB::create(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_impl->create(path, error);
 }
 
-void EmbeddedTreeDB::open(const boost::filesystem::path& path,
-                          Ishiko::Error& error)
+void EmbeddedTreeDB::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_impl->open(path, error);
 }
@@ -155,10 +153,22 @@ TreeDBNode EmbeddedTreeDB::appendChildNode(TreeDBNode& parent, const std::string
     return m_impl->appendChildNode(parent, name, error);
 }
 
+TreeDBNode EmbeddedTreeDB::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+    Ishiko::Error& error)
+{
+    return m_impl->appendChildNode(transaction, parent, name, error);
+}
+
 TreeDBNode EmbeddedTreeDB::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
     Ishiko::Error& error)
 {
     return m_impl->appendChildNode(parent, name, value, error);
+}
+
+TreeDBNode EmbeddedTreeDB::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+    const TreeDBValue& value, Ishiko::Error& error)
+{
+    return m_impl->appendChildNode(transaction, parent, name, value, error);
 }
 
 TreeDBNode EmbeddedTreeDB::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)

@@ -241,16 +241,47 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
     return appendChildNode(parent, name, value, error);
 }
 
+TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
+    const std::string& name, Ishiko::Error& error)
+{
+    TreeDBValue value;
+    return appendChildNode(transaction, parent, name, value, error);
+}
+
 TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
     Ishiko::Error& error)
 {
-    // TODO : doesn't work if there are already child nodes on this node
+    TreeDBNode result;
+
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = appendNode(parentNodeImpl.nodeID(), name);
+    result = appendNode(parentNodeImpl.nodeID(), name);
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    SiblingNodesRecordGroup siblings(nodeImpl);
-    m_masterFile.addSiblingNodesRecordGroup(siblings, error);
+
+    SiblingNodesRecordGroup existingSiblingNodesRecordGroup;
+    bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), existingSiblingNodesRecordGroup,
+        error);
+    if (!error)
+    {
+        if (found)
+        {
+            existingSiblingNodesRecordGroup.push_back(nodeImpl);
+            m_masterFile.updateSiblingNodesRecordGroup(existingSiblingNodesRecordGroup, error);
+        }
+        else
+        {
+            SiblingNodesRecordGroup siblings(nodeImpl);
+            m_masterFile.addSiblingNodesRecordGroup(siblings, error);
+        }
+    }
+
+    return result;
+}
+
+TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
+    const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+{
+    TreeDBNode result;
     return result;
 }
 

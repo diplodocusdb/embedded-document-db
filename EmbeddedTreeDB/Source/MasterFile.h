@@ -123,8 +123,7 @@ public:
     /**
         @param error The result of the operation.
     */
-    void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& existingSiblingNodes,
-        const SiblingNodesRecordGroup& newSiblingNodes, Ishiko::Error& error);
+    void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
 
 private:
