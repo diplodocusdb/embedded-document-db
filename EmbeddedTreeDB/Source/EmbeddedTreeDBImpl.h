@@ -85,6 +85,9 @@ public:
         Ishiko::Error& error);
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
+
+    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
+        Ishiko::Error& error);
     
 private:
     SiblingNodesRecordGroupCache m_siblingNodesRecordGroupCache;

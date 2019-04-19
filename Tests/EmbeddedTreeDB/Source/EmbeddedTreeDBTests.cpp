@@ -52,6 +52,7 @@ EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestEnv
     append<FileComparisonTest>("appendChildNode test 5", AppendChildNodeTest5);
     append<FileComparisonTest>("appendChildNode test 6", AppendChildNodeTest6);
     append<FileComparisonTest>("removeChildNode test 1", RemoveChildNodeTest1);
+    append<FileComparisonTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
 }
 
 void EmbeddedTreeDBTests::CreationTest1(Test& test)
@@ -591,4 +592,8 @@ void EmbeddedTreeDBTests::RemoveChildNodeTest1(FileComparisonTest& test)
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_RemoveChildNodeTest1.dpdb");
 
     ISHTF_PASS();
+}
+
+void EmbeddedTreeDBTests::RemoveAllChildNodesTest1(FileComparisonTest& test)
+{
 }

@@ -76,7 +76,7 @@ std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& parent, Ishik
 
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
     SiblingNodesRecordGroup siblingNodesRecordGroup;
-    bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
+    bool found = findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
     if (!error && found)
     {
         // TODO: use iterator, also need to check the impact of copying these things around
@@ -96,7 +96,7 @@ TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name
 
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
     SiblingNodesRecordGroup siblingNodesRecordGroup;
-    bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
+    bool found = findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
     if (!error && found)
     {
         EmbeddedTreeDBNodeImpl node;
@@ -259,7 +259,7 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
     nodeImpl.value() = value;
 
     SiblingNodesRecordGroup existingSiblingNodesRecordGroup;
-    bool found = m_masterFile.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), existingSiblingNodesRecordGroup,
+    bool found = findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), existingSiblingNodesRecordGroup,
         error);
     if (!error)
     {
@@ -310,6 +310,12 @@ size_t EmbeddedTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error
 {
     // TODO
     return 0;
+}
+
+bool EmbeddedTreeDBImpl::findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
+    Ishiko::Error& error)
+{
+    return m_masterFile.findSiblingNodesRecordGroup(parentNodeID, siblingNodes, error);
 }
 
 }
