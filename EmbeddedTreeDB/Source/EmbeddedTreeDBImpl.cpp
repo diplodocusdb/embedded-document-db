@@ -146,13 +146,13 @@ void EmbeddedTreeDBImpl::traverse(TreeDBNode& node, ETreeTraversalOrder order,
     // TODO
 }
 
-TreeDBTransaction EmbeddedTreeDBImpl::createTransaction()
+TreeDBTransaction EmbeddedTreeDBImpl::createTransaction(Ishiko::Error& error)
 {
     // TODO
     return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
 }
 
-TreeDBTransaction EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction)
+TreeDBTransaction EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
     // TODO
     return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
@@ -185,7 +185,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index,
 {
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = appendNode(parentNodeImpl.nodeID(), name);
+    TreeDBNode result = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
@@ -206,7 +206,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = insertNode(parentNodeImpl.nodeID(), name);
+    TreeDBNode result = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
@@ -227,7 +227,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNo
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = insertNode(parentNodeImpl.nodeID(), name);
+    TreeDBNode result = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
@@ -254,7 +254,7 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
     TreeDBNode result;
 
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    result = appendNode(parentNodeImpl.nodeID(), name);
+    result = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
 
@@ -265,6 +265,7 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
     {
         if (found)
         {
+            // TODO
             existingSiblingNodesRecordGroup.push_back(nodeImpl);
             m_masterFile.updateSiblingNodesRecordGroup(existingSiblingNodesRecordGroup, error);
         }
@@ -281,8 +282,8 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
 TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
     const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
 {
-    TreeDBNode result;
-    return result;
+    EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
+    return transactionImpl.appendChildNode(*this, parent, name, value, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
@@ -309,16 +310,6 @@ size_t EmbeddedTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error
 {
     // TODO
     return 0;
-}
-
-TreeDBNode EmbeddedTreeDBImpl::insertNode(const NodeID& parentNodeID, const std::string& name)
-{
-    return m_uncommittedNodes.createNode(parentNodeID, name);
-}
-
-TreeDBNode EmbeddedTreeDBImpl::appendNode(const NodeID& parentNodeID, const std::string& name)
-{
-    return m_uncommittedNodes.createNode(parentNodeID, name);
 }
 
 }

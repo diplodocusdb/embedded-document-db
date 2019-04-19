@@ -23,8 +23,8 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
+#include "SiblingNodesRecordGroupCache.h"
 #include "MasterFile.h"
-#include "UncommittedNodes.h"
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDB.h"
 #include "Ishiko/Errors/Error.h"
@@ -56,8 +56,8 @@ public:
     void traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*callback)(TreeDB& db, TreeDBNode& node),
         void* callbackData);
 
-    TreeDBTransaction createTransaction();
-    TreeDBTransaction commitTransaction(TreeDBTransaction& transaction);
+    TreeDBTransaction createTransaction(Ishiko::Error& error);
+    TreeDBTransaction commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error);
     TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction);
 
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error);
@@ -74,21 +74,21 @@ public:
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         const TreeDBValue& value, Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
+    TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+        Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error);
+    TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+        const TreeDBValue& value, Ishiko::Error& error);
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error);
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
-
-private:
-    TreeDBNode insertNode(const NodeID& parentNodeID, const std::string& name);
-    TreeDBNode appendNode(const NodeID& parentNodeID, const std::string& name);
     
 private:
+    SiblingNodesRecordGroupCache m_siblingNodesRecordGroupCache;
     MasterFile m_masterFile;
-    UncommittedNodes m_uncommittedNodes;
     TreeDBNode m_root;
 };
 
