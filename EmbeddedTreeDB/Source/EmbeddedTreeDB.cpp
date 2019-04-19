@@ -92,14 +92,14 @@ void EmbeddedTreeDB::traverse(TreeDBNode& node, ETreeTraversalOrder order,
     return m_impl->traverse(node, order, callback, callbackData);
 }
 
-TreeDBTransaction EmbeddedTreeDB::createTransaction()
+TreeDBTransaction EmbeddedTreeDB::createTransaction(Ishiko::Error& error)
 {
-    return m_impl->createTransaction();
+    return m_impl->createTransaction(error);
 }
 
-TreeDBTransaction EmbeddedTreeDB::commitTransaction(TreeDBTransaction& transaction)
+TreeDBTransaction EmbeddedTreeDB::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
-    return m_impl->commitTransaction(transaction);
+    return m_impl->commitTransaction(transaction, error);
 }
 
 TreeDBTransaction EmbeddedTreeDB::rollbackTransaction(TreeDBTransaction& transaction)
