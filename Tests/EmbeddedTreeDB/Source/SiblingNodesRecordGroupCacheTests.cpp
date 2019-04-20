@@ -30,11 +30,23 @@ SiblingNodesRecordGroupCacheTests::SiblingNodesRecordGroupCacheTests(const TestN
     : TestSequence(number, "SiblingNodesRecordGroupCache tests", environment)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<HeapAllocationErrorsTest>("find test 1", FindTest1);
 }
 
 void SiblingNodesRecordGroupCacheTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::SiblingNodesRecordGroupCache cache;
 
+    ISHTF_PASS();
+}
+
+void SiblingNodesRecordGroupCacheTests::FindTest1(Test& test)
+{
+    DiplodocusDB::SiblingNodesRecordGroupCache cache;
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> group;
+    bool found = cache.find(DiplodocusDB::NodeID(1), group);
+
+    ISHTF_FAIL_IF(found);
+    ISHTF_FAIL_IF((bool)group);
     ISHTF_PASS();
 }

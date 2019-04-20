@@ -21,3 +21,23 @@
 */
 
 #include "SiblingNodesRecordGroupCache.h"
+
+namespace DiplodocusDB
+{
+
+bool SiblingNodesRecordGroupCache::find(const NodeID& parentNodeID,
+    std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes)
+{
+    std::map<NodeID, std::shared_ptr<SiblingNodesRecordGroup>>::iterator it = m_groups.find(parentNodeID);
+    if (it != m_groups.end())
+    {
+        siblingNodes = it->second;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+}

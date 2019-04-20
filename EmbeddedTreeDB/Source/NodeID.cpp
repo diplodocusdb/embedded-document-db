@@ -50,6 +50,16 @@ bool NodeID::operator!=(const NodeID& other) const
     return (m_value != other.m_value);
 }
 
+bool NodeID::operator<(const NodeID& other) const
+{
+    return (m_value < other.m_value);
+}
+
+bool NodeID::operator>(const NodeID& other) const
+{
+    return (m_value > other.m_value);
+}
+
 void NodeID::read(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     // TODO: this needs to decode LEB128

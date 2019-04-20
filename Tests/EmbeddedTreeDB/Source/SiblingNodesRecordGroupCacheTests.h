@@ -33,6 +33,7 @@ public:
 
 private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
+    static void FindTest1(Ishiko::Tests::Test& test);
 };
 
 #endif

@@ -23,11 +23,21 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUPCACHE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUPCACHE_H_
 
+#include "NodeID.h"
+#include "SiblingNodesRecordGroup.h"
+#include <map>
+#include <memory>
+
 namespace DiplodocusDB
 {
 
 class SiblingNodesRecordGroupCache
 {
+public:
+    bool find(const NodeID& parentNodeID, std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes);
+
+private:
+    std::map<NodeID, std::shared_ptr<SiblingNodesRecordGroup>> m_groups;
 };
 
 }
