@@ -29,11 +29,32 @@ CachedRecordFilesSetTests::CachedRecordFilesSetTests(const TestNumber& number, c
     : TestSequence(number, "CachedRecordFilesSet tests", environment)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<FileComparisonTest>("createMasterFile test 1", CreateMasterFileTest1);
 }
 
 void CachedRecordFilesSetTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::CachedRecordFilesSet cachedSet;
+
+    ISHTF_PASS();
+}
+
+void CachedRecordFilesSetTests::CreateMasterFileTest1(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_CreateTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    cachedSet.createMasterFile(outputPath, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    cachedSet.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_CreateTest1.dpdb");
 
     ISHTF_PASS();
 }
