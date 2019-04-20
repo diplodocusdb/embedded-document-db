@@ -40,6 +40,7 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 5", AddSiblingNodesRecordGroupTest5);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 6", AddSiblingNodesRecordGroupTest6);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 7", AddSiblingNodesRecordGroupTest7);
+    append<FileComparisonTest>("addSiblingNodesRecordGroup test 8", AddSiblingNodesRecordGroupTest8);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 9", AddSiblingNodesRecordGroupTest9);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 10", AddSiblingNodesRecordGroupTest10);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
@@ -358,6 +359,40 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest7(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "MasterFileTests_AddSiblingNodesRecordGroupTest7.dpdb");
+
+    ISHTF_PASS();
+}
+
+void MasterFileTests::AddSiblingNodesRecordGroupTest8(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::MasterFile masterFile;
+    masterFile.create(outputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    for (size_t i = 0; i < 1000000; ++i)
+    {
+        std::stringstream key;
+        key << "key" << i;
+        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
+        siblingsNodesRecordGroup.push_back(newNode);
+    }
+
+    masterFile.addSiblingNodesRecordGroup(siblingsNodesRecordGroup, error);
+
+    ISHTF_FAIL_IF((bool)error);
+
+    masterFile.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
 
     ISHTF_PASS();
 }

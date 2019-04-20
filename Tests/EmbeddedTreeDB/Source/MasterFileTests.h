@@ -42,6 +42,7 @@ private:
     static void AddSiblingNodesRecordGroupTest5(Ishiko::Tests::FileComparisonTest& test);
     static void AddSiblingNodesRecordGroupTest6(Ishiko::Tests::FileComparisonTest& test);
     static void AddSiblingNodesRecordGroupTest7(Ishiko::Tests::FileComparisonTest& test);
+    static void AddSiblingNodesRecordGroupTest8(Ishiko::Tests::FileComparisonTest& test);
     static void AddSiblingNodesRecordGroupTest9(Ishiko::Tests::FileComparisonTest& test);
     static void AddSiblingNodesRecordGroupTest10(Ishiko::Tests::FileComparisonTest& test);
     static void FindSiblingNodesRecordGroupTest1(Ishiko::Tests::Test& test);
