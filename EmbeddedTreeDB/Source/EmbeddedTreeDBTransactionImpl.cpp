@@ -80,7 +80,8 @@ void EmbeddedTreeDBTransactionImpl::commit(CachedRecordFilesSet& cachedRecordFil
 
 void EmbeddedTreeDBTransactionImpl::rollback()
 {
-    // TODO
+    // TODO : need to clear the m_new and m_updated and unlock the nodes, need to also lock the nodes too in the first
+    // place
 }
 
 EmbeddedTreeDBTransactionImpl::EFindResult EmbeddedTreeDBTransactionImpl::findSiblingNodesRecordGroup(

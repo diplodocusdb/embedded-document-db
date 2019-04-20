@@ -47,6 +47,7 @@ private:
     static void FindSiblingNodesRecordGroupTest1(Ishiko::Tests::Test& test);
     static void FindSiblingNodesRecordGroupTest2(Ishiko::Tests::Test& test);
     static void FindSiblingNodesRecordGroupTest3(Ishiko::Tests::Test& test);
+    static void RemoveSiblingNodesRecordGroupTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
 #endif

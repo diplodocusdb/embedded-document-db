@@ -181,7 +181,7 @@ void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& si
     // TODO
 }
 
-bool MasterFile::removeNode(const TreeDBKey& key, Ishiko::Error& error)
+bool MasterFile::removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error)
 {
     // TODO
     error.fail(-1);

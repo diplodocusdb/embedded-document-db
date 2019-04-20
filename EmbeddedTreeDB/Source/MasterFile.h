@@ -127,7 +127,7 @@ public:
         @param error The result of the operation.
     */
     void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
-    bool removeNode(const TreeDBKey& key, Ishiko::Error& error);
+    bool removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error);
 
 private:
     static void createRootNode(PageRepositoryWriter& writer, Ishiko::Error& error);

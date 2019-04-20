@@ -45,6 +45,7 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
+    append<FileComparisonTest>("removeSiblingNodesRecordGroup test 1", RemoveSiblingNodesRecordGroupTest1);
 }
 
 void MasterFileTests::ConstructionTest1(Test& test)
@@ -483,4 +484,8 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest3(Test& test)
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(!found);
     ISHTF_PASS();
+}
+
+void MasterFileTests::RemoveSiblingNodesRecordGroupTest1(Ishiko::Tests::FileComparisonTest& test)
+{
 }
