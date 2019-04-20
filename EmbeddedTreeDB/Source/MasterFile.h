@@ -111,7 +111,6 @@ public:
     // TODO : can be marked private. Remove?
     RecordMarker dataEndPosition() const;
 
-public:
     bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
         Ishiko::Error& error);
     /// Adds a sibling nodes record group to the file.

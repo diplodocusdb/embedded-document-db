@@ -75,16 +75,16 @@ std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& parent, Ishik
     std::vector<TreeDBNode> result;
 
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    SiblingNodesRecordGroup siblingNodesRecordGroup;
+    std::shared_ptr<SiblingNodesRecordGroup> siblingNodesRecordGroup;
     bool found = m_cachedRecordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup,
         error);
     if (!error && found)
     {
         // TODO: use iterator, also need to check the impact of copying these things around
-        for (size_t i = 0; i < siblingNodesRecordGroup.size(); ++i)
+        for (size_t i = 0; i < siblingNodesRecordGroup->size(); ++i)
         {
             // TODO: this looks pretty horrible conversion wise
-            result.push_back(TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(siblingNodesRecordGroup[i])));
+            result.push_back(TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>((*siblingNodesRecordGroup)[i])));
         }
     }
 
@@ -96,13 +96,13 @@ TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name
     TreeDBNode result;
 
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    SiblingNodesRecordGroup siblingNodesRecordGroup;
+    std::shared_ptr<SiblingNodesRecordGroup> siblingNodesRecordGroup;
     bool found = m_cachedRecordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup,
         error);
     if (!error && found)
     {
         EmbeddedTreeDBNodeImpl node;
-        found = siblingNodesRecordGroup.find(name, node);
+        found = siblingNodesRecordGroup->find(name, node);
         if (found)
         {
             // TODO : this doesn't work because we take a copy of the node so modifications will casuse
@@ -259,7 +259,7 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
 
-    SiblingNodesRecordGroup existingSiblingNodesRecordGroup;
+    std::shared_ptr<SiblingNodesRecordGroup> existingSiblingNodesRecordGroup;
     bool found = m_cachedRecordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(),
         existingSiblingNodesRecordGroup, error);
     if (!error)
@@ -267,8 +267,8 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
         if (found)
         {
             // TODO
-            existingSiblingNodesRecordGroup.push_back(nodeImpl);
-            m_cachedRecordFiles.updateSiblingNodesRecordGroup(existingSiblingNodesRecordGroup, error);
+            existingSiblingNodesRecordGroup->push_back(nodeImpl);
+            m_cachedRecordFiles.updateSiblingNodesRecordGroup(*existingSiblingNodesRecordGroup, error);
         }
         else
         {
