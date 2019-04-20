@@ -37,6 +37,7 @@ private:
     static void SubscriptOperatorTest2(Ishiko::Tests::Test& test);
     static void FindTest1(Ishiko::Tests::Test& test);
     static void FindTest2(Ishiko::Tests::Test& test);
+    static void EraseTest1(Ishiko::Tests::Test& test);
 };
 
 #endif

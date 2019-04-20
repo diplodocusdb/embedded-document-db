@@ -36,6 +36,7 @@ class SiblingNodesRecordGroupCache
 public:
     bool find(const NodeID& key, std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes);
     std::shared_ptr<SiblingNodesRecordGroup>& operator[](const NodeID& key);
+    bool erase(const NodeID& key);
 
 private:
     // TODO : it is not good enough for these to be shared pointers because if I remove them from the cache

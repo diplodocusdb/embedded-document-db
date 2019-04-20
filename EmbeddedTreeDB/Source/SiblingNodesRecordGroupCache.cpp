@@ -50,4 +50,9 @@ std::shared_ptr<SiblingNodesRecordGroup>& SiblingNodesRecordGroupCache::operator
     return result;
 }
 
+bool SiblingNodesRecordGroupCache::erase(const NodeID& key)
+{
+    return (m_groups.erase(key) > 0);
+}
+
 }

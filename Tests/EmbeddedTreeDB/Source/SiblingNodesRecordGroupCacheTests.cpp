@@ -34,6 +34,7 @@ SiblingNodesRecordGroupCacheTests::SiblingNodesRecordGroupCacheTests(const TestN
     append<HeapAllocationErrorsTest>("operator[] test 2", SubscriptOperatorTest2);
     append<HeapAllocationErrorsTest>("find test 1", FindTest1);
     append<HeapAllocationErrorsTest>("find test 2", FindTest2);
+    append<HeapAllocationErrorsTest>("erase test 1", EraseTest1);
 }
 
 void SiblingNodesRecordGroupCacheTests::ConstructionTest1(Test& test)
@@ -96,5 +97,22 @@ void SiblingNodesRecordGroupCacheTests::FindTest2(Test& test)
     ISHTF_FAIL_UNLESS((bool)found);
     // Make sure we return the group that was created during the first call
     ISHTF_FAIL_UNLESS(group1.get() == group2.get());
+    ISHTF_PASS();
+}
+
+void SiblingNodesRecordGroupCacheTests::EraseTest1(Test& test)
+{
+    DiplodocusDB::SiblingNodesRecordGroupCache cache;
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group1 = cache[DiplodocusDB::NodeID(1)];
+
+    ISHTF_FAIL_UNLESS(group1->parentNodeID() == DiplodocusDB::NodeID(1));
+    ISHTF_FAIL_UNLESS(group1->size() == 0);
+
+    cache.erase(DiplodocusDB::NodeID(1));
+
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> group2;
+    bool found = cache.find(DiplodocusDB::NodeID(1), group2);
+
+    ISHTF_FAIL_IF((bool)found);
     ISHTF_PASS();
 }
