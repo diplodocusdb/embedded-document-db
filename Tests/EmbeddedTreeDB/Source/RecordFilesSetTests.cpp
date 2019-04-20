@@ -20,16 +20,20 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_CACHEDRECORDFILESSET_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_CACHEDRECORDFILESSET_H_
+#include "RecordFilesSetTests.h"
+#include "RecordFilesSet.h"
 
-namespace DiplodocusDB
+using namespace Ishiko::Tests;
+
+RecordFilesSetTests::RecordFilesSetTests(const TestNumber& number, const TestEnvironment& environment)
+    : TestSequence(number, "RecordFilesSet tests", environment)
 {
-
-class CachedRecordFilesSet
-{
-};
-
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
 }
 
-#endif
+void RecordFilesSetTests::ConstructionTest1(Test& test)
+{
+    DiplodocusDB::RecordFilesSet set;
+
+    ISHTF_PASS();
+}

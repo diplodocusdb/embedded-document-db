@@ -20,16 +20,19 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_CACHEDRECORDFILESSET_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_CACHEDRECORDFILESSET_H_
+#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_CACHEDRECORDFILESSETTESTS_H_
+#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_CACHEDRECORDFILESSETTESTS_H_
 
-namespace DiplodocusDB
-{
+#include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-class CachedRecordFilesSet
+class CachedRecordFilesSetTests : public Ishiko::Tests::TestSequence
 {
+public:
+    CachedRecordFilesSetTests(const Ishiko::Tests::TestNumber& number,
+        const Ishiko::Tests::TestEnvironment& environment);
+
+private:
+    static void ConstructionTest1(Ishiko::Tests::Test& test);
 };
-
-}
 
 #endif

@@ -24,6 +24,8 @@ program DiplodocusEmbeddedTreeDBTests : DiplodocusEmbeddedTreeDB, IshikoTestFram
         ../../Source/SiblingNodesRecordGroupCacheTests.h
         ../../Source/MasterFileTests.h
         ../../Source/SecondaryFileTests.h
+        ../../Source/RecordFilesSetTests.h
+        ../../Source/CachedRecordFilesSetTests.h
         ../../Source/EmbeddedTreeDBTests.h
         ../../Source/TransactionTests.h
     }
@@ -38,6 +40,8 @@ program DiplodocusEmbeddedTreeDBTests : DiplodocusEmbeddedTreeDB, IshikoTestFram
         ../../Source/SiblingNodesRecordGroupCacheTests.cpp
         ../../Source/MasterFileTests.cpp
         ../../Source/SecondaryFileTests.cpp
+        ../../Source/RecordFilesSetTests.cpp
+        ../../Source/CachedRecordFilesSetTests.cpp
         ../../Source/EmbeddedTreeDBTests.cpp
         ../../Source/TransactionTests.cpp
     }

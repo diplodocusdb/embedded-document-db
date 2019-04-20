@@ -27,6 +27,8 @@
 #include "SiblingNodesRecordGroupCacheTests.h"
 #include "MasterFileTests.h"
 #include "SecondaryFileTests.h"
+#include "RecordFilesSetTests.h"
+#include "CachedRecordFilesSetTests.h"
 #include "EmbeddedTreeDBTests.h"
 #include "TransactionTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
@@ -51,6 +53,8 @@ int main(int argc, char* argv[])
     theTests.append<SiblingNodesRecordGroupCacheTests>();
     theTests.append<MasterFileTests>();
     theTests.append<SecondaryFileTests>();
+    theTests.append<RecordFilesSetTests>();
+    theTests.append<CachedRecordFilesSetTests>();
     theTests.append<EmbeddedTreeDBTests>();
     theTests.append<TransactionTests>();
 
