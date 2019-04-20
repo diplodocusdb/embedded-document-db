@@ -33,7 +33,10 @@ public:
 
 private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest1(Ishiko::Tests::Test& test);
+    static void SubscriptOperatorTest2(Ishiko::Tests::Test& test);
     static void FindTest1(Ishiko::Tests::Test& test);
+    static void FindTest2(Ishiko::Tests::Test& test);
 };
 
 #endif

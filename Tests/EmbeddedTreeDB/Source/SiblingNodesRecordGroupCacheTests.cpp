@@ -30,12 +30,42 @@ SiblingNodesRecordGroupCacheTests::SiblingNodesRecordGroupCacheTests(const TestN
     : TestSequence(number, "SiblingNodesRecordGroupCache tests", environment)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+    append<HeapAllocationErrorsTest>("operator[] test 1", SubscriptOperatorTest1);
+    append<HeapAllocationErrorsTest>("operator[] test 2", SubscriptOperatorTest2);
     append<HeapAllocationErrorsTest>("find test 1", FindTest1);
+    append<HeapAllocationErrorsTest>("find test 2", FindTest2);
 }
 
 void SiblingNodesRecordGroupCacheTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::SiblingNodesRecordGroupCache cache;
+
+    ISHTF_PASS();
+}
+
+void SiblingNodesRecordGroupCacheTests::SubscriptOperatorTest1(Test& test)
+{
+    DiplodocusDB::SiblingNodesRecordGroupCache cache;
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group = cache[DiplodocusDB::NodeID(1)];
+
+    ISHTF_FAIL_UNLESS(group->parentNodeID() == DiplodocusDB::NodeID(1));
+    ISHTF_FAIL_UNLESS(group->size() == 0);
+    ISHTF_PASS();
+}
+
+void SiblingNodesRecordGroupCacheTests::SubscriptOperatorTest2(Test& test)
+{
+    DiplodocusDB::SiblingNodesRecordGroupCache cache;
+    
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group1 = cache[DiplodocusDB::NodeID(1)];
+
+    ISHTF_FAIL_UNLESS(group1->parentNodeID() == DiplodocusDB::NodeID(1));
+    ISHTF_FAIL_UNLESS(group1->size() == 0);
+
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group2 = cache[DiplodocusDB::NodeID(1)];
+
+    // Make sure we return the group that was created during the first call
+    ISHTF_FAIL_UNLESS(&group1 == &group2);
 
     ISHTF_PASS();
 }
@@ -48,5 +78,23 @@ void SiblingNodesRecordGroupCacheTests::FindTest1(Test& test)
 
     ISHTF_FAIL_IF(found);
     ISHTF_FAIL_IF((bool)group);
+    ISHTF_PASS();
+}
+
+void SiblingNodesRecordGroupCacheTests::FindTest2(Test& test)
+{
+    DiplodocusDB::SiblingNodesRecordGroupCache cache;
+
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group1 = cache[DiplodocusDB::NodeID(1)];
+
+    ISHTF_FAIL_UNLESS(group1->parentNodeID() == DiplodocusDB::NodeID(1));
+    ISHTF_FAIL_UNLESS(group1->size() == 0);
+
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> group2;
+    bool found = cache.find(DiplodocusDB::NodeID(1), group2);
+
+    ISHTF_FAIL_UNLESS((bool)found);
+    // Make sure we return the group that was created during the first call
+    ISHTF_FAIL_UNLESS(group1.get() == group2.get());
     ISHTF_PASS();
 }

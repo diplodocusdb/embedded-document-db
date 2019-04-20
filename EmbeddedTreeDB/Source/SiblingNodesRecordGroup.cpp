@@ -26,6 +26,11 @@
 namespace DiplodocusDB
 {
 
+SiblingNodesRecordGroup::SiblingNodesRecordGroup(const NodeID& parentNodeID)
+    : m_parentNodeID(parentNodeID)
+{
+}
+
 SiblingNodesRecordGroup::SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node)
 {
     m_parentNodeID = node.parentNodeID();
