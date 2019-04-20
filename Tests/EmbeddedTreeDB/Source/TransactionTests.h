@@ -34,6 +34,7 @@ private:
     static void CreateTransactionTest1(Ishiko::Tests::FileComparisonTest& test);
     static void CommitTransactionTest1(Ishiko::Tests::FileComparisonTest& test);
     static void AppendChildNodeTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void AppendChildNodeTest2(Ishiko::Tests::FileComparisonTest& test);
     static void RollbackTransactionTest1(Ishiko::Tests::FileComparisonTest& test);
 };
 
