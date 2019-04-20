@@ -36,8 +36,8 @@ public:
     void openMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
-    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
-        Ishiko::Error& error);
+    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID,
+        std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error);
     void addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
 
