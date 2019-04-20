@@ -62,13 +62,7 @@ bool NodeID::operator>(const NodeID& other) const
 
 void NodeID::read(PageRepositoryReader& reader, Ishiko::Error& error)
 {
-    // TODO: this needs to decode LEB128
-    uint8_t id;
-    reader.read((char*)&id, 1, error);
-    if (!error)
-    {
-        m_value = id;
-    }
+    m_value = reader.readLEB128(error);
 }
 
 void NodeID::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
