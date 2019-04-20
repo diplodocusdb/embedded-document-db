@@ -32,6 +32,9 @@ CachedRecordFilesSetTests::CachedRecordFilesSetTests(const TestNumber& number, c
     append<FileComparisonTest>("createMasterFile test 1", CreateMasterFileTest1);
     append<HeapAllocationErrorsTest>("openMasterFile test 1", OpenMasterFileTest1);
     append<HeapAllocationErrorsTest>("openMasterFile test 2", OpenMasterFileTest2);
+    append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
+    append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
+    append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
 }
 
 void CachedRecordFilesSetTests::ConstructionTest1(Test& test)
@@ -74,13 +77,13 @@ void CachedRecordFilesSetTests::OpenMasterFileTest1(Test& test)
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup;
     bool found = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(found);
-    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup.size() == 1);
-    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup[0].name() == "/");
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup->size() == 1);
+    ISHTF_FAIL_UNLESS((*siblingsNodesRecordGroup)[0].name() == "/");
     ISHTF_PASS();
 }
 
@@ -95,12 +98,101 @@ void CachedRecordFilesSetTests::OpenMasterFileTest2(Test& test)
 
     ISHTF_ABORT_IF((bool)error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup;
     bool found = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup, error);
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(found);
-    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup.size() == 1);
-    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup[0].name() == "key1");
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup->size() == 1);
+    ISHTF_FAIL_UNLESS((*siblingsNodesRecordGroup)[0].name() == "key1");
+    ISHTF_PASS();
+}
+
+void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest1(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    cachedSet.openMasterFile(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
+    // The record group can be found by passing 0 as the parent Node ID.
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
+    bool found1 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup1, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(found1);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup1->size() == 1);
+    ISHTF_FAIL_UNLESS((*siblingsNodesRecordGroup1)[0].name() == "/");
+
+    // Verify the cache is working as expected
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
+    bool found2 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup2, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(found2);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup1.get() == siblingsNodesRecordGroup2.get());
+
+    ISHTF_PASS();
+}
+
+void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest2(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    cachedSet.openMasterFile(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
+    bool found1 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup1, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(found1);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup1->size() == 1);
+    ISHTF_FAIL_UNLESS((*siblingsNodesRecordGroup1)[0].name() == "key1");
+
+    // Verify the cache is working as expected
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
+    bool found2 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup2, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(found2);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup1.get() == siblingsNodesRecordGroup2.get());
+
+    ISHTF_PASS();
+}
+
+void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest3(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    cachedSet.openMasterFile(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
+    bool found1 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(3), siblingsNodesRecordGroup1, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(!found1);
+
+    // Verify the cache is working as expected
+    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
+    bool found2 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(3), siblingsNodesRecordGroup2, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(!found2);
+
     ISHTF_PASS();
 }

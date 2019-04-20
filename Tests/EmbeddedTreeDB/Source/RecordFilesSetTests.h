@@ -35,6 +35,9 @@ private:
     static void CreateMasterFileTest1(Ishiko::Tests::FileComparisonTest& test);
     static void OpenMasterFileTest1(Ishiko::Tests::Test& test);
     static void OpenMasterFileTest2(Ishiko::Tests::Test& test);
+    static void FindSiblingNodesRecordGroupTest1(Ishiko::Tests::Test& test);
+    static void FindSiblingNodesRecordGroupTest2(Ishiko::Tests::Test& test);
+    static void FindSiblingNodesRecordGroupTest3(Ishiko::Tests::Test& test);
 };
 
 #endif
