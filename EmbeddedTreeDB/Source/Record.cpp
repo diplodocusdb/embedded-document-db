@@ -236,9 +236,7 @@ void Record::writeBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error
 std::string Record::readString(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     std::string name;
-    // TODO: this needs to decode LEB128
-    uint8_t size;
-    reader.read((char*)&size, 1, error);
+    size_t size = reader.readLEB128(error);
     if (!error)
     {
         name.resize(size);
