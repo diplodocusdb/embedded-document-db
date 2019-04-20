@@ -30,6 +30,8 @@ RecordFilesSetTests::RecordFilesSetTests(const TestNumber& number, const TestEnv
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
     append<FileComparisonTest>("createMasterFile test 1", CreateMasterFileTest1);
+    append<HeapAllocationErrorsTest>("openMasterFile test 1", OpenMasterFileTest1);
+    append<HeapAllocationErrorsTest>("openMasterFile test 2", OpenMasterFileTest2);
 }
 
 void RecordFilesSetTests::ConstructionTest1(Test& test)
@@ -56,5 +58,49 @@ void RecordFilesSetTests::CreateMasterFileTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "MasterFileTests_CreateTest1.dpdb");
 
+    ISHTF_PASS();
+}
+
+void RecordFilesSetTests::OpenMasterFileTest1(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest1.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::RecordFilesSet set;
+    set.openMasterFile(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
+    // The record group can be found by passing 0 as the parent Node ID.
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = set.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(found);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup.size() == 1);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup[0].name() == "/");
+    ISHTF_PASS();
+}
+
+void RecordFilesSetTests::OpenMasterFileTest2(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
+
+    Ishiko::Error error(0);
+
+    DiplodocusDB::RecordFilesSet set;
+    set.openMasterFile(inputPath, error);
+
+    ISHTF_ABORT_IF((bool)error);
+
+    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = set.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(found);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup.size() == 1);
+    ISHTF_FAIL_UNLESS(siblingsNodesRecordGroup[0].name() == "key1");
     ISHTF_PASS();
 }

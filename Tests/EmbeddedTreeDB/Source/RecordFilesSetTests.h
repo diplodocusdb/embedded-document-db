@@ -33,6 +33,8 @@ public:
 private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
     static void CreateMasterFileTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void OpenMasterFileTest1(Ishiko::Tests::Test& test);
+    static void OpenMasterFileTest2(Ishiko::Tests::Test& test);
 };
 
 #endif
