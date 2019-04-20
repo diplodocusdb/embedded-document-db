@@ -36,18 +36,20 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(RecordFilesSet& record
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
 
-    SiblingNodesRecordGroup existingSiblingNodesRecordGroup;
-    bool found = recordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), existingSiblingNodesRecordGroup,
+    std::shared_ptr<SiblingNodesRecordGroup> existingSiblingNodesRecordGroup;
+    bool found = findSiblingNodesRecordGroup(recordFiles, parentNodeImpl.nodeID(), existingSiblingNodesRecordGroup,
         error);
     if (!error)
     {
         if (found)
         {
-            // TODO
+            existingSiblingNodesRecordGroup->push_back(nodeImpl);
+            
+            // TODO : add to m_updated... unless already in it or in m_new..
         }
         else
         {
-            m_newSiblingNodesRecordGroup.emplace_back(nodeImpl);
+            m_newSiblingNodesRecordGroups.emplace_back(std::make_shared<SiblingNodesRecordGroup>(nodeImpl));
         }
     }
 
@@ -58,9 +60,9 @@ void EmbeddedTreeDBTransactionImpl::commit(RecordFilesSet& recordFiles, Ishiko::
 {
     // TODO : updated siblings
 
-    for (const SiblingNodesRecordGroup& siblingNodes : m_newSiblingNodesRecordGroup)
+    for (std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes : m_newSiblingNodesRecordGroups)
     {
-        recordFiles.addSiblingNodesRecordGroup(siblingNodes, error);
+        recordFiles.addSiblingNodesRecordGroup(*siblingNodes, error);
         if (error)
         {
             break;
@@ -71,6 +73,30 @@ void EmbeddedTreeDBTransactionImpl::commit(RecordFilesSet& recordFiles, Ishiko::
 void EmbeddedTreeDBTransactionImpl::rollback()
 {
     // TODO
+}
+
+bool EmbeddedTreeDBTransactionImpl::findSiblingNodesRecordGroup(RecordFilesSet& recordFiles,
+    const NodeID& parentNodeID, std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error)
+{
+    for (std::shared_ptr<SiblingNodesRecordGroup>& group : m_newSiblingNodesRecordGroups)
+    {
+        if (group->parentNodeID() == parentNodeID)
+        {
+            siblingNodes = group;
+            return true;
+        }
+    }
+    for (std::shared_ptr<SiblingNodesRecordGroup>& group : m_updatedSiblingNodesRecordGroups)
+    {
+        if (group->parentNodeID() == parentNodeID)
+        {
+            siblingNodes = group;
+            return true;
+        }
+    }
+    // TODO : this should be cached
+    siblingNodes = std::make_shared<SiblingNodesRecordGroup>(parentNodeID);
+    return recordFiles.findSiblingNodesRecordGroup(parentNodeID, *siblingNodes, error);
 }
 
 }

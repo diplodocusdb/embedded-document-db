@@ -27,6 +27,7 @@
 #include "RecordFilesSet.h"
 #include "SiblingNodesRecordGroup.h"
 #include <vector>
+#include <memory>
 
 namespace DiplodocusDB
 {
@@ -41,8 +42,13 @@ public:
     void rollback();
 
 private:
-    std::vector<SiblingNodesRecordGroup> m_newSiblingNodesRecordGroup;
-    std::vector<SiblingNodesRecordGroup> m_updatedSiblingNodesRecordGroup;
+    bool findSiblingNodesRecordGroup(RecordFilesSet& recordFiles, const NodeID& parentNodeID,
+        std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error);
+
+private:
+    // TODO : see comments about using shared pointers in SiblingNodesRecordGroupCache, the same may apply here
+    std::vector<std::shared_ptr<SiblingNodesRecordGroup>> m_newSiblingNodesRecordGroups;
+    std::vector<std::shared_ptr<SiblingNodesRecordGroup>> m_updatedSiblingNodesRecordGroups;
 };
 
 }
