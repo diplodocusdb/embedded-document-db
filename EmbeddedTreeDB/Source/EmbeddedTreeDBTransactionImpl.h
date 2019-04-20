@@ -24,7 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBTRANSACTIONIMPL_H_
 
 #include "DiplodocusDB/TreeDB/Core/TreeDBTransactionImpl.h"
-#include "RecordFilesSet.h"
+#include "CachedRecordFilesSet.h"
 #include "SiblingNodesRecordGroup.h"
 #include <vector>
 #include <memory>
@@ -35,14 +35,21 @@ namespace DiplodocusDB
 class EmbeddedTreeDBTransactionImpl : public TreeDBTransactionImpl
 {
 public:
-    TreeDBNode appendChildNode(RecordFilesSet& recordFiles, TreeDBNode& parent, const std::string& name,
+    TreeDBNode appendChildNode(CachedRecordFilesSet& cachedRecordFiles, TreeDBNode& parent, const std::string& name,
         const TreeDBValue& value, Ishiko::Error& error);
 
-    void commit(RecordFilesSet& recordFiles, Ishiko::Error& error);
+    void commit(CachedRecordFilesSet& cachedRecordFiles, Ishiko::Error& error);
     void rollback();
 
 private:
-    bool findSiblingNodesRecordGroup(RecordFilesSet& recordFiles, const NodeID& parentNodeID,
+    enum EFindResult
+    {
+        eNotFound,
+        eFoundInNew,
+        eFoundInUpdated,
+        eFoundInCache
+    };
+    EFindResult findSiblingNodesRecordGroup(CachedRecordFilesSet& cachedRecordFiles, const NodeID& parentNodeID,
         std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error);
 
 private:
