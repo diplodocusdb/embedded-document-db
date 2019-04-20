@@ -53,6 +53,9 @@
     <ClInclude Include="..\..\Source\RecordFilesSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\CachedRecordFilesSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\MasterFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -98,6 +101,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\RecordFilesSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\CachedRecordFilesSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\MasterFileMetadata.cpp">
