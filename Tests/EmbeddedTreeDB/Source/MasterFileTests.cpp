@@ -40,8 +40,8 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestEnvironment
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 5", AddSiblingNodesRecordGroupTest5);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 6", AddSiblingNodesRecordGroupTest6);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 7", AddSiblingNodesRecordGroupTest7);
-    append<FileComparisonTest>("addSiblingNodesRecordGroup test 8", AddSiblingNodesRecordGroupTest8);
     append<FileComparisonTest>("addSiblingNodesRecordGroup test 9", AddSiblingNodesRecordGroupTest9);
+    append<FileComparisonTest>("addSiblingNodesRecordGroup test 10", AddSiblingNodesRecordGroupTest10);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
@@ -362,10 +362,10 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest7(FileComparisonTest& test)
     ISHTF_PASS();
 }
 
-void MasterFileTests::AddSiblingNodesRecordGroupTest8(FileComparisonTest& test)
+void MasterFileTests::AddSiblingNodesRecordGroupTest9(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb");
 
     Ishiko::Error error(0);
 
@@ -385,15 +385,15 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest8(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb");
 
     ISHTF_PASS();
 }
 
-void MasterFileTests::AddSiblingNodesRecordGroupTest9(FileComparisonTest& test)
+void MasterFileTests::AddSiblingNodesRecordGroupTest10(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb");
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest10.dpdb");
 
     Ishiko::Error error(0);
 
@@ -418,7 +418,7 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest9(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb");
+        / "MasterFileTests_AddSiblingNodesRecordGroupTest10.dpdb");
 
     ISHTF_PASS();
 }
