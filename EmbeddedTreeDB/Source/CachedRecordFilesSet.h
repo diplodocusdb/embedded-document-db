@@ -23,11 +23,27 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_CACHEDRECORDFILESSET_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_CACHEDRECORDFILESSET_H_
 
+#include "SiblingNodesRecordGroupCache.h"
+#include "RecordFilesSet.h"
+
 namespace DiplodocusDB
 {
 
 class CachedRecordFilesSet
 {
+public:
+    void createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);
+    void openMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);
+    void close();
+
+    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
+        Ishiko::Error& error);
+    void addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
+    void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
+
+private:
+    SiblingNodesRecordGroupCache m_siblingNodesRecordGroupCache;
+    RecordFilesSet m_recordFiles;
 };
 
 }

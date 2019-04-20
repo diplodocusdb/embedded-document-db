@@ -21,3 +21,41 @@
 */
 
 #include "CachedRecordFilesSet.h"
+
+namespace DiplodocusDB
+{
+
+void CachedRecordFilesSet::createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
+{
+    m_recordFiles.createMasterFile(path, error);
+}
+
+void CachedRecordFilesSet::openMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
+{
+    m_recordFiles.openMasterFile(path, error);
+}
+
+void CachedRecordFilesSet::close()
+{
+    m_recordFiles.close();
+}
+
+bool CachedRecordFilesSet::findSiblingNodesRecordGroup(const NodeID& parentNodeID,
+    SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
+{
+    return m_recordFiles.findSiblingNodesRecordGroup(parentNodeID, siblingNodes, error);
+}
+
+void CachedRecordFilesSet::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes,
+    Ishiko::Error& error)
+{
+    m_recordFiles.addSiblingNodesRecordGroup(siblingNodes, error);
+}
+
+void CachedRecordFilesSet::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes,
+    Ishiko::Error& error)
+{
+    m_recordFiles.updateSiblingNodesRecordGroup(siblingNodes, error);
+}
+
+}

@@ -23,8 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
-#include "SiblingNodesRecordGroupCache.h"
-#include "RecordFilesSet.h"
+#include "CachedRecordFilesSet.h"
 #include "RecordMarker.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDB.h"
 #include "Ishiko/Errors/Error.h"
@@ -87,8 +86,7 @@ public:
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
 
 private:
-    SiblingNodesRecordGroupCache m_siblingNodesRecordGroupCache;
-    RecordFilesSet m_recordFiles;
+    CachedRecordFilesSet m_cachedRecordFiles;
     TreeDBNode m_root;
 };
 

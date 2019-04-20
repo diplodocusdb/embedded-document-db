@@ -37,7 +37,7 @@ EmbeddedTreeDBImpl::~EmbeddedTreeDBImpl()
 
 void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& error)
 {
-    m_recordFiles.createMasterFile(path, error);
+    m_cachedRecordFiles.createMasterFile(path, error);
     if (!error)
     {
         m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(1), "/"));
@@ -46,7 +46,7 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Err
 
 void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
-    m_recordFiles.openMasterFile(path, error);
+    m_cachedRecordFiles.openMasterFile(path, error);
     if (!error)
     {
         m_root = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(NodeID(0), NodeID(1), "/"));
@@ -55,7 +55,7 @@ void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error
 
 void EmbeddedTreeDBImpl::close()
 {
-    m_recordFiles.close();
+    m_cachedRecordFiles.close();
 }
 
 TreeDBNode& EmbeddedTreeDBImpl::root()
@@ -76,7 +76,8 @@ std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& parent, Ishik
 
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
     SiblingNodesRecordGroup siblingNodesRecordGroup;
-    bool found = m_recordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
+    bool found = m_cachedRecordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup,
+        error);
     if (!error && found)
     {
         // TODO: use iterator, also need to check the impact of copying these things around
@@ -96,7 +97,8 @@ TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name
 
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
     SiblingNodesRecordGroup siblingNodesRecordGroup;
-    bool found = m_recordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup, error);
+    bool found = m_cachedRecordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup,
+        error);
     if (!error && found)
     {
         EmbeddedTreeDBNodeImpl node;
@@ -154,7 +156,7 @@ TreeDBTransaction EmbeddedTreeDBImpl::createTransaction(Ishiko::Error& error)
 void EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
     EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
-    transactionImpl.commit(m_recordFiles, error);
+    transactionImpl.commit(m_cachedRecordFiles, error);
 }
 
 void EmbeddedTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
@@ -169,7 +171,7 @@ void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Is
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
-    m_recordFiles.addSiblingNodesRecordGroup(siblings, error);
+    m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
@@ -188,7 +190,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index,
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
-    m_recordFiles.addSiblingNodesRecordGroup(siblings, error);
+    m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
 
@@ -209,7 +211,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
-    m_recordFiles.addSiblingNodesRecordGroup(siblings, error);
+    m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
 
@@ -230,7 +232,7 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNo
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
     SiblingNodesRecordGroup siblings(nodeImpl);
-    m_recordFiles.addSiblingNodesRecordGroup(siblings, error);
+    m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
 
@@ -258,20 +260,20 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
     nodeImpl.value() = value;
 
     SiblingNodesRecordGroup existingSiblingNodesRecordGroup;
-    bool found = m_recordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), existingSiblingNodesRecordGroup,
-        error);
+    bool found = m_cachedRecordFiles.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(),
+        existingSiblingNodesRecordGroup, error);
     if (!error)
     {
         if (found)
         {
             // TODO
             existingSiblingNodesRecordGroup.push_back(nodeImpl);
-            m_recordFiles.updateSiblingNodesRecordGroup(existingSiblingNodesRecordGroup, error);
+            m_cachedRecordFiles.updateSiblingNodesRecordGroup(existingSiblingNodesRecordGroup, error);
         }
         else
         {
             SiblingNodesRecordGroup siblings(nodeImpl);
-            m_recordFiles.addSiblingNodesRecordGroup(siblings, error);
+            m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
         }
     }
 
@@ -282,7 +284,7 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, T
     const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
 {
     EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
-    return transactionImpl.appendChildNode(m_recordFiles, parent, name, value, error);
+    return transactionImpl.appendChildNode(m_cachedRecordFiles, parent, name, value, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
