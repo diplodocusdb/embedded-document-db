@@ -70,8 +70,12 @@ public:
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         const TreeDBValue& value, Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
+    TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+        Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error);
+    TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+        const TreeDBValue& value, Ishiko::Error& error);
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
         Ishiko::Error& error);

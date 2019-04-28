@@ -184,9 +184,26 @@ TreeDBNode XMLTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string&
     return appendChildNode(parent, name, value, error);
 }
 
+TreeDBNode XMLTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+    Ishiko::Error& error)
+{
+    TreeDBValue value;
+    return appendChildNode(transaction, parent, name, value, error);
+}
+
 TreeDBNode XMLTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
     Ishiko::Error& error)
 {
+    XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
+    TreeDBNode result = parentNodeImpl.appendChildNode(name, value, error);
+    commitNode(parentNodeImpl, error);
+    return result;
+}
+
+TreeDBNode XMLTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
+    const TreeDBValue& value, Ishiko::Error& error)
+{
+    // TODO : make this a transaction!!!
     XMLTreeDBNodeImpl& parentNodeImpl = static_cast<XMLTreeDBNodeImpl&>(*parent.impl());
     TreeDBNode result = parentNodeImpl.appendChildNode(name, value, error);
     commitNode(parentNodeImpl, error);
