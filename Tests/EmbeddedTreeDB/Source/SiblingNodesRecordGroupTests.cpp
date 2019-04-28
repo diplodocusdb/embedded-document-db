@@ -69,7 +69,7 @@ void SiblingNodesRecordGroupTests::WriteTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -107,7 +107,7 @@ void SiblingNodesRecordGroupTests::WriteTest2(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -144,7 +144,7 @@ void SiblingNodesRecordGroupTests::WriteTest3(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -183,7 +183,7 @@ void SiblingNodesRecordGroupTests::WriteTest4(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 

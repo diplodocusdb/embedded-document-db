@@ -439,7 +439,7 @@ void RecordTests::WriteMasterFileMetadataTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -475,7 +475,7 @@ void RecordTests::WriteDataStartTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -511,7 +511,7 @@ void RecordTests::WriteDataEndTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -547,7 +547,7 @@ void RecordTests::WriteNodeStartTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -583,7 +583,7 @@ void RecordTests::WriteNodeEndTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -619,7 +619,7 @@ void RecordTests::WriteParentNodeIDTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -655,7 +655,7 @@ void RecordTests::WriteNodeNameTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -693,7 +693,7 @@ void RecordTests::WriteNodeNameTest2(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -729,7 +729,7 @@ void RecordTests::WriteNodeIDTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -765,7 +765,7 @@ void RecordTests::WriteNodeIDTest2(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -801,7 +801,7 @@ void RecordTests::WritePersistentNodeIDTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -838,7 +838,7 @@ void RecordTests::WriteInlineValueBinaryTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -875,7 +875,7 @@ void RecordTests::WriteInlineValueBooleanTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
@@ -912,7 +912,7 @@ void RecordTests::WriteInlineValueUTF8StringTest1(FileComparisonTest& test)
 
     ISHTF_FAIL_IF((bool)error);
 
-    page->save(error);
+    repository.save(*page, error);
 
     ISHTF_FAIL_IF((bool)error);
 
