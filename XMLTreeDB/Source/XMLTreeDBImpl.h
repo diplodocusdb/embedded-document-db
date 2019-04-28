@@ -52,9 +52,9 @@ public:
     void traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*callback)(TreeDB& db, TreeDBNode& node),
         void* callbackData);
 
-    TreeDBTransaction createTransaction();
-    TreeDBTransaction commitTransaction(TreeDBTransaction& transaction);
-    TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction);
+    TreeDBTransaction createTransaction(Ishiko::Error& error);
+    void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error);
+    void rollbackTransaction(TreeDBTransaction& transaction);
 
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error);
 

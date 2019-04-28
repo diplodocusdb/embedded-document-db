@@ -96,17 +96,17 @@ void XMLTreeDB::traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*cal
     return m_impl->traverse(node, order, callback, callbackData);
 }
 
-TreeDBTransaction XMLTreeDB::createTransaction()
+TreeDBTransaction XMLTreeDB::createTransaction(Ishiko::Error& error)
 {
-    return m_impl->createTransaction();
+    return m_impl->createTransaction(error);
 }
 
-TreeDBTransaction XMLTreeDB::commitTransaction(TreeDBTransaction& transaction)
+void XMLTreeDB::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
-    return m_impl->commitTransaction(transaction);
+    return m_impl->commitTransaction(transaction, error);
 }
 
-TreeDBTransaction XMLTreeDB::rollbackTransaction(TreeDBTransaction& transaction)
+void XMLTreeDB::rollbackTransaction(TreeDBTransaction& transaction)
 {
     return m_impl->rollbackTransaction(transaction);
 }

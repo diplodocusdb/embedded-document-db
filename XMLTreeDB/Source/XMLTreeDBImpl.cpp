@@ -107,22 +107,20 @@ void XMLTreeDBImpl::traverse(TreeDBNode& node, ETreeTraversalOrder order,
     // TODO
 }
 
-TreeDBTransaction XMLTreeDBImpl::createTransaction()
+TreeDBTransaction XMLTreeDBImpl::createTransaction(Ishiko::Error& error)
 {
     // TODO
     return TreeDBTransaction(std::make_shared<XMLTreeDBTransactionImpl>());
 }
 
-TreeDBTransaction XMLTreeDBImpl::commitTransaction(TreeDBTransaction& transaction)
+void XMLTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
     // TODO
-    return TreeDBTransaction(std::make_shared<XMLTreeDBTransactionImpl>());
 }
 
-TreeDBTransaction XMLTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
+void XMLTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
 {
     // TODO
-    return TreeDBTransaction(std::make_shared<XMLTreeDBTransactionImpl>());
 }
 
 void XMLTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)

@@ -57,9 +57,9 @@ public:
     void traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*callback)(TreeDB& db, TreeDBNode& node),
         void* callbackData) override;
 
-    TreeDBTransaction createTransaction() override;
-    TreeDBTransaction commitTransaction(TreeDBTransaction& transaction) override;
-    TreeDBTransaction rollbackTransaction(TreeDBTransaction& transaction) override;
+    TreeDBTransaction createTransaction(Ishiko::Error& error) override;
+    void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error) override;
+    void rollbackTransaction(TreeDBTransaction& transaction) override;
 
     void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error) override;
 
