@@ -63,6 +63,12 @@ TreeDBNode& EmbeddedTreeDBImpl::root()
     return m_root;
 }
 
+TreeDBValue EmbeddedTreeDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
+{
+    EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
+    return nodeImpl.value();
+}
+
 TreeDBNode EmbeddedTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
 {
     // TODO

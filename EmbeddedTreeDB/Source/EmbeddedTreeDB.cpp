@@ -51,6 +51,11 @@ TreeDBNode& EmbeddedTreeDB::root()
     return m_impl->root();
 }
 
+TreeDBValue EmbeddedTreeDB::value(TreeDBNode& node, Ishiko::Error& error)
+{
+    return m_impl->value(node, error);
+}
+
 TreeDBNode EmbeddedTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)
 {
     return m_impl->parent(node, error);
