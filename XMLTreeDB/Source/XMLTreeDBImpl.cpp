@@ -59,6 +59,12 @@ TreeDBNode& XMLTreeDBImpl::root()
     return m_root;
 }
 
+TreeDBValue XMLTreeDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
+{
+    XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
+    return nodeImpl.value();
+}
+
 TreeDBNode XMLTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
 {
     XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());

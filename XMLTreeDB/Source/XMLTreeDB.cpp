@@ -55,6 +55,11 @@ TreeDBNode& XMLTreeDB::root()
     return m_impl->root();
 }
 
+TreeDBValue XMLTreeDB::value(TreeDBNode& node, Ishiko::Error& error)
+{
+    return m_impl->value(node, error);
+}
+
 TreeDBNode XMLTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)
 {
     return m_impl->parent(node, error);

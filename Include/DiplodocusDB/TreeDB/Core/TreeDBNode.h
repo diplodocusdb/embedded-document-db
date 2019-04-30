@@ -46,8 +46,6 @@ public:
     bool operator !=(const TreeDBNode& other) const;
 
     const std::string& name() const;
-    const TreeDBValue& value() const;
-    TreeDBValue& value();
 
     bool isRoot() const;
 

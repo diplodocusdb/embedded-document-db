@@ -56,16 +56,6 @@ const std::string& TreeDBNode::name() const
     return m_impl->name();
 }
 
-const TreeDBValue& TreeDBNode::value() const
-{
-    return m_impl->value();
-}
-
-TreeDBValue& TreeDBNode::value()
-{
-    return m_impl->value();
-}
-
 bool TreeDBNode::isRoot() const
 {
     return m_impl->isRoot();
