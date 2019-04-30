@@ -24,6 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDB_H_
 
 #include "TreeDBNode.h"
+#include "TreeDBValue.h"
 #include "TreeDBTransaction.h"
 #include "Ishiko/Errors/Error.h"
 
@@ -50,6 +51,8 @@ public:
 
     /// Returns the root of the tree.
     virtual TreeDBNode& root() = 0;
+
+    virtual TreeDBValue value(TreeDBNode& node, Ishiko::Error& error) = 0;
 
     virtual TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) = 0;
     virtual std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error) = 0;
