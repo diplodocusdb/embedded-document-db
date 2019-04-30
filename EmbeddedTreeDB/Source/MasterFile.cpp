@@ -31,8 +31,7 @@ MasterFile::MasterFile()
 {
 }
 
-void MasterFile::create(const boost::filesystem::path& path,
-                        Ishiko::Error& error)
+void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_repository.create(path, error);
     if (error)
@@ -72,7 +71,7 @@ void MasterFile::create(const boost::filesystem::path& path,
         return;
     }
 
-    m_dataEndPage = page;
+    m_dataEndPageIndex = page->index();
     m_dataEndOffset = page->dataSize();
     Record dataEndRecord(Record::ERecordType::eDataEnd);
     dataEndRecord.write(writer, error);
@@ -81,19 +80,19 @@ void MasterFile::create(const boost::filesystem::path& path,
         return;
     }
     
-    page->save(error);
+    m_repository.save(*page, error);
 }
 
-void MasterFile::open(const boost::filesystem::path& path,
-                      Ishiko::Error& error)
+void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_repository.open(path, error);
     m_dataStartOffset = 14;
-    m_dataEndPage = m_repository.page(m_repository.pageCount() - 1, error);
+    m_dataEndPageIndex = m_repository.pageCount() - 1;
+    std::shared_ptr<Page> dataEndPage = m_repository.page(m_dataEndPageIndex, error);
     if (!error)
     {
         // Deduct 1 for the end of data record
-        m_dataEndOffset = (m_dataEndPage->dataSize() - 1);
+        m_dataEndOffset = (dataEndPage->dataSize() - 1);
     }
 }
 
@@ -109,7 +108,7 @@ RecordMarker MasterFile::rootNodePosition() const
 
 RecordMarker MasterFile::dataEndPosition() const
 {
-    return RecordMarker(PageRepositoryPosition(m_dataEndPage->index(), m_dataEndOffset));
+    return RecordMarker(PageRepositoryPosition(m_dataEndPageIndex, m_dataEndOffset));
 }
 
 bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
@@ -130,6 +129,10 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
         {
             SiblingNodesRecordGroup siblingNodesRecordGroup;
             siblingNodesRecordGroup.readWithoutType(reader, error);
+            if (error)
+            {
+                break;
+            }
             if (siblingNodesRecordGroup.parentNodeID() == parentNodeID)
             {
                 siblingNodes = siblingNodesRecordGroup;
@@ -172,8 +175,8 @@ void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& sibli
         return;
     }
 
-    m_dataEndPage = writer.currentPage();
-    m_dataEndOffset = (m_dataEndPage->dataSize() - 1);
+    m_dataEndPageIndex = writer.currentPosition().page();
+    m_dataEndOffset = writer.currentPosition().offset();
 }
 
 void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)

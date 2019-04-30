@@ -117,7 +117,11 @@ void EmbeddedTreeDBTests::OpenTest2(Test& test)
     DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(node.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+
+    DiplodocusDB::TreeDBValue value = db.value(node, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(value.type() == DiplodocusDB::EPrimitiveDataType::eNULL);
     ISHTF_PASS();
 }
 
@@ -135,12 +139,20 @@ void EmbeddedTreeDBTests::OpenTest3(Test& test)
     DiplodocusDB::TreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(node1.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+
+    DiplodocusDB::TreeDBValue value1 = db.value(node1, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(value1.type() == DiplodocusDB::EPrimitiveDataType::eNULL);
 
     DiplodocusDB::TreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(node2.value().type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+
+    DiplodocusDB::TreeDBValue value2 = db.value(node2, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(value2.type() == DiplodocusDB::EPrimitiveDataType::eNULL);
 
     ISHTF_PASS();
 }
@@ -159,7 +171,11 @@ void EmbeddedTreeDBTests::OpenTest4(Test& test)
     DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(node.value().asUTF8String() == "value1");
+
+    DiplodocusDB::TreeDBValue value = db.value(node, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(value.asUTF8String() == "value1");
     ISHTF_PASS();
 }
 
@@ -177,12 +193,20 @@ void EmbeddedTreeDBTests::OpenTest5(Test& test)
     DiplodocusDB::TreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(node1.value().asUTF8String() == "value1");
+
+    DiplodocusDB::TreeDBValue value1 = db.value(node1, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(value1.asUTF8String() == "value1");
     
     DiplodocusDB::TreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(node2.value().asUTF8String() == "value2");
+
+    DiplodocusDB::TreeDBValue value2 = db.value(node2, error);
+
+    ISHTF_FAIL_IF((bool)error);
+    ISHTF_FAIL_UNLESS(value2.asUTF8String() == "value2");
         
     ISHTF_PASS();
 }

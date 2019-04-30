@@ -136,7 +136,7 @@ private:
     PageFileRepository m_repository;
     Record m_metadataRecord;
     size_t m_dataStartOffset;
-    std::shared_ptr<Page> m_dataEndPage;
+    size_t m_dataEndPageIndex;
     size_t m_dataEndOffset;
 };
 
