@@ -69,6 +69,17 @@ TreeDBValue EmbeddedTreeDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
     return nodeImpl.value();
 }
 
+TreeDBValue EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    TreeDBValue result;
+    TreeDBNode childNode = child(parent, name, error);
+    if (!error)
+    {
+        result = value(childNode, error);
+    }
+    return result;
+}
+
 TreeDBNode EmbeddedTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
 {
     // TODO
