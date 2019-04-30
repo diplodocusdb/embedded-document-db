@@ -60,6 +60,11 @@ TreeDBValue XMLTreeDB::value(TreeDBNode& node, Ishiko::Error& error)
     return m_impl->value(node, error);
 }
 
+TreeDBValue XMLTreeDB::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+{
+    return m_impl->childValue(parent, name, error);
+}
+
 TreeDBNode XMLTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)
 {
     return m_impl->parent(node, error);

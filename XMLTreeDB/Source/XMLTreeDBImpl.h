@@ -42,6 +42,7 @@ public:
     TreeDBNode& root();
 
     TreeDBValue value(TreeDBNode& node, Ishiko::Error& error);
+    TreeDBValue childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error);
     std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error);

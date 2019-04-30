@@ -47,6 +47,7 @@ public:
     TreeDBNode& root() override;
 
     TreeDBValue value(TreeDBNode& node, Ishiko::Error& error) override;
+    TreeDBValue childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) override;
     std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error) override;
