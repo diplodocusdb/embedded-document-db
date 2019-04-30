@@ -53,7 +53,10 @@ public:
     virtual TreeDBNode& root() = 0;
 
     virtual TreeDBValue value(TreeDBNode& node, Ishiko::Error& error) = 0;
+    virtual TreeDBValue value(TreeDBNode& node, const DataType& type, Ishiko::Error& error) = 0;
     virtual TreeDBValue childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
+    virtual TreeDBValue childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+        Ishiko::Error& error) = 0;
 
     virtual TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) = 0;
     virtual std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error) = 0;

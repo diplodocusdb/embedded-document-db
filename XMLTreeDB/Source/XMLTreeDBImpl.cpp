@@ -65,6 +65,17 @@ TreeDBValue XMLTreeDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
     return nodeImpl.value();
 }
 
+TreeDBValue XMLTreeDBImpl::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
+{
+    TreeDBValue result;
+    XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
+    if (nodeImpl.value().type() == type)
+    {
+        result = nodeImpl.value();
+    }
+    return result;
+}
+
 TreeDBValue XMLTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     TreeDBValue result;
@@ -72,6 +83,18 @@ TreeDBValue XMLTreeDBImpl::childValue(TreeDBNode& parent, const std::string& nam
     if (!error)
     {
         result = value(childNode, error);
+    }
+    return result;
+}
+
+TreeDBValue XMLTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+    Ishiko::Error& error)
+{
+    TreeDBValue result;
+    TreeDBNode childNode = child(parent, name, error);
+    if (!error)
+    {
+        result = value(childNode, type, error);
     }
     return result;
 }
