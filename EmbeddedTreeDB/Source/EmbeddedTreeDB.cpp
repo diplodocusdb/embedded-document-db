@@ -56,9 +56,20 @@ TreeDBValue EmbeddedTreeDB::value(TreeDBNode& node, Ishiko::Error& error)
     return m_impl->value(node, error);
 }
 
+TreeDBValue EmbeddedTreeDB::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
+{
+    return m_impl->value(node, type, error);
+}
+
 TreeDBValue EmbeddedTreeDB::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     return m_impl->childValue(parent, name, error);
+}
+
+TreeDBValue EmbeddedTreeDB::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+    Ishiko::Error& error)
+{
+    return m_impl->childValue(parent, name, type, error);
 }
 
 TreeDBNode EmbeddedTreeDB::parent(TreeDBNode& node, Ishiko::Error& error)

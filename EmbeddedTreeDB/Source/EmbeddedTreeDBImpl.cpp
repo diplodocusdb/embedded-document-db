@@ -69,6 +69,17 @@ TreeDBValue EmbeddedTreeDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
     return nodeImpl.value();
 }
 
+TreeDBValue EmbeddedTreeDBImpl::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
+{
+    TreeDBValue result;
+    EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
+    if (nodeImpl.value().type() == type)
+    {
+        result = nodeImpl.value();
+    }
+    return result;
+}
+
 TreeDBValue EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     TreeDBValue result;
@@ -76,6 +87,18 @@ TreeDBValue EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string
     if (!error)
     {
         result = value(childNode, error);
+    }
+    return result;
+}
+
+TreeDBValue EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+    Ishiko::Error& error)
+{
+    TreeDBValue result;
+    TreeDBNode childNode = child(parent, name, error);
+    if (!error)
+    {
+        result = value(childNode, type, error);
     }
     return result;
 }
