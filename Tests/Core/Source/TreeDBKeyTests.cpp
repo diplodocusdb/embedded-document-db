@@ -42,7 +42,7 @@ void TreeDBKeyTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHTF_FAIL_UNLESS(key.value() == "/");
+    ISHTF_FAIL_IF_NEQ(key.value(), "/");
     ISHTF_PASS();
 }
 
@@ -50,7 +50,7 @@ void TreeDBKeyTests::ParentKeyTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1/key2");
 
-    ISHTF_FAIL_UNLESS(key.parentKey() == "/key1");
+    ISHTF_FAIL_IF_NEQ(key.parentKey(), "/key1");
     ISHTF_PASS();
 }
 
@@ -58,7 +58,7 @@ void TreeDBKeyTests::ParentKeyTest2(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1");
 
-    ISHTF_FAIL_UNLESS(key.parentKey() == "/");
+    ISHTF_FAIL_IF_NEQ(key.parentKey(), "/");
     ISHTF_PASS();
 }
 
@@ -66,7 +66,7 @@ void TreeDBKeyTests::ParentKeyTest3(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHTF_FAIL_UNLESS(key.parentKey().isNull());
+    ISHTF_FAIL_IF_NOT(key.parentKey().isNull());
     ISHTF_PASS();
 }
 
@@ -74,7 +74,7 @@ void TreeDBKeyTests::BaseTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1/key2");
 
-    ISHTF_FAIL_UNLESS(key.base() == "key2");
+    ISHTF_FAIL_IF_NEQ(key.base(), "key2");
     ISHTF_PASS();
 }
 
@@ -82,7 +82,7 @@ void TreeDBKeyTests::BaseTest2(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1");
 
-    ISHTF_FAIL_UNLESS(key.base() == "key1");
+    ISHTF_FAIL_IF_NEQ(key.base(), "key1");
     ISHTF_PASS();
 }
 
@@ -90,7 +90,7 @@ void TreeDBKeyTests::BaseTest3(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHTF_FAIL_UNLESS(key.base() == "");
+    ISHTF_FAIL_IF_NEQ(key.base(), "");
     ISHTF_PASS();
 }
 
@@ -98,6 +98,6 @@ void TreeDBKeyTests::BaseTest4(Test& test)
 {
     DiplodocusDB::TreeDBKey key("key1");
 
-    ISHTF_FAIL_UNLESS(key.base() == "key1");
+    ISHTF_FAIL_IF_NEQ(key.base(), "key1");
     ISHTF_PASS();
 }
