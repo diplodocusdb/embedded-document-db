@@ -1,6 +1,6 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
-ishikopath = envvar("ISHIKO");
+ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
 import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/Boost.bkl;
 
