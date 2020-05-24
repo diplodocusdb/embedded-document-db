@@ -6,3 +6,6 @@ jobs:
     steps:
       - checkout:
           path: /DiplodocusDB/TreeDB
+      - run:
+          name: Build
+          command: cd /DiplodocusDB/TreeDB/Core/Makefiles/GNUmakefile && make
