@@ -4,8 +4,17 @@ jobs:
     docker:
       - image: ishikocpp/gcc-boost:9.1.0-1.70.0
     steps:
+      - run: 
+          name: "Set DIPLODOCUSDB environment variable and create directory"
+          command: mkdir /DiplodocusDB && echo 'export DIPLODOCUSDB="/DiplodocusDB"' >> $BASH_ENV
+      - run:
+          name: "Checkout DiplodocusDB/Core dependency"
+          command: cd /DiplodocusDB && git clone https://github.com/CodeSmithyIDE/Collections.git
       - checkout:
           path: /DiplodocusDB/TreeDB
+      - run:
+          name: "Build DiplodocusDB/Core dependency"
+          command: cd /DiplodocusDB/Core/Makefiles/GNUmakefile && make
       - run:
           name: Build
           command: cd /DiplodocusDB/TreeDB/Core/Makefiles/GNUmakefile && make
