@@ -9,7 +9,7 @@ jobs:
           command: mkdir /DiplodocusDB && echo 'export DIPLODOCUSDB="/DiplodocusDB"' >> $BASH_ENV
       - run:
           name: "Checkout DiplodocusDB/Core dependency"
-          command: cd /DiplodocusDB && git clone https://github.com/CodeSmithyIDE/Collections.git
+          command: cd /DiplodocusDB && git clone https://github.com/DiplodocusDB/Core.git
       - checkout:
           path: /DiplodocusDB/TreeDB
       - run:
