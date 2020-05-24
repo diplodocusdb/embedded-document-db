@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ishikocpp/gcc-boost:9.1.0-1.70.0
+      - image: ishikocpp/gcc-ishiko:1.0.0
     steps:
       - run: 
           name: "Set DIPLODOCUSDB environment variable and create directory"
