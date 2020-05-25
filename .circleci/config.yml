@@ -16,5 +16,8 @@ jobs:
           name: "Build DiplodocusDB/Core dependency"
           command: cd /DiplodocusDB/Core/Makefiles/GNUmakefile && make
       - run:
-          name: Build
+          name: Build TreeDB/Core
           command: cd /DiplodocusDB/TreeDB/Core/Makefiles/GNUmakefile && make
+      - run:
+          name: Build TreeDB/XMLTreeDB
+          command: cd /DiplodocusDB/TreeDB/XMLTreeDB/Makefiles/GNUmakefile && make
