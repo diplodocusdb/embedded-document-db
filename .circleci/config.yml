@@ -19,5 +19,11 @@ jobs:
           name: Build TreeDB/Core
           command: cd /DiplodocusDB/TreeDB/Core/Makefiles/GNUmakefile && make
       - run:
+          name: Build TreeDB/Core tests
+          command: cd /DiplodocusDB/TreeDB/Core/Makefiles/GNUmakefile && make
+      - run:
+          name: Run TreeDB/Core tests
+          command: cd /DiplodocusDB/TreeDB/Core/Makefiles/GNUmakefile && make
+      - run:
           name: Build TreeDB/XMLTreeDB
           command: cd /DiplodocusDB/TreeDB/XMLTreeDB/Makefiles/GNUmakefile && make
