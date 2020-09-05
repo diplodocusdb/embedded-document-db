@@ -81,7 +81,7 @@ DIPLODOCUSDB_TREEDB_ROOT ?= $(DIPLODOCUSDB)/TreeDB
 all: $(_builddir)DiplodocusTreeDBCoreTests
 
 $(_builddir)DiplodocusTreeDBCoreTests: $(_builddir)DiplodocusTreeDBCoreTests_main.o $(_builddir)DiplodocusTreeDBCoreTests_TreeDBKeyTests.o $(_builddir)DiplodocusTreeDBCoreTests_TreeDBValueTests.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)DiplodocusTreeDBCoreTests_main.o $(_builddir)DiplodocusTreeDBCoreTests_TreeDBKeyTests.o $(_builddir)DiplodocusTreeDBCoreTests_TreeDBValueTests.o -L$(DIPLODOCUSDB_CORE_ROOT)/Lib -L$(DIPLODOCUSDB_TREEDB_ROOT)/Lib -L$(ISHIKO_CPP_ERRORS_ROOT)/Lib -L$(ISHIKO_CPP_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/lib -L$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/Lib -lDiplodocusTreeDBCore -lIshikoTestFrameworkCore -lIshikoProcess -lIshikoErrors -lboost_filesystem -lboost_system -pthread
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)DiplodocusTreeDBCoreTests_main.o $(_builddir)DiplodocusTreeDBCoreTests_TreeDBKeyTests.o $(_builddir)DiplodocusTreeDBCoreTests_TreeDBValueTests.o -L$(DIPLODOCUSDB_CORE_ROOT)/Lib -L$(DIPLODOCUSDB_TREEDB_ROOT)/Lib -L$(ISHIKO_CPP_ERRORS_ROOT)/Lib -L$(ISHIKO_CPP_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/lib -L$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/Lib -lDiplodocusTreeDBCore -lDiplodocusDBCore -lIshikoTestFrameworkCore -lIshikoProcess -lIshikoErrors -lboost_filesystem -lboost_system -pthread
 
 $(_builddir)DiplodocusTreeDBCoreTests_main.o: ../../Source/main.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/Include -I$(DIPLODOCUSDB_TREEDB_ROOT)/Include -I$(ISHIKO_CPP_ERRORS_ROOT)/Include -I$(ISHIKO_CPP_PROCESS_ROOT)/Include -I$(BOOST_ROOT)/include -I$(ISHIKO_CPP_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/main.cpp
