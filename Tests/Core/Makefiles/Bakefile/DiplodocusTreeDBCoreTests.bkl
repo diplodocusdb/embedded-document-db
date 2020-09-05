@@ -12,7 +12,16 @@ vs2013.solutionfile = ../VC12/DiplodocusTreeDBCoreTests.sln;
 
 program DiplodocusTreeDBCoreTests : DiplodocusTreeDBCore, IshikoTestFrameworkCore
 {
-    archs = x86 x86_64;
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        libs += IshikoTestFrameworkCore IshikoProcess IshikoErrors boost_filesystem boost_system;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        archs = x86 x86_64;
+    }
 
     headers
     {
