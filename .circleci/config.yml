@@ -27,3 +27,6 @@ jobs:
       - run:
           name: Build TreeDB/XMLTreeDB
           command: cd /DiplodocusDB/TreeDB/XMLTreeDB/Makefiles/GNUmakefile && make
+      - run:
+          name: Run TreeDB/XMLTreeDB tests
+          command: cd /DiplodocusDB/TreeDB/Tests/XMLTreeDB/Makefiles/GNUmakefile && ./DiplodocusXMLTreeDBTests
