@@ -20,6 +20,9 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\TreeDBCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBErrorCategory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBKey.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -49,6 +52,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\TreeDBErrorCategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\TreeDBKey.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
