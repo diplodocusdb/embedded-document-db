@@ -37,6 +37,7 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
     {
         ../../../Include/DiplodocusDB/TreeDB/TreeDBCore.h
 
+        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBErrorCategory.h
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBKey.h
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBPersistentNodeID.h
         ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBValue.h
@@ -50,6 +51,7 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
 
     sources
     {
+        ../../Source/TreeDBErrorCategory.cpp
         ../../Source/TreeDBKey.cpp
         ../../Source/TreeDBPersistentNodeID.cpp
         ../../Source/TreeDBValue.cpp
