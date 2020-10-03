@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\TreeDBErrorCategory.cpp" />
     <ClCompile Include="..\..\Source\TreeDBKey.cpp" />
     <ClCompile Include="..\..\Source\TreeDBPersistentNodeID.cpp" />
     <ClCompile Include="..\..\Source\TreeDBValue.cpp" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\TreeDBCore.h" />
+    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBErrorCategory.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBKey.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBPersistentNodeID.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBValue.h" />
