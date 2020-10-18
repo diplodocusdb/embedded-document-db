@@ -23,6 +23,8 @@ public:
 
     static const TreeDBErrorCategory& Get() noexcept;
 
+    const char* name() const noexcept override;
+
 private:
     TreeDBErrorCategory() noexcept = default;
 };
