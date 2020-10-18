@@ -15,6 +15,11 @@ const TreeDBErrorCategory& TreeDBErrorCategory::Get() noexcept
     return theCategory;
 }
 
+const char* TreeDBErrorCategory::name() const noexcept
+{
+    return "DiplodocusDB::TreeDBErrorCategory";
+}
+
 void Fail(Ishiko::Error& error, TreeDBErrorCategory::EErrorValues value) noexcept
 {
     error.fail(value, TreeDBErrorCategory::Get());
