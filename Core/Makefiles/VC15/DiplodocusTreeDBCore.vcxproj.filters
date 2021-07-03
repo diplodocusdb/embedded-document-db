@@ -17,37 +17,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\TreeDBCore.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBErrorCategory.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBErrorCategory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBKey.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBKey.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBPersistentNodeID.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBPersistentNodeID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBValue.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBNode.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBNodeImpl.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBNodeImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBTransaction.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBTransaction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDBTransactionImpl.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBTransactionImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\TreeDB.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\Core\linkoptions.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\linkoptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

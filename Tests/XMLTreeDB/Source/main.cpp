@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2021 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -21,8 +21,9 @@
 */
 
 #include "XMLTreeDBTests/XMLTreeDBTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+
 #include <boost/filesystem/operations.hpp>
+#include <Ishiko/Tests.h>
 
 using namespace Ishiko::Tests;
 

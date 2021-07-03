@@ -1,0 +1,21 @@
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/core/include/DiplodocusDB/DiplodocusDBCore.bkl;
+import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
+ishikopath = envvar("ISHIKO_CPP");
+import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
+
+template DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErrors, Boost
+{
+    includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/include;
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/lib/$(arch);
+    }
+}

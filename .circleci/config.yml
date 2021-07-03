@@ -2,34 +2,31 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ishikocpp/gcc-ishiko:1.0.0
+      - image: ishiko/gcc-ishiko-cpp:0.2.0
     steps:
       - run: 
-          name: "Set DIPLODOCUSDB environment variable and create directory"
-          command: mkdir /DiplodocusDB && echo 'export DIPLODOCUSDB="/DiplodocusDB"' >> $BASH_ENV
+          name: "Set DIPLODOCUSDB environment variable and create workspace directory"
+          command: mkdir -p /projects/diplodocusdb && echo 'export DIPLODOCUSDB="/projects/diplodocusdb"' >> $BASH_ENV
       - run:
-          name: "Checkout DiplodocusDB/Core dependency"
-          command: cd /DiplodocusDB && git clone https://github.com/DiplodocusDB/Core.git
+          name: "Install build dependency: DiplodocusDB Core"
+          command: cd /projects/diplodocusdb && git clone https://github.com/diplodocusdb/core.git && cd core/build/gnumake && make
       - checkout:
-          path: /DiplodocusDB/TreeDB
-      - run:
-          name: "Build DiplodocusDB/Core dependency"
-          command: cd /DiplodocusDB/Core/Makefiles/GNUmakefile && make
+          path: /projects/diplodocusdb/tree-db
       - run:
           name: Build TreeDB/Core
-          command: cd /DiplodocusDB/TreeDB/Core/Makefiles/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/Core/Makefiles/GNUmakefile && make
       - run:
           name: Build TreeDB/Core tests
-          command: cd /DiplodocusDB/TreeDB/Tests/Core/Makefiles/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/Tests/Core/Makefiles/GNUmakefile && make
       - run:
           name: Run TreeDB/Core tests
-          command: cd /DiplodocusDB/TreeDB/Tests/Core/Makefiles/GNUmakefile && ./DiplodocusTreeDBCoreTests
+          command: cd /projects/diplodocusdb/tree-db/Tests/Core/Makefiles/GNUmakefile && ./DiplodocusTreeDBCoreTests
       - run:
           name: Build TreeDB/XMLTreeDB
-          command: cd /DiplodocusDB/TreeDB/XMLTreeDB/Makefiles/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/XMLTreeDB/Makefiles/GNUmakefile && make
       - run:
           name: Build TreeDB/XMLTreeDB tests
-          command: cd /DiplodocusDB/TreeDB/Tests/XMLTreeDB/Makefiles/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/Tests/XMLTreeDB/Makefiles/GNUmakefile && make
       - run:
           name: Run TreeDB/XMLTreeDB tests
-          command: cd /DiplodocusDB/TreeDB/Tests/XMLTreeDB/Makefiles/GNUmakefile && ./DiplodocusXMLTreeDBTests
+          command: cd /projects/diplodocusdb/tree-db/Tests/XMLTreeDB/Makefiles/GNUmakefile && ./DiplodocusXMLTreeDBTests
