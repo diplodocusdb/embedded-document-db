@@ -1,7 +1,7 @@
 ishikopath = envvar("ISHIKO_CPP");
-import $(ishikopath)/TestFramework/Include/Ishiko/TestFramework/TestFrameworkCore.bkl;
+import $(ishikopath)/tests/include/Ishiko/Tests.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
+import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 
 toolsets = gnu vs2017 vs2015 vs2013;
 
@@ -10,12 +10,12 @@ vs2017.solutionfile = ../VC15/DiplodocusTreeDBCoreTests.sln;
 vs2015.solutionfile = ../VC14/DiplodocusTreeDBCoreTests.sln;
 vs2013.solutionfile = ../VC12/DiplodocusTreeDBCoreTests.sln;
 
-program DiplodocusTreeDBCoreTests : DiplodocusTreeDBCore, IshikoTestFrameworkCore
+program DiplodocusTreeDBCoreTests : DiplodocusTreeDBCore, IshikoTests
 {
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += DiplodocusTreeDBCore DiplodocusDBCore IshikoTestFrameworkCore IshikoProcess IshikoErrors boost_filesystem boost_system;
+        libs += DiplodocusTreeDBCore DiplodocusDBCore IshikoTests IshikoProcess IshikoErrors boost_filesystem boost_system;
     }
 
     if ($(toolset) != gnu)

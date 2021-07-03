@@ -1,0 +1,23 @@
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/core/include/DiplodocusDB/DiplodocusDBCore.bkl;
+
+setting DIPLODOCUSDB_TREEDB_ROOT
+{
+    help = "Path to the DiplodocusDB installation";
+    default = '$(DIPLODOCUSDB)/tree-db';
+}
+
+template DiplodocusTreeDBCore : DiplodocusDBCore
+{
+    includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/include;
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/lib/$(arch);
+    }
+}

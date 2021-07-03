@@ -1,8 +1,8 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
+import $(diplodocusdbpath)/core/include/DiplodocusDB/DiplodocusDBCore.bkl;
 ishikopath = envvar("ISHIKO_CPP");
-import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
-import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/Boost.bkl;
+import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
 
 toolsets = gnu vs2017 vs2015 vs2013;
 
@@ -15,17 +15,17 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
 {
     archs = x86 x86_64;
    
-    includedirs += ../../../Include/DiplodocusDB/TreeDB/Core;
+    includedirs += ../../../include/DiplodocusDB/TreeDB/Core;
 
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        outputdir = ../../../Lib;
+        outputdir = ../../../lib;
     }
 
     if ($(toolset) != gnu)
     {
-        outputdir = ../../../Lib/$(arch);
+        outputdir = ../../../lib/$(arch);
     }
 
     if ($(config) == Debug)
@@ -35,18 +35,17 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
 
     headers
     {
-        ../../../Include/DiplodocusDB/TreeDB/TreeDBCore.h
-
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBErrorCategory.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBKey.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBPersistentNodeID.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBValue.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBNode.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBTransaction.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDBTransactionImpl.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/TreeDB.h
-        ../../../Include/DiplodocusDB/TreeDB/Core/linkoptions.h
+        ../../../include/DiplodocusDB/TreeDB/TreeDBCore.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBErrorCategory.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBKey.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBPersistentNodeID.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBValue.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBNode.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBTransaction.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBTransactionImpl.h
+        ../../../include/DiplodocusDB/TreeDB/Core/TreeDB.h
+        ../../../include/DiplodocusDB/TreeDB/Core/linkoptions.h
     }
 
     sources

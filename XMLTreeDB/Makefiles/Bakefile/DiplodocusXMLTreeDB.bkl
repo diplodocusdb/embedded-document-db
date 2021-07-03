@@ -1,10 +1,10 @@
-ishikopath = envvar("ISHIKO_CPP");
-import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/Boost.bkl;
-import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/pugixml.bkl;
-import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
-import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
+import $(diplodocusdbpath)/core/include/DiplodocusDB/DiplodocusDBCore.bkl;
+import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
+ishikopath = envvar("ISHIKO_CPP");
+import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
+import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/pugixml.bkl;
 
 toolsets = gnu vs2017 vs2015 vs2013;
 
@@ -17,17 +17,17 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErro
 {
     archs = x86 x86_64;
    
-    includedirs += ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB;
+    includedirs += ../../../include/DiplodocusDB/TreeDB/XMLTreeDB;
 
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        outputdir = ../../../Lib;
+        outputdir = ../../../lib;
     }
 
     if ($(toolset) != gnu)
     {
-        outputdir = ../../../Lib/$(arch);
+        outputdir = ../../../lib/$(arch);
     }
 
     if ($(config) == Debug)
@@ -37,11 +37,9 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErro
 
     headers
     {
-        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB.h
-
-        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h
-        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
-
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB.h
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
         ../../Source/XMLTreeDBImpl.h
         ../../Source/XMLTreeDBNodeImpl.h
         ../../Source/XMLTreeDBTransactionImpl.h

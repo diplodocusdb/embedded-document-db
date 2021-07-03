@@ -69,17 +69,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetName>DiplodocusXMLTreeDB-d</TargetName>
-    <OutDir>..\Bakefile\..\..\..\Lib\$(Platform)\</OutDir>
+    <OutDir>..\Bakefile\..\..\..\lib\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>DiplodocusXMLTreeDB-d</TargetName>
-    <OutDir>..\Bakefile\..\..\..\Lib\$(Platform)\</OutDir>
+    <OutDir>..\Bakefile\..\..\..\lib\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\Bakefile\..\..\..\Lib\$(Platform)\</OutDir>
+    <OutDir>..\Bakefile\..\..\..\lib\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\Bakefile\..\..\..\Lib\$(Platform)\</OutDir>
+    <OutDir>..\Bakefile\..\..\..\lib\$(Platform)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -88,7 +88,7 @@
       <PreprocessorDefinitions>PUGIXML_HEADER_ONLY;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO_CPP)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/core\include;$(DIPLODOCUSDB)/tree-db\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP_THIRD_PARTY_PUGIXML)\src;$(ISHIKO_CPP_THIRD_PARTY_BOOST);..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>PUGIXML_HEADER_ONLY;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO_CPP)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/core\include;$(DIPLODOCUSDB)/tree-db\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP_THIRD_PARTY_PUGIXML)\src;$(ISHIKO_CPP_THIRD_PARTY_BOOST);..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>PUGIXML_HEADER_ONLY;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO_CPP)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/core\include;$(DIPLODOCUSDB)/tree-db\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP_THIRD_PARTY_PUGIXML)\src;$(ISHIKO_CPP_THIRD_PARTY_BOOST);..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -139,7 +139,7 @@
       <PreprocessorDefinitions>PUGIXML_HEADER_ONLY;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/Core\Include;$(DIPLODOCUSDB)/TreeDB\Include;$(ISHIKO_CPP)/Errors\Include;$(PUGIXML)\src;$(BOOST);..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DIPLODOCUSDB)/core\include;$(DIPLODOCUSDB)/tree-db\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP_THIRD_PARTY_PUGIXML)\src;$(ISHIKO_CPP_THIRD_PARTY_BOOST);..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -156,9 +156,9 @@
     <ClCompile Include="..\..\Source\XMLTreeDBTransactionImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB.h" />
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.h" />
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.h" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.h" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.h" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\Source\XMLTreeDBImpl.h" />
     <ClInclude Include="..\..\Source\XMLTreeDBNodeImpl.h" />
     <ClInclude Include="..\..\Source\XMLTreeDBTransactionImpl.h" />
