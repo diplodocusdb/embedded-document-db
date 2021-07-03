@@ -15,7 +15,7 @@ program DiplodocusTreeDBCoreTests : DiplodocusTreeDBCore, IshikoTests
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += DiplodocusTreeDBCore DiplodocusDBCore IshikoTestFrameworkCore IshikoProcess IshikoErrors boost_filesystem boost_system;
+        libs += DiplodocusTreeDBCore DiplodocusDBCore IshikoTests IshikoProcess IshikoErrors boost_filesystem boost_system;
     }
 
     if ($(toolset) != gnu)
