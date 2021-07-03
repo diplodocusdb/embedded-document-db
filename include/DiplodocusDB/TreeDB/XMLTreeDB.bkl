@@ -7,15 +7,15 @@ import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
 
 template DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErrors, Boost
 {
-    includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Include;
+    includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/include;
 
     if ($(toolset) == gnu)
     {
-        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib;
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/lib;
     }
 
     if ($(toolset) != gnu)
     {
-        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/Lib/$(arch);
+        libdirs += $(DIPLODOCUSDB_TREEDB_ROOT)/lib/$(arch);
     }
 }
