@@ -17,17 +17,17 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErro
 {
     archs = x86 x86_64;
    
-    includedirs += ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB;
+    includedirs += ../../../include/DiplodocusDB/TreeDB/XMLTreeDB;
 
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        outputdir = ../../../Lib;
+        outputdir = ../../../lib;
     }
 
     if ($(toolset) != gnu)
     {
-        outputdir = ../../../Lib/$(arch);
+        outputdir = ../../../lib/$(arch);
     }
 
     if ($(config) == Debug)
@@ -37,11 +37,9 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErro
 
     headers
     {
-        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB.h
-
-        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h
-        ../../../Include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
-
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB.h
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
         ../../Source/XMLTreeDBImpl.h
         ../../Source/XMLTreeDBNodeImpl.h
         ../../Source/XMLTreeDBTransactionImpl.h
