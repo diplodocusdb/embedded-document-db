@@ -1,10 +1,10 @@
-ishikopath = envvar("ISHIKO_CPP");
-import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/Boost.bkl;
-import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/pugixml.bkl;
-import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
-import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
+import $(diplodocusdbpath)/core/include/DiplodocusDB/DiplodocusDBCore.bkl;
+import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
+ishikopath = envvar("ISHIKO_CPP");
+import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
+import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/pugixml.bkl;
 
 toolsets = gnu vs2017 vs2015 vs2013;
 
