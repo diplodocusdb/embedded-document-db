@@ -14,19 +14,19 @@ jobs:
           path: /projects/diplodocusdb/tree-db
       - run:
           name: Build TreeDB/Core
-          command: cd /projects/diplodocusdb/tree-db/Core/Makefiles/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/core/build/gnumake && make
       - run:
           name: Build TreeDB/Core tests
-          command: cd /projects/diplodocusdb/tree-db/Tests/Core/Makefiles/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/tests/Core/Makefiles/GNUmakefile && make
       - run:
           name: Run TreeDB/Core tests
-          command: cd /projects/diplodocusdb/tree-db/Tests/Core/Makefiles/GNUmakefile && ./DiplodocusTreeDBCoreTests
+          command: cd /projects/diplodocusdb/tree-db/tests/Core/Makefiles/GNUmakefile && ./DiplodocusTreeDBCoreTests
       - run:
           name: Build TreeDB/XMLTreeDB
-          command: cd /projects/diplodocusdb/tree-db/XMLTreeDB/Makefiles/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/xml-tree-db/build/gnumake && make
       - run:
           name: Build TreeDB/XMLTreeDB tests
-          command: cd /projects/diplodocusdb/tree-db/Tests/XMLTreeDB/Makefiles/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/tests/XMLTreeDB/Makefiles/GNUmakefile && make
       - run:
           name: Run TreeDB/XMLTreeDB tests
-          command: cd /projects/diplodocusdb/tree-db/Tests/XMLTreeDB/Makefiles/GNUmakefile && ./DiplodocusXMLTreeDBTests
+          command: cd /projects/diplodocusdb/tree-db/tests/XMLTreeDB/Makefiles/GNUmakefile && ./DiplodocusXMLTreeDBTests
