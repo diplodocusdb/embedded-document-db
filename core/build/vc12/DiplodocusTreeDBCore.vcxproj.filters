@@ -52,25 +52,25 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TreeDBErrorCategory.cpp">
+    <ClCompile Include="..\..\src\TreeDBErrorCategory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TreeDBKey.cpp">
+    <ClCompile Include="..\..\src\TreeDBKey.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TreeDBPersistentNodeID.cpp">
+    <ClCompile Include="..\..\src\TreeDBPersistentNodeID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TreeDBValue.cpp">
+    <ClCompile Include="..\..\src\TreeDBValue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TreeDBNode.cpp">
+    <ClCompile Include="..\..\src\TreeDBNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TreeDBNodeImpl.cpp">
+    <ClCompile Include="..\..\src\TreeDBNodeImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\TreeDBTransaction.cpp">
+    <ClCompile Include="..\..\src\TreeDBTransaction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
