@@ -14,7 +14,7 @@ jobs:
           path: /projects/diplodocusdb/tree-db
       - run:
           name: Build TreeDB/Core
-          command: cd /projects/diplodocusdb/tree-db/core/build/GNUmakefile && make
+          command: cd /projects/diplodocusdb/tree-db/core/build/gnumake && make
       - run:
           name: Build TreeDB/Core tests
           command: cd /projects/diplodocusdb/tree-db/Tests/Core/Makefiles/GNUmakefile && make
