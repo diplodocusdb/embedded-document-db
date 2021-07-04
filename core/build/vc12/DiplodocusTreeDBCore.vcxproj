@@ -150,13 +150,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\TreeDBErrorCategory.cpp" />
-    <ClCompile Include="..\..\Source\TreeDBKey.cpp" />
-    <ClCompile Include="..\..\Source\TreeDBPersistentNodeID.cpp" />
-    <ClCompile Include="..\..\Source\TreeDBValue.cpp" />
-    <ClCompile Include="..\..\Source\TreeDBNode.cpp" />
-    <ClCompile Include="..\..\Source\TreeDBNodeImpl.cpp" />
-    <ClCompile Include="..\..\Source\TreeDBTransaction.cpp" />
+    <ClCompile Include="..\..\src\TreeDBErrorCategory.cpp" />
+    <ClCompile Include="..\..\src\TreeDBKey.cpp" />
+    <ClCompile Include="..\..\src\TreeDBPersistentNodeID.cpp" />
+    <ClCompile Include="..\..\src\TreeDBValue.cpp" />
+    <ClCompile Include="..\..\src\TreeDBNode.cpp" />
+    <ClCompile Include="..\..\src\TreeDBNodeImpl.cpp" />
+    <ClCompile Include="..\..\src\TreeDBTransaction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBCore.h" />

@@ -50,12 +50,12 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
 
     sources
     {
-        ../../Source/TreeDBErrorCategory.cpp
-        ../../Source/TreeDBKey.cpp
-        ../../Source/TreeDBPersistentNodeID.cpp
-        ../../Source/TreeDBValue.cpp
-        ../../Source/TreeDBNode.cpp
-        ../../Source/TreeDBNodeImpl.cpp
-        ../../Source/TreeDBTransaction.cpp
+        ../../src/TreeDBErrorCategory.cpp
+        ../../src/TreeDBKey.cpp
+        ../../src/TreeDBPersistentNodeID.cpp
+        ../../src/TreeDBValue.cpp
+        ../../src/TreeDBNode.cpp
+        ../../src/TreeDBNodeImpl.cpp
+        ../../src/TreeDBTransaction.cpp
     }
 }
