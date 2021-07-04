@@ -6,10 +6,10 @@ import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
 
 toolsets = gnu vs2017 vs2015 vs2013;
 
-gnu.makefile = ../GNUmakefile/GNUmakefile;
-vs2017.solutionfile = ../VC15/DiplodocusTreeDBCore.sln;
-vs2015.solutionfile = ../VC14/DiplodocusTreeDBCore.sln;
-vs2013.solutionfile = ../VC12/DiplodocusTreeDBCore.sln;
+gnu.makefile = ../gnumake/GNUmakefile;
+vs2017.solutionfile = ../vc15/DiplodocusTreeDBCore.sln;
+vs2015.solutionfile = ../vc14/DiplodocusTreeDBCore.sln;
+vs2013.solutionfile = ../vc12/DiplodocusTreeDBCore.sln;
 
 library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
 {
@@ -50,12 +50,12 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
 
     sources
     {
-        ../../Source/TreeDBErrorCategory.cpp
-        ../../Source/TreeDBKey.cpp
-        ../../Source/TreeDBPersistentNodeID.cpp
-        ../../Source/TreeDBValue.cpp
-        ../../Source/TreeDBNode.cpp
-        ../../Source/TreeDBNodeImpl.cpp
-        ../../Source/TreeDBTransaction.cpp
+        ../../src/TreeDBErrorCategory.cpp
+        ../../src/TreeDBKey.cpp
+        ../../src/TreeDBPersistentNodeID.cpp
+        ../../src/TreeDBValue.cpp
+        ../../src/TreeDBNode.cpp
+        ../../src/TreeDBNodeImpl.cpp
+        ../../src/TreeDBTransaction.cpp
     }
 }
