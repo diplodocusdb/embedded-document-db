@@ -4,9 +4,10 @@ ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
 
-toolsets = gnu vs2017 vs2015 vs2013;
+toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
 gnu.makefile = ../gnumake/GNUmakefile;
+vs2019.solutionfile = ../vc16/DiplodocusTreeDBCore.sln;
 vs2017.solutionfile = ../vc15/DiplodocusTreeDBCore.sln;
 vs2015.solutionfile = ../vc14/DiplodocusTreeDBCore.sln;
 vs2013.solutionfile = ../vc12/DiplodocusTreeDBCore.sln;

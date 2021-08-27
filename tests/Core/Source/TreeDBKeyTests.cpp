@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2021 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -42,62 +42,62 @@ void TreeDBKeyTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHTF_FAIL_IF_NEQ(key.value(), "/");
-    ISHTF_PASS();
+    ISHIKO_FAIL_IF_NEQ(key.value(), "/");
+    ISHIKO_PASS();
 }
 
 void TreeDBKeyTests::ParentKeyTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1/key2");
 
-    ISHTF_FAIL_IF_NEQ(key.parentKey(), "/key1");
-    ISHTF_PASS();
+    ISHIKO_FAIL_IF_NEQ(key.parentKey(), "/key1");
+    ISHIKO_PASS();
 }
 
 void TreeDBKeyTests::ParentKeyTest2(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1");
 
-    ISHTF_FAIL_IF_NEQ(key.parentKey(), "/");
-    ISHTF_PASS();
+    ISHIKO_FAIL_IF_NEQ(key.parentKey(), "/");
+    ISHIKO_PASS();
 }
 
 void TreeDBKeyTests::ParentKeyTest3(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHTF_FAIL_IF_NOT(key.parentKey().isNull());
-    ISHTF_PASS();
+    ISHIKO_FAIL_IF_NOT(key.parentKey().isNull());
+    ISHIKO_PASS();
 }
 
 void TreeDBKeyTests::BaseTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1/key2");
 
-    ISHTF_FAIL_IF_NEQ(key.base(), "key2");
-    ISHTF_PASS();
+    ISHIKO_FAIL_IF_NEQ(key.base(), "key2");
+    ISHIKO_PASS();
 }
 
 void TreeDBKeyTests::BaseTest2(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1");
 
-    ISHTF_FAIL_IF_NEQ(key.base(), "key1");
-    ISHTF_PASS();
+    ISHIKO_FAIL_IF_NEQ(key.base(), "key1");
+    ISHIKO_PASS();
 }
 
 void TreeDBKeyTests::BaseTest3(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHTF_FAIL_IF_NEQ(key.base(), "");
-    ISHTF_PASS();
+    ISHIKO_FAIL_IF_NEQ(key.base(), "");
+    ISHIKO_PASS();
 }
 
 void TreeDBKeyTests::BaseTest4(Test& test)
 {
     DiplodocusDB::TreeDBKey key("key1");
 
-    ISHTF_FAIL_IF_NEQ(key.base(), "key1");
-    ISHTF_PASS();
+    ISHIKO_FAIL_IF_NEQ(key.base(), "key1");
+    ISHIKO_PASS();
 }
