@@ -6,9 +6,10 @@ import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/pugixml.bkl;
 
-toolsets = gnu vs2017 vs2015 vs2013;
+toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
 gnu.makefile = ../gnumake/GNUmakefile;
+vs2019.solutionfile = ../vc16/DiplodocusXMLTreeDB.sln;
 vs2017.solutionfile = ../vc15/DiplodocusXMLTreeDB.sln;
 vs2015.solutionfile = ../vc14/DiplodocusXMLTreeDB.sln;
 vs2013.solutionfile = ../vc12/DiplodocusXMLTreeDB.sln;
