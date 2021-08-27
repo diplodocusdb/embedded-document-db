@@ -6,9 +6,10 @@ import $(ishikopath)/tests/include/Ishiko/Tests.bkl;
 toolsets = gnu vs2017 vs2015 vs2013;
 
 gnu.makefile = ../GNUmakefile/GNUmakefile;
-vs2017.solutionfile = ../VC15/DiplodocusXMLTreeDBTests.sln;
-vs2015.solutionfile = ../VC14/DiplodocusXMLTreeDBTests.sln;
-vs2013.solutionfile = ../VC12/DiplodocusXMLTreeDBTests.sln;
+vs2019.solutionfile = ../vc16/DiplodocusXMLTreeDBTests.sln;
+vs2017.solutionfile = ../vc15/DiplodocusXMLTreeDBTests.sln;
+vs2015.solutionfile = ../vc14/DiplodocusXMLTreeDBTests.sln;
+vs2013.solutionfile = ../vc12/DiplodocusXMLTreeDBTests.sln;
 
 program DiplodocusXMLTreeDBTests : DiplodocusXMLTreeDB, IshikoTests
 {
