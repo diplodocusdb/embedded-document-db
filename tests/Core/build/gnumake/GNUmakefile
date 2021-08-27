@@ -37,17 +37,17 @@ endif
 # Additionally, this makefile is customizable with the following
 # settings:
 #
-#      ISHIKO_CPP_ERRORS_ROOT      Path to the Ishiko Errors installation
-#      ISHIKO_CPP_PLATFORM_ROOT    Path to the Ishiko Platform installation
-#      ISHIKO_CPP_BOOST_ROOT       Path to the Boost installation
-#      ISHIKO_CPP_FILESYSTEM_ROOT  Path to the Ishiko FileSystem installation
-#      ISHIKO_CPP_TEXT_ROOT        Path to the Ishiko/Text installation
-#      ISHIKO_CPP_TYPES_ROOT       Path to the Ishiko Types installation
-#      ISHIKO_CPP_DIFF_ROOT        Path to the Ishiko Diff installation
-#      ISHIKO_CPP_PROCESS_ROOT     Path to the Ishiko Process installation
-#      ISHIKO_CPP_TESTS_ROOT       Path to the Ishiko Tests installation
-#      DIPLODOCUSDB_CORE_ROOT      Path to the DiplodocusDB installation
-#      DIPLODOCUSDB_TREEDB_ROOT    Path to the DiplodocusDB installation
+#      ISHIKO_CPP_BASEPLATFORM_ROOT  Path to the Ishiko BasePlatform installation
+#      ISHIKO_CPP_ERRORS_ROOT        Path to the Ishiko Errors installation
+#      ISHIKO_CPP_BOOST_ROOT         Path to the Boost installation
+#      ISHIKO_CPP_FILESYSTEM_ROOT    Path to the Ishiko FileSystem installation
+#      ISHIKO_CPP_TEXT_ROOT          Path to the Ishiko/Text installation
+#      ISHIKO_CPP_TYPES_ROOT         Path to the Ishiko Types installation
+#      ISHIKO_CPP_DIFF_ROOT          Path to the Ishiko Diff installation
+#      ISHIKO_CPP_PROCESS_ROOT       Path to the Ishiko Process installation
+#      ISHIKO_CPP_TESTS_ROOT         Path to the Ishiko Tests installation
+#      DIPLODOCUSDB_CORE_ROOT        Path to the DiplodocusDB installation
+#      DIPLODOCUSDB_TREEDB_ROOT      Path to the DiplodocusDB installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -59,7 +59,7 @@ CXX := c++
 builddir = .
 
 ifneq ($(builddir),.)
-_builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(builddir)/../GNUmakefile/
+_builddir := $(if $(findstring $(abspath $(builddir)),$(builddir)),,../../)$(builddir)/../gnumake/
 _builddir_error := $(shell mkdir -p $(_builddir) 2>&1)
 $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_error)))
 endif
@@ -68,10 +68,10 @@ endif
 # Configurable settings:
 # 
 
+# Path to the Ishiko BasePlatform installation
+ISHIKO_CPP_BASEPLATFORM_ROOT ?= $(ISHIKO_CPP)/base-platform
 # Path to the Ishiko Errors installation
 ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
-# Path to the Ishiko Platform installation
-ISHIKO_CPP_PLATFORM_ROOT ?= $(ISHIKO_CPP)/platform
 # Path to the Boost installation
 ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
 # Path to the Ishiko FileSystem installation
@@ -99,13 +99,13 @@ $(_builddir)DiplodocusTreeDBCoreTests: $(_builddir)DiplodocusTreeDBCoreTests_mai
 	$(CXX) -o $@ $(LDFLAGS) $(_builddir)DiplodocusTreeDBCoreTests_main.o $(_builddir)DiplodocusTreeDBCoreTests_TreeDBKeyTests.o $(_builddir)DiplodocusTreeDBCoreTests_TreeDBValueTests.o -L$(DIPLODOCUSDB_CORE_ROOT)/lib -L$(DIPLODOCUSDB_TREEDB_ROOT)/lib -L$(ISHIKO_CPP_ERRORS_ROOT)/lib -L$(ISHIKO_CPP_BOOST_ROOT)/lib -L$(ISHIKO_CPP_FILESYSTEM_ROOT)/lib -L$(ISHIKO_CPP_TEXT_ROOT)/lib -L$(ISHIKO_CPP_TYPES_ROOT)/lib -L$(ISHIKO_CPP_DIFF_ROOT)/lib -L$(ISHIKO_CPP_PROCESS_ROOT)/lib -L$(ISHIKO_CPP_TESTS_ROOT)/lib -lDiplodocusTreeDBCore -lDiplodocusDBCore -lIshikoTests -lIshikoProcess -lIshikoErrors -lboost_filesystem -lboost_system -pthread
 
 $(_builddir)DiplodocusTreeDBCoreTests_main.o: ../../Source/main.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../Source/main.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../Source/main.cpp
 
 $(_builddir)DiplodocusTreeDBCoreTests_TreeDBKeyTests.o: ../../Source/TreeDBKeyTests.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../Source/TreeDBKeyTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../Source/TreeDBKeyTests.cpp
 
 $(_builddir)DiplodocusTreeDBCoreTests_TreeDBValueTests.o: ../../Source/TreeDBValueTests.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../Source/TreeDBValueTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../Source/TreeDBValueTests.cpp
 
 clean:
 	rm -f $(_builddir)*.o

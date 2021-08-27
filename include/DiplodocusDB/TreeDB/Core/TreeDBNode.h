@@ -1,14 +1,14 @@
 /*
-    Copyright (c) 2018-2020 Xavier Leclercq
+    Copyright (c) 2018-2021 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_H_
 
 #include "TreeDBValue.h"
-#include "Ishiko/Errors/Error.h"
+#include <Ishiko/Errors.hpp>
 #include <string>
 #include <vector>
 #include <memory>
