@@ -3,12 +3,13 @@ import $(ishikopath)/tests/include/Ishiko/Tests.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 
-toolsets = gnu vs2017 vs2015 vs2013;
+toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
-gnu.makefile = ../GNUmakefile/GNUmakefile;
-vs2017.solutionfile = ../VC15/DiplodocusTreeDBCoreTests.sln;
-vs2015.solutionfile = ../VC14/DiplodocusTreeDBCoreTests.sln;
-vs2013.solutionfile = ../VC12/DiplodocusTreeDBCoreTests.sln;
+gnu.makefile = ../gnumake/GNUmakefile;
+vs2019.solutionfile = ../vc16/DiplodocusTreeDBCoreTests.sln;
+vs2017.solutionfile = ../vc15/DiplodocusTreeDBCoreTests.sln;
+vs2015.solutionfile = ../vc14/DiplodocusTreeDBCoreTests.sln;
+vs2013.solutionfile = ../vc12/DiplodocusTreeDBCoreTests.sln;
 
 program DiplodocusTreeDBCoreTests : DiplodocusTreeDBCore, IshikoTests
 {
