@@ -1,14 +1,13 @@
 /*
-    Copyright (c) 2020 Xavier Leclercq
+    Copyright (c) 2020-2021 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBERRORCATEGORY_H_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBERRORCATEGORY_H_
 
-#include <Ishiko/Errors/ErrorCategory.h>
-#include <Ishiko/Errors/Error.h>
+#include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
 {
