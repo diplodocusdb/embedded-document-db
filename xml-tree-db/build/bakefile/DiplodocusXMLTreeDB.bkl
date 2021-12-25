@@ -41,17 +41,17 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErro
         ../../../include/DiplodocusDB/TreeDB/XMLTreeDB.h
         ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h
         ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
-        ../../Source/XMLTreeDBImpl.h
-        ../../Source/XMLTreeDBNodeImpl.h
-        ../../Source/XMLTreeDBTransactionImpl.h
+        ../../src/XMLTreeDBImpl.h
+        ../../src/XMLTreeDBNodeImpl.h
+        ../../src/XMLTreeDBTransactionImpl.h
     }
 
     sources
     {
-        ../../Source/XMLTreeDB.cpp
+        ../../src/XMLTreeDB.cpp
 
-        ../../Source/XMLTreeDBImpl.cpp
-        ../../Source/XMLTreeDBNodeImpl.cpp
-        ../../Source/XMLTreeDBTransactionImpl.cpp
+        ../../src/XMLTreeDBImpl.cpp
+        ../../src/XMLTreeDBNodeImpl.cpp
+        ../../src/XMLTreeDBTransactionImpl.cpp
     }
 }
