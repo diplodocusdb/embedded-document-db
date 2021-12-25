@@ -17,10 +17,10 @@ jobs:
           command: cd /projects/diplodocusdb/tree-db/core/build/gnumake && make
       - run:
           name: Build TreeDB/Core tests
-          command: cd /projects/diplodocusdb/tree-db/tests/Core/build/gnumake && make
+          command: cd /projects/diplodocusdb/tree-db/core/tests/build/gnumake && make
       - run:
           name: Run TreeDB/Core tests
-          command: cd /projects/diplodocusdb/tree-db/tests/Core/build/gnumake && ./DiplodocusTreeDBCoreTests
+          command: cd /projects/diplodocusdb/tree-db/core/tests/build/gnumake && ./DiplodocusTreeDBCoreTests
       - run:
           name: Build TreeDB/XMLTreeDB
           command: cd /projects/diplodocusdb/tree-db/xml-tree-db/build/gnumake && make

@@ -1,23 +1,7 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+    Copyright (c) 2018-2021 Xavier Leclercq
+    Released under the MIT License
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #include "TreeDBValue.h"
@@ -26,7 +10,7 @@ namespace DiplodocusDB
 {
 
 TreeDBValue::TreeDBValue()
-    : m_type(EPrimitiveDataType::eNULL)
+    : m_type(PrimitiveDataType::null)
 {
 }
 
@@ -65,6 +49,13 @@ TreeDBValue TreeDBValue::Int64(int64_t data)
     return result;
 }
 
+TreeDBValue TreeDBValue::Double(double data)
+{
+    TreeDBValue result;
+    result.setDouble(data);
+    return result;
+}
+
 TreeDBValue TreeDBValue::UTF8String(const std::string& data)
 {
     TreeDBValue result;
@@ -76,6 +67,13 @@ TreeDBValue TreeDBValue::Binary(const std::string& data)
 {
     TreeDBValue result;
     result.setBinary(data);
+    return result;
+}
+
+TreeDBValue TreeDBValue::Date(const boost::gregorian::date& data)
+{
+    TreeDBValue result;
+    result.setDate(data);
     return result;
 }
 
@@ -109,6 +107,11 @@ int64_t TreeDBValue::asInt64() const
     return boost::get<int64_t>(m_data);
 }
 
+double TreeDBValue::asDouble() const
+{
+    return boost::get<double>(m_data);
+}
+
 const std::string& TreeDBValue::asUTF8String() const
 {
     return boost::get<std::string>(m_data);
@@ -117,6 +120,11 @@ const std::string& TreeDBValue::asUTF8String() const
 const std::string& TreeDBValue::asBinary() const
 {
     return boost::get<std::string>(m_data);
+}
+
+const boost::gregorian::date& TreeDBValue::asDate() const
+{
+    return boost::get<boost::gregorian::date>(m_data);
 }
 
 bool TreeDBValue::operator ==(const TreeDBValue& other) const
@@ -131,43 +139,55 @@ bool TreeDBValue::operator !=(const TreeDBValue& other) const
 
 void TreeDBValue::setBoolean(bool data)
 {
-    m_type = EPrimitiveDataType::eBoolean;
+    m_type = PrimitiveDataType::boolean;
     m_data = data;
 }
 
 void TreeDBValue::setInt8(int8_t data)
 {
-    m_type = EPrimitiveDataType::eInt8;
+    m_type = PrimitiveDataType::int8bit;
     m_data = data;
 }
 
 void TreeDBValue::setInt16(int16_t data)
 {
-    m_type = EPrimitiveDataType::eInt16;
+    m_type = PrimitiveDataType::int16bit;
     m_data = data;
 }
 
 void TreeDBValue::setInt32(int32_t data)
 {
-    m_type = EPrimitiveDataType::eInt32;
+    m_type = PrimitiveDataType::int32bit;
     m_data = data;
 }
 
 void TreeDBValue::setInt64(int64_t data)
 {
-    m_type = EPrimitiveDataType::eInt64;
+    m_type = PrimitiveDataType::int64bit;
+    m_data = data;
+}
+
+void TreeDBValue::setDouble(double data)
+{
+    m_type = PrimitiveDataType::IEEE754Binary64;
     m_data = data;
 }
 
 void TreeDBValue::setUTF8String(const std::string& data)
 {
-    m_type = EPrimitiveDataType::eUTF8String;
+    m_type = PrimitiveDataType::unicodeString;
     m_data = data;
 }
 
 void TreeDBValue::setBinary(const std::string& data)
 {
-    m_type = EPrimitiveDataType::eBinary;
+    m_type = PrimitiveDataType::binary;
+    m_data = data;
+}
+
+void TreeDBValue::setDate(const boost::gregorian::date& data)
+{
+    m_type = PrimitiveDataType::universalDate;
     m_data = data;
 }
 
