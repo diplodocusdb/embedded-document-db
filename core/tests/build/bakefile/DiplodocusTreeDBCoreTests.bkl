@@ -26,14 +26,14 @@ program DiplodocusTreeDBCoreTests : DiplodocusTreeDBCore, IshikoTests
 
     headers
     {
-        ../../Source/TreeDBKeyTests.h
-        ../../Source/TreeDBValueTests.h
+        ../../src/TreeDBKeyTests.h
+        ../../src/TreeDBValueTests.h
     }
 
     sources
     {
-        ../../Source/main.cpp
-        ../../Source/TreeDBKeyTests.cpp
-        ../../Source/TreeDBValueTests.cpp
+        ../../src/main.cpp
+        ../../src/TreeDBKeyTests.cpp
+        ../../src/TreeDBValueTests.cpp
     }
 }
