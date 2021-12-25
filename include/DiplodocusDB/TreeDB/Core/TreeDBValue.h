@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2021 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
@@ -8,6 +8,7 @@
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
 
 #include "DiplodocusDB/Core/DataType.h"
+#include <boost/date_time.hpp>
 #include <boost/variant.hpp>
 #include <string>
 
@@ -36,6 +37,7 @@ public:
     */
     static TreeDBValue Int32(int32_t data);
     static TreeDBValue Int64(int64_t data);
+    static TreeDBValue Double(double data);
     /// Returns a value of type UTF8String.
     /**
         @param data The data to store in the value.
@@ -51,6 +53,7 @@ public:
     int16_t asInt16() const;
     int32_t asInt32() const;
     int64_t asInt64() const;
+    double asDouble() const;
     const std::string& asUTF8String() const;
     const std::string& asBinary() const;
 
@@ -62,12 +65,14 @@ public:
     void setInt16(int16_t data);
     void setInt32(int32_t data);
     void setInt64(int64_t data);
+    void setDouble(double data);
     void setUTF8String(const std::string& data);
     void setBinary(const std::string& data);
+    void setDate(const boost::gregorian::date& data);
 
 private:
     DataType m_type;
-    boost::variant<bool, int8_t, int16_t,int32_t, int64_t, std::string> m_data;
+    boost::variant<bool, int8_t, int16_t,int32_t, int64_t, double, std::string, boost::gregorian::date> m_data;
 };
 
 }

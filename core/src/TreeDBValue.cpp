@@ -49,6 +49,13 @@ TreeDBValue TreeDBValue::Int64(int64_t data)
     return result;
 }
 
+TreeDBValue TreeDBValue::Double(double data)
+{
+    TreeDBValue result;
+    result.setDouble(data);
+    return result;
+}
+
 TreeDBValue TreeDBValue::UTF8String(const std::string& data)
 {
     TreeDBValue result;
@@ -91,6 +98,11 @@ int32_t TreeDBValue::asInt32() const
 int64_t TreeDBValue::asInt64() const
 {
     return boost::get<int64_t>(m_data);
+}
+
+double TreeDBValue::asDouble() const
+{
+    return boost::get<double>(m_data);
 }
 
 const std::string& TreeDBValue::asUTF8String() const
@@ -143,6 +155,12 @@ void TreeDBValue::setInt64(int64_t data)
     m_data = data;
 }
 
+void TreeDBValue::setDouble(double data)
+{
+    m_type = PrimitiveDataType::IEEE754Binary64;
+    m_data = data;
+}
+
 void TreeDBValue::setUTF8String(const std::string& data)
 {
     m_type = PrimitiveDataType::unicodeString;
@@ -152,6 +170,12 @@ void TreeDBValue::setUTF8String(const std::string& data)
 void TreeDBValue::setBinary(const std::string& data)
 {
     m_type = PrimitiveDataType::binary;
+    m_data = data;
+}
+
+void TreeDBValue::setDate(const boost::gregorian::date& data)
+{
+    m_type = PrimitiveDataType::universalDate;
     m_data = data;
 }
 
