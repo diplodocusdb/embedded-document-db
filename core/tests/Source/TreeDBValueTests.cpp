@@ -1,23 +1,7 @@
 /*
     Copyright (c) 2019-2021 Xavier Leclercq
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+    Released under the MIT License
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #include "TreeDBValueTests.h"
@@ -41,8 +25,8 @@ void TreeDBValueTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::TreeDBValue value;
 
-    ISHIKO_FAIL_IF_NEQ(value.type().primitiveType(), DiplodocusDB::EPrimitiveDataType::eNULL);
-    ISHIKO_FAIL_IF_NEQ(value.type().modifier(), DiplodocusDB::EDataTypeModifier::eNone);
+    ISHIKO_FAIL_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::null);
+    ISHIKO_FAIL_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
     ISHIKO_PASS();
 }
 
@@ -50,8 +34,8 @@ void TreeDBValueTests::Int8Test1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Int8(123);
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::EPrimitiveDataType::eInt8);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::EDataTypeModifier::eNone);
+    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::int8bit);
+    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
     ISHIKO_FAIL_IF_NEQ(value.asInt8(), 123);
     ISHIKO_PASS();
 }
@@ -60,8 +44,8 @@ void TreeDBValueTests::Int32Test1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Int32(123);
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::EPrimitiveDataType::eInt32);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::EDataTypeModifier::eNone);
+    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::int32bit);
+    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
     ISHIKO_FAIL_IF_NEQ(value.asInt32(), 123);
     ISHIKO_PASS();
 }
@@ -70,8 +54,8 @@ void TreeDBValueTests::UTF8StringTest1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::UTF8String("string1");
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::EPrimitiveDataType::eUTF8String);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::EDataTypeModifier::eNone);
+    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::unicodeString);
+    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
     ISHIKO_FAIL_IF_NEQ(value.asUTF8String(), "string1");
     ISHIKO_PASS();
 }
