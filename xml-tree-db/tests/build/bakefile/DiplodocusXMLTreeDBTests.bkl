@@ -26,13 +26,13 @@ program DiplodocusXMLTreeDBTests : DiplodocusXMLTreeDB, IshikoTests
 
     headers
     {
-        ../../Source/XMLTreeDBTests/XMLTreeDBTests.h
+        ../../src/XMLTreeDBTests/XMLTreeDBTests.h
     }
 
     sources
     {
-        ../../Source/main.cpp
+        ../../src/main.cpp
 
-        ../../Source/XMLTreeDBTests/XMLTreeDBTests.cpp
+        ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
     }
 }
