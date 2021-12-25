@@ -242,11 +242,11 @@ void XMLTreeDBNodeImpl::updateValue()
             pugi::xml_attribute attributeNode = m_node.attribute("data-type");
             if (attributeNode)
             {
-                attributeNode.set_value("utf8string");
+                attributeNode.set_value("unicode-string");
             }
             else
             {
-                m_node.append_attribute("data-type").set_value("utf8string");
+                m_node.append_attribute("data-type").set_value("unicode-string");
             }
             if (m_children.empty())
             {
