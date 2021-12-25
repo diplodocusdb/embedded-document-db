@@ -26,27 +26,27 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\XMLTreeDBImpl.h">
+    <ClInclude Include="..\..\src\XMLTreeDBImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\XMLTreeDBNodeImpl.h">
+    <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\XMLTreeDBTransactionImpl.h">
+    <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\XMLTreeDB.cpp">
+    <ClCompile Include="..\..\src\XMLTreeDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\XMLTreeDBImpl.cpp">
+    <ClCompile Include="..\..\src\XMLTreeDBImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\XMLTreeDBNodeImpl.cpp">
+    <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\XMLTreeDBTransactionImpl.cpp">
+    <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

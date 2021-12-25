@@ -1,0 +1,38 @@
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/XMLTreeDB.bkl;
+ishikopath = envvar("ISHIKO_CPP");
+import $(ishikopath)/tests/include/Ishiko/Tests.bkl;
+
+toolsets = gnu vs2019 vs2017 vs2015 vs2013;
+
+gnu.makefile = ../gnumake/GNUmakefile;
+vs2019.solutionfile = ../vc16/DiplodocusXMLTreeDBTests.sln;
+vs2017.solutionfile = ../vc15/DiplodocusXMLTreeDBTests.sln;
+vs2015.solutionfile = ../vc14/DiplodocusXMLTreeDBTests.sln;
+vs2013.solutionfile = ../vc12/DiplodocusXMLTreeDBTests.sln;
+
+program DiplodocusXMLTreeDBTests : DiplodocusXMLTreeDB, IshikoTests
+{
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        libs += DiplodocusXMLTreeDB DiplodocusTreeDBCore DiplodocusDBCore IshikoTests IshikoDiff IshikoFileSystem IshikoProcess IshikoText IshikoErrors boost_filesystem boost_system;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        archs = x86 x86_64;
+    }
+
+    headers
+    {
+        ../../src/XMLTreeDBTests/XMLTreeDBTests.h
+    }
+
+    sources
+    {
+        ../../src/main.cpp
+
+        ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
+    }
+}
