@@ -1,23 +1,7 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+    Copyright (c) 2018-2021 Xavier Leclercq
+    Released under the MIT License
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #include "TreeDBValue.h"
@@ -26,7 +10,7 @@ namespace DiplodocusDB
 {
 
 TreeDBValue::TreeDBValue()
-    : m_type(EPrimitiveDataType::eNULL)
+    : m_type(PrimitiveDataType::null)
 {
 }
 
@@ -131,43 +115,43 @@ bool TreeDBValue::operator !=(const TreeDBValue& other) const
 
 void TreeDBValue::setBoolean(bool data)
 {
-    m_type = EPrimitiveDataType::eBoolean;
+    m_type = PrimitiveDataType::boolean;
     m_data = data;
 }
 
 void TreeDBValue::setInt8(int8_t data)
 {
-    m_type = EPrimitiveDataType::eInt8;
+    m_type = PrimitiveDataType::int8bit;
     m_data = data;
 }
 
 void TreeDBValue::setInt16(int16_t data)
 {
-    m_type = EPrimitiveDataType::eInt16;
+    m_type = PrimitiveDataType::int16bit;
     m_data = data;
 }
 
 void TreeDBValue::setInt32(int32_t data)
 {
-    m_type = EPrimitiveDataType::eInt32;
+    m_type = PrimitiveDataType::int32bit;
     m_data = data;
 }
 
 void TreeDBValue::setInt64(int64_t data)
 {
-    m_type = EPrimitiveDataType::eInt64;
+    m_type = PrimitiveDataType::int64bit;
     m_data = data;
 }
 
 void TreeDBValue::setUTF8String(const std::string& data)
 {
-    m_type = EPrimitiveDataType::eUTF8String;
+    m_type = PrimitiveDataType::unicodeString;
     m_data = data;
 }
 
 void TreeDBValue::setBinary(const std::string& data)
 {
-    m_type = EPrimitiveDataType::eBinary;
+    m_type = PrimitiveDataType::binary;
     m_data = data;
 }
 
