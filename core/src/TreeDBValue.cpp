@@ -70,6 +70,13 @@ TreeDBValue TreeDBValue::Binary(const std::string& data)
     return result;
 }
 
+TreeDBValue TreeDBValue::Date(const boost::gregorian::date& data)
+{
+    TreeDBValue result;
+    result.setDate(data);
+    return result;
+}
+
 const DataType& TreeDBValue::type() const
 {
     return m_type;
@@ -113,6 +120,11 @@ const std::string& TreeDBValue::asUTF8String() const
 const std::string& TreeDBValue::asBinary() const
 {
     return boost::get<std::string>(m_data);
+}
+
+const boost::gregorian::date& TreeDBValue::asDate() const
+{
+    return boost::get<boost::gregorian::date>(m_data);
 }
 
 bool TreeDBValue::operator ==(const TreeDBValue& other) const

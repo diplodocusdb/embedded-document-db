@@ -44,6 +44,7 @@ public:
     */
     static TreeDBValue UTF8String(const std::string& data);
     static TreeDBValue Binary(const std::string& data);
+    static TreeDBValue Date(const boost::gregorian::date& data);
     
     /// Returns the type of the data.
     const DataType& type() const;
@@ -56,6 +57,7 @@ public:
     double asDouble() const;
     const std::string& asUTF8String() const;
     const std::string& asBinary() const;
+    const boost::gregorian::date& asDate() const;
 
     bool operator ==(const TreeDBValue& other) const;
     bool operator !=(const TreeDBValue& other) const;
