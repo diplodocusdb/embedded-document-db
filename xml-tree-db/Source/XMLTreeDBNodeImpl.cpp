@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019-2020 Xavier Leclercq
+    Copyright (c) 2019-2021 Xavier Leclercq
     Released under the MIT License
     See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
 */
@@ -200,7 +200,7 @@ void XMLTreeDBNodeImpl::updateValue()
 
     // Set the new data
     const TreeDBValue& v = value();
-    if (v.type() == EPrimitiveDataType::eNULL)
+    if (v.type() == PrimitiveDataType::null)
     {
         // The data type of a node is null by default. If we didn't do that
         // then all the intermediate nodes without any value would have a
@@ -208,7 +208,7 @@ void XMLTreeDBNodeImpl::updateValue()
 
         m_node.remove_attribute("data-type");
     }
-    else if (v.type() != EPrimitiveDataType::eNULL)
+    else if (v.type() != PrimitiveDataType::null)
     {
         pugi::xml_attribute attributeNode = m_node.attribute("data-type");
         if (attributeNode)
