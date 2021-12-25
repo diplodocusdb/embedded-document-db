@@ -5,8 +5,6 @@
 */
 
 #include "XMLTreeDBTests/XMLTreeDBTests.h"
-
-#include <boost/filesystem/operations.hpp>
 #include <Ishiko/Tests.h>
 
 using namespace Ishiko::Tests;
@@ -15,10 +13,9 @@ int main(int argc, char* argv[])
 {
     TestHarness theTestHarness("DiplodocusXMLTreeDB");
 
-    theTestHarness.environment().setTestDataDirectory("../../TestData");
-    theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
-    boost::filesystem::create_directories("../../TestOutput");
-    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
+    theTestHarness.environment().setTestDataDirectory("../../data");
+    theTestHarness.environment().setTestOutputDirectory("../../output");
+    theTestHarness.environment().setReferenceDataDirectory("../../reference");
 
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<XMLTreeDBTests>();
