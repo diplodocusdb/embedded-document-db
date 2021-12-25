@@ -1,23 +1,7 @@
 /*
     Copyright (c) 2019-2021 Xavier Leclercq
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+    Released under the MIT License
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #include "XMLTreeDBTests.h"
@@ -53,6 +37,7 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<FileComparisonTest>("appendChildNode test 5", AppendChildNodeTest5);
     append<FileComparisonTest>("appendChildNode test 6", AppendChildNodeTest6);
     append<FileComparisonTest>("appendChildNode test 7", AppendChildNodeTest7);
+    append<FileComparisonTest>("appendChildNode test 8", AppendChildNodeTest8);
     append<FileComparisonTest>("setChildNode test 1", SetChildNodeTest1);
     append<FileComparisonTest>("setChildNode test 2", SetChildNodeTest2);
     append<FileComparisonTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
@@ -124,7 +109,7 @@ void XMLTreeDBTests::OpenTest2(Test& test)
     DiplodocusDB::TreeDBValue value = db.value(node, error);
 
     ISHIKO_FAIL_IF(error);
-    ISHIKO_FAIL_IF_NEQ(value.type(), DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHIKO_FAIL_IF_NEQ(value.type(), DiplodocusDB::PrimitiveDataType::null);
     ISHIKO_PASS();
 }
 
@@ -146,7 +131,7 @@ void XMLTreeDBTests::OpenTest3(Test& test)
     DiplodocusDB::TreeDBValue value = db.value(node, error);
 
     ISHIKO_FAIL_IF(error);
-    ISHIKO_FAIL_IF_NEQ(value.type(), DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHIKO_FAIL_IF_NEQ(value.type(), DiplodocusDB::PrimitiveDataType::null);
     ISHIKO_PASS();
 }
 
@@ -172,12 +157,12 @@ void XMLTreeDBTests::OpenTest4(Test& test)
     DiplodocusDB::TreeDBValue value1 = db.value(node1, error);
 
     ISHIKO_FAIL_IF(error);
-    ISHIKO_FAIL_IF_NEQ(value1.type(), DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHIKO_FAIL_IF_NEQ(value1.type(), DiplodocusDB::PrimitiveDataType::null);
 
     DiplodocusDB::TreeDBValue value2 = db.value(node2, error);
 
     ISHIKO_FAIL_IF(error);
-    ISHIKO_FAIL_IF_NEQ(value2.type(), DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHIKO_FAIL_IF_NEQ(value2.type(), DiplodocusDB::PrimitiveDataType::null);
 
     ISHIKO_PASS();
 }
@@ -377,7 +362,7 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
     DiplodocusDB::TreeDBValue value = db.value(nextSibling, error);
 
     ISHIKO_FAIL_IF(error);
-    ISHIKO_FAIL_IF_NEQ(value.type(), DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHIKO_FAIL_IF_NEQ(value.type(), DiplodocusDB::PrimitiveDataType::null);
     
     nextSibling = db.nextSibling(nextSibling, error);
 
@@ -598,6 +583,30 @@ void XMLTreeDBTests::AppendChildNodeTest7(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest7.xml");
+
+    ISHIKO_PASS();
+}
+
+void XMLTreeDBTests::AppendChildNodeTest8(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest8.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.create(outputPath, error);
+
+    ISHIKO_ABORT_IF(error);
+
+    DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1", DiplodocusDB::TreeDBValue::Double(123.45),
+        error);
+
+    ISHIKO_FAIL_IF(error);
+
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest8.xml");
 
     ISHIKO_PASS();
 }
