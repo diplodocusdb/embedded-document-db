@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019-2020 Xavier Leclercq
+    Copyright (c) 2019-2021 Xavier Leclercq
     Released under the MIT License
     See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
 */
@@ -200,40 +200,72 @@ void XMLTreeDBNodeImpl::updateValue()
 
     // Set the new data
     const TreeDBValue& v = value();
-    if (v.type() == EPrimitiveDataType::eNULL)
+    switch (v.type().primitiveType())
     {
+    case PrimitiveDataType::null:
         // The data type of a node is null by default. If we didn't do that
         // then all the intermediate nodes without any value would have a
         // data-type attribute which would be cumbersome to write manually.
-
         m_node.remove_attribute("data-type");
-    }
-    else if (v.type() != EPrimitiveDataType::eNULL)
-    {
-        pugi::xml_attribute attributeNode = m_node.attribute("data-type");
-        if (attributeNode)
+        break;
+
+    case PrimitiveDataType::IEEE754Binary64:
         {
-            attributeNode.set_value("utf8string");
-        }
-        else
-        {
-            m_node.append_attribute("data-type").set_value("utf8string");
-        }
-        if (m_children.empty())
-        {
-            pugi::xml_node pcdataNode = m_node.first_child();
-            if (!pcdataNode || (pcdataNode.type() != pugi::node_pcdata))
+            pugi::xml_attribute attributeNode = m_node.attribute("data-type");
+            if (attributeNode)
             {
-                pcdataNode = m_node.prepend_child(pugi::node_pcdata);
+                attributeNode.set_value("ieee-754-binary64");
             }
-            pcdataNode.set_value(v.asUTF8String().c_str());
+            else
+            {
+                m_node.append_attribute("data-type").set_value("ieee-754-binary64");
+            }
+            if (m_children.empty())
+            {
+                pugi::xml_node pcdataNode = m_node.first_child();
+                if (!pcdataNode || (pcdataNode.type() != pugi::node_pcdata))
+                {
+                    pcdataNode = m_node.prepend_child(pugi::node_pcdata);
+                }
+                pcdataNode.set_value(std::to_string(v.asDouble()).c_str());
+            }
+            else
+            {
+                pugi::xml_node valueNode = m_node.prepend_child("data");
+                valueNode.append_child(pugi::node_pcdata).set_value(std::to_string(v.asDouble()).c_str());
+            }
         }
-        else
+        break;
+
+    case PrimitiveDataType::unicodeString:
         {
-            pugi::xml_node valueNode = m_node.prepend_child("data");
-            valueNode.append_child(pugi::node_pcdata).set_value(v.asUTF8String().c_str());
+            pugi::xml_attribute attributeNode = m_node.attribute("data-type");
+            if (attributeNode)
+            {
+                attributeNode.set_value("utf8string");
+            }
+            else
+            {
+                m_node.append_attribute("data-type").set_value("utf8string");
+            }
+            if (m_children.empty())
+            {
+                pugi::xml_node pcdataNode = m_node.first_child();
+                if (!pcdataNode || (pcdataNode.type() != pugi::node_pcdata))
+                {
+                    pcdataNode = m_node.prepend_child(pugi::node_pcdata);
+                }
+                pcdataNode.set_value(v.asUTF8String().c_str());
+            }
+            else
+            {
+                pugi::xml_node valueNode = m_node.prepend_child("data");
+                valueNode.append_child(pugi::node_pcdata).set_value(v.asUTF8String().c_str());
+            }
         }
+        break;
     }
+     
     for (size_t i = 0; i < m_children.size(); ++i)
     {
         m_children[i]->updateValue();
