@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <diplodocusdb-xmltreedb>
-  <key1 data-type="utf8string">
+  <key1 data-type="unicode-string">
     <data>value1</data>
     <key2 />
   </key1>

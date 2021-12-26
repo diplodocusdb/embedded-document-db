@@ -80,7 +80,7 @@ void TreeDBValueTests::DateTest1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Date(date(2021, 12, 25));
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::universalDate);
+    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::date);
     ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
     ISHIKO_FAIL_IF_NEQ(value.asDate(), date(2021, 12, 25));
     ISHIKO_PASS();

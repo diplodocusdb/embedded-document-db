@@ -7,6 +7,9 @@
 #include "XMLTreeDBNodeImpl.h"
 #include "XMLTreeDBImpl.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBErrorCategory.h"
+#include <Ishiko/Time.hpp>
+
+using namespace Ishiko::Time;
 
 namespace DiplodocusDB
 {
@@ -242,11 +245,11 @@ void XMLTreeDBNodeImpl::updateValue()
             pugi::xml_attribute attributeNode = m_node.attribute("data-type");
             if (attributeNode)
             {
-                attributeNode.set_value("utf8string");
+                attributeNode.set_value("unicode-string");
             }
             else
             {
-                m_node.append_attribute("data-type").set_value("utf8string");
+                m_node.append_attribute("data-type").set_value("unicode-string");
             }
             if (m_children.empty())
             {
@@ -264,6 +267,40 @@ void XMLTreeDBNodeImpl::updateValue()
             }
         }
         break;
+
+    case PrimitiveDataType::date:
+        {
+            pugi::xml_attribute attributeNode = m_node.attribute("data-type");
+            if (attributeNode)
+            {
+                attributeNode.set_value("date");
+            }
+            else
+            {
+                m_node.append_attribute("data-type").set_value("date");
+            }
+
+
+            if (m_children.empty())
+            {
+                pugi::xml_node pcdataNode = m_node.first_child();
+                if (!pcdataNode || (pcdataNode.type() != pugi::node_pcdata))
+                {
+                    pcdataNode = m_node.prepend_child(pugi::node_pcdata);
+                }
+                pcdataNode.set_value(Date(v.asDate()).toISO8601String().c_str());
+            }
+            else
+            {
+                pugi::xml_node valueNode = m_node.prepend_child("data");
+                valueNode.append_child(pugi::node_pcdata).set_value(Date(v.asDate()).toISO8601String().c_str());
+            }
+        }
+        break;
+
+    default:
+        // TODO
+        throw 0;
     }
      
     for (size_t i = 0; i < m_children.size(); ++i)

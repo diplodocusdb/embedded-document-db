@@ -42,6 +42,8 @@ endif
 #      ISHIKO_CPP_ERRORS_ROOT    Path to the Ishiko Errors installation
 #      ISHIKO_CPP_BOOST_ROOT     Path to the Boost installation
 #      ISHIKO_CPP_PUGIXML_ROOT   Path to the pugixml installation
+#      ISHIKO_CPP_FMT_ROOT       Path to the fmt installation
+#      ISHIKO_CPP_TIME_ROOT      Path to the Ishiko Timeinstallation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -78,6 +80,10 @@ ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
 ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
 # Path to the pugixml installation
 ISHIKO_CPP_PUGIXML_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_PUGIXML)
+# Path to the fmt installation
+ISHIKO_CPP_FMT_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_FMT)
+# Path to the Ishiko Timeinstallation
+ISHIKO_CPP_TIME_ROOT ?= $(ISHIKO_CPP)/time
 
 # ------------
 
@@ -88,16 +94,16 @@ all: ../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusX
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDB.o: ../../src/XMLTreeDB.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../src/XMLTreeDB.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../src/XMLTreeDB.cpp
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBImpl.o: ../../src/XMLTreeDBImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../src/XMLTreeDBImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../src/XMLTreeDBImpl.cpp
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBNodeImpl.o: ../../src/XMLTreeDBNodeImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../src/XMLTreeDBNodeImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../src/XMLTreeDBNodeImpl.cpp
 
 $(_builddir)DiplodocusXMLTreeDB_XMLTreeDBTransactionImpl.o: ../../src/XMLTreeDBTransactionImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../src/XMLTreeDBTransactionImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/TreeDB/XMLTreeDB -std=c++11 ../../src/XMLTreeDBTransactionImpl.cpp
 
 clean:
 	rm -f $(_builddir)*.o

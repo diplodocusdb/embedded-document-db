@@ -4,8 +4,9 @@ import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
+import $(ishikopath)/time/include/Ishiko/Time.bkl;
 
-template DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErrors, Boost
+template DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoTime, IshikoErrors, Boost
 {
     includedirs += $(DIPLODOCUSDB_TREEDB_ROOT)/include;
 
