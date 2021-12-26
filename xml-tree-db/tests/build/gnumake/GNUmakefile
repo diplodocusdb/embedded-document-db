@@ -41,6 +41,8 @@ endif
 #      DIPLODOCUSDB_TREEDB_ROOT      Path to the DiplodocusDB installation
 #      ISHIKO_CPP_ERRORS_ROOT        Path to the Ishiko Errors installation
 #      ISHIKO_CPP_BOOST_ROOT         Path to the Boost installation
+#      ISHIKO_CPP_FMT_ROOT           Path to the fmt installation
+#      ISHIKO_CPP_TIME_ROOT          Path to the Ishiko Timeinstallation
 #      ISHIKO_CPP_BASEPLATFORM_ROOT  Path to the Ishiko BasePlatform installation
 #      ISHIKO_CPP_FILESYSTEM_ROOT    Path to the Ishiko FileSystem installation
 #      ISHIKO_CPP_TEXT_ROOT          Path to the Ishiko/Text installation
@@ -76,6 +78,10 @@ DIPLODOCUSDB_TREEDB_ROOT ?= $(DIPLODOCUSDB)/tree-db
 ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
 # Path to the Boost installation
 ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
+# Path to the fmt installation
+ISHIKO_CPP_FMT_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_FMT)
+# Path to the Ishiko Timeinstallation
+ISHIKO_CPP_TIME_ROOT ?= $(ISHIKO_CPP)/time
 # Path to the Ishiko BasePlatform installation
 ISHIKO_CPP_BASEPLATFORM_ROOT ?= $(ISHIKO_CPP)/base-platform
 # Path to the Ishiko FileSystem installation
@@ -96,13 +102,13 @@ ISHIKO_CPP_TESTS_ROOT ?= $(ISHIKO_CPP)/tests
 all: $(_builddir)DiplodocusXMLTreeDBTests
 
 $(_builddir)DiplodocusXMLTreeDBTests: $(_builddir)DiplodocusXMLTreeDBTests_main.o $(_builddir)DiplodocusXMLTreeDBTests_XMLTreeDBTests.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)DiplodocusXMLTreeDBTests_main.o $(_builddir)DiplodocusXMLTreeDBTests_XMLTreeDBTests.o -L$(DIPLODOCUSDB_CORE_ROOT)/lib -L$(DIPLODOCUSDB_TREEDB_ROOT)/lib -L$(ISHIKO_CPP_ERRORS_ROOT)/lib -L$(ISHIKO_CPP_BOOST_ROOT)/lib -L$(ISHIKO_CPP_FILESYSTEM_ROOT)/lib -L$(ISHIKO_CPP_TEXT_ROOT)/lib -L$(ISHIKO_CPP_TYPES_ROOT)/lib -L$(ISHIKO_CPP_DIFF_ROOT)/lib -L$(ISHIKO_CPP_PROCESS_ROOT)/lib -L$(ISHIKO_CPP_TESTS_ROOT)/lib -lDiplodocusXMLTreeDB -lDiplodocusTreeDBCore -lDiplodocusDBCore -lIshikoTests -lIshikoDiff -lIshikoFileSystem -lIshikoProcess -lIshikoText -lIshikoErrors -lboost_filesystem -lboost_system -pthread
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)DiplodocusXMLTreeDBTests_main.o $(_builddir)DiplodocusXMLTreeDBTests_XMLTreeDBTests.o -L$(DIPLODOCUSDB_CORE_ROOT)/lib -L$(DIPLODOCUSDB_TREEDB_ROOT)/lib -L$(ISHIKO_CPP_FMT_ROOT)/lib -L$(ISHIKO_CPP_BOOST_ROOT)/lib -L$(ISHIKO_CPP_TIME_ROOT)/lib -L$(ISHIKO_CPP_ERRORS_ROOT)/lib -L$(ISHIKO_CPP_FILESYSTEM_ROOT)/lib -L$(ISHIKO_CPP_TEXT_ROOT)/lib -L$(ISHIKO_CPP_TYPES_ROOT)/lib -L$(ISHIKO_CPP_DIFF_ROOT)/lib -L$(ISHIKO_CPP_PROCESS_ROOT)/lib -L$(ISHIKO_CPP_TESTS_ROOT)/lib -lDiplodocusXMLTreeDB -lDiplodocusTreeDBCore -lDiplodocusDBCore -lIshikoTests -lIshikoDiff -lIshikoFileSystem -lIshikoProcess -lIshikoText -lIshikoErrors -lboost_filesystem -lboost_system -pthread
 
 $(_builddir)DiplodocusXMLTreeDBTests_main.o: ../../src/main.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../src/main.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../src/main.cpp
 
 $(_builddir)DiplodocusXMLTreeDBTests_XMLTreeDBTests.o: ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(DIPLODOCUSDB_TREEDB_ROOT)/include -I$(ISHIKO_CPP_BASEPLATFORM_ROOT)/include -I$(ISHIKO_CPP_FILESYSTEM_ROOT)/include -I$(ISHIKO_CPP_TEXT_ROOT)/include -I$(ISHIKO_CPP_TYPES_ROOT)/include -I$(ISHIKO_CPP_DIFF_ROOT)/include -I$(ISHIKO_CPP_PROCESS_ROOT)/include -I$(ISHIKO_CPP_TESTS_ROOT)/include -std=c++11 ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
 
 clean:
 	rm -f $(_builddir)*.o
