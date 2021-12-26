@@ -187,7 +187,7 @@ void TreeDBValue::setBinary(const std::string& data)
 
 void TreeDBValue::setDate(const boost::gregorian::date& data)
 {
-    m_type = PrimitiveDataType::universalDate;
+    m_type = PrimitiveDataType::date;
     m_data = data;
 }
 
