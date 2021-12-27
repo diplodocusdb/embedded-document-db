@@ -49,6 +49,13 @@ TreeDBValue TreeDBValue::Int64(int64_t data)
     return result;
 }
 
+TreeDBValue TreeDBValue::UnsignedInt64(uint64_t data)
+{
+    TreeDBValue result;
+    result.setUnsignedInt64(data);
+    return result;
+}
+
 TreeDBValue TreeDBValue::Double(double data)
 {
     TreeDBValue result;
@@ -105,6 +112,11 @@ int32_t TreeDBValue::asInt32() const
 int64_t TreeDBValue::asInt64() const
 {
     return boost::get<int64_t>(m_data);
+}
+
+uint64_t TreeDBValue::asUnsignedInt64() const
+{
+    return boost::get<uint64_t>(m_data);
 }
 
 double TreeDBValue::asDouble() const
@@ -164,6 +176,12 @@ void TreeDBValue::setInt32(int32_t data)
 void TreeDBValue::setInt64(int64_t data)
 {
     m_type = PrimitiveDataType::int64bit;
+    m_data = data;
+}
+
+void TreeDBValue::setUnsignedInt64(uint64_t data)
+{
+    m_type = PrimitiveDataType::unsignedInt64bit;
     m_data = data;
 }
 
