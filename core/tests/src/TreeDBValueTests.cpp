@@ -17,11 +17,13 @@ TreeDBValueTests::TreeDBValueTests(const TestNumber& number, const TestEnvironme
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("Int8 test 1", Int8Test1);
     append<HeapAllocationErrorsTest>("Int32 test 1", Int32Test1);
+    append<HeapAllocationErrorsTest>("UnsignedInt64 test 1", UnsignedInt64Test1);
     append<HeapAllocationErrorsTest>("Double test 1", DoubleTest1);
     append<HeapAllocationErrorsTest>("UTF8String test 1", UTF8StringTest1);
     append<HeapAllocationErrorsTest>("Date test 1", DateTest1);
     append<HeapAllocationErrorsTest>("setInt8 test 1", SetInt8Test1);
     append<HeapAllocationErrorsTest>("setInt32 test 1", SetInt32Test1);
+    append<HeapAllocationErrorsTest>("setUnsignedInt64 test 1", SetUnsignedInt64Test1);
     append<HeapAllocationErrorsTest>("setDouble test 1", SetDoubleTest1);
     append<HeapAllocationErrorsTest>("setUTF8String test 1", SetUTF8StringTest1);
     append<HeapAllocationErrorsTest>("setDate test 1", SetDateTest1);
@@ -56,6 +58,16 @@ void TreeDBValueTests::Int32Test1(Test& test)
     ISHIKO_PASS();
 }
 
+void TreeDBValueTests::UnsignedInt64Test1(Test& test)
+{
+    DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::UnsignedInt64(123);
+
+    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::unsignedInt64bit);
+    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
+    ISHIKO_FAIL_IF_NEQ(value.asUnsignedInt64(), 123);
+    ISHIKO_PASS();
+}
+
 void TreeDBValueTests::DoubleTest1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Double(123.45);
@@ -86,6 +98,15 @@ void TreeDBValueTests::DateTest1(Test& test)
     ISHIKO_PASS();
 }
 
+void TreeDBValueTests::SetInt8Test1(Test& test)
+{
+    DiplodocusDB::TreeDBValue value;
+    value.setInt8(123);
+
+    ISHIKO_FAIL_IF_NEQ(value.asInt8(), 123);
+    ISHIKO_PASS();
+}
+
 void TreeDBValueTests::SetInt32Test1(Test& test)
 {
     DiplodocusDB::TreeDBValue value;
@@ -95,12 +116,12 @@ void TreeDBValueTests::SetInt32Test1(Test& test)
     ISHIKO_PASS();
 }
 
-void TreeDBValueTests::SetInt8Test1(Test& test)
+void TreeDBValueTests::SetUnsignedInt64Test1(Test& test)
 {
     DiplodocusDB::TreeDBValue value;
-    value.setInt8(123);
+    value.setUnsignedInt64(123);
 
-    ISHIKO_FAIL_IF_NEQ(value.asInt8(), 123);
+    ISHIKO_FAIL_IF_NEQ(value.asUnsignedInt64(), 123);
     ISHIKO_PASS();
 }
 
