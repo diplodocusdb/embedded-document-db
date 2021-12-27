@@ -37,6 +37,7 @@ public:
     */
     static TreeDBValue Int32(int32_t data);
     static TreeDBValue Int64(int64_t data);
+    static TreeDBValue UnsignedInt64(uint64_t data);
     static TreeDBValue Double(double data);
     /// Returns a value of type UTF8String.
     /**
@@ -54,6 +55,7 @@ public:
     int16_t asInt16() const;
     int32_t asInt32() const;
     int64_t asInt64() const;
+    uint64_t asUnsignedInt64() const;
     double asDouble() const;
     const std::string& asUTF8String() const;
     const std::string& asBinary() const;
@@ -67,6 +69,7 @@ public:
     void setInt16(int16_t data);
     void setInt32(int32_t data);
     void setInt64(int64_t data);
+    void setUnsignedInt64(uint64_t data);
     void setDouble(double data);
     void setUTF8String(const std::string& data);
     void setBinary(const std::string& data);
@@ -74,7 +77,7 @@ public:
 
 private:
     DataType m_type;
-    boost::variant<bool, int8_t, int16_t,int32_t, int64_t, double, std::string, boost::gregorian::date> m_data;
+    boost::variant<bool, int8_t, int16_t,int32_t, int64_t, uint64_t, double, std::string, boost::gregorian::date> m_data;
 };
 
 }
