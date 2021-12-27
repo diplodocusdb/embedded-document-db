@@ -212,6 +212,34 @@ void XMLTreeDBNodeImpl::updateValue()
         m_node.remove_attribute("data-type");
         break;
 
+    case PrimitiveDataType::unsignedInt64bit:
+    {
+        pugi::xml_attribute attributeNode = m_node.attribute("data-type");
+        if (attributeNode)
+        {
+            attributeNode.set_value("unsigned-int-64bits");
+        }
+        else
+        {
+            m_node.append_attribute("data-type").set_value("unsigned-int-64bits");
+        }
+        if (m_children.empty())
+        {
+            pugi::xml_node pcdataNode = m_node.first_child();
+            if (!pcdataNode || (pcdataNode.type() != pugi::node_pcdata))
+            {
+                pcdataNode = m_node.prepend_child(pugi::node_pcdata);
+            }
+            pcdataNode.set_value(std::to_string(v.asUnsignedInt64()).c_str());
+        }
+        else
+        {
+            pugi::xml_node valueNode = m_node.prepend_child("data");
+            valueNode.append_child(pugi::node_pcdata).set_value(std::to_string(v.asUnsignedInt64()).c_str());
+        }
+    }
+    break;
+
     case PrimitiveDataType::IEEE754Binary64:
         {
             pugi::xml_attribute attributeNode = m_node.attribute("data-type");

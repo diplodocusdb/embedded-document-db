@@ -41,6 +41,7 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<FileComparisonTest>("appendChildNode test 7", AppendChildNodeTest7);
     append<FileComparisonTest>("appendChildNode test 8", AppendChildNodeTest8);
     append<FileComparisonTest>("appendChildNode test 9", AppendChildNodeTest9);
+    append<FileComparisonTest>("appendChildNode test 10", AppendChildNodeTest10);
     append<FileComparisonTest>("setChildNode test 1", SetChildNodeTest1);
     append<FileComparisonTest>("setChildNode test 2", SetChildNodeTest2);
     append<FileComparisonTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
@@ -601,8 +602,8 @@ void XMLTreeDBTests::AppendChildNodeTest8(FileComparisonTest& test)
 
     ISHIKO_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1", DiplodocusDB::TreeDBValue::Double(123.45),
-        error);
+    DiplodocusDB::TreeDBNode node =
+        db.appendChildNode(db.root(), "key1", DiplodocusDB::TreeDBValue::UnsignedInt64(123), error);
 
     ISHIKO_FAIL_IF(error);
 
@@ -625,7 +626,8 @@ void XMLTreeDBTests::AppendChildNodeTest9(FileComparisonTest& test)
 
     ISHIKO_ABORT_IF(error);
 
-    TreeDBNode node = db.appendChildNode(db.root(), "key1", TreeDBValue::Date(date(2021, 12, 25)), error);
+    DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1", DiplodocusDB::TreeDBValue::Double(123.45),
+        error);
 
     ISHIKO_FAIL_IF(error);
 
@@ -633,6 +635,29 @@ void XMLTreeDBTests::AppendChildNodeTest9(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest9.xml");
+
+    ISHIKO_PASS();
+}
+
+void XMLTreeDBTests::AppendChildNodeTest10(FileComparisonTest& test)
+{
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest10.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.create(outputPath, error);
+
+    ISHIKO_ABORT_IF(error);
+
+    TreeDBNode node = db.appendChildNode(db.root(), "key1", TreeDBValue::Date(date(2021, 12, 25)), error);
+
+    ISHIKO_FAIL_IF(error);
+
+    db.close();
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest10.xml");
 
     ISHIKO_PASS();
 }
