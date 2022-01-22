@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019-2021 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
@@ -18,12 +18,12 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
     append<FileComparisonTest>("create test 1", CreateTest1);
-    append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
     append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
     append<HeapAllocationErrorsTest>("open test 4", OpenTest4);
     append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
     append<HeapAllocationErrorsTest>("open test 6", OpenTest6);
+    append<HeapAllocationErrorsTest>("open test 7", OpenTest7);
     append<HeapAllocationErrorsTest>("parent test 1", ParentTest1);
     append<HeapAllocationErrorsTest>("parent test 2", ParentTest2);
     append<HeapAllocationErrorsTest>("childNodes test 1", ChildNodesTest1);
@@ -73,7 +73,7 @@ void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
     ISHIKO_PASS();
 }
 
-void XMLTreeDBTests::OpenTest1(Test& test)
+void XMLTreeDBTests::OpenTest2(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
@@ -95,9 +95,9 @@ void XMLTreeDBTests::OpenTest1(Test& test)
     ISHIKO_PASS();
 }
 
-void XMLTreeDBTests::OpenTest2(Test& test)
+void XMLTreeDBTests::OpenTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest2.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
 
     Ishiko::Error error(0);
 
@@ -117,9 +117,9 @@ void XMLTreeDBTests::OpenTest2(Test& test)
     ISHIKO_PASS();
 }
 
-void XMLTreeDBTests::OpenTest3(Test& test)
+void XMLTreeDBTests::OpenTest4(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
 
     Ishiko::Error error(0);
 
@@ -139,9 +139,9 @@ void XMLTreeDBTests::OpenTest3(Test& test)
     ISHIKO_PASS();
 }
 
-void XMLTreeDBTests::OpenTest4(Test& test)
+void XMLTreeDBTests::OpenTest5(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest5.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -171,9 +171,9 @@ void XMLTreeDBTests::OpenTest4(Test& test)
     ISHIKO_PASS();
 }
 
-void XMLTreeDBTests::OpenTest5(Test& test)
+void XMLTreeDBTests::OpenTest6(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest5.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest6.xml");
 
     Ishiko::Error error(0);
 
@@ -193,9 +193,9 @@ void XMLTreeDBTests::OpenTest5(Test& test)
     ISHIKO_PASS();
 }
 
-void XMLTreeDBTests::OpenTest6(Test& test)
+void XMLTreeDBTests::OpenTest7(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest6.xml");
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest7.xml");
 
     DiplodocusDB::XMLTreeDB db;
 

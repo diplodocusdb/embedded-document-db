@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019-2021 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
@@ -17,12 +17,12 @@ public:
 private:
     static void CreationTest1(Ishiko::Tests::Test& test);
     static void CreateTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void OpenTest1(Ishiko::Tests::Test& test);
     static void OpenTest2(Ishiko::Tests::Test& test);
     static void OpenTest3(Ishiko::Tests::Test& test);
     static void OpenTest4(Ishiko::Tests::Test& test);
     static void OpenTest5(Ishiko::Tests::Test& test);
     static void OpenTest6(Ishiko::Tests::Test& test);
+    static void OpenTest7(Ishiko::Tests::Test& test);
     static void ParentTest1(Ishiko::Tests::Test& test);
     static void ParentTest2(Ishiko::Tests::Test& test);
     static void ChildNodesTest1(Ishiko::Tests::Test& test);
