@@ -25,6 +25,9 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
     append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
     append<HeapAllocationErrorsTest>("open test 6", OpenTest6);
     append<HeapAllocationErrorsTest>("open test 7", OpenTest7);
+    append<HeapAllocationErrorsTest>("open test 8", OpenTest8);
+    append<HeapAllocationErrorsTest>("open test 9", OpenTest9);
+    append<HeapAllocationErrorsTest>("open test 10", OpenTest10);
     append<HeapAllocationErrorsTest>("parent test 1", ParentTest1);
     append<HeapAllocationErrorsTest>("parent test 2", ParentTest2);
     append<HeapAllocationErrorsTest>("childNodes test 1", ChildNodesTest1);
@@ -235,6 +238,72 @@ void XMLTreeDBTests::OpenTest7(Test& test)
 
     ISHIKO_FAIL_IF(error);
     ISHIKO_FAIL_IF_NEQ(value2.asUTF8String(), "value2");
+    ISHIKO_PASS();
+}
+
+void XMLTreeDBTests::OpenTest8(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest8.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(inputPath, error);
+
+    ISHIKO_ABORT_IF(error);
+
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
+
+    ISHIKO_FAIL_IF(error);
+
+    DiplodocusDB::TreeDBValue value = db.value(node, error);
+
+    ISHIKO_FAIL_IF(error);
+    ISHIKO_FAIL_IF_NEQ(value.asUnsignedInt64(), 123);
+    ISHIKO_PASS();
+}
+
+void XMLTreeDBTests::OpenTest9(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest9.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(inputPath, error);
+
+    ISHIKO_ABORT_IF(error);
+
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
+
+    ISHIKO_FAIL_IF(error);
+
+    DiplodocusDB::TreeDBValue value = db.value(node, error);
+
+    ISHIKO_FAIL_IF(error);
+    ISHIKO_FAIL_IF_NEQ(value.asDouble(), 123.45);
+    ISHIKO_PASS();
+}
+
+void XMLTreeDBTests::OpenTest10(Test& test)
+{
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest10.xml");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(inputPath, error);
+
+    ISHIKO_ABORT_IF(error);
+
+    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
+
+    ISHIKO_FAIL_IF(error);
+
+    DiplodocusDB::TreeDBValue value = db.value(node, error);
+
+    ISHIKO_FAIL_IF(error);
+    ISHIKO_FAIL_IF_NEQ(value.asDate(), date(2021, 12, 25));
     ISHIKO_PASS();
 }
 
