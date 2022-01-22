@@ -4,10 +4,10 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
-#define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_H_
+#ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_HPP_
+#define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_HPP_
 
-#include "XMLTreeDBNodeImpl.h"
+#include "XMLTreeDBNodeImpl.hpp"
 #include <boost/filesystem/path.hpp>
 #include <DiplodocusDB/TreeDB/Core.hpp>
 #include <Ishiko/Errors.hpp>

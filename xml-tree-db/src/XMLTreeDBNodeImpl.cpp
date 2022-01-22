@@ -4,8 +4,8 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#include "XMLTreeDBNodeImpl.h"
-#include "XMLTreeDBImpl.h"
+#include "XMLTreeDBNodeImpl.hpp"
+#include "XMLTreeDBImpl.hpp"
 #include <boost/date_time.hpp>
 #include <DiplodocusDB/TreeDB/Core.hpp>
 #include <Ishiko/Time.hpp>
