@@ -18,6 +18,7 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& 
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
     append<FileComparisonTest>("create test 1", CreateTest1);
+    append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
     append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
     append<HeapAllocationErrorsTest>("open test 4", OpenTest4);
@@ -58,7 +59,7 @@ void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_CreateTest1.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -73,11 +74,24 @@ void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
     ISHIKO_PASS();
 }
 
+void XMLTreeDBTests::OpenTest1(Test& test)
+{
+    boost::filesystem::path inputPath("doesnotexist");
+
+    Ishiko::Error error;
+
+    DiplodocusDB::XMLTreeDB db;
+    db.open(inputPath, error);
+
+    ISHIKO_FAIL_IF_NOT(error);
+    ISHIKO_PASS();
+}
+
 void XMLTreeDBTests::OpenTest2(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.open(inputPath, error);
@@ -99,7 +113,7 @@ void XMLTreeDBTests::OpenTest3(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.open(inputPath, error);
@@ -121,7 +135,7 @@ void XMLTreeDBTests::OpenTest4(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.open(inputPath, error);
@@ -145,7 +159,7 @@ void XMLTreeDBTests::OpenTest5(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF(error);
@@ -175,7 +189,7 @@ void XMLTreeDBTests::OpenTest6(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest6.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.open(inputPath, error);
@@ -199,7 +213,7 @@ void XMLTreeDBTests::OpenTest7(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF(error);
@@ -230,7 +244,7 @@ void XMLTreeDBTests::ParentTest1(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF(error);
@@ -248,7 +262,7 @@ void XMLTreeDBTests::ParentTest2(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF(error);
@@ -271,7 +285,7 @@ void XMLTreeDBTests::ChildNodesTest1(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF(error);
@@ -289,7 +303,7 @@ void XMLTreeDBTests::ChildNodesTest2(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF((bool)error);
@@ -307,7 +321,7 @@ void XMLTreeDBTests::NextSiblingTest1(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF(error);
@@ -325,7 +339,7 @@ void XMLTreeDBTests::NextSiblingTest2(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF(error);
@@ -348,7 +362,7 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
 
     DiplodocusDB::XMLTreeDB db;
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
     db.open(inputPath, error);
 
     ISHIKO_ABORT_IF(error);
@@ -379,7 +393,7 @@ void XMLTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -402,7 +416,7 @@ void XMLTreeDBTests::AppendChildNodeTest1(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest1.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -425,7 +439,7 @@ void XMLTreeDBTests::AppendChildNodeTest2(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest2.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -452,7 +466,7 @@ void XMLTreeDBTests::AppendChildNodeTest3(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest3.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -476,7 +490,7 @@ void XMLTreeDBTests::AppendChildNodeTest4(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest4.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -505,7 +519,7 @@ void XMLTreeDBTests::AppendChildNodeTest5(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest5.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -540,7 +554,7 @@ void XMLTreeDBTests::AppendChildNodeTest6(FileComparisonTest& test)
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.open(outputPath, error);
@@ -567,7 +581,7 @@ void XMLTreeDBTests::AppendChildNodeTest7(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest7.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -666,7 +680,7 @@ void XMLTreeDBTests::SetChildNodeTest1(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -689,7 +703,7 @@ void XMLTreeDBTests::SetChildNodeTest2(FileComparisonTest& test)
 {
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.create(outputPath, error);
@@ -719,7 +733,7 @@ void XMLTreeDBTests::RemoveAllChildNodesTest1(FileComparisonTest& test)
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error(0);
+    Ishiko::Error error;
 
     DiplodocusDB::XMLTreeDB db;
     db.open(outputPath, error);
