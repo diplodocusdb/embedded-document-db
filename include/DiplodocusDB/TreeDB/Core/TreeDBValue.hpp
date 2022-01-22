@@ -4,8 +4,8 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
-#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
+#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_HPP_
+#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_HPP_
 
 #include <boost/date_time.hpp>
 #include <boost/variant.hpp>
