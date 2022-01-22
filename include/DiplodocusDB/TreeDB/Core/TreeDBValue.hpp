@@ -9,7 +9,7 @@
 
 #include <boost/date_time.hpp>
 #include <boost/variant.hpp>
-#include <DiplodocusDB/Core/DataType.hpp>
+#include <DiplodocusDB/Core.hpp>
 #include <string>
 
 namespace DiplodocusDB
