@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019-2021 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
 */
@@ -7,6 +7,7 @@
 #include "XMLTreeDBNodeImpl.h"
 #include "XMLTreeDBImpl.h"
 #include "DiplodocusDB/TreeDB/Core/TreeDBErrorCategory.h"
+#include <boost/date_time.hpp>
 #include <Ishiko/Time.hpp>
 
 using namespace Ishiko::Time;
@@ -352,7 +353,25 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
                 {
                     m_children.push_back(newNode);
                 }
-                else if (strcmp(dataTypeAttribute.as_string(), "utf8string") == 0)
+                else if (strcmp(dataTypeAttribute.as_string(), "unsigned-int-64bits") == 0)
+                {
+                    // TODO: more robust decoding
+                    newNode->value().setUnsignedInt64(atoi(childNode.child_value()));
+                    m_children.push_back(newNode);
+                }
+                else if (strcmp(dataTypeAttribute.as_string(), "ieee-754-binary64") == 0)
+                {
+                    // TODO: more robust decoding
+                    newNode->value().setDouble(atof(childNode.child_value()));
+                    m_children.push_back(newNode);
+                }
+                else if (strcmp(dataTypeAttribute.as_string(), "date") == 0)
+                {
+                    // TODO: more robust decoding
+                    newNode->value().setDate(boost::gregorian::from_string(childNode.child_value()));
+                    m_children.push_back(newNode);
+                }
+                else if (strcmp(dataTypeAttribute.as_string(), "unicode-string") == 0)
                 {
                     newNode->value().setUTF8String(childNode.child_value());
                     m_children.push_back(newNode);

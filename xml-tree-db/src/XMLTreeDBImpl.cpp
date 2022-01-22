@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
 */
@@ -7,6 +7,7 @@
 #include "XMLTreeDBImpl.h"
 #include "XMLTreeDBNodeImpl.h"
 #include "XMLTreeDBTransactionImpl.h"
+#include <DiplodocusDB/TreeDB/Core/TreeDBErrorCategory.h>
 #include <fstream>
 
 namespace DiplodocusDB
@@ -30,7 +31,12 @@ void XMLTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& e
 void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_path = path;
-    m_document.load_file(m_path.string().c_str());
+    pugi::xml_parse_result result = m_document.load_file(m_path.string().c_str());
+    if (!result)
+    {
+        // TODO: better error
+        Fail(error, TreeDBErrorCategory::eGeneric, "Failed to open file", __FILE__, __LINE__);
+    }
     m_root = TreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(nullptr, m_document.child(rootElementName)));
 }
 
