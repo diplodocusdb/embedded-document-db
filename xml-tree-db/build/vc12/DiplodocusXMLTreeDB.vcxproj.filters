@@ -17,22 +17,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\XMLTreeDBImpl.h">
+    <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.h">
+    <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.h">
+    <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

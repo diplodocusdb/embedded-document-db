@@ -1,6 +1,6 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/core/include/DiplodocusDB/DiplodocusDBCore.bkl;
-import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
+import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
+import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/Core.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
@@ -39,18 +39,17 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoTime
 
     headers
     {
-        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB.h
-        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.h
-        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.h
-        ../../src/XMLTreeDBImpl.h
-        ../../src/XMLTreeDBNodeImpl.h
-        ../../src/XMLTreeDBTransactionImpl.h
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB.hpp
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.hpp
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.hpp
+        ../../src/XMLTreeDBImpl.hpp
+        ../../src/XMLTreeDBNodeImpl.hpp
+        ../../src/XMLTreeDBTransactionImpl.hpp
     }
 
     sources
     {
         ../../src/XMLTreeDB.cpp
-
         ../../src/XMLTreeDBImpl.cpp
         ../../src/XMLTreeDBNodeImpl.cpp
         ../../src/XMLTreeDBTransactionImpl.cpp
