@@ -7,7 +7,7 @@
 #include "XMLTreeDBImpl.h"
 #include "XMLTreeDBNodeImpl.h"
 #include "XMLTreeDBTransactionImpl.h"
-#include <DiplodocusDB/TreeDB/Core/TreeDBErrorCategory.h>
+#include <DiplodocusDB/TreeDB/Core.hpp>
 #include <fstream>
 
 namespace DiplodocusDB

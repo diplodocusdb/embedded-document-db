@@ -1,15 +1,15 @@
 /*
-    Copyright (c) 2018-2021 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
-#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_H_
+#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_HPP_
+#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBVALUE_HPP_
 
-#include "DiplodocusDB/Core/DataType.h"
 #include <boost/date_time.hpp>
 #include <boost/variant.hpp>
+#include <DiplodocusDB/Core.hpp>
 #include <string>
 
 namespace DiplodocusDB

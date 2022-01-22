@@ -4,4 +4,7 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#include "TreeDBPersistentNodeID.hpp"
+#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBPERSISTENTNODEID_HPP_
+#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBPERSISTENTNODEID_HPP_
+
+#endif

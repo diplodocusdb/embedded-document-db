@@ -1,11 +1,11 @@
 /*
-    Copyright (c) 2020-2021 Xavier Leclercq
+    Copyright (c) 2020-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBERRORCATEGORY_H_
-#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBERRORCATEGORY_H_
+#ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBERRORCATEGORY_HPP_
+#define _DIPLODOCUSDB_TREEDB_CORE_TREEDBERRORCATEGORY_HPP_
 
 #include <Ishiko/Errors.hpp>
 
