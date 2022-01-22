@@ -1,15 +1,14 @@
 /*
-    Copyright (c) 2019-2021 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDB_H_
 
-#include "DiplodocusDB/TreeDB/Core/TreeDB.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
 #include <boost/filesystem/path.hpp>
+#include <DiplodocusDB/TreeDB/Core.hpp>
 #include <Ishiko/Errors.hpp>
 #include <memory>
 

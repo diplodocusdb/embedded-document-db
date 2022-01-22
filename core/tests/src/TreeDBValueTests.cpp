@@ -1,11 +1,11 @@
 /*
-    Copyright (c) 2019-2021 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #include "TreeDBValueTests.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBValue.h"
+#include <DiplodocusDB/TreeDB/Core/TreeDBValue.hpp>
 #include <boost/date_time.hpp>
 
 using namespace boost::gregorian;

@@ -1,10 +1,10 @@
 /*
-    Copyright (c) 2020 Xavier Leclercq
+    Copyright (c) 2020-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#include "TreeDBErrorCategory.h"
+#include "TreeDBErrorCategory.hpp"
 
 namespace DiplodocusDB
 {

@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
 */
@@ -13,6 +13,6 @@
 #pragma comment(lib, "DiplodocusXMLTreeDB.lib")
 #endif
 
-#include "DiplodocusDB/Core/linkoptions.h"
+#include <DiplodocusDB/Core/linkoptions.hpp>
 
 #endif
