@@ -1,12 +1,12 @@
 /*
     Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/DiplodocusDB/TreeDB/blob/master/LICENSE.txt
+    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#include "XMLTreeDBImpl.h"
-#include "XMLTreeDBNodeImpl.h"
-#include "XMLTreeDBTransactionImpl.h"
+#include "XMLTreeDBImpl.hpp"
+#include "XMLTreeDBNodeImpl.hpp"
+#include "XMLTreeDBTransactionImpl.hpp"
 #include <DiplodocusDB/TreeDB/Core.hpp>
 #include <fstream>
 
