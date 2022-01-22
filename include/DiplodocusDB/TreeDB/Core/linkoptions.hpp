@@ -13,4 +13,6 @@
 #pragma comment(lib, "DiplodocusTreeDBCore.lib")
 #endif
 
+#include <DiplodocusDB/Core/linkoptions.hpp>
+
 #endif
