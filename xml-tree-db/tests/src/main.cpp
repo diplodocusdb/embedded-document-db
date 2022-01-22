@@ -1,10 +1,11 @@
 /*
-    Copyright (c) 2019-2021 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
 #include "XMLTreeDBTests/XMLTreeDBTests.h"
+#include <DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.hpp>
 #include <Ishiko/Tests.h>
 
 using namespace Ishiko::Tests;

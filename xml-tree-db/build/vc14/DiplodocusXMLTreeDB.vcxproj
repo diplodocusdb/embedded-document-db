@@ -156,12 +156,12 @@
     <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.h" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.h" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.h" />
-    <ClInclude Include="..\..\src\XMLTreeDBImpl.h" />
-    <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.h" />
-    <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.h" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.hpp" />
+    <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
+    <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
+    <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
