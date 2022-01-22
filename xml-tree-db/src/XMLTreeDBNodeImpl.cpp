@@ -352,7 +352,7 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
                 {
                     m_children.push_back(newNode);
                 }
-                else if (strcmp(dataTypeAttribute.as_string(), "utf8string") == 0)
+                else if (strcmp(dataTypeAttribute.as_string(), "unicode-string") == 0)
                 {
                     newNode->value().setUTF8String(childNode.child_value());
                     m_children.push_back(newNode);
