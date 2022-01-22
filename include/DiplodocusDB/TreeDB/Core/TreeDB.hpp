@@ -7,9 +7,9 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDB_HPP_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDB_HPP_
 
-#include "TreeDBNode.h"
-#include "TreeDBValue.h"
-#include "TreeDBTransaction.h"
+#include "TreeDBNode.hpp"
+#include "TreeDBValue.hpp"
+#include "TreeDBTransaction.hpp"
 #include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
