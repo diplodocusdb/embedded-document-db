@@ -13,8 +13,8 @@ using namespace boost::gregorian;
 using namespace DiplodocusDB;
 using namespace Ishiko::Tests;
 
-XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "XMLTreeDB tests", environment)
+XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "XMLTreeDB tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
     append<FileComparisonTest>("create test 1", CreateTest1);
@@ -60,7 +60,7 @@ void XMLTreeDBTests::CreationTest1(Test& test)
 
 void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_CreateTest1.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_CreateTest1.xml");
 
     Ishiko::Error error;
 
@@ -72,7 +72,7 @@ void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_CreateTest1.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_CreateTest1.xml");
 
     ISHIKO_PASS();
 }
@@ -92,7 +92,7 @@ void XMLTreeDBTests::OpenTest1(Test& test)
 
 void XMLTreeDBTests::OpenTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
     Ishiko::Error error;
 
@@ -114,7 +114,7 @@ void XMLTreeDBTests::OpenTest2(Test& test)
 
 void XMLTreeDBTests::OpenTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
 
     Ishiko::Error error;
 
@@ -136,7 +136,7 @@ void XMLTreeDBTests::OpenTest3(Test& test)
 
 void XMLTreeDBTests::OpenTest4(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
 
     Ishiko::Error error;
 
@@ -158,7 +158,7 @@ void XMLTreeDBTests::OpenTest4(Test& test)
 
 void XMLTreeDBTests::OpenTest5(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest5.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest5.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -190,7 +190,7 @@ void XMLTreeDBTests::OpenTest5(Test& test)
 
 void XMLTreeDBTests::OpenTest6(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest6.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest6.xml");
 
     Ishiko::Error error;
 
@@ -212,7 +212,7 @@ void XMLTreeDBTests::OpenTest6(Test& test)
 
 void XMLTreeDBTests::OpenTest7(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest7.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest7.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -243,7 +243,7 @@ void XMLTreeDBTests::OpenTest7(Test& test)
 
 void XMLTreeDBTests::OpenTest8(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest8.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest8.xml");
 
     Ishiko::Error error;
 
@@ -265,7 +265,7 @@ void XMLTreeDBTests::OpenTest8(Test& test)
 
 void XMLTreeDBTests::OpenTest9(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest9.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest9.xml");
 
     Ishiko::Error error;
 
@@ -287,7 +287,7 @@ void XMLTreeDBTests::OpenTest9(Test& test)
 
 void XMLTreeDBTests::OpenTest10(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_OpenTest10.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest10.xml");
 
     Ishiko::Error error;
 
@@ -309,7 +309,7 @@ void XMLTreeDBTests::OpenTest10(Test& test)
 
 void XMLTreeDBTests::ParentTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -327,7 +327,7 @@ void XMLTreeDBTests::ParentTest1(Test& test)
 
 void XMLTreeDBTests::ParentTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_ParentTest2.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_ParentTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -350,7 +350,7 @@ void XMLTreeDBTests::ParentTest2(Test& test)
 
 void XMLTreeDBTests::ChildNodesTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -368,7 +368,7 @@ void XMLTreeDBTests::ChildNodesTest1(Test& test)
 
 void XMLTreeDBTests::ChildNodesTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_ChildNodesTest2.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_ChildNodesTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -386,7 +386,7 @@ void XMLTreeDBTests::ChildNodesTest2(Test& test)
 
 void XMLTreeDBTests::NextSiblingTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -404,7 +404,7 @@ void XMLTreeDBTests::NextSiblingTest1(Test& test)
 
 void XMLTreeDBTests::NextSiblingTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_NextSiblingTest2.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_NextSiblingTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -427,7 +427,7 @@ void XMLTreeDBTests::NextSiblingTest2(Test& test)
 
 void XMLTreeDBTests::NextSiblingTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_NextSiblingTest3.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_NextSiblingTest3.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -460,7 +460,7 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
 
 void XMLTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
 
     Ishiko::Error error;
 
@@ -476,14 +476,14 @@ void XMLTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest1.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest1.xml");
 
     Ishiko::Error error;
 
@@ -499,14 +499,14 @@ void XMLTreeDBTests::AppendChildNodeTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest1.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest1.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest2(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest2.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest2.xml");
 
     Ishiko::Error error;
 
@@ -526,14 +526,14 @@ void XMLTreeDBTests::AppendChildNodeTest2(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest2.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest2.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest3(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest3.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest3.xml");
 
     Ishiko::Error error;
 
@@ -550,14 +550,14 @@ void XMLTreeDBTests::AppendChildNodeTest3(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest3.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest3.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest4(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest4.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest4.xml");
 
     Ishiko::Error error;
 
@@ -579,14 +579,14 @@ void XMLTreeDBTests::AppendChildNodeTest4(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest4.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest4.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest5(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest5.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest5.xml");
 
     Ishiko::Error error;
 
@@ -611,15 +611,15 @@ void XMLTreeDBTests::AppendChildNodeTest5(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest5.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest5.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest6(FileComparisonTest& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest6.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest6.xml");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -641,14 +641,14 @@ void XMLTreeDBTests::AppendChildNodeTest6(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest6.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest6.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest7(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest7.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest7.xml");
 
     Ishiko::Error error;
 
@@ -669,14 +669,14 @@ void XMLTreeDBTests::AppendChildNodeTest7(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest7.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest7.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest8(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest8.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest8.xml");
 
     Ishiko::Error error;
 
@@ -693,14 +693,14 @@ void XMLTreeDBTests::AppendChildNodeTest8(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest8.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest8.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest9(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest9.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest9.xml");
 
     Ishiko::Error error;
 
@@ -717,14 +717,14 @@ void XMLTreeDBTests::AppendChildNodeTest9(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest9.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest9.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::AppendChildNodeTest10(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest10.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest10.xml");
 
     Ishiko::Error error;
 
@@ -740,14 +740,14 @@ void XMLTreeDBTests::AppendChildNodeTest10(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest10.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest10.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::SetChildNodeTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
 
     Ishiko::Error error;
 
@@ -763,14 +763,14 @@ void XMLTreeDBTests::SetChildNodeTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::SetChildNodeTest2(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
 
     Ishiko::Error error;
 
@@ -790,15 +790,15 @@ void XMLTreeDBTests::SetChildNodeTest2(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
 
     ISHIKO_PASS();
 }
 
 void XMLTreeDBTests::RemoveAllChildNodesTest1(FileComparisonTest& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -816,7 +816,7 @@ void XMLTreeDBTests::RemoveAllChildNodesTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
 
     ISHIKO_PASS();
 }
