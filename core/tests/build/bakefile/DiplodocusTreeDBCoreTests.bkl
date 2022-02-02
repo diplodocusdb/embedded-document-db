@@ -1,7 +1,7 @@
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/tests/include/Ishiko/Tests.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
+import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/Core.bkl;
 
 toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
