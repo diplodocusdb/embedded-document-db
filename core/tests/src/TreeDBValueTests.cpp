@@ -11,8 +11,8 @@
 using namespace boost::gregorian;
 using namespace Ishiko::Tests;
 
-TreeDBValueTests::TreeDBValueTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "TreeDBValue tests", environment)
+TreeDBValueTests::TreeDBValueTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "TreeDBValue tests", context)
 {
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("Int8 test 1", Int8Test1);
