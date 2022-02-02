@@ -252,6 +252,8 @@ void XMLTreeDBNodeImpl::updateValue()
             {
                 m_node.append_attribute("data-type").set_value("ieee-754-binary64");
             }
+            std::stringstream value;
+            value << std::fixed << std::setprecision(8) << v.asDouble();
             if (m_children.empty())
             {
                 pugi::xml_node pcdataNode = m_node.first_child();
@@ -259,12 +261,12 @@ void XMLTreeDBNodeImpl::updateValue()
                 {
                     pcdataNode = m_node.prepend_child(pugi::node_pcdata);
                 }
-                pcdataNode.set_value(std::to_string(v.asDouble()).c_str());
+                pcdataNode.set_value(value.str().c_str());
             }
             else
             {
                 pugi::xml_node valueNode = m_node.prepend_child("data");
-                valueNode.append_child(pugi::node_pcdata).set_value(std::to_string(v.asDouble()).c_str());
+                valueNode.append_child(pugi::node_pcdata).set_value(value.str().c_str());
             }
         }
         break;

@@ -6,7 +6,7 @@
 
 #include "XMLTreeDBTests/XMLTreeDBTests.h"
 #include <DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.hpp>
-#include <Ishiko/Tests.h>
+#include <Ishiko/Tests.hpp>
 
 using namespace Ishiko::Tests;
 
@@ -14,9 +14,9 @@ int main(int argc, char* argv[])
 {
     TestHarness theTestHarness("DiplodocusXMLTreeDB");
 
-    theTestHarness.environment().setTestDataDirectory("../../data");
-    theTestHarness.environment().setTestOutputDirectory("../../output");
-    theTestHarness.environment().setReferenceDataDirectory("../../reference");
+    theTestHarness.context().setTestDataDirectory("../../data");
+    theTestHarness.context().setTestOutputDirectory("../../output");
+    theTestHarness.context().setReferenceDataDirectory("../../reference");
 
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<XMLTreeDBTests>();

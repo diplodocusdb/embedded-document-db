@@ -7,12 +7,12 @@
 #ifndef _DIPLODOCUSDB_TEST_TREEDB_XMLTREEDBTESTS_XMLTREEDBTESTS_H_
 #define _DIPLODOCUSDB_TEST_TREEDB_XMLTREEDBTESTS_XMLTREEDBTESTS_H_
 
-#include <Ishiko/Tests.h>
+#include <Ishiko/Tests.hpp>
 
 class XMLTreeDBTests : public Ishiko::Tests::TestSequence
 {
 public:
-    XMLTreeDBTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    XMLTreeDBTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestContext& context);
 
 private:
     static void CreationTest1(Ishiko::Tests::Test& test);

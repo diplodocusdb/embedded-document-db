@@ -9,8 +9,8 @@
 
 using namespace Ishiko::Tests;
 
-TreeDBKeyTests::TreeDBKeyTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "TreeDBKey tests", environment)
+TreeDBKeyTests::TreeDBKeyTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "TreeDBKey tests", context)
 {
     append<HeapAllocationErrorsTest>("Construction test 1", ConstructionTest1);
     append<HeapAllocationErrorsTest>("parentKey test 1", ParentKeyTest1);
