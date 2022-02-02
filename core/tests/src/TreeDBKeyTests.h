@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2021 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
@@ -7,12 +7,12 @@
 #ifndef _DIPLODOCUSDB_TEST_TREEDB_CORE_TREEDBKEYTESTS_H_
 #define _DIPLODOCUSDB_TEST_TREEDB_CORE_TREEDBKEYTESTS_H_
 
-#include <Ishiko/Tests.h>
+#include <Ishiko/Tests.hpp>
 
 class TreeDBKeyTests : public Ishiko::Tests::TestSequence
 {
 public:
-    TreeDBKeyTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    TreeDBKeyTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestContext& context);
 
 private:
     static void ConstructionTest1(Ishiko::Tests::Test& test);
