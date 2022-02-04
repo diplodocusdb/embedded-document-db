@@ -16,7 +16,7 @@ program DiplodocusXMLTreeDBTests : DiplodocusXMLTreeDB, IshikoTests
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += DiplodocusXMLTreeDB DiplodocusTreeDBCore DiplodocusDBCore IshikoTests IshikoDiff IshikoFileSystem IshikoProcess IshikoTime IshikoText IshikoErrors fmt boost_filesystem;
+        libs += DiplodocusXMLTreeDB DiplodocusTreeDBCore DiplodocusDBCore IshikoTests IshikoTestsCore IshikoDiff IshikoFileSystem IshikoProcess IshikoTime IshikoText IshikoErrors fmt boost_filesystem;
     }
 
     if ($(toolset) != gnu)
