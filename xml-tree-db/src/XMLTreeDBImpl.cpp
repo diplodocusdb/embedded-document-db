@@ -42,6 +42,8 @@ void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& err
 
 void XMLTreeDBImpl::close()
 {
+    std::ofstream file(m_path.string());
+    m_document.save(file, "  ");
 }
 
 TreeDBNode& XMLTreeDBImpl::root()
@@ -274,8 +276,6 @@ size_t XMLTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& err
 void XMLTreeDBImpl::commitNode(XMLTreeDBNodeImpl& node, Ishiko::Error& error)
 {
     node.updateValue();
-    std::ofstream file(m_path.string());
-    m_document.save(file, "  ");
 }
 
 }
