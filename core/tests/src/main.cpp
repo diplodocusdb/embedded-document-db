@@ -9,7 +9,7 @@
 #include <DiplodocusDB/TreeDB/Core/linkoptions.hpp>
 #include <Ishiko/Tests.hpp>
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
 int main(int argc, char* argv[])
 {
