@@ -7,7 +7,7 @@
 #include "TreeDBKeyTests.h"
 #include <DiplodocusDB/TreeDB/Core/TreeDBKey.hpp>
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
 TreeDBKeyTests::TreeDBKeyTests(const TestNumber& number, const TestContext& context)
     : TestSequence(number, "TreeDBKey tests", context)
@@ -26,62 +26,62 @@ void TreeDBKeyTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHIKO_FAIL_IF_NEQ(key.value(), "/");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(key.value(), "/");
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBKeyTests::ParentKeyTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1/key2");
 
-    ISHIKO_FAIL_IF_NEQ(key.parentKey(), "/key1");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(key.parentKey(), "/key1");
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBKeyTests::ParentKeyTest2(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1");
 
-    ISHIKO_FAIL_IF_NEQ(key.parentKey(), "/");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(key.parentKey(), "/");
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBKeyTests::ParentKeyTest3(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHIKO_FAIL_IF_NOT(key.parentKey().isNull());
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NOT(key.parentKey().isNull());
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBKeyTests::BaseTest1(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1/key2");
 
-    ISHIKO_FAIL_IF_NEQ(key.base(), "key2");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(key.base(), "key2");
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBKeyTests::BaseTest2(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/key1");
 
-    ISHIKO_FAIL_IF_NEQ(key.base(), "key1");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(key.base(), "key1");
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBKeyTests::BaseTest3(Test& test)
 {
     DiplodocusDB::TreeDBKey key("/");
 
-    ISHIKO_FAIL_IF_NEQ(key.base(), "");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(key.base(), "");
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBKeyTests::BaseTest4(Test& test)
 {
     DiplodocusDB::TreeDBKey key("key1");
 
-    ISHIKO_FAIL_IF_NEQ(key.base(), "key1");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(key.base(), "key1");
+    ISHIKO_TEST_PASS();
 }

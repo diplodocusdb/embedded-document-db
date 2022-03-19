@@ -10,7 +10,7 @@
 #include <DiplodocusDB/TreeDB/Core.hpp>
 #include <Ishiko/Time.hpp>
 
-using namespace Ishiko::Time;
+using namespace Ishiko;
 
 namespace DiplodocusDB
 {

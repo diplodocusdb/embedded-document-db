@@ -9,7 +9,7 @@
 #include <boost/date_time.hpp>
 
 using namespace boost::gregorian;
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
 TreeDBValueTests::TreeDBValueTests(const TestNumber& number, const TestContext& context)
     : TestSequence(number, "TreeDBValue tests", context)
@@ -33,69 +33,69 @@ void TreeDBValueTests::ConstructorTest1(Test& test)
 {
     DiplodocusDB::TreeDBValue value;
 
-    ISHIKO_FAIL_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::null);
-    ISHIKO_FAIL_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::null);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::Int8Test1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Int8(123);
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::int8bit);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
-    ISHIKO_FAIL_IF_NEQ(value.asInt8(), 123);
-    ISHIKO_PASS();
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::int8bit);
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asInt8(), 123);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::Int32Test1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Int32(123);
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::int32bit);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
-    ISHIKO_FAIL_IF_NEQ(value.asInt32(), 123);
-    ISHIKO_PASS();
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::int32bit);
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asInt32(), 123);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::UnsignedInt64Test1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::UnsignedInt64(123);
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::unsignedInt64bit);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
-    ISHIKO_FAIL_IF_NEQ(value.asUnsignedInt64(), 123);
-    ISHIKO_PASS();
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::unsignedInt64bit);
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asUnsignedInt64(), 123);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::DoubleTest1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Double(123.45);
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::IEEE754Binary64);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
-    ISHIKO_FAIL_IF_NEQ(value.asDouble(), 123.45);
-    ISHIKO_PASS();
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::IEEE754Binary64);
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asDouble(), 123.45);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::UTF8StringTest1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::UTF8String("string1");
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::unicodeString);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
-    ISHIKO_FAIL_IF_NEQ(value.asUTF8String(), "string1");
-    ISHIKO_PASS();
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::unicodeString);
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asUTF8String(), "string1");
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::DateTest1(Test& test)
 {
     DiplodocusDB::TreeDBValue value = DiplodocusDB::TreeDBValue::Date(date(2021, 12, 25));
 
-    ISHIKO_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::date);
-    ISHIKO_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
-    ISHIKO_FAIL_IF_NEQ(value.asDate(), date(2021, 12, 25));
-    ISHIKO_PASS();
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().primitiveType(), DiplodocusDB::PrimitiveDataType::date);
+    ISHIKO_TEST_ABORT_IF_NEQ(value.type().modifier(), DiplodocusDB::DataTypeModifier::none);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asDate(), date(2021, 12, 25));
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::SetInt8Test1(Test& test)
@@ -103,8 +103,8 @@ void TreeDBValueTests::SetInt8Test1(Test& test)
     DiplodocusDB::TreeDBValue value;
     value.setInt8(123);
 
-    ISHIKO_FAIL_IF_NEQ(value.asInt8(), 123);
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asInt8(), 123);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::SetInt32Test1(Test& test)
@@ -112,8 +112,8 @@ void TreeDBValueTests::SetInt32Test1(Test& test)
     DiplodocusDB::TreeDBValue value;
     value.setInt32(123);
 
-    ISHIKO_FAIL_IF_NEQ(value.asInt32(), 123);
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asInt32(), 123);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::SetUnsignedInt64Test1(Test& test)
@@ -121,8 +121,8 @@ void TreeDBValueTests::SetUnsignedInt64Test1(Test& test)
     DiplodocusDB::TreeDBValue value;
     value.setUnsignedInt64(123);
 
-    ISHIKO_FAIL_IF_NEQ(value.asUnsignedInt64(), 123);
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asUnsignedInt64(), 123);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::SetDoubleTest1(Test& test)
@@ -130,8 +130,8 @@ void TreeDBValueTests::SetDoubleTest1(Test& test)
     DiplodocusDB::TreeDBValue value;
     value.setDouble(123.45);
 
-    ISHIKO_FAIL_IF_NEQ(value.asDouble(), 123.45);
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asDouble(), 123.45);
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::SetUTF8StringTest1(Test& test)
@@ -139,8 +139,8 @@ void TreeDBValueTests::SetUTF8StringTest1(Test& test)
     DiplodocusDB::TreeDBValue value;
     value.setUTF8String("text");
 
-    ISHIKO_FAIL_IF_NEQ(value.asUTF8String(), "text");
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asUTF8String(), "text");
+    ISHIKO_TEST_PASS();
 }
 
 void TreeDBValueTests::SetDateTest1(Test& test)
@@ -148,6 +148,6 @@ void TreeDBValueTests::SetDateTest1(Test& test)
     DiplodocusDB::TreeDBValue value;
     value.setDate(date(2021, 12, 15));
 
-    ISHIKO_FAIL_IF_NEQ(value.asDate(), date(2021, 12, 15));
-    ISHIKO_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(value.asDate(), date(2021, 12, 15));
+    ISHIKO_TEST_PASS();
 }

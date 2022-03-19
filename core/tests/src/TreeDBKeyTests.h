@@ -9,20 +9,20 @@
 
 #include <Ishiko/Tests.hpp>
 
-class TreeDBKeyTests : public Ishiko::Tests::TestSequence
+class TreeDBKeyTests : public Ishiko::TestSequence
 {
 public:
-    TreeDBKeyTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestContext& context);
+    TreeDBKeyTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-    static void ParentKeyTest1(Ishiko::Tests::Test& test);
-    static void ParentKeyTest2(Ishiko::Tests::Test& test);
-    static void ParentKeyTest3(Ishiko::Tests::Test& test);
-    static void BaseTest1(Ishiko::Tests::Test& test);
-    static void BaseTest2(Ishiko::Tests::Test& test);
-    static void BaseTest3(Ishiko::Tests::Test& test);
-    static void BaseTest4(Ishiko::Tests::Test& test);
+    static void ConstructionTest1(Ishiko::Test& test);
+    static void ParentKeyTest1(Ishiko::Test& test);
+    static void ParentKeyTest2(Ishiko::Test& test);
+    static void ParentKeyTest3(Ishiko::Test& test);
+    static void BaseTest1(Ishiko::Test& test);
+    static void BaseTest2(Ishiko::Test& test);
+    static void BaseTest3(Ishiko::Test& test);
+    static void BaseTest4(Ishiko::Test& test);
 };
 
 #endif
