@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ishiko/gcc-ishiko-cpp:0.10.0
+      - image: ishiko/gcc-ishiko-cpp:0.15.0
     steps:
       - run: 
           name: "Set DIPLODOCUSDB environment variable and create workspace directory"
@@ -30,3 +30,18 @@ jobs:
       - run:
           name: Run TreeDB/XMLTreeDB tests
           command: cd /projects/diplodocusdb/tree-db/xml-tree-db/tests/build/gnumake && ./DiplodocusXMLTreeDBTests
+workflows:
+  version: 2
+  continuous_build:
+    jobs:
+      - build
+  weekly_build:
+    jobs:
+      - build
+    triggers:
+      - schedule:
+          cron: "0 8 * * 0"
+          filters:
+            branches:
+              only:
+                 - main
