@@ -1,0 +1,40 @@
+ishikopath = envvar("ISHIKO_CPP");
+import $(ishikopath)/test-framework/include/Ishiko/TestFramework.bkl;
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/embedded-document-db/include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.bkl;
+
+toolsets = gnu vs2019 vs2017 vs2015 vs2013;
+
+gnu.makefile = ../gnumake/GNUmakefile;
+vs2019.solutionfile = ../vc16/DiplodocusEmbeddedDocumentDBTests.sln;
+vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBTests.sln;
+vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBTests.sln;
+vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBTests.sln;
+
+program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, IshikoTestFramework
+{
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        libs += DiplodocusEmbeddedDocumentDB DiplodocusDBCore IshikoTestFramework IshikoTestFrameworkCore IshikoConfiguration IshikoXML IshikoFileSystem IshikoProcess IshikoTime IshikoText IshikoErrors;
+        libs += fmt boost_filesystem;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        archs = x86 x86_64;
+    }
+
+    headers
+    {
+        ../../src/TreeDBKeyTests.h
+        ../../src/TreeDBValueTests.h
+    }
+
+    sources
+    {
+        ../../src/main.cpp
+        ../../src/TreeDBKeyTests.cpp
+        ../../src/TreeDBValueTests.cpp
+    }
+}
