@@ -7,12 +7,12 @@ import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
 toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
 gnu.makefile = ../gnumake/GNUmakefile;
-vs2019.solutionfile = ../vc16/DiplodocusTreeDBCore.sln;
-vs2017.solutionfile = ../vc15/DiplodocusTreeDBCore.sln;
-vs2015.solutionfile = ../vc14/DiplodocusTreeDBCore.sln;
-vs2013.solutionfile = ../vc12/DiplodocusTreeDBCore.sln;
+vs2019.solutionfile = ../vc16/DiplodocusEmbeddedDocumentDB.sln;
+vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDB.sln;
+vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDB.sln;
+vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDB.sln;
 
-library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
+library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoErrors, Boost
 {
     archs = x86 x86_64;
    
@@ -31,7 +31,7 @@ library DiplodocusTreeDBCore : DiplodocusDBCore, IshikoErrors, Boost
 
     if ($(config) == Debug)
     {
-        basename = DiplodocusTreeDBCore-d;
+        basename = DiplodocusEmbeddedDocumentDB-d;
     }
 
     headers

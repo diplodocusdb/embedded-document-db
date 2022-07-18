@@ -1,17 +1,17 @@
 ishikopath = envvar("ISHIKO_CPP");
-import $(ishikopath)/test-framework/include/Ishiko/Tests.bkl;
+import $(ishikopath)/test-framework/include/Ishiko/TestFramework.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/Core.bkl;
+import $(diplodocusdbpath)/embedded-document-db/include/DiplodocusDB/TreeDB/Core.bkl;
 
 toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
 gnu.makefile = ../gnumake/GNUmakefile;
-vs2019.solutionfile = ../vc16/DiplodocusTreeDBCoreTests.sln;
-vs2017.solutionfile = ../vc15/DiplodocusTreeDBCoreTests.sln;
-vs2015.solutionfile = ../vc14/DiplodocusTreeDBCoreTests.sln;
-vs2013.solutionfile = ../vc12/DiplodocusTreeDBCoreTests.sln;
+vs2019.solutionfile = ../vc16/DiplodocusEmbeddedDocumentDBTests.sln;
+vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBTests.sln;
+vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBTests.sln;
+vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBTests.sln;
 
-program DiplodocusTreeDBCoreTests : DiplodocusTreeDBCore, IshikoTests
+program DiplodocusEmbeddedDocumentDBTests : DiplodocusTreeDBCore, IshikoTestFramework
 {
     if ($(toolset) == gnu)
     {
