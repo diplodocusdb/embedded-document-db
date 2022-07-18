@@ -7,7 +7,7 @@
 #ifndef _DIPLODOCUSDB_TEST_TREEDB_CORE_TREEDBVALUETESTS_H_
 #define _DIPLODOCUSDB_TEST_TREEDB_CORE_TREEDBVALUETESTS_H_
 
-#include <Ishiko/Tests.hpp>
+#include <Ishiko/TestFramework.hpp>
 
 class TreeDBValueTests : public Ishiko::TestSequence
 {

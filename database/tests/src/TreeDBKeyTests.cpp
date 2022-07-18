@@ -5,7 +5,7 @@
 */
 
 #include "TreeDBKeyTests.h"
-#include <DiplodocusDB/TreeDB/Core/TreeDBKey.hpp>
+#include <DiplodocusDB/EmbeddedDocumentDB/Core/TreeDBKey.hpp>
 
 using namespace Ishiko;
 

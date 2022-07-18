@@ -5,7 +5,7 @@
 */
 
 #include "TreeDBValueTests.h"
-#include <DiplodocusDB/TreeDB/Core/TreeDBValue.hpp>
+#include <DiplodocusDB/EmbeddedDocumentDB/Core/TreeDBValue.hpp>
 #include <boost/date_time.hpp>
 
 using namespace boost::gregorian;
