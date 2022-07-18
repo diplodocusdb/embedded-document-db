@@ -1,0 +1,23 @@
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
+
+setting DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT
+{
+    help = "Path to the DiplodocusDB Embedded Document DB installation";
+    default = '$(DIPLODOCUSDB)/embedded-document-db';
+}
+
+template DiplodocusEmbeddedDocumentDB : DiplodocusDBCore
+{
+    includedirs += $(DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT)/include;
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT)/lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT)/lib/$(arch);
+    }
+}
