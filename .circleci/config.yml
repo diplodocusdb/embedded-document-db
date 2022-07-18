@@ -13,8 +13,8 @@ jobs:
       - checkout:
           path: /projects/diplodocusdb/embedded-document-db
       - run:
-          name: Build TreeDB/Core
-          command: cd /projects/diplodocusdb/embedded-document-db/core/build/gnumake && make
+          name: Build
+          command: cd /projects/diplodocusdb/embedded-document-db/build/gnumake && make
       - run:
           name: Build TreeDB/Core tests
           command: cd /projects/diplodocusdb/embedded-document-db/core/tests/build/gnumake && make
