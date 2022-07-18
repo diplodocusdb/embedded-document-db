@@ -21,10 +21,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E26F0E6D-14DC-526D-93D1-EC3E007EEE1C}</ProjectGuid>
+    <ProjectGuid>{A8042B93-9A75-54E5-9ED8-A73CB4BCC77A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>DiplodocusTreeDBCore</RootNamespace>
-    <ProjectName>DiplodocusTreeDBCore</ProjectName>
+    <RootNamespace>DiplodocusEmbeddedDocumentDB</RootNamespace>
+    <ProjectName>DiplodocusEmbeddedDocumentDB</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -68,11 +68,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetName>DiplodocusTreeDBCore-d</TargetName>
+    <TargetName>DiplodocusEmbeddedDocumentDB-d</TargetName>
     <OutDir>..\bakefile\..\..\..\lib\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>DiplodocusTreeDBCore-d</TargetName>
+    <TargetName>DiplodocusEmbeddedDocumentDB-d</TargetName>
     <OutDir>..\bakefile\..\..\..\lib\$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
