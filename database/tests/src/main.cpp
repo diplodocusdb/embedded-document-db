@@ -6,8 +6,8 @@
 
 #include "TreeDBKeyTests.h"
 #include "TreeDBValueTests.h"
-#include <DiplodocusDB/TreeDB/Core/linkoptions.hpp>
-#include <Ishiko/Tests.hpp>
+#include <DiplodocusDB/EmbeddedDocumentDB/Core/linkoptions.hpp>
+#include <Ishiko/TestFramework.hpp>
 
 using namespace Ishiko;
 
