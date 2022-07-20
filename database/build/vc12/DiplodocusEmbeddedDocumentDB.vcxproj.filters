@@ -20,34 +20,34 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBErrorCategory.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBErrorCategory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBKey.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBKey.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBPersistentNodeID.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBPersistentNodeID.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBValue.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBValue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBNode.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBNodeImpl.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBNodeImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBTransaction.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBTransaction.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBTransactionImpl.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBTransactionImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDB.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\linkoptions.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\linkoptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.hpp">

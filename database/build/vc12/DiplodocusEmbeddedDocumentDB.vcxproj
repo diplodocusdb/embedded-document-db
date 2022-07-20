@@ -164,16 +164,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBErrorCategory.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBKey.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBPersistentNodeID.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBValue.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBNode.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBNodeImpl.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBTransaction.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBTransactionImpl.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDB.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\linkoptions.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBErrorCategory.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBKey.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBPersistentNodeID.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBValue.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBNode.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBNodeImpl.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBTransaction.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBTransactionImpl.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDB.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\linkoptions.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.hpp" />

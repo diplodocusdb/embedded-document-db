@@ -37,16 +37,16 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoErrors, Boost
     headers
     {
         ../../../include/DiplodocusDB/TreeDB/Core.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBErrorCategory.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBKey.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBPersistentNodeID.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBValue.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBNode.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBTransaction.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDBTransactionImpl.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/TreeDB.hpp
-        ../../../include/DiplodocusDB/TreeDB/Core/linkoptions.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDBErrorCategory.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDBKey.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDBPersistentNodeID.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDBValue.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDBNode.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDBNodeImpl.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDBTransaction.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDBTransactionImpl.hpp
+        ../../../include/DiplodocusDB/TreeDB/TreeDB.hpp
+        ../../../include/DiplodocusDB/TreeDB/linkoptions.hpp
         ../../../include/DiplodocusDB/TreeDB/XMLTreeDB.hpp
         ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.hpp
         ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.hpp
