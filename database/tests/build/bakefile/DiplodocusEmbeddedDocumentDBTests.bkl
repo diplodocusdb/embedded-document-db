@@ -29,6 +29,7 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
     {
         ../../src/TreeDBKeyTests.h
         ../../src/TreeDBValueTests.h
+        ../../src/XMLTreeDBTests/XMLTreeDBTests.h
     }
 
     sources
@@ -36,5 +37,6 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/main.cpp
         ../../src/TreeDBKeyTests.cpp
         ../../src/TreeDBValueTests.cpp
+        ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
     }
 }

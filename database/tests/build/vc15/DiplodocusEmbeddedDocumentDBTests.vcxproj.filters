@@ -23,6 +23,9 @@
     <ClInclude Include="..\..\src\TreeDBValueTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -32,6 +35,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TreeDBValueTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

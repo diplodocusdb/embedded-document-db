@@ -159,10 +159,12 @@
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\TreeDBKeyTests.cpp" />
     <ClCompile Include="..\..\src\TreeDBValueTests.cpp" />
+    <ClCompile Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\TreeDBKeyTests.h" />
     <ClInclude Include="..\..\src\TreeDBValueTests.h" />
+    <ClInclude Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
