@@ -7,7 +7,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBTRANSACTIONIMPL_HPP_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBTRANSACTIONIMPL_HPP_
 
-#include <DiplodocusDB/TreeDB/Core.hpp>
+#include "Core.hpp"
 
 namespace DiplodocusDB
 {

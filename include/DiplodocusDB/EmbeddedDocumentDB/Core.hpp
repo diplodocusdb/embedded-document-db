@@ -7,15 +7,14 @@
 #ifndef _DIPLODOCUSDB_TREEDB_TREEDBCORE_HPP_
 #define _DIPLODOCUSDB_TREEDB_TREEDBCORE_HPP_
 
-#include "Core/TreeDB.hpp"
-#include "Core/TreeDBErrorCategory.hpp"
-#include "Core/TreeDBKey.hpp"
-#include "Core/TreeDBNode.hpp"
-#include "Core/TreeDBNodeImpl.hpp"
-#include "Core/TreeDBTransaction.hpp"
-#include "Core/TreeDBTransactionImpl.hpp"
-#include "Core/TreeDBValue.hpp"
-
-#include "Core/linkoptions.hpp"
+#include "linkoptions.hpp"
+#include "TreeDB.hpp"
+#include "TreeDBErrorCategory.hpp"
+#include "TreeDBKey.hpp"
+#include "TreeDBNode.hpp"
+#include "TreeDBNodeImpl.hpp"
+#include "TreeDBTransaction.hpp"
+#include "TreeDBTransactionImpl.hpp"
+#include "TreeDBValue.hpp"
 
 #endif
