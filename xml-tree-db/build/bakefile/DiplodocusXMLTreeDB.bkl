@@ -36,22 +36,4 @@ library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoTime
     {
         basename = DiplodocusXMLTreeDB-d;
     }
-
-    headers
-    {
-        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB.hpp
-        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.hpp
-        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.hpp
-        ../../src/XMLTreeDBImpl.hpp
-        ../../src/XMLTreeDBNodeImpl.hpp
-        ../../src/XMLTreeDBTransactionImpl.hpp
-    }
-
-    sources
-    {
-        ../../src/XMLTreeDB.cpp
-        ../../src/XMLTreeDBImpl.cpp
-        ../../src/XMLTreeDBNodeImpl.cpp
-        ../../src/XMLTreeDBTransactionImpl.cpp
-    }
 }
