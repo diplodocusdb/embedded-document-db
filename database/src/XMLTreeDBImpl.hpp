@@ -7,9 +7,9 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_HPP_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBIMPL_HPP_
 
+#include "Core.hpp"
 #include "XMLTreeDBNodeImpl.hpp"
 #include <boost/filesystem/path.hpp>
-#include <DiplodocusDB/TreeDB/Core.hpp>
 #include <Ishiko/Errors.hpp>
 #include <pugixml.hpp>
 
