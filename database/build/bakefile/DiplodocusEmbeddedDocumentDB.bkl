@@ -16,7 +16,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoErrors, Boost
 {
     archs = x86 x86_64;
    
-    includedirs += ../../../include/DiplodocusDB/EmbeddedDocumentDB/Core;
+    includedirs += ../../../include/DiplodocusDB/EmbeddedDocumentDB;
 
     if ($(toolset) == gnu)
     {
