@@ -7,7 +7,7 @@
 #ifndef _DIPLODOCUSDB_TEST_TREEDB_XMLTREEDBTESTS_XMLTREEDBTESTS_H_
 #define _DIPLODOCUSDB_TEST_TREEDB_XMLTREEDBTESTS_XMLTREEDBTESTS_H_
 
-#include <Ishiko/Tests.hpp>
+#include <Ishiko/TestFramework.hpp>
 
 class XMLTreeDBTests : public Ishiko::TestSequence
 {

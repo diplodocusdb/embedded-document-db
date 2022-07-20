@@ -5,8 +5,8 @@
 */
 
 #include "XMLTreeDBTests.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/XMLTreeDB/XMLTreeDB.hpp"
 #include <boost/filesystem/operations.hpp>
-#include <DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.hpp>
 #include <sstream>
 
 using namespace boost::gregorian;
