@@ -3,7 +3,6 @@ import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
 import $(diplodocusdbpath)/tree-db/include/DiplodocusDB/TreeDB/Core.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
-import $(ishikopath)/time/include/Ishiko/Time.bkl;
 
 toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
@@ -13,7 +12,7 @@ vs2017.solutionfile = ../vc15/DiplodocusXMLTreeDB.sln;
 vs2015.solutionfile = ../vc14/DiplodocusXMLTreeDB.sln;
 vs2013.solutionfile = ../vc12/DiplodocusXMLTreeDB.sln;
 
-library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoTime, IshikoErrors
+library DiplodocusXMLTreeDB : DiplodocusTreeDBCore, DiplodocusDBCore, IshikoErrors
 {
     archs = x86 x86_64;
    
