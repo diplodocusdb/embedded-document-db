@@ -24,15 +24,9 @@ program DiplodocusXMLTreeDBTests : DiplodocusXMLTreeDB, IshikoTests
         archs = x86 x86_64;
     }
 
-    headers
-    {
-        ../../src/XMLTreeDBTests/XMLTreeDBTests.h
-    }
-
     sources
     {
         ../../src/main.cpp
 
-        ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
     }
 }

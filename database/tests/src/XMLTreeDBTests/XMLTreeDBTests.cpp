@@ -5,8 +5,8 @@
 */
 
 #include "XMLTreeDBTests.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/XMLTreeDB/XMLTreeDB.hpp"
 #include <boost/filesystem/operations.hpp>
-#include <DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.hpp>
 #include <sstream>
 
 using namespace boost::gregorian;
@@ -17,7 +17,7 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestContext& cont
     : TestSequence(number, "XMLTreeDB tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
-    append<FileComparisonTest>("create test 1", CreateTest1);
+    append<HeapAllocationErrorsTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
     append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
@@ -35,20 +35,20 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestContext& cont
     append<HeapAllocationErrorsTest>("nextSibling test 1", NextSiblingTest1);
     append<HeapAllocationErrorsTest>("nextSibling test 2", NextSiblingTest2);
     append<HeapAllocationErrorsTest>("nextSibling test 3", NextSiblingTest3);
-    append<FileComparisonTest>("insertChildNode test 1", InsertChildNodeTest1);
-    append<FileComparisonTest>("appendChildNode test 1", AppendChildNodeTest1);
-    append<FileComparisonTest>("appendChildNode test 2", AppendChildNodeTest2);
-    append<FileComparisonTest>("appendChildNode test 3", AppendChildNodeTest3);
-    append<FileComparisonTest>("appendChildNode test 4", AppendChildNodeTest4);
-    append<FileComparisonTest>("appendChildNode test 5", AppendChildNodeTest5);
-    append<FileComparisonTest>("appendChildNode test 6", AppendChildNodeTest6);
-    append<FileComparisonTest>("appendChildNode test 7", AppendChildNodeTest7);
-    append<FileComparisonTest>("appendChildNode test 8", AppendChildNodeTest8);
-    append<FileComparisonTest>("appendChildNode test 9", AppendChildNodeTest9);
-    append<FileComparisonTest>("appendChildNode test 10", AppendChildNodeTest10);
-    append<FileComparisonTest>("setChildNode test 1", SetChildNodeTest1);
-    append<FileComparisonTest>("setChildNode test 2", SetChildNodeTest2);
-    append<FileComparisonTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
+    append<HeapAllocationErrorsTest>("insertChildNode test 1", InsertChildNodeTest1);
+    append<HeapAllocationErrorsTest>("appendChildNode test 1", AppendChildNodeTest1);
+    append<HeapAllocationErrorsTest>("appendChildNode test 2", AppendChildNodeTest2);
+    append<HeapAllocationErrorsTest>("appendChildNode test 3", AppendChildNodeTest3);
+    append<HeapAllocationErrorsTest>("appendChildNode test 4", AppendChildNodeTest4);
+    append<HeapAllocationErrorsTest>("appendChildNode test 5", AppendChildNodeTest5);
+    append<HeapAllocationErrorsTest>("appendChildNode test 6", AppendChildNodeTest6);
+    append<HeapAllocationErrorsTest>("appendChildNode test 7", AppendChildNodeTest7);
+    append<HeapAllocationErrorsTest>("appendChildNode test 8", AppendChildNodeTest8);
+    append<HeapAllocationErrorsTest>("appendChildNode test 9", AppendChildNodeTest9);
+    append<HeapAllocationErrorsTest>("appendChildNode test 10", AppendChildNodeTest10);
+    append<HeapAllocationErrorsTest>("setChildNode test 1", SetChildNodeTest1);
+    append<HeapAllocationErrorsTest>("setChildNode test 2", SetChildNodeTest2);
+    append<HeapAllocationErrorsTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
 }
 
 void XMLTreeDBTests::CreationTest1(Test& test)
@@ -58,22 +58,20 @@ void XMLTreeDBTests::CreationTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
+void XMLTreeDBTests::CreateTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_CreateTest1.xml");
+    const char* outputName = "XMLTreeDBTests_CreateTest1.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_FAIL_IF(error);
     
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_CreateTest1.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
@@ -92,7 +90,7 @@ void XMLTreeDBTests::OpenTest1(Test& test)
 
 void XMLTreeDBTests::OpenTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("EmptyXMLTreeDB.xml");
 
     Error error;
 
@@ -114,7 +112,7 @@ void XMLTreeDBTests::OpenTest2(Test& test)
 
 void XMLTreeDBTests::OpenTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest3.xml");
 
     Error error;
 
@@ -136,7 +134,7 @@ void XMLTreeDBTests::OpenTest3(Test& test)
 
 void XMLTreeDBTests::OpenTest4(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest4.xml");
 
     Error error;
 
@@ -158,7 +156,7 @@ void XMLTreeDBTests::OpenTest4(Test& test)
 
 void XMLTreeDBTests::OpenTest5(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest5.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest5.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -190,7 +188,7 @@ void XMLTreeDBTests::OpenTest5(Test& test)
 
 void XMLTreeDBTests::OpenTest6(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest6.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest6.xml");
 
     Error error;
 
@@ -212,7 +210,7 @@ void XMLTreeDBTests::OpenTest6(Test& test)
 
 void XMLTreeDBTests::OpenTest7(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest7.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest7.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -243,7 +241,7 @@ void XMLTreeDBTests::OpenTest7(Test& test)
 
 void XMLTreeDBTests::OpenTest8(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest8.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest8.xml");
 
     Error error;
 
@@ -265,7 +263,7 @@ void XMLTreeDBTests::OpenTest8(Test& test)
 
 void XMLTreeDBTests::OpenTest9(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest9.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest9.xml");
 
     Error error;
 
@@ -287,7 +285,7 @@ void XMLTreeDBTests::OpenTest9(Test& test)
 
 void XMLTreeDBTests::OpenTest10(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest10.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest10.xml");
 
     Error error;
 
@@ -309,7 +307,7 @@ void XMLTreeDBTests::OpenTest10(Test& test)
 
 void XMLTreeDBTests::ParentTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("EmptyXMLTreeDB.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -327,7 +325,7 @@ void XMLTreeDBTests::ParentTest1(Test& test)
 
 void XMLTreeDBTests::ParentTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_ParentTest2.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_ParentTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -350,7 +348,7 @@ void XMLTreeDBTests::ParentTest2(Test& test)
 
 void XMLTreeDBTests::ChildNodesTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("EmptyXMLTreeDB.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -368,7 +366,7 @@ void XMLTreeDBTests::ChildNodesTest1(Test& test)
 
 void XMLTreeDBTests::ChildNodesTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_ChildNodesTest2.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_ChildNodesTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -386,7 +384,7 @@ void XMLTreeDBTests::ChildNodesTest2(Test& test)
 
 void XMLTreeDBTests::NextSiblingTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("EmptyXMLTreeDB.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -404,7 +402,7 @@ void XMLTreeDBTests::NextSiblingTest1(Test& test)
 
 void XMLTreeDBTests::NextSiblingTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_NextSiblingTest2.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_NextSiblingTest2.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -427,7 +425,7 @@ void XMLTreeDBTests::NextSiblingTest2(Test& test)
 
 void XMLTreeDBTests::NextSiblingTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_NextSiblingTest3.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_NextSiblingTest3.xml");
 
     DiplodocusDB::XMLTreeDB db;
 
@@ -458,14 +456,14 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
+void XMLTreeDBTests::InsertChildNodeTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
+    const char* outputName = "XMLTreeDBTests_InsertChildNodeTest1.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -475,20 +473,18 @@ void XMLTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest1(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest1.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest1.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -498,20 +494,18 @@ void XMLTreeDBTests::AppendChildNodeTest1(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest1.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest2(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest2(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest2.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest2.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -525,20 +519,18 @@ void XMLTreeDBTests::AppendChildNodeTest2(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest2.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest3(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest3(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest3.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest3.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -549,20 +541,18 @@ void XMLTreeDBTests::AppendChildNodeTest3(FileComparisonTest& test)
    
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest3.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest4(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest4(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest4.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest4.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -578,20 +568,18 @@ void XMLTreeDBTests::AppendChildNodeTest4(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest4.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest5(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest5(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest5.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest5.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -610,16 +598,15 @@ void XMLTreeDBTests::AppendChildNodeTest5(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest5.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest6(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest6(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest6.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest6.xml";
+    boost::filesystem::path inputPath = test.context().getDataPath("EmptyXMLTreeDB.xml");
+    boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -640,20 +627,18 @@ void XMLTreeDBTests::AppendChildNodeTest6(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest6.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest7(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest7(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest7.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest7.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -668,20 +653,18 @@ void XMLTreeDBTests::AppendChildNodeTest7(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest7.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest8(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest8(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest8.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest8.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -692,20 +675,18 @@ void XMLTreeDBTests::AppendChildNodeTest8(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest8.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest9(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest9(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest9.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest9.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -716,20 +697,18 @@ void XMLTreeDBTests::AppendChildNodeTest9(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest9.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::AppendChildNodeTest10(FileComparisonTest& test)
+void XMLTreeDBTests::AppendChildNodeTest10(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_AppendChildNodeTest10.xml");
+    const char* outputName = "XMLTreeDBTests_AppendChildNodeTest10.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -739,20 +718,18 @@ void XMLTreeDBTests::AppendChildNodeTest10(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_AppendChildNodeTest10.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::SetChildNodeTest1(FileComparisonTest& test)
+void XMLTreeDBTests::SetChildNodeTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
+    const char* outputName = "XMLTreeDBTests_SetChildNodeTest1.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -762,20 +739,18 @@ void XMLTreeDBTests::SetChildNodeTest1(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_SetChildNodeTest1.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::SetChildNodeTest2(FileComparisonTest& test)
+void XMLTreeDBTests::SetChildNodeTest2(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
+    const char* outputName = "XMLTreeDBTests_SetChildNodeTest2.xml";
 
     Error error;
 
     DiplodocusDB::XMLTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -789,16 +764,15 @@ void XMLTreeDBTests::SetChildNodeTest2(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_SetChildNodeTest2.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::RemoveAllChildNodesTest1(FileComparisonTest& test)
+void XMLTreeDBTests::RemoveAllChildNodesTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
+    const char* outputName = "XMLTreeDBTests_RemoveAllChildNodesTest1.xml";
+    boost::filesystem::path inputPath = test.context().getDataPath(outputName);
+    boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -815,8 +789,6 @@ void XMLTreeDBTests::RemoveAllChildNodesTest1(FileComparisonTest& test)
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "XMLTreeDBTests_RemoveAllChildNodesTest1.xml");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
