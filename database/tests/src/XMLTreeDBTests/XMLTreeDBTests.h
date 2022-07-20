@@ -16,7 +16,7 @@ public:
 
 private:
     static void CreationTest1(Ishiko::Test& test);
-    static void CreateTest1(Ishiko::FileComparisonTest& test);
+    static void CreateTest1(Ishiko::Test& test);
     static void OpenTest1(Ishiko::Test& test);
     static void OpenTest2(Ishiko::Test& test);
     static void OpenTest3(Ishiko::Test& test);
@@ -34,20 +34,20 @@ private:
     static void NextSiblingTest1(Ishiko::Test& test);
     static void NextSiblingTest2(Ishiko::Test& test);
     static void NextSiblingTest3(Ishiko::Test& test);
-    static void InsertChildNodeTest1(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest1(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest2(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest3(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest4(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest5(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest6(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest7(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest8(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest9(Ishiko::FileComparisonTest& test);
-    static void AppendChildNodeTest10(Ishiko::FileComparisonTest& test);
-    static void SetChildNodeTest1(Ishiko::FileComparisonTest& test);
-    static void SetChildNodeTest2(Ishiko::FileComparisonTest& test);
-    static void RemoveAllChildNodesTest1(Ishiko::FileComparisonTest& test);
+    static void InsertChildNodeTest1(Ishiko::Test& test);
+    static void AppendChildNodeTest1(Ishiko::Test& test);
+    static void AppendChildNodeTest2(Ishiko::Test& test);
+    static void AppendChildNodeTest3(Ishiko::Test& test);
+    static void AppendChildNodeTest4(Ishiko::Test& test);
+    static void AppendChildNodeTest5(Ishiko::Test& test);
+    static void AppendChildNodeTest6(Ishiko::Test& test);
+    static void AppendChildNodeTest7(Ishiko::Test& test);
+    static void AppendChildNodeTest8(Ishiko::Test& test);
+    static void AppendChildNodeTest9(Ishiko::Test& test);
+    static void AppendChildNodeTest10(Ishiko::Test& test);
+    static void SetChildNodeTest1(Ishiko::Test& test);
+    static void SetChildNodeTest2(Ishiko::Test& test);
+    static void RemoveAllChildNodesTest1(Ishiko::Test& test);
 };
 
 #endif

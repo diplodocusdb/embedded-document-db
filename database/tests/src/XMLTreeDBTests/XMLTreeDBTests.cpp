@@ -17,7 +17,7 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestContext& cont
     : TestSequence(number, "XMLTreeDB tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
-    append<FileComparisonTest>("create test 1", CreateTest1);
+    append<HeapAllocationErrorsTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
     append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
@@ -35,20 +35,20 @@ XMLTreeDBTests::XMLTreeDBTests(const TestNumber& number, const TestContext& cont
     append<HeapAllocationErrorsTest>("nextSibling test 1", NextSiblingTest1);
     append<HeapAllocationErrorsTest>("nextSibling test 2", NextSiblingTest2);
     append<HeapAllocationErrorsTest>("nextSibling test 3", NextSiblingTest3);
-    append<FileComparisonTest>("insertChildNode test 1", InsertChildNodeTest1);
-    append<FileComparisonTest>("appendChildNode test 1", AppendChildNodeTest1);
-    append<FileComparisonTest>("appendChildNode test 2", AppendChildNodeTest2);
-    append<FileComparisonTest>("appendChildNode test 3", AppendChildNodeTest3);
-    append<FileComparisonTest>("appendChildNode test 4", AppendChildNodeTest4);
-    append<FileComparisonTest>("appendChildNode test 5", AppendChildNodeTest5);
-    append<FileComparisonTest>("appendChildNode test 6", AppendChildNodeTest6);
-    append<FileComparisonTest>("appendChildNode test 7", AppendChildNodeTest7);
-    append<FileComparisonTest>("appendChildNode test 8", AppendChildNodeTest8);
-    append<FileComparisonTest>("appendChildNode test 9", AppendChildNodeTest9);
-    append<FileComparisonTest>("appendChildNode test 10", AppendChildNodeTest10);
-    append<FileComparisonTest>("setChildNode test 1", SetChildNodeTest1);
-    append<FileComparisonTest>("setChildNode test 2", SetChildNodeTest2);
-    append<FileComparisonTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
+    append<HeapAllocationErrorsTest>("insertChildNode test 1", InsertChildNodeTest1);
+    append<HeapAllocationErrorsTest>("appendChildNode test 1", AppendChildNodeTest1);
+    append<HeapAllocationErrorsTest>("appendChildNode test 2", AppendChildNodeTest2);
+    append<HeapAllocationErrorsTest>("appendChildNode test 3", AppendChildNodeTest3);
+    append<HeapAllocationErrorsTest>("appendChildNode test 4", AppendChildNodeTest4);
+    append<HeapAllocationErrorsTest>("appendChildNode test 5", AppendChildNodeTest5);
+    append<HeapAllocationErrorsTest>("appendChildNode test 6", AppendChildNodeTest6);
+    append<HeapAllocationErrorsTest>("appendChildNode test 7", AppendChildNodeTest7);
+    append<HeapAllocationErrorsTest>("appendChildNode test 8", AppendChildNodeTest8);
+    append<HeapAllocationErrorsTest>("appendChildNode test 9", AppendChildNodeTest9);
+    append<HeapAllocationErrorsTest>("appendChildNode test 10", AppendChildNodeTest10);
+    append<HeapAllocationErrorsTest>("setChildNode test 1", SetChildNodeTest1);
+    append<HeapAllocationErrorsTest>("setChildNode test 2", SetChildNodeTest2);
+    append<HeapAllocationErrorsTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
 }
 
 void XMLTreeDBTests::CreationTest1(Test& test)
@@ -58,9 +58,9 @@ void XMLTreeDBTests::CreationTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::CreateTest1(FileComparisonTest& test)
+void XMLTreeDBTests::CreateTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_CreateTest1.xml");
+    boost::filesystem::path outputPath(test.context().getOutputPath("XMLTreeDBTests_CreateTest1.xml");
 
     Error error;
 
@@ -92,7 +92,7 @@ void XMLTreeDBTests::OpenTest1(Test& test)
 
 void XMLTreeDBTests::OpenTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyXMLTreeDB.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("EmptyXMLTreeDB.xml");
 
     Error error;
 
@@ -114,7 +114,7 @@ void XMLTreeDBTests::OpenTest2(Test& test)
 
 void XMLTreeDBTests::OpenTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest3.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest3.xml");
 
     Error error;
 
@@ -136,7 +136,7 @@ void XMLTreeDBTests::OpenTest3(Test& test)
 
 void XMLTreeDBTests::OpenTest4(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "XMLTreeDBTests_OpenTest4.xml");
+    boost::filesystem::path inputPath = test.context().getDataPath("XMLTreeDBTests_OpenTest4.xml");
 
     Error error;
 
@@ -458,9 +458,9 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void XMLTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
+void XMLTreeDBTests::InsertChildNodeTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "XMLTreeDBTests_InsertChildNodeTest1.xml");
+    boost::filesystem::path outputPath = test.context().getOutputPath("XMLTreeDBTests_InsertChildNodeTest1.xml");
 
     Error error;
 
