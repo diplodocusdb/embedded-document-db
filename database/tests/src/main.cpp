@@ -6,14 +6,14 @@
 
 #include "TreeDBKeyTests.h"
 #include "TreeDBValueTests.h"
-#include <DiplodocusDB/EmbeddedDocumentDB/Core/linkoptions.hpp>
+#include "DiplodocusDB/EmbeddedDocumentDB/linkoptions.hpp"
 #include <Ishiko/TestFramework.hpp>
 
 using namespace Ishiko;
 
 int main(int argc, char* argv[])
 {
-    TestHarness theTestHarness("DiplodocusTreeDBCore");
+    TestHarness theTestHarness("DiplodocusEmbeddedDocumentDB Library Tests");
 
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<TreeDBKeyTests>();
