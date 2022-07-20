@@ -157,6 +157,10 @@
     <ClCompile Include="..\..\src\TreeDBNode.cpp" />
     <ClCompile Include="..\..\src\TreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\TreeDBTransaction.cpp" />
+    <ClCompile Include="..\..\src\XMLTreeDB.cpp" />
+    <ClCompile Include="..\..\src\XMLTreeDBImpl.cpp" />
+    <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp" />
+    <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core.hpp" />
@@ -170,6 +174,12 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDBTransactionImpl.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\TreeDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core\linkoptions.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.hpp" />
+    <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
+    <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
+    <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

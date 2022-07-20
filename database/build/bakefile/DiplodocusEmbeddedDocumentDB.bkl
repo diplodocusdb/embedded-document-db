@@ -47,6 +47,12 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoErrors, Boost
         ../../../include/DiplodocusDB/TreeDB/Core/TreeDBTransactionImpl.hpp
         ../../../include/DiplodocusDB/TreeDB/Core/TreeDB.hpp
         ../../../include/DiplodocusDB/TreeDB/Core/linkoptions.hpp
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB.hpp
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.hpp
+        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/linkoptions.hpp
+        ../../src/XMLTreeDBImpl.hpp
+        ../../src/XMLTreeDBNodeImpl.hpp
+        ../../src/XMLTreeDBTransactionImpl.hpp
     }
 
     sources
@@ -58,5 +64,9 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoErrors, Boost
         ../../src/TreeDBNode.cpp
         ../../src/TreeDBNodeImpl.cpp
         ../../src/TreeDBTransaction.cpp
+        ../../src/XMLTreeDB.cpp
+        ../../src/XMLTreeDBImpl.cpp
+        ../../src/XMLTreeDBNodeImpl.cpp
+        ../../src/XMLTreeDBTransactionImpl.cpp
     }
 }

@@ -77,8 +77,8 @@ ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
 
 all: ../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDB-d,DiplodocusEmbeddedDocumentDB).a
 
-../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDB-d,DiplodocusEmbeddedDocumentDB).a: $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBValue.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o
-	$(AR) rc $@ $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBValue.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o
+../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDB-d,DiplodocusEmbeddedDocumentDB).a: $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBValue.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBTransactionImpl.o
+	$(AR) rc $@ $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBValue.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBTransactionImpl.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o: ../../src/TreeDBErrorCategory.cpp
@@ -101,6 +101,18 @@ $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o: ../../src/TreeDBNodeI
 
 $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o: ../../src/TreeDBTransaction.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/Core -std=c++11 ../../src/TreeDBTransaction.cpp
+
+$(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDB.o: ../../src/XMLTreeDB.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/Core -std=c++11 ../../src/XMLTreeDB.cpp
+
+$(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBImpl.o: ../../src/XMLTreeDBImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/Core -std=c++11 ../../src/XMLTreeDBImpl.cpp
+
+$(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBNodeImpl.o: ../../src/XMLTreeDBNodeImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/Core -std=c++11 ../../src/XMLTreeDBNodeImpl.cpp
+
+$(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBTransactionImpl.o: ../../src/XMLTreeDBTransactionImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/Core -std=c++11 ../../src/XMLTreeDBTransactionImpl.cpp
 
 clean:
 	rm -f $(_builddir)*.o
