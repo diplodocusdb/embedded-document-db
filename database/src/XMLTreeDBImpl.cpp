@@ -4,10 +4,10 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
+#include "Core.hpp"
 #include "XMLTreeDBImpl.hpp"
 #include "XMLTreeDBNodeImpl.hpp"
 #include "XMLTreeDBTransactionImpl.hpp"
-#include <DiplodocusDB/TreeDB/Core.hpp>
 #include <fstream>
 
 namespace DiplodocusDB

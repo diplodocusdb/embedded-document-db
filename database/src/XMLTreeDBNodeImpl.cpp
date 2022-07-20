@@ -4,10 +4,10 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
+#include "Core.hpp"
 #include "XMLTreeDBNodeImpl.hpp"
 #include "XMLTreeDBImpl.hpp"
 #include <boost/date_time.hpp>
-#include <DiplodocusDB/TreeDB/Core.hpp>
 #include <Ishiko/Time.hpp>
 
 using namespace Ishiko;
