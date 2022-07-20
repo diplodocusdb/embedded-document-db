@@ -22,9 +22,6 @@ jobs:
           name: Run TreeDB/Core tests
           command: cd /projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBTests
       - run:
-          name: Build TreeDB/XMLTreeDB
-          command: cd /projects/diplodocusdb/embedded-document-db/xml-tree-db/build/gnumake && make
-      - run:
           name: Build TreeDB/XMLTreeDB tests
           command: cd /projects/diplodocusdb/embedded-document-db/xml-tree-db/tests/build/gnumake && make
       - run:
