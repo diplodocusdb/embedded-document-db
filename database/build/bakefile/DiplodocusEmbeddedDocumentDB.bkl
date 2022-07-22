@@ -40,17 +40,17 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoTime, IshikoError
     headers
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDBErrorCategory.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDBKey.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDBPersistentNodeID.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDBValue.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDBNode.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDBNodeImpl.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDBTransaction.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDBTransactionImpl.hpp
-        ../../../include/DiplodocusDB/TreeDB/TreeDB.hpp
-        ../../../include/DiplodocusDB/TreeDB/linkoptions.hpp
-        ../../../include/DiplodocusDB/TreeDB/XMLTreeDB/XMLTreeDB.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBErrorCategory.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBPersistentNodeID.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBValue.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBNode.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBNodeImpl.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBTransaction.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBTransactionImpl.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDB.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/linkoptions.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/XMLTreeDB.hpp
         ../../src/XMLTreeDBImpl.hpp
         ../../src/XMLTreeDBNodeImpl.hpp
         ../../src/XMLTreeDBTransactionImpl.hpp
