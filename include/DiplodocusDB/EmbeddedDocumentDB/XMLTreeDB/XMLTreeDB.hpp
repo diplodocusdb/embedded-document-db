@@ -7,7 +7,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDB_HPP_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDB_HPP_
 
-#include "../Core.hpp"
+#include "TreeDB.hpp"
 #include <boost/filesystem/path.hpp>
 #include <Ishiko/Errors.hpp>
 #include <memory>

@@ -163,7 +163,7 @@
     <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBErrorCategory.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBKey.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBPersistentNodeID.hpp" />
@@ -174,9 +174,7 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBTransactionImpl.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\linkoptions.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp" />
