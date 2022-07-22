@@ -1,7 +1,7 @@
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/test-framework/include/Ishiko/TestFramework.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/embedded-document-db/include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.bkl;
+import $(diplodocusdbpath)/embedded-document-db/include/DiplodocusDB/EmbeddedDocumentDB.bkl;
 
 toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 

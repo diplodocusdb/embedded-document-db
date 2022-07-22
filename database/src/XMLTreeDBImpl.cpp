@@ -4,7 +4,9 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#include "Core.hpp"
+#include "TreeDBErrorCategory.hpp"
+#include "TreeDBTransaction.hpp"
+#include "TreeDBValue.hpp"
 #include "XMLTreeDBImpl.hpp"
 #include "XMLTreeDBNodeImpl.hpp"
 #include "XMLTreeDBTransactionImpl.hpp"

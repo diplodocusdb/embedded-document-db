@@ -17,46 +17,40 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\Core.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBErrorCategory.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBErrorCategory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBKey.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBPersistentNodeID.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBPersistentNodeID.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBValue.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBValue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBNode.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBNodeImpl.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBNodeImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBTransaction.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBTransaction.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDBTransactionImpl.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBTransactionImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\TreeDB.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\linkoptions.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\linkoptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\XMLTreeDB.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\TreeDB\XMLTreeDB\linkoptions.hpp">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\XMLTreeDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp">
