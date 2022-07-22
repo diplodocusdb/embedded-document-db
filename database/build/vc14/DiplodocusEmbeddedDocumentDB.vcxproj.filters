@@ -71,49 +71,49 @@
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\linkoptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\EmbeddedTreeDBImpl.h">
+    <ClInclude Include="..\..\src\EmbeddedTreeDBImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\EmbeddedTreeDBNodeImpl.h">
+    <ClInclude Include="..\..\src\EmbeddedTreeDBNodeImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\EmbeddedTreeDBTransactionImpl.h">
+    <ClInclude Include="..\..\src\EmbeddedTreeDBTransactionImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\NodeID.h">
+    <ClInclude Include="..\..\src\NodeID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\NodeIDAllocator.h">
+    <ClInclude Include="..\..\src\NodeIDAllocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SiblingNodesRecordGroup.h">
+    <ClInclude Include="..\..\src\SiblingNodesRecordGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SiblingNodesRecordGroupCache.h">
+    <ClInclude Include="..\..\src\SiblingNodesRecordGroupCache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\RecordFile.h">
+    <ClInclude Include="..\..\src\RecordFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\RecordFilesSet.h">
+    <ClInclude Include="..\..\src\RecordFilesSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\CachedRecordFilesSet.h">
+    <ClInclude Include="..\..\src\CachedRecordFilesSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\MasterFile.h">
+    <ClInclude Include="..\..\src\MasterFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\MasterFileMetadata.h">
+    <ClInclude Include="..\..\src\MasterFileMetadata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SecondaryFile.h">
+    <ClInclude Include="..\..\src\SecondaryFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Record.h">
+    <ClInclude Include="..\..\src\Record.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\RecordMarker.h">
+    <ClInclude Include="..\..\src\RecordMarker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -151,52 +151,52 @@
     <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\EmbeddedTreeDB.cpp">
+    <ClCompile Include="..\..\src\EmbeddedTreeDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\EmbeddedTreeDBImpl.cpp">
+    <ClCompile Include="..\..\src\EmbeddedTreeDBImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\EmbeddedTreeDBNodeImpl.cpp">
+    <ClCompile Include="..\..\src\EmbeddedTreeDBNodeImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\EmbeddedTreeDBTransactionImpl.cpp">
+    <ClCompile Include="..\..\src\EmbeddedTreeDBTransactionImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\NodeID.cpp">
+    <ClCompile Include="..\..\src\NodeID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\NodeIDAllocator.cpp">
+    <ClCompile Include="..\..\src\NodeIDAllocator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SiblingNodesRecordGroup.cpp">
+    <ClCompile Include="..\..\src\SiblingNodesRecordGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SiblingNodesRecordGroupCache.cpp">
+    <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\RecordFile.cpp">
+    <ClCompile Include="..\..\src\RecordFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\RecordFilesSet.cpp">
+    <ClCompile Include="..\..\src\RecordFilesSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CachedRecordFilesSet.cpp">
+    <ClCompile Include="..\..\src\CachedRecordFilesSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\MasterFileMetadata.cpp">
+    <ClCompile Include="..\..\src\MasterFileMetadata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\MasterFile.cpp">
+    <ClCompile Include="..\..\src\MasterFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SecondaryFile.cpp">
+    <ClCompile Include="..\..\src\SecondaryFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Record.cpp">
+    <ClCompile Include="..\..\src\Record.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\RecordMarker.cpp">
+    <ClCompile Include="..\..\src\RecordMarker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -60,21 +60,21 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoTime, IshikoError
         ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h
         ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
 
-        ../../Source/EmbeddedTreeDBImpl.h
-        ../../Source/EmbeddedTreeDBNodeImpl.h
-        ../../Source/EmbeddedTreeDBTransactionImpl.h
-        ../../Source/NodeID.h
-        ../../Source/NodeIDAllocator.h
-        ../../Source/SiblingNodesRecordGroup.h
-        ../../Source/SiblingNodesRecordGroupCache.h
-        ../../Source/RecordFile.h
-        ../../Source/RecordFilesSet.h
-        ../../Source/CachedRecordFilesSet.h
-        ../../Source/MasterFile.h
-        ../../Source/MasterFileMetadata.h
-        ../../Source/SecondaryFile.h
-        ../../Source/Record.h
-        ../../Source/RecordMarker.h
+        ../../src/EmbeddedTreeDBImpl.h
+        ../../src/EmbeddedTreeDBNodeImpl.h
+        ../../src/EmbeddedTreeDBTransactionImpl.h
+        ../../src/NodeID.h
+        ../../src/NodeIDAllocator.h
+        ../../src/SiblingNodesRecordGroup.h
+        ../../src/SiblingNodesRecordGroupCache.h
+        ../../src/RecordFile.h
+        ../../src/RecordFilesSet.h
+        ../../src/CachedRecordFilesSet.h
+        ../../src/MasterFile.h
+        ../../src/MasterFileMetadata.h
+        ../../src/SecondaryFile.h
+        ../../src/Record.h
+        ../../src/RecordMarker.h
     }
 
     sources
@@ -91,22 +91,22 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoTime, IshikoError
         ../../src/XMLTreeDBNodeImpl.cpp
         ../../src/XMLTreeDBTransactionImpl.cpp
 
-        ../../Source/EmbeddedTreeDB.cpp
+        ../../src/EmbeddedTreeDB.cpp
 
-        ../../Source/EmbeddedTreeDBImpl.cpp
-        ../../Source/EmbeddedTreeDBNodeImpl.cpp
-        ../../Source/EmbeddedTreeDBTransactionImpl.cpp
-        ../../Source/NodeID.cpp
-        ../../Source/NodeIDAllocator.cpp
-        ../../Source/SiblingNodesRecordGroup.cpp
-        ../../Source/SiblingNodesRecordGroupCache.cpp
-        ../../Source/RecordFile.cpp
-        ../../Source/RecordFilesSet.cpp
-        ../../Source/CachedRecordFilesSet.cpp
-        ../../Source/MasterFileMetadata.cpp
-        ../../Source/MasterFile.cpp
-        ../../Source/SecondaryFile.cpp
-        ../../Source/Record.cpp
-        ../../Source/RecordMarker.cpp
+        ../../src/EmbeddedTreeDBImpl.cpp
+        ../../src/EmbeddedTreeDBNodeImpl.cpp
+        ../../src/EmbeddedTreeDBTransactionImpl.cpp
+        ../../src/NodeID.cpp
+        ../../src/NodeIDAllocator.cpp
+        ../../src/SiblingNodesRecordGroup.cpp
+        ../../src/SiblingNodesRecordGroupCache.cpp
+        ../../src/RecordFile.cpp
+        ../../src/RecordFilesSet.cpp
+        ../../src/CachedRecordFilesSet.cpp
+        ../../src/MasterFileMetadata.cpp
+        ../../src/MasterFile.cpp
+        ../../src/SecondaryFile.cpp
+        ../../src/Record.cpp
+        ../../src/RecordMarker.cpp
     }
 }

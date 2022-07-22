@@ -123,53 +123,53 @@ $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBNodeImpl.o: ../../src/XMLTreeD
 $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBTransactionImpl.o: ../../src/XMLTreeDBTransactionImpl.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/XMLTreeDBTransactionImpl.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDB.o: ../../Source/EmbeddedTreeDB.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/EmbeddedTreeDB.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDB.o: ../../src/EmbeddedTreeDB.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/EmbeddedTreeDB.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBImpl.o: ../../Source/EmbeddedTreeDBImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/EmbeddedTreeDBImpl.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBImpl.o: ../../src/EmbeddedTreeDBImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/EmbeddedTreeDBImpl.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBNodeImpl.o: ../../Source/EmbeddedTreeDBNodeImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/EmbeddedTreeDBNodeImpl.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBNodeImpl.o: ../../src/EmbeddedTreeDBNodeImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/EmbeddedTreeDBNodeImpl.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBTransactionImpl.o: ../../Source/EmbeddedTreeDBTransactionImpl.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/EmbeddedTreeDBTransactionImpl.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBTransactionImpl.o: ../../src/EmbeddedTreeDBTransactionImpl.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/EmbeddedTreeDBTransactionImpl.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_NodeID.o: ../../Source/NodeID.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/NodeID.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_NodeID.o: ../../src/NodeID.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/NodeID.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_NodeIDAllocator.o: ../../Source/NodeIDAllocator.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/NodeIDAllocator.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_NodeIDAllocator.o: ../../src/NodeIDAllocator.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/NodeIDAllocator.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroup.o: ../../Source/SiblingNodesRecordGroup.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/SiblingNodesRecordGroup.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroup.o: ../../src/SiblingNodesRecordGroup.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/SiblingNodesRecordGroup.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroupCache.o: ../../Source/SiblingNodesRecordGroupCache.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/SiblingNodesRecordGroupCache.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroupCache.o: ../../src/SiblingNodesRecordGroupCache.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/SiblingNodesRecordGroupCache.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_RecordFile.o: ../../Source/RecordFile.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/RecordFile.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_RecordFile.o: ../../src/RecordFile.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/RecordFile.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_RecordFilesSet.o: ../../Source/RecordFilesSet.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/RecordFilesSet.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_RecordFilesSet.o: ../../src/RecordFilesSet.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/RecordFilesSet.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_CachedRecordFilesSet.o: ../../Source/CachedRecordFilesSet.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/CachedRecordFilesSet.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_CachedRecordFilesSet.o: ../../src/CachedRecordFilesSet.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/CachedRecordFilesSet.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_MasterFileMetadata.o: ../../Source/MasterFileMetadata.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/MasterFileMetadata.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_MasterFileMetadata.o: ../../src/MasterFileMetadata.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/MasterFileMetadata.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_MasterFile.o: ../../Source/MasterFile.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/MasterFile.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_MasterFile.o: ../../src/MasterFile.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/MasterFile.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_SecondaryFile.o: ../../Source/SecondaryFile.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/SecondaryFile.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_SecondaryFile.o: ../../src/SecondaryFile.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/SecondaryFile.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_Record.o: ../../Source/Record.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/Record.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_Record.o: ../../src/Record.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/Record.cpp
 
-$(_builddir)DiplodocusEmbeddedDocumentDB_RecordMarker.o: ../../Source/RecordMarker.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../Source/RecordMarker.cpp
+$(_builddir)DiplodocusEmbeddedDocumentDB_RecordMarker.o: ../../src/RecordMarker.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/RecordMarker.cpp
 
 clean:
 	rm -f $(_builddir)*.o
