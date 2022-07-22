@@ -34,49 +34,4 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
     {
         basename = DiplodocusEmbeddedTreeDB-d;
     }
-
-    headers
-    {
-        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB.h
-
-        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h
-        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
-
-        ../../Source/EmbeddedTreeDBImpl.h
-        ../../Source/EmbeddedTreeDBNodeImpl.h
-        ../../Source/EmbeddedTreeDBTransactionImpl.h
-        ../../Source/NodeID.h
-        ../../Source/NodeIDAllocator.h
-        ../../Source/SiblingNodesRecordGroup.h
-        ../../Source/SiblingNodesRecordGroupCache.h
-        ../../Source/RecordFile.h
-        ../../Source/RecordFilesSet.h
-        ../../Source/CachedRecordFilesSet.h
-        ../../Source/MasterFile.h
-        ../../Source/MasterFileMetadata.h
-        ../../Source/SecondaryFile.h
-        ../../Source/Record.h
-        ../../Source/RecordMarker.h
-    }
-
-    sources
-    {
-        ../../Source/EmbeddedTreeDB.cpp
-
-        ../../Source/EmbeddedTreeDBImpl.cpp
-        ../../Source/EmbeddedTreeDBNodeImpl.cpp
-        ../../Source/EmbeddedTreeDBTransactionImpl.cpp
-        ../../Source/NodeID.cpp
-        ../../Source/NodeIDAllocator.cpp
-        ../../Source/SiblingNodesRecordGroup.cpp
-        ../../Source/SiblingNodesRecordGroupCache.cpp
-        ../../Source/RecordFile.cpp
-        ../../Source/RecordFilesSet.cpp
-        ../../Source/CachedRecordFilesSet.cpp
-        ../../Source/MasterFileMetadata.cpp
-        ../../Source/MasterFile.cpp
-        ../../Source/SecondaryFile.cpp
-        ../../Source/Record.cpp
-        ../../Source/RecordMarker.cpp
-    }
 }
