@@ -77,7 +77,7 @@ ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
 # Path to the Ishiko Errors installation
 ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
 # Path to the DiplodocusDB installation
-DIPLODOCUSDB_PHYSICALSTORAGE_ROOT ?= $(DIPLODOCUSDB)/PhysicalStorage
+DIPLODOCUSDB_PHYSICALSTORAGE_ROOT ?= $(DIPLODOCUSDB)/physical-storage
 # Path to the pugixml installation
 ISHIKO_CPP_PUGIXML_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_PUGIXML)
 # Path to the fmt installation
