@@ -1,5 +1,6 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
+import $(diplodocusdbpath)/physical-storage/Include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
@@ -15,7 +16,7 @@ vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDB.sln;
 vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDB.sln;
 vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDB.sln;
 
-library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
+library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
 {
     archs = x86 x86_64;
    
