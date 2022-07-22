@@ -5,7 +5,7 @@
 */
 
 #include "XMLTreeDBTests.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/XMLTreeDB/XMLTreeDB.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/XMLTreeDB.hpp"
 #include <boost/filesystem/operations.hpp>
 #include <sstream>
 
