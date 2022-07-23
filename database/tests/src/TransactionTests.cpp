@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -21,18 +21,18 @@
 */
 
 #include "TransactionTests.h"
-#include "DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB/EmbeddedTreeDB.h"
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
-TransactionTests::TransactionTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "Transaction tests", environment)
+TransactionTests::TransactionTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "Transaction tests", context)
 {
-    append<FileComparisonTest>("createTransaction test 1", CreateTransactionTest1);
-    append<FileComparisonTest>("commitTransaction test 1", CommitTransactionTest1);
-    append<FileComparisonTest>("appendChildNode test 1", AppendChildNodeTest1);
-    append<FileComparisonTest>("appendChildNode test 2", AppendChildNodeTest2);
-    append<FileComparisonTest>("rollbackTransaction test 1", RollbackTransactionTest1);
+    append<HeapAllocationErrorsTest>("createTransaction test 1", CreateTransactionTest1);
+    append<HeapAllocationErrorsTest>("commitTransaction test 1", CommitTransactionTest1);
+    append<HeapAllocationErrorsTest>("appendChildNode test 1", AppendChildNodeTest1);
+    append<HeapAllocationErrorsTest>("appendChildNode test 2", AppendChildNodeTest2);
+    append<HeapAllocationErrorsTest>("rollbackTransaction test 1", RollbackTransactionTest1);
 }
 
 void TransactionTests::CreateTransactionTest1(FileComparisonTest& test)

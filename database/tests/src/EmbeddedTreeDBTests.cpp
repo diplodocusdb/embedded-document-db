@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -21,17 +21,17 @@
 */
 
 #include "EmbeddedTreeDBTests.h"
-#include "DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB.h"
 #include <boost/filesystem/operations.hpp>
 #include <sstream>
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
-EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "EmbeddedTreeDB tests", environment)
+EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "EmbeddedTreeDB tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
-    append<FileComparisonTest>("create test 1", CreateTest1);
+    append<HeapAllocationErrorsTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
     append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
@@ -39,95 +39,89 @@ EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestEnv
     append<HeapAllocationErrorsTest>("open test 5", OpenTest5);
     append<HeapAllocationErrorsTest>("childNodes test 1", ChildNodesTest1);
     append<HeapAllocationErrorsTest>("childNodes test 2", ChildNodesTest2);
-    append<FileComparisonTest>("insertChildNode test 1", InsertChildNodeTest1);
-    append<FileComparisonTest>("insertChildNodeBefore test 1", InsertChildNodeBeforeTest1);
-    append<FileComparisonTest>("insertChildNodeBefore test 2", InsertChildNodeBeforeTest2);
-    append<FileComparisonTest>("insertChildNodeBefore test 3", InsertChildNodeBeforeTest3);
-    append<FileComparisonTest>("insertChildNodeAfter test 1", InsertChildNodeAfterTest1);
-    append<FileComparisonTest>("insertChildNodeAfter test 2", InsertChildNodeAfterTest2);
-    append<FileComparisonTest>("appendChildNode test 1", AppendChildNodeTest1);
-    append<FileComparisonTest>("appendChildNode test 2", AppendChildNodeTest2);
-    append<FileComparisonTest>("appendChildNode test 3", AppendChildNodeTest3);
-    append<FileComparisonTest>("appendChildNode test 4", AppendChildNodeTest4);
-    append<FileComparisonTest>("appendChildNode test 5", AppendChildNodeTest5);
-    append<FileComparisonTest>("appendChildNode test 6", AppendChildNodeTest6);
-    append<FileComparisonTest>("removeChildNode test 1", RemoveChildNodeTest1);
-    append<FileComparisonTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
+    append<HeapAllocationErrorsTest>("insertChildNode test 1", InsertChildNodeTest1);
+    append<HeapAllocationErrorsTest>("insertChildNodeBefore test 1", InsertChildNodeBeforeTest1);
+    append<HeapAllocationErrorsTest>("insertChildNodeBefore test 2", InsertChildNodeBeforeTest2);
+    append<HeapAllocationErrorsTest>("insertChildNodeBefore test 3", InsertChildNodeBeforeTest3);
+    append<HeapAllocationErrorsTest>("insertChildNodeAfter test 1", InsertChildNodeAfterTest1);
+    append<HeapAllocationErrorsTest>("insertChildNodeAfter test 2", InsertChildNodeAfterTest2);
+    append<HeapAllocationErrorsTest>("appendChildNode test 1", AppendChildNodeTest1);
+    append<HeapAllocationErrorsTest>("appendChildNode test 2", AppendChildNodeTest2);
+    append<HeapAllocationErrorsTest>("appendChildNode test 3", AppendChildNodeTest3);
+    append<HeapAllocationErrorsTest>("appendChildNode test 4", AppendChildNodeTest4);
+    append<HeapAllocationErrorsTest>("appendChildNode test 5", AppendChildNodeTest5);
+    append<HeapAllocationErrorsTest>("appendChildNode test 6", AppendChildNodeTest6);
+    append<HeapAllocationErrorsTest>("removeChildNode test 1", RemoveChildNodeTest1);
+    append<HeapAllocationErrorsTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
 }
 
 void EmbeddedTreeDBTests::CreationTest1(Test& test)
 {
     DiplodocusDB::EmbeddedTreeDB db;
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::CreateTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::CreateTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_CreateTest1.dpdb");
+    const char* testName = "EmbeddedTreeDBTests_CreateTest1.dpdb";
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
     
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_CreateTest1.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::OpenTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyEmbeddedTreeDB.dpdb");
-
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.open(inputPath, error);
+    db.open(test.context().getDataPath("EmptyEmbeddedTreeDB.dpdb"), error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
     
     DiplodocusDB::TreeDBNode& node = db.root();
 
-    ISHTF_FAIL_UNLESS(node.isRoot());
+    ISHIKO_TEST_FAIL_IF_NOT(node.isRoot());
    
     std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(node, error);
 
-    ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(children.size() == 0);
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_NEQ(children.size(), 0);
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::OpenTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest2.dpdb");
-
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.open(inputPath, error);
+    db.open(test.context().getDataPath("EmbeddedTreeDBTests_OpenTest2.dpdb"), error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     DiplodocusDB::TreeDBValue value = db.value(node, error);
 
-    ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(value.type() == DiplodocusDB::EPrimitiveDataType::eNULL);
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_NEQ(value.type(), DiplodocusDB::PrimitiveDataType::null);
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::OpenTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest3.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest3.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 
@@ -143,7 +137,7 @@ void EmbeddedTreeDBTests::OpenTest3(Test& test)
     DiplodocusDB::TreeDBValue value1 = db.value(node1, error);
 
     ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(value1.type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHTF_FAIL_UNLESS(value1.type() == DiplodocusDB::PrimitiveDataType::null);
 
     DiplodocusDB::TreeDBNode node2 = db.child(db.root(), "key2", error);
 
@@ -152,14 +146,14 @@ void EmbeddedTreeDBTests::OpenTest3(Test& test)
     DiplodocusDB::TreeDBValue value2 = db.value(node2, error);
 
     ISHTF_FAIL_IF((bool)error);
-    ISHTF_FAIL_UNLESS(value2.type() == DiplodocusDB::EPrimitiveDataType::eNULL);
+    ISHTF_FAIL_UNLESS(value2.type() == DiplodocusDB::PrimitiveDataType::null);
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::OpenTest4(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest4.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest4.dpdb");
 
     Ishiko::Error error(0);
 
@@ -176,12 +170,12 @@ void EmbeddedTreeDBTests::OpenTest4(Test& test)
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(value.asUTF8String() == "value1");
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::OpenTest5(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest5.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_OpenTest5.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 
@@ -208,12 +202,12 @@ void EmbeddedTreeDBTests::OpenTest5(Test& test)
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(value2.asUTF8String() == "value2");
         
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::ChildNodesTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyEmbeddedTreeDB.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmptyEmbeddedTreeDB.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 
@@ -226,12 +220,12 @@ void EmbeddedTreeDBTests::ChildNodesTest1(Test& test)
 
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.size() == 0);
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::ChildNodesTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_ChildNodesTest2.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_ChildNodesTest2.dpdb");
 
     DiplodocusDB::EmbeddedTreeDB db;
 
@@ -245,12 +239,12 @@ void EmbeddedTreeDBTests::ChildNodesTest2(Test& test)
     ISHTF_FAIL_IF((bool)error);
     ISHTF_FAIL_UNLESS(children.size() == 1);
     ISHTF_FAIL_UNLESS(children[0].name() == "key1");
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeTest1.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeTest1.dpdb");
 
     Ishiko::Error error;
 
@@ -266,15 +260,15 @@ void EmbeddedTreeDBTests::InsertChildNodeTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeTest1.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -296,15 +290,15 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -330,15 +324,15 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -364,15 +358,15 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeAfterTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeAfterTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest1.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest1.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest1.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest1.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -394,15 +388,15 @@ void EmbeddedTreeDBTests::InsertChildNodeAfterTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest1.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeAfterTest2(FileComparisonTest& test)
+void EmbeddedTreeDBTests::InsertChildNodeAfterTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest2.dpdb");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest2.dpdb");
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest2.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest2.dpdb");
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
@@ -424,14 +418,14 @@ void EmbeddedTreeDBTests::InsertChildNodeAfterTest2(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest2.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_InsertChildNodeAfterTest2.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest1(FileComparisonTest& test)
+void EmbeddedTreeDBTests::AppendChildNodeTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest1.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest1.dpdb");
 
     Ishiko::Error error(0);
 
@@ -447,14 +441,14 @@ void EmbeddedTreeDBTests::AppendChildNodeTest1(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest1.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest2(FileComparisonTest& test)
+void EmbeddedTreeDBTests::AppendChildNodeTest2(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest2.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest2.dpdb");
 
     Ishiko::Error error(0);
 
@@ -474,45 +468,45 @@ void EmbeddedTreeDBTests::AppendChildNodeTest2(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest2.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest2.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest3(FileComparisonTest& test)
+void EmbeddedTreeDBTests::AppendChildNodeTest3(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest3.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest3.dpdb");
 
     Ishiko::Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1",
         DiplodocusDB::TreeDBValue::UTF8String("value1"), error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest3.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest3.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest4(FileComparisonTest& test)
+void EmbeddedTreeDBTests::AppendChildNodeTest4(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest4.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest4.dpdb");
 
     Ishiko::Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
     
     DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", 
         DiplodocusDB::TreeDBValue::UTF8String("value1"), error);
@@ -527,21 +521,21 @@ void EmbeddedTreeDBTests::AppendChildNodeTest4(FileComparisonTest& test)
     db.close();
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest4.dpdb");
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest4.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::AppendChildNodeTest5(FileComparisonTest& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest5.dpdb");
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest5.dpdb");
 
     Ishiko::Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
     db.create(outputPath, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
     
     for (size_t i = 0; i < 523; ++i)
     {
@@ -561,7 +555,7 @@ void EmbeddedTreeDBTests::AppendChildNodeTest5(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest5.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::AppendChildNodeTest6(FileComparisonTest& test)
@@ -576,22 +570,22 @@ void EmbeddedTreeDBTests::AppendChildNodeTest6(FileComparisonTest& test)
     DiplodocusDB::EmbeddedTreeDB db;
     db.open(outputPath, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::TreeDBNode node2 = db.appendChildNode(node1, "key2", error);
     
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.close();
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_AppendChildNodeTest6.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::RemoveChildNodeTest1(FileComparisonTest& test)
@@ -606,16 +600,16 @@ void EmbeddedTreeDBTests::RemoveChildNodeTest1(FileComparisonTest& test)
     DiplodocusDB::EmbeddedTreeDB db;
     db.open(outputPath, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
     
     db.removeChildNode(db.root(), "key1", error);
     
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "EmbeddedTreeDBTests_RemoveChildNodeTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void EmbeddedTreeDBTests::RemoveAllChildNodesTest1(FileComparisonTest& test)
