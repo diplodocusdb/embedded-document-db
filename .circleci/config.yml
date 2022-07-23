@@ -10,6 +10,9 @@ jobs:
       - run:
           name: "Install build dependency: DiplodocusDB Core"
           command: cd /projects/diplodocusdb && git clone https://github.com/diplodocusdb/core.git && cd core/build/gnumake && make
+      - run:
+          name: "Install build dependency: DiplodocusDB PhysicalStorage"
+          command: cd /projects/diplodocusdb && git clone https://github.com/diplodocusdb/physical-storage.git && cd physical-storage/PageRepository/Makefiles/GNUmakefile && make
       - checkout:
           path: /projects/diplodocusdb/embedded-document-db
       - run:
