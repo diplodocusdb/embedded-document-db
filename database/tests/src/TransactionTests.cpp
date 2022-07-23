@@ -35,153 +35,133 @@ TransactionTests::TransactionTests(const TestNumber& number, const TestContext& 
     append<HeapAllocationErrorsTest>("rollbackTransaction test 1", RollbackTransactionTest1);
 }
 
-void TransactionTests::CreateTransactionTest1(FileComparisonTest& test)
+void TransactionTests::CreateTransactionTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "TransactionTests_CreateTransactionTest1.dpdb");
-
-    Ishiko::Error error(0);
+    const char* testName = "TransactionTests_CreateTransactionTest1.dpdb";
+   
+    Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "TransactionTests_CreateTransactionTest1.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
 
-void TransactionTests::CommitTransactionTest1(FileComparisonTest& test)
+void TransactionTests::CommitTransactionTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "TransactionTests_CommitTransactionTest1.dpdb");
-
-    Ishiko::Error error(0);
+    const char* testName = "TransactionTests_CommitTransactionTest1.dpdb";
+   
+    Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.commitTransaction(transaction, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "TransactionTests_CommitTransactionTest1.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
 
-void TransactionTests::AppendChildNodeTest1(FileComparisonTest& test)
+void TransactionTests::AppendChildNodeTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "TransactionTests_AppendChildNodeTest1.dpdb");
-
-    Ishiko::Error error(0);
+    const char* testName = "TransactionTests_AppendChildNodeTest1.dpdb";
+   
+    Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.appendChildNode(transaction, db.root(), "key1", error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.commitTransaction(transaction, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "TransactionTests_AppendChildNodeTest1.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
 
-void TransactionTests::AppendChildNodeTest2(FileComparisonTest& test)
+void TransactionTests::AppendChildNodeTest2(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "TransactionTests_AppendChildNodeTest2.dpdb");
+    const char* testName = "TransactionTests_AppendChildNodeTest2.dpdb";
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.appendChildNode(transaction, db.root(), "key1", error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.appendChildNode(transaction, db.root(), "key2", error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.commitTransaction(transaction, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "TransactionTests_AppendChildNodeTest2.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
 
-void TransactionTests::RollbackTransactionTest1(FileComparisonTest& test)
+void TransactionTests::RollbackTransactionTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "TransactionTests_RollbackTransactionTest1.dpdb");
+    const char* testName = "TransactionTests_RollbackTransactionTest1.dpdb";
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::EmbeddedTreeDB db;
-    db.create(outputPath, error);
+    db.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     db.rollbackTransaction(transaction);
 
     db.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "TransactionTests_RollbackTransactionTest1.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
