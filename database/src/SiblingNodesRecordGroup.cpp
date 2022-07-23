@@ -172,7 +172,7 @@ void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const Embe
         }
     }
 
-    if (node.value().type() != DataType(EPrimitiveDataType::eNULL))
+    if (node.value().type() != DataType(PrimitiveDataType::null))
     {
         Record record(Record::ERecordType::eInlineValue, node.value());
         record.write(writer, error);

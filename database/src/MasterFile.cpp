@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -22,6 +22,7 @@
 
 #include "MasterFile.h"
 #include "EmbeddedTreeDBNodeImpl.h"
+#include "TreeDBErrorCategory.hpp"
 
 namespace DiplodocusDB
 {
@@ -147,7 +148,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
         else
         {
             // TODO : more precise error
-            error.fail(-1, "TODO", __FILE__, __LINE__);
+            error.fail(-1, TreeDBErrorCategory::Get(), "TODO", __FILE__, __LINE__);
             break;
         }
     }
@@ -187,7 +188,7 @@ void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& si
 bool MasterFile::removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error)
 {
     // TODO
-    error.fail(-1);
+    error.fail(-1, TreeDBErrorCategory::Get());
     return false;
 }
 

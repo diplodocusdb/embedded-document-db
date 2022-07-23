@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,10 +23,10 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDB_H_
 
-#include "DiplodocusDB/TreeDB/Core/TreeDB.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBNode.h"
-#include "Ishiko/Errors/Error.h"
+#include "TreeDB.hpp"
+#include "TreeDBNode.hpp"
 #include <boost/filesystem/path.hpp>
+#include <Ishiko/Errors.hpp>
 #include <memory>
 
 namespace DiplodocusDB

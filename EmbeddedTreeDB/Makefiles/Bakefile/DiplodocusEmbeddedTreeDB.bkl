@@ -1,10 +1,6 @@
 ishikopath = envvar("ISHIKO");
 import $(ishikopath)/ThirdPartyGlue/Include/Ishiko/Boost.bkl;
 import $(ishikopath)/Errors/Include/Ishiko/Errors.bkl;
-diplodocusdbpath = envvar("DIPLODOCUSDB");
-import $(diplodocusdbpath)/Core/Include/DiplodocusDB/DiplodocusDBCore.bkl;
-import $(diplodocusdbpath)/PhysicalStorage/Include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
-import $(diplodocusdbpath)/TreeDB/Include/DiplodocusDB/TreeDB/TreeDBCore.bkl;
 
 toolsets = gnu vs2017 vs2015 vs2013;
 
@@ -13,7 +9,7 @@ vs2017.solutionfile = ../VC15/DiplodocusEmbeddedTreeDB.sln;
 vs2015.solutionfile = ../VC14/DiplodocusEmbeddedTreeDB.sln;
 vs2013.solutionfile = ../VC12/DiplodocusEmbeddedTreeDB.sln;
 
-library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageRepository, DiplodocusDBCore, IshikoErrors, Boost
+library DiplodocusEmbeddedTreeDB : DiplodocusDBPageRepository
 {
     archs = x86 x86_64;
    
@@ -33,50 +29,5 @@ library DiplodocusEmbeddedTreeDB : DiplodocusTreeDBCore, DiplodocusDBPageReposit
     if ($(config) == Debug)
     {
         basename = DiplodocusEmbeddedTreeDB-d;
-    }
-
-    headers
-    {
-        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB.h
-
-        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h
-        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
-
-        ../../Source/EmbeddedTreeDBImpl.h
-        ../../Source/EmbeddedTreeDBNodeImpl.h
-        ../../Source/EmbeddedTreeDBTransactionImpl.h
-        ../../Source/NodeID.h
-        ../../Source/NodeIDAllocator.h
-        ../../Source/SiblingNodesRecordGroup.h
-        ../../Source/SiblingNodesRecordGroupCache.h
-        ../../Source/RecordFile.h
-        ../../Source/RecordFilesSet.h
-        ../../Source/CachedRecordFilesSet.h
-        ../../Source/MasterFile.h
-        ../../Source/MasterFileMetadata.h
-        ../../Source/SecondaryFile.h
-        ../../Source/Record.h
-        ../../Source/RecordMarker.h
-    }
-
-    sources
-    {
-        ../../Source/EmbeddedTreeDB.cpp
-
-        ../../Source/EmbeddedTreeDBImpl.cpp
-        ../../Source/EmbeddedTreeDBNodeImpl.cpp
-        ../../Source/EmbeddedTreeDBTransactionImpl.cpp
-        ../../Source/NodeID.cpp
-        ../../Source/NodeIDAllocator.cpp
-        ../../Source/SiblingNodesRecordGroup.cpp
-        ../../Source/SiblingNodesRecordGroupCache.cpp
-        ../../Source/RecordFile.cpp
-        ../../Source/RecordFilesSet.cpp
-        ../../Source/CachedRecordFilesSet.cpp
-        ../../Source/MasterFileMetadata.cpp
-        ../../Source/MasterFile.cpp
-        ../../Source/SecondaryFile.cpp
-        ../../Source/Record.cpp
-        ../../Source/RecordMarker.cpp
     }
 }

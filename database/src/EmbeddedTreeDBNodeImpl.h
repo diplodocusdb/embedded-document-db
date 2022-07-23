@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -24,7 +24,7 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 
 #include "NodeID.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBNodeImpl.h"
+#include "TreeDBNodeImpl.hpp"
 
 namespace DiplodocusDB
 {
