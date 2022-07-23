@@ -21,7 +21,7 @@
 */
 
 #include "TransactionTests.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB/EmbeddedTreeDB.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB.h"
 
 using namespace Ishiko;
 
