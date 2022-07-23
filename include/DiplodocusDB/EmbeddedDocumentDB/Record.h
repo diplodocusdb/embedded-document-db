@@ -23,11 +23,11 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
-#include "DiplodocusDB/EmbeddedDocumentDB/MasterFileMetadata.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/NodeID.h"
+#include "MasterFileMetadata.h"
+#include "NodeID.h"
 #include "TreeDBValue.hpp"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
+#include <DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h>
+#include <DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h>
 #include <boost/variant.hpp>
 #include <Ishiko/Errors.hpp>
 #include <memory>

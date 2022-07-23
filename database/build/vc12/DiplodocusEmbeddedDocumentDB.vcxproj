@@ -191,6 +191,7 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBTransactionImpl.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\linkoptions.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\Record.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\XMLTreeDB.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
@@ -209,7 +210,6 @@
     <ClInclude Include="..\..\src\MasterFile.h" />
     <ClInclude Include="..\..\src\MasterFileMetadata.h" />
     <ClInclude Include="..\..\src\SecondaryFile.h" />
-    <ClInclude Include="..\..\src\Record.h" />
     <ClInclude Include="..\..\src\RecordMarker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
