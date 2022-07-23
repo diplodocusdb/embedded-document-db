@@ -25,32 +25,32 @@
 
 #include <Ishiko/TestFramework.hpp>
 
-class MasterFileTests : public Ishiko::Tests::TestSequence
+class MasterFileTests : public Ishiko::TestSequence
 {
 public:
-    MasterFileTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    MasterFileTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-    static void CreateTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void OpenTest1(Ishiko::Tests::Test& test);
-    static void OpenTest2(Ishiko::Tests::Test& test);
-    static void OpenTest3(Ishiko::Tests::Test& test);
-    static void OpenTest4(Ishiko::Tests::Test& test);
-    static void AddSiblingNodesRecordGroupTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest3(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest4(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest5(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest6(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest7(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest8(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest9(Ishiko::Tests::FileComparisonTest& test);
-    static void AddSiblingNodesRecordGroupTest10(Ishiko::Tests::FileComparisonTest& test);
-    static void FindSiblingNodesRecordGroupTest1(Ishiko::Tests::Test& test);
-    static void FindSiblingNodesRecordGroupTest2(Ishiko::Tests::Test& test);
-    static void FindSiblingNodesRecordGroupTest3(Ishiko::Tests::Test& test);
-    static void RemoveSiblingNodesRecordGroupTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void ConstructionTest1(Ishiko::Test& test);
+    static void CreateTest1(Ishiko::Test& test);
+    static void OpenTest1(Ishiko::Test& test);
+    static void OpenTest2(Ishiko::Test& test);
+    static void OpenTest3(Ishiko::Test& test);
+    static void OpenTest4(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest1(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest2(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest3(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest4(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest5(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest6(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest7(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest8(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest9(Ishiko::Test& test);
+    static void AddSiblingNodesRecordGroupTest10(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest1(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest2(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest3(Ishiko::Test& test);
+    static void RemoveSiblingNodesRecordGroupTest1(Ishiko::Test& test);
 };
 
 #endif

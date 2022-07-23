@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,43 +23,43 @@
 #ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_RECORDTESTS_H_
 #define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_RECORDTESTS_H_
 
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include <Ishiko/TestFramework.hpp>
 
-class RecordTests : public Ishiko::Tests::TestSequence
+class RecordTests : public Ishiko::TestSequence
 {
 public:
-    RecordTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    RecordTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-    static void ReadMasterFileMetadataTest1(Ishiko::Tests::Test& test);
-    static void ReadDataStartTest1(Ishiko::Tests::Test& test);
-    static void ReadDataEndTest1(Ishiko::Tests::Test& test);
-    static void ReadNodeStartTest1(Ishiko::Tests::Test& test);
-    static void ReadNodeEndTest1(Ishiko::Tests::Test& test);
-    static void ReadParentNodeIDTest1(Ishiko::Tests::Test& test);
-    static void ReadNodeNameTest1(Ishiko::Tests::Test& test);
-    static void ReadNodeNameTest2(Ishiko::Tests::Test& test);
-    static void ReadNodeIDTest1(Ishiko::Tests::Test& test);
-    static void ReadNodeIDTest2(Ishiko::Tests::Test& test);
-    static void ReadPersistentNodeIDTest1(Ishiko::Tests::Test& test);
-    static void ReadInlineValueBinaryTest1(Ishiko::Tests::Test& test);
-    static void ReadInlineValueBooleanTest1(Ishiko::Tests::Test& test);
-    static void ReadInlineValueUTF8StringTest1(Ishiko::Tests::Test& test);
-    static void WriteMasterFileMetadataTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteDataStartTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteDataEndTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteNodeStartTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteNodeEndTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteParentNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteNodeNameTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteNodeNameTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteNodeIDTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void WritePersistentNodeIDTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteInlineValueBinaryTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteInlineValueBooleanTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteInlineValueUTF8StringTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void ConstructionTest1(Ishiko::Test& test);
+    static void ReadMasterFileMetadataTest1(Ishiko::Test& test);
+    static void ReadDataStartTest1(Ishiko::Test& test);
+    static void ReadDataEndTest1(Ishiko::Test& test);
+    static void ReadNodeStartTest1(Ishiko::Test& test);
+    static void ReadNodeEndTest1(Ishiko::Test& test);
+    static void ReadParentNodeIDTest1(Ishiko::Test& test);
+    static void ReadNodeNameTest1(Ishiko::Test& test);
+    static void ReadNodeNameTest2(Ishiko::Test& test);
+    static void ReadNodeIDTest1(Ishiko::Test& test);
+    static void ReadNodeIDTest2(Ishiko::Test& test);
+    static void ReadPersistentNodeIDTest1(Ishiko::Test& test);
+    static void ReadInlineValueBinaryTest1(Ishiko::Test& test);
+    static void ReadInlineValueBooleanTest1(Ishiko::Test& test);
+    static void ReadInlineValueUTF8StringTest1(Ishiko::Test& test);
+    static void WriteMasterFileMetadataTest1(Ishiko::Test& test);
+    static void WriteDataStartTest1(Ishiko::Test& test);
+    static void WriteDataEndTest1(Ishiko::Test& test);
+    static void WriteNodeStartTest1(Ishiko::Test& test);
+    static void WriteNodeEndTest1(Ishiko::Test& test);
+    static void WriteParentNodeIDTest1(Ishiko::Test& test);
+    static void WriteNodeNameTest1(Ishiko::Test& test);
+    static void WriteNodeNameTest2(Ishiko::Test& test);
+    static void WriteNodeIDTest1(Ishiko::Test& test);
+    static void WriteNodeIDTest2(Ishiko::Test& test);
+    static void WritePersistentNodeIDTest1(Ishiko::Test& test);
+    static void WriteInlineValueBinaryTest1(Ishiko::Test& test);
+    static void WriteInlineValueBooleanTest1(Ishiko::Test& test);
+    static void WriteInlineValueUTF8StringTest1(Ishiko::Test& test);
 };
 
 #endif

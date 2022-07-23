@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,10 +23,10 @@
 #include "NodeIDTests.h"
 #include "NodeID.h"
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
-NodeIDTests::NodeIDTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "NodeID tests", environment)
+NodeIDTests::NodeIDTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "NodeID tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
 }
@@ -35,5 +35,5 @@ void NodeIDTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::NodeID id(0);
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }

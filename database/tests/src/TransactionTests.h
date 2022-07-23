@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,19 +23,19 @@
 #ifndef _DIPLODOCUSDB_TEST_TREEDB_TRANSACTIONTESTS_H_
 #define _DIPLODOCUSDB_TEST_TREEDB_TRANSACTIONTESTS_H_
 
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include <Ishiko/TestFramework.hpp>
 
-class TransactionTests : public Ishiko::Tests::TestSequence
+class TransactionTests : public Ishiko::TestSequence
 {
 public:
-    TransactionTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    TransactionTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void CreateTransactionTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void CommitTransactionTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void AppendChildNodeTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void AppendChildNodeTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void RollbackTransactionTest1(Ishiko::Tests::FileComparisonTest& test);
+    static void CreateTransactionTest1(Ishiko::Test& test);
+    static void CommitTransactionTest1(Ishiko::Test& test);
+    static void AppendChildNodeTest1(Ishiko::Test& test);
+    static void AppendChildNodeTest2(Ishiko::Test& test);
+    static void RollbackTransactionTest1(Ishiko::Test& test);
 };
 
 #endif

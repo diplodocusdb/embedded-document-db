@@ -25,18 +25,17 @@
 
 #include <Ishiko/TestFramework.hpp>
 
-class SiblingNodesRecordGroupTests : public Ishiko::Tests::TestSequence
+class SiblingNodesRecordGroupTests : public Ishiko::TestSequence
 {
 public:
-    SiblingNodesRecordGroupTests(const Ishiko::Tests::TestNumber& number,
-        const Ishiko::Tests::TestEnvironment& environment);
+    SiblingNodesRecordGroupTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-    static void WriteTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteTest2(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteTest3(Ishiko::Tests::FileComparisonTest& test);
-    static void WriteTest4(Ishiko::Tests::FileComparisonTest& test);
+    static void ConstructionTest1(Ishiko::Test& test);
+    static void WriteTest1(Ishiko::Test& test);
+    static void WriteTest2(Ishiko::Test& test);
+    static void WriteTest3(Ishiko::Test& test);
+    static void WriteTest4(Ishiko::Test& test);
 };
 
 #endif

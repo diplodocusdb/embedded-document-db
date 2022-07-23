@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,21 +23,20 @@
 #ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUPCACHETESTS_H_
 #define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUPCACHETESTS_H_
 
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include <Ishiko/TestFramework.hpp>
 
-class SiblingNodesRecordGroupCacheTests : public Ishiko::Tests::TestSequence
+class SiblingNodesRecordGroupCacheTests : public Ishiko::TestSequence
 {
 public:
-    SiblingNodesRecordGroupCacheTests(const Ishiko::Tests::TestNumber& number,
-        const Ishiko::Tests::TestEnvironment& environment);
+    SiblingNodesRecordGroupCacheTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-    static void SubscriptOperatorTest1(Ishiko::Tests::Test& test);
-    static void SubscriptOperatorTest2(Ishiko::Tests::Test& test);
-    static void FindTest1(Ishiko::Tests::Test& test);
-    static void FindTest2(Ishiko::Tests::Test& test);
-    static void EraseTest1(Ishiko::Tests::Test& test);
+    static void ConstructionTest1(Ishiko::Test& test);
+    static void SubscriptOperatorTest1(Ishiko::Test& test);
+    static void SubscriptOperatorTest2(Ishiko::Test& test);
+    static void FindTest1(Ishiko::Test& test);
+    static void FindTest2(Ishiko::Test& test);
+    static void EraseTest1(Ishiko::Test& test);
 };
 
 #endif
