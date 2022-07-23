@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,22 +23,21 @@
 #ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_CACHEDRECORDFILESSETTESTS_H_
 #define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_CACHEDRECORDFILESSETTESTS_H_
 
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include <Ishiko/TestFramework.hpp>
 
-class CachedRecordFilesSetTests : public Ishiko::Tests::TestSequence
+class CachedRecordFilesSetTests : public Ishiko::TestSequence
 {
 public:
-    CachedRecordFilesSetTests(const Ishiko::Tests::TestNumber& number,
-        const Ishiko::Tests::TestEnvironment& environment);
+    CachedRecordFilesSetTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-    static void CreateMasterFileTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void OpenMasterFileTest1(Ishiko::Tests::Test& test);
-    static void OpenMasterFileTest2(Ishiko::Tests::Test& test);
-    static void FindSiblingNodesRecordGroupTest1(Ishiko::Tests::Test& test);
-    static void FindSiblingNodesRecordGroupTest2(Ishiko::Tests::Test& test);
-    static void FindSiblingNodesRecordGroupTest3(Ishiko::Tests::Test& test);
+    static void ConstructionTest1(Ishiko::Test& test);
+    static void CreateMasterFileTest1(Ishiko::Test& test);
+    static void OpenMasterFileTest1(Ishiko::Test& test);
+    static void OpenMasterFileTest2(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest1(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest2(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest3(Ishiko::Test& test);
 };
 
 #endif

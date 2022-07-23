@@ -20,17 +20,6 @@
     IN THE SOFTWARE.
 */
 
-#include "NodeIDTests.h"
-#include "NodeIDAllocatorTests.h"
-#include "RecordTests.h"
-#include "SiblingNodesRecordGroupTests.h"
-#include "SiblingNodesRecordGroupCacheTests.h"
-#include "MasterFileTests.h"
-#include "SecondaryFileTests.h"
-#include "RecordFilesSetTests.h"
-#include "CachedRecordFilesSetTests.h"
-#include "EmbeddedTreeDBTests.h"
-#include "TransactionTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 #include <boost/filesystem/operations.hpp>
 
@@ -46,17 +35,7 @@ int main(int argc, char* argv[])
     theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
 
     TestSequence& theTests = theTestHarness.tests();
-    theTests.append<NodeIDTests>();
-    theTests.append<NodeIDAllocatorTests>();
-    theTests.append<RecordTests>();
-    theTests.append<SiblingNodesRecordGroupTests>();
-    theTests.append<SiblingNodesRecordGroupCacheTests>();
-    theTests.append<MasterFileTests>();
-    theTests.append<SecondaryFileTests>();
-    theTests.append<RecordFilesSetTests>();
-    theTests.append<CachedRecordFilesSetTests>();
-    theTests.append<EmbeddedTreeDBTests>();
-    theTests.append<TransactionTests>();
+    
 
     return theTestHarness.run();
 }
