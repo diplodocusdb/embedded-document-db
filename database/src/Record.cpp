@@ -21,6 +21,7 @@
 */
 
 #include "Record.h"
+#include "TreeDBErrorCategory.hpp"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/Page.h"
 
 namespace DiplodocusDB
@@ -86,7 +87,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
     {
     case ERecordType::eInvalid:
         // TODO : add details
-        error.fail(-1, "Invalid record type", __FILE__, __LINE__);
+        error.fail(-1, TreeDBErrorCategory::Get(), "Invalid record type", __FILE__, __LINE__);
         break;
 
     case ERecordType::eMasterFileMetadata:
@@ -117,7 +118,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
 
     default:
         // TODO : add details
-        error.fail(-1, "Invalid record type", __FILE__, __LINE__);
+        error.fail(-1, TreeDBErrorCategory::Get(), "Invalid record type", __FILE__, __LINE__);
         break;
     }
 }
@@ -156,15 +157,15 @@ TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error&
     {
         switch (type.primitiveType())
         {
-        case EPrimitiveDataType::eBinary:
+        case PrimitiveDataType::binary:
             result.setBinary(readString(reader, error));
             break;
 
-        case EPrimitiveDataType::eBoolean:
+        case PrimitiveDataType::boolean:
             result.setBoolean(readBoolean(reader, error));
             break;
 
-        case EPrimitiveDataType::eUTF8String:
+        case PrimitiveDataType::unicodeString:
             result.setUTF8String(readString(reader, error));
             break;
         }
@@ -179,15 +180,15 @@ void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& v
     {
         switch (value.type().primitiveType())
         {
-        case EPrimitiveDataType::eBinary:
+        case PrimitiveDataType::binary:
             writeString(writer, value.asBinary(), error);
             break;
 
-        case EPrimitiveDataType::eBoolean:
+        case PrimitiveDataType::boolean:
             writeBoolean(writer, value.asBoolean(), error);
             break;
 
-        case EPrimitiveDataType::eUTF8String:
+        case PrimitiveDataType::unicodeString:
             writeString(writer, value.asUTF8String(), error);
             break;
         }
@@ -196,12 +197,12 @@ void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& v
 
 DataType Record::readDataType(PageRepositoryReader& reader, Ishiko::Error& error)
 {
-    DataType result(EPrimitiveDataType::eNULL);
+    DataType result(PrimitiveDataType::null);
     char buffer;
     reader.read(&buffer, 1, error);
     if (!error)
     {
-        result = DataType((EPrimitiveDataType)(buffer & 0x3F), (EDataTypeModifier)(buffer >> 6));
+        result = DataType((PrimitiveDataType)(buffer & 0x3F), (DataTypeModifier)(buffer >> 6));
     }
     return result;
 }
