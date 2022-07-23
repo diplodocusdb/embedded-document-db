@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,9 +23,9 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 
-#include "DiplodocusDB/Core/VersionNumber.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
+#include <DiplodocusDB/Core.hpp>
 
 namespace DiplodocusDB
 {

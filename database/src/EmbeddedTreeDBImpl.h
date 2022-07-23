@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -25,9 +25,9 @@
 
 #include "CachedRecordFilesSet.h"
 #include "RecordMarker.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDB.h"
-#include "Ishiko/Errors/Error.h"
+#include "TreeDB.hpp"
 #include <boost/filesystem/path.hpp>
+#include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
 {

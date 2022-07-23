@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -27,11 +27,11 @@
 #include "Record.h"
 #include "SiblingNodesRecordGroup.h"
 #include "RecordMarker.h"
-#include "DiplodocusDB/TreeDB/Core/TreeDBKey.h"
+#include "TreeDBKey.hpp"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
-#include "Ishiko/Errors/Error.h"
 #include <boost/filesystem/path.hpp>
+#include <Ishiko/Errors.hpp>
 #include <fstream>
 #include <memory>
 

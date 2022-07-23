@@ -1,5 +1,6 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
+import $(diplodocusdbpath)/physical-storage/Include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
@@ -15,7 +16,7 @@ vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDB.sln;
 vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDB.sln;
 vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDB.sln;
 
-library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
+library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
 {
     archs = x86 x86_64;
    
@@ -54,6 +55,27 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoTime, IshikoError
         ../../src/XMLTreeDBImpl.hpp
         ../../src/XMLTreeDBNodeImpl.hpp
         ../../src/XMLTreeDBTransactionImpl.hpp
+
+        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB.h
+
+        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h
+        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
+
+        ../../src/EmbeddedTreeDBImpl.h
+        ../../src/EmbeddedTreeDBNodeImpl.h
+        ../../src/EmbeddedTreeDBTransactionImpl.h
+        ../../src/NodeID.h
+        ../../src/NodeIDAllocator.h
+        ../../src/SiblingNodesRecordGroup.h
+        ../../src/SiblingNodesRecordGroupCache.h
+        ../../src/RecordFile.h
+        ../../src/RecordFilesSet.h
+        ../../src/CachedRecordFilesSet.h
+        ../../src/MasterFile.h
+        ../../src/MasterFileMetadata.h
+        ../../src/SecondaryFile.h
+        ../../src/Record.h
+        ../../src/RecordMarker.h
     }
 
     sources
@@ -69,5 +91,23 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBCore, IshikoTime, IshikoError
         ../../src/XMLTreeDBImpl.cpp
         ../../src/XMLTreeDBNodeImpl.cpp
         ../../src/XMLTreeDBTransactionImpl.cpp
+
+        ../../src/EmbeddedTreeDB.cpp
+
+        ../../src/EmbeddedTreeDBImpl.cpp
+        ../../src/EmbeddedTreeDBNodeImpl.cpp
+        ../../src/EmbeddedTreeDBTransactionImpl.cpp
+        ../../src/NodeID.cpp
+        ../../src/NodeIDAllocator.cpp
+        ../../src/SiblingNodesRecordGroup.cpp
+        ../../src/SiblingNodesRecordGroupCache.cpp
+        ../../src/RecordFile.cpp
+        ../../src/RecordFilesSet.cpp
+        ../../src/CachedRecordFilesSet.cpp
+        ../../src/MasterFileMetadata.cpp
+        ../../src/MasterFile.cpp
+        ../../src/SecondaryFile.cpp
+        ../../src/Record.cpp
+        ../../src/RecordMarker.cpp
     }
 }
