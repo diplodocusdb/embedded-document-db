@@ -30,6 +30,17 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/TreeDBKeyTests.h
         ../../src/TreeDBValueTests.h
         ../../src/XMLTreeDBTests/XMLTreeDBTests.h
+        ../../src/NodeIDTests.h
+        ../../src/NodeIDAllocatorTests.h
+        ../../src/RecordTests.h
+        ../../src/SiblingNodesRecordGroupTests.h
+        ../../src/SiblingNodesRecordGroupCacheTests.h
+        ../../src/MasterFileTests.h
+        ../../src/SecondaryFileTests.h
+        ../../src/RecordFilesSetTests.h
+        ../../src/CachedRecordFilesSetTests.h
+        ../../src/EmbeddedTreeDBTests.h
+        ../../src/TransactionTests.h
     }
 
     sources
@@ -38,5 +49,16 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/TreeDBKeyTests.cpp
         ../../src/TreeDBValueTests.cpp
         ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
+        ../../src/NodeIDTests.cpp
+        ../../src/NodeIDAllocatorTests.cpp
+        ../../src/RecordTests.cpp
+        ../../src/SiblingNodesRecordGroupTests.cpp
+        ../../src/SiblingNodesRecordGroupCacheTests.cpp
+        ../../src/MasterFileTests.cpp
+        ../../src/SecondaryFileTests.cpp
+        ../../src/RecordFilesSetTests.cpp
+        ../../src/CachedRecordFilesSetTests.cpp
+        ../../src/EmbeddedTreeDBTests.cpp
+        ../../src/TransactionTests.cpp
     }
 }
