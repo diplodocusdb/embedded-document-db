@@ -41,6 +41,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
     headers
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBPersistentNodeID.hpp
@@ -56,7 +57,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
         ../../src/XMLTreeDBNodeImpl.hpp
         ../../src/XMLTreeDBTransactionImpl.hpp
 
-        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/EmbeddedTreeDB.h
         ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
 
         ../../src/EmbeddedTreeDBImpl.h

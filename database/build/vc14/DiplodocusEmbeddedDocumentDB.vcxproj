@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedTreeDB.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBErrorCategory.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBPersistentNodeID.hpp" />
@@ -194,7 +195,6 @@
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp" />
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\EmbeddedTreeDB.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBImpl.h" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBNodeImpl.h" />
