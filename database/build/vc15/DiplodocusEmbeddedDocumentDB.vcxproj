@@ -194,7 +194,6 @@
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp" />
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\EmbeddedTreeDB.h" />
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBImpl.h" />

@@ -62,9 +62,6 @@
     <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\EmbeddedTreeDB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
