@@ -127,7 +127,7 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_type;
     writer.write((char*)&type, 1, error);
-    switch (type)
+    switch (m_type)
     {
     case ERecordType::eMasterFileMetadata:
         boost::get<MasterFileMetadata>(m_data).write(writer, error);
