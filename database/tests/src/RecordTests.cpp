@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -21,13 +21,13 @@
 */
 
 #include "RecordTests.h"
-#include "Record.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/Record.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
-RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "Record tests", environment)
+RecordTests::RecordTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "Record tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
     append<HeapAllocationErrorsTest>("read (eMasterFileMetadata) test 1", ReadMasterFileMetadataTest1);
@@ -44,20 +44,20 @@ RecordTests::RecordTests(const TestNumber& number, const TestEnvironment& enviro
     append<HeapAllocationErrorsTest>("read (eInlineValue, eBinary) test 1", ReadInlineValueBinaryTest1);
     append<HeapAllocationErrorsTest>("read (eInlineValue, eBoolean) test 1", ReadInlineValueBooleanTest1);
     append<HeapAllocationErrorsTest>("read (eInlineValue, eUTF8String) test 1", ReadInlineValueUTF8StringTest1);
-    append<FileComparisonTest>("write (eMasterFileMetadata) test 1", WriteMasterFileMetadataTest1);
-    append<FileComparisonTest>("write (eDataStart) test 1", WriteDataStartTest1);
-    append<FileComparisonTest>("write (eDataEnd) test 1", WriteDataEndTest1);
-    append<FileComparisonTest>("write (eNodeStart) test 1", WriteNodeStartTest1);
-    append<FileComparisonTest>("write (eNodeEnd) test 1", WriteNodeEndTest1);
-    append<FileComparisonTest>("write (eParentNodeID) test 1", WriteParentNodeIDTest1);
-    append<FileComparisonTest>("write (eNodeName) test 1", WriteNodeNameTest1);
-    append<FileComparisonTest>("write (eNodeName) test 2", WriteNodeNameTest2);
-    append<FileComparisonTest>("write (eNodeID) test 1", WriteNodeIDTest1);
-    append<FileComparisonTest>("write (eNodeID) test 2", WriteNodeIDTest2);
-    append<FileComparisonTest>("write (ePersistentNodeID) test 1", WritePersistentNodeIDTest1);
-    append<FileComparisonTest>("write (eInlineValue, eBinary) test 1", WriteInlineValueBinaryTest1);
-    append<FileComparisonTest>("write (eInlineValue, eBoolean) test 1", WriteInlineValueBooleanTest1);
-    append<FileComparisonTest>("write (eInlineValue, eUTF8String) test 1", WriteInlineValueUTF8StringTest1);
+    append<HeapAllocationErrorsTest>("write (eMasterFileMetadata) test 1", WriteMasterFileMetadataTest1);
+    append<HeapAllocationErrorsTest>("write (eDataStart) test 1", WriteDataStartTest1);
+    append<HeapAllocationErrorsTest>("write (eDataEnd) test 1", WriteDataEndTest1);
+    append<HeapAllocationErrorsTest>("write (eNodeStart) test 1", WriteNodeStartTest1);
+    append<HeapAllocationErrorsTest>("write (eNodeEnd) test 1", WriteNodeEndTest1);
+    append<HeapAllocationErrorsTest>("write (eParentNodeID) test 1", WriteParentNodeIDTest1);
+    append<HeapAllocationErrorsTest>("write (eNodeName) test 1", WriteNodeNameTest1);
+    append<HeapAllocationErrorsTest>("write (eNodeName) test 2", WriteNodeNameTest2);
+    append<HeapAllocationErrorsTest>("write (eNodeID) test 1", WriteNodeIDTest1);
+    append<HeapAllocationErrorsTest>("write (eNodeID) test 2", WriteNodeIDTest2);
+    append<HeapAllocationErrorsTest>("write (ePersistentNodeID) test 1", WritePersistentNodeIDTest1);
+    append<HeapAllocationErrorsTest>("write (eInlineValue, eBinary) test 1", WriteInlineValueBinaryTest1);
+    append<HeapAllocationErrorsTest>("write (eInlineValue, eBoolean) test 1", WriteInlineValueBooleanTest1);
+    append<HeapAllocationErrorsTest>("write (eInlineValue, eUTF8String) test 1", WriteInlineValueUTF8StringTest1);
 }
 
 void RecordTests::ConstructionTest1(Test& test)
@@ -69,7 +69,7 @@ void RecordTests::ConstructionTest1(Test& test)
 
 void RecordTests::ReadMasterFileMetadataTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory()
+    boost::filesystem::path inputPath(test.context().getTestDataDirectory()
         / "RecordTests_ReadMasterFileMetadataTest1.dpdb");
 
     Ishiko::Error error(0);

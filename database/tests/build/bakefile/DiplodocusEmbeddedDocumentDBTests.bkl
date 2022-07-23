@@ -13,8 +13,6 @@ vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBTests.sln;
 
 program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, IshikoTestFramework
 {
-    includedirs += ../../../src;
-
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
