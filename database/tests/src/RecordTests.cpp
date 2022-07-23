@@ -416,13 +416,12 @@ void RecordTests::ReadInlineValueUTF8StringTest1(Test& test)
 
 void RecordTests::WriteMasterFileMetadataTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "RecordTests_WriteMasterFileMetadataTest1.dpdb");
+    const char* testName = "RecordTests_WriteMasterFileMetadataTest1.dpdb";
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::PageFileRepository repository;
-    repository.create(outputPath, error);
+    repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -437,28 +436,23 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
     DiplodocusDB::Record record = DiplodocusDB::MasterFileMetadata();
     record.write(writer, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
-
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "RecordTests_WriteMasterFileMetadataTest1.dpdb");
-
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
     ISHIKO_TEST_PASS();
 }
 
 void RecordTests::WriteDataStartTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "RecordTests_WriteDataStartTest1.dpdb");
-
+    const char* testName = "RecordTests_WriteDataStartTest1.dpdb";
+   
     Error error;
 
     DiplodocusDB::PageFileRepository repository;
-    repository.create(outputPath, error);
+    repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -473,28 +467,23 @@ void RecordTests::WriteDataStartTest1(Test& test)
     DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eDataStart);
     record.write(writer, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
-
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "RecordTests_WriteDataStartTest1.dpdb");
-
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
     ISHIKO_TEST_PASS();
 }
 
 void RecordTests::WriteDataEndTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "RecordTests_WriteDataEndTest1.dpdb");
+    const char* testName = "RecordTests_WriteDataEndTest1.dpdb";
 
     Error error;
 
     DiplodocusDB::PageFileRepository repository;
-    repository.create(outputPath, error);
+    repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -514,23 +503,18 @@ void RecordTests::WriteDataEndTest1(Test& test)
     repository.save(*page, error);
 
     ISHIKO_TEST_FAIL_IF(error);
-
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "RecordTests_WriteDataEndTest1.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
     ISHIKO_TEST_PASS();
 }
 
 void RecordTests::WriteNodeStartTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "RecordTests_WriteNodeStartTest1.dpdb");
+    const char* testName = "RecordTests_WriteNodeStartTest1.dpdb";
 
     Error error;
 
     DiplodocusDB::PageFileRepository repository;
-    repository.create(outputPath, error);
+    repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -549,18 +533,14 @@ void RecordTests::WriteNodeStartTest1(Test& test)
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
-
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "RecordTests_WriteNodeStartTest1.dpdb");
-
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
     ISHIKO_TEST_PASS();
 }
 
-void RecordTests::WriteNodeEndTest1(FileComparisonTest& test)
+void RecordTests::WriteNodeEndTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
         / "RecordTests_WriteNodeEndTest1.dpdb");
 
     Ishiko::Error error(0);
@@ -585,21 +565,21 @@ void RecordTests::WriteNodeEndTest1(FileComparisonTest& test)
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
         / "RecordTests_WriteNodeEndTest1.dpdb");
 
     ISHTF_PASS();
 }
 
-void RecordTests::WriteParentNodeIDTest1(FileComparisonTest& test)
+void RecordTests::WriteParentNodeIDTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
         / "RecordTests_WriteParentNodeIDTest1.dpdb");
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::PageFileRepository repository;
     repository.create(outputPath, error);
@@ -621,21 +601,21 @@ void RecordTests::WriteParentNodeIDTest1(FileComparisonTest& test)
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
         / "RecordTests_WriteParentNodeIDTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void RecordTests::WriteNodeNameTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
         / "RecordTests_WriteNodeNameTest1.dpdb");
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::PageFileRepository repository;
     repository.create(outputPath, error);
@@ -648,7 +628,7 @@ void RecordTests::WriteNodeNameTest1(Test& test)
 
     DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::Record record("key1");
     record.write(writer, error);
@@ -660,15 +640,15 @@ void RecordTests::WriteNodeNameTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
         / "RecordTests_WriteNodeNameTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void RecordTests::WriteNodeNameTest2(FileComparisonTest& test)
+void RecordTests::WriteNodeNameTest2(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
         / "RecordTests_WriteNodeNameTest2.dpdb");
 
     Ishiko::Error error(0);
@@ -676,15 +656,15 @@ void RecordTests::WriteNodeNameTest2(FileComparisonTest& test)
     DiplodocusDB::PageFileRepository repository;
     repository.create(outputPath, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     std::string key = "key";
     key.resize(300, '1');
@@ -695,18 +675,18 @@ void RecordTests::WriteNodeNameTest2(FileComparisonTest& test)
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
+    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
         / "RecordTests_WriteNodeNameTest2.dpdb");
 
     ISHTF_PASS();
 }
 
-void RecordTests::WriteNodeIDTest1(FileComparisonTest& test)
+void RecordTests::WriteNodeIDTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
         / "RecordTests_WriteNodeIDTest1.dpdb");
 
     Ishiko::Error error(0);
@@ -727,17 +707,17 @@ void RecordTests::WriteNodeIDTest1(FileComparisonTest& test)
     DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eNodeID, DiplodocusDB::NodeID(123));
     record.write(writer, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WriteNodeIDTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void RecordTests::WriteNodeIDTest2(FileComparisonTest& test)
@@ -750,35 +730,35 @@ void RecordTests::WriteNodeIDTest2(FileComparisonTest& test)
     DiplodocusDB::PageFileRepository repository;
     repository.create(outputPath, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eNodeID, DiplodocusDB::NodeID(300));
     record.write(writer, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WriteNodeIDTest2.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void RecordTests::WritePersistentNodeIDTest1(FileComparisonTest& test)
+void RecordTests::WritePersistentNodeIDTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
+    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
         / "RecordTests_WritePersistentNodeIDTest1.dpdb");
 
     Ishiko::Error error(0);
@@ -786,15 +766,15 @@ void RecordTests::WritePersistentNodeIDTest1(FileComparisonTest& test)
     DiplodocusDB::PageFileRepository repository;
     repository.create(outputPath, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::ePersistentNodeID, DiplodocusDB::NodeID(123));
     record.write(writer, error);
@@ -809,7 +789,7 @@ void RecordTests::WritePersistentNodeIDTest1(FileComparisonTest& test)
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WritePersistentNodeIDTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void RecordTests::WriteInlineValueBinaryTest1(FileComparisonTest& test)
@@ -846,7 +826,7 @@ void RecordTests::WriteInlineValueBinaryTest1(FileComparisonTest& test)
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WriteInlineValueBinaryTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void RecordTests::WriteInlineValueBooleanTest1(FileComparisonTest& test)
@@ -883,7 +863,7 @@ void RecordTests::WriteInlineValueBooleanTest1(FileComparisonTest& test)
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WriteInlineValueBooleanTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void RecordTests::WriteInlineValueUTF8StringTest1(FileComparisonTest& test)
@@ -920,5 +900,5 @@ void RecordTests::WriteInlineValueUTF8StringTest1(FileComparisonTest& test)
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
         / "RecordTests_WriteInlineValueUTF8StringTest1.dpdb");
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
