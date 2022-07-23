@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,20 +20,20 @@
     IN THE SOFTWARE.
 */
 
-#include "NodeIDAllocatorTests.h"
-#include "NodeIDAllocator.h"
+#include "SecondaryFileTests.h"
+#include "SecondaryFile.h"
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
-NodeIDAllocatorTests::NodeIDAllocatorTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "NodeIDAllocator tests", environment)
+SecondaryFileTests::SecondaryFileTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "SecondaryFile tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
 }
 
-void NodeIDAllocatorTests::ConstructionTest1(Test& test)
+void SecondaryFileTests::ConstructionTest1(Test& test)
 {
-    DiplodocusDB::NodeIDAllocator nodeIDAllocator;
+    DiplodocusDB::SecondaryFile secondaryFile;
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }

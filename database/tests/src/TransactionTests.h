@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,18 +20,22 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDALLOCARORTESTS_H_
-#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDALLOCARORTESTS_H_
+#ifndef _DIPLODOCUSDB_TEST_TREEDB_TRANSACTIONTESTS_H_
+#define _DIPLODOCUSDB_TEST_TREEDB_TRANSACTIONTESTS_H_
 
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include <Ishiko/TestFramework.hpp>
 
-class NodeIDAllocatorTests : public Ishiko::Tests::TestSequence
+class TransactionTests : public Ishiko::TestSequence
 {
 public:
-    NodeIDAllocatorTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    TransactionTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
+    static void CreateTransactionTest1(Ishiko::Test& test);
+    static void CommitTransactionTest1(Ishiko::Test& test);
+    static void AppendChildNodeTest1(Ishiko::Test& test);
+    static void AppendChildNodeTest2(Ishiko::Test& test);
+    static void RollbackTransactionTest1(Ishiko::Test& test);
 };
 
 #endif

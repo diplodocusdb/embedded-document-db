@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,25 +20,20 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_CACHEDRECORDFILESSETTESTS_H_
-#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_CACHEDRECORDFILESSETTESTS_H_
+#include "NodeIDAllocatorTests.h"
+#include "NodeIDAllocator.h"
 
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+using namespace Ishiko;
 
-class CachedRecordFilesSetTests : public Ishiko::Tests::TestSequence
+NodeIDAllocatorTests::NodeIDAllocatorTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "NodeIDAllocator tests", context)
 {
-public:
-    CachedRecordFilesSetTests(const Ishiko::Tests::TestNumber& number,
-        const Ishiko::Tests::TestEnvironment& environment);
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+}
 
-private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-    static void CreateMasterFileTest1(Ishiko::Tests::FileComparisonTest& test);
-    static void OpenMasterFileTest1(Ishiko::Tests::Test& test);
-    static void OpenMasterFileTest2(Ishiko::Tests::Test& test);
-    static void FindSiblingNodesRecordGroupTest1(Ishiko::Tests::Test& test);
-    static void FindSiblingNodesRecordGroupTest2(Ishiko::Tests::Test& test);
-    static void FindSiblingNodesRecordGroupTest3(Ishiko::Tests::Test& test);
-};
+void NodeIDAllocatorTests::ConstructionTest1(Test& test)
+{
+    DiplodocusDB::NodeIDAllocator nodeIDAllocator;
 
-#endif
+    ISHIKO_TEST_PASS();
+}

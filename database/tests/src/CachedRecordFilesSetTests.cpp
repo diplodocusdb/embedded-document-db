@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -21,7 +21,7 @@
 */
 
 #include "CachedRecordFilesSetTests.h"
-#include "CachedRecordFilesSet.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/CachedRecordFilesSet.h"
 
 using namespace Ishiko::Tests;
 
