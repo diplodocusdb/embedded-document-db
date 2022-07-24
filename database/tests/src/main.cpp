@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
     theTests.append<SecondaryFileTests>();
     theTests.append<RecordFilesSetTests>();
     theTests.append<CachedRecordFilesSetTests>();
-    theTests.append<EmbeddedTreeDBTests>();
+    theTests.append<EmbeddedDocumentDBTests>();
     theTests.append<TransactionTests>();
     theTests.append<XMLTreeDBTests>();
 
