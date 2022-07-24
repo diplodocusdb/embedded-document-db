@@ -5,6 +5,7 @@
 */
 
 #include "NodeIDTests.hpp"
+#include "SecondaryFileTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/linkoptions.hpp"
 #include <Ishiko/TestFramework.hpp>
 
@@ -16,6 +17,7 @@ int main(int argc, char* argv[])
 
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<NodeIDTests>();
+    theTests.append<SecondaryFileTests>();
 
     return theTestHarness.run();
 }
