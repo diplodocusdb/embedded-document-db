@@ -17,6 +17,15 @@ jobs:
           path: /projects/diplodocusdb/embedded-document-db
       - run:
           name: Build 
+          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/build/gnumake && make
+      - run:
+          name: Build tests
+          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/build/gnumake && make
+      - run:
+          name: Run TreeDB/Core tests
+          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBStorageEngineTests
+      - run:
+          name: Build 
           command: cd /projects/diplodocusdb/embedded-document-db/database/build/gnumake && make
       - run:
           name: Build tests
