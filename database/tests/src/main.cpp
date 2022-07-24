@@ -1,9 +1,10 @@
 /*
     Copyright (c) 2018-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
+#include "EmbeddedDocumentDBTests.hpp"
 #include "TreeDBKeyTests.h"
 #include "TreeDBValueTests.h"
 #include "NodeIDAllocatorTests.h"
@@ -14,7 +15,6 @@
 #include "SecondaryFileTests.h"
 #include "RecordFilesSetTests.h"
 #include "CachedRecordFilesSetTests.h"
-#include "EmbeddedTreeDBTests.h"
 #include "TransactionTests.h"
 #include "XMLTreeDBTests/XMLTreeDBTests.h"
 #include "DiplodocusDB/EmbeddedDocumentDB/linkoptions.hpp"

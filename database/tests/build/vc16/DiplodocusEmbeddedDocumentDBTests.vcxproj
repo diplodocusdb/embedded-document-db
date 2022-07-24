@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\EmbeddedDocumentDBTests.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\TreeDBKeyTests.cpp" />
     <ClCompile Include="..\..\src\TreeDBValueTests.cpp" />
@@ -168,10 +169,10 @@
     <ClCompile Include="..\..\src\SecondaryFileTests.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSetTests.cpp" />
     <ClCompile Include="..\..\src\CachedRecordFilesSetTests.cpp" />
-    <ClCompile Include="..\..\src\EmbeddedTreeDBTests.cpp" />
     <ClCompile Include="..\..\src\TransactionTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\EmbeddedDocumentDBTests.hpp" />
     <ClInclude Include="..\..\src\TreeDBKeyTests.h" />
     <ClInclude Include="..\..\src\TreeDBValueTests.h" />
     <ClInclude Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.h" />
@@ -183,7 +184,6 @@
     <ClInclude Include="..\..\src\SecondaryFileTests.h" />
     <ClInclude Include="..\..\src\RecordFilesSetTests.h" />
     <ClInclude Include="..\..\src\CachedRecordFilesSetTests.h" />
-    <ClInclude Include="..\..\src\EmbeddedTreeDBTests.h" />
     <ClInclude Include="..\..\src\TransactionTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
