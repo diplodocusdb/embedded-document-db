@@ -1,3 +1,8 @@
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/physical-storage/include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
+ishikopath = envvar("ISHIKO_CPP");
+import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+
 toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
 gnu.makefile = ../gnumake/GNUmakefile;
@@ -6,11 +11,11 @@ vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 
-library DiplodocusEmbeddedDocumentDBStorageEngine
+library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, IshikoErrors
 {
     archs = x86 x86_64;
    
-    includedirs += ../../../include/DiplodocusDB/EmbeddedDocumentDB;
+    includedirs += ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine;
 
     if ($(toolset) == gnu)
     {
