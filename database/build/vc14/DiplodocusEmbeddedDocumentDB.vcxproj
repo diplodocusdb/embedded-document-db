@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\EmbeddedDocumentDB.cpp" />
     <ClCompile Include="..\..\src\TreeDBErrorCategory.cpp" />
     <ClCompile Include="..\..\src\TreeDBKey.cpp" />
     <ClCompile Include="..\..\src\TreeDBPersistentNodeID.cpp" />
@@ -161,7 +162,6 @@
     <ClCompile Include="..\..\src\XMLTreeDBImpl.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp" />
-    <ClCompile Include="..\..\src\EmbeddedTreeDB.cpp" />
     <ClCompile Include="..\..\src\EmbeddedTreeDBImpl.cpp" />
     <ClCompile Include="..\..\src\EmbeddedTreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\EmbeddedTreeDBTransactionImpl.cpp" />

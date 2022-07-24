@@ -115,6 +115,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\EmbeddedDocumentDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\TreeDBErrorCategory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -146,9 +149,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\EmbeddedTreeDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\EmbeddedTreeDBImpl.cpp">

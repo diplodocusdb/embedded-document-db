@@ -78,6 +78,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
 
     sources
     {
+        ../../src/EmbeddedDocumentDB.cpp
         ../../src/TreeDBErrorCategory.cpp
         ../../src/TreeDBKey.cpp
         ../../src/TreeDBPersistentNodeID.cpp
@@ -89,8 +90,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
         ../../src/XMLTreeDBImpl.cpp
         ../../src/XMLTreeDBNodeImpl.cpp
         ../../src/XMLTreeDBTransactionImpl.cpp
-
-        ../../src/EmbeddedTreeDB.cpp
 
         ../../src/EmbeddedTreeDBImpl.cpp
         ../../src/EmbeddedTreeDBNodeImpl.cpp
