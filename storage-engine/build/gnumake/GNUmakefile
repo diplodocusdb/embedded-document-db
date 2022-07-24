@@ -80,8 +80,8 @@ DIPLODOCUSDB_PHYSICALSTORAGE_ROOT ?= $(DIPLODOCUSDB)/physical-storage
 
 all: ../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDBStorageEngine-d,DiplodocusEmbeddedDocumentDBStorageEngine).a
 
-../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDBStorageEngine-d,DiplodocusEmbeddedDocumentDBStorageEngine).a: $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o
-	$(AR) rc $@ $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o
+../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDBStorageEngine-d,DiplodocusEmbeddedDocumentDBStorageEngine).a: $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordMarker.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_SecondaryFile.o
+	$(AR) rc $@ $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordMarker.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_SecondaryFile.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o: ../../src/MasterFileMetadata.cpp
@@ -89,6 +89,15 @@ $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o: ../.
 
 $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o: ../../src/NodeID.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/NodeID.cpp
+
+$(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordFile.o: ../../src/RecordFile.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/RecordFile.cpp
+
+$(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordMarker.o: ../../src/RecordMarker.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/RecordMarker.cpp
+
+$(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_SecondaryFile.o: ../../src/SecondaryFile.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/SecondaryFile.cpp
 
 clean:
 	rm -f $(_builddir)*.o

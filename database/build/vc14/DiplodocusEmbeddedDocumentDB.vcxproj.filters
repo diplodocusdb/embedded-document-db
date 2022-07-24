@@ -86,9 +86,6 @@
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\RecordFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\RecordFilesSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -96,12 +93,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\MasterFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\SecondaryFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RecordMarker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -160,9 +151,6 @@
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\RecordFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\RecordFilesSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -172,13 +160,7 @@
     <ClCompile Include="..\..\src\MasterFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\SecondaryFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Record.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RecordMarker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -168,13 +168,10 @@
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroup.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp" />
-    <ClCompile Include="..\..\src\RecordFile.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\CachedRecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\MasterFile.cpp" />
-    <ClCompile Include="..\..\src\SecondaryFile.cpp" />
     <ClCompile Include="..\..\src\Record.cpp" />
-    <ClCompile Include="..\..\src\RecordMarker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp" />
@@ -200,12 +197,9 @@
     <ClInclude Include="..\..\src\NodeIDAllocator.h" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroup.h" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCache.h" />
-    <ClInclude Include="..\..\src\RecordFile.h" />
     <ClInclude Include="..\..\src\RecordFilesSet.h" />
     <ClInclude Include="..\..\src\CachedRecordFilesSet.h" />
     <ClInclude Include="..\..\src\MasterFile.h" />
-    <ClInclude Include="..\..\src\SecondaryFile.h" />
-    <ClInclude Include="..\..\src\RecordMarker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

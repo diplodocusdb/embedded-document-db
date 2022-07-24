@@ -64,12 +64,9 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/NodeIDAllocator.h
         ../../src/SiblingNodesRecordGroup.h
         ../../src/SiblingNodesRecordGroupCache.h
-        ../../src/RecordFile.h
         ../../src/RecordFilesSet.h
         ../../src/CachedRecordFilesSet.h
         ../../src/MasterFile.h
-        ../../src/SecondaryFile.h
-        ../../src/RecordMarker.h
     }
 
     sources
@@ -93,12 +90,9 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/NodeIDAllocator.cpp
         ../../src/SiblingNodesRecordGroup.cpp
         ../../src/SiblingNodesRecordGroupCache.cpp
-        ../../src/RecordFile.cpp
         ../../src/RecordFilesSet.cpp
         ../../src/CachedRecordFilesSet.cpp
         ../../src/MasterFile.cpp
-        ../../src/SecondaryFile.cpp
         ../../src/Record.cpp
-        ../../src/RecordMarker.cpp
     }
 }
