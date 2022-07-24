@@ -26,8 +26,14 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\NodeID.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFileMetadata.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\MasterFileMetadata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\NodeID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

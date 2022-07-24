@@ -38,10 +38,12 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/linkoptions.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeID.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/MasterFileMetadata.hpp
     }
 
     sources
     {
+        ../../src/MasterFileMetadata.cpp
         ../../src/NodeID.cpp
     }
 }

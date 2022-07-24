@@ -171,7 +171,6 @@
     <ClCompile Include="..\..\src\RecordFile.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\CachedRecordFilesSet.cpp" />
-    <ClCompile Include="..\..\src\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\src\MasterFile.cpp" />
     <ClCompile Include="..\..\src\SecondaryFile.cpp" />
     <ClCompile Include="..\..\src\Record.cpp" />
@@ -180,7 +179,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDB.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\MasterFileMetadata.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBErrorCategory.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBPersistentNodeID.hpp" />

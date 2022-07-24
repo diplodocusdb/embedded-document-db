@@ -42,7 +42,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/MasterFileMetadata.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBPersistentNodeID.hpp
@@ -97,7 +96,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/RecordFile.cpp
         ../../src/RecordFilesSet.cpp
         ../../src/CachedRecordFilesSet.cpp
-        ../../src/MasterFileMetadata.cpp
         ../../src/MasterFile.cpp
         ../../src/SecondaryFile.cpp
         ../../src/Record.cpp

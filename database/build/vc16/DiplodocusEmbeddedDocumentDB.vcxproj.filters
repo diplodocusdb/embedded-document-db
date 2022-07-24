@@ -23,9 +23,6 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\MasterFileMetadata.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBErrorCategory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -170,9 +167,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\CachedRecordFilesSet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MasterFileMetadata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MasterFile.cpp">
