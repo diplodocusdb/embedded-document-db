@@ -59,8 +59,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/XMLTreeDBNodeImpl.hpp
         ../../src/XMLTreeDBTransactionImpl.hpp
 
-        ../../../Include/DiplodocusDB/TreeDB/EmbeddedTreeDB/linkoptions.h
-
         ../../src/EmbeddedTreeDBImpl.h
         ../../src/EmbeddedTreeDBNodeImpl.h
         ../../src/EmbeddedTreeDBTransactionImpl.h

@@ -34,8 +34,6 @@
 namespace DiplodocusDB
 {
 
-class RecordData;
-
 /// A record in physical storage.
 /**
     The data in the physical storage of an EmbeddedTreeDB is stored as a series of records.
