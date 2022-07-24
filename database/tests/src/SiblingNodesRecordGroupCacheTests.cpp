@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -21,13 +21,13 @@
 */
 
 #include "SiblingNodesRecordGroupCacheTests.h"
-#include "SiblingNodesRecordGroupCache.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/SiblingNodesRecordGroupCache.h"
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
 SiblingNodesRecordGroupCacheTests::SiblingNodesRecordGroupCacheTests(const TestNumber& number,
-    const TestEnvironment& environment)
-    : TestSequence(number, "SiblingNodesRecordGroupCache tests", environment)
+    const TestContext& context)
+    : TestSequence(number, "SiblingNodesRecordGroupCache tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
     append<HeapAllocationErrorsTest>("operator[] test 1", SubscriptOperatorTest1);
@@ -41,7 +41,7 @@ void SiblingNodesRecordGroupCacheTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::SiblingNodesRecordGroupCache cache;
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void SiblingNodesRecordGroupCacheTests::SubscriptOperatorTest1(Test& test)
@@ -49,9 +49,9 @@ void SiblingNodesRecordGroupCacheTests::SubscriptOperatorTest1(Test& test)
     DiplodocusDB::SiblingNodesRecordGroupCache cache;
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group = cache[DiplodocusDB::NodeID(1)];
 
-    ISHTF_FAIL_UNLESS(group->parentNodeID() == DiplodocusDB::NodeID(1));
-    ISHTF_FAIL_UNLESS(group->size() == 0);
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(group->parentNodeID(), DiplodocusDB::NodeID(1));
+    ISHIKO_TEST_FAIL_IF_NEQ(group->size(), 0);
+    ISHIKO_TEST_PASS();
 }
 
 void SiblingNodesRecordGroupCacheTests::SubscriptOperatorTest2(Test& test)
@@ -60,15 +60,15 @@ void SiblingNodesRecordGroupCacheTests::SubscriptOperatorTest2(Test& test)
     
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group1 = cache[DiplodocusDB::NodeID(1)];
 
-    ISHTF_FAIL_UNLESS(group1->parentNodeID() == DiplodocusDB::NodeID(1));
-    ISHTF_FAIL_UNLESS(group1->size() == 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(group1->parentNodeID(), DiplodocusDB::NodeID(1));
+    ISHIKO_TEST_FAIL_IF_NEQ(group1->size(), 0);
 
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group2 = cache[DiplodocusDB::NodeID(1)];
 
     // Make sure we return the group that was created during the first call
-    ISHTF_FAIL_UNLESS(&group1 == &group2);
+    ISHIKO_TEST_FAIL_IF_NEQ(&group1, &group2);
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
 void SiblingNodesRecordGroupCacheTests::FindTest1(Test& test)
@@ -77,9 +77,9 @@ void SiblingNodesRecordGroupCacheTests::FindTest1(Test& test)
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> group;
     bool found = cache.find(DiplodocusDB::NodeID(1), group);
 
-    ISHTF_FAIL_IF(found);
-    ISHTF_FAIL_IF((bool)group);
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF(found);
+    ISHIKO_TEST_FAIL_IF(group);
+    ISHIKO_TEST_PASS();
 }
 
 void SiblingNodesRecordGroupCacheTests::FindTest2(Test& test)
@@ -88,16 +88,16 @@ void SiblingNodesRecordGroupCacheTests::FindTest2(Test& test)
 
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group1 = cache[DiplodocusDB::NodeID(1)];
 
-    ISHTF_FAIL_UNLESS(group1->parentNodeID() == DiplodocusDB::NodeID(1));
-    ISHTF_FAIL_UNLESS(group1->size() == 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(group1->parentNodeID(), DiplodocusDB::NodeID(1));
+    ISHIKO_TEST_FAIL_IF_NEQ(group1->size(), 0);
 
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> group2;
     bool found = cache.find(DiplodocusDB::NodeID(1), group2);
 
-    ISHTF_FAIL_UNLESS((bool)found);
+    ISHIKO_TEST_FAIL_IF_NOT(found);
     // Make sure we return the group that was created during the first call
-    ISHTF_FAIL_UNLESS(group1.get() == group2.get());
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF_NEQ(group1.get(), group2.get());
+    ISHIKO_TEST_PASS();
 }
 
 void SiblingNodesRecordGroupCacheTests::EraseTest1(Test& test)
@@ -105,14 +105,14 @@ void SiblingNodesRecordGroupCacheTests::EraseTest1(Test& test)
     DiplodocusDB::SiblingNodesRecordGroupCache cache;
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup>& group1 = cache[DiplodocusDB::NodeID(1)];
 
-    ISHTF_FAIL_UNLESS(group1->parentNodeID() == DiplodocusDB::NodeID(1));
-    ISHTF_FAIL_UNLESS(group1->size() == 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(group1->parentNodeID(), DiplodocusDB::NodeID(1));
+    ISHIKO_TEST_FAIL_IF_NEQ(group1->size(), 0);
 
     cache.erase(DiplodocusDB::NodeID(1));
 
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> group2;
     bool found = cache.find(DiplodocusDB::NodeID(1), group2);
 
-    ISHTF_FAIL_IF((bool)found);
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF(found);
+    ISHIKO_TEST_PASS();
 }

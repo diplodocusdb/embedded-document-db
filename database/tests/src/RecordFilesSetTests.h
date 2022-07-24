@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,20 +20,24 @@
     IN THE SOFTWARE.
 */
 
-#include "NodeIDTests.h"
-#include "NodeID.h"
+#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_RECORDFILESSETTESTS_H_
+#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_RECORDFILESSETTESTS_H_
 
-using namespace Ishiko::Tests;
+#include <Ishiko/TestFramework.hpp>
 
-NodeIDTests::NodeIDTests(const TestNumber& number, const TestEnvironment& environment)
-    : TestSequence(number, "NodeID tests", environment)
+class RecordFilesSetTests : public Ishiko::TestSequence
 {
-    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
-}
+public:
+    RecordFilesSetTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
-void NodeIDTests::ConstructionTest1(Test& test)
-{
-    DiplodocusDB::NodeID id(0);
+private:
+    static void ConstructionTest1(Ishiko::Test& test);
+    static void CreateMasterFileTest1(Ishiko::Test& test);
+    static void OpenMasterFileTest1(Ishiko::Test& test);
+    static void OpenMasterFileTest2(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest1(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest2(Ishiko::Test& test);
+    static void FindSiblingNodesRecordGroupTest3(Ishiko::Test& test);
+};
 
-    ISHTF_PASS();
-}
+#endif

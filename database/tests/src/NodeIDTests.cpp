@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,18 +20,20 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDALLOCARORTESTS_H_
-#define _DIPLODOCUSDB_TREEDB_TESTS_EMBEDDEDTREEDB_NODEIDALLOCARORTESTS_H_
+#include "NodeIDTests.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/NodeID.h"
 
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
+using namespace Ishiko;
 
-class NodeIDAllocatorTests : public Ishiko::Tests::TestSequence
+NodeIDTests::NodeIDTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "NodeID tests", context)
 {
-public:
-    NodeIDAllocatorTests(const Ishiko::Tests::TestNumber& number, const Ishiko::Tests::TestEnvironment& environment);
+    append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
+}
 
-private:
-    static void ConstructionTest1(Ishiko::Tests::Test& test);
-};
+void NodeIDTests::ConstructionTest1(Test& test)
+{
+    DiplodocusDB::NodeID id(0);
 
-#endif
+    ISHIKO_TEST_PASS();
+}

@@ -15,34 +15,8 @@ program DiplodocusEmbeddedTreeDBTests : DiplodocusEmbeddedTreeDB, IshikoTestFram
 
     includedirs += ../../../../EmbeddedTreeDB/Source;
 
-    headers
-    {
-        ../../Source/NodeIDTests.h
-        ../../Source/NodeIDAllocatorTests.h
-        ../../Source/RecordTests.h
-        ../../Source/SiblingNodesRecordGroupTests.h
-        ../../Source/SiblingNodesRecordGroupCacheTests.h
-        ../../Source/MasterFileTests.h
-        ../../Source/SecondaryFileTests.h
-        ../../Source/RecordFilesSetTests.h
-        ../../Source/CachedRecordFilesSetTests.h
-        ../../Source/EmbeddedTreeDBTests.h
-        ../../Source/TransactionTests.h
-    }
-
     sources
     {
         ../../Source/main.cpp
-        ../../Source/NodeIDTests.cpp
-        ../../Source/NodeIDAllocatorTests.cpp
-        ../../Source/RecordTests.cpp
-        ../../Source/SiblingNodesRecordGroupTests.cpp
-        ../../Source/SiblingNodesRecordGroupCacheTests.cpp
-        ../../Source/MasterFileTests.cpp
-        ../../Source/SecondaryFileTests.cpp
-        ../../Source/RecordFilesSetTests.cpp
-        ../../Source/CachedRecordFilesSetTests.cpp
-        ../../Source/EmbeddedTreeDBTests.cpp
-        ../../Source/TransactionTests.cpp
     }
 }
