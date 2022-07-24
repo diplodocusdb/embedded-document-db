@@ -24,156 +24,139 @@
 #include "DiplodocusDB/EmbeddedDocumentDB/SiblingNodesRecordGroup.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 
-using namespace Ishiko::Tests;
+using namespace Ishiko;
 
-SiblingNodesRecordGroupTests::SiblingNodesRecordGroupTests(const TestNumber& number,
-    const TestEnvironment& environment)
-    : TestSequence(number, "SiblingNodesRecordGroup tests", environment)
+SiblingNodesRecordGroupTests::SiblingNodesRecordGroupTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "SiblingNodesRecordGroup tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
-    append<FileComparisonTest>("write test 1", WriteTest1);
-    append<FileComparisonTest>("write test 2", WriteTest2);
-    append<FileComparisonTest>("write test 3", WriteTest3);
-    append<FileComparisonTest>("write test 4", WriteTest4);
+    append<HeapAllocationErrorsTest>("write test 1", WriteTest1);
+    append<HeapAllocationErrorsTest>("write test 2", WriteTest2);
+    append<HeapAllocationErrorsTest>("write test 3", WriteTest3);
+    append<HeapAllocationErrorsTest>("write test 4", WriteTest4);
 }
 
 void SiblingNodesRecordGroupTests::ConstructionTest1(Test& test)
 {
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup;
 
-    ISHTF_PASS();
+    ISHIKO_TEST_PASS();
 }
 
-void SiblingNodesRecordGroupTests::WriteTest1(FileComparisonTest& test)
+void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "SiblingNodesRecordGroupTests_WriteTest1.dpdb");
-
-    Ishiko::Error error(0);
+    const char* testName = "SiblingNodesRecordGroupTests_WriteTest1.dpdb";
+    
+    Error error;
 
     DiplodocusDB::PageFileRepository repository;
-    repository.create(outputPath, error);
+    repository.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup;
     siblingNodesRecordGroup.write(writer, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
-
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "SiblingNodesRecordGroupTests_WriteTest1.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
 
-void SiblingNodesRecordGroupTests::WriteTest2(FileComparisonTest& test)
+void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "SiblingNodesRecordGroupTests_WriteTest2.dpdb");
+    const char* testName = "SiblingNodesRecordGroupTests_WriteTest2.dpdb";
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::PageFileRepository repository;
-    repository.create(outputPath, error);
+    repository.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     // Create a root node
     DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(DiplodocusDB::NodeID(0), DiplodocusDB::NodeID(1), "/");
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl);
     siblingNodesRecordGroup.write(writer, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
-
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "SiblingNodesRecordGroupTests_WriteTest2.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
 
-void SiblingNodesRecordGroupTests::WriteTest3(FileComparisonTest& test)
+void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "SiblingNodesRecordGroupTests_WriteTest3.dpdb");
-
-    Ishiko::Error error(0);
+    const char* testName = "SiblingNodesRecordGroupTests_WriteTest3.dpdb";
+   
+    Error error;
 
     DiplodocusDB::PageFileRepository repository;
-    repository.create(outputPath, error);
+    repository.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "name1");
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl);
     siblingNodesRecordGroup.write(writer, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
-
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "SiblingNodesRecordGroupTests_WriteTest3.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
 
-void SiblingNodesRecordGroupTests::WriteTest4(FileComparisonTest& test)
+void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "SiblingNodesRecordGroupTests_WriteTest4.dpdb");
+    const char* testName = "SiblingNodesRecordGroupTests_WriteTest4.dpdb";
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::PageFileRepository repository;
-    repository.create(outputPath, error);
+    repository.create(test.context().getOutputPath(testName), error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
-    ISHTF_ABORT_IF((bool)error);
+    ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "name1");
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl1);
@@ -181,15 +164,11 @@ void SiblingNodesRecordGroupTests::WriteTest4(FileComparisonTest& test)
     siblingNodesRecordGroup.push_back(nodeImpl2);
     siblingNodesRecordGroup.write(writer, error);
 
-    ISHTF_FAIL_IF((bool)error);
+    ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
 
-    ISHTF_FAIL_IF((bool)error);
-
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory()
-        / "SiblingNodesRecordGroupTests_WriteTest4.dpdb");
-
-    ISHTF_PASS();
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
+    ISHIKO_TEST_PASS();
 }
