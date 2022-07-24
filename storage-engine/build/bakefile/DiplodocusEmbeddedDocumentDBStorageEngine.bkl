@@ -1,0 +1,35 @@
+toolsets = gnu vs2019 vs2017 vs2015 vs2013;
+
+gnu.makefile = ../gnumake/GNUmakefile;
+vs2019.solutionfile = ../vc16/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
+vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
+vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
+vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
+
+library DiplodocusEmbeddedDocumentDBStorageEngine
+{
+    archs = x86 x86_64;
+   
+    includedirs += ../../../include/DiplodocusDB/EmbeddedDocumentDB;
+
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        outputdir = ../../../lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        outputdir = ../../../lib/$(arch);
+    }
+
+    if ($(config) == Debug)
+    {
+        basename = DiplodocusEmbeddedDocumentDBStorageEngine-d;
+    }
+
+    headers
+    {
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp
+    }
+}
