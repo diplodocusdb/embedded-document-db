@@ -37,6 +37,7 @@ endif
 # Additionally, this makefile is customizable with the following
 # settings:
 #
+#      DIPLODOCUSDB_CORE_ROOT             Path to the DiplodocusDB installation
 #      ISHIKO_CPP_ERRORS_ROOT             Path to the Ishiko Errors installation
 #      ISHIKO_CPP_BOOST_ROOT              Path to the Boost installation
 #      DIPLODOCUSDB_PHYSICALSTORAGE_ROOT  Path to the DiplodocusDB installation
@@ -66,6 +67,8 @@ endif
 # Configurable settings:
 # 
 
+# Path to the DiplodocusDB installation
+DIPLODOCUSDB_CORE_ROOT ?= $(DIPLODOCUSDB)/core
 # Path to the Ishiko Errors installation
 ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
 # Path to the Boost installation
@@ -82,10 +85,10 @@ all: ../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusE
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o: ../../src/MasterFileMetadata.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/MasterFileMetadata.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/MasterFileMetadata.cpp
 
 $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o: ../../src/NodeID.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/NodeID.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/NodeID.cpp
 
 clean:
 	rm -f $(_builddir)*.o
