@@ -21,7 +21,7 @@
 */
 
 #include "SecondaryFileTests.h"
-#include "SecondaryFile.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/SecondaryFile.h"
 
 using namespace Ishiko;
 
