@@ -1,0 +1,28 @@
+ishikopath = envvar("ISHIKO_CPP");
+import $(ishikopath)/test-framework/include/Ishiko/TestFramework.bkl;
+
+toolsets = gnu vs2019 vs2017 vs2015 vs2013;
+
+gnu.makefile = ../gnumake/GNUmakefile;
+vs2019.solutionfile = ../vc16/DiplodocusEmbeddedDocumentDBStorageEngineTests.sln;
+vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBStorageEngineTests.sln;
+vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBStorageEngineTests.sln;
+vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBStorageEngineTests.sln;
+
+program DiplodocusEmbeddedDocumentDBStorageEngineTests : IshikoTestFramework
+{
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+    }
+
+    if ($(toolset) != gnu)
+    {
+        archs = x86 x86_64;
+    }
+
+    sources
+    {
+        ../../src/main.cpp
+    }
+}
