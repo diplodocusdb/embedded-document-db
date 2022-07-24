@@ -35,22 +35,22 @@ TreeDBNode& EmbeddedDocumentDB::root()
     return m_impl->root();
 }
 
-TreeDBValue EmbeddedDocumentDB::value(TreeDBNode& node, Ishiko::Error& error)
+Value EmbeddedDocumentDB::value(TreeDBNode& node, Ishiko::Error& error)
 {
     return m_impl->value(node, error);
 }
 
-TreeDBValue EmbeddedDocumentDB::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
+Value EmbeddedDocumentDB::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
 {
     return m_impl->value(node, type, error);
 }
 
-TreeDBValue EmbeddedDocumentDB::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+Value EmbeddedDocumentDB::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     return m_impl->childValue(parent, name, error);
 }
 
-TreeDBValue EmbeddedDocumentDB::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+Value EmbeddedDocumentDB::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
     Ishiko::Error& error)
 {
     return m_impl->childValue(parent, name, type, error);
@@ -112,7 +112,7 @@ void EmbeddedDocumentDB::rollbackTransaction(TreeDBTransaction& transaction)
     m_impl->rollbackTransaction(transaction);
 }
 
-void EmbeddedDocumentDB::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)
+void EmbeddedDocumentDB::setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error)
 {
     m_impl->setValue(node, value, error);
 }
@@ -124,7 +124,7 @@ TreeDBNode EmbeddedDocumentDB::insertChildNode(TreeDBNode& parent, size_t index,
 }
 
 TreeDBNode EmbeddedDocumentDB::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     return m_impl->insertChildNode(parent, index, name, value, error);
 }
@@ -136,7 +136,7 @@ TreeDBNode EmbeddedDocumentDB::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
 }
 
 TreeDBNode EmbeddedDocumentDB::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     return m_impl->insertChildNodeBefore(parent, nextChild, name, value, error);
 }
@@ -148,7 +148,7 @@ TreeDBNode EmbeddedDocumentDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNo
 }
 
 TreeDBNode EmbeddedDocumentDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     return m_impl->insertChildNodeAfter(parent, previousChild, name, value, error);
 }
@@ -164,14 +164,14 @@ TreeDBNode EmbeddedDocumentDB::appendChildNode(TreeDBTransaction& transaction, T
     return m_impl->appendChildNode(transaction, parent, name, error);
 }
 
-TreeDBNode EmbeddedDocumentDB::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+TreeDBNode EmbeddedDocumentDB::appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     return m_impl->appendChildNode(parent, name, value, error);
 }
 
 TreeDBNode EmbeddedDocumentDB::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     return m_impl->appendChildNode(transaction, parent, name, value, error);
 }
@@ -181,7 +181,7 @@ TreeDBNode EmbeddedDocumentDB::setChildNode(TreeDBNode& parent, const std::strin
     return m_impl->setChildNode(parent, name, error);
 }
 
-TreeDBNode EmbeddedDocumentDB::setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+TreeDBNode EmbeddedDocumentDB::setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     return m_impl->setChildNode(parent, name, value, error);

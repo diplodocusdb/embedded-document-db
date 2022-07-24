@@ -44,10 +44,10 @@ public:
 
     TreeDBNode& root();
 
-    TreeDBValue value(TreeDBNode& node, Ishiko::Error& error);
-    TreeDBValue value(TreeDBNode& node, const DataType& type, Ishiko::Error& error);
-    TreeDBValue childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
-    TreeDBValue childValue(TreeDBNode& parent, const std::string& name, const DataType& type, Ishiko::Error& error);
+    Value value(TreeDBNode& node, Ishiko::Error& error);
+    Value value(TreeDBNode& node, const DataType& type, Ishiko::Error& error);
+    Value childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
+    Value childValue(TreeDBNode& parent, const std::string& name, const DataType& type, Ishiko::Error& error);
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error);
     std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error);
@@ -64,28 +64,28 @@ public:
     void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error);
     void rollbackTransaction(TreeDBTransaction& transaction);
 
-    void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error);
+    void setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error);
 
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error);
-    TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, const TreeDBValue& value,
+    TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, const Value& value,
         Ishiko::Error& error);
     TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
         Ishiko::Error& error);
     TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error);
+        const Value& value, Ishiko::Error& error);
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         Ishiko::Error& error);
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error);
+        const Value& value, Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
         Ishiko::Error& error);
-    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
         Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error);
+        const Value& value, Ishiko::Error& error);
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
-    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
         Ishiko::Error& error);
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);

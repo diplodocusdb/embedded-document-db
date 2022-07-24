@@ -7,7 +7,6 @@
 #ifndef _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_HPP_
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDBNODE_HPP_
 
-#include "TreeDBValue.hpp"
 #include <Ishiko/Errors.hpp>
 #include <string>
 #include <vector>

@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019 Xavier Leclercq
+    Copyright (c) 2018-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -24,8 +24,7 @@
 #include "EmbeddedTreeDBNodeImpl.h"
 #include "EmbeddedTreeDBTransactionImpl.h"
 
-namespace DiplodocusDB
-{
+using namespace DiplodocusDB;
 
 EmbeddedTreeDBImpl::EmbeddedTreeDBImpl()
 {
@@ -63,15 +62,15 @@ TreeDBNode& EmbeddedTreeDBImpl::root()
     return m_root;
 }
 
-TreeDBValue EmbeddedTreeDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
+Value EmbeddedTreeDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
 {
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
     return nodeImpl.value();
 }
 
-TreeDBValue EmbeddedTreeDBImpl::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
+Value EmbeddedTreeDBImpl::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
 {
-    TreeDBValue result;
+    Value result;
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
     if (nodeImpl.value().type() == type)
     {
@@ -80,9 +79,9 @@ TreeDBValue EmbeddedTreeDBImpl::value(TreeDBNode& node, const DataType& type, Is
     return result;
 }
 
-TreeDBValue EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+Value EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    TreeDBValue result;
+    Value result;
     TreeDBNode childNode = child(parent, name, error);
     if (!error)
     {
@@ -91,10 +90,10 @@ TreeDBValue EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string
     return result;
 }
 
-TreeDBValue EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+Value EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
     Ishiko::Error& error)
 {
-    TreeDBValue result;
+    Value result;
     TreeDBNode childNode = child(parent, name, error);
     if (!error)
     {
@@ -205,7 +204,7 @@ void EmbeddedTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
     transactionImpl.rollback();
 }
 
-void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)
+void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error)
 {
     // TODO : this can't be working, it re-adds the node, surely that creates duplicate nodes
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
@@ -217,12 +216,12 @@ void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const TreeDBValue& value, Is
 TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
     Ishiko::Error& error)
 {   
-    TreeDBValue value;
+    Value value;
     return insertChildNode(parent, index, name, value, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
@@ -237,12 +236,12 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index,
 TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild,
     const std::string& name, Ishiko::Error& error)
 {
-    TreeDBValue value;
+    Value value;
     return insertChildNodeBefore(parent, nextChild, name, value, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild,
-    const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+    const std::string& name, const Value& value, Ishiko::Error& error)
 {
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
@@ -258,12 +257,12 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
 TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild,
     const std::string& name, Ishiko::Error& error)
 {
-    TreeDBValue value;
+    Value value;
     return insertChildNodeAfter(parent, previousChild, name, value, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild,
-    const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+    const std::string& name, const Value& value, Ishiko::Error& error)
 {
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
@@ -278,18 +277,18 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNo
 
 TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    TreeDBValue value;
+    Value value;
     return appendChildNode(parent, name, value, error);
 }
 
 TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
     const std::string& name, Ishiko::Error& error)
 {
-    TreeDBValue value;
+    Value value;
     return appendChildNode(transaction, parent, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     TreeDBNode result;
@@ -321,7 +320,7 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
 }
 
 TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
-    const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+    const std::string& name, const Value& value, Ishiko::Error& error)
 {
     EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
     return transactionImpl.appendChildNode(m_cachedRecordFiles, parent, name, value, error);
@@ -329,11 +328,11 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, T
 
 TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
-    TreeDBValue value;
+    Value value;
     return setChildNode(parent, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     // TODO
@@ -351,6 +350,4 @@ size_t EmbeddedTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error
 {
     // TODO
     return 0;
-}
-
 }

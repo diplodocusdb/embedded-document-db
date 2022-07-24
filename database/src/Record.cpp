@@ -36,7 +36,7 @@ Record::Record(ERecordType type, const NodeID& data)
 {
 }
 
-Record::Record(ERecordType type, const TreeDBValue& data)
+Record::Record(ERecordType type, const Value& data)
     : m_type(type), m_data(data)
 {
 }
@@ -66,9 +66,9 @@ const std::string& Record::asString() const
     return boost::get<std::string>(m_data);
 }
 
-const TreeDBValue& Record::asValue() const
+const Value& Record::asValue() const
 {
-    return boost::get<TreeDBValue>(m_data);
+    return boost::get<Value>(m_data);
 }
 
 void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
@@ -143,14 +143,14 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
         break;
 
     case ERecordType::eInlineValue:
-        writeInlineValue(writer, boost::get<TreeDBValue>(m_data), error);
+        writeInlineValue(writer, boost::get<Value>(m_data), error);
         break;
     }
 }
 
-TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error)
+Value Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error)
 {
-    TreeDBValue result;
+    Value result;
     DataType type = readDataType(reader, error);
     if (!error)
     {
@@ -172,7 +172,7 @@ TreeDBValue Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error&
     return result;
 }
 
-void Record::writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& value, Ishiko::Error& error)
+void Record::writeInlineValue(PageRepositoryWriter& writer, const Value& value, Ishiko::Error& error)
 {
     writeDataType(writer, value.type(), error);
     if (!error)

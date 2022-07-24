@@ -37,9 +37,9 @@ endif
 # Additionally, this makefile is customizable with the following
 # settings:
 #
+#      ISHIKO_CPP_BOOST_ROOT                 Path to the Boost installation
 #      DIPLODOCUSDB_CORE_ROOT                Path to the DiplodocusDB installation
 #      ISHIKO_CPP_ERRORS_ROOT                Path to the Ishiko Errors installation
-#      ISHIKO_CPP_BOOST_ROOT                 Path to the Boost installation
 #      DIPLODOCUSDB_PHYSICALSTORAGE_ROOT     Path to the DiplodocusDB installation
 #      DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT  Path to the DiplodocusDB Embedded Document DB installation
 #      ISHIKO_CPP_PUGIXML_ROOT               Path to the pugixml installation
@@ -71,12 +71,12 @@ endif
 # Configurable settings:
 # 
 
+# Path to the Boost installation
+ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
 # Path to the DiplodocusDB installation
 DIPLODOCUSDB_CORE_ROOT ?= $(DIPLODOCUSDB)/core
 # Path to the Ishiko Errors installation
 ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
-# Path to the Boost installation
-ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
 # Path to the DiplodocusDB installation
 DIPLODOCUSDB_PHYSICALSTORAGE_ROOT ?= $(DIPLODOCUSDB)/physical-storage
 # Path to the DiplodocusDB Embedded Document DB installation
@@ -92,8 +92,8 @@ ISHIKO_CPP_TIME_ROOT ?= $(ISHIKO_CPP)/time
 
 all: ../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDB-d,DiplodocusEmbeddedDocumentDB).a
 
-../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDB-d,DiplodocusEmbeddedDocumentDB).a: $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedDocumentDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBValue.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBTransactionImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBTransactionImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_NodeIDAllocator.o $(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroup.o $(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroupCache.o $(_builddir)DiplodocusEmbeddedDocumentDB_RecordFilesSet.o $(_builddir)DiplodocusEmbeddedDocumentDB_CachedRecordFilesSet.o $(_builddir)DiplodocusEmbeddedDocumentDB_MasterFile.o $(_builddir)DiplodocusEmbeddedDocumentDB_Record.o
-	$(AR) rc $@ $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedDocumentDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBValue.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBTransactionImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBTransactionImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_NodeIDAllocator.o $(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroup.o $(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroupCache.o $(_builddir)DiplodocusEmbeddedDocumentDB_RecordFilesSet.o $(_builddir)DiplodocusEmbeddedDocumentDB_CachedRecordFilesSet.o $(_builddir)DiplodocusEmbeddedDocumentDB_MasterFile.o $(_builddir)DiplodocusEmbeddedDocumentDB_Record.o
+../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDB-d,DiplodocusEmbeddedDocumentDB).a: $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedDocumentDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBTransactionImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBTransactionImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_NodeIDAllocator.o $(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroup.o $(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroupCache.o $(_builddir)DiplodocusEmbeddedDocumentDB_RecordFilesSet.o $(_builddir)DiplodocusEmbeddedDocumentDB_CachedRecordFilesSet.o $(_builddir)DiplodocusEmbeddedDocumentDB_MasterFile.o $(_builddir)DiplodocusEmbeddedDocumentDB_Record.o
+	$(AR) rc $@ $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedDocumentDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBTransaction.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDB.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_XMLTreeDBTransactionImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBNodeImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedTreeDBTransactionImpl.o $(_builddir)DiplodocusEmbeddedDocumentDB_NodeIDAllocator.o $(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroup.o $(_builddir)DiplodocusEmbeddedDocumentDB_SiblingNodesRecordGroupCache.o $(_builddir)DiplodocusEmbeddedDocumentDB_RecordFilesSet.o $(_builddir)DiplodocusEmbeddedDocumentDB_CachedRecordFilesSet.o $(_builddir)DiplodocusEmbeddedDocumentDB_MasterFile.o $(_builddir)DiplodocusEmbeddedDocumentDB_Record.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedDocumentDB_EmbeddedDocumentDB.o: ../../src/EmbeddedDocumentDB.cpp
@@ -107,9 +107,6 @@ $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBKey.o: ../../src/TreeDBKey.cpp
 
 $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBPersistentNodeID.o: ../../src/TreeDBPersistentNodeID.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/TreeDBPersistentNodeID.cpp
-
-$(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBValue.o: ../../src/TreeDBValue.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/TreeDBValue.cpp
 
 $(_builddir)DiplodocusEmbeddedDocumentDB_TreeDBNode.o: ../../src/TreeDBNode.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -DPUGIXML_HEADER_ONLY -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I$(ISHIKO_CPP_FMT_ROOT)/include -I$(ISHIKO_CPP_TIME_ROOT)/include -I$(ISHIKO_CPP_PUGIXML_ROOT)/src -I../../../include/DiplodocusDB/EmbeddedDocumentDB -std=c++11 ../../src/TreeDBNode.cpp
