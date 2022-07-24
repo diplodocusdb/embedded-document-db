@@ -36,7 +36,6 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/SiblingNodesRecordGroupTests.h
         ../../src/SiblingNodesRecordGroupCacheTests.h
         ../../src/MasterFileTests.h
-        ../../src/SecondaryFileTests.h
         ../../src/RecordFilesSetTests.h
         ../../src/CachedRecordFilesSetTests.h
         ../../src/TransactionTests.h
@@ -54,7 +53,6 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/SiblingNodesRecordGroupTests.cpp
         ../../src/SiblingNodesRecordGroupCacheTests.cpp
         ../../src/MasterFileTests.cpp
-        ../../src/SecondaryFileTests.cpp
         ../../src/RecordFilesSetTests.cpp
         ../../src/CachedRecordFilesSetTests.cpp
         ../../src/TransactionTests.cpp
