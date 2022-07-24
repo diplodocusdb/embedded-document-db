@@ -23,9 +23,8 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILEMETADATA_H_
 
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryReader.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include <DiplodocusDB/Core.hpp>
+#include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
 
 namespace DiplodocusDB
 {

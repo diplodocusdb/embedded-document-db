@@ -1,6 +1,6 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
-import $(diplodocusdbpath)/physical-storage/Include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
+import $(diplodocusdbpath)/physical-storage/include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
@@ -42,6 +42,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB.h
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/MasterFileMetadata.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBPersistentNodeID.hpp
@@ -71,7 +72,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
         ../../src/RecordFilesSet.h
         ../../src/CachedRecordFilesSet.h
         ../../src/MasterFile.h
-        ../../src/MasterFileMetadata.h
         ../../src/SecondaryFile.h
         ../../src/RecordMarker.h
     }
