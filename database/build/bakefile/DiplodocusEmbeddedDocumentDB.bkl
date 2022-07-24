@@ -64,7 +64,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
         ../../src/EmbeddedTreeDBImpl.h
         ../../src/EmbeddedTreeDBNodeImpl.h
         ../../src/EmbeddedTreeDBTransactionImpl.h
-        ../../src/NodeID.h
         ../../src/NodeIDAllocator.h
         ../../src/SiblingNodesRecordGroup.h
         ../../src/SiblingNodesRecordGroupCache.h
@@ -94,7 +93,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
         ../../src/EmbeddedTreeDBImpl.cpp
         ../../src/EmbeddedTreeDBNodeImpl.cpp
         ../../src/EmbeddedTreeDBTransactionImpl.cpp
-        ../../src/NodeID.cpp
         ../../src/NodeIDAllocator.cpp
         ../../src/SiblingNodesRecordGroup.cpp
         ../../src/SiblingNodesRecordGroupCache.cpp

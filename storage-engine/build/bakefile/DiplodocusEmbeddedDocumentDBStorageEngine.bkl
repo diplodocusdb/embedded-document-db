@@ -31,5 +31,11 @@ library DiplodocusEmbeddedDocumentDBStorageEngine
     headers
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeID.hpp
+    }
+
+    sources
+    {
+        ../../src/NodeID.cpp
     }
 }
