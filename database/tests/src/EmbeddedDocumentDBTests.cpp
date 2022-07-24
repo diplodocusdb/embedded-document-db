@@ -1,33 +1,18 @@
 /*
     Copyright (c) 2018-2022 Xavier Leclercq
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+    Released under the MIT License
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "EmbeddedTreeDBTests.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB.h"
+#include "EmbeddedDocumentDBTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.hpp"
 #include <boost/filesystem/operations.hpp>
 #include <sstream>
 
+using namespace DiplodocusDB;
 using namespace Ishiko;
 
-EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestContext& context)
+EmbeddedDocumentDBTests::EmbeddedDocumentDBTests(const TestNumber& number, const TestContext& context)
     : TestSequence(number, "EmbeddedTreeDB tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
@@ -55,20 +40,20 @@ EmbeddedTreeDBTests::EmbeddedTreeDBTests(const TestNumber& number, const TestCon
     append<HeapAllocationErrorsTest>("removeAllChildNodes test 1", RemoveAllChildNodesTest1);
 }
 
-void EmbeddedTreeDBTests::CreationTest1(Test& test)
+void EmbeddedDocumentDBTests::CreationTest1(Test& test)
 {
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
 
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::CreateTest1(Test& test)
+void EmbeddedDocumentDBTests::CreateTest1(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_CreateTest1.dpdb";
 
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -79,81 +64,81 @@ void EmbeddedTreeDBTests::CreateTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::OpenTest1(Test& test)
+void EmbeddedDocumentDBTests::OpenTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(test.context().getDataPath("EmptyEmbeddedTreeDB.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode& node = db.root();
+    TreeDBNode& node = db.root();
 
     ISHIKO_TEST_FAIL_IF_NOT(node.isRoot());
    
-    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(node, error);
+    std::vector<TreeDBNode> children = db.childNodes(node, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(children.size(), 0);
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::OpenTest2(Test& test)
+void EmbeddedDocumentDBTests::OpenTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(test.context().getDataPath("EmbeddedTreeDBTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
+    TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::TreeDBValue value = db.value(node, error);
+    TreeDBValue value = db.value(node, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(value.type(), DiplodocusDB::PrimitiveDataType::null);
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::OpenTest3(Test& test)
+void EmbeddedDocumentDBTests::OpenTest3(Test& test)
 {
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
 
     Error error;
     db.open(test.context().getDataPath("EmbeddedTreeDBTests_OpenTest3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node1 = db.child(db.root(), "key1", error);
+    TreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::TreeDBValue value1 = db.value(node1, error);
+    TreeDBValue value1 = db.value(node1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(value1.type(), DiplodocusDB::PrimitiveDataType::null);
+    ISHIKO_TEST_FAIL_IF_NEQ(value1.type(), PrimitiveDataType::null);
 
-    DiplodocusDB::TreeDBNode node2 = db.child(db.root(), "key2", error);
-
-    ISHIKO_TEST_FAIL_IF(error);
-
-    DiplodocusDB::TreeDBValue value2 = db.value(node2, error);
+    TreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(value2.type(), DiplodocusDB::PrimitiveDataType::null);
+
+    TreeDBValue value2 = db.value(node2, error);
+
+    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_FAIL_IF_NEQ(value2.type(), PrimitiveDataType::null);
 
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::OpenTest4(Test& test)
+void EmbeddedDocumentDBTests::OpenTest4(Test& test)
 {
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(test.context().getDataPath("EmbeddedTreeDBTests_OpenTest4.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -171,9 +156,9 @@ void EmbeddedTreeDBTests::OpenTest4(Test& test)
     */
 }
 
-void EmbeddedTreeDBTests::OpenTest5(Test& test)
+void EmbeddedDocumentDBTests::OpenTest5(Test& test)
 {
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
 
     Error error;
     db.open(test.context().getDataPath("EmbeddedTreeDBTests_OpenTest5.dpdb"), error);
@@ -203,25 +188,25 @@ void EmbeddedTreeDBTests::OpenTest5(Test& test)
     */
 }
 
-void EmbeddedTreeDBTests::ChildNodesTest1(Test& test)
+void EmbeddedDocumentDBTests::ChildNodesTest1(Test& test)
 {
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
 
     Error error;
     db.open(test.context().getDataPath("EmptyEmbeddedTreeDB.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(db.root(), error);
+    std::vector<TreeDBNode> children = db.childNodes(db.root(), error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(children.size(), 0);
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::ChildNodesTest2(Test& test)
+void EmbeddedDocumentDBTests::ChildNodesTest2(Test& test)
 {
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
 
     Error error;
     db.open(test.context().getDataPath("EmbeddedTreeDBTests_ChildNodesTest2.dpdb"), error);
@@ -236,18 +221,18 @@ void EmbeddedTreeDBTests::ChildNodesTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeTest1(Test& test)
+void EmbeddedDocumentDBTests::InsertChildNodeTest1(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_InsertChildNodeTest1.dpdb";
     
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node = db.insertChildNode(db.root(), 0, "key1", error);
+    TreeDBNode node = db.insertChildNode(db.root(), 0, "key1", error);
         
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -257,7 +242,7 @@ void EmbeddedTreeDBTests::InsertChildNodeTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(Test& test)
+void EmbeddedDocumentDBTests::InsertChildNodeBeforeTest1(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_InsertChildNodeBeforeTest1.dpdb";
     boost::filesystem::path inputPath = test.context().getDataPath(testName);
@@ -265,18 +250,18 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(Test& test)
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
+    TreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_ABORT_IF(error);
         
-    DiplodocusDB::TreeDBNode newNode = db.insertChildNodeBefore(db.root(), node, "key0", error);
+    TreeDBNode newNode = db.insertChildNodeBefore(db.root(), node, "key0", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -286,7 +271,7 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(Test& test)
+void EmbeddedDocumentDBTests::InsertChildNodeBeforeTest2(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_InsertChildNodeBeforeTest2.dpdb";
     boost::filesystem::path inputPath = test.context().getDataPath(testName);
@@ -294,22 +279,22 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(Test& test)
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key2", error);
+    TreeDBNode node = db.child(db.root(), "key2", error);
 
     ISHIKO_TEST_ABORT_IF(error);
         
-    DiplodocusDB::TreeDBNode newNode1 = db.insertChildNodeBefore(db.root(), node, "key1", error);
+    TreeDBNode newNode1 = db.insertChildNodeBefore(db.root(), node, "key1", error);
     
     ISHIKO_TEST_ABORT_IF(error);
             
-    DiplodocusDB::TreeDBNode newNode2 = db.insertChildNodeBefore(db.root(), newNode1, "key0", error);
+    TreeDBNode newNode2 = db.insertChildNodeBefore(db.root(), newNode1, "key0", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -319,7 +304,7 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(Test& test)
+void EmbeddedDocumentDBTests::InsertChildNodeBeforeTest3(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_InsertChildNodeBeforeTest3.dpdb";
     boost::filesystem::path inputPath = test.context().getDataPath(testName);
@@ -327,22 +312,22 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(Test& test)
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key2", error);
+    TreeDBNode node = db.child(db.root(), "key2", error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode newNode1 = db.insertChildNodeBefore(db.root(), node, "key1", error);
+    TreeDBNode newNode1 = db.insertChildNodeBefore(db.root(), node, "key1", error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode newNode2 = db.insertChildNodeBefore(db.root(), newNode1, "key0", error);
+    TreeDBNode newNode2 = db.insertChildNodeBefore(db.root(), newNode1, "key0", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -352,7 +337,7 @@ void EmbeddedTreeDBTests::InsertChildNodeBeforeTest3(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeAfterTest1(Test& test)
+void EmbeddedDocumentDBTests::InsertChildNodeAfterTest1(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_InsertChildNodeAfterTest1.dpdb";
     boost::filesystem::path inputPath = test.context().getDataPath(testName);
@@ -360,18 +345,18 @@ void EmbeddedTreeDBTests::InsertChildNodeAfterTest1(Test& test)
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
+    TreeDBNode node = db.child(db.root(), "key1", error);
     
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode newNode = db.insertChildNodeAfter(db.root(), node, "key2", error);
+    TreeDBNode newNode = db.insertChildNodeAfter(db.root(), node, "key2", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -381,7 +366,7 @@ void EmbeddedTreeDBTests::InsertChildNodeAfterTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::InsertChildNodeAfterTest2(Test& test)
+void EmbeddedDocumentDBTests::InsertChildNodeAfterTest2(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_InsertChildNodeAfterTest2.dpdb";
     boost::filesystem::path inputPath = test.context().getDataPath(testName);
@@ -389,18 +374,18 @@ void EmbeddedTreeDBTests::InsertChildNodeAfterTest2(Test& test)
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node = db.child(db.root(), "key1", error);
+    TreeDBNode node = db.child(db.root(), "key1", error);
     
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode newNode = db.insertChildNodeAfter(db.root(), node, "key2", error);
+    TreeDBNode newNode = db.insertChildNodeAfter(db.root(), node, "key2", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -410,18 +395,18 @@ void EmbeddedTreeDBTests::InsertChildNodeAfterTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest1(Test& test)
+void EmbeddedDocumentDBTests::AppendChildNodeTest1(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_AppendChildNodeTest1.dpdb";
 
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath("EmbeddedTreeDBTests_AppendChildNodeTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1", error);
+    TreeDBNode node = db.appendChildNode(db.root(), "key1", error);
     
     ISHIKO_TEST_FAIL_IF(error);
     
@@ -431,22 +416,22 @@ void EmbeddedTreeDBTests::AppendChildNodeTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest2(Test& test)
+void EmbeddedDocumentDBTests::AppendChildNodeTest2(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_AppendChildNodeTest2.dpdb";
     
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
+    TreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::TreeDBNode node2 = db.appendChildNode(db.root(), "key2", error);
+    TreeDBNode node2 = db.appendChildNode(db.root(), "key2", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -456,19 +441,18 @@ void EmbeddedTreeDBTests::AppendChildNodeTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest3(Test& test)
+void EmbeddedDocumentDBTests::AppendChildNodeTest3(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_AppendChildNodeTest3.dpdb";
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1",
-        DiplodocusDB::TreeDBValue::UTF8String("value1"), error);
+    TreeDBNode node = db.appendChildNode(db.root(), "key1", TreeDBValue::UTF8String("value1"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -478,24 +462,22 @@ void EmbeddedTreeDBTests::AppendChildNodeTest3(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest4(Test& test)
+void EmbeddedDocumentDBTests::AppendChildNodeTest4(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_AppendChildNodeTest4.dpdb";
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", 
-        DiplodocusDB::TreeDBValue::UTF8String("value1"), error);
+    TreeDBNode node1 = db.appendChildNode(db.root(), "key1", TreeDBValue::UTF8String("value1"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::TreeDBNode node2 = db.appendChildNode(db.root(), "key2", 
-        DiplodocusDB::TreeDBValue::UTF8String("value2"), error);
+    TreeDBNode node2 = db.appendChildNode(db.root(), "key2", TreeDBValue::UTF8String("value2"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -505,13 +487,13 @@ void EmbeddedTreeDBTests::AppendChildNodeTest4(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest5(Test& test)
+void EmbeddedDocumentDBTests::AppendChildNodeTest5(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_AppendChildNodeTest5.dpdb";
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -520,7 +502,7 @@ void EmbeddedTreeDBTests::AppendChildNodeTest5(Test& test)
     {
         std::stringstream key;
         key << "key" << i;
-        DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), key.str(), error);
+        TreeDBNode node = db.appendChildNode(db.root(), key.str(), error);
         if (error)
         {
             break;
@@ -535,7 +517,7 @@ void EmbeddedTreeDBTests::AppendChildNodeTest5(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::AppendChildNodeTest6(Test& test)
+void EmbeddedDocumentDBTests::AppendChildNodeTest6(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_AppendChildNodeTest6.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(testName);
@@ -543,18 +525,18 @@ void EmbeddedTreeDBTests::AppendChildNodeTest6(Test& test)
     boost::filesystem::copy_file(test.context().getDataPath("EmptyEmbeddedTreeDB.dpdb"), outputPath,
         boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
+    TreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node2 = db.appendChildNode(node1, "key2", error);
+    TreeDBNode node2 = db.appendChildNode(node1, "key2", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -564,7 +546,7 @@ void EmbeddedTreeDBTests::AppendChildNodeTest6(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::RemoveChildNodeTest1(Test& test)
+void EmbeddedDocumentDBTests::RemoveChildNodeTest1(Test& test)
 {
     const char* testName = "EmbeddedTreeDBTests_RemoveChildNodeTest1.dpdb";
     boost::filesystem::path inputPath = test.context().getDataPath(testName);
@@ -572,9 +554,9 @@ void EmbeddedTreeDBTests::RemoveChildNodeTest1(Test& test)
 
     boost::filesystem::copy_file(inputPath, outputPath, boost::filesystem::copy_option::overwrite_if_exists);
 
-    Ishiko::Error error;
+    Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -587,6 +569,6 @@ void EmbeddedTreeDBTests::RemoveChildNodeTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedTreeDBTests::RemoveAllChildNodesTest1(Test& test)
+void EmbeddedDocumentDBTests::RemoveAllChildNodesTest1(Test& test)
 {
 }

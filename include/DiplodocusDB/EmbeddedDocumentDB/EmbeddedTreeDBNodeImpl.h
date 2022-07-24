@@ -23,7 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 
-#include "NodeID.h"
+#include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include "TreeDBNodeImpl.hpp"
 
 namespace DiplodocusDB

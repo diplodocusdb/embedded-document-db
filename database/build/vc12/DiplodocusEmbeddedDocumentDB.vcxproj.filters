@@ -20,7 +20,7 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedTreeDB.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\MasterFileMetadata.h">
@@ -83,9 +83,6 @@
     <ClInclude Include="..\..\src\EmbeddedTreeDBTransactionImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\NodeID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\NodeIDAllocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -115,6 +112,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\EmbeddedDocumentDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\TreeDBErrorCategory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -148,9 +148,6 @@
     <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\EmbeddedTreeDB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\EmbeddedTreeDBImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -158,9 +155,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\EmbeddedTreeDBTransactionImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\NodeID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp">
