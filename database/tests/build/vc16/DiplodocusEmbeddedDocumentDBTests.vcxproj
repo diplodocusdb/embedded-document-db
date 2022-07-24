@@ -166,7 +166,6 @@
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCacheTests.cpp" />
     <ClCompile Include="..\..\src\MasterFileTests.cpp" />
-    <ClCompile Include="..\..\src\SecondaryFileTests.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSetTests.cpp" />
     <ClCompile Include="..\..\src\CachedRecordFilesSetTests.cpp" />
     <ClCompile Include="..\..\src\TransactionTests.cpp" />
@@ -181,7 +180,6 @@
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.h" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCacheTests.h" />
     <ClInclude Include="..\..\src\MasterFileTests.h" />
-    <ClInclude Include="..\..\src\SecondaryFileTests.h" />
     <ClInclude Include="..\..\src\RecordFilesSetTests.h" />
     <ClInclude Include="..\..\src\CachedRecordFilesSetTests.h" />
     <ClInclude Include="..\..\src\TransactionTests.h" />

@@ -158,9 +158,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\NodeIDTests.cpp" />
+    <ClCompile Include="..\..\src\SecondaryFileTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\NodeIDTests.hpp" />
+    <ClInclude Include="..\..\src\SecondaryFileTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

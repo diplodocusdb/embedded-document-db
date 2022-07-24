@@ -23,14 +23,13 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 
-#include "RecordFile.h"
 #include "Record.h"
 #include "SiblingNodesRecordGroup.h"
-#include "RecordMarker.h"
 #include "TreeDBKey.hpp"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include <boost/filesystem/path.hpp>
+#include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include <Ishiko/Errors.hpp>
 #include <fstream>
 #include <memory>

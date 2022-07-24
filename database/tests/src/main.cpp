@@ -12,7 +12,6 @@
 #include "SiblingNodesRecordGroupTests.h"
 #include "SiblingNodesRecordGroupCacheTests.h"
 #include "MasterFileTests.h"
-#include "SecondaryFileTests.h"
 #include "RecordFilesSetTests.h"
 #include "CachedRecordFilesSetTests.h"
 #include "TransactionTests.h"
@@ -38,7 +37,6 @@ int main(int argc, char* argv[])
     theTests.append<SiblingNodesRecordGroupTests>();
     theTests.append<SiblingNodesRecordGroupCacheTests>();
     theTests.append<MasterFileTests>();
-    theTests.append<SecondaryFileTests>();
     theTests.append<RecordFilesSetTests>();
     theTests.append<CachedRecordFilesSetTests>();
     theTests.append<EmbeddedDocumentDBTests>();

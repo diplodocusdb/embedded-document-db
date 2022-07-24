@@ -23,7 +23,6 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
-#include "MasterFileMetadata.h"
 #include "TreeDBValue.hpp"
 #include <boost/variant.hpp>
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
@@ -33,8 +32,6 @@
 
 namespace DiplodocusDB
 {
-
-class RecordData;
 
 /// A record in physical storage.
 /**
