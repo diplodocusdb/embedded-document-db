@@ -7,6 +7,7 @@
 #ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP_
 #define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP_
 
+#include "StorageEngine/linkoptions.hpp"
 #include "StorageEngine/NodeID.hpp"
 
 #endif

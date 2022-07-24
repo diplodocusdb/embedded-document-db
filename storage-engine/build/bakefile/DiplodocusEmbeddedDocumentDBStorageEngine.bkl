@@ -36,6 +36,7 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
     headers
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/linkoptions.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeID.hpp
     }
 
