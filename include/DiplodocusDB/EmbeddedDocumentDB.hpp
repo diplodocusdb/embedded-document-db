@@ -7,8 +7,8 @@
 #ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_HPP_
 #define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_HPP_
 
+#include "EmbeddedDocumentDB/EmbeddedDocumentDB.hpp"
 #include "EmbeddedDocumentDB/linkoptions.hpp"
-#include "EmbeddedDocumentDB/TreeDB.hpp"
 #include "EmbeddedDocumentDB/TreeDBErrorCategory.hpp"
 #include "EmbeddedDocumentDB/TreeDBKey.hpp"
 #include "EmbeddedDocumentDB/TreeDBNode.hpp"

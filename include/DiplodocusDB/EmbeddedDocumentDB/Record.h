@@ -24,9 +24,9 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
 #include "MasterFileMetadata.h"
-#include "NodeID.h"
 #include "TreeDBValue.hpp"
 #include <boost/variant.hpp>
+#include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
 #include <Ishiko/Errors.hpp>
 #include <memory>

@@ -21,8 +21,9 @@
 */
 
 #include "TransactionTests.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.hpp"
 
+using namespace DiplodocusDB;
 using namespace Ishiko;
 
 TransactionTests::TransactionTests(const TestNumber& number, const TestContext& context)
@@ -41,12 +42,12 @@ void TransactionTests::CreateTransactionTest1(Test& test)
    
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
+    TreeDBTransaction transaction = db.createTransaction(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -62,12 +63,12 @@ void TransactionTests::CommitTransactionTest1(Test& test)
    
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
+    TreeDBTransaction transaction = db.createTransaction(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -87,7 +88,7 @@ void TransactionTests::AppendChildNodeTest1(Test& test)
    
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -116,12 +117,12 @@ void TransactionTests::AppendChildNodeTest2(Test& test)
 
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
+    TreeDBTransaction transaction = db.createTransaction(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -149,12 +150,12 @@ void TransactionTests::RollbackTransactionTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::EmbeddedTreeDB db;
+    EmbeddedDocumentDB db;
     db.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::TreeDBTransaction transaction = db.createTransaction(error);
+    TreeDBTransaction transaction = db.createTransaction(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 

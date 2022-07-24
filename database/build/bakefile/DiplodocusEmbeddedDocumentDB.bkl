@@ -1,6 +1,6 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
-import $(diplodocusdbpath)/physical-storage/include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
+import $(diplodocusdbpath)/embedded-document-db/include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
@@ -16,7 +16,7 @@ vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDB.sln;
 vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDB.sln;
 vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDB.sln;
 
-library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
+library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine, DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
 {
     archs = x86 x86_64;
    
@@ -41,7 +41,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
     headers
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB.h
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/MasterFileMetadata.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
@@ -64,7 +64,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
         ../../src/EmbeddedTreeDBImpl.h
         ../../src/EmbeddedTreeDBNodeImpl.h
         ../../src/EmbeddedTreeDBTransactionImpl.h
-        ../../src/NodeID.h
         ../../src/NodeIDAllocator.h
         ../../src/SiblingNodesRecordGroup.h
         ../../src/SiblingNodesRecordGroupCache.h
@@ -78,6 +77,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
 
     sources
     {
+        ../../src/EmbeddedDocumentDB.cpp
         ../../src/TreeDBErrorCategory.cpp
         ../../src/TreeDBKey.cpp
         ../../src/TreeDBPersistentNodeID.cpp
@@ -90,12 +90,9 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
         ../../src/XMLTreeDBNodeImpl.cpp
         ../../src/XMLTreeDBTransactionImpl.cpp
 
-        ../../src/EmbeddedTreeDB.cpp
-
         ../../src/EmbeddedTreeDBImpl.cpp
         ../../src/EmbeddedTreeDBNodeImpl.cpp
         ../../src/EmbeddedTreeDBTransactionImpl.cpp
-        ../../src/NodeID.cpp
         ../../src/NodeIDAllocator.cpp
         ../../src/SiblingNodesRecordGroup.cpp
         ../../src/SiblingNodesRecordGroupCache.cpp

@@ -11,18 +11,27 @@ jobs:
           name: "Install build dependency: DiplodocusDB Core"
           command: cd /projects/diplodocusdb && git clone https://github.com/diplodocusdb/core.git && cd core/build/gnumake && make
       - run:
-          name: "Install build dependency: DiplodocusDB PhysicalStorage"
+          name: "Install build dependency: DiplodocusDB PhysicalStorage/PageRepository"
           command: cd /projects/diplodocusdb && git clone https://github.com/diplodocusdb/physical-storage.git && cd physical-storage/PageRepository/build/gnumake && make
       - checkout:
           path: /projects/diplodocusdb/embedded-document-db
       - run:
-          name: Build 
+          name: "Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine"
+          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/build/gnumake && make
+      - run:
+          name: "Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests"
+          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && make
+      - run:
+          name: "Run: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests"
+          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBStorageEngineTests
+      - run:
+          name: "Build: DiplodocusDB EmbeddedDocumentDB"
           command: cd /projects/diplodocusdb/embedded-document-db/database/build/gnumake && make
       - run:
-          name: Build tests
+          name: "Build: DiplodocusDB EmbeddedDocumentDB tests"
           command: cd /projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && make
       - run:
-          name: Run TreeDB/Core tests
+          name: "Run: DiplodocusDB EmbeddedDocumentDB tests"
           command: cd /projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBTests
 workflows:
   version: 2

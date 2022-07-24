@@ -1,12 +1,12 @@
 /*
     Copyright (c) 2018-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
+#include "EmbeddedDocumentDBTests.hpp"
 #include "TreeDBKeyTests.h"
 #include "TreeDBValueTests.h"
-#include "NodeIDTests.h"
 #include "NodeIDAllocatorTests.h"
 #include "RecordTests.h"
 #include "SiblingNodesRecordGroupTests.h"
@@ -15,7 +15,6 @@
 #include "SecondaryFileTests.h"
 #include "RecordFilesSetTests.h"
 #include "CachedRecordFilesSetTests.h"
-#include "EmbeddedTreeDBTests.h"
 #include "TransactionTests.h"
 #include "XMLTreeDBTests/XMLTreeDBTests.h"
 #include "DiplodocusDB/EmbeddedDocumentDB/linkoptions.hpp"
@@ -34,7 +33,6 @@ int main(int argc, char* argv[])
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<TreeDBKeyTests>();
     theTests.append<TreeDBValueTests>();
-    theTests.append<NodeIDTests>();
     theTests.append<NodeIDAllocatorTests>();
     theTests.append<RecordTests>();
     theTests.append<SiblingNodesRecordGroupTests>();
@@ -43,7 +41,7 @@ int main(int argc, char* argv[])
     theTests.append<SecondaryFileTests>();
     theTests.append<RecordFilesSetTests>();
     theTests.append<CachedRecordFilesSetTests>();
-    theTests.append<EmbeddedTreeDBTests>();
+    theTests.append<EmbeddedDocumentDBTests>();
     theTests.append<TransactionTests>();
     theTests.append<XMLTreeDBTests>();
 

@@ -16,7 +16,7 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += DiplodocusEmbeddedDocumentDB DiplodocusDBPageRepository DiplodocusDBCore IshikoTestFramework IshikoTestFrameworkCore IshikoConfiguration IshikoDiff IshikoXML IshikoFileSystem IshikoProcess IshikoTime IshikoText IshikoErrors;
+        libs += DiplodocusEmbeddedDocumentDB DiplodocusEmbeddedDocumentDBStorageEngine DiplodocusDBPageRepository DiplodocusDBCore IshikoTestFramework IshikoTestFrameworkCore IshikoConfiguration IshikoDiff IshikoXML IshikoFileSystem IshikoProcess IshikoTime IshikoText IshikoErrors;
         libs += fmt boost_filesystem;
     }
 
@@ -27,10 +27,10 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
 
     headers
     {
+        ../../src/EmbeddedDocumentDBTests.hpp
         ../../src/TreeDBKeyTests.h
         ../../src/TreeDBValueTests.h
         ../../src/XMLTreeDBTests/XMLTreeDBTests.h
-        ../../src/NodeIDTests.h
         ../../src/NodeIDAllocatorTests.h
         ../../src/RecordTests.h
         ../../src/SiblingNodesRecordGroupTests.h
@@ -39,17 +39,16 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/SecondaryFileTests.h
         ../../src/RecordFilesSetTests.h
         ../../src/CachedRecordFilesSetTests.h
-        ../../src/EmbeddedTreeDBTests.h
         ../../src/TransactionTests.h
     }
 
     sources
     {
+        ../../src/EmbeddedDocumentDBTests.cpp
         ../../src/main.cpp
         ../../src/TreeDBKeyTests.cpp
         ../../src/TreeDBValueTests.cpp
         ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
-        ../../src/NodeIDTests.cpp
         ../../src/NodeIDAllocatorTests.cpp
         ../../src/RecordTests.cpp
         ../../src/SiblingNodesRecordGroupTests.cpp
@@ -58,7 +57,6 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/SecondaryFileTests.cpp
         ../../src/RecordFilesSetTests.cpp
         ../../src/CachedRecordFilesSetTests.cpp
-        ../../src/EmbeddedTreeDBTests.cpp
         ../../src/TransactionTests.cpp
     }
 }
