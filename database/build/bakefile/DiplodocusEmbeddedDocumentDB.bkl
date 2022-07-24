@@ -41,7 +41,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBC
     headers
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDB.h
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/MasterFileMetadata.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
