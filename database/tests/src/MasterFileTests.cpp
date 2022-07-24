@@ -60,56 +60,49 @@ void MasterFileTests::ConstructionTest1(Test& test)
 
 void MasterFileTests::CreateTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory()
-        / "MasterFileTests_CreateTest1.dpdb");
+    const char* basename = "MasterFileTests_CreateTest1.dpdb";
 
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.create(outputPath, error);
+    masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
     masterFile.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory() / "MasterFileTests_CreateTest1.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void MasterFileTests::OpenTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "MasterFileTests_OpenTest1.dpdb");
-
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.open(inputPath, error);
+    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     DiplodocusDB::RecordMarker rootMarker = masterFile.rootNodePosition();
 
-    ISHTF_FAIL_UNLESS(rootMarker.position().page() == 0);
-    ISHTF_FAIL_UNLESS(rootMarker.position().offset() == 15);
+    ISHIKO_TEST_FAIL_IF_NEQ(rootMarker.position().page(), 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(rootMarker.position().offset(), 15);
 
     DiplodocusDB::RecordMarker dataEndMarker = masterFile.dataEndPosition();
 
-    ISHTF_FAIL_UNLESS(dataEndMarker.position().page() == 0);
-    ISHTF_FAIL_UNLESS(dataEndMarker.position().offset() == 20);
+    ISHIKO_TEST_FAIL_IF_NEQ(dataEndMarker.position().page(), 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(dataEndMarker.position().offset(), 20);
 
     ISHIKO_TEST_PASS();
 }
 
 void MasterFileTests::OpenTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
-
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.open(inputPath, error);
+    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -128,12 +121,10 @@ void MasterFileTests::OpenTest2(Test& test)
 
 void MasterFileTests::OpenTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "MasterFileTests_OpenTest3.dpdb");
-
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.open(inputPath, error);
+    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -161,12 +152,10 @@ void MasterFileTests::OpenTest3(Test& test)
 
 void MasterFileTests::OpenTest4(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "MasterFileTests_OpenTest4.dpdb");
-
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.open(inputPath, error);
+    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest4.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -194,13 +183,12 @@ void MasterFileTests::OpenTest4(Test& test)
 
 void MasterFileTests::AddSiblingNodesRecordGroupTest1(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest1.dpdb");
+    const char* basename = "MasterFileTests_AddSiblingNodesRecordGroupTest1.dpdb";
 
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.create(outputPath, error);
+    masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -212,10 +200,7 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest1(Test& test)
 
     masterFile.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest1.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
@@ -315,13 +300,12 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest4(Test& test)
 /// This test uses just one byte more than can be stored in a page
 void MasterFileTests::AddSiblingNodesRecordGroupTest5(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest5.dpdb");
+    const char* basename = "MasterFileTests_AddSiblingNodesRecordGroupTest5.dpdb";
 
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.create(outputPath, error);
+    masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -344,22 +328,18 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest5(Test& test)
 
     masterFile.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest5.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void MasterFileTests::AddSiblingNodesRecordGroupTest6(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest6.dpdb");
+    const char* basename = "MasterFileTests_AddSiblingNodesRecordGroupTest6.dpdb";
 
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.create(outputPath, error);
+    masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -378,22 +358,18 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest6(Test& test)
 
     masterFile.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest6.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void MasterFileTests::AddSiblingNodesRecordGroupTest7(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest7.dpdb");
+    const char* basename = "MasterFileTests_AddSiblingNodesRecordGroupTest7.dpdb";
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.create(outputPath, error);
+    masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -412,22 +388,18 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest7(Test& test)
 
     masterFile.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest7.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void MasterFileTests::AddSiblingNodesRecordGroupTest8(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
+    const char* basename = "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb";
 
-    Ishiko::Error error(0);
+    Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.create(outputPath, error);
+    masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -446,22 +418,18 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest8(Test& test)
 
     masterFile.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest8.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void MasterFileTests::AddSiblingNodesRecordGroupTest9(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb");
+    const char* basename = "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb";
 
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.create(outputPath, error);
+    masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -474,22 +442,18 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest9(Test& test)
 
     masterFile.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest9.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void MasterFileTests::AddSiblingNodesRecordGroupTest10(Test& test)
 {
-    boost::filesystem::path outputPath(test.context().getTestOutputDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest10.dpdb");
-
+    const char* basename = "MasterFileTests_AddSiblingNodesRecordGroupTest10.dpdb";
+    
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.create(outputPath, error);
+    masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -507,21 +471,16 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest10(Test& test)
 
     masterFile.close();
 
-    test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.context().getReferenceDataDirectory()
-        / "MasterFileTests_AddSiblingNodesRecordGroupTest10.dpdb");
-
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void MasterFileTests::FindSiblingNodesRecordGroupTest1(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "MasterFileTests_OpenTest1.dpdb");
-
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.open(inputPath, error);
+    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -539,12 +498,10 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest1(Test& test)
 
 void MasterFileTests::FindSiblingNodesRecordGroupTest2(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
-
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.open(inputPath, error);
+    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -552,7 +509,7 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest2(Test& test)
     bool found = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
-    ISHTF_FAIL_UNLESS(found);
+    ISHIKO_TEST_FAIL_IF_NOT(found);
     ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup.size(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup[0].name(), "key1");
     ISHIKO_TEST_PASS();
@@ -560,12 +517,10 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest2(Test& test)
 
 void MasterFileTests::FindSiblingNodesRecordGroupTest3(Test& test)
 {
-    boost::filesystem::path inputPath(test.context().getTestDataDirectory() / "MasterFileTests_OpenTest2.dpdb");
-
     Error error;
 
     DiplodocusDB::MasterFile masterFile;
-    masterFile.open(inputPath, error);
+    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
