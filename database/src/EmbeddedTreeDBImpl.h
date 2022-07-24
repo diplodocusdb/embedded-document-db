@@ -24,9 +24,9 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBIMPL_H_
 
 #include "CachedRecordFilesSet.h"
-#include "RecordMarker.h"
 #include "TreeDB.hpp"
 #include <boost/filesystem/path.hpp>
+#include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB

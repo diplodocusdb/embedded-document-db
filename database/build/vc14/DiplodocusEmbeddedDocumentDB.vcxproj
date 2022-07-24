@@ -168,19 +168,14 @@
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroup.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp" />
-    <ClCompile Include="..\..\src\RecordFile.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\CachedRecordFilesSet.cpp" />
-    <ClCompile Include="..\..\src\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\src\MasterFile.cpp" />
-    <ClCompile Include="..\..\src\SecondaryFile.cpp" />
     <ClCompile Include="..\..\src\Record.cpp" />
-    <ClCompile Include="..\..\src\RecordMarker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDB.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\MasterFileMetadata.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBErrorCategory.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBPersistentNodeID.hpp" />
@@ -196,19 +191,15 @@
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp" />
-    <ClInclude Include="..\..\..\Include\DiplodocusDB\TreeDB\EmbeddedTreeDB\linkoptions.h" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBImpl.h" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBNodeImpl.h" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBTransactionImpl.h" />
     <ClInclude Include="..\..\src\NodeIDAllocator.h" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroup.h" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCache.h" />
-    <ClInclude Include="..\..\src\RecordFile.h" />
     <ClInclude Include="..\..\src\RecordFilesSet.h" />
     <ClInclude Include="..\..\src\CachedRecordFilesSet.h" />
     <ClInclude Include="..\..\src\MasterFile.h" />
-    <ClInclude Include="..\..\src\SecondaryFile.h" />
-    <ClInclude Include="..\..\src\RecordMarker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

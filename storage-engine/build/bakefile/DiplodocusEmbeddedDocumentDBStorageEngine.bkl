@@ -1,4 +1,5 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
 import $(diplodocusdbpath)/physical-storage/include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
@@ -11,7 +12,7 @@ vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 
-library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, IshikoErrors
+library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, DiplodocusDBCore, IshikoErrors
 {
     archs = x86 x86_64;
    
@@ -38,10 +39,18 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/linkoptions.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeID.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/MasterFileMetadata.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordMarker.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SecondaryFile.hpp
     }
 
     sources
     {
+        ../../src/MasterFileMetadata.cpp
         ../../src/NodeID.cpp
+        ../../src/RecordFile.cpp
+        ../../src/RecordMarker.cpp
+        ../../src/SecondaryFile.cpp
     }
 }
