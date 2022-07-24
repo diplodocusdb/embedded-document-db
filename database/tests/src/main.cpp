@@ -6,7 +6,6 @@
 
 #include "TreeDBKeyTests.h"
 #include "TreeDBValueTests.h"
-#include "NodeIDTests.h"
 #include "NodeIDAllocatorTests.h"
 #include "RecordTests.h"
 #include "SiblingNodesRecordGroupTests.h"
@@ -34,7 +33,6 @@ int main(int argc, char* argv[])
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<TreeDBKeyTests>();
     theTests.append<TreeDBValueTests>();
-    theTests.append<NodeIDTests>();
     theTests.append<NodeIDAllocatorTests>();
     theTests.append<RecordTests>();
     theTests.append<SiblingNodesRecordGroupTests>();
