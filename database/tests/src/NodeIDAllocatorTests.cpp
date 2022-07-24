@@ -21,7 +21,7 @@
 */
 
 #include "NodeIDAllocatorTests.h"
-#include "NodeIDAllocator.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/NodeIDAllocator.h"
 
 using namespace Ishiko;
 

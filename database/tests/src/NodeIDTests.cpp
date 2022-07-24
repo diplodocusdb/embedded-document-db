@@ -21,7 +21,7 @@
 */
 
 #include "NodeIDTests.h"
-#include "NodeID.h"
+#include "DiplodocusDB/EmbeddedDocumentDB/NodeID.h"
 
 using namespace Ishiko;
 
