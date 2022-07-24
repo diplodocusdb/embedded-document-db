@@ -1,3 +1,5 @@
+diplodocusdbpath = envvar("DIPLODOCUSDB");
+import $(diplodocusdbpath)/embedded-document-db/include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/test-framework/include/Ishiko/TestFramework.bkl;
 
@@ -9,7 +11,7 @@ vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBStorageEngineTests.sln
 vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBStorageEngineTests.sln;
 vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBStorageEngineTests.sln;
 
-program DiplodocusEmbeddedDocumentDBStorageEngineTests : IshikoTestFramework
+program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocumentDBStorageEngine, IshikoTestFramework
 {
     if ($(toolset) == gnu)
     {
@@ -23,8 +25,14 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : IshikoTestFramework
         archs = x86 x86_64;
     }
 
+    headers
+    {
+        ../../src/NodeIDTests.hpp
+    }
+
     sources
     {
         ../../src/main.cpp
+        ../../src/NodeIDTests.cpp
     }
 }
