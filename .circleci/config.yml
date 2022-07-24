@@ -16,22 +16,22 @@ jobs:
       - checkout:
           path: /projects/diplodocusdb/embedded-document-db
       - run:
-          name: Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine
+          name: "Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine"
           command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/build/gnumake && make
       - run:
-          name: Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests
+          name: "Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests"
           command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && make
       - run:
-          name: Run: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests
+          name: "Run: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests"
           command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBStorageEngineTests
       - run:
-          name: Build: DiplodocusDB EmbeddedDocumentDB
+          name: "Build: DiplodocusDB EmbeddedDocumentDB"
           command: cd /projects/diplodocusdb/embedded-document-db/database/build/gnumake && make
       - run:
-          name: Build: DiplodocusDB EmbeddedDocumentDB tests
+          name: "Build: DiplodocusDB EmbeddedDocumentDB tests"
           command: cd /projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && make
       - run:
-          name: Run: DiplodocusDB EmbeddedDocumentDB tests
+          name: "Run: DiplodocusDB EmbeddedDocumentDB tests"
           command: cd /projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBTests
 workflows:
   version: 2
