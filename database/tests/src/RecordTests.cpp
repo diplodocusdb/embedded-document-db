@@ -24,6 +24,7 @@
 #include "DiplodocusDB/EmbeddedDocumentDB/Record.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 
+using namespace DiplodocusDB;
 using namespace Ishiko;
 
 RecordTests::RecordTests(const TestNumber& number, const TestContext& context)
@@ -310,21 +311,21 @@ void RecordTests::ReadInlineValueBinaryTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadInlineValueBinaryTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eInlineValue);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.asValue(), DiplodocusDB::TreeDBValue::Binary("binary"));
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::eInlineValue);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.asValue(), Value::Binary("binary"));
     ISHIKO_TEST_PASS();
 }
 
@@ -332,21 +333,21 @@ void RecordTests::ReadInlineValueBooleanTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadInlineValueBooleanTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eInlineValue);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.asValue(), DiplodocusDB::TreeDBValue::Boolean(true));
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::eInlineValue);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.asValue(), Value::Boolean(true));
     ISHIKO_TEST_PASS();
 }
 
@@ -354,21 +355,21 @@ void RecordTests::ReadInlineValueUTF8StringTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadInlineValueUTF8StringTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eInlineValue);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.asValue(), DiplodocusDB::TreeDBValue::UTF8String("text"));
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::eInlineValue);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.asValue(), Value::UTF8String("text"));
     ISHIKO_TEST_PASS();
 }
 
@@ -378,20 +379,20 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record = DiplodocusDB::MasterFileMetadata();
+    Record record = MasterFileMetadata();
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -721,21 +722,20 @@ void RecordTests::WriteInlineValueBinaryTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInlineValue,
-        DiplodocusDB::TreeDBValue::Binary("binary"));
+    Record record(Record::ERecordType::eInlineValue, Value::Binary("binary"));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -753,21 +753,20 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInlineValue,
-        DiplodocusDB::TreeDBValue::Boolean(true));
+    Record record(DiplodocusDB::Record::ERecordType::eInlineValue, Value::Boolean(true));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -785,21 +784,20 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInlineValue, 
-        DiplodocusDB::TreeDBValue::UTF8String("text"));
+    Record record(DiplodocusDB::Record::ERecordType::eInlineValue, Value::UTF8String("text"));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
