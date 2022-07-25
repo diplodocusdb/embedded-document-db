@@ -71,9 +71,6 @@
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\XMLTreeDBTransactionImpl.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\EmbeddedTreeDBImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -125,9 +122,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\XMLTreeDBTransactionImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\EmbeddedTreeDBImpl.cpp">
