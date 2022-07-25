@@ -80,8 +80,8 @@ DIPLODOCUSDB_PHYSICALSTORAGE_ROOT ?= $(DIPLODOCUSDB)/physical-storage
 
 all: ../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDBStorageEngine-d,DiplodocusEmbeddedDocumentDBStorageEngine).a
 
-../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDBStorageEngine-d,DiplodocusEmbeddedDocumentDBStorageEngine).a: $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_Record.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordMarker.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_SecondaryFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_StorageEngineErrorCategory.o
-	$(AR) rc $@ $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_Record.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordMarker.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_SecondaryFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_StorageEngineErrorCategory.o
+../bakefile/../../../lib/lib$(if $(call _equal,$(config),Debug),DiplodocusEmbeddedDocumentDBStorageEngine-d,DiplodocusEmbeddedDocumentDBStorageEngine).a: $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_Record.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordMarker.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_SecondaryFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_StorageEngineErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_ValueCodec.o
+	$(AR) rc $@ $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_NodeID.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_Record.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_RecordMarker.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_SecondaryFile.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_StorageEngineErrorCategory.o $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_ValueCodec.o
 	$(RANLIB) $@
 
 $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_MasterFileMetadata.o: ../../src/MasterFileMetadata.cpp
@@ -104,6 +104,9 @@ $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_SecondaryFile.o: ../../src
 
 $(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_StorageEngineErrorCategory.o: ../../src/StorageEngineErrorCategory.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/StorageEngineErrorCategory.cpp
+
+$(_builddir)DiplodocusEmbeddedDocumentDBStorageEngine_ValueCodec.o: ../../src/ValueCodec.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I$(ISHIKO_CPP_ERRORS_ROOT)/include -I$(ISHIKO_CPP_BOOST_ROOT)/include -I$(DIPLODOCUSDB_PHYSICALSTORAGE_ROOT)/include -I$(DIPLODOCUSDB_CORE_ROOT)/include -I../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine -std=c++11 ../../src/ValueCodec.cpp
 
 clean:
 	rm -f $(_builddir)*.o

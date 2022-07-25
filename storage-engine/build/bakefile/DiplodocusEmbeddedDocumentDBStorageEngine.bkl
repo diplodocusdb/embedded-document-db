@@ -45,6 +45,7 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordMarker.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SecondaryFile.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/StorageEngineErrorCategory.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/ValueCodec.hpp
     }
 
     sources
@@ -56,5 +57,6 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../src/RecordMarker.cpp
         ../../src/SecondaryFile.cpp
         ../../src/StorageEngineErrorCategory.cpp
+        ../../src/ValueCodec.cpp
     }
 }
