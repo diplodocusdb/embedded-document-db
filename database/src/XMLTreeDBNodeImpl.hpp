@@ -8,6 +8,7 @@
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBNODEIMPL_HPP_
 
 #include "TreeDBNodeImpl.hpp"
+#include "XMLTreeDBNode.hpp"
 #include <pugixml.hpp>
 
 namespace DiplodocusDB
@@ -22,20 +23,16 @@ public:
     ~XMLTreeDBNodeImpl() override;
 
     bool isRoot() const override;
-    TreeDBNode parent(Ishiko::Error& error);
-    std::vector<TreeDBNode> childNodes(Ishiko::Error& error);
-    TreeDBNode child(const std::string& name, Ishiko::Error& error);
-    TreeDBNode previousSibling(Ishiko::Error& error);
-    TreeDBNode previousSibling(const std::string& name, Ishiko::Error& error);
-    TreeDBNode nextSibling(Ishiko::Error& error);
-    TreeDBNode nextSibling(const std::string& name, Ishiko::Error& error);
-    TreeDBNode insertChildNode(size_t index, const std::string& name, const Value& value, Ishiko::Error& error);
-    TreeDBNode insertChildNodeBefore(const TreeDBNode& nextChild, const std::string& name, const Value& value,
-        Ishiko::Error& error);
-    TreeDBNode insertChildNodeAfter(const TreeDBNode& previousChild, const std::string& name, const Value& value,
-        Ishiko::Error& error);
-    TreeDBNode appendChildNode(const std::string& name, const Value& value, Ishiko::Error& error);
-    TreeDBNode setChildNode(const std::string& name, const Value& value, Ishiko::Error& error);
+    XMLTreeDBNode parent(Ishiko::Error& error);
+    std::vector<XMLTreeDBNode> childNodes(Ishiko::Error& error);
+    XMLTreeDBNode child(const std::string& name, Ishiko::Error& error);
+    XMLTreeDBNode previousSibling(Ishiko::Error& error);
+    XMLTreeDBNode previousSibling(const std::string& name, Ishiko::Error& error);
+    XMLTreeDBNode nextSibling(Ishiko::Error& error);
+    XMLTreeDBNode nextSibling(const std::string& name, Ishiko::Error& error);
+    XMLTreeDBNode insertChildNode(size_t index, const std::string& name, const Value& value, Ishiko::Error& error);
+    XMLTreeDBNode appendChildNode(const std::string& name, const Value& value, Ishiko::Error& error);
+    XMLTreeDBNode setChildNode(const std::string& name, const Value& value, Ishiko::Error& error);
     size_t removeChildNode(const std::string& name, Ishiko::Error& error);
     size_t removeAllChildNodes(Ishiko::Error& error);
 
