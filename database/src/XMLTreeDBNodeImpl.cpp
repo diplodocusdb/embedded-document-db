@@ -29,37 +29,37 @@ bool XMLTreeDBNodeImpl::isRoot() const
     return (m_parent == nullptr);
 }
 
-TreeDBNode XMLTreeDBNodeImpl::parent(Ishiko::Error& error)
+XMLTreeDBNode XMLTreeDBNodeImpl::parent(Ishiko::Error& error)
 {
-    TreeDBNode result;
+    XMLTreeDBNode result;
     if (m_parent)
     {
-        result = TreeDBNode(m_parent->shared_from_this());
+        result = XMLTreeDBNode(m_parent->shared_from_this());
     }
     return result;
 }
 
-std::vector<TreeDBNode> XMLTreeDBNodeImpl::childNodes(Ishiko::Error& error)
+std::vector<XMLTreeDBNode> XMLTreeDBNodeImpl::childNodes(Ishiko::Error& error)
 {
-    std::vector<TreeDBNode> result;
+    std::vector<XMLTreeDBNode> result;
     loadChildren(error);
     for (std::shared_ptr<XMLTreeDBNodeImpl>& child : m_children)
     {
-        result.push_back(TreeDBNode(child));
+        result.push_back(XMLTreeDBNode(child));
     }
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::child(const std::string& name, Ishiko::Error& error)
+XMLTreeDBNode XMLTreeDBNodeImpl::child(const std::string& name, Ishiko::Error& error)
 {
-    TreeDBNode result;
+    XMLTreeDBNode result;
 
     loadChildren(error);
     for (std::shared_ptr<XMLTreeDBNodeImpl>& child : m_children)
     {
         if (child->name() == name)
         {
-            result = TreeDBNode(child);
+            result = XMLTreeDBNode(child);
             break;
         }
     }
@@ -67,21 +67,21 @@ TreeDBNode XMLTreeDBNodeImpl::child(const std::string& name, Ishiko::Error& erro
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::previousSibling(Ishiko::Error& error)
+XMLTreeDBNode XMLTreeDBNodeImpl::previousSibling(Ishiko::Error& error)
 {
-    TreeDBNode result;
+    XMLTreeDBNode result;
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::previousSibling(const std::string& name, Ishiko::Error& error)
+XMLTreeDBNode XMLTreeDBNodeImpl::previousSibling(const std::string& name, Ishiko::Error& error)
 {
-    TreeDBNode result;
+    XMLTreeDBNode result;
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
+XMLTreeDBNode XMLTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
 {
-    TreeDBNode result;
+    XMLTreeDBNode result;
 
     if (m_parent)
     {
@@ -92,7 +92,7 @@ TreeDBNode XMLTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
                 ++i;
                 if (i < m_parent->m_children.size())
                 {
-                    result = TreeDBNode(m_parent->m_children[i]);
+                    result = XMLTreeDBNode(m_parent->m_children[i]);
                 }
                 break;
             }
@@ -102,58 +102,42 @@ TreeDBNode XMLTreeDBNodeImpl::nextSibling(Ishiko::Error& error)
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::nextSibling(const std::string& name, Ishiko::Error& error)
+XMLTreeDBNode XMLTreeDBNodeImpl::nextSibling(const std::string& name, Ishiko::Error& error)
 {
     // TODO
-    TreeDBNode result;
+    XMLTreeDBNode result;
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::insertChildNode(size_t index, const std::string& name, const Value& value,
+XMLTreeDBNode XMLTreeDBNodeImpl::insertChildNode(size_t index, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     pugi::xml_node newNode = m_node.append_child(name.c_str());
     std::shared_ptr<XMLTreeDBNodeImpl> newNodeImpl = std::make_shared<XMLTreeDBNodeImpl>(this, newNode);
     newNodeImpl->value() = value;
     m_children.push_back(newNodeImpl);
-    return TreeDBNode(newNodeImpl);
+    return XMLTreeDBNode(newNodeImpl);
 }
 
-TreeDBNode XMLTreeDBNodeImpl::insertChildNodeBefore(const TreeDBNode& nextChild, const std::string& name,
-    const Value& value, Ishiko::Error& error)
-{
-    // TODO
-    TreeDBNode result;
-    return result;
-}
-
-TreeDBNode XMLTreeDBNodeImpl::insertChildNodeAfter(const TreeDBNode& previousChild, const std::string& name,
-    const Value& value, Ishiko::Error& error)
-{
-    // TODO
-    TreeDBNode result;
-    return result;
-}
-
-TreeDBNode XMLTreeDBNodeImpl::appendChildNode(const std::string& name, const Value& value, Ishiko::Error& error)
+XMLTreeDBNode XMLTreeDBNodeImpl::appendChildNode(const std::string& name, const Value& value, Ishiko::Error& error)
 {
     pugi::xml_node newNode = m_node.append_child(name.c_str());
     std::shared_ptr<XMLTreeDBNodeImpl> newNodeImpl = std::make_shared<XMLTreeDBNodeImpl>(this, newNode);
     newNodeImpl->value() = value;
     m_children.push_back(newNodeImpl);
-    return TreeDBNode(newNodeImpl);
+    return XMLTreeDBNode(newNodeImpl);
 }
 
-TreeDBNode XMLTreeDBNodeImpl::setChildNode(const std::string& name, const Value& value, Ishiko::Error& error)
+XMLTreeDBNode XMLTreeDBNodeImpl::setChildNode(const std::string& name, const Value& value, Ishiko::Error& error)
 {
-    TreeDBNode result;
+    XMLTreeDBNode result;
 
     loadChildren(error);
     for (size_t i = 0; i < m_children.size(); ++i)
     {
         if (m_children[i]->name() == name)
         {
-            result = TreeDBNode(m_children[i]);
+            result = XMLTreeDBNode(m_children[i]);
             m_children[i]->value() = value;
             break;
         }
@@ -164,7 +148,7 @@ TreeDBNode XMLTreeDBNodeImpl::setChildNode(const std::string& name, const Value&
         std::shared_ptr<XMLTreeDBNodeImpl> newNodeImpl = std::make_shared<XMLTreeDBNodeImpl>(this, newNode);
         newNodeImpl->value() = value;
         m_children.push_back(newNodeImpl);
-        result = TreeDBNode(newNodeImpl);
+        result = XMLTreeDBNode(newNodeImpl);
     }
 
     return result;
