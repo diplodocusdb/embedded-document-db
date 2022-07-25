@@ -7,7 +7,6 @@
 #include "EmbeddedDocumentDBTests.hpp"
 #include "TreeDBKeyTests.h"
 #include "NodeIDAllocatorTests.h"
-#include "RecordTests.h"
 #include "SiblingNodesRecordGroupTests.h"
 #include "SiblingNodesRecordGroupCacheTests.h"
 #include "MasterFileTests.h"
@@ -31,7 +30,6 @@ int main(int argc, char* argv[])
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<TreeDBKeyTests>();
     theTests.append<NodeIDAllocatorTests>();
-    theTests.append<RecordTests>();
     theTests.append<SiblingNodesRecordGroupTests>();
     theTests.append<SiblingNodesRecordGroupCacheTests>();
     theTests.append<MasterFileTests>();

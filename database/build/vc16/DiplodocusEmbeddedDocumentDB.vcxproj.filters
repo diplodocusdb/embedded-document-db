@@ -59,9 +59,6 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\linkoptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\Record.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\XMLTreeDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -152,9 +149,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MasterFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Record.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
