@@ -382,6 +382,7 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -413,6 +414,7 @@ void RecordTests::WriteDataStartTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -444,6 +446,7 @@ void RecordTests::WriteDataEndTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -475,6 +478,7 @@ void RecordTests::WriteNodeStartTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -506,6 +510,7 @@ void RecordTests::WriteNodeEndTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -537,6 +542,7 @@ void RecordTests::WriteParentNodeIDTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -568,6 +574,7 @@ void RecordTests::WriteNodeNameTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -601,6 +608,7 @@ void RecordTests::WriteNodeNameTest2(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -632,6 +640,7 @@ void RecordTests::WriteNodeIDTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -663,6 +672,7 @@ void RecordTests::WriteNodeIDTest2(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -694,6 +704,7 @@ void RecordTests::WritePersistentNodeIDTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -725,6 +736,7 @@ void RecordTests::WriteInlineValueBinaryTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -756,6 +768,7 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
@@ -787,6 +800,7 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.save(*page, error);
+    repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);

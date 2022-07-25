@@ -6,6 +6,7 @@
 
 #include "Record.hpp"
 #include "StorageEngineErrorCategory.hpp"
+#include "ValueCodec.hpp"
 
 using namespace DiplodocusDB;
 
@@ -91,11 +92,11 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eNodeName:
-        m_data = readString(reader, error);
+        m_data = ValueCodec::ReadString(reader, error);
         break;
 
     case ERecordType::eInlineValue:
-        m_data = readInlineValue(reader, error);
+        m_data = ValueCodec::ReadInlineValue(reader, error);
         break;
 
     default:
@@ -122,117 +123,11 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
         break;
 
     case ERecordType::eNodeName:
-        writeString(writer, boost::get<std::string>(m_data), error);
+        ValueCodec::WriteString(writer, boost::get<std::string>(m_data), error);
         break;
 
     case ERecordType::eInlineValue:
-        writeInlineValue(writer, boost::get<Value>(m_data), error);
+        ValueCodec::WriteInlineValue(writer, boost::get<Value>(m_data), error);
         break;
-    }
-}
-
-Value Record::readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error)
-{
-    Value result;
-    DataType type = readDataType(reader, error);
-    if (!error)
-    {
-        switch (type.primitiveType())
-        {
-        case PrimitiveDataType::binary:
-            result.setBinary(readString(reader, error));
-            break;
-
-        case PrimitiveDataType::boolean:
-            result.setBoolean(readBoolean(reader, error));
-            break;
-
-        case PrimitiveDataType::unicodeString:
-            result.setUTF8String(readString(reader, error));
-            break;
-        }
-    }
-    return result;
-}
-
-void Record::writeInlineValue(PageRepositoryWriter& writer, const Value& value, Ishiko::Error& error)
-{
-    writeDataType(writer, value.type(), error);
-    if (!error)
-    {
-        switch (value.type().primitiveType())
-        {
-        case PrimitiveDataType::binary:
-            writeString(writer, value.asBinary(), error);
-            break;
-
-        case PrimitiveDataType::boolean:
-            writeBoolean(writer, value.asBoolean(), error);
-            break;
-
-        case PrimitiveDataType::unicodeString:
-            writeString(writer, value.asUTF8String(), error);
-            break;
-        }
-    }
-}
-
-DataType Record::readDataType(PageRepositoryReader& reader, Ishiko::Error& error)
-{
-    DataType result(PrimitiveDataType::null);
-    char buffer;
-    reader.read(&buffer, 1, error);
-    if (!error)
-    {
-        result = DataType((PrimitiveDataType)(buffer & 0x3F), (DataTypeModifier)(buffer >> 6));
-    }
-    return result;
-}
-
-void Record::writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error)
-{
-    uint8_t primitiveType = (uint8_t)dataType.primitiveType();
-    uint8_t typeModifier = (uint8_t)dataType.modifier();
-    uint8_t type = ((primitiveType & 0x3F) | (typeModifier << 6));
-    writer.write((char*)&type, 1, error);
-}
-
-bool Record::readBoolean(PageRepositoryReader& reader, Ishiko::Error& error)
-{
-    char data;
-    reader.read(&data, 1, error);
-    return data;
-}
-
-void Record::writeBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error& error)
-{
-    if (data)
-    {
-        writer.write("\x1", 1, error);
-    }
-    else
-    {
-        writer.write("\x0", 1, error);
-    }
-}
-
-std::string Record::readString(PageRepositoryReader& reader, Ishiko::Error& error)
-{
-    std::string name;
-    size_t size = reader.readLEB128(error);
-    if (!error)
-    {
-        name.resize(size);
-        reader.read(&name[0], size, error);
-    }
-    return name;
-}
-
-void Record::writeString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error)
-{
-    writer.writeLEB128(data.size(), error);
-    if (!error)
-    {
-        writer.write(data.c_str(), data.size(), error);
     }
 }
