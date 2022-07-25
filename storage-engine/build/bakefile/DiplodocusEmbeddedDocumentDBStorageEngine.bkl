@@ -40,17 +40,21 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/linkoptions.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeID.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/MasterFileMetadata.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/Record.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordMarker.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SecondaryFile.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/StorageEngineErrorCategory.hpp
     }
 
     sources
     {
         ../../src/MasterFileMetadata.cpp
         ../../src/NodeID.cpp
+        ../../src/Record.cpp
         ../../src/RecordFile.cpp
         ../../src/RecordMarker.cpp
         ../../src/SecondaryFile.cpp
+        ../../src/StorageEngineErrorCategory.cpp
     }
 }

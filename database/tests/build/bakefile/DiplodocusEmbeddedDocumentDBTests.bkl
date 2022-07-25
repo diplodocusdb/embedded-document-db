@@ -31,7 +31,6 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/TreeDBKeyTests.h
         ../../src/XMLTreeDBTests/XMLTreeDBTests.h
         ../../src/NodeIDAllocatorTests.h
-        ../../src/RecordTests.h
         ../../src/SiblingNodesRecordGroupTests.h
         ../../src/SiblingNodesRecordGroupCacheTests.h
         ../../src/MasterFileTests.h
@@ -47,7 +46,6 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
         ../../src/TreeDBKeyTests.cpp
         ../../src/XMLTreeDBTests/XMLTreeDBTests.cpp
         ../../src/NodeIDAllocatorTests.cpp
-        ../../src/RecordTests.cpp
         ../../src/SiblingNodesRecordGroupTests.cpp
         ../../src/SiblingNodesRecordGroupCacheTests.cpp
         ../../src/MasterFileTests.cpp
