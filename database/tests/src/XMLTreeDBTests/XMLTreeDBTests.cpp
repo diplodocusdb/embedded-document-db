@@ -98,11 +98,11 @@ void XMLTreeDBTests::OpenTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode& node = db.root();
+    DiplodocusDB::XMLTreeDBNode& node = db.root();
 
     ISHIKO_TEST_FAIL_IF_NOT(node.isRoot());
 
-    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(node, error);
+    std::vector<DiplodocusDB::XMLTreeDBNode> children = db.childNodes(node, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(children.size(), 0);
@@ -120,7 +120,7 @@ void XMLTreeDBTests::OpenTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode node = db.child(db.root(), "key1", error);
+    XMLTreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -142,7 +142,7 @@ void XMLTreeDBTests::OpenTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    TreeDBNode node = db.child(db.root(), "key1", error);
+    XMLTreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -164,11 +164,11 @@ void XMLTreeDBTests::OpenTest5(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode node1 = db.child(db.root(), "key1", error);
+    XMLTreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
     
-    TreeDBNode node2 = db.child(db.root(), "key2", error);
+    XMLTreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -196,7 +196,7 @@ void XMLTreeDBTests::OpenTest6(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode node = db.child(db.root(), "key1", error);
+    XMLTreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -218,11 +218,11 @@ void XMLTreeDBTests::OpenTest7(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode node1 = db.child(db.root(), "key1", error);
+    XMLTreeDBNode node1 = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
     
-    TreeDBNode node2 = db.child(db.root(), "key2", error);
+    XMLTreeDBNode node2 = db.child(db.root(), "key2", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -249,7 +249,7 @@ void XMLTreeDBTests::OpenTest8(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    TreeDBNode node = db.child(db.root(), "key1", error);
+    XMLTreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -271,7 +271,7 @@ void XMLTreeDBTests::OpenTest9(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    TreeDBNode node = db.child(db.root(), "key1", error);
+    XMLTreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -293,7 +293,7 @@ void XMLTreeDBTests::OpenTest10(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    TreeDBNode node = db.child(db.root(), "key1", error);
+    XMLTreeDBNode node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -315,7 +315,7 @@ void XMLTreeDBTests::ParentTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode parent = db.parent(db.root(), error);
+    DiplodocusDB::XMLTreeDBNode parent = db.parent(db.root(), error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF(parent);
@@ -333,12 +333,12 @@ void XMLTreeDBTests::ParentTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode childNode = db.child(db.root(), "key1", error);
+    DiplodocusDB::XMLTreeDBNode childNode = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(childNode);
     
-    DiplodocusDB::TreeDBNode parentNode = db.parent(childNode, error);
+    DiplodocusDB::XMLTreeDBNode parentNode = db.parent(childNode, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(parentNode, db.root());
@@ -356,7 +356,7 @@ void XMLTreeDBTests::ChildNodesTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(db.root(), error);
+    std::vector<DiplodocusDB::XMLTreeDBNode> children = db.childNodes(db.root(), error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(children.empty());
@@ -374,7 +374,7 @@ void XMLTreeDBTests::ChildNodesTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF((bool)error);
     
-    std::vector<DiplodocusDB::TreeDBNode> children = db.childNodes(db.root(), error);
+    std::vector<DiplodocusDB::XMLTreeDBNode> children = db.childNodes(db.root(), error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(children.size(), 1);
@@ -392,7 +392,7 @@ void XMLTreeDBTests::NextSiblingTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode nextSibling = db.nextSibling(db.root(), error);
+    DiplodocusDB::XMLTreeDBNode nextSibling = db.nextSibling(db.root(), error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF(nextSibling);
@@ -410,12 +410,12 @@ void XMLTreeDBTests::NextSiblingTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode key1Node = db.child(db.root(), "key1", error);
+    XMLTreeDBNode key1Node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(key1Node);
 
-    TreeDBNode nextSibling = db.nextSibling(key1Node, error);
+    XMLTreeDBNode nextSibling = db.nextSibling(key1Node, error);
     
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF(nextSibling);
@@ -433,12 +433,12 @@ void XMLTreeDBTests::NextSiblingTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode key1Node = db.child(db.root(), "key1", error);
+    XMLTreeDBNode key1Node = db.child(db.root(), "key1", error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(key1Node);
 
-    TreeDBNode nextSibling = db.nextSibling(key1Node, error);
+    XMLTreeDBNode nextSibling = db.nextSibling(key1Node, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(nextSibling);
@@ -466,7 +466,7 @@ void XMLTreeDBTests::InsertChildNodeTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node = db.insertChildNode(db.root(), 0, "key1", error);
+    DiplodocusDB::XMLTreeDBNode node = db.insertChildNode(db.root(), 0, "key1", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -487,7 +487,7 @@ void XMLTreeDBTests::AppendChildNodeTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node = db.appendChildNode(db.root(), "key1", error);
+    DiplodocusDB::XMLTreeDBNode node = db.appendChildNode(db.root(), "key1", error);
         
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -508,11 +508,11 @@ void XMLTreeDBTests::AppendChildNodeTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
+    DiplodocusDB::XMLTreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
     
     ISHIKO_TEST_FAIL_IF(error);
         
-    DiplodocusDB::TreeDBNode node2 = db.appendChildNode(db.root(), "key2", error);
+    DiplodocusDB::XMLTreeDBNode node2 = db.appendChildNode(db.root(), "key2", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -533,7 +533,7 @@ void XMLTreeDBTests::AppendChildNodeTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode node = db.appendChildNode(db.root(), "key1", Value::UTF8String("value1"), error);
+    XMLTreeDBNode node = db.appendChildNode(db.root(), "key1", Value::UTF8String("value1"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
    
@@ -554,11 +554,11 @@ void XMLTreeDBTests::AppendChildNodeTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode node1 = db.appendChildNode(db.root(), "key1", Value::UTF8String("value1"), error);
+    XMLTreeDBNode node1 = db.appendChildNode(db.root(), "key1", Value::UTF8String("value1"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
         
-    TreeDBNode node2 = db.appendChildNode(db.root(), "key2", Value::UTF8String("value2"), error);
+    XMLTreeDBNode node2 = db.appendChildNode(db.root(), "key2", Value::UTF8String("value2"), error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -583,7 +583,7 @@ void XMLTreeDBTests::AppendChildNodeTest5(Test& test)
     {
         std::stringstream key;
         key << "key" << i;
-        TreeDBNode node = db.appendChildNode(db.root(), key.str(), error);
+        XMLTreeDBNode node = db.appendChildNode(db.root(), key.str(), error);
         if (error)
         {
             break;
@@ -613,11 +613,11 @@ void XMLTreeDBTests::AppendChildNodeTest6(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
+    DiplodocusDB::XMLTreeDBNode node1 = db.appendChildNode(db.root(), "key1", error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::TreeDBNode node2 = db.appendChildNode(node1, "key2", error);
+    DiplodocusDB::XMLTreeDBNode node2 = db.appendChildNode(node1, "key2", error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -638,11 +638,11 @@ void XMLTreeDBTests::AppendChildNodeTest7(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode node1 = db.appendChildNode(db.root(), "key1", Value::UTF8String("value1"), error);
+    XMLTreeDBNode node1 = db.appendChildNode(db.root(), "key1", Value::UTF8String("value1"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    TreeDBNode node2 = db.appendChildNode(node1, "key2", error);
+    XMLTreeDBNode node2 = db.appendChildNode(node1, "key2", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -663,7 +663,7 @@ void XMLTreeDBTests::AppendChildNodeTest8(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    TreeDBNode node = db.appendChildNode(db.root(), "key1", Value::UnsignedInt64(123), error);
+    XMLTreeDBNode node = db.appendChildNode(db.root(), "key1", Value::UnsignedInt64(123), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -684,7 +684,7 @@ void XMLTreeDBTests::AppendChildNodeTest9(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    TreeDBNode node = db.appendChildNode(db.root(), "key1", Value::Double(123.45), error);
+    XMLTreeDBNode node = db.appendChildNode(db.root(), "key1", Value::Double(123.45), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -705,7 +705,7 @@ void XMLTreeDBTests::AppendChildNodeTest10(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    TreeDBNode node = db.appendChildNode(db.root(), "key1", Value::Date(boost::gregorian::date(2021, 12, 25)), error);
+    XMLTreeDBNode node = db.appendChildNode(db.root(), "key1", Value::Date(boost::gregorian::date(2021, 12, 25)), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -726,7 +726,7 @@ void XMLTreeDBTests::SetChildNodeTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node = db.setChildNode(db.root(), "key1", error);
+    DiplodocusDB::XMLTreeDBNode node = db.setChildNode(db.root(), "key1", error);
         
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -747,11 +747,11 @@ void XMLTreeDBTests::SetChildNodeTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    DiplodocusDB::TreeDBNode node1 = db.setChildNode(db.root(), "key1", error);
+    DiplodocusDB::XMLTreeDBNode node1 = db.setChildNode(db.root(), "key1", error);
    
     ISHIKO_TEST_FAIL_IF(error);
         
-    DiplodocusDB::TreeDBNode node2 = db.setChildNode(db.root(), "key1", error);
+    DiplodocusDB::XMLTreeDBNode node2 = db.setChildNode(db.root(), "key1", error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
