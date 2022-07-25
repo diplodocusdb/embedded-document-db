@@ -92,11 +92,11 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
         break;
 
     case ERecordType::eNodeName:
-        m_data = ValueCodec::readString(reader, error);
+        m_data = ValueCodec::ReadString(reader, error);
         break;
 
     case ERecordType::eInlineValue:
-        m_data = ValueCodec::readInlineValue(reader, error);
+        m_data = ValueCodec::ReadInlineValue(reader, error);
         break;
 
     default:
@@ -123,11 +123,11 @@ void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
         break;
 
     case ERecordType::eNodeName:
-        ValueCodec::writeString(writer, boost::get<std::string>(m_data), error);
+        ValueCodec::WriteString(writer, boost::get<std::string>(m_data), error);
         break;
 
     case ERecordType::eInlineValue:
-        ValueCodec::writeInlineValue(writer, boost::get<Value>(m_data), error);
+        ValueCodec::WriteInlineValue(writer, boost::get<Value>(m_data), error);
         break;
     }
 }

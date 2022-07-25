@@ -17,14 +17,14 @@ namespace DiplodocusDB
 class ValueCodec
 {
 public:
-    static Value readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error);
-    static void writeInlineValue(PageRepositoryWriter& writer, const Value& value, Ishiko::Error& error);
-    static DataType readDataType(PageRepositoryReader& reader, Ishiko::Error& error);
-    static void writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error);
-    static bool readBoolean(PageRepositoryReader& reader, Ishiko::Error& error);
-    static void writeBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error& error);
-    static std::string readString(PageRepositoryReader& reader, Ishiko::Error& error);
-    static void writeString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error);
+    static Value ReadInlineValue(PageRepositoryReader& reader, Ishiko::Error& error);
+    static void WriteInlineValue(PageRepositoryWriter& writer, const Value& value, Ishiko::Error& error);
+    static DataType ReadDataType(PageRepositoryReader& reader, Ishiko::Error& error);
+    static void WriteDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error);
+    static bool ReadBoolean(PageRepositoryReader& reader, Ishiko::Error& error);
+    static void WriteBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error& error);
+    static std::string ReadString(PageRepositoryReader& reader, Ishiko::Error& error);
+    static void WriteString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error);
 };
 
 }

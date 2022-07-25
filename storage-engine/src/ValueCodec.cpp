@@ -8,53 +8,53 @@
 
 using namespace DiplodocusDB;
 
-Value ValueCodec::readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error)
+Value ValueCodec::ReadInlineValue(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     Value result;
-    DataType type = readDataType(reader, error);
+    DataType type = ReadDataType(reader, error);
     if (!error)
     {
         switch (type.primitiveType())
         {
         case PrimitiveDataType::binary:
-            result.setBinary(readString(reader, error));
+            result.setBinary(ReadString(reader, error));
             break;
 
         case PrimitiveDataType::boolean:
-            result.setBoolean(readBoolean(reader, error));
+            result.setBoolean(ReadBoolean(reader, error));
             break;
 
         case PrimitiveDataType::unicodeString:
-            result.setUTF8String(readString(reader, error));
+            result.setUTF8String(ReadString(reader, error));
             break;
         }
     }
     return result;
 }
 
-void ValueCodec::writeInlineValue(PageRepositoryWriter& writer, const Value& value, Ishiko::Error& error)
+void ValueCodec::WriteInlineValue(PageRepositoryWriter& writer, const Value& value, Ishiko::Error& error)
 {
-    writeDataType(writer, value.type(), error);
+    WriteDataType(writer, value.type(), error);
     if (!error)
     {
         switch (value.type().primitiveType())
         {
         case PrimitiveDataType::binary:
-            writeString(writer, value.asBinary(), error);
+            WriteString(writer, value.asBinary(), error);
             break;
 
         case PrimitiveDataType::boolean:
-            writeBoolean(writer, value.asBoolean(), error);
+            WriteBoolean(writer, value.asBoolean(), error);
             break;
 
         case PrimitiveDataType::unicodeString:
-            writeString(writer, value.asUTF8String(), error);
+            WriteString(writer, value.asUTF8String(), error);
             break;
         }
     }
 }
 
-DataType ValueCodec::readDataType(PageRepositoryReader& reader, Ishiko::Error& error)
+DataType ValueCodec::ReadDataType(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     DataType result(PrimitiveDataType::null);
     char buffer;
@@ -66,7 +66,7 @@ DataType ValueCodec::readDataType(PageRepositoryReader& reader, Ishiko::Error& e
     return result;
 }
 
-void ValueCodec::writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error)
+void ValueCodec::WriteDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error)
 {
     uint8_t primitiveType = (uint8_t)dataType.primitiveType();
     uint8_t typeModifier = (uint8_t)dataType.modifier();
@@ -74,14 +74,14 @@ void ValueCodec::writeDataType(PageRepositoryWriter& writer, const DataType& dat
     writer.write((char*)&type, 1, error);
 }
 
-bool ValueCodec::readBoolean(PageRepositoryReader& reader, Ishiko::Error& error)
+bool ValueCodec::ReadBoolean(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     char data;
     reader.read(&data, 1, error);
     return data;
 }
 
-void ValueCodec::writeBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error& error)
+void ValueCodec::WriteBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error& error)
 {
     if (data)
     {
@@ -93,7 +93,7 @@ void ValueCodec::writeBoolean(PageRepositoryWriter& writer, bool data, Ishiko::E
     }
 }
 
-std::string ValueCodec::readString(PageRepositoryReader& reader, Ishiko::Error& error)
+std::string ValueCodec::ReadString(PageRepositoryReader& reader, Ishiko::Error& error)
 {
     std::string name;
     size_t size = reader.readLEB128(error);
@@ -105,7 +105,7 @@ std::string ValueCodec::readString(PageRepositoryReader& reader, Ishiko::Error& 
     return name;
 }
 
-void ValueCodec::writeString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error)
+void ValueCodec::WriteString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error)
 {
     writer.writeLEB128(data.size(), error);
     if (!error)
