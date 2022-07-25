@@ -17,7 +17,7 @@ namespace DiplodocusDB
 
 class XMLTreeDBImpl;
 
-class XMLTreeDB : public TreeDB
+class XMLTreeDB
 {
 public:
     XMLTreeDB();
@@ -27,55 +27,51 @@ public:
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
-    TreeDBNode& root() override;
+    TreeDBNode& root();
 
-    Value value(TreeDBNode& node, Ishiko::Error& error) override;
-    Value value(TreeDBNode& node, const DataType& type, Ishiko::Error& error) override;
-    Value childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
-    Value childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
-        Ishiko::Error& error) override;
+    Value value(TreeDBNode& node, Ishiko::Error& error);
+    Value value(TreeDBNode& node, const DataType& type, Ishiko::Error& error);
+    Value childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
+    Value childValue(TreeDBNode& parent, const std::string& name, const DataType& type, Ishiko::Error& error);
 
-    TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) override;
-    std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error) override;
-    TreeDBNode child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
-    TreeDBNode previousSibling(TreeDBNode& node, Ishiko::Error& error) override;
-    TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error) override;
-    TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error) override;
-    TreeDBNode nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error) override;
+    TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error);
+    std::vector<TreeDBNode> childNodes(TreeDBNode& parent, Ishiko::Error& error);
+    TreeDBNode child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
+    TreeDBNode previousSibling(TreeDBNode& node, Ishiko::Error& error);
+    TreeDBNode previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
+    TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error);
+    TreeDBNode nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
 
     void traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*callback)(TreeDB& db, TreeDBNode& node),
-        void* callbackData) override;
+        void* callbackData);
 
-    TreeDBTransaction createTransaction(Ishiko::Error& error) override;
-    void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error) override;
-    void rollbackTransaction(TreeDBTransaction& transaction) override;
+    TreeDBTransaction createTransaction(Ishiko::Error& error);
+    void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error);
+    void rollbackTransaction(TreeDBTransaction& transaction);
 
-    void setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error) override;
+    void setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error);
 
-    TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
-        Ishiko::Error& error) override;
+    TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error);
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, const Value& value,
-        Ishiko::Error& error) override;
+        Ishiko::Error& error);
     TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
-        Ishiko::Error& error) override;
-    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name, 
-        const Value& value, Ishiko::Error& error) override;
+        Ishiko::Error& error);
+    TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
+        const Value& value, Ishiko::Error& error);
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
-        Ishiko::Error& error) override;
+        Ishiko::Error& error);
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
-        const Value& value, Ishiko::Error& error) override;
-    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
+        const Value& value, Ishiko::Error& error);
+    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
-        Ishiko::Error& error) override;
-    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
-        Ishiko::Error& error) override;
+        Ishiko::Error& error);
+    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value, Ishiko::Error& error);
     TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
-        const Value& value, Ishiko::Error& error) override;
-    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
-    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
-        Ishiko::Error& error) override;
-    size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
-    size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error) override;
+        const Value& value, Ishiko::Error& error);
+    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
+    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const Value& value, Ishiko::Error& error);
+    size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error);
+    size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
 
 private:
     std::shared_ptr<XMLTreeDBImpl> m_impl;
