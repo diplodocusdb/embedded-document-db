@@ -5,6 +5,7 @@
 */
 
 #include "ValueCodec.hpp"
+#include <Ishiko/Memory.hpp>
 
 using namespace DiplodocusDB;
 
@@ -61,14 +62,69 @@ DataType ValueCodec::ReadDataType(PageRepositoryReader& reader, Ishiko::Error& e
     reader.read(&buffer, 1, error);
     if (!error)
     {
-        result = DataType((PrimitiveDataType)(buffer & 0x3F), (DataTypeModifier)(buffer >> 6));
+        PrimitiveDataType primitiveType;
+        switch (buffer & 0x3F)
+        {
+        case 0:
+        case 1:
+        case 2:
+            primitiveType = (PrimitiveDataType)(buffer & 0x3F);
+            break;
+
+        case 18:
+            primitiveType = PrimitiveDataType::unicodeString;
+
+            // TODO: other values
+        }
+        result = DataType(primitiveType, (DataTypeModifier)(buffer >> 6));
     }
     return result;
 }
 
 void ValueCodec::WriteDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error)
 {
-    uint8_t primitiveType = (uint8_t)dataType.primitiveType();
+    Ishiko::Byte primitiveType;
+    switch (dataType.primitiveType())
+    {
+    case PrimitiveDataType::null:
+    case PrimitiveDataType::binary:
+    case PrimitiveDataType::boolean:
+        primitiveType = (Ishiko::Byte)dataType.primitiveType();
+        break;
+
+        // TODO
+            /*
+            PrimitiveDataType::int8bit
+            PrimitiveDataType::int16bit
+            PrimitiveDataType::int32bit
+            PrimitiveDataType::int64bit
+            PrimitiveDataType::intInfinite
+
+            PrimitiveDataType::unsignedInt8bit
+            PrimitiveDataType::unsignedInt16bit
+            PrimitiveDataType::unsignedInt32bit
+            PrimitiveDataType::unsignedInt64bit
+            PrimitiveDataType::unsignedIntInfinite
+
+            PrimitiveDataType::IEEE754Binary16
+            PrimitiveDataType::IEEE754Binary32
+            PrimitiveDataType::IEEE754Binary64
+            PrimitiveDataType::IEEE754Binary128
+            PrimitiveDataType::IEEE754Binary256
+            */
+
+    case PrimitiveDataType::unicodeString:
+        primitiveType = 18;
+        break;
+
+        // TODO
+                /*
+            PrimitiveDataType::universalDateTime
+            PrimitiveDataType::localDateTime
+            PrimitiveDataType::date
+            PrimitiveDataType::timeOfDay*/
+    }
+  
     uint8_t typeModifier = (uint8_t)dataType.modifier();
     uint8_t type = ((primitiveType & 0x3F) | (typeModifier << 6));
     writer.write((char*)&type, 1, error);
