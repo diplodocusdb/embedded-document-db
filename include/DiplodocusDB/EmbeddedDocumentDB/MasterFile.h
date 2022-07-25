@@ -25,7 +25,6 @@
 
 #include "Record.h"
 #include "SiblingNodesRecordGroup.h"
-#include "TreeDBKey.hpp"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include <boost/filesystem/path.hpp>

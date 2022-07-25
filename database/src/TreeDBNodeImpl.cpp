@@ -6,8 +6,7 @@
 
 #include "TreeDBNodeImpl.hpp"
 
-namespace DiplodocusDB
-{
+using namespace DiplodocusDB;
 
 TreeDBNodeImpl::TreeDBNodeImpl(const std::string& name)
     : m_name(name)
@@ -19,14 +18,12 @@ const std::string& TreeDBNodeImpl::name() const
     return m_name;
 }
 
-const TreeDBValue& TreeDBNodeImpl::value() const
+const Value& TreeDBNodeImpl::value() const
 {
     return m_value;
 }
 
-TreeDBValue& TreeDBNodeImpl::value()
+Value& TreeDBNodeImpl::value()
 {
     return m_value;
-}
-
 }

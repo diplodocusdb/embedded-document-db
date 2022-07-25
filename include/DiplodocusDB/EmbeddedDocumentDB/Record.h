@@ -23,8 +23,8 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORD_H_
 
-#include "TreeDBValue.hpp"
 #include <boost/variant.hpp>
+#include <DiplodocusDB/Core.hpp>
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
 #include <Ishiko/Errors.hpp>
@@ -133,21 +133,21 @@ public:
 
     Record(ERecordType type);
     Record(ERecordType type, const NodeID& data);
-    Record(ERecordType type, const TreeDBValue& data);
+    Record(ERecordType type, const Value& data);
     Record(const MasterFileMetadata& data);
     Record(const std::string& data);
 
     ERecordType type() const;
     const NodeID& asNodeID() const;
     const std::string& asString() const;
-    const TreeDBValue& asValue() const;
+    const Value& asValue() const;
 
     void read(PageRepositoryReader& reader, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
-    static TreeDBValue readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error);
-    static void writeInlineValue(PageRepositoryWriter& writer, const TreeDBValue& value, Ishiko::Error& error);
+    static Value readInlineValue(PageRepositoryReader& reader, Ishiko::Error& error);
+    static void writeInlineValue(PageRepositoryWriter& writer, const Value& value, Ishiko::Error& error);
     static DataType readDataType(PageRepositoryReader& reader, Ishiko::Error& error);
     static void writeDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error);
     static bool readBoolean(PageRepositoryReader& reader, Ishiko::Error& error);
@@ -157,7 +157,7 @@ private:
 
 private:
     Record::ERecordType m_type;
-    boost::variant<MasterFileMetadata, NodeID, std::string, TreeDBValue> m_data;
+    boost::variant<MasterFileMetadata, NodeID, std::string, Value> m_data;
 };
 
 }

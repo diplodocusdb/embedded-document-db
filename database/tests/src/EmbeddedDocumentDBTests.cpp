@@ -97,7 +97,7 @@ void EmbeddedDocumentDBTests::OpenTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    TreeDBValue value = db.value(node, error);
+    Value value = db.value(node, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(value.type(), DiplodocusDB::PrimitiveDataType::null);
@@ -117,7 +117,7 @@ void EmbeddedDocumentDBTests::OpenTest3(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    TreeDBValue value1 = db.value(node1, error);
+    Value value1 = db.value(node1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(value1.type(), PrimitiveDataType::null);
@@ -126,7 +126,7 @@ void EmbeddedDocumentDBTests::OpenTest3(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    TreeDBValue value2 = db.value(node2, error);
+    Value value2 = db.value(node2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(value2.type(), PrimitiveDataType::null);
@@ -452,7 +452,7 @@ void EmbeddedDocumentDBTests::AppendChildNodeTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    TreeDBNode node = db.appendChildNode(db.root(), "key1", TreeDBValue::UTF8String("value1"), error);
+    TreeDBNode node = db.appendChildNode(db.root(), "key1", Value::UTF8String("value1"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -473,11 +473,11 @@ void EmbeddedDocumentDBTests::AppendChildNodeTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    TreeDBNode node1 = db.appendChildNode(db.root(), "key1", TreeDBValue::UTF8String("value1"), error);
+    TreeDBNode node1 = db.appendChildNode(db.root(), "key1", Value::UTF8String("value1"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    TreeDBNode node2 = db.appendChildNode(db.root(), "key2", TreeDBValue::UTF8String("value2"), error);
+    TreeDBNode node2 = db.appendChildNode(db.root(), "key2", Value::UTF8String("value2"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 

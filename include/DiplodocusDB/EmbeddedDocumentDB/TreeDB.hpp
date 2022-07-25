@@ -8,8 +8,8 @@
 #define _DIPLODOCUSDB_TREEDB_CORE_TREEDB_HPP_
 
 #include "TreeDBNode.hpp"
-#include "TreeDBValue.hpp"
 #include "TreeDBTransaction.hpp"
+#include <DiplodocusDB/Core.hpp>
 #include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
@@ -36,10 +36,10 @@ public:
     /// Returns the root of the tree.
     virtual TreeDBNode& root() = 0;
 
-    virtual TreeDBValue value(TreeDBNode& node, Ishiko::Error& error) = 0;
-    virtual TreeDBValue value(TreeDBNode& node, const DataType& type, Ishiko::Error& error) = 0;
-    virtual TreeDBValue childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
-    virtual TreeDBValue childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+    virtual Value value(TreeDBNode& node, Ishiko::Error& error) = 0;
+    virtual Value value(TreeDBNode& node, const DataType& type, Ishiko::Error& error) = 0;
+    virtual Value childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) = 0;
+    virtual Value childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
         Ishiko::Error& error) = 0;
 
     virtual TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) = 0;
@@ -65,7 +65,7 @@ public:
         @param value The new value of the node.
         @param error The result of the operation.
     */
-    virtual void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error) = 0;
+    virtual void setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error) = 0;
 
     /// Inserts a new child node at a given position and returns a handle to the new child.
     /**
@@ -95,7 +95,7 @@ public:
         @returns A handle to the new child node.
     */
     virtual TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error) = 0;
+        const Value& value, Ishiko::Error& error) = 0;
     /// Inserts a new child node before an existing child node and returns a handle to the new child.
     /**
         The new node has a NULL value.
@@ -124,7 +124,7 @@ public:
         @returns A handle to the new child node.
     */
     virtual TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error) = 0;
+        const Value& value, Ishiko::Error& error) = 0;
     /// Inserts a new child node after an existing child node and returns a handle to the new child.
     /**
         The new node has a NULL value.
@@ -153,7 +153,7 @@ public:
         @returns A handle to the new child node.
     */
     virtual TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error) = 0;
+        const Value& value, Ishiko::Error& error) = 0;
     /// Inserts a new child node after the last existing child node and returns a handle to the new child.
     /**
         The new node has a NULL value.
@@ -180,10 +180,10 @@ public:
         @param error The result of the operation.
         @returns A handle to the new child node.
     */
-    virtual TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    virtual TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
         Ishiko::Error& error) = 0;
     virtual TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error) = 0;
+        const Value& value, Ishiko::Error& error) = 0;
     /// Clears the value of the first node with the given name or appends a new node if no node with this name exists.
     /**
         If a node with the given name exists then its value is cleared and a handle to this node is returned. If
@@ -216,7 +216,7 @@ public:
         @param error The result of the operation.
         @returns A handle to the child node.
     */
-    virtual TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    virtual TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
         Ishiko::Error& error) = 0;
     /// Removes the first child node with the given name.
     /**

@@ -24,6 +24,7 @@
 #include "DiplodocusDB/EmbeddedDocumentDB/MasterFile.h"
 #include <sstream>
 
+using namespace DiplodocusDB;
 using namespace Ishiko;
 
 MasterFileTests::MasterFileTests(const TestNumber& number, const TestContext& context)
@@ -428,14 +429,14 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest9(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Create a node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
-    newNode.value() = DiplodocusDB::TreeDBValue::UTF8String("value1");
+    EmbeddedTreeDBNodeImpl newNode(NodeID(1), NodeID(0), "key1");
+    newNode.value() = Value::UTF8String("value1");
     masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode), error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -452,17 +453,17 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest10(Test& test)
     
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Create a node whose parent is the root (ID 1)
     DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
-    newNode1.value() = DiplodocusDB::TreeDBValue::UTF8String("value1");
+    newNode1.value() = Value::UTF8String("value1");
     // Create a second node whose parent is the root (ID 1)
     DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key2");
-    newNode2.value() = DiplodocusDB::TreeDBValue::UTF8String("value2");
+    newNode2.value() = Value::UTF8String("value2");
     DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(newNode1);
     siblingNodesRecordGroup.push_back(newNode2);
     masterFile.addSiblingNodesRecordGroup(siblingNodesRecordGroup, error);
