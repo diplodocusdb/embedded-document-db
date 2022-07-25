@@ -95,27 +95,6 @@ TreeDBNode XMLTreeDB::nextSibling(TreeDBNode& node, const std::string& name, Ish
     return m_impl->nextSibling(node, name, error);
 }
 
-void XMLTreeDB::traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*callback)(TreeDB& db, TreeDBNode& node),
-    void* callbackData)
-{
-    return m_impl->traverse(node, order, callback, callbackData);
-}
-
-TreeDBTransaction XMLTreeDB::createTransaction(Ishiko::Error& error)
-{
-    return m_impl->createTransaction(error);
-}
-
-void XMLTreeDB::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
-{
-    return m_impl->commitTransaction(transaction, error);
-}
-
-void XMLTreeDB::rollbackTransaction(TreeDBTransaction& transaction)
-{
-    return m_impl->rollbackTransaction(transaction);
-}
-
 void XMLTreeDB::setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error)
 {
     m_impl->setValue(node, value, error);

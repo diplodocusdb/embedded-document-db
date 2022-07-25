@@ -39,13 +39,6 @@ public:
     TreeDBNode nextSibling(TreeDBNode& node, Ishiko::Error& error);
     TreeDBNode nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error);
 
-    void traverse(TreeDBNode& node, ETreeTraversalOrder order, void (*callback)(TreeDB& db, TreeDBNode& node),
-        void* callbackData);
-
-    TreeDBTransaction createTransaction(Ishiko::Error& error);
-    void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error);
-    void rollbackTransaction(TreeDBTransaction& transaction);
-
     void setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error);
 
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, Ishiko::Error& error);

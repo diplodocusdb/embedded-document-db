@@ -134,28 +134,6 @@ TreeDBNode XMLTreeDBImpl::nextSibling(TreeDBNode& node, const std::string& name,
     return nodeImpl.nextSibling(name, error);
 }
 
-void XMLTreeDBImpl::traverse(TreeDBNode& node, ETreeTraversalOrder order,
-    void(*callback)(TreeDB& db, TreeDBNode& node), void* callbackData)
-{
-    // TODO
-}
-
-TreeDBTransaction XMLTreeDBImpl::createTransaction(Ishiko::Error& error)
-{
-    // TODO
-    return TreeDBTransaction(std::make_shared<XMLTreeDBTransactionImpl>());
-}
-
-void XMLTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
-{
-    // TODO
-}
-
-void XMLTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
-{
-    // TODO
-}
-
 void XMLTreeDBImpl::setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error)
 {
     XMLTreeDBNodeImpl& nodeImpl = static_cast<XMLTreeDBNodeImpl&>(*node.impl());
