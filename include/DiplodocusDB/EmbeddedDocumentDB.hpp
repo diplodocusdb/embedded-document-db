@@ -15,7 +15,6 @@
 #include "EmbeddedDocumentDB/TreeDBNodeImpl.hpp"
 #include "EmbeddedDocumentDB/TreeDBTransaction.hpp"
 #include "EmbeddedDocumentDB/TreeDBTransactionImpl.hpp"
-#include "EmbeddedDocumentDB/TreeDBValue.hpp"
 #include "EmbeddedDocumentDB/XMLTreeDB.hpp"
 
 #endif

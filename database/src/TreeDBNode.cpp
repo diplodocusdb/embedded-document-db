@@ -7,8 +7,7 @@
 #include "TreeDBNode.hpp"
 #include "TreeDBNodeImpl.hpp"
 
-namespace DiplodocusDB
-{
+using namespace DiplodocusDB;
 
 TreeDBNode::TreeDBNode(std::shared_ptr<TreeDBNodeImpl> impl)
     : m_impl(impl)
@@ -48,6 +47,4 @@ bool TreeDBNode::isRoot() const
 std::shared_ptr<TreeDBNodeImpl>& TreeDBNode::impl()
 {
     return m_impl;
-}
-
 }

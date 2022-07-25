@@ -29,10 +29,10 @@ public:
 
     TreeDBNode& root() override;
 
-    TreeDBValue value(TreeDBNode& node, Ishiko::Error& error) override;
-    TreeDBValue value(TreeDBNode& node, const DataType& type, Ishiko::Error& error) override;
-    TreeDBValue childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
-    TreeDBValue childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+    Value value(TreeDBNode& node, Ishiko::Error& error) override;
+    Value value(TreeDBNode& node, const DataType& type, Ishiko::Error& error) override;
+    Value childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
+    Value childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
         Ishiko::Error& error) override;
 
     TreeDBNode parent(TreeDBNode& node, Ishiko::Error& error) override;
@@ -50,29 +50,29 @@ public:
     void commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error) override;
     void rollbackTransaction(TreeDBTransaction& transaction) override;
 
-    void setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error) override;
+    void setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error) override;
 
     TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
         Ishiko::Error& error) override;
-    TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, const TreeDBValue& value,
+    TreeDBNode insertChildNode(TreeDBNode& parent, size_t index, const std::string& name, const Value& value,
         Ishiko::Error& error) override;
     TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
         Ishiko::Error& error) override;
     TreeDBNode insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name, 
-        const TreeDBValue& value, Ishiko::Error& error) override;
+        const Value& value, Ishiko::Error& error) override;
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
         Ishiko::Error& error) override;
     TreeDBNode insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error) override;
+        const Value& value, Ishiko::Error& error) override;
     TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
     TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
         Ishiko::Error& error) override;
-    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    TreeDBNode appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
         Ishiko::Error& error) override;
     TreeDBNode appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error) override;
+        const Value& value, Ishiko::Error& error) override;
     TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
-    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+    TreeDBNode setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
         Ishiko::Error& error) override;
     size_t removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error) override;
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error) override;

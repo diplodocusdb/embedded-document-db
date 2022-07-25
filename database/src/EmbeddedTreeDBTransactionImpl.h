@@ -36,7 +36,7 @@ class EmbeddedTreeDBTransactionImpl : public TreeDBTransactionImpl
 {
 public:
     TreeDBNode appendChildNode(CachedRecordFilesSet& cachedRecordFiles, TreeDBNode& parent, const std::string& name,
-        const TreeDBValue& value, Ishiko::Error& error);
+        const Value& value, Ishiko::Error& error);
 
     void commit(CachedRecordFilesSet& cachedRecordFiles, Ishiko::Error& error);
     void rollback();

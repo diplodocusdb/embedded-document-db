@@ -42,10 +42,12 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDBNodeImpl.h
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/MasterFile.h
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/SiblingNodesRecordGroup.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBPersistentNodeID.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBValue.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBNode.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBNodeImpl.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBTransaction.hpp
@@ -59,14 +61,11 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/XMLTreeDBTransactionImpl.hpp
 
         ../../src/EmbeddedTreeDBImpl.h
-        ../../src/EmbeddedTreeDBNodeImpl.h
         ../../src/EmbeddedTreeDBTransactionImpl.h
         ../../src/NodeIDAllocator.h
-        ../../src/SiblingNodesRecordGroup.h
         ../../src/SiblingNodesRecordGroupCache.h
         ../../src/RecordFilesSet.h
         ../../src/CachedRecordFilesSet.h
-        ../../src/MasterFile.h
     }
 
     sources
@@ -75,7 +74,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/TreeDBErrorCategory.cpp
         ../../src/TreeDBKey.cpp
         ../../src/TreeDBPersistentNodeID.cpp
-        ../../src/TreeDBValue.cpp
         ../../src/TreeDBNode.cpp
         ../../src/TreeDBNodeImpl.cpp
         ../../src/TreeDBTransaction.cpp

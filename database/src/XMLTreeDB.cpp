@@ -40,23 +40,22 @@ TreeDBNode& XMLTreeDB::root()
     return m_impl->root();
 }
 
-TreeDBValue XMLTreeDB::value(TreeDBNode& node, Ishiko::Error& error)
+Value XMLTreeDB::value(TreeDBNode& node, Ishiko::Error& error)
 {
     return m_impl->value(node, error);
 }
 
-TreeDBValue XMLTreeDB::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
+Value XMLTreeDB::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
 {
     return m_impl->value(node, type, error);
 }
 
-TreeDBValue XMLTreeDB::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+Value XMLTreeDB::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     return m_impl->childValue(parent, name, error);
 }
 
-TreeDBValue XMLTreeDB::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
-    Ishiko::Error& error)
+Value XMLTreeDB::childValue(TreeDBNode& parent, const std::string& name, const DataType& type, Ishiko::Error& error)
 {
     return m_impl->childValue(parent, name, type, error);
 }
@@ -117,7 +116,7 @@ void XMLTreeDB::rollbackTransaction(TreeDBTransaction& transaction)
     return m_impl->rollbackTransaction(transaction);
 }
 
-void XMLTreeDB::setValue(TreeDBNode& node, const TreeDBValue& value, Ishiko::Error& error)
+void XMLTreeDB::setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error)
 {
     m_impl->setValue(node, value, error);
 }
@@ -128,7 +127,7 @@ TreeDBNode XMLTreeDB::insertChildNode(TreeDBNode& parent, size_t index, const st
 }
 
 TreeDBNode XMLTreeDB::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     return m_impl->insertChildNode(parent, index, name, value, error);
 }
@@ -140,7 +139,7 @@ TreeDBNode XMLTreeDB::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& next
 }
 
 TreeDBNode XMLTreeDB::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     return m_impl->insertChildNodeBefore(parent, nextChild, name, value, error);
 }
@@ -152,7 +151,7 @@ TreeDBNode XMLTreeDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previ
 }
 
 TreeDBNode XMLTreeDB::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     return m_impl->insertChildNodeAfter(parent, previousChild, name, value, error);
 }
@@ -168,14 +167,14 @@ TreeDBNode XMLTreeDB::appendChildNode(TreeDBTransaction& transaction, TreeDBNode
     return m_impl->appendChildNode(transaction, parent, name, error);
 }
 
-TreeDBNode XMLTreeDB::appendChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+TreeDBNode XMLTreeDB::appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     return m_impl->appendChildNode(parent, name, value, error);
 }
 
 TreeDBNode XMLTreeDB::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     return m_impl->appendChildNode(transaction, parent, name, value, error);
 }
@@ -185,7 +184,7 @@ TreeDBNode XMLTreeDB::setChildNode(TreeDBNode& parent, const std::string& name, 
     return m_impl->setChildNode(parent, name, error);
 }
 
-TreeDBNode XMLTreeDB::setChildNode(TreeDBNode& parent, const std::string& name, const TreeDBValue& value,
+TreeDBNode XMLTreeDB::setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     return m_impl->setChildNode(parent, name, value, error);

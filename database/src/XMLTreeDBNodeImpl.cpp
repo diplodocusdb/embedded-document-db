@@ -109,7 +109,7 @@ TreeDBNode XMLTreeDBNodeImpl::nextSibling(const std::string& name, Ishiko::Error
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::insertChildNode(size_t index, const std::string& name, const TreeDBValue& value,
+TreeDBNode XMLTreeDBNodeImpl::insertChildNode(size_t index, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     pugi::xml_node newNode = m_node.append_child(name.c_str());
@@ -120,7 +120,7 @@ TreeDBNode XMLTreeDBNodeImpl::insertChildNode(size_t index, const std::string& n
 }
 
 TreeDBNode XMLTreeDBNodeImpl::insertChildNodeBefore(const TreeDBNode& nextChild, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
@@ -128,14 +128,14 @@ TreeDBNode XMLTreeDBNodeImpl::insertChildNodeBefore(const TreeDBNode& nextChild,
 }
 
 TreeDBNode XMLTreeDBNodeImpl::insertChildNodeAfter(const TreeDBNode& previousChild, const std::string& name,
-    const TreeDBValue& value, Ishiko::Error& error)
+    const Value& value, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
     return result;
 }
 
-TreeDBNode XMLTreeDBNodeImpl::appendChildNode(const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::appendChildNode(const std::string& name, const Value& value, Ishiko::Error& error)
 {
     pugi::xml_node newNode = m_node.append_child(name.c_str());
     std::shared_ptr<XMLTreeDBNodeImpl> newNodeImpl = std::make_shared<XMLTreeDBNodeImpl>(this, newNode);
@@ -144,7 +144,7 @@ TreeDBNode XMLTreeDBNodeImpl::appendChildNode(const std::string& name, const Tre
     return TreeDBNode(newNodeImpl);
 }
 
-TreeDBNode XMLTreeDBNodeImpl::setChildNode(const std::string& name, const TreeDBValue& value, Ishiko::Error& error)
+TreeDBNode XMLTreeDBNodeImpl::setChildNode(const std::string& name, const Value& value, Ishiko::Error& error)
 {
     TreeDBNode result;
 
@@ -203,7 +203,7 @@ void XMLTreeDBNodeImpl::updateValue()
     }
 
     // Set the new data
-    const TreeDBValue& v = value();
+    const Value& v = value();
     switch (v.type().primitiveType())
     {
     case PrimitiveDataType::null:
