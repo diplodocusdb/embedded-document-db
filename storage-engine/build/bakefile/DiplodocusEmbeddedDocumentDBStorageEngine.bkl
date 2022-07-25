@@ -44,6 +44,7 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordMarker.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SecondaryFile.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/StorageEngineErrorCategory.hpp
     }
 
     sources
@@ -54,5 +55,6 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../src/RecordFile.cpp
         ../../src/RecordMarker.cpp
         ../../src/SecondaryFile.cpp
+        ../../src/StorageEngineErrorCategory.cpp
     }
 }
