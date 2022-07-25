@@ -5,11 +5,11 @@
 */
 
 #include "XMLTreeDBNode.hpp"
-#include "TreeDBNodeImpl.hpp"
+#include "XMLTreeDBNodeImpl.hpp"
 
 using namespace DiplodocusDB;
 
-XMLTreeDBNode::XMLTreeDBNode(std::shared_ptr<TreeDBNodeImpl> impl)
+XMLTreeDBNode::XMLTreeDBNode(std::shared_ptr<XMLTreeDBNodeImpl> impl)
     : m_impl(impl)
 {
 }
@@ -44,7 +44,7 @@ bool XMLTreeDBNode::isRoot() const
     return m_impl->isRoot();
 }
 
-std::shared_ptr<TreeDBNodeImpl>& XMLTreeDBNode::impl()
+std::shared_ptr<XMLTreeDBNodeImpl>& XMLTreeDBNode::impl()
 {
     return m_impl;
 }
