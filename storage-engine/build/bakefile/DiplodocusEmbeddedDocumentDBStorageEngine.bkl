@@ -3,6 +3,7 @@ import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
 import $(diplodocusdbpath)/physical-storage/include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
+import $(ishikopath)/memory/include/Ishiko/Memory.bkl;
 
 toolsets = gnu vs2019 vs2017 vs2015 vs2013;
 
@@ -12,7 +13,7 @@ vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 
-library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, DiplodocusDBCore, IshikoErrors
+library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, DiplodocusDBCore, IshikoMemory, IshikoErrors
 {
     archs = x86 x86_64;
    
