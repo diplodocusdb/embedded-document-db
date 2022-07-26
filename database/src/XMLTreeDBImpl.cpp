@@ -4,7 +4,7 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#include "TreeDBErrorCategory.hpp"
+#include "EmbeddedDocumentDBErrorCategory.hpp"
 #include "TreeDBTransaction.hpp"
 #include "XMLTreeDBImpl.hpp"
 #include "XMLTreeDBNodeImpl.hpp"
@@ -35,7 +35,7 @@ void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& err
     if (!result)
     {
         // TODO: better error
-        Fail(error, TreeDBErrorCategory::eGeneric, "Failed to open file", __FILE__, __LINE__);
+        Fail(error, EmbeddedDocumentDBErrorCategory::eGeneric, "Failed to open file", __FILE__, __LINE__);
     }
     m_root = XMLTreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(nullptr, m_document.child(rootElementName)));
 }

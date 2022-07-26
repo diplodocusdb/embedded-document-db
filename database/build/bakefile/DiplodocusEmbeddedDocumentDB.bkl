@@ -42,10 +42,10 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDBErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDBNodeImpl.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/MasterFile.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/SiblingNodesRecordGroup.h
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBPersistentNodeID.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBNode.hpp
@@ -56,10 +56,10 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/linkoptions.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/XMLTreeDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/XMLTreeDBNode.hpp
+        ../../src/EmbeddedDocumentDBImpl.hpp
         ../../src/XMLTreeDBImpl.hpp
         ../../src/XMLTreeDBNodeImpl.hpp
 
-        ../../src/EmbeddedTreeDBImpl.h
         ../../src/EmbeddedTreeDBTransactionImpl.h
         ../../src/NodeIDAllocator.h
         ../../src/SiblingNodesRecordGroupCache.h
@@ -70,7 +70,8 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
     sources
     {
         ../../src/EmbeddedDocumentDB.cpp
-        ../../src/TreeDBErrorCategory.cpp
+        ../../src/EmbeddedDocumentDBErrorCategory.cpp
+        ../../src/EmbeddedDocumentDBImpl.cpp
         ../../src/TreeDBKey.cpp
         ../../src/TreeDBPersistentNodeID.cpp
         ../../src/TreeDBNode.cpp
@@ -81,7 +82,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/XMLTreeDBNode.cpp
         ../../src/XMLTreeDBNodeImpl.cpp
 
-        ../../src/EmbeddedTreeDBImpl.cpp
         ../../src/EmbeddedTreeDBNodeImpl.cpp
         ../../src/EmbeddedTreeDBTransactionImpl.cpp
         ../../src/NodeIDAllocator.cpp

@@ -23,6 +23,9 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDBErrorCategory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedTreeDBNodeImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -30,9 +33,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\SiblingNodesRecordGroup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBErrorCategory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp">
@@ -65,13 +65,13 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\XMLTreeDBNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\EmbeddedDocumentDBImpl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\EmbeddedTreeDBImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\EmbeddedTreeDBTransactionImpl.h">
@@ -94,7 +94,10 @@
     <ClCompile Include="..\..\src\EmbeddedDocumentDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\TreeDBErrorCategory.cpp">
+    <ClCompile Include="..\..\src\EmbeddedDocumentDBErrorCategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\EmbeddedDocumentDBImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TreeDBKey.cpp">
@@ -122,9 +125,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\EmbeddedTreeDBImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\EmbeddedTreeDBNodeImpl.cpp">
