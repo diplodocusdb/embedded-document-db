@@ -27,6 +27,7 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
 
     headers
     {
+        ../../src/MasterFileTests.hpp
         ../../src/NodeIDTests.hpp
         ../../src/RecordTests.hpp
         ../../src/SecondaryFileTests.hpp
@@ -36,6 +37,7 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
     sources
     {
         ../../src/main.cpp
+        ../../src/MasterFileTests.cpp
         ../../src/NodeIDTests.cpp
         ../../src/RecordTests.cpp
         ../../src/SecondaryFileTests.cpp
