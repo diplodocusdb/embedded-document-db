@@ -7,7 +7,6 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
 
-#include "SiblingNodesRecordGroup.h"
 #include <boost/filesystem/path.hpp>
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
