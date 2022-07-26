@@ -4,6 +4,7 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
+#include "MasterFileTests.hpp"
 #include "NodeIDTests.hpp"
 #include "RecordTests.hpp"
 #include "SecondaryFileTests.hpp"
@@ -25,6 +26,7 @@ int main(int argc, char* argv[])
     theTests.append<NodeIDTests>();
     theTests.append<RecordTests>();
     theTests.append<SiblingNodesRecordGroupTests>();
+    theTests.append<MasterFileTests>();
     theTests.append<SecondaryFileTests>();
 
     return theTestHarness.run();
