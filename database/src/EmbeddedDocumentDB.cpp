@@ -11,7 +11,7 @@ namespace DiplodocusDB
 {
 
 EmbeddedDocumentDB::EmbeddedDocumentDB()
-    : m_impl(std::make_shared<EmbeddedTreeDBImpl>())
+    : m_impl(std::make_shared<EmbeddedDocumentDBImpl>())
 {
 }
 

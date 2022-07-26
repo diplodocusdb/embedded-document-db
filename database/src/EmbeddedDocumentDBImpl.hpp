@@ -16,11 +16,11 @@
 namespace DiplodocusDB
 {
 
-class EmbeddedTreeDBImpl
+class EmbeddedDocumentDBImpl
 {
 public:
-    EmbeddedTreeDBImpl();
-    ~EmbeddedTreeDBImpl();
+    EmbeddedDocumentDBImpl();
+    ~EmbeddedDocumentDBImpl();
 
     void create(const boost::filesystem::path& path, Ishiko::Error& error);
     void open(const boost::filesystem::path& path, Ishiko::Error& error);

@@ -10,15 +10,15 @@
 
 using namespace DiplodocusDB;
 
-EmbeddedTreeDBImpl::EmbeddedTreeDBImpl()
+EmbeddedDocumentDBImpl::EmbeddedDocumentDBImpl()
 {
 }
 
-EmbeddedTreeDBImpl::~EmbeddedTreeDBImpl()
+EmbeddedDocumentDBImpl::~EmbeddedDocumentDBImpl()
 {
 }
 
-void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& error)
+void EmbeddedDocumentDBImpl::create(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_cachedRecordFiles.createMasterFile(path, error);
     if (!error)
@@ -27,7 +27,7 @@ void EmbeddedTreeDBImpl::create(const boost::filesystem::path& path, Ishiko::Err
     }
 }
 
-void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
+void EmbeddedDocumentDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_cachedRecordFiles.openMasterFile(path, error);
     if (!error)
@@ -36,23 +36,23 @@ void EmbeddedTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error
     }
 }
 
-void EmbeddedTreeDBImpl::close()
+void EmbeddedDocumentDBImpl::close()
 {
     m_cachedRecordFiles.close();
 }
 
-TreeDBNode& EmbeddedTreeDBImpl::root()
+TreeDBNode& EmbeddedDocumentDBImpl::root()
 {
     return m_root;
 }
 
-Value EmbeddedTreeDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
+Value EmbeddedDocumentDBImpl::value(TreeDBNode& node, Ishiko::Error& error)
 {
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
     return nodeImpl.value();
 }
 
-Value EmbeddedTreeDBImpl::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
+Value EmbeddedDocumentDBImpl::value(TreeDBNode& node, const DataType& type, Ishiko::Error& error)
 {
     Value result;
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
@@ -63,7 +63,7 @@ Value EmbeddedTreeDBImpl::value(TreeDBNode& node, const DataType& type, Ishiko::
     return result;
 }
 
-Value EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+Value EmbeddedDocumentDBImpl::childValue(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     Value result;
     TreeDBNode childNode = child(parent, name, error);
@@ -74,7 +74,7 @@ Value EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name
     return result;
 }
 
-Value EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
+Value EmbeddedDocumentDBImpl::childValue(TreeDBNode& parent, const std::string& name, const DataType& type,
     Ishiko::Error& error)
 {
     Value result;
@@ -86,14 +86,14 @@ Value EmbeddedTreeDBImpl::childValue(TreeDBNode& parent, const std::string& name
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
+TreeDBNode EmbeddedDocumentDBImpl::parent(TreeDBNode& node, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
     return result;
 }
 
-std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& parent, Ishiko::Error& error)
+std::vector<TreeDBNode> EmbeddedDocumentDBImpl::childNodes(TreeDBNode& parent, Ishiko::Error& error)
 {
     std::vector<TreeDBNode> result;
 
@@ -114,7 +114,7 @@ std::vector<TreeDBNode> EmbeddedTreeDBImpl::childNodes(TreeDBNode& parent, Ishik
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+TreeDBNode EmbeddedDocumentDBImpl::child(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     TreeDBNode result;
 
@@ -137,58 +137,58 @@ TreeDBNode EmbeddedTreeDBImpl::child(TreeDBNode& parent, const std::string& name
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::previousSibling(TreeDBNode& node, Ishiko::Error& error)
+TreeDBNode EmbeddedDocumentDBImpl::previousSibling(TreeDBNode& node, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+TreeDBNode EmbeddedDocumentDBImpl::previousSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::nextSibling(TreeDBNode& node, Ishiko::Error& error)
+TreeDBNode EmbeddedDocumentDBImpl::nextSibling(TreeDBNode& node, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
+TreeDBNode EmbeddedDocumentDBImpl::nextSibling(TreeDBNode& node, const std::string& name, Ishiko::Error& error)
 {
     // TODO
     TreeDBNode result;
     return result;
 }
 
-void EmbeddedTreeDBImpl::traverse(TreeDBNode& node, ETreeTraversalOrder order,
+void EmbeddedDocumentDBImpl::traverse(TreeDBNode& node, ETreeTraversalOrder order,
     void (*callback)(TreeDB& db, TreeDBNode& node), void* callbackData)
 {
     // TODO
 }
 
-TreeDBTransaction EmbeddedTreeDBImpl::createTransaction(Ishiko::Error& error)
+TreeDBTransaction EmbeddedDocumentDBImpl::createTransaction(Ishiko::Error& error)
 {
     return TreeDBTransaction(std::make_shared<EmbeddedTreeDBTransactionImpl>());
 }
 
-void EmbeddedTreeDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
+void EmbeddedDocumentDBImpl::commitTransaction(TreeDBTransaction& transaction, Ishiko::Error& error)
 {
     EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
     transactionImpl.commit(m_cachedRecordFiles, error);
 }
 
-void EmbeddedTreeDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
+void EmbeddedDocumentDBImpl::rollbackTransaction(TreeDBTransaction& transaction)
 {
     EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
     transactionImpl.rollback();
 }
 
-void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error)
+void EmbeddedDocumentDBImpl::setValue(TreeDBNode& node, const Value& value, Ishiko::Error& error)
 {
     // TODO : this can't be working, it re-adds the node, surely that creates duplicate nodes
     EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*node.impl());
@@ -197,14 +197,14 @@ void EmbeddedTreeDBImpl::setValue(TreeDBNode& node, const Value& value, Ishiko::
     m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
+TreeDBNode EmbeddedDocumentDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
     Ishiko::Error& error)
 {   
     Value value;
     return insertChildNode(parent, index, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
+TreeDBNode EmbeddedDocumentDBImpl::insertChildNode(TreeDBNode& parent, size_t index, const std::string& name,
     const Value& value, Ishiko::Error& error)
 {
     // TODO : doesn't work if there are already child nodes on this node
@@ -217,14 +217,14 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNode(TreeDBNode& parent, size_t index,
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild,
+TreeDBNode EmbeddedDocumentDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild,
     const std::string& name, Ishiko::Error& error)
 {
     Value value;
     return insertChildNodeBefore(parent, nextChild, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild,
+TreeDBNode EmbeddedDocumentDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBNode& nextChild,
     const std::string& name, const Value& value, Ishiko::Error& error)
 {
     // TODO : does this work?
@@ -238,14 +238,14 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeBefore(TreeDBNode& parent, TreeDBN
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild,
+TreeDBNode EmbeddedDocumentDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild,
     const std::string& name, Ishiko::Error& error)
 {
     Value value;
     return insertChildNodeAfter(parent, previousChild, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild,
+TreeDBNode EmbeddedDocumentDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNode& previousChild,
     const std::string& name, const Value& value, Ishiko::Error& error)
 {
     // TODO : does this work?
@@ -259,20 +259,20 @@ TreeDBNode EmbeddedTreeDBImpl::insertChildNodeAfter(TreeDBNode& parent, TreeDBNo
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+TreeDBNode EmbeddedDocumentDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     Value value;
     return appendChildNode(parent, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
+TreeDBNode EmbeddedDocumentDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
     const std::string& name, Ishiko::Error& error)
 {
     Value value;
     return appendChildNode(transaction, parent, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
+TreeDBNode EmbeddedDocumentDBImpl::appendChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     TreeDBNode result;
@@ -303,20 +303,20 @@ TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBNode& parent, const std::st
     return result;
 }
 
-TreeDBNode EmbeddedTreeDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
+TreeDBNode EmbeddedDocumentDBImpl::appendChildNode(TreeDBTransaction& transaction, TreeDBNode& parent,
     const std::string& name, const Value& value, Ishiko::Error& error)
 {
     EmbeddedTreeDBTransactionImpl& transactionImpl = static_cast<EmbeddedTreeDBTransactionImpl&>(*transaction.impl());
     return transactionImpl.appendChildNode(m_cachedRecordFiles, parent, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+TreeDBNode EmbeddedDocumentDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     Value value;
     return setChildNode(parent, name, value, error);
 }
 
-TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
+TreeDBNode EmbeddedDocumentDBImpl::setChildNode(TreeDBNode& parent, const std::string& name, const Value& value,
     Ishiko::Error& error)
 {
     // TODO
@@ -324,13 +324,13 @@ TreeDBNode EmbeddedTreeDBImpl::setChildNode(TreeDBNode& parent, const std::strin
     return result;
 }
 
-size_t EmbeddedTreeDBImpl::removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
+size_t EmbeddedDocumentDBImpl::removeChildNode(TreeDBNode& parent, const std::string& name, Ishiko::Error& error)
 {
     // TODO
     return 0;
 }
 
-size_t EmbeddedTreeDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error)
+size_t EmbeddedDocumentDBImpl::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error)
 {
     // TODO
     return 0;
