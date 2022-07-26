@@ -49,7 +49,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBPersistentNodeID.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBNode.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBNodeImpl.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBTransaction.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBTransactionImpl.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDB.hpp
@@ -75,7 +74,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/TreeDBKey.cpp
         ../../src/TreeDBPersistentNodeID.cpp
         ../../src/TreeDBNode.cpp
-        ../../src/TreeDBNodeImpl.cpp
         ../../src/TreeDBTransaction.cpp
         ../../src/XMLTreeDB.cpp
         ../../src/XMLTreeDBImpl.cpp

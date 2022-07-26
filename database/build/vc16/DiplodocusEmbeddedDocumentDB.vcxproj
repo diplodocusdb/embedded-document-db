@@ -156,7 +156,6 @@
     <ClCompile Include="..\..\src\TreeDBKey.cpp" />
     <ClCompile Include="..\..\src\TreeDBPersistentNodeID.cpp" />
     <ClCompile Include="..\..\src\TreeDBNode.cpp" />
-    <ClCompile Include="..\..\src\TreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\TreeDBTransaction.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDB.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDBImpl.cpp" />
@@ -181,7 +180,6 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBPersistentNodeID.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBNode.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBNodeImpl.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBTransaction.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBTransactionImpl.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDB.hpp" />
