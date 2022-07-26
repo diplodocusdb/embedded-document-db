@@ -23,9 +23,8 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUP_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUP_H_
 
-#include "EmbeddedTreeDBNodeImpl.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
+#include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
 #include <vector>
 
 namespace DiplodocusDB
@@ -40,24 +39,24 @@ class SiblingNodesRecordGroup
 public:
     SiblingNodesRecordGroup() = default;
     explicit SiblingNodesRecordGroup(const NodeID& parentNodeID);
-    explicit SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node);
+    explicit SiblingNodesRecordGroup(const NodeID& parentNodeID, const SiblingNodeRecordGroup& node);
 
     const NodeID& parentNodeID() const;
-    const EmbeddedTreeDBNodeImpl& operator[](size_t pos) const;
+    const SiblingNodeRecordGroup& operator[](size_t pos) const;
     /// Returns the number of sibling nodes in the record group.
     size_t size() const noexcept;
-    void push_back(const EmbeddedTreeDBNodeImpl& value);
-    bool find(const std::string& name, EmbeddedTreeDBNodeImpl& node);
+    void push_back(const SiblingNodeRecordGroup& value);
+    bool find(const std::string& name, SiblingNodeRecordGroup& node);
 
     void readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
-    static void writeNode(PageRepositoryWriter& writer, const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
+    static void writeNode(PageRepositoryWriter& writer, const SiblingNodeRecordGroup& node, Ishiko::Error& error);
 
 private:
     NodeID m_parentNodeID;
-    std::vector<EmbeddedTreeDBNodeImpl> m_siblings;
+    std::vector<SiblingNodeRecordGroup> m_siblings;
 };
 
 }

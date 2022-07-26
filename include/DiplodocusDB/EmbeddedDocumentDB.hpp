@@ -9,10 +9,9 @@
 
 #include "EmbeddedDocumentDB/EmbeddedDocumentDB.hpp"
 #include "EmbeddedDocumentDB/linkoptions.hpp"
-#include "EmbeddedDocumentDB/TreeDBErrorCategory.hpp"
+#include "EmbeddedDocumentDB/EmbeddedDocumentDBErrorCategory.hpp"
 #include "EmbeddedDocumentDB/TreeDBKey.hpp"
 #include "EmbeddedDocumentDB/TreeDBNode.hpp"
-#include "EmbeddedDocumentDB/TreeDBNodeImpl.hpp"
 #include "EmbeddedDocumentDB/TreeDBTransaction.hpp"
 #include "EmbeddedDocumentDB/TreeDBTransactionImpl.hpp"
 #include "EmbeddedDocumentDB/XMLTreeDB.hpp"

@@ -14,6 +14,7 @@
 #include "StorageEngine/RecordFile.hpp"
 #include "StorageEngine/RecordMarker.hpp"
 #include "StorageEngine/SecondaryFile.hpp"
+#include "StorageEngine/SiblingNodeRecordGroup.hpp"
 #include "StorageEngine/ValueCodec.hpp"
 
 #endif

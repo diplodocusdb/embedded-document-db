@@ -23,17 +23,16 @@
 #include "SiblingNodesRecordGroup.h"
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 
-namespace DiplodocusDB
-{
+using namespace DiplodocusDB;
 
 SiblingNodesRecordGroup::SiblingNodesRecordGroup(const NodeID& parentNodeID)
     : m_parentNodeID(parentNodeID)
 {
 }
 
-SiblingNodesRecordGroup::SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node)
+SiblingNodesRecordGroup::SiblingNodesRecordGroup(const NodeID& parentNodeID, const SiblingNodeRecordGroup& node)
+    : m_parentNodeID(parentNodeID)
 {
-    m_parentNodeID = node.parentNodeID();
     m_siblings.emplace_back(node);
 }
 
@@ -42,7 +41,7 @@ const NodeID& SiblingNodesRecordGroup::parentNodeID() const
     return m_parentNodeID;
 }
 
-const EmbeddedTreeDBNodeImpl& SiblingNodesRecordGroup::operator[](size_t pos) const
+const SiblingNodeRecordGroup& SiblingNodesRecordGroup::operator[](size_t pos) const
 {
     return m_siblings[pos];
 }
@@ -52,19 +51,15 @@ size_t SiblingNodesRecordGroup::size() const noexcept
     return m_siblings.size();
 }
 
-void SiblingNodesRecordGroup::push_back(const EmbeddedTreeDBNodeImpl& value)
+void SiblingNodesRecordGroup::push_back(const SiblingNodeRecordGroup& value)
 {
-    if (m_siblings.size() == 0)
-    {
-        m_parentNodeID = value.parentNodeID();
-    }
     m_siblings.push_back(value);
 }
 
-bool SiblingNodesRecordGroup::find(const std::string& name, EmbeddedTreeDBNodeImpl& node)
+bool SiblingNodesRecordGroup::find(const std::string& name, SiblingNodeRecordGroup& node)
 {
     bool result = false;
-    for (EmbeddedTreeDBNodeImpl n : m_siblings)
+    for (const SiblingNodeRecordGroup& n : m_siblings)
     {
         if (n.name() == name)
         {
@@ -98,7 +93,7 @@ void SiblingNodesRecordGroup::readWithoutType(PageRepositoryReader& reader, Ishi
             }
             else if (nextRecord.type() == Record::ERecordType::eNodeName)
             {
-                m_siblings.emplace_back(m_parentNodeID, NodeID(0), nextRecord.asString());
+                m_siblings.emplace_back(nextRecord.asString(), Value(), NodeID(0));
             }
             else if (nextRecord.type() == Record::ERecordType::eInlineValue)
             {
@@ -127,7 +122,7 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
         }
     }
 
-    for (const EmbeddedTreeDBNodeImpl& node : m_siblings)
+    for (const SiblingNodeRecordGroup& node : m_siblings)
     {
         writeNode(writer, node, error);
         if (error)
@@ -140,7 +135,7 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
     nodeEndRecord.write(writer, error);
 }
 
-void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const EmbeddedTreeDBNodeImpl& node,
+void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const SiblingNodeRecordGroup& node,
     Ishiko::Error& error)
 {
     if (node.isRoot())
@@ -181,6 +176,4 @@ void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const Embe
             return;
         }
     }
-}
-
 }

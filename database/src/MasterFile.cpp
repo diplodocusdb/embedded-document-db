@@ -6,7 +6,7 @@
 
 #include "MasterFile.h"
 #include "EmbeddedDocumentDBErrorCategory.hpp"
-#include "EmbeddedTreeDBNodeImpl.h"
+#include "EmbeddedDocumentDBNodeImpl.hpp"
 
 namespace DiplodocusDB
 {
