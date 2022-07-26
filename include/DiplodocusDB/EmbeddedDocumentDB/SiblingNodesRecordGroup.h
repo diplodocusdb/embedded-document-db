@@ -23,7 +23,7 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUP_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUP_H_
 
-#include "EmbeddedTreeDBNodeImpl.h"
+#include "EmbeddedDocumentDBNodeImpl.hpp"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryWriter.h"
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include <vector>
