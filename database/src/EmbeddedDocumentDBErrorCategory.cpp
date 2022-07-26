@@ -16,7 +16,7 @@ const EmbeddedDocumentDBErrorCategory& EmbeddedDocumentDBErrorCategory::Get() no
 
 const char* EmbeddedDocumentDBErrorCategory::name() const noexcept
 {
-    return "DiplodocusDB::TreeDBErrorCategory";
+    return "DiplodocusDB::EmbeddedDocumentDBErrorCategory";
 }
 
 void DiplodocusDB::Fail(Ishiko::Error& error, EmbeddedDocumentDBErrorCategory::EErrorValues value) noexcept
