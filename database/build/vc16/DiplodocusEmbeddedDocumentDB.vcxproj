@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\EmbeddedDocumentDB.cpp" />
+    <ClCompile Include="..\..\src\EmbeddedDocumentDBImpl.cpp" />
     <ClCompile Include="..\..\src\TreeDBErrorCategory.cpp" />
     <ClCompile Include="..\..\src\TreeDBKey.cpp" />
     <ClCompile Include="..\..\src\TreeDBPersistentNodeID.cpp" />
@@ -161,7 +162,6 @@
     <ClCompile Include="..\..\src\XMLTreeDBImpl.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDBNode.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp" />
-    <ClCompile Include="..\..\src\EmbeddedTreeDBImpl.cpp" />
     <ClCompile Include="..\..\src\EmbeddedTreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\EmbeddedTreeDBTransactionImpl.cpp" />
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
@@ -188,9 +188,9 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\linkoptions.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\XMLTreeDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\XMLTreeDBNode.hpp" />
+    <ClInclude Include="..\..\src\EmbeddedDocumentDBImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
-    <ClInclude Include="..\..\src\EmbeddedTreeDBImpl.h" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBTransactionImpl.h" />
     <ClInclude Include="..\..\src\NodeIDAllocator.h" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCache.h" />
