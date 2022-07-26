@@ -10,13 +10,25 @@
 #include <boost/date_time.hpp>
 #include <Ishiko/Time.hpp>
 
-using namespace Ishiko;
+using namespace DiplodocusDB;
 
-namespace DiplodocusDB
+const std::string& XMLTreeDBNodeImpl::name() const
 {
+    return m_name;
+}
+
+const Value& XMLTreeDBNodeImpl::value() const
+{
+    return m_value;
+}
+
+Value& XMLTreeDBNodeImpl::value()
+{
+    return m_value;
+}
 
 XMLTreeDBNodeImpl::XMLTreeDBNodeImpl(XMLTreeDBNodeImpl* parent, pugi::xml_node node)
-    : TreeDBNodeImpl(node.name()), m_parent(parent), m_node(node)
+    : m_name(node.name()), m_parent(parent), m_node(node)
 {
 }
 
@@ -303,12 +315,13 @@ void XMLTreeDBNodeImpl::updateValue()
                 {
                     pcdataNode = m_node.prepend_child(pugi::node_pcdata);
                 }
-                pcdataNode.set_value(Date(v.asDate()).toISO8601String().c_str());
+                pcdataNode.set_value(Ishiko::Date(v.asDate()).toISO8601String().c_str());
             }
             else
             {
                 pugi::xml_node valueNode = m_node.prepend_child("data");
-                valueNode.append_child(pugi::node_pcdata).set_value(Date(v.asDate()).toISO8601String().c_str());
+                valueNode.append_child(pugi::node_pcdata).set_value(
+                    Ishiko::Date(v.asDate()).toISO8601String().c_str());
             }
         }
         break;
@@ -376,6 +389,4 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
             childNode = childNode.next_sibling();
         }
     }
-}
-
 }
