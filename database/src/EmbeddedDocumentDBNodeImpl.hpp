@@ -12,11 +12,11 @@
 namespace DiplodocusDB
 {
 
-class EmbeddedTreeDBNodeImpl
+class EmbeddedDocumentDBNodeImpl
 {
 public:
-    EmbeddedTreeDBNodeImpl();
-    EmbeddedTreeDBNodeImpl(const NodeID& parentNodeID, const NodeID& nodeID, const std::string& name);
+    EmbeddedDocumentDBNodeImpl();
+    EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeID, const NodeID& nodeID, const std::string& name);
 
     const std::string& name() const;
     const Value& value() const;

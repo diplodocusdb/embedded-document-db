@@ -15,13 +15,13 @@
 namespace DiplodocusDB
 {
 
-class EmbeddedTreeDBNodeImpl;
+class EmbeddedDocumentDBNodeImpl;
 
 class TreeDBNode
 {
 public:
     TreeDBNode() = default;
-    TreeDBNode(std::shared_ptr<EmbeddedTreeDBNodeImpl> impl);
+    TreeDBNode(std::shared_ptr<EmbeddedDocumentDBNodeImpl> impl);
 
     explicit operator bool() const;
     bool operator !() const;
@@ -32,10 +32,10 @@ public:
 
     bool isRoot() const;
 
-    std::shared_ptr<EmbeddedTreeDBNodeImpl>& impl();
+    std::shared_ptr<EmbeddedDocumentDBNodeImpl>& impl();
 
 private:
-    std::shared_ptr<EmbeddedTreeDBNodeImpl> m_impl;
+    std::shared_ptr<EmbeddedDocumentDBNodeImpl> m_impl;
 };
 
 }

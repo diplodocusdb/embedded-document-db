@@ -40,24 +40,24 @@ class SiblingNodesRecordGroup
 public:
     SiblingNodesRecordGroup() = default;
     explicit SiblingNodesRecordGroup(const NodeID& parentNodeID);
-    explicit SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node);
+    explicit SiblingNodesRecordGroup(const EmbeddedDocumentDBNodeImpl& node);
 
     const NodeID& parentNodeID() const;
-    const EmbeddedTreeDBNodeImpl& operator[](size_t pos) const;
+    const EmbeddedDocumentDBNodeImpl& operator[](size_t pos) const;
     /// Returns the number of sibling nodes in the record group.
     size_t size() const noexcept;
-    void push_back(const EmbeddedTreeDBNodeImpl& value);
-    bool find(const std::string& name, EmbeddedTreeDBNodeImpl& node);
+    void push_back(const EmbeddedDocumentDBNodeImpl& value);
+    bool find(const std::string& name, EmbeddedDocumentDBNodeImpl& node);
 
     void readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error);
     void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
-    static void writeNode(PageRepositoryWriter& writer, const EmbeddedTreeDBNodeImpl& node, Ishiko::Error& error);
+    static void writeNode(PageRepositoryWriter& writer, const EmbeddedDocumentDBNodeImpl& node, Ishiko::Error& error);
 
 private:
     NodeID m_parentNodeID;
-    std::vector<EmbeddedTreeDBNodeImpl> m_siblings;
+    std::vector<EmbeddedDocumentDBNodeImpl> m_siblings;
 };
 
 }

@@ -31,9 +31,9 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(CachedRecordFilesSet& 
 {
     TreeDBNode result;
 
-    EmbeddedTreeDBNodeImpl& parentNodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*parent.impl());
-    result = TreeDBNode(std::make_shared<EmbeddedTreeDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
-    EmbeddedTreeDBNodeImpl& nodeImpl = static_cast<EmbeddedTreeDBNodeImpl&>(*result.impl());
+    EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
+    result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
+    EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
 
     std::shared_ptr<SiblingNodesRecordGroup> existingSiblingNodesRecordGroup;

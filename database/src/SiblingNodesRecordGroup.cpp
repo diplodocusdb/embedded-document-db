@@ -31,7 +31,7 @@ SiblingNodesRecordGroup::SiblingNodesRecordGroup(const NodeID& parentNodeID)
 {
 }
 
-SiblingNodesRecordGroup::SiblingNodesRecordGroup(const EmbeddedTreeDBNodeImpl& node)
+SiblingNodesRecordGroup::SiblingNodesRecordGroup(const EmbeddedDocumentDBNodeImpl& node)
 {
     m_parentNodeID = node.parentNodeID();
     m_siblings.emplace_back(node);
@@ -42,7 +42,7 @@ const NodeID& SiblingNodesRecordGroup::parentNodeID() const
     return m_parentNodeID;
 }
 
-const EmbeddedTreeDBNodeImpl& SiblingNodesRecordGroup::operator[](size_t pos) const
+const EmbeddedDocumentDBNodeImpl& SiblingNodesRecordGroup::operator[](size_t pos) const
 {
     return m_siblings[pos];
 }
@@ -52,7 +52,7 @@ size_t SiblingNodesRecordGroup::size() const noexcept
     return m_siblings.size();
 }
 
-void SiblingNodesRecordGroup::push_back(const EmbeddedTreeDBNodeImpl& value)
+void SiblingNodesRecordGroup::push_back(const EmbeddedDocumentDBNodeImpl& value)
 {
     if (m_siblings.size() == 0)
     {
@@ -61,10 +61,10 @@ void SiblingNodesRecordGroup::push_back(const EmbeddedTreeDBNodeImpl& value)
     m_siblings.push_back(value);
 }
 
-bool SiblingNodesRecordGroup::find(const std::string& name, EmbeddedTreeDBNodeImpl& node)
+bool SiblingNodesRecordGroup::find(const std::string& name, EmbeddedDocumentDBNodeImpl& node)
 {
     bool result = false;
-    for (EmbeddedTreeDBNodeImpl n : m_siblings)
+    for (EmbeddedDocumentDBNodeImpl n : m_siblings)
     {
         if (n.name() == name)
         {
@@ -127,7 +127,7 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
         }
     }
 
-    for (const EmbeddedTreeDBNodeImpl& node : m_siblings)
+    for (const EmbeddedDocumentDBNodeImpl& node : m_siblings)
     {
         writeNode(writer, node, error);
         if (error)
@@ -140,7 +140,7 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
     nodeEndRecord.write(writer, error);
 }
 
-void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const EmbeddedTreeDBNodeImpl& node,
+void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const EmbeddedDocumentDBNodeImpl& node,
     Ishiko::Error& error)
 {
     if (node.isRoot())

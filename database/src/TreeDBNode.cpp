@@ -9,7 +9,7 @@
 
 using namespace DiplodocusDB;
 
-TreeDBNode::TreeDBNode(std::shared_ptr<EmbeddedTreeDBNodeImpl> impl)
+TreeDBNode::TreeDBNode(std::shared_ptr<EmbeddedDocumentDBNodeImpl> impl)
     : m_impl(impl)
 {
 }
@@ -44,7 +44,7 @@ bool TreeDBNode::isRoot() const
     return m_impl->isRoot();
 }
 
-std::shared_ptr<EmbeddedTreeDBNodeImpl>& TreeDBNode::impl()
+std::shared_ptr<EmbeddedDocumentDBNodeImpl>& TreeDBNode::impl()
 {
     return m_impl;
 }
