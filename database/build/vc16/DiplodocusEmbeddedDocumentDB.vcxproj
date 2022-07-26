@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\src\EmbeddedDocumentDB.cpp" />
     <ClCompile Include="..\..\src\EmbeddedDocumentDBErrorCategory.cpp" />
     <ClCompile Include="..\..\src\EmbeddedDocumentDBImpl.cpp" />
+    <ClCompile Include="..\..\src\EmbeddedDocumentDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\TreeDBKey.cpp" />
     <ClCompile Include="..\..\src\TreeDBPersistentNodeID.cpp" />
     <ClCompile Include="..\..\src\TreeDBNode.cpp" />
@@ -161,7 +162,6 @@
     <ClCompile Include="..\..\src\XMLTreeDBImpl.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDBNode.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp" />
-    <ClCompile Include="..\..\src\EmbeddedTreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\EmbeddedTreeDBTransactionImpl.cpp" />
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroup.cpp" />
@@ -174,7 +174,6 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDBErrorCategory.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedTreeDBNodeImpl.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\MasterFile.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\SiblingNodesRecordGroup.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp" />
@@ -187,6 +186,7 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\XMLTreeDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\XMLTreeDBNode.hpp" />
     <ClInclude Include="..\..\src\EmbeddedDocumentDBImpl.hpp" />
+    <ClInclude Include="..\..\src\EmbeddedDocumentDBNodeImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBImpl.hpp" />
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBTransactionImpl.h" />

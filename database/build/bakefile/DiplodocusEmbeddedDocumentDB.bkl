@@ -43,7 +43,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../../include/DiplodocusDB/EmbeddedDocumentDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedDocumentDBErrorCategory.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/EmbeddedTreeDBNodeImpl.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/MasterFile.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/SiblingNodesRecordGroup.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/TreeDBKey.hpp
@@ -56,6 +55,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/XMLTreeDB.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/XMLTreeDBNode.hpp
         ../../src/EmbeddedDocumentDBImpl.hpp
+        ../../src/EmbeddedDocumentDBNodeImpl.hpp
         ../../src/XMLTreeDBImpl.hpp
         ../../src/XMLTreeDBNodeImpl.hpp
 
@@ -71,6 +71,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/EmbeddedDocumentDB.cpp
         ../../src/EmbeddedDocumentDBErrorCategory.cpp
         ../../src/EmbeddedDocumentDBImpl.cpp
+        ../../src/EmbeddedDocumentDBNodeImpl.cpp
         ../../src/TreeDBKey.cpp
         ../../src/TreeDBPersistentNodeID.cpp
         ../../src/TreeDBNode.cpp
@@ -79,8 +80,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/XMLTreeDBImpl.cpp
         ../../src/XMLTreeDBNode.cpp
         ../../src/XMLTreeDBNodeImpl.cpp
-
-        ../../src/EmbeddedTreeDBNodeImpl.cpp
         ../../src/EmbeddedTreeDBTransactionImpl.cpp
         ../../src/NodeIDAllocator.cpp
         ../../src/SiblingNodesRecordGroup.cpp
