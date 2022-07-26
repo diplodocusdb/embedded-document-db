@@ -20,6 +20,11 @@ EmbeddedDocumentDBNodeImpl::EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeI
 {
 }
 
+EmbeddedDocumentDBNodeImpl::EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeID, const SiblingNodeRecordGroup& node)
+    : m_name(node.name()), m_value(node.value()), m_parentNodeID(parentNodeID), m_nodeID(node.nodeID())
+{
+}
+
 const std::string& EmbeddedDocumentDBNodeImpl::name() const
 {
     return m_name;
@@ -37,7 +42,7 @@ Value& EmbeddedDocumentDBNodeImpl::value()
 
 bool EmbeddedDocumentDBNodeImpl::isRoot() const
 {
-    return (name() == "/");
+    return (m_name == "/");
 }
 
 const NodeID& EmbeddedDocumentDBNodeImpl::parentNodeID() const

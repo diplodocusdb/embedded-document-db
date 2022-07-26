@@ -17,6 +17,7 @@ class EmbeddedDocumentDBNodeImpl
 public:
     EmbeddedDocumentDBNodeImpl();
     EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeID, const NodeID& nodeID, const std::string& name);
+    EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeID, const SiblingNodeRecordGroup& node);
 
     const std::string& name() const;
     const Value& value() const;

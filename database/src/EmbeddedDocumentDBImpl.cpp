@@ -107,7 +107,7 @@ std::vector<TreeDBNode> EmbeddedDocumentDBImpl::childNodes(TreeDBNode& parent, I
         for (size_t i = 0; i < siblingNodesRecordGroup->size(); ++i)
         {
             // TODO: this looks pretty horrible conversion wise
-            result.push_back(TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>((*siblingNodesRecordGroup)[i])));
+            result.push_back(TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(siblingNodesRecordGroup->parentNodeID(), (*siblingNodesRecordGroup)[i])));
         }
     }
 
@@ -124,13 +124,13 @@ TreeDBNode EmbeddedDocumentDBImpl::child(TreeDBNode& parent, const std::string& 
         error);
     if (!error && found)
     {
-        EmbeddedDocumentDBNodeImpl node;
+        SiblingNodeRecordGroup node;
         found = siblingNodesRecordGroup->find(name, node);
         if (found)
         {
             // TODO : this doesn't work because we take a copy of the node so modifications will casuse
             // inconsistencies
-            result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(node));
+            result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(siblingNodesRecordGroup->parentNodeID(), node));
         }
     }
 
@@ -192,8 +192,8 @@ void EmbeddedDocumentDBImpl::setValue(TreeDBNode& node, const Value& value, Ishi
 {
     // TODO : this can't be working, it re-adds the node, surely that creates duplicate nodes
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*node.impl());
-    nodeImpl.value() = value;
-    SiblingNodesRecordGroup siblings(nodeImpl);
+    SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
+        SiblingNodeRecordGroup(nodeImpl.name(), value, nodeImpl.nodeID()));
     m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
 }
 
@@ -209,10 +209,12 @@ TreeDBNode EmbeddedDocumentDBImpl::insertChildNode(TreeDBNode& parent, size_t in
 {
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
+    TreeDBNode result =
+        TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    SiblingNodesRecordGroup siblings(nodeImpl);
+    SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
+        SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
     m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
@@ -233,7 +235,8 @@ TreeDBNode EmbeddedDocumentDBImpl::insertChildNodeBefore(TreeDBNode& parent, Tre
     TreeDBNode result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    SiblingNodesRecordGroup siblings(nodeImpl);
+    SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
+        SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
     m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
@@ -254,7 +257,8 @@ TreeDBNode EmbeddedDocumentDBImpl::insertChildNodeAfter(TreeDBNode& parent, Tree
     TreeDBNode result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    SiblingNodesRecordGroup siblings(nodeImpl);
+    SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
+        SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
     m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
@@ -290,12 +294,14 @@ TreeDBNode EmbeddedDocumentDBImpl::appendChildNode(TreeDBNode& parent, const std
         if (found)
         {
             // TODO
-            existingSiblingNodesRecordGroup->push_back(nodeImpl);
+            existingSiblingNodesRecordGroup->push_back(
+                SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
             m_cachedRecordFiles.updateSiblingNodesRecordGroup(*existingSiblingNodesRecordGroup, error);
         }
         else
         {
-            SiblingNodesRecordGroup siblings(nodeImpl);
+            SiblingNodesRecordGroup siblings(parentNodeImpl.nodeID(),
+                SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
             m_cachedRecordFiles.addSiblingNodesRecordGroup(siblings, error);
         }
     }

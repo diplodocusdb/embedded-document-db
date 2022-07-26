@@ -21,10 +21,9 @@
 */
 
 #include "EmbeddedTreeDBTransactionImpl.h"
-#include "EmbeddedDocumentDBImpl.hpp"
+#include "EmbeddedDocumentDBNodeImpl.hpp"
 
-namespace DiplodocusDB
-{
+using namespace DiplodocusDB;
 
 TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(CachedRecordFilesSet& cachedRecordFiles, TreeDBNode& parent,
     const std::string& name, const Value& value, Ishiko::Error& error)
@@ -43,7 +42,8 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(CachedRecordFilesSet& 
     {
         if (findResult != eNotFound)
         {
-            existingSiblingNodesRecordGroup->push_back(nodeImpl);
+            existingSiblingNodesRecordGroup->push_back(
+                SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
             if (findResult == eFoundInCache)
             {
                 m_updatedSiblingNodesRecordGroups.push_back(existingSiblingNodesRecordGroup);
@@ -51,7 +51,9 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(CachedRecordFilesSet& 
         }
         else
         {
-            m_newSiblingNodesRecordGroups.emplace_back(std::make_shared<SiblingNodesRecordGroup>(nodeImpl));
+            m_newSiblingNodesRecordGroups.emplace_back(
+                std::make_shared<SiblingNodesRecordGroup>(nodeImpl.parentNodeID(),
+                    SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID())));
         }
     }
 
@@ -113,6 +115,4 @@ EmbeddedTreeDBTransactionImpl::EFindResult EmbeddedTreeDBTransactionImpl::findSi
     {
         return eNotFound;
     }
-}
-
 }
