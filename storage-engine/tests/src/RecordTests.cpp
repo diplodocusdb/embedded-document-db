@@ -6,7 +6,7 @@
 
 #include "RecordTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/Record.hpp"
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
+#include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
 
 using namespace DiplodocusDB;
 using namespace Ishiko;
@@ -47,7 +47,7 @@ RecordTests::RecordTests(const TestNumber& number, const TestContext& context)
 
 void RecordTests::ConstructionTest1(Test& test)
 {
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
 
     ISHIKO_TEST_PASS();
 }
@@ -56,20 +56,20 @@ void RecordTests::ReadMasterFileMetadataTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadMasterFileMetadataTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eMasterFileMetadata);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), Record::ERecordType::eMasterFileMetadata);
     ISHIKO_TEST_PASS();
 }
 
@@ -77,20 +77,20 @@ void RecordTests::ReadDataStartTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadDataStartTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eDataStart);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), Record::ERecordType::eDataStart);
     ISHIKO_TEST_PASS();
 }
 
@@ -98,20 +98,20 @@ void RecordTests::ReadDataEndTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadDataEndTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eDataEnd);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), Record::ERecordType::eDataEnd);
     ISHIKO_TEST_PASS();
 }
 
@@ -119,20 +119,20 @@ void RecordTests::ReadNodeStartTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeStartTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eSiblingNodesStart);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), Record::ERecordType::eSiblingNodesStart);
     ISHIKO_TEST_PASS();
 }
 
@@ -140,20 +140,20 @@ void RecordTests::ReadNodeEndTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeEndTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eSiblingNodesEnd);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.type(), Record::ERecordType::eSiblingNodesEnd);
     ISHIKO_TEST_PASS();
 }
 
@@ -161,21 +161,21 @@ void RecordTests::ReadParentNodeIDTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadParentNodeIDTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eParentNodeID);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.asNodeID(), DiplodocusDB::NodeID(123));
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::eParentNodeID);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.asNodeID(), NodeID(123));
     ISHIKO_TEST_PASS();
 }
 
@@ -183,20 +183,20 @@ void RecordTests::ReadNodeNameTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeNameTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eNodeName);
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::eNodeName);
     ISHIKO_TEST_FAIL_IF_NEQ(record.asString(), "key1");
     ISHIKO_TEST_PASS();
 }
@@ -205,20 +205,20 @@ void RecordTests::ReadNodeNameTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeNameTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eNodeName);
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::eNodeName);
     std::string key = "key";
     key.resize(300, '1');
     ISHIKO_TEST_FAIL_IF_NEQ(record.asString(), key);
@@ -229,21 +229,21 @@ void RecordTests::ReadNodeIDTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeIDTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eNodeID);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.asNodeID(), DiplodocusDB::NodeID(123));
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::eNodeID);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.asNodeID(), NodeID(123));
     ISHIKO_TEST_PASS();
 }
 
@@ -251,21 +251,21 @@ void RecordTests::ReadNodeIDTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeIDTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::eNodeID);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.asNodeID(), DiplodocusDB::NodeID(300));
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::eNodeID);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.asNodeID(), NodeID(300));
     ISHIKO_TEST_PASS();
 }
 
@@ -273,21 +273,21 @@ void RecordTests::ReadPersistentNodeIDTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.open(test.context().getDataPath("RecordTests_ReadPersistentNodeIDTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryReader reader = repository.read(0, 0, error);
+    PageRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eInvalid);
+    Record record(Record::ERecordType::eInvalid);
     record.read(reader, error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), DiplodocusDB::Record::ERecordType::ePersistentNodeID);
-    ISHIKO_TEST_FAIL_IF_NEQ(record.asNodeID(), DiplodocusDB::NodeID(123));
+    ISHIKO_TEST_ABORT_IF_NEQ(record.type(), Record::ERecordType::ePersistentNodeID);
+    ISHIKO_TEST_FAIL_IF_NEQ(record.asNodeID(), NodeID(123));
     ISHIKO_TEST_PASS();
 }
 
@@ -395,20 +395,20 @@ void RecordTests::WriteDataStartTest1(Test& test)
    
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eDataStart);
+    Record record(Record::ERecordType::eDataStart);
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -427,20 +427,20 @@ void RecordTests::WriteDataEndTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eDataEnd);
+    Record record(Record::ERecordType::eDataEnd);
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -459,20 +459,20 @@ void RecordTests::WriteNodeStartTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eSiblingNodesStart);
+    Record record(Record::ERecordType::eSiblingNodesStart);
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -491,20 +491,20 @@ void RecordTests::WriteNodeEndTest1(Test& test)
    
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eSiblingNodesEnd);
+    Record record(Record::ERecordType::eSiblingNodesEnd);
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -523,20 +523,20 @@ void RecordTests::WriteParentNodeIDTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eParentNodeID, DiplodocusDB::NodeID(123));
+    Record record(Record::ERecordType::eParentNodeID, NodeID(123));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -555,20 +555,20 @@ void RecordTests::WriteNodeNameTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record("key1");
+    Record record("key1");
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -587,22 +587,22 @@ void RecordTests::WriteNodeNameTest2(Test& test)
     
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     std::string key = "key";
     key.resize(300, '1');
-    DiplodocusDB::Record record(key);
+    Record record(key);
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -621,20 +621,20 @@ void RecordTests::WriteNodeIDTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eNodeID, DiplodocusDB::NodeID(123));
+    Record record(Record::ERecordType::eNodeID, NodeID(123));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -653,20 +653,20 @@ void RecordTests::WriteNodeIDTest2(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::eNodeID, DiplodocusDB::NodeID(300));
+    Record record(Record::ERecordType::eNodeID, NodeID(300));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -685,20 +685,20 @@ void RecordTests::WritePersistentNodeIDTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::Record record(DiplodocusDB::Record::ERecordType::ePersistentNodeID, DiplodocusDB::NodeID(123));
+    Record record(Record::ERecordType::ePersistentNodeID, NodeID(123));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -762,7 +762,7 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    Record record(DiplodocusDB::Record::ERecordType::eInlineValue, Value::Boolean(true));
+    Record record(Record::ERecordType::eInlineValue, Value::Boolean(true));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -794,7 +794,7 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    Record record(DiplodocusDB::Record::ERecordType::eInlineValue, Value::UTF8String("text"));
+    Record record(Record::ERecordType::eInlineValue, Value::UTF8String("text"));
     record.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
