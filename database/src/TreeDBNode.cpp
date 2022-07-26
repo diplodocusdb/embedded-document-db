@@ -5,7 +5,7 @@
 */
 
 #include "TreeDBNode.hpp"
-#include "EmbeddedTreeDBNodeImpl.h"
+#include "EmbeddedDocumentDBNodeImpl.hpp"
 
 using namespace DiplodocusDB;
 
