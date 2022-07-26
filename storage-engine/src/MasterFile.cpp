@@ -4,12 +4,11 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "MasterFile.h"
-#include "EmbeddedDocumentDBErrorCategory.hpp"
-#include "EmbeddedDocumentDBNodeImpl.hpp"
+#include "MasterFile.hpp"
+#include "MasterFileMetadata.hpp"
+#include "StorageEngineErrorCategory.hpp"
 
-namespace DiplodocusDB
-{
+using namespace DiplodocusDB;
 
 MasterFile::MasterFile()
     : m_metadataRecord(MasterFileMetadata()), m_dataStartOffset(0), m_dataEndOffset(0)
@@ -132,7 +131,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
         else
         {
             // TODO : more precise error
-            error.fail(-1, EmbeddedDocumentDBErrorCategory::Get(), "TODO", __FILE__, __LINE__);
+            error.fail(-1, StorageEngineErrorCategory::Get(), "TODO", __FILE__, __LINE__);
             break;
         }
     }
@@ -172,7 +171,7 @@ void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& si
 bool MasterFile::removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error)
 {
     // TODO
-    error.fail(-1, EmbeddedDocumentDBErrorCategory::Get());
+    error.fail(-1, StorageEngineErrorCategory::Get());
     return false;
 }
 
@@ -198,6 +197,4 @@ void MasterFile::createRootNode(PageRepositoryWriter& writer, Ishiko::Error& err
     {
         return;
     }
-}
-
 }
