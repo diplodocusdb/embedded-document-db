@@ -167,13 +167,11 @@
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\CachedRecordFilesSet.cpp" />
-    <ClCompile Include="..\..\src\MasterFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDBErrorCategory.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\MasterFile.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBPersistentNodeID.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBNode.hpp" />
