@@ -27,14 +27,29 @@ namespace DiplodocusDB
 {
 
 EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl()
-    : TreeDBNodeImpl("/")
+    : m_name("/")
 {
 }
 
-EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(const NodeID& parentNodeID, const NodeID& nodeID, 
+EmbeddedTreeDBNodeImpl::EmbeddedTreeDBNodeImpl(const NodeID& parentNodeID, const NodeID& nodeID,
     const std::string& name)
-    : TreeDBNodeImpl(name), m_parentNodeID(parentNodeID), m_nodeID(nodeID)
+    : m_name(name), m_parentNodeID(parentNodeID), m_nodeID(nodeID)
 {
+}
+
+const std::string& EmbeddedTreeDBNodeImpl::name() const
+{
+    return m_name;
+}
+
+const Value& EmbeddedTreeDBNodeImpl::value() const
+{
+    return m_value;
+}
+
+Value& EmbeddedTreeDBNodeImpl::value()
+{
+    return m_value;
 }
 
 bool EmbeddedTreeDBNodeImpl::isRoot() const

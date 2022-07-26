@@ -24,25 +24,27 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBNODEIMPL_H_
 
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
-#include "TreeDBNodeImpl.hpp"
 
 namespace DiplodocusDB
 {
 
-class EmbeddedTreeDBImpl;
-
-class EmbeddedTreeDBNodeImpl : public TreeDBNodeImpl
+class EmbeddedTreeDBNodeImpl
 {
 public:
     EmbeddedTreeDBNodeImpl();
     EmbeddedTreeDBNodeImpl(const NodeID& parentNodeID, const NodeID& nodeID, const std::string& name);
 
-    bool isRoot() const override;
+    const std::string& name() const;
+    const Value& value() const;
+    Value& value();
+    bool isRoot() const;
 
     const NodeID& parentNodeID() const;
     const NodeID& nodeID() const;
     
 private:
+    std::string m_name;
+    Value m_value;
     NodeID m_parentNodeID;
     NodeID m_nodeID;
 };
