@@ -30,6 +30,7 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
         ../../src/NodeIDTests.hpp
         ../../src/RecordTests.hpp
         ../../src/SecondaryFileTests.hpp
+        ../../src/SiblingNodesRecordGroupTests.hpp
     }
 
     sources
@@ -38,5 +39,6 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
         ../../src/NodeIDTests.cpp
         ../../src/RecordTests.cpp
         ../../src/SecondaryFileTests.cpp
+        ../../src/SiblingNodesRecordGroupTests.cpp
     }
 }

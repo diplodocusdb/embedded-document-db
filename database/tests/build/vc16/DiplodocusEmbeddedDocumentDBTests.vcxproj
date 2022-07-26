@@ -161,7 +161,6 @@
     <ClCompile Include="..\..\src\TreeDBKeyTests.cpp" />
     <ClCompile Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.cpp" />
     <ClCompile Include="..\..\src\NodeIDAllocatorTests.cpp" />
-    <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCacheTests.cpp" />
     <ClCompile Include="..\..\src\MasterFileTests.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSetTests.cpp" />
@@ -173,7 +172,6 @@
     <ClInclude Include="..\..\src\TreeDBKeyTests.h" />
     <ClInclude Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.h" />
     <ClInclude Include="..\..\src\NodeIDAllocatorTests.h" />
-    <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.h" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCacheTests.h" />
     <ClInclude Include="..\..\src\MasterFileTests.h" />
     <ClInclude Include="..\..\src\RecordFilesSetTests.h" />

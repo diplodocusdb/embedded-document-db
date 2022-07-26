@@ -160,11 +160,13 @@
     <ClCompile Include="..\..\src\NodeIDTests.cpp" />
     <ClCompile Include="..\..\src\RecordTests.cpp" />
     <ClCompile Include="..\..\src\SecondaryFileTests.cpp" />
+    <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\NodeIDTests.hpp" />
     <ClInclude Include="..\..\src\RecordTests.hpp" />
     <ClInclude Include="..\..\src\SecondaryFileTests.hpp" />
+    <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

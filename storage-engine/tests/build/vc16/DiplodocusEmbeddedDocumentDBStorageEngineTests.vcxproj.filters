@@ -26,6 +26,9 @@
     <ClInclude Include="..\..\src\SecondaryFileTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -38,6 +41,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\SecondaryFileTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
