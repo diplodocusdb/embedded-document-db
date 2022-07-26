@@ -188,14 +188,14 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Create a node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
-    masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode), error);
+    SiblingNodeRecordGroup sibling("key1", NodeID(0));
+    masterFile.addSiblingNodesRecordGroup(SiblingNodesRecordGroup(NodeID(1), sibling), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -211,19 +211,19 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest2(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Create a node whose parent is the root (ID 1) and has a node ID as it will be the parent of another node
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(2), "key1");
-    masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode1), error);
+    SiblingNodeRecordGroup newNode1("key1", NodeID(2));
+    masterFile.addSiblingNodesRecordGroup(SiblingNodesRecordGroup(NodeID(1), newNode1), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(2), DiplodocusDB::NodeID(0), "key1_1");
-    masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode2), error);
+    SiblingNodeRecordGroup newNode2("key1_1", NodeID(0));
+    masterFile.addSiblingNodesRecordGroup(SiblingNodesRecordGroup(NodeID(2), newNode2), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -239,16 +239,16 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest3(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Create a node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
+    SiblingNodeRecordGroup newNode1("key1", NodeID(0));
     // Create a second node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key2");
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    SiblingNodeRecordGroup newNode2("key2", NodeID(0));
+    SiblingNodesRecordGroup siblingsNodesRecordGroup(NodeID(1));
     siblingsNodesRecordGroup.push_back(newNode1);
     siblingsNodesRecordGroup.push_back(newNode2);
     masterFile.addSiblingNodesRecordGroup(siblingsNodesRecordGroup, error);
@@ -268,24 +268,24 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest4(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    SiblingNodesRecordGroup siblingsNodesRecordGroup(NodeID(1));
     for (size_t i = 0; i < 520; ++i)
     {
         std::stringstream key;
         key << "key" << i;
-        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
+        SiblingNodeRecordGroup newNode(key.str(), NodeID(0));
         siblingsNodesRecordGroup.push_back(newNode);
     }
 
     ISHIKO_TEST_FAIL_IF(error);
 
     // The name length is exactly the number of characters needed to fill the page
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "k12");
+    SiblingNodeRecordGroup newNode("k12", NodeID(0));
     siblingsNodesRecordGroup.push_back(newNode);
 
     masterFile.addSiblingNodesRecordGroup(siblingsNodesRecordGroup, error);
@@ -305,24 +305,24 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest5(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    SiblingNodesRecordGroup siblingsNodesRecordGroup(NodeID(1));
     for (size_t i = 0; i < 520; ++i)
     {
         std::stringstream key;
         key << "key" << i;
-        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
+        SiblingNodeRecordGroup newNode(key.str(), NodeID(0));
         siblingsNodesRecordGroup.push_back(newNode);
     }
 
     ISHIKO_TEST_FAIL_IF(error);
 
     // The name length is exactly the number of characters needed to fill the page plus one byte
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "k123");
+    SiblingNodeRecordGroup newNode("k123", NodeID(0));
     siblingsNodesRecordGroup.push_back(newNode);
 
     masterFile.addSiblingNodesRecordGroup(siblingsNodesRecordGroup, error);
@@ -339,17 +339,17 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest6(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    SiblingNodesRecordGroup siblingsNodesRecordGroup(NodeID(1));
     for (size_t i = 0; i < 10000; ++i)
     {
         std::stringstream key;
         key << "key" << i;
-        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
+        SiblingNodeRecordGroup newNode(key.str(), NodeID(0));
         siblingsNodesRecordGroup.push_back(newNode);
     }
 
@@ -369,17 +369,17 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest7(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    SiblingNodesRecordGroup siblingsNodesRecordGroup(NodeID(1));
     for (size_t i = 0; i < 100000; ++i)
     {
         std::stringstream key;
         key << "key" << i;
-        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
+        SiblingNodeRecordGroup newNode(key.str(), NodeID(0));
         siblingsNodesRecordGroup.push_back(newNode);
     }
 
@@ -399,17 +399,17 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest8(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    SiblingNodesRecordGroup siblingsNodesRecordGroup(NodeID(1));
     for (size_t i = 0; i < 1000000; ++i)
     {
         std::stringstream key;
         key << "key" << i;
-        DiplodocusDB::EmbeddedTreeDBNodeImpl newNode(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), key.str());
+        SiblingNodeRecordGroup newNode(key.str(), NodeID(0));
         siblingsNodesRecordGroup.push_back(newNode);
     }
 
@@ -435,9 +435,9 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest9(Test& test)
     ISHIKO_TEST_ABORT_IF(error);
 
     // Create a node whose parent is the root (ID 1)
-    EmbeddedTreeDBNodeImpl newNode(NodeID(1), NodeID(0), "key1");
+    SiblingNodeRecordGroup newNode("key1", NodeID(0));
     newNode.value() = Value::UTF8String("value1");
-    masterFile.addSiblingNodesRecordGroup(DiplodocusDB::SiblingNodesRecordGroup(newNode), error);
+    masterFile.addSiblingNodesRecordGroup(SiblingNodesRecordGroup(NodeID(1), newNode), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -459,13 +459,13 @@ void MasterFileTests::AddSiblingNodesRecordGroupTest10(Test& test)
     ISHIKO_TEST_ABORT_IF(error);
 
     // Create a node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key1");
-    newNode1.value() = Value::UTF8String("value1");
+    SiblingNodeRecordGroup sibling1("key1", NodeID(0));
+    sibling1.value() = Value::UTF8String("value1");
     // Create a second node whose parent is the root (ID 1)
-    DiplodocusDB::EmbeddedTreeDBNodeImpl newNode2(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "key2");
-    newNode2.value() = Value::UTF8String("value2");
-    DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(newNode1);
-    siblingNodesRecordGroup.push_back(newNode2);
+    SiblingNodeRecordGroup sibling2("key2", NodeID(0));
+    sibling2.value() = Value::UTF8String("value2");
+    SiblingNodesRecordGroup siblingNodesRecordGroup(NodeID(1), sibling1);
+    siblingNodesRecordGroup.push_back(sibling2);
     masterFile.addSiblingNodesRecordGroup(siblingNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);

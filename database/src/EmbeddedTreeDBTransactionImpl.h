@@ -26,6 +26,11 @@
 #include "TreeDBTransactionImpl.hpp"
 #include "CachedRecordFilesSet.h"
 #include "SiblingNodesRecordGroup.h"
+#include "TreeDBNode.hpp"
+#include <DiplodocusDB/Core.hpp>
+#include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
+#include <Ishiko/Errors.hpp>
+#include <string>
 #include <vector>
 #include <memory>
 

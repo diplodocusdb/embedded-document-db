@@ -7,8 +7,7 @@
 #include "EmbeddedDocumentDB.hpp"
 #include "EmbeddedDocumentDBImpl.hpp"
 
-namespace DiplodocusDB
-{
+using namespace DiplodocusDB;
 
 EmbeddedDocumentDB::EmbeddedDocumentDB()
     : m_impl(std::make_shared<EmbeddedDocumentDBImpl>())
@@ -195,6 +194,4 @@ size_t EmbeddedDocumentDB::removeChildNode(TreeDBNode& parent, const std::string
 size_t EmbeddedDocumentDB::removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error)
 {
     return m_impl->removeAllChildNodes(parent, error);
-}
-
 }

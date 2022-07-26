@@ -156,6 +156,7 @@
     <ClCompile Include="..\..\src\RecordFile.cpp" />
     <ClCompile Include="..\..\src\RecordMarker.cpp" />
     <ClCompile Include="..\..\src\SecondaryFile.cpp" />
+    <ClCompile Include="..\..\src\SiblingNodeRecordGroup.cpp" />
     <ClCompile Include="..\..\src\StorageEngineErrorCategory.cpp" />
     <ClCompile Include="..\..\src\ValueCodec.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordMarker.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SecondaryFile.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SiblingNodeRecordGroup.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\StorageEngineErrorCategory.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\ValueCodec.hpp" />
   </ItemGroup>

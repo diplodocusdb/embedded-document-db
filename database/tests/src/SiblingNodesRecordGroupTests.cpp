@@ -24,6 +24,7 @@
 #include "DiplodocusDB/EmbeddedDocumentDB/SiblingNodesRecordGroup.h"
 #include "DiplodocusDB/PhysicalStorage/PageRepository/PageFileRepository.h"
 
+using namespace DiplodocusDB;
 using namespace Ishiko;
 
 SiblingNodesRecordGroupTests::SiblingNodesRecordGroupTests(const TestNumber& number, const TestContext& context)
@@ -85,17 +86,17 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Create a root node
-    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(DiplodocusDB::NodeID(0), DiplodocusDB::NodeID(1), "/");
-    DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl);
+    SiblingNodeRecordGroup sibling("/", NodeID(1));
+    SiblingNodesRecordGroup siblingNodesRecordGroup(NodeID(0), sibling);
     siblingNodesRecordGroup.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -113,21 +114,22 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
    
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "name1");
-    DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl);
+    // TODO: is this test correct? Why is the root node id 1 and the child 0?
+    SiblingNodeRecordGroup sibling("name1", NodeID(0));
+    SiblingNodesRecordGroup siblingNodesRecordGroup(NodeID(1), sibling);
     siblingNodesRecordGroup.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -145,23 +147,24 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     Error error;
 
-    DiplodocusDB::PageFileRepository repository;
+    PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::Page> page = repository.allocatePage(error);
+    std::shared_ptr<Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl1(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "name1");
-    DiplodocusDB::SiblingNodesRecordGroup siblingNodesRecordGroup(nodeImpl1);
-    DiplodocusDB::EmbeddedTreeDBNodeImpl nodeImpl2(DiplodocusDB::NodeID(1), DiplodocusDB::NodeID(0), "name2");
-    siblingNodesRecordGroup.push_back(nodeImpl2);
+    // TODO: is this test correct? Why is the root node id 1 and both children 0?
+    SiblingNodeRecordGroup sibling1("name1", NodeID(0));
+    SiblingNodesRecordGroup siblingNodesRecordGroup(NodeID(1), sibling1);
+    SiblingNodeRecordGroup sibling2("name2", NodeID(0));
+    siblingNodesRecordGroup.push_back(sibling2);
     siblingNodesRecordGroup.write(writer, error);
 
     ISHIKO_TEST_FAIL_IF(error);

@@ -7,22 +7,27 @@
 #ifndef _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBNODEIMPL_HPP_
 #define _DIPLODOCUSDB_TREEDB_XMLTREEDB_XMLTREEDBNODEIMPL_HPP_
 
-#include "TreeDBNodeImpl.hpp"
 #include "XMLTreeDBNode.hpp"
+#include <DiplodocusDB/Core.hpp>
+#include <Ishiko/Errors.hpp>
 #include <pugixml.hpp>
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace DiplodocusDB
 {
 
-class XMLTreeDBImpl;
-
-class XMLTreeDBNodeImpl : public TreeDBNodeImpl, public std::enable_shared_from_this<XMLTreeDBNodeImpl>
+class XMLTreeDBNodeImpl : public std::enable_shared_from_this<XMLTreeDBNodeImpl>
 {
 public:
     XMLTreeDBNodeImpl(XMLTreeDBNodeImpl* parent, pugi::xml_node node);
-    ~XMLTreeDBNodeImpl() override;
+    ~XMLTreeDBNodeImpl();
 
-    bool isRoot() const override;
+    const std::string& name() const;
+    const Value& value() const;
+    Value& value();
+    bool isRoot() const;
     XMLTreeDBNode parent(Ishiko::Error& error);
     std::vector<XMLTreeDBNode> childNodes(Ishiko::Error& error);
     XMLTreeDBNode child(const std::string& name, Ishiko::Error& error);
@@ -42,6 +47,8 @@ private:
     void loadChildren(Ishiko::Error& error);
 
 private:
+    std::string m_name;
+    Value m_value;
     XMLTreeDBNodeImpl* m_parent;
     pugi::xml_node m_node;
     std::vector<std::shared_ptr<XMLTreeDBNodeImpl>> m_children;
