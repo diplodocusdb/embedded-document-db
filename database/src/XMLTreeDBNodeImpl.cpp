@@ -4,7 +4,7 @@
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
 
-#include "TreeDBErrorCategory.hpp"
+#include "EmbeddedDocumentDBErrorCategory.hpp"
 #include "XMLTreeDBNodeImpl.hpp"
 #include "XMLTreeDBImpl.hpp"
 #include <boost/date_time.hpp>
@@ -364,7 +364,8 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
                 }
                 else
                 {
-                    Fail(error, TreeDBErrorCategory::eGeneric, "Unknown data type encountered while loading child node", __FILE__, __LINE__);
+                    Fail(error, EmbeddedDocumentDBErrorCategory::eGeneric,
+                        "Unknown data type encountered while loading child node", __FILE__, __LINE__);
                 }
             }
             else

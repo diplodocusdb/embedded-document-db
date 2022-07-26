@@ -16,7 +16,7 @@
 namespace DiplodocusDB
 {
 
-class EmbeddedTreeDBImpl;
+class EmbeddedDocumentDBImpl;
 
 class EmbeddedDocumentDB : public TreeDB
 {
@@ -78,7 +78,7 @@ public:
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error) override;
 
 private:
-    std::shared_ptr<EmbeddedTreeDBImpl> m_impl;
+    std::shared_ptr<EmbeddedDocumentDBImpl> m_impl;
 };
 
 }

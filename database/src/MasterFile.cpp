@@ -5,8 +5,8 @@
 */
 
 #include "MasterFile.h"
+#include "EmbeddedDocumentDBErrorCategory.hpp"
 #include "EmbeddedTreeDBNodeImpl.h"
-#include "TreeDBErrorCategory.hpp"
 
 namespace DiplodocusDB
 {
@@ -132,7 +132,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
         else
         {
             // TODO : more precise error
-            error.fail(-1, TreeDBErrorCategory::Get(), "TODO", __FILE__, __LINE__);
+            error.fail(-1, EmbeddedDocumentDBErrorCategory::Get(), "TODO", __FILE__, __LINE__);
             break;
         }
     }
@@ -172,7 +172,7 @@ void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& si
 bool MasterFile::removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error)
 {
     // TODO
-    error.fail(-1, TreeDBErrorCategory::Get());
+    error.fail(-1, EmbeddedDocumentDBErrorCategory::Get());
     return false;
 }
 

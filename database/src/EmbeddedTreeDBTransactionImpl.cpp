@@ -21,7 +21,7 @@
 */
 
 #include "EmbeddedTreeDBTransactionImpl.h"
-#include "EmbeddedTreeDBImpl.h"
+#include "EmbeddedDocumentDBImpl.hpp"
 
 namespace DiplodocusDB
 {
