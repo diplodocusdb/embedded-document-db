@@ -164,7 +164,6 @@
     <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\EmbeddedTreeDBTransactionImpl.cpp" />
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
-    <ClCompile Include="..\..\src\SiblingNodesRecordGroup.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\CachedRecordFilesSet.cpp" />
@@ -175,7 +174,6 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDB.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\EmbeddedDocumentDBErrorCategory.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\MasterFile.h" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\SiblingNodesRecordGroup.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBKey.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBPersistentNodeID.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\TreeDBNode.hpp" />
