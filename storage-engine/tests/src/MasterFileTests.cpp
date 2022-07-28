@@ -1,27 +1,11 @@
 /*
     Copyright (c) 2018-2022 Xavier Leclercq
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+    Released under the MIT License
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "MasterFileTests.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/MasterFile.h"
+#include "MasterFileTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/MasterFile.hpp"
 #include <sstream>
 
 using namespace DiplodocusDB;
@@ -49,12 +33,13 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestContext& co
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
-    append<HeapAllocationErrorsTest>("removeSiblingNodesRecordGroup test 1", RemoveSiblingNodesRecordGroupTest1);
+    // TODO
+    //append<HeapAllocationErrorsTest>("removeSiblingNodesRecordGroup test 1", RemoveSiblingNodesRecordGroupTest1);
 }
 
 void MasterFileTests::ConstructionTest1(Test& test)
 {
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
 
     ISHIKO_TEST_PASS();
 }
@@ -65,7 +50,7 @@ void MasterFileTests::CreateTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -80,17 +65,17 @@ void MasterFileTests::OpenTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::RecordMarker rootMarker = masterFile.rootNodePosition();
+    RecordMarker rootMarker = masterFile.rootNodePosition();
 
     ISHIKO_TEST_FAIL_IF_NEQ(rootMarker.position().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(rootMarker.position().offset(), 15);
 
-    DiplodocusDB::RecordMarker dataEndMarker = masterFile.dataEndPosition();
+    RecordMarker dataEndMarker = masterFile.dataEndPosition();
 
     ISHIKO_TEST_FAIL_IF_NEQ(dataEndMarker.position().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(dataEndMarker.position().offset(), 20);
@@ -102,17 +87,17 @@ void MasterFileTests::OpenTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::RecordMarker rootMarker = masterFile.rootNodePosition();
+    RecordMarker rootMarker = masterFile.rootNodePosition();
 
     ISHIKO_TEST_FAIL_IF_NEQ(rootMarker.position().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(rootMarker.position().offset(), 15);
 
-    DiplodocusDB::RecordMarker dataEndMarker = masterFile.dataEndPosition();
+    RecordMarker dataEndMarker = masterFile.dataEndPosition();
 
     ISHIKO_TEST_FAIL_IF_NEQ(dataEndMarker.position().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(dataEndMarker.position().offset(), 30);
@@ -124,23 +109,23 @@ void MasterFileTests::OpenTest3(Test& test)
 {
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup1;
-    bool found1 = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup1, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup1;
+    bool found1 = masterFile.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found1);
     ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup1.size(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1[0].name(), "/");
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup2;
-    bool found2 = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup2, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup2;
+    bool found2 = masterFile.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
@@ -155,23 +140,23 @@ void MasterFileTests::OpenTest4(Test& test)
 {
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest4.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup1;
-    bool found1 = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup1, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup1;
+    bool found1 = masterFile.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found1);
     ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup1.size(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1[0].name(), "/");
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup2;
-    bool found2 = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup2, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup2;
+    bool found2 = masterFile.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
@@ -480,15 +465,15 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = masterFile.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -501,13 +486,13 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = masterFile.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -520,19 +505,21 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest3(Test& test)
 {
     Error error;
 
-    DiplodocusDB::MasterFile masterFile;
+    MasterFile masterFile;
     masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = masterFile.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(3), siblingsNodesRecordGroup, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = masterFile.findSiblingNodesRecordGroup(NodeID(3), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(!found);
     ISHIKO_TEST_PASS();
 }
 
+/* TODO
 void MasterFileTests::RemoveSiblingNodesRecordGroupTest1(Test& test)
 {
 }
+*/

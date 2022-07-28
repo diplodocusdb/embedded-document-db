@@ -4,12 +4,15 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
-#define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_MASTERFILE_H_
+#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_MASTERFILE_HPP_
+#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_MASTERFILE_HPP_
 
-#include "SiblingNodesRecordGroup.h"
+#include "NodeID.hpp"
+#include "Record.hpp"
+#include "RecordFile.hpp"
+#include "RecordMarker.hpp"
+#include "SiblingNodesRecordGroup.hpp"
 #include <boost/filesystem/path.hpp>
-#include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
 #include <Ishiko/Errors.hpp>
 #include <fstream>

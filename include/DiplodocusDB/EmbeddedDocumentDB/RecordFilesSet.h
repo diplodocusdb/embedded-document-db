@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019 Xavier Leclercq
+    Copyright (c) 2019-2022 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -23,7 +23,9 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDFILESSET_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_RECORDFILESSET_H_
 
-#include "MasterFile.h"
+#include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
+#include <boost/filesystem.hpp>
+#include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
 {

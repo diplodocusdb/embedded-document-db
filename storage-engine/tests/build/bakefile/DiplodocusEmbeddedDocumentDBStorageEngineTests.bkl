@@ -27,16 +27,20 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
 
     headers
     {
+        ../../src/MasterFileTests.hpp
         ../../src/NodeIDTests.hpp
         ../../src/RecordTests.hpp
         ../../src/SecondaryFileTests.hpp
+        ../../src/SiblingNodesRecordGroupTests.hpp
     }
 
     sources
     {
         ../../src/main.cpp
+        ../../src/MasterFileTests.cpp
         ../../src/NodeIDTests.cpp
         ../../src/RecordTests.cpp
         ../../src/SecondaryFileTests.cpp
+        ../../src/SiblingNodesRecordGroupTests.cpp
     }
 }

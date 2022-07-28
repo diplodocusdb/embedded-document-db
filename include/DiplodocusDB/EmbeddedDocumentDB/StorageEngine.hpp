@@ -8,6 +8,7 @@
 #define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP_
 
 #include "StorageEngine/linkoptions.hpp"
+#include "StorageEngine/MasterFile.hpp"
 #include "StorageEngine/MasterFileMetadata.hpp"
 #include "StorageEngine/NodeID.hpp"
 #include "StorageEngine/Record.hpp"
@@ -15,6 +16,7 @@
 #include "StorageEngine/RecordMarker.hpp"
 #include "StorageEngine/SecondaryFile.hpp"
 #include "StorageEngine/SiblingNodeRecordGroup.hpp"
+#include "StorageEngine/SiblingNodesRecordGroup.hpp"
 #include "StorageEngine/ValueCodec.hpp"
 
 #endif

@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\MasterFile.cpp" />
     <ClCompile Include="..\..\src\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\src\NodeID.cpp" />
     <ClCompile Include="..\..\src\Record.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="..\..\src\RecordMarker.cpp" />
     <ClCompile Include="..\..\src\SecondaryFile.cpp" />
     <ClCompile Include="..\..\src\SiblingNodeRecordGroup.cpp" />
+    <ClCompile Include="..\..\src\SiblingNodesRecordGroup.cpp" />
     <ClCompile Include="..\..\src\StorageEngineErrorCategory.cpp" />
     <ClCompile Include="..\..\src\ValueCodec.cpp" />
   </ItemGroup>
@@ -164,12 +166,14 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\linkoptions.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\NodeID.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFileMetadata.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\Record.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordMarker.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SecondaryFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SiblingNodeRecordGroup.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SiblingNodesRecordGroup.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\StorageEngineErrorCategory.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\ValueCodec.hpp" />
   </ItemGroup>

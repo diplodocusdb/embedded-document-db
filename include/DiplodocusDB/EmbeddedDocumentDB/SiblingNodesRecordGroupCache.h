@@ -23,7 +23,6 @@
 #ifndef _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUPCACHE_H_
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_SIBLINGNODESRECORDGROUPCACHE_H_
 
-#include "SiblingNodesRecordGroup.h"
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>
 #include <map>
 #include <memory>

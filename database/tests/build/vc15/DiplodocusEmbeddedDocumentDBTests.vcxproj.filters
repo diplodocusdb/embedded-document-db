@@ -29,13 +29,7 @@
     <ClInclude Include="..\..\src\NodeIDAllocatorTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCacheTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MasterFileTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\RecordFilesSetTests.h">
@@ -64,13 +58,7 @@
     <ClCompile Include="..\..\src\NodeIDAllocatorTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCacheTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MasterFileTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\RecordFilesSetTests.cpp">
