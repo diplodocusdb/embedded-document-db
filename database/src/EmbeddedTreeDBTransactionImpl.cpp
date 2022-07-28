@@ -25,8 +25,8 @@
 
 using namespace DiplodocusDB;
 
-TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(CachedRecordFilesSet& cachedRecordFiles, TreeDBNode& parent,
-    const std::string& name, const Value& value, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(EmbeddedDocumentDBStorageEngine& storageEngine,
+    TreeDBNode& parent, const std::string& name, const Value& value, Ishiko::Error& error)
 {
     TreeDBNode result;
 
@@ -36,7 +36,7 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(CachedRecordFilesSet& 
     nodeImpl.value() = value;
 
     std::shared_ptr<SiblingNodesRecordGroup> existingSiblingNodesRecordGroup;
-    EFindResult findResult = findSiblingNodesRecordGroup(cachedRecordFiles, parentNodeImpl.nodeID(),
+    EFindResult findResult = findSiblingNodesRecordGroup(storageEngine, parentNodeImpl.nodeID(),
         existingSiblingNodesRecordGroup, error);
     if (!error)
     {
@@ -60,11 +60,11 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(CachedRecordFilesSet& 
     return result;
 }
 
-void EmbeddedTreeDBTransactionImpl::commit(CachedRecordFilesSet& cachedRecordFiles, Ishiko::Error& error)
+void EmbeddedTreeDBTransactionImpl::commit(EmbeddedDocumentDBStorageEngine& storageEngine, Ishiko::Error& error)
 {
     for (std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes : m_updatedSiblingNodesRecordGroups)
     {
-        cachedRecordFiles.updateSiblingNodesRecordGroup(*siblingNodes, error);
+        storageEngine.updateSiblingNodesRecordGroup(*siblingNodes, error);
         if (error)
         {
             break;
@@ -72,7 +72,7 @@ void EmbeddedTreeDBTransactionImpl::commit(CachedRecordFilesSet& cachedRecordFil
     }
     for (std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes : m_newSiblingNodesRecordGroups)
     {
-        cachedRecordFiles.addSiblingNodesRecordGroup(*siblingNodes, error);
+        storageEngine.addSiblingNodesRecordGroup(*siblingNodes, error);
         if (error)
         {
             break;
@@ -87,7 +87,7 @@ void EmbeddedTreeDBTransactionImpl::rollback()
 }
 
 EmbeddedTreeDBTransactionImpl::EFindResult EmbeddedTreeDBTransactionImpl::findSiblingNodesRecordGroup(
-    CachedRecordFilesSet& cachedRecordFiles, const NodeID& parentNodeID,
+    EmbeddedDocumentDBStorageEngine& storageEngine, const NodeID& parentNodeID,
     std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error)
 {
     for (std::shared_ptr<SiblingNodesRecordGroup>& group : m_newSiblingNodesRecordGroups)
@@ -106,7 +106,7 @@ EmbeddedTreeDBTransactionImpl::EFindResult EmbeddedTreeDBTransactionImpl::findSi
             return eFoundInUpdated;
         }
     }
-    bool found = cachedRecordFiles.findSiblingNodesRecordGroup(parentNodeID, siblingNodes, error);
+    bool found = storageEngine.findSiblingNodesRecordGroup(parentNodeID, siblingNodes, error);
     if (found)
     {
         return eFoundInCache;
