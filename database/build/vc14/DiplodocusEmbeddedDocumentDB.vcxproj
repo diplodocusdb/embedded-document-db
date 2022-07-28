@@ -164,7 +164,6 @@
     <ClCompile Include="..\..\src\XMLTreeDBNodeImpl.cpp" />
     <ClCompile Include="..\..\src\EmbeddedTreeDBTransactionImpl.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp" />
-    <ClCompile Include="..\..\src\CachedRecordFilesSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB.hpp" />
@@ -185,7 +184,6 @@
     <ClInclude Include="..\..\src\XMLTreeDBNodeImpl.hpp" />
     <ClInclude Include="..\..\src\EmbeddedTreeDBTransactionImpl.h" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCache.h" />
-    <ClInclude Include="..\..\src\CachedRecordFilesSet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -59,7 +59,6 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
 
         ../../src/EmbeddedTreeDBTransactionImpl.h
         ../../src/SiblingNodesRecordGroupCache.h
-        ../../src/CachedRecordFilesSet.h
     }
 
     sources
@@ -78,6 +77,5 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
         ../../src/XMLTreeDBNodeImpl.cpp
         ../../src/EmbeddedTreeDBTransactionImpl.cpp
         ../../src/SiblingNodesRecordGroupCache.cpp
-        ../../src/CachedRecordFilesSet.cpp
     }
 }
