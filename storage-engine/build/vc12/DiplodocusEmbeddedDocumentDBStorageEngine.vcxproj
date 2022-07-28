@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\src\MasterFile.cpp" />
     <ClCompile Include="..\..\src\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\src\NodeID.cpp" />
+    <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
     <ClCompile Include="..\..\src\Record.cpp" />
     <ClCompile Include="..\..\src\RecordFile.cpp" />
     <ClCompile Include="..\..\src\RecordMarker.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\linkoptions.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\NodeID.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\NodeIDAllocator.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFileMetadata.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\Record.hpp" />
