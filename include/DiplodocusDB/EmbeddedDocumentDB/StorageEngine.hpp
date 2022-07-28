@@ -11,6 +11,7 @@
 #include "StorageEngine/MasterFile.hpp"
 #include "StorageEngine/MasterFileMetadata.hpp"
 #include "StorageEngine/NodeID.hpp"
+#include "StorageEngine/NodeIDAllocator.hpp"
 #include "StorageEngine/Record.hpp"
 #include "StorageEngine/RecordFile.hpp"
 #include "StorageEngine/RecordMarker.hpp"
