@@ -6,6 +6,7 @@
 
 #include "MasterFileTests.hpp"
 #include "NodeIDTests.hpp"
+#include "NodeIDAllocatorTests.hpp"
 #include "RecordTests.hpp"
 #include "SecondaryFileTests.hpp"
 #include "SiblingNodesRecordGroupTests.hpp"
@@ -24,6 +25,7 @@ int main(int argc, char* argv[])
 
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<NodeIDTests>();
+    theTests.append<NodeIDAllocatorTests>();
     theTests.append<RecordTests>();
     theTests.append<SiblingNodesRecordGroupTests>();
     theTests.append<MasterFileTests>();
