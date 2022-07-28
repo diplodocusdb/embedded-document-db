@@ -106,7 +106,7 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest1(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ((*siblingsNodesRecordGroup1)[0].name(), "/");
 
     // Verify the cache is working as expected
-    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
     bool found2 = cachedSet.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -137,7 +137,7 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest2(Test& test)
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
     bool found2 = cachedSet.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
 
-    ISHIKO_TEST_FAIL_IF_NOT(error);
+    ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
     ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1.get(), siblingsNodesRecordGroup2.get());
 
