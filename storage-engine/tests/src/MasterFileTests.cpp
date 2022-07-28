@@ -33,7 +33,8 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestContext& co
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 1", FindSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 2", FindSiblingNodesRecordGroupTest2);
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
-    append<HeapAllocationErrorsTest>("removeSiblingNodesRecordGroup test 1", RemoveSiblingNodesRecordGroupTest1);
+    // TODO
+    //append<HeapAllocationErrorsTest>("removeSiblingNodesRecordGroup test 1", RemoveSiblingNodesRecordGroupTest1);
 }
 
 void MasterFileTests::ConstructionTest1(Test& test)
@@ -517,6 +518,8 @@ void MasterFileTests::FindSiblingNodesRecordGroupTest3(Test& test)
     ISHIKO_TEST_PASS();
 }
 
+/* TODO
 void MasterFileTests::RemoveSiblingNodesRecordGroupTest1(Test& test)
 {
 }
+*/
