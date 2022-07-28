@@ -26,13 +26,7 @@
     <ClInclude Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\NodeIDAllocatorTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupCacheTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\RecordFilesSetTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\CachedRecordFilesSetTests.h">
@@ -55,13 +49,7 @@
     <ClCompile Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\NodeIDAllocatorTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCacheTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RecordFilesSetTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\CachedRecordFilesSetTests.cpp">
