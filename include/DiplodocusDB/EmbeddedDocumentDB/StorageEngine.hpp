@@ -7,7 +7,8 @@
 #ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP_
 #define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP_
 
-#include "StorageEngine/CachedRecordFilesSet.hpp"
+#include "StorageEngine/EmbeddedDocumentDBStorageEngine.hpp"
+#include "StorageEngine/EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
 #include "StorageEngine/linkoptions.hpp"
 #include "StorageEngine/MasterFile.hpp"
 #include "StorageEngine/MasterFileMetadata.hpp"

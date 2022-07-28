@@ -4,26 +4,26 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "CachedRecordFilesSet.hpp"
+#include "EmbeddedDocumentDBStorageEngine.hpp"
 
 using namespace DiplodocusDB;
 
-void CachedRecordFilesSet::createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
+void EmbeddedDocumentDBStorageEngine::createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_recordFiles.createMasterFile(path, error);
 }
 
-void CachedRecordFilesSet::openMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
+void EmbeddedDocumentDBStorageEngine::openMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_recordFiles.openMasterFile(path, error);
 }
 
-void CachedRecordFilesSet::close()
+void EmbeddedDocumentDBStorageEngine::close()
 {
     m_recordFiles.close();
 }
 
-bool CachedRecordFilesSet::findSiblingNodesRecordGroup(const NodeID& parentNodeID,
+bool EmbeddedDocumentDBStorageEngine::findSiblingNodesRecordGroup(const NodeID& parentNodeID,
     std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error)
 {
     bool result = false;
@@ -58,13 +58,13 @@ bool CachedRecordFilesSet::findSiblingNodesRecordGroup(const NodeID& parentNodeI
     return result;
 }
 
-void CachedRecordFilesSet::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes,
+void EmbeddedDocumentDBStorageEngine::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes,
     Ishiko::Error& error)
 {
     m_recordFiles.addSiblingNodesRecordGroup(siblingNodes, error);
 }
 
-void CachedRecordFilesSet::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes,
+void EmbeddedDocumentDBStorageEngine::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes,
     Ishiko::Error& error)
 {
     m_recordFiles.updateSiblingNodesRecordGroup(siblingNodes, error);

@@ -4,15 +4,15 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_STORAGEENGINEERRORCATEGORY_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_STORAGEENGINEERRORCATEGORY_HPP_
+#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_EMBEDDEDDOCUMENTDBSTORAGEENGINEERRORCATEGORY_HPP_
+#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_EMBEDDEDDOCUMENTDBSTORAGEENGINEERRORCATEGORY_HPP_
 
 #include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
 {
 
-class StorageEngineErrorCategory : public Ishiko::ErrorCategory
+class EmbeddedDocumentDBStorageEngineErrorCategory : public Ishiko::ErrorCategory
 {
 public:
     enum EErrorValues
@@ -20,16 +20,16 @@ public:
         eGeneric = -1
     };
 
-    static const StorageEngineErrorCategory& Get() noexcept;
+    static const EmbeddedDocumentDBStorageEngineErrorCategory& Get() noexcept;
 
     const char* name() const noexcept override;
 
 private:
-    StorageEngineErrorCategory() noexcept = default;
+    EmbeddedDocumentDBStorageEngineErrorCategory() noexcept = default;
 };
 
-void Fail(Ishiko::Error& error, StorageEngineErrorCategory::EErrorValues value) noexcept;
-void Fail(Ishiko::Error& error, StorageEngineErrorCategory::EErrorValues value, const std::string& message,
+void Fail(Ishiko::Error& error, EmbeddedDocumentDBStorageEngineErrorCategory::EErrorValues value) noexcept;
+void Fail(Ishiko::Error& error, EmbeddedDocumentDBStorageEngineErrorCategory::EErrorValues value, const std::string& message,
     const char* file, int line) noexcept;
 
 }

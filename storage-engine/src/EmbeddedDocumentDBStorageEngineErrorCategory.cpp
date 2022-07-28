@@ -4,28 +4,28 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "StorageEngineErrorCategory.hpp"
+#include "EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
 
 using namespace DiplodocusDB;
 
-const StorageEngineErrorCategory& StorageEngineErrorCategory::Get() noexcept
+const EmbeddedDocumentDBStorageEngineErrorCategory& EmbeddedDocumentDBStorageEngineErrorCategory::Get() noexcept
 {
-    static StorageEngineErrorCategory theCategory;
+    static EmbeddedDocumentDBStorageEngineErrorCategory theCategory;
     return theCategory;
 }
 
-const char* StorageEngineErrorCategory::name() const noexcept
+const char* EmbeddedDocumentDBStorageEngineErrorCategory::name() const noexcept
 {
-    return "DiplodocusDB::StorageEngineErrorCategory";
+    return "DiplodocusDB::EmbeddedDocumentDBStorageEngineErrorCategory";
 }
 
-void Fail(Ishiko::Error& error, StorageEngineErrorCategory::EErrorValues value) noexcept
+void Fail(Ishiko::Error& error, EmbeddedDocumentDBStorageEngineErrorCategory::EErrorValues value) noexcept
 {
-    error.fail(value, StorageEngineErrorCategory::Get());
+    error.fail(value, EmbeddedDocumentDBStorageEngineErrorCategory::Get());
 }
 
-void Fail(Ishiko::Error& error, StorageEngineErrorCategory::EErrorValues value, const std::string& message,
+void Fail(Ishiko::Error& error, EmbeddedDocumentDBStorageEngineErrorCategory::EErrorValues value, const std::string& message,
     const char* file, int line) noexcept
 {
-    error.fail(value, StorageEngineErrorCategory::Get(), message, file, line);
+    error.fail(value, EmbeddedDocumentDBStorageEngineErrorCategory::Get(), message, file, line);
 }
