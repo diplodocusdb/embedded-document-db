@@ -7,7 +7,6 @@
 #include "EmbeddedDocumentDBTests.hpp"
 #include "TreeDBKeyTests.h"
 #include "SiblingNodesRecordGroupCacheTests.h"
-#include "RecordFilesSetTests.h"
 #include "CachedRecordFilesSetTests.h"
 #include "TransactionTests.h"
 #include "XMLTreeDBTests/XMLTreeDBTests.h"
@@ -27,7 +26,6 @@ int main(int argc, char* argv[])
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<TreeDBKeyTests>();
     theTests.append<SiblingNodesRecordGroupCacheTests>();
-    theTests.append<RecordFilesSetTests>();
     theTests.append<CachedRecordFilesSetTests>();
     theTests.append<EmbeddedDocumentDBTests>();
     theTests.append<TransactionTests>();
