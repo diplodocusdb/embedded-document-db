@@ -4,14 +4,15 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "CachedRecordFilesSetTests.hpp"
-#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/CachedRecordFilesSet.hpp"
+#include "EmbeddedDocumentDBStorageEngineTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/EmbeddedDocumentDBStorageEngine.hpp"
 
 using namespace DiplodocusDB;
 using namespace Ishiko;
 
-CachedRecordFilesSetTests::CachedRecordFilesSetTests(const TestNumber& number, const TestContext& context)
-    : TestSequence(number, "CachedRecordFilesSet tests", context)
+EmbeddedDocumentDBStorageEngineTests::EmbeddedDocumentDBStorageEngineTests(const TestNumber& number,
+    const TestContext& context)
+    : TestSequence(number, "EmbeddedDocumentDBStorageEngine tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
     append<HeapAllocationErrorsTest>("createMasterFile test 1", CreateMasterFileTest1);
@@ -22,43 +23,43 @@ CachedRecordFilesSetTests::CachedRecordFilesSetTests(const TestNumber& number, c
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
 }
 
-void CachedRecordFilesSetTests::ConstructionTest1(Test& test)
+void EmbeddedDocumentDBStorageEngineTests::ConstructionTest1(Test& test)
 {
-    CachedRecordFilesSet cachedSet;
+    EmbeddedDocumentDBStorageEngine storageEngine;
 
     ISHIKO_TEST_PASS();
 }
 
-void CachedRecordFilesSetTests::CreateMasterFileTest1(Test& test)
+void EmbeddedDocumentDBStorageEngineTests::CreateMasterFileTest1(Test& test)
 {
     const char* basename = "MasterFileTests_CreateTest1.dpdb";
 
     Error error;
 
-    CachedRecordFilesSet cachedSet;
-    cachedSet.createMasterFile(test.context().getOutputPath(basename), error);
+    EmbeddedDocumentDBStorageEngine storageEngine;
+    storageEngine.createMasterFile(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    cachedSet.close();
+    storageEngine.close();
 
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
-void CachedRecordFilesSetTests::OpenMasterFileTest1(Test& test)
+void EmbeddedDocumentDBStorageEngineTests::OpenMasterFileTest1(Test& test)
 {
     Error error;
 
-    CachedRecordFilesSet cachedSet;
-    cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
+    EmbeddedDocumentDBStorageEngine storageEngine;
+    storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup;
-    bool found = cachedSet.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup, error);
+    bool found = storageEngine.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -67,17 +68,17 @@ void CachedRecordFilesSetTests::OpenMasterFileTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void CachedRecordFilesSetTests::OpenMasterFileTest2(Test& test)
+void EmbeddedDocumentDBStorageEngineTests::OpenMasterFileTest2(Test& test)
 {
     Error error;
 
-    CachedRecordFilesSet cachedSet;
-    cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
+    EmbeddedDocumentDBStorageEngine storageEngine;
+    storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup;
-    bool found = cachedSet.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup, error);
+    bool found = storageEngine.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -86,19 +87,19 @@ void CachedRecordFilesSetTests::OpenMasterFileTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest1(Test& test)
+void EmbeddedDocumentDBStorageEngineTests::FindSiblingNodesRecordGroupTest1(Test& test)
 {
     Error error;
 
-    CachedRecordFilesSet cachedSet;
-    cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
+    EmbeddedDocumentDBStorageEngine storageEngine;
+    storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
-    bool found1 = cachedSet.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup1, error);
+    bool found1 = storageEngine.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found1);
@@ -107,7 +108,7 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest1(Test& test)
 
     // Verify the cache is working as expected
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
-    bool found2 = cachedSet.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup2, error);
+    bool found2 = storageEngine.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
@@ -116,17 +117,17 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest2(Test& test)
+void EmbeddedDocumentDBStorageEngineTests::FindSiblingNodesRecordGroupTest2(Test& test)
 {
     Error error;
 
-    CachedRecordFilesSet cachedSet;
-    cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
+    EmbeddedDocumentDBStorageEngine storageEngine;
+    storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
-    bool found1 = cachedSet.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup1, error);
+    bool found1 = storageEngine.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found1);
@@ -135,7 +136,7 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest2(Test& test)
 
     // Verify the cache is working as expected
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
-    bool found2 = cachedSet.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
+    bool found2 = storageEngine.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
@@ -144,24 +145,24 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest3(Test& test)
+void EmbeddedDocumentDBStorageEngineTests::FindSiblingNodesRecordGroupTest3(Test& test)
 {
     Error error;
 
-    CachedRecordFilesSet cachedSet;
-    cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
+    EmbeddedDocumentDBStorageEngine storageEngine;
+    storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
-    bool found1 = cachedSet.findSiblingNodesRecordGroup(NodeID(3), siblingsNodesRecordGroup1, error);
+    bool found1 = storageEngine.findSiblingNodesRecordGroup(NodeID(3), siblingsNodesRecordGroup1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(!found1);
 
     // Verify the cache is working as expected
     std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
-    bool found2 = cachedSet.findSiblingNodesRecordGroup(NodeID(3), siblingsNodesRecordGroup2, error);
+    bool found2 = storageEngine.findSiblingNodesRecordGroup(NodeID(3), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(!found2);

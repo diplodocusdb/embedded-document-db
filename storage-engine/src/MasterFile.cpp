@@ -6,7 +6,7 @@
 
 #include "MasterFile.hpp"
 #include "MasterFileMetadata.hpp"
-#include "StorageEngineErrorCategory.hpp"
+#include "EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
 
 using namespace DiplodocusDB;
 
@@ -131,7 +131,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
         else
         {
             // TODO : more precise error
-            error.fail(-1, StorageEngineErrorCategory::Get(), "TODO", __FILE__, __LINE__);
+            error.fail(-1, EmbeddedDocumentDBStorageEngineErrorCategory::Get(), "TODO", __FILE__, __LINE__);
             break;
         }
     }
@@ -171,7 +171,7 @@ void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& si
 bool MasterFile::removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error)
 {
     // TODO
-    error.fail(-1, StorageEngineErrorCategory::Get());
+    error.fail(-1, EmbeddedDocumentDBStorageEngineErrorCategory::Get());
     return false;
 }
 

@@ -4,15 +4,15 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_TESTS_CACHEDRECORDFILESSETTESTS_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_TESTS_CACHEDRECORDFILESSETTESTS_HPP_
+#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_TESTS_EMBEDDEDDOCUMENTDBSTORAGEENGINETESTS_HPP_
+#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_TESTS_EMBEDDEDDOCUMENTDBSTORAGEENGINETESTS_HPP_
 
 #include <Ishiko/TestFramework.hpp>
 
-class CachedRecordFilesSetTests : public Ishiko::TestSequence
+class EmbeddedDocumentDBStorageEngineTests : public Ishiko::TestSequence
 {
 public:
-    CachedRecordFilesSetTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
+    EmbeddedDocumentDBStorageEngineTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
     static void ConstructionTest1(Ishiko::Test& test);
