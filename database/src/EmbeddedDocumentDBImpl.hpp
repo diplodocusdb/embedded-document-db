@@ -7,7 +7,6 @@
 #ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_EMBEDDEDDOCUMENTDBIMPL_HPP_
 #define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_EMBEDDEDDOCUMENTDBIMPL_HPP_
 
-#include "CachedRecordFilesSet.h"
 #include "TreeDB.hpp"
 #include <boost/filesystem/path.hpp>
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>

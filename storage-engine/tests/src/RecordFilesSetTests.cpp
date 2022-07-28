@@ -1,28 +1,13 @@
 /*
     Copyright (c) 2019-2022 Xavier Leclercq
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+    Released under the MIT License
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "RecordFilesSetTests.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/RecordFilesSet.h"
+#include "RecordFilesSetTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFilesSet.hpp"
 
+using namespace DiplodocusDB;
 using namespace Ishiko;
 
 RecordFilesSetTests::RecordFilesSetTests(const TestNumber& number, const TestContext& context)
@@ -39,7 +24,7 @@ RecordFilesSetTests::RecordFilesSetTests(const TestNumber& number, const TestCon
 
 void RecordFilesSetTests::ConstructionTest1(Test& test)
 {
-    DiplodocusDB::RecordFilesSet set;
+    RecordFilesSet set;
 
     ISHIKO_TEST_PASS();
 }
@@ -50,7 +35,7 @@ void RecordFilesSetTests::CreateMasterFileTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::RecordFilesSet set;
+    RecordFilesSet set;
     set.createMasterFile(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -65,15 +50,15 @@ void RecordFilesSetTests::OpenMasterFileTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::RecordFilesSet set;
+    RecordFilesSet set;
     set.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = set.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = set.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -86,13 +71,13 @@ void RecordFilesSetTests::OpenMasterFileTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::RecordFilesSet set;
+    RecordFilesSet set;
     set.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = set.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = set.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -105,15 +90,15 @@ void RecordFilesSetTests::FindSiblingNodesRecordGroupTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::RecordFilesSet set;
+    RecordFilesSet set;
     set.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = set.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = set.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -126,13 +111,13 @@ void RecordFilesSetTests::FindSiblingNodesRecordGroupTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::RecordFilesSet set;
+    RecordFilesSet set;
     set.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = set.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = set.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -145,13 +130,13 @@ void RecordFilesSetTests::FindSiblingNodesRecordGroupTest3(Test& test)
 {
     Error error;
 
-    DiplodocusDB::RecordFilesSet set;
+    RecordFilesSet set;
     set.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    DiplodocusDB::SiblingNodesRecordGroup siblingsNodesRecordGroup;
-    bool found = set.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(3), siblingsNodesRecordGroup, error);
+    SiblingNodesRecordGroup siblingsNodesRecordGroup;
+    bool found = set.findSiblingNodesRecordGroup(NodeID(3), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(!found);

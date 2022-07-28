@@ -24,7 +24,6 @@
 #define _DIPLODOCUSDB_TREEDB_EMBEDDEDTREEDB_EMBEDDEDTREEDBTRANSACTIONIMPL_H_
 
 #include "TreeDBTransactionImpl.hpp"
-#include "CachedRecordFilesSet.h"
 #include "TreeDBNode.hpp"
 #include <DiplodocusDB/Core.hpp>
 #include <DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp>

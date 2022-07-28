@@ -159,6 +159,8 @@
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\MasterFileTests.cpp" />
     <ClCompile Include="..\..\src\NodeIDTests.cpp" />
+    <ClCompile Include="..\..\src\NodeIDAllocatorTests.cpp" />
+    <ClCompile Include="..\..\src\RecordFilesSetTests.cpp" />
     <ClCompile Include="..\..\src\RecordTests.cpp" />
     <ClCompile Include="..\..\src\SecondaryFileTests.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp" />
@@ -166,6 +168,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\MasterFileTests.hpp" />
     <ClInclude Include="..\..\src\NodeIDTests.hpp" />
+    <ClInclude Include="..\..\src\NodeIDAllocatorTests.hpp" />
+    <ClInclude Include="..\..\src\RecordFilesSetTests.hpp" />
     <ClInclude Include="..\..\src\RecordTests.hpp" />
     <ClInclude Include="..\..\src\SecondaryFileTests.hpp" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.hpp" />
