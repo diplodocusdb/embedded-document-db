@@ -68,9 +68,6 @@
     <ClInclude Include="..\..\src\EmbeddedTreeDBTransactionImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\SiblingNodesRecordGroupCache.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\EmbeddedDocumentDB.cpp">
@@ -110,9 +107,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\EmbeddedTreeDBTransactionImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
