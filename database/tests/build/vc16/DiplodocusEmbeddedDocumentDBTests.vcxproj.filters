@@ -26,12 +26,6 @@
     <ClInclude Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\SiblingNodesRecordGroupCacheTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\CachedRecordFilesSetTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\TransactionTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -47,12 +41,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\XMLTreeDBTests\XMLTreeDBTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SiblingNodesRecordGroupCacheTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\CachedRecordFilesSetTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TransactionTests.cpp">

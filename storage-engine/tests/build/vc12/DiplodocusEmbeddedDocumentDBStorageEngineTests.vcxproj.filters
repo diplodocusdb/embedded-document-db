@@ -17,6 +17,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\CachedRecordFilesSetTests.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\MasterFileTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -38,8 +41,14 @@
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\SiblingNodesRecordGroupCacheTests.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\CachedRecordFilesSetTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -62,6 +71,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SiblingNodesRecordGroupCacheTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
