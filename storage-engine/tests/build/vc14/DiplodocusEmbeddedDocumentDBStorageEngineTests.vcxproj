@@ -156,7 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\CachedRecordFilesSetTests.cpp" />
+    <ClCompile Include="..\..\src\EmbeddedDocumentDBStorageEngineTests.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\MasterFileTests.cpp" />
     <ClCompile Include="..\..\src\NodeIDTests.cpp" />
@@ -168,7 +168,7 @@
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCacheTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\CachedRecordFilesSetTests.hpp" />
+    <ClInclude Include="..\..\src\EmbeddedDocumentDBStorageEngineTests.hpp" />
     <ClInclude Include="..\..\src\MasterFileTests.hpp" />
     <ClInclude Include="..\..\src\NodeIDTests.hpp" />
     <ClInclude Include="..\..\src\NodeIDAllocatorTests.hpp" />

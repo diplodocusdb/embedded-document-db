@@ -17,7 +17,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\CachedRecordFilesSetTests.hpp">
+    <ClInclude Include="..\..\src\EmbeddedDocumentDBStorageEngineTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\MasterFileTests.hpp">
@@ -46,7 +46,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\CachedRecordFilesSetTests.cpp">
+    <ClCompile Include="..\..\src\EmbeddedDocumentDBStorageEngineTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\main.cpp">
