@@ -1,28 +1,13 @@
 /*
     Copyright (c) 2019-2022 Xavier Leclercq
-
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-    IN THE SOFTWARE.
+    Released under the MIT License
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "CachedRecordFilesSetTests.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/CachedRecordFilesSet.h"
+#include "CachedRecordFilesSetTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/CachedRecordFilesSet.hpp"
 
+using namespace DiplodocusDB;
 using namespace Ishiko;
 
 CachedRecordFilesSetTests::CachedRecordFilesSetTests(const TestNumber& number, const TestContext& context)
@@ -39,7 +24,7 @@ CachedRecordFilesSetTests::CachedRecordFilesSetTests(const TestNumber& number, c
 
 void CachedRecordFilesSetTests::ConstructionTest1(Test& test)
 {
-    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    CachedRecordFilesSet cachedSet;
 
     ISHIKO_TEST_PASS();
 }
@@ -50,7 +35,7 @@ void CachedRecordFilesSetTests::CreateMasterFileTest1(Test& test)
 
     Error error;
 
-    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    CachedRecordFilesSet cachedSet;
     cachedSet.createMasterFile(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -65,15 +50,15 @@ void CachedRecordFilesSetTests::OpenMasterFileTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    CachedRecordFilesSet cachedSet;
     cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
-    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup;
-    bool found = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup, error);
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup;
+    bool found = cachedSet.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -86,13 +71,13 @@ void CachedRecordFilesSetTests::OpenMasterFileTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    CachedRecordFilesSet cachedSet;
     cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup;
-    bool found = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup, error);
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup;
+    bool found = cachedSet.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found);
@@ -105,15 +90,15 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest1(Test& test)
 {
     Error error;
 
-    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    CachedRecordFilesSet cachedSet;
     cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
     // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
     // The record group can be found by passing 0 as the parent Node ID.
-    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
-    bool found1 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup1, error);
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
+    bool found1 = cachedSet.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found1);
@@ -122,7 +107,7 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest1(Test& test)
 
     // Verify the cache is working as expected
     std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
-    bool found2 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(0), siblingsNodesRecordGroup2, error);
+    bool found2 = cachedSet.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
@@ -135,13 +120,13 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest2(Test& test)
 {
     Error error;
 
-    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    CachedRecordFilesSet cachedSet;
     cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
-    bool found1 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup1, error);
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
+    bool found1 = cachedSet.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found1);
@@ -149,8 +134,8 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest2(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ((*siblingsNodesRecordGroup1)[0].name(), "key1");
 
     // Verify the cache is working as expected
-    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
-    bool found2 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(1), siblingsNodesRecordGroup2, error);
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
+    bool found2 = cachedSet.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
@@ -163,20 +148,20 @@ void CachedRecordFilesSetTests::FindSiblingNodesRecordGroupTest3(Test& test)
 {
     Error error;
 
-    DiplodocusDB::CachedRecordFilesSet cachedSet;
+    CachedRecordFilesSet cachedSet;
     cachedSet.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
-    bool found1 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(3), siblingsNodesRecordGroup1, error);
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup1;
+    bool found1 = cachedSet.findSiblingNodesRecordGroup(NodeID(3), siblingsNodesRecordGroup1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(!found1);
 
     // Verify the cache is working as expected
-    std::shared_ptr<DiplodocusDB::SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
-    bool found2 = cachedSet.findSiblingNodesRecordGroup(DiplodocusDB::NodeID(3), siblingsNodesRecordGroup2, error);
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
+    bool found2 = cachedSet.findSiblingNodesRecordGroup(NodeID(3), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(!found2);
