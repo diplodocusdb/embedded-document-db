@@ -20,6 +20,7 @@
 #include "StorageEngine/SecondaryFile.hpp"
 #include "StorageEngine/SiblingNodeRecordGroup.hpp"
 #include "StorageEngine/SiblingNodesRecordGroup.hpp"
+#include "StorageEngine/SiblingNodesRecordGroupCache.hpp"
 #include "StorageEngine/ValueCodec.hpp"
 
 #endif

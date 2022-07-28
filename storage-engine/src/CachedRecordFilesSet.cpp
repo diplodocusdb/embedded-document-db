@@ -6,7 +6,7 @@
 
 #include "CachedRecordFilesSet.hpp"
 
-uisng namespace DiplodocusDB;
+using namespace DiplodocusDB;
 
 void CachedRecordFilesSet::createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
 {
