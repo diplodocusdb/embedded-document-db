@@ -6,7 +6,7 @@
 
 #include "RecordTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/Record.hpp"
-#include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
+#include <DiplodocusDB/PhysicalStorage.hpp>
 
 using namespace DiplodocusDB;
 using namespace Ishiko;
