@@ -38,7 +38,7 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
     headers
     {
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/CachedRecordFilesSet.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/EmbeddedDocumentDBStorageEngine.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/linkoptions.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeID.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeIDAllocator.hpp
@@ -52,13 +52,13 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodeRecordGroup.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodesRecordGroup.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodesRecordGroupCache.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/StorageEngineErrorCategory.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/EmbeddedDocumentDBStorageEngineErrorCategory.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/ValueCodec.hpp
     }
 
     sources
     {
-        ../../src/CachedRecordFilesSet.cpp
+        ../../src/EmbeddedDocumentDBStorageEngine.cpp
         ../../src/MasterFile.cpp
         ../../src/MasterFileMetadata.cpp
         ../../src/NodeID.cpp
@@ -71,7 +71,7 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPageRepository, 
         ../../src/SiblingNodeRecordGroup.cpp
         ../../src/SiblingNodesRecordGroup.cpp
         ../../src/SiblingNodesRecordGroupCache.cpp
-        ../../src/StorageEngineErrorCategory.cpp
+        ../../src/EmbeddedDocumentDBStorageEngineErrorCategory.cpp
         ../../src/ValueCodec.cpp
     }
 }

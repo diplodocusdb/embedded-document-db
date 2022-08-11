@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\EmbeddedDocumentDBStorageEngineTests.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\MasterFileTests.cpp" />
     <ClCompile Include="..\..\src\NodeIDTests.cpp" />
@@ -164,8 +165,10 @@
     <ClCompile Include="..\..\src\RecordTests.cpp" />
     <ClCompile Include="..\..\src\SecondaryFileTests.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp" />
+    <ClCompile Include="..\..\src\SiblingNodesRecordGroupCacheTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\EmbeddedDocumentDBStorageEngineTests.hpp" />
     <ClInclude Include="..\..\src\MasterFileTests.hpp" />
     <ClInclude Include="..\..\src\NodeIDTests.hpp" />
     <ClInclude Include="..\..\src\NodeIDAllocatorTests.hpp" />
@@ -173,6 +176,7 @@
     <ClInclude Include="..\..\src\RecordTests.hpp" />
     <ClInclude Include="..\..\src\SecondaryFileTests.hpp" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.hpp" />
+    <ClInclude Include="..\..\src\SiblingNodesRecordGroupCacheTests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -38,10 +38,10 @@ namespace DiplodocusDB
 class EmbeddedTreeDBTransactionImpl : public TreeDBTransactionImpl
 {
 public:
-    TreeDBNode appendChildNode(CachedRecordFilesSet& cachedRecordFiles, TreeDBNode& parent, const std::string& name,
-        const Value& value, Ishiko::Error& error);
+    TreeDBNode appendChildNode(EmbeddedDocumentDBStorageEngine& storageEngine, TreeDBNode& parent,
+        const std::string& name, const Value& value, Ishiko::Error& error);
 
-    void commit(CachedRecordFilesSet& cachedRecordFiles, Ishiko::Error& error);
+    void commit(EmbeddedDocumentDBStorageEngine& storageEngine, Ishiko::Error& error);
     void rollback();
 
 private:
@@ -52,8 +52,8 @@ private:
         eFoundInUpdated,
         eFoundInCache
     };
-    EFindResult findSiblingNodesRecordGroup(CachedRecordFilesSet& cachedRecordFiles, const NodeID& parentNodeID,
-        std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error);
+    EFindResult findSiblingNodesRecordGroup(EmbeddedDocumentDBStorageEngine& storageEngine,
+        const NodeID& parentNodeID, std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error);
 
 private:
     // TODO : see comments about using shared pointers in SiblingNodesRecordGroupCache, the same may apply here

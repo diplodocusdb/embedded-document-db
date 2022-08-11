@@ -4,8 +4,8 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_CACHEDRECORDFILESSET_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_CACHEDRECORDFILESSET_HPP_
+#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_EMBEDDEDDOCUMENTDBSTORAGEENGINE_HPP_
+#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_EMBEDDEDDOCUMENTDBSTORAGEENGINE_HPP_
 
 #include "NodeID.hpp"
 #include "RecordFilesSet.hpp"
@@ -17,7 +17,7 @@
 namespace DiplodocusDB
 {
 
-class CachedRecordFilesSet
+class EmbeddedDocumentDBStorageEngine
 {
 public:
     void createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);

@@ -6,8 +6,6 @@
 
 #include "EmbeddedDocumentDBTests.hpp"
 #include "TreeDBKeyTests.h"
-#include "SiblingNodesRecordGroupCacheTests.h"
-#include "CachedRecordFilesSetTests.h"
 #include "TransactionTests.h"
 #include "XMLTreeDBTests/XMLTreeDBTests.h"
 #include "DiplodocusDB/EmbeddedDocumentDB/linkoptions.hpp"
@@ -25,8 +23,6 @@ int main(int argc, char* argv[])
 
     TestSequence& theTests = theTestHarness.tests();
     theTests.append<TreeDBKeyTests>();
-    theTests.append<SiblingNodesRecordGroupCacheTests>();
-    theTests.append<CachedRecordFilesSetTests>();
     theTests.append<EmbeddedDocumentDBTests>();
     theTests.append<TransactionTests>();
     theTests.append<XMLTreeDBTests>();

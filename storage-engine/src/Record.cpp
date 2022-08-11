@@ -5,7 +5,7 @@
 */
 
 #include "Record.hpp"
-#include "StorageEngineErrorCategory.hpp"
+#include "EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
 #include "ValueCodec.hpp"
 
 using namespace DiplodocusDB;
@@ -70,7 +70,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
     {
     case ERecordType::eInvalid:
         // TODO : add details
-        error.fail(-1, StorageEngineErrorCategory::Get(), "Invalid record type", __FILE__, __LINE__);
+        error.fail(-1, EmbeddedDocumentDBStorageEngineErrorCategory::Get(), "Invalid record type", __FILE__, __LINE__);
         break;
 
     case ERecordType::eMasterFileMetadata:
@@ -101,7 +101,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
 
     default:
         // TODO : add details
-        error.fail(-1, StorageEngineErrorCategory::Get(), "Invalid record type", __FILE__, __LINE__);
+        error.fail(-1, EmbeddedDocumentDBStorageEngineErrorCategory::Get(), "Invalid record type", __FILE__, __LINE__);
         break;
     }
 }
