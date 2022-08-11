@@ -17,7 +17,7 @@ program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, Ishiko
     {
         cxx-compiler-options = "-std=c++11";
         libs += DiplodocusEmbeddedDocumentDB DiplodocusEmbeddedDocumentDBStorageEngine DiplodocusDBPhysicalStorage DiplodocusDBCore;
-        libs += IshikoTestFramework IshikoTestFrameworkCore IshikoConfiguration IshikoDiff IshikoXML IshikoFileSystem IshikoProcess IshikoTime IshikoText IshikoErrors;
+        libs += IshikoTestFramework IshikoTestFrameworkCore IshikoConfiguration IshikoDiff IshikoXML IshikoFileSystem IshikoIO IshikoProcess IshikoTime IshikoText IshikoErrors;
         libs += fmt boost_filesystem;
     }
 
