@@ -35,7 +35,7 @@ void XMLTreeDBImpl::open(const boost::filesystem::path& path, Ishiko::Error& err
     if (!result)
     {
         // TODO: better error
-        Fail(error, EmbeddedDocumentDBErrorCategory::eGeneric, "Failed to open file", __FILE__, __LINE__);
+        Fail(error, EmbeddedDocumentDBErrorCategory::Value::generic_error, "Failed to open file", __FILE__, __LINE__);
     }
     m_root = XMLTreeDBNode(std::make_shared<XMLTreeDBNodeImpl>(nullptr, m_document.child(rootElementName)));
 }

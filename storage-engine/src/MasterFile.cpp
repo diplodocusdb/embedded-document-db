@@ -131,7 +131,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
         else
         {
             // TODO : more precise error
-            error.fail(-1, EmbeddedDocumentDBStorageEngineErrorCategory::Get(), "TODO", __FILE__, __LINE__);
+            error.fail(EmbeddedDocumentDBStorageEngineErrorCategory::Get(), -1, "TODO", __FILE__, __LINE__);
             break;
         }
     }
@@ -171,7 +171,7 @@ void MasterFile::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& si
 bool MasterFile::removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error)
 {
     // TODO
-    error.fail(-1, EmbeddedDocumentDBStorageEngineErrorCategory::Get());
+    error.fail(EmbeddedDocumentDBStorageEngineErrorCategory::Get(), -1);
     return false;
 }
 

@@ -6,7 +6,7 @@
 
 #include "SiblingNodesRecordGroupTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodesRecordGroup.hpp"
-#include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
+#include <DiplodocusDB/PhysicalStorage.hpp>
 
 using namespace DiplodocusDB;
 using namespace Ishiko;
