@@ -4,12 +4,12 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP
 
 #include "NodeID.hpp"
 #include "SiblingNodeRecordGroup.hpp"
-#include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
+#include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
 #include <string>
 #include <vector>

@@ -4,10 +4,10 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDMARKER_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDMARKER_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDMARKER_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDMARKER_HPP
 
-#include "DiplodocusDB/PhysicalStorage/PageRepository/PageRepositoryPosition.h"
+#include "DiplodocusDB/PhysicalStorage.hpp"
 
 namespace DiplodocusDB
 {
