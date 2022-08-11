@@ -19,13 +19,28 @@ const char* EmbeddedDocumentDBErrorCategory::name() const noexcept
     return "DiplodocusDB::EmbeddedDocumentDBErrorCategory";
 }
 
-void DiplodocusDB::Fail(Ishiko::Error& error, EmbeddedDocumentDBErrorCategory::EErrorValues value) noexcept
+std::ostream& EmbeddedDocumentDBErrorCategory::streamOut(int value, std::ostream& os) const
 {
-    error.fail(value, EmbeddedDocumentDBErrorCategory::Get());
+    switch (static_cast<Value>(value))
+    {
+    case Value::generic_error:
+        os << "generic error";
+        break;
+
+    default:
+        os << "unknown value";
+        break;
+    }
+    return os;
 }
 
-void DiplodocusDB::Fail(Ishiko::Error& error, EmbeddedDocumentDBErrorCategory::EErrorValues value,
+void DiplodocusDB::Fail(Ishiko::Error& error, EmbeddedDocumentDBErrorCategory::Value value) noexcept
+{
+    error.fail(EmbeddedDocumentDBErrorCategory::Get(), value);
+}
+
+void DiplodocusDB::Fail(Ishiko::Error& error, EmbeddedDocumentDBErrorCategory::Value value,
     const std::string& message, const char* file, int line) noexcept
 {
-    error.fail(value, EmbeddedDocumentDBErrorCategory::Get(), message, file, line);
+    error.fail(EmbeddedDocumentDBErrorCategory::Get(), value, message, file, line);
 }
