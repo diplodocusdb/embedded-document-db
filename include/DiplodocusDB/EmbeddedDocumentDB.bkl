@@ -1,6 +1,6 @@
 diplodocusdbpath = envvar("DIPLODOCUSDB");
 import $(diplodocusdbpath)/core/include/DiplodocusDB/Core.bkl;
-import $(diplodocusdbpath)/physical-storage/include/DiplodocusDB/PhysicalStorage/PageRepository.bkl;
+import $(diplodocusdbpath)/physical-storage/include/DiplodocusDB/PhysicalStorage.bkl;
 ishikopath = envvar("ISHIKO_CPP");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/Boost.bkl;
@@ -13,7 +13,7 @@ setting DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT
     default = '$(DIPLODOCUSDB)/embedded-document-db';
 }
 
-template DiplodocusEmbeddedDocumentDB : DiplodocusDBPageRepository, DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
+template DiplodocusEmbeddedDocumentDB : DiplodocusDBPhysicalStorage, DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
 {
     includedirs += $(DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT)/include;
 
