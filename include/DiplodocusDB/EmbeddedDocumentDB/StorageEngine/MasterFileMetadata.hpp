@@ -4,11 +4,11 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_MASTERFILEMETADATA_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_MASTERFILEMETADATA_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_MASTERFILEMETADATA_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_MASTERFILEMETADATA_HPP
 
 #include <DiplodocusDB/Core.hpp>
-#include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
+#include <DiplodocusDB/PhysicalStorage.hpp>
 
 namespace DiplodocusDB
 {
@@ -18,8 +18,8 @@ class MasterFileMetadata
 public:
     MasterFileMetadata();
 
-    void read(PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
+    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     VersionNumber m_fileFormatVersion;

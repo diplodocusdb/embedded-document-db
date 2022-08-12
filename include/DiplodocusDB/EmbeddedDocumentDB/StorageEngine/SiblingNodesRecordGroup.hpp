@@ -4,12 +4,12 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP
 
 #include "NodeID.hpp"
 #include "SiblingNodeRecordGroup.hpp"
-#include <DiplodocusDB/PhysicalStorage/PageRepository.hpp>
+#include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
 #include <string>
 #include <vector>
@@ -35,11 +35,12 @@ public:
     void push_back(const SiblingNodeRecordGroup& value);
     bool find(const std::string& name, SiblingNodeRecordGroup& node);
 
-    void readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void readWithoutType(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
+    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
-    static void writeNode(PageRepositoryWriter& writer, const SiblingNodeRecordGroup& node, Ishiko::Error& error);
+    static void writeNode(PhysicalStorage::PageRepositoryWriter& writer, const SiblingNodeRecordGroup& node,
+        Ishiko::Error& error);
 
 private:
     NodeID m_parentNodeID;

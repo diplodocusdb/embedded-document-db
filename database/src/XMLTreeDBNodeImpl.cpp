@@ -377,7 +377,7 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
                 }
                 else
                 {
-                    Fail(error, EmbeddedDocumentDBErrorCategory::eGeneric,
+                    Fail(error, EmbeddedDocumentDBErrorCategory::Value::generic_error,
                         "Unknown data type encountered while loading child node", __FILE__, __LINE__);
                 }
             }

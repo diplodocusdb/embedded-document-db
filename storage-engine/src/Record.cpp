@@ -5,7 +5,7 @@
 */
 
 #include "Record.hpp"
-#include "StorageEngineErrorCategory.hpp"
+#include "EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
 #include "ValueCodec.hpp"
 
 using namespace DiplodocusDB;
@@ -55,7 +55,7 @@ const Value& Record::asValue() const
     return boost::get<Value>(m_data);
 }
 
-void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
+void Record::read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
     uint8_t type;
     reader.read((char*)&type, 1, error);
@@ -70,7 +70,7 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
     {
     case ERecordType::eInvalid:
         // TODO : add details
-        error.fail(-1, StorageEngineErrorCategory::Get(), "Invalid record type", __FILE__, __LINE__);
+        error.fail(EmbeddedDocumentDBStorageEngineErrorCategory::Get(), -1, "Invalid record type", __FILE__, __LINE__);
         break;
 
     case ERecordType::eMasterFileMetadata:
@@ -101,12 +101,12 @@ void Record::read(PageRepositoryReader& reader, Ishiko::Error& error)
 
     default:
         // TODO : add details
-        error.fail(-1, StorageEngineErrorCategory::Get(), "Invalid record type", __FILE__, __LINE__);
+        error.fail(EmbeddedDocumentDBStorageEngineErrorCategory::Get(), -1, "Invalid record type", __FILE__, __LINE__);
         break;
     }
 }
 
-void Record::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
+void Record::write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_type;
     writer.write((char*)&type, 1, error);

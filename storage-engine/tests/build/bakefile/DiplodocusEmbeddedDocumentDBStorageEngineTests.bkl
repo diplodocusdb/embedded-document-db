@@ -16,7 +16,7 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
     if ($(toolset) == gnu)
     {
         cxx-compiler-options = "-std=c++11";
-        libs += DiplodocusEmbeddedDocumentDBStorageEngine DiplodocusDBPageRepository DiplodocusDBCore IshikoTestFramework IshikoTestFrameworkCore IshikoConfiguration IshikoDiff IshikoXML IshikoFileSystem IshikoProcess IshikoTime IshikoText IshikoErrors;
+        libs += DiplodocusEmbeddedDocumentDBStorageEngine DiplodocusDBPhysicalStorage DiplodocusDBCore IshikoTestFramework IshikoTestFrameworkCore IshikoConfiguration IshikoDiff IshikoXML IshikoFileSystem IshikoIO IshikoProcess IshikoTime IshikoText IshikoErrors;
         libs += fmt boost_filesystem;
     }
 
@@ -27,6 +27,7 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
 
     headers
     {
+        ../../src/EmbeddedDocumentDBStorageEngineTests.hpp
         ../../src/MasterFileTests.hpp
         ../../src/NodeIDTests.hpp
         ../../src/NodeIDAllocatorTests.hpp
@@ -34,10 +35,12 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
         ../../src/RecordTests.hpp
         ../../src/SecondaryFileTests.hpp
         ../../src/SiblingNodesRecordGroupTests.hpp
+        ../../src/SiblingNodesRecordGroupCacheTests.hpp
     }
 
     sources
     {
+        ../../src/EmbeddedDocumentDBStorageEngineTests.cpp
         ../../src/main.cpp
         ../../src/MasterFileTests.cpp
         ../../src/NodeIDTests.cpp
@@ -46,5 +49,6 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
         ../../src/RecordTests.cpp
         ../../src/SecondaryFileTests.cpp
         ../../src/SiblingNodesRecordGroupTests.cpp
+        ../../src/SiblingNodesRecordGroupCacheTests.cpp
     }
 }

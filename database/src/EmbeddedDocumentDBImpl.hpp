@@ -74,7 +74,7 @@ public:
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
 
 private:
-    CachedRecordFilesSet m_cachedRecordFiles;
+    EmbeddedDocumentDBStorageEngine m_storageEngine;
     TreeDBNode m_root;
 };
 
