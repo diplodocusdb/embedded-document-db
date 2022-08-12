@@ -116,7 +116,7 @@ private:
     static void createRootNode(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error);
 
 private:
-    PhysicalStorage::PageFileRepository m_repository;
+    PhysicalStorage::PageFileRepository2 m_repository;
     Record m_metadataRecord;
     size_t m_dataStartOffset;
     size_t m_dataEndPageIndex;

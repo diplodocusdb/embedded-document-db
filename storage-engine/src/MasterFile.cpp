@@ -64,7 +64,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    m_repository.save(*page, error);
+    m_repository.store(*page, error);
 }
 
 void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
