@@ -34,7 +34,7 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
     
     Error error;
 
-    PhysicalStorage::PageFileRepository repository;
+    PhysicalStorage::PageFileRepository2 repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -52,7 +52,7 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.save(*page, error);
+    repository.store(*page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -66,7 +66,7 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository repository;
+    PhysicalStorage::PageFileRepository2 repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -86,7 +86,7 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.save(*page, error);
+    repository.store(*page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -100,7 +100,7 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
    
     Error error;
 
-    PhysicalStorage::PageFileRepository repository;
+    PhysicalStorage::PageFileRepository2 repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -120,7 +120,7 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.save(*page, error);
+    repository.store(*page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -134,7 +134,7 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository repository;
+    PhysicalStorage::PageFileRepository2 repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -156,7 +156,7 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.save(*page, error);
+    repository.store(*page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
