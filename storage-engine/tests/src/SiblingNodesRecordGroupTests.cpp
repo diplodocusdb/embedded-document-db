@@ -34,16 +34,16 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
     
     Error error;
 
-    PageFileRepository repository;
+    PhysicalStorage::PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -66,16 +66,16 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     Error error;
 
-    PageFileRepository repository;
+    PhysicalStorage::PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -100,16 +100,16 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
    
     Error error;
 
-    PageFileRepository repository;
+    PhysicalStorage::PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -134,16 +134,16 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     Error error;
 
-    PageFileRepository repository;
+    PhysicalStorage::PageFileRepository repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryWriter writer = repository.insert(page, 0, error);
+    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
