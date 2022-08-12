@@ -368,7 +368,7 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -400,7 +400,7 @@ void RecordTests::WriteDataStartTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -432,7 +432,7 @@ void RecordTests::WriteDataEndTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -464,7 +464,7 @@ void RecordTests::WriteNodeStartTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -496,7 +496,7 @@ void RecordTests::WriteNodeEndTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -528,7 +528,7 @@ void RecordTests::WriteParentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -560,7 +560,7 @@ void RecordTests::WriteNodeNameTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -592,7 +592,7 @@ void RecordTests::WriteNodeNameTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -626,7 +626,7 @@ void RecordTests::WriteNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -658,7 +658,7 @@ void RecordTests::WriteNodeIDTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -690,7 +690,7 @@ void RecordTests::WritePersistentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -722,7 +722,7 @@ void RecordTests::WriteInlineValueBinaryTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -754,7 +754,7 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -786,7 +786,7 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 

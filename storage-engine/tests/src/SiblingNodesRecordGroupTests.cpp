@@ -39,7 +39,7 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -71,7 +71,7 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -105,7 +105,7 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -139,7 +139,7 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<PhysicalStorage::Page> page = repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
