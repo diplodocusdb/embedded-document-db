@@ -113,10 +113,10 @@ public:
     bool removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error);
 
 private:
-    static void createRootNode(PageRepositoryWriter& writer, Ishiko::Error& error);
+    static void createRootNode(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error);
 
 private:
-    PageFileRepository m_repository;
+    PhysicalStorage::PageFileRepository m_repository;
     Record m_metadataRecord;
     size_t m_dataStartOffset;
     size_t m_dataEndPageIndex;

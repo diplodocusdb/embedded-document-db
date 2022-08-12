@@ -8,7 +8,7 @@
 
 using namespace DiplodocusDB;
 
-RecordMarker::RecordMarker(const PageRepositoryPosition& pos)
+RecordMarker::RecordMarker(const PhysicalStorage::PageRepositoryPosition& pos)
     : m_position(pos)
 {
 }
@@ -17,7 +17,7 @@ RecordMarker::~RecordMarker()
 {
 }
 
-const PageRepositoryPosition& RecordMarker::position() const
+const PhysicalStorage::PageRepositoryPosition& RecordMarker::position() const
 {
     return m_position;
 }
