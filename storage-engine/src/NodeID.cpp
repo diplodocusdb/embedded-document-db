@@ -43,12 +43,12 @@ bool NodeID::operator>(const NodeID& other) const
     return (m_value > other.m_value);
 }
 
-void NodeID::read(PageRepositoryReader& reader, Ishiko::Error& error)
+void NodeID::read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
     m_value = reader.readLEB128(error);
 }
 
-void NodeID::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
+void NodeID::write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     writer.writeLEB128(m_value, error);
 }

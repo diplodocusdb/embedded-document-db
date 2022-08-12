@@ -35,11 +35,12 @@ public:
     void push_back(const SiblingNodeRecordGroup& value);
     bool find(const std::string& name, SiblingNodeRecordGroup& node);
 
-    void readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void readWithoutType(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
+    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
-    static void writeNode(PageRepositoryWriter& writer, const SiblingNodeRecordGroup& node, Ishiko::Error& error);
+    static void writeNode(PhysicalStorage::PageRepositoryWriter& writer, const SiblingNodeRecordGroup& node,
+        Ishiko::Error& error);
 
 private:
     NodeID m_parentNodeID;

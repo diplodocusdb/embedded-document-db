@@ -15,13 +15,13 @@ namespace DiplodocusDB
 class RecordMarker
 {
 public:
-    RecordMarker(const PageRepositoryPosition& pos);
+    RecordMarker(const PhysicalStorage::PageRepositoryPosition& pos);
     ~RecordMarker();
 
-    const PageRepositoryPosition& position() const;
+    const PhysicalStorage::PageRepositoryPosition& position() const;
 
 private:
-    PageRepositoryPosition m_position;
+    PhysicalStorage::PageRepositoryPosition m_position;
 };
 
 }

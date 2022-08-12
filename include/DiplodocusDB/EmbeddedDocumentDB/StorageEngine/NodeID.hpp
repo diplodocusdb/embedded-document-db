@@ -42,8 +42,8 @@ public:
     bool operator<(const NodeID& other) const;
     bool operator>(const NodeID& other) const;
 
-    void read(PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
+    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     size_t m_value;

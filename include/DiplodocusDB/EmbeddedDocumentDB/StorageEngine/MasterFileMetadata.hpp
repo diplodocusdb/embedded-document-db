@@ -18,8 +18,8 @@ class MasterFileMetadata
 public:
     MasterFileMetadata();
 
-    void read(PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
+    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     VersionNumber m_fileFormatVersion;

@@ -9,7 +9,7 @@
 
 using namespace DiplodocusDB;
 
-Value ValueCodec::ReadInlineValue(PageRepositoryReader& reader, Ishiko::Error& error)
+Value ValueCodec::ReadInlineValue(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
     Value result;
     DataType type = ReadDataType(reader, error);
@@ -33,7 +33,8 @@ Value ValueCodec::ReadInlineValue(PageRepositoryReader& reader, Ishiko::Error& e
     return result;
 }
 
-void ValueCodec::WriteInlineValue(PageRepositoryWriter& writer, const Value& value, Ishiko::Error& error)
+void ValueCodec::WriteInlineValue(PhysicalStorage::PageRepositoryWriter& writer, const Value& value,
+    Ishiko::Error& error)
 {
     WriteDataType(writer, value.type(), error);
     if (!error)
@@ -55,7 +56,7 @@ void ValueCodec::WriteInlineValue(PageRepositoryWriter& writer, const Value& val
     }
 }
 
-DataType ValueCodec::ReadDataType(PageRepositoryReader& reader, Ishiko::Error& error)
+DataType ValueCodec::ReadDataType(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
     DataType result(PrimitiveDataType::null);
     char buffer;
@@ -81,7 +82,8 @@ DataType ValueCodec::ReadDataType(PageRepositoryReader& reader, Ishiko::Error& e
     return result;
 }
 
-void ValueCodec::WriteDataType(PageRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error)
+void ValueCodec::WriteDataType(PhysicalStorage::PageRepositoryWriter& writer, const DataType& dataType,
+    Ishiko::Error& error)
 {
     Ishiko::Byte primitiveType;
     switch (dataType.primitiveType())
@@ -130,14 +132,14 @@ void ValueCodec::WriteDataType(PageRepositoryWriter& writer, const DataType& dat
     writer.write((char*)&type, 1, error);
 }
 
-bool ValueCodec::ReadBoolean(PageRepositoryReader& reader, Ishiko::Error& error)
+bool ValueCodec::ReadBoolean(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
     char data;
     reader.read(&data, 1, error);
     return data;
 }
 
-void ValueCodec::WriteBoolean(PageRepositoryWriter& writer, bool data, Ishiko::Error& error)
+void ValueCodec::WriteBoolean(PhysicalStorage::PageRepositoryWriter& writer, bool data, Ishiko::Error& error)
 {
     if (data)
     {
@@ -149,7 +151,7 @@ void ValueCodec::WriteBoolean(PageRepositoryWriter& writer, bool data, Ishiko::E
     }
 }
 
-std::string ValueCodec::ReadString(PageRepositoryReader& reader, Ishiko::Error& error)
+std::string ValueCodec::ReadString(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
     std::string name;
     size_t size = reader.readLEB128(error);
@@ -161,7 +163,8 @@ std::string ValueCodec::ReadString(PageRepositoryReader& reader, Ishiko::Error& 
     return name;
 }
 
-void ValueCodec::WriteString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error)
+void ValueCodec::WriteString(PhysicalStorage::PageRepositoryWriter& writer, const std::string& data,
+    Ishiko::Error& error)
 {
     writer.writeLEB128(data.size(), error);
     if (!error)

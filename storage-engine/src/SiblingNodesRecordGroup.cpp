@@ -55,7 +55,7 @@ bool SiblingNodesRecordGroup::find(const std::string& name, SiblingNodeRecordGro
     return result;
 }
 
-void SiblingNodesRecordGroup::readWithoutType(PageRepositoryReader& reader, Ishiko::Error& error)
+void SiblingNodesRecordGroup::readWithoutType(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
     Record nextRecord(Record::ERecordType::eInvalid);
     while (true)
@@ -87,7 +87,7 @@ void SiblingNodesRecordGroup::readWithoutType(PageRepositoryReader& reader, Ishi
     }
 }
 
-void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
+void SiblingNodesRecordGroup::write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     Record nodeStartRecord(Record::ERecordType::eSiblingNodesStart);
     nodeStartRecord.write(writer, error);
@@ -119,8 +119,8 @@ void SiblingNodesRecordGroup::write(PageRepositoryWriter& writer, Ishiko::Error&
     nodeEndRecord.write(writer, error);
 }
 
-void SiblingNodesRecordGroup::writeNode(PageRepositoryWriter& writer, const SiblingNodeRecordGroup& node,
-    Ishiko::Error& error)
+void SiblingNodesRecordGroup::writeNode(PhysicalStorage::PageRepositoryWriter& writer,
+    const SiblingNodeRecordGroup& node, Ishiko::Error& error)
 {
     if (node.isRoot())
     {

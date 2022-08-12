@@ -23,13 +23,13 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    std::shared_ptr<Page> page = m_repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = m_repository.allocatePage(error);
     if (error)
     {
         return;
     }
     
-    PageRepositoryWriter writer = m_repository.insert(page, 0, error);
+    PhysicalStorage::PageRepositoryWriter writer = m_repository.insert(page, 0, error);
     if (error)
     {
         return;
@@ -55,7 +55,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
 
-    m_dataEndPageIndex = page->index();
+    m_dataEndPageIndex = page->number();
     m_dataEndOffset = page->dataSize();
     Record dataEndRecord(Record::ERecordType::eDataEnd);
     dataEndRecord.write(writer, error);
@@ -64,7 +64,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    m_repository.save(*page, error);
+    m_repository.store(*page, error);
 }
 
 void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
@@ -72,7 +72,7 @@ void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
     m_repository.open(path, error);
     m_dataStartOffset = 14;
     m_dataEndPageIndex = m_repository.pageCount() - 1;
-    std::shared_ptr<Page> dataEndPage = m_repository.page(m_dataEndPageIndex, error);
+    std::shared_ptr<PhysicalStorage::Page2> dataEndPage = m_repository.page(m_dataEndPageIndex, error);
     if (!error)
     {
         // Deduct 1 for the end of data record
@@ -87,12 +87,12 @@ void MasterFile::close()
 
 RecordMarker MasterFile::rootNodePosition() const
 {
-    return RecordMarker(PageRepositoryPosition(0, m_dataStartOffset + 1));
+    return RecordMarker(PhysicalStorage::PageRepositoryPosition(0, m_dataStartOffset + 1));
 }
 
 RecordMarker MasterFile::dataEndPosition() const
 {
-    return RecordMarker(PageRepositoryPosition(m_dataEndPageIndex, m_dataEndOffset));
+    return RecordMarker(PhysicalStorage::PageRepositoryPosition(m_dataEndPageIndex, m_dataEndOffset));
 }
 
 bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
@@ -100,7 +100,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
 {
     bool result = false;
 
-    PageRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
+    PhysicalStorage::PageRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
     while (!result && !error)
     {
         Record nextRecord(Record::ERecordType::eInvalid);
@@ -141,7 +141,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
 
 void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
 {
-    PageRepositoryWriter writer = m_repository.insert(dataEndPosition().position(), error);
+    PhysicalStorage::PageRepositoryWriter writer = m_repository.insert(dataEndPosition().position(), error);
     if (error)
     {
         return;
@@ -175,7 +175,7 @@ bool MasterFile::removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishik
     return false;
 }
 
-void MasterFile::createRootNode(PageRepositoryWriter& writer, Ishiko::Error& error)
+void MasterFile::createRootNode(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error)
 {
     Record nodeStartRecord(Record::ERecordType::eSiblingNodesStart);
     nodeStartRecord.write(writer, error);

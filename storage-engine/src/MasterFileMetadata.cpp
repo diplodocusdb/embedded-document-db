@@ -13,7 +13,7 @@ MasterFileMetadata::MasterFileMetadata()
 {
 }
 
-void MasterFileMetadata::read(PageRepositoryReader& reader, Ishiko::Error& error)
+void MasterFileMetadata::read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
     // TODO: this needs to decode LEB128
     uint8_t size;
@@ -26,7 +26,7 @@ void MasterFileMetadata::read(PageRepositoryReader& reader, Ishiko::Error& error
     }
 }
 
-void MasterFileMetadata::write(PageRepositoryWriter& writer, Ishiko::Error& error) const
+void MasterFileMetadata::write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const
 {
     writer.writeLEB128(12, error);
     if (!error)
