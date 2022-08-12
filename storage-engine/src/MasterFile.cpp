@@ -23,7 +23,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    std::shared_ptr<PhysicalStorage::Page> page = m_repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> page = m_repository.allocatePage(error);
     if (error)
     {
         return;
@@ -55,7 +55,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
 
-    m_dataEndPageIndex = page->index();
+    m_dataEndPageIndex = page->number();
     m_dataEndOffset = page->dataSize();
     Record dataEndRecord(Record::ERecordType::eDataEnd);
     dataEndRecord.write(writer, error);
@@ -72,7 +72,7 @@ void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
     m_repository.open(path, error);
     m_dataStartOffset = 14;
     m_dataEndPageIndex = m_repository.pageCount() - 1;
-    std::shared_ptr<PhysicalStorage::Page> dataEndPage = m_repository.page(m_dataEndPageIndex, error);
+    std::shared_ptr<PhysicalStorage::Page2> dataEndPage = m_repository.page(m_dataEndPageIndex, error);
     if (!error)
     {
         // Deduct 1 for the end of data record
