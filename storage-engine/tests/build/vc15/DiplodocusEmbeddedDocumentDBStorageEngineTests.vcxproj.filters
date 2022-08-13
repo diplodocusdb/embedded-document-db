@@ -29,6 +29,9 @@
     <ClInclude Include="..\..\src\RecordFilesSetTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\RecordFileTests.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\RecordRepositoryWriterTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -65,6 +68,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\RecordFilesSetTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RecordFileTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\RecordRepositoryWriterTests.cpp">
