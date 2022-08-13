@@ -7,6 +7,7 @@
 #include "MasterFileTests.hpp"
 #include "NodeIDTests.hpp"
 #include "NodeIDAllocatorTests.hpp"
+#include "RecordFileTests.hpp"
 #include "RecordFilesSetTests.hpp"
 #include "RecordRepositoryReaderTests.hpp"
 #include "RecordRepositoryWriterTests.hpp"
@@ -29,6 +30,7 @@ int main(int argc, char* argv[])
     theTestHarness.context().setReferenceDirectory("../../reference");
 
     TestSequence& theTests = theTestHarness.tests();
+    theTests.append<RecordFileTests>();
     theTests.append<RecordRepositoryReaderTests>();
     theTests.append<RecordRepositoryWriterTests>();
     theTests.append<NodeIDTests>();
