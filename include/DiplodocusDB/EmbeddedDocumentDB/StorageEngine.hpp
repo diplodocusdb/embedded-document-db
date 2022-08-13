@@ -7,7 +7,6 @@
 #ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP
 
-#include "StorageEngine/EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
 #include "StorageEngine/linkoptions.hpp"
 #include "StorageEngine/MasterFile.hpp"
 #include "StorageEngine/MasterFileMetadata.hpp"
@@ -22,6 +21,7 @@
 #include "StorageEngine/SiblingNodesRecordGroup.hpp"
 #include "StorageEngine/SiblingNodesRecordGroupCache.hpp"
 #include "StorageEngine/StorageEngine.hpp"
+#include "StorageEngine/StorageEngineErrorCategory.hpp"
 #include "StorageEngine/ValueCodec.hpp"
 
 #endif
