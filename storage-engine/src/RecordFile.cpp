@@ -6,6 +6,7 @@
 
 #include "RecordFile.hpp"
 
+using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
 void RecordFile::create(const boost::filesystem::path& path, Ishiko::Error& error)
@@ -28,19 +29,19 @@ size_t RecordFile::pageCount()
     return m_page_file_repository.pageCount();
 }
 
-std::shared_ptr<Page2> RecordFile::page(size_t index, Ishiko::Error& error)
+std::shared_ptr<PhysicalStorage::Page2> RecordFile::page(size_t index, Ishiko::Error& error)
 {
     return m_page_file_repository.page(index, error);
 }
 
-std::shared_ptr<Page2> RecordFile::allocatePage(Ishiko::Error& error)
+std::shared_ptr<PhysicalStorage::Page2> RecordFile::allocatePage(Ishiko::Error& error)
 {
     return m_page_file_repository.allocatePage(error);
 }
 
-std::shared_ptr<Page2> RecordFile::insertPageAfter(Page2& page, Ishiko::Error& error)
+std::shared_ptr<PhysicalStorage::Page2> RecordFile::insertPageAfter(PhysicalStorage::Page2& page, Ishiko::Error& error)
 {
-    std::shared_ptr<Page2> newPage = m_page_file_repository.allocatePage(error);
+    std::shared_ptr<PhysicalStorage::Page2> newPage = m_page_file_repository.allocatePage(error);
     if (!error)
     {
         newPage->init();
@@ -50,39 +51,41 @@ std::shared_ptr<Page2> RecordFile::insertPageAfter(Page2& page, Ishiko::Error& e
     return newPage;
 }
 
-void RecordFile::store(const Page2& page, Ishiko::Error& error)
+void RecordFile::store(const PhysicalStorage::Page2& page, Ishiko::Error& error)
 {
     m_page_file_repository.store(page, error);
 }
 
-PageRepositoryReader RecordFile::read(const PageRepositoryPosition& pos, Ishiko::Error& error)
+RecordRepositoryReader RecordFile::read(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error)
 {
     return read(pos.page(), pos.offset(), error);
 }
 
-PageRepositoryReader RecordFile::read(size_t startPage, size_t offset, Ishiko::Error& error)
+RecordRepositoryReader RecordFile::read(size_t startPage, size_t offset, Ishiko::Error& error)
 {
-    std::shared_ptr<Page2> p = page(startPage, error);
+    std::shared_ptr<PhysicalStorage::Page2> p = page(startPage, error);
     return read(p, offset, error);
 }
 
-PageRepositoryReader RecordFile::read(std::shared_ptr<Page2> startPage, size_t offset, Ishiko::Error& error)
+RecordRepositoryReader RecordFile::read(std::shared_ptr<PhysicalStorage::Page2> startPage, size_t offset,
+    Ishiko::Error& error)
 {
-    return PageRepositoryReader(*this, startPage, offset);
+    return RecordRepositoryReader(*this, startPage, offset);
 }
 
-PageRepositoryWriter RecordFile::insert(const PageRepositoryPosition& pos, Ishiko::Error& error)
+RecordRepositoryWriter RecordFile::insert(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error)
 {
     return insert(pos.page(), pos.offset(), error);
 }
 
-PageRepositoryWriter RecordFile::insert(size_t startPage, size_t offset, Ishiko::Error& error)
+RecordRepositoryWriter RecordFile::insert(size_t startPage, size_t offset, Ishiko::Error& error)
 {
-    std::shared_ptr<Page2> p = page(startPage, error);
+    std::shared_ptr<PhysicalStorage::Page2> p = page(startPage, error);
     return insert(p, offset, error);
 }
 
-PageRepositoryWriter RecordFile::insert(std::shared_ptr<Page2> startPage, size_t offset, Ishiko::Error& error)
+RecordRepositoryWriter RecordFile::insert(std::shared_ptr<PhysicalStorage::Page2> startPage, size_t offset,
+    Ishiko::Error& error)
 {
-    return PageRepositoryWriter(*this, startPage, offset);
+    return RecordRepositoryWriter(*this, startPage, offset);
 }

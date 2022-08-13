@@ -36,11 +36,13 @@ public:
 
     RecordRepositoryReader read(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
     RecordRepositoryReader read(size_t startPage, size_t offset, Ishiko::Error& error);
-    RecordRepositoryReader read(std::shared_ptr<Page2> startPage, size_t offset, Ishiko::Error& error);
+    RecordRepositoryReader read(std::shared_ptr<PhysicalStorage::Page2> startPage, size_t offset,
+        Ishiko::Error& error);
 
     RecordRepositoryWriter insert(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
     RecordRepositoryWriter insert(size_t startPage, size_t offset, Ishiko::Error& error);
-    RecordRepositoryWriter insert(std::shared_ptr<PhysicalStorage::Page2> startPage, size_t offset, Ishiko::Error& error);
+    RecordRepositoryWriter insert(std::shared_ptr<PhysicalStorage::Page2> startPage, size_t offset,
+        Ishiko::Error& error);
 
 private:
     PhysicalStorage::PageFileRepository m_page_file_repository;

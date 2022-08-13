@@ -7,10 +7,11 @@
 #include "RecordRepositoryReader.hpp"
 #include "RecordRepository.hpp"
 
+using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
-RecordRepositoryReader::RecordRepositoryReader(RecordRepository& repository, std::shared_ptr<Page2> startPage,
-    size_t startOffset)
+RecordRepositoryReader::RecordRepositoryReader(RecordRepository& repository,
+    std::shared_ptr<PhysicalStorage::Page2> startPage, size_t startOffset)
     : m_repository(repository), m_currentPage(startPage), m_currentOffset(startOffset)
 {
 }

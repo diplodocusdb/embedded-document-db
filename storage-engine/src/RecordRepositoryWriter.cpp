@@ -7,10 +7,11 @@
 #include "RecordRepositoryWriter.hpp"
 #include "RecordRepository.hpp"
 
+using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
-RecordRepositoryWriter::RecordRepositoryWriter(RecordRepository& repository, std::shared_ptr<Page2> startPage,
-    size_t startOffset)
+RecordRepositoryWriter::RecordRepositoryWriter(RecordRepository& repository,
+    std::shared_ptr<PhysicalStorage::Page2> startPage, size_t startOffset)
     : m_repository(repository), m_currentPage(startPage), m_currentOffset(startOffset)
 {
 }
@@ -75,7 +76,7 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
         // Only part of the new data can fit in the current page. We have to
         // move any existing data to the next page.
         size_t nextPageIndex = m_currentPage->nextPage();
-        std::shared_ptr<Page2> newPage;
+        std::shared_ptr<PhysicalStorage::Page2> newPage;
         if (nextPageIndex != 0)
         {
             newPage = m_repository.page(nextPageIndex, error);
@@ -128,7 +129,7 @@ void RecordRepositoryWriter::writeLEB128(size_t value, Ishiko::Error& error)
 
 void RecordRepositoryWriter::save(Ishiko::Error& error)
 {
-    for (const std::shared_ptr<Page2>& page : m_updatedPages)
+    for (const std::shared_ptr<PhysicalStorage::Page2>& page : m_updatedPages)
     {
         m_repository.store(*page, error);
     }

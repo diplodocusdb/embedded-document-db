@@ -56,7 +56,7 @@ const Value& Record::asValue() const
     return boost::get<Value>(m_data);
 }
 
-void Record::read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
+void Record::read(RecordRepositoryReader& reader, Ishiko::Error& error)
 {
     uint8_t type;
     reader.read((char*)&type, 1, error);
@@ -107,7 +107,7 @@ void Record::read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& 
     }
 }
 
-void Record::write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const
+void Record::write(RecordRepositoryWriter& writer, Ishiko::Error& error) const
 {
     uint8_t type = (uint8_t)m_type;
     writer.write((char*)&type, 1, error);

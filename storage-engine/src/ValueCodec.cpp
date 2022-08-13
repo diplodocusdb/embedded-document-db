@@ -150,7 +150,7 @@ void ValueCodec::WriteBoolean(RecordRepositoryWriter& writer, bool data, Ishiko:
     }
 }
 
-std::string ValueCodec::ReadString(PageRepositoryReader& reader, Ishiko::Error& error)
+std::string ValueCodec::ReadString(RecordRepositoryReader& reader, Ishiko::Error& error)
 {
     std::string name;
     size_t size = reader.readLEB128(error);
@@ -162,7 +162,7 @@ std::string ValueCodec::ReadString(PageRepositoryReader& reader, Ishiko::Error& 
     return name;
 }
 
-void ValueCodec::WriteString(PageRepositoryWriter& writer, const std::string& data, Ishiko::Error& error)
+void ValueCodec::WriteString(RecordRepositoryWriter& writer, const std::string& data, Ishiko::Error& error)
 {
     writer.writeLEB128(data.size(), error);
     if (!error)
