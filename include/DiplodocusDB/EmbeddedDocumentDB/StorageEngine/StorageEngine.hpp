@@ -16,8 +16,10 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
-class EmbeddedDocumentDBStorageEngine
+class StorageEngine
 {
 public:
     void createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);
@@ -34,6 +36,7 @@ private:
     RecordFilesSet m_recordFiles;
 };
 
+}
 }
 
 #endif
