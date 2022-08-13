@@ -7,7 +7,7 @@
 #include "NodeIDAllocatorTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeIDAllocator.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
 NodeIDAllocatorTests::NodeIDAllocatorTests(const TestNumber& number, const TestContext& context)

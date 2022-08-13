@@ -27,28 +27,34 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
 
     headers
     {
-        ../../src/EmbeddedDocumentDBStorageEngineTests.hpp
         ../../src/MasterFileTests.hpp
         ../../src/NodeIDTests.hpp
         ../../src/NodeIDAllocatorTests.hpp
         ../../src/RecordFilesSetTests.hpp
+        ../../src/RecordFileTests.hpp
+        ../../src/RecordRepositoryWriterTests.hpp
+        ../../src/RecordRepositoryReaderTests.hpp
         ../../src/RecordTests.hpp
         ../../src/SecondaryFileTests.hpp
         ../../src/SiblingNodesRecordGroupTests.hpp
         ../../src/SiblingNodesRecordGroupCacheTests.hpp
+        ../../src/StorageEngineTests.hpp
     }
 
     sources
     {
-        ../../src/EmbeddedDocumentDBStorageEngineTests.cpp
         ../../src/main.cpp
         ../../src/MasterFileTests.cpp
         ../../src/NodeIDTests.cpp
         ../../src/NodeIDAllocatorTests.cpp
         ../../src/RecordFilesSetTests.cpp
+        ../../src/RecordFileTests.cpp
+        ../../src/RecordRepositoryWriterTests.cpp
+        ../../src/RecordRepositoryReaderTests.cpp
         ../../src/RecordTests.cpp
         ../../src/SecondaryFileTests.cpp
         ../../src/SiblingNodesRecordGroupTests.cpp
         ../../src/SiblingNodesRecordGroupCacheTests.cpp
+        ../../src/StorageEngineTests.cpp
     }
 }

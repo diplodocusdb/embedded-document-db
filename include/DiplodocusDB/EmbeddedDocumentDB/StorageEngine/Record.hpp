@@ -9,14 +9,17 @@
 
 #include "MasterFileMetadata.hpp"
 #include "NodeID.hpp"
+#include "RecordRepositoryReader.hpp"
+#include "RecordRepositoryWriter.hpp"
 #include <boost/variant.hpp>
 #include <DiplodocusDB/Core.hpp>
-#include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
 #include <memory>
 #include <string>
 
 namespace DiplodocusDB
+{
+namespace EDDBImpl
 {
 
 /// A record in physical storage.
@@ -128,14 +131,15 @@ public:
     const std::string& asString() const;
     const Value& asValue() const;
 
-    void read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void read(RecordRepositoryReader& reader, Ishiko::Error& error);
+    void write(RecordRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     Record::ERecordType m_type;
     boost::variant<MasterFileMetadata, NodeID, std::string, Value> m_data;
 };
 
+}
 }
 
 #endif

@@ -4,15 +4,18 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "EmbeddedDocumentDBStorageEngineTests.hpp"
 #include "MasterFileTests.hpp"
 #include "NodeIDTests.hpp"
 #include "NodeIDAllocatorTests.hpp"
+#include "RecordFileTests.hpp"
 #include "RecordFilesSetTests.hpp"
+#include "RecordRepositoryReaderTests.hpp"
+#include "RecordRepositoryWriterTests.hpp"
 #include "RecordTests.hpp"
 #include "SecondaryFileTests.hpp"
 #include "SiblingNodesRecordGroupCacheTests.hpp"
 #include "SiblingNodesRecordGroupTests.hpp"
+#include "StorageEngineTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/linkoptions.hpp"
 #include <Ishiko/TestFramework.hpp>
 
@@ -27,6 +30,9 @@ int main(int argc, char* argv[])
     theTestHarness.context().setReferenceDirectory("../../reference");
 
     TestSequence& theTests = theTestHarness.tests();
+    theTests.append<RecordFileTests>();
+    theTests.append<RecordRepositoryReaderTests>();
+    theTests.append<RecordRepositoryWriterTests>();
     theTests.append<NodeIDTests>();
     theTests.append<NodeIDAllocatorTests>();
     theTests.append<RecordTests>();
@@ -35,7 +41,7 @@ int main(int argc, char* argv[])
     theTests.append<MasterFileTests>();
     theTests.append<SecondaryFileTests>();
     theTests.append<RecordFilesSetTests>();
-    theTests.append<EmbeddedDocumentDBStorageEngineTests>();
+    theTests.append<StorageEngineTests>();
 
     return theTestHarness.run();
 }

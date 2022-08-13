@@ -4,15 +4,14 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "EmbeddedDocumentDBStorageEngineTests.hpp"
-#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/EmbeddedDocumentDBStorageEngine.hpp"
+#include "StorageEngineTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/StorageEngine.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
-EmbeddedDocumentDBStorageEngineTests::EmbeddedDocumentDBStorageEngineTests(const TestNumber& number,
-    const TestContext& context)
-    : TestSequence(number, "EmbeddedDocumentDBStorageEngine tests", context)
+StorageEngineTests::StorageEngineTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "StorageEngine tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", ConstructionTest1);
     append<HeapAllocationErrorsTest>("createMasterFile test 1", CreateMasterFileTest1);
@@ -23,20 +22,20 @@ EmbeddedDocumentDBStorageEngineTests::EmbeddedDocumentDBStorageEngineTests(const
     append<HeapAllocationErrorsTest>("findSiblingNodesRecordGroup test 3", FindSiblingNodesRecordGroupTest3);
 }
 
-void EmbeddedDocumentDBStorageEngineTests::ConstructionTest1(Test& test)
+void StorageEngineTests::ConstructionTest1(Test& test)
 {
-    EmbeddedDocumentDBStorageEngine storageEngine;
+    StorageEngine storageEngine;
 
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedDocumentDBStorageEngineTests::CreateMasterFileTest1(Test& test)
+void StorageEngineTests::CreateMasterFileTest1(Test& test)
 {
     const char* basename = "MasterFileTests_CreateTest1.dpdb";
 
     Error error;
 
-    EmbeddedDocumentDBStorageEngine storageEngine;
+    StorageEngine storageEngine;
     storageEngine.createMasterFile(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -47,11 +46,11 @@ void EmbeddedDocumentDBStorageEngineTests::CreateMasterFileTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedDocumentDBStorageEngineTests::OpenMasterFileTest1(Test& test)
+void StorageEngineTests::OpenMasterFileTest1(Test& test)
 {
     Error error;
 
-    EmbeddedDocumentDBStorageEngine storageEngine;
+    StorageEngine storageEngine;
     storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -68,11 +67,11 @@ void EmbeddedDocumentDBStorageEngineTests::OpenMasterFileTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedDocumentDBStorageEngineTests::OpenMasterFileTest2(Test& test)
+void StorageEngineTests::OpenMasterFileTest2(Test& test)
 {
     Error error;
 
-    EmbeddedDocumentDBStorageEngine storageEngine;
+    StorageEngine storageEngine;
     storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -87,11 +86,11 @@ void EmbeddedDocumentDBStorageEngineTests::OpenMasterFileTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedDocumentDBStorageEngineTests::FindSiblingNodesRecordGroupTest1(Test& test)
+void StorageEngineTests::FindSiblingNodesRecordGroupTest1(Test& test)
 {
     Error error;
 
-    EmbeddedDocumentDBStorageEngine storageEngine;
+    StorageEngine storageEngine;
     storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -117,11 +116,11 @@ void EmbeddedDocumentDBStorageEngineTests::FindSiblingNodesRecordGroupTest1(Test
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedDocumentDBStorageEngineTests::FindSiblingNodesRecordGroupTest2(Test& test)
+void StorageEngineTests::FindSiblingNodesRecordGroupTest2(Test& test)
 {
     Error error;
 
-    EmbeddedDocumentDBStorageEngine storageEngine;
+    StorageEngine storageEngine;
     storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -145,11 +144,11 @@ void EmbeddedDocumentDBStorageEngineTests::FindSiblingNodesRecordGroupTest2(Test
     ISHIKO_TEST_PASS();
 }
 
-void EmbeddedDocumentDBStorageEngineTests::FindSiblingNodesRecordGroupTest3(Test& test)
+void StorageEngineTests::FindSiblingNodesRecordGroupTest3(Test& test)
 {
     Error error;
 
-    EmbeddedDocumentDBStorageEngine storageEngine;
+    StorageEngine storageEngine;
     storageEngine.openMasterFile(test.context().getDataPath("MasterFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);

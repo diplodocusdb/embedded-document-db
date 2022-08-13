@@ -7,7 +7,7 @@
 #include "RecordFilesSetTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFilesSet.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
 RecordFilesSetTests::RecordFilesSetTests(const TestNumber& number, const TestContext& context)

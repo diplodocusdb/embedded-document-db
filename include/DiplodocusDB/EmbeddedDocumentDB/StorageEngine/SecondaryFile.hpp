@@ -4,18 +4,21 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SECONDARYFILE_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SECONDARYFILE_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SECONDARYFILE_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SECONDARYFILE_HPP
 
 #include "RecordFile.hpp"
 
 namespace DiplodocusDB
+{
+namespace EDDBImpl
 {
 
 class SecondaryFile : public RecordFile
 {
 };
 
+}
 }
 
 #endif

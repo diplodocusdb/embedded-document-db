@@ -4,8 +4,8 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUPCACHE_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUPCACHE_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUPCACHE_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUPCACHE_HPP
 
 #include "NodeID.hpp"
 #include "SiblingNodesRecordGroup.hpp"
@@ -13,6 +13,8 @@
 #include <memory>
 
 namespace DiplodocusDB
+{
+namespace EDDBImpl
 {
 
 class SiblingNodesRecordGroupCache
@@ -29,6 +31,7 @@ private:
     std::map<NodeID, std::shared_ptr<SiblingNodesRecordGroup>> m_groups;
 };
 
+}
 }
 
 #endif

@@ -5,10 +5,12 @@
 */
 
 #include "SiblingNodesRecordGroupTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodesRecordGroup.hpp"
 #include <DiplodocusDB/PhysicalStorage.hpp>
 
 using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
 SiblingNodesRecordGroupTests::SiblingNodesRecordGroupTests(const TestNumber& number, const TestContext& context)
@@ -34,7 +36,7 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
     
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -43,7 +45,7 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -66,7 +68,7 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -75,7 +77,7 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -100,7 +102,7 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
    
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -109,7 +111,7 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -134,7 +136,7 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -143,7 +145,7 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 

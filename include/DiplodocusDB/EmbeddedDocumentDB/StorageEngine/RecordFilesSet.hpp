@@ -4,8 +4,8 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDFILESSET_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDFILESSET_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDFILESSET_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDFILESSET_HPP
 
 #include "MasterFile.hpp"
 #include "NodeID.hpp"
@@ -14,6 +14,8 @@
 #include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
+{
+namespace EDDBImpl
 {
 
 class RecordFilesSet
@@ -32,6 +34,7 @@ private:
     MasterFile m_masterFile;
 };
 
+}
 }
 
 #endif

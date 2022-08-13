@@ -25,17 +25,18 @@
 
 using namespace DiplodocusDB;
 
-TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(EmbeddedDocumentDBStorageEngine& storageEngine,
-    TreeDBNode& parent, const std::string& name, const Value& value, Ishiko::Error& error)
+TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(EDDBImpl::StorageEngine& storageEngine, TreeDBNode& parent,
+    const std::string& name, const Value& value, Ishiko::Error& error)
 {
     TreeDBNode result;
 
     EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
-    result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
+    result = TreeDBNode(
+        std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), EDDBImpl::NodeID(0), name));
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
 
-    std::shared_ptr<SiblingNodesRecordGroup> existingSiblingNodesRecordGroup;
+    std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup> existingSiblingNodesRecordGroup;
     EFindResult findResult = findSiblingNodesRecordGroup(storageEngine, parentNodeImpl.nodeID(),
         existingSiblingNodesRecordGroup, error);
     if (!error)
@@ -43,7 +44,7 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(EmbeddedDocumentDBStor
         if (findResult != eNotFound)
         {
             existingSiblingNodesRecordGroup->push_back(
-                SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
+                EDDBImpl::SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
             if (findResult == eFoundInCache)
             {
                 m_updatedSiblingNodesRecordGroups.push_back(existingSiblingNodesRecordGroup);
@@ -52,17 +53,17 @@ TreeDBNode EmbeddedTreeDBTransactionImpl::appendChildNode(EmbeddedDocumentDBStor
         else
         {
             m_newSiblingNodesRecordGroups.emplace_back(
-                std::make_shared<SiblingNodesRecordGroup>(nodeImpl.parentNodeID(),
-                    SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID())));
+                std::make_shared<EDDBImpl::SiblingNodesRecordGroup>(nodeImpl.parentNodeID(),
+                    EDDBImpl::SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID())));
         }
     }
 
     return result;
 }
 
-void EmbeddedTreeDBTransactionImpl::commit(EmbeddedDocumentDBStorageEngine& storageEngine, Ishiko::Error& error)
+void EmbeddedTreeDBTransactionImpl::commit(EDDBImpl::StorageEngine& storageEngine, Ishiko::Error& error)
 {
-    for (std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes : m_updatedSiblingNodesRecordGroups)
+    for (std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup>& siblingNodes : m_updatedSiblingNodesRecordGroups)
     {
         storageEngine.updateSiblingNodesRecordGroup(*siblingNodes, error);
         if (error)
@@ -70,7 +71,7 @@ void EmbeddedTreeDBTransactionImpl::commit(EmbeddedDocumentDBStorageEngine& stor
             break;
         }
     }
-    for (std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes : m_newSiblingNodesRecordGroups)
+    for (std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup>& siblingNodes : m_newSiblingNodesRecordGroups)
     {
         storageEngine.addSiblingNodesRecordGroup(*siblingNodes, error);
         if (error)
@@ -87,10 +88,10 @@ void EmbeddedTreeDBTransactionImpl::rollback()
 }
 
 EmbeddedTreeDBTransactionImpl::EFindResult EmbeddedTreeDBTransactionImpl::findSiblingNodesRecordGroup(
-    EmbeddedDocumentDBStorageEngine& storageEngine, const NodeID& parentNodeID,
-    std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error)
+    EDDBImpl::StorageEngine& storageEngine, const EDDBImpl::NodeID& parentNodeID,
+    std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error)
 {
-    for (std::shared_ptr<SiblingNodesRecordGroup>& group : m_newSiblingNodesRecordGroups)
+    for (std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup>& group : m_newSiblingNodesRecordGroups)
     {
         if (group->parentNodeID() == parentNodeID)
         {
@@ -98,7 +99,7 @@ EmbeddedTreeDBTransactionImpl::EFindResult EmbeddedTreeDBTransactionImpl::findSi
             return eFoundInNew;
         }
     }
-    for (std::shared_ptr<SiblingNodesRecordGroup>& group : m_updatedSiblingNodesRecordGroups)
+    for (std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup>& group : m_updatedSiblingNodesRecordGroups)
     {
         if (group->parentNodeID() == parentNodeID)
         {

@@ -11,14 +11,16 @@
 #include "Record.hpp"
 #include "RecordFile.hpp"
 #include "RecordMarker.hpp"
+#include "RecordRepositoryWriter.hpp"
 #include "SiblingNodesRecordGroup.hpp"
 #include <boost/filesystem/path.hpp>
-#include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
 #include <fstream>
 #include <memory>
 
 namespace DiplodocusDB
+{
+namespace EDDBImpl
 {
 
 /// The master file where the database contents are physically stored.
@@ -113,16 +115,17 @@ public:
     bool removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishiko::Error& error);
 
 private:
-    static void createRootNode(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error);
+    static void createRootNode(RecordRepositoryWriter& writer, Ishiko::Error& error);
 
 private:
-    PhysicalStorage::PageFileRepository2 m_repository;
+    RecordFile m_repository;
     Record m_metadataRecord;
     size_t m_dataStartOffset;
     size_t m_dataEndPageIndex;
     size_t m_dataEndOffset;
 };
 
+}
 }
 
 #endif

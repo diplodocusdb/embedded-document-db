@@ -16,22 +16,23 @@ class EmbeddedDocumentDBNodeImpl
 {
 public:
     EmbeddedDocumentDBNodeImpl();
-    EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeID, const NodeID& nodeID, const std::string& name);
-    EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeID, const SiblingNodeRecordGroup& node);
+    EmbeddedDocumentDBNodeImpl(const EDDBImpl::NodeID& parentNodeID, const EDDBImpl::NodeID& nodeID,
+        const std::string& name);
+    EmbeddedDocumentDBNodeImpl(const EDDBImpl::NodeID& parentNodeID, const EDDBImpl::SiblingNodeRecordGroup& node);
 
     const std::string& name() const;
     const Value& value() const;
     Value& value();
     bool isRoot() const;
 
-    const NodeID& parentNodeID() const;
-    const NodeID& nodeID() const;
+    const EDDBImpl::NodeID& parentNodeID() const;
+    const EDDBImpl::NodeID& nodeID() const;
     
 private:
     std::string m_name;
     Value m_value;
-    NodeID m_parentNodeID;
-    NodeID m_nodeID;
+    EDDBImpl::NodeID m_parentNodeID;
+    EDDBImpl::NodeID m_nodeID;
 };
 
 }

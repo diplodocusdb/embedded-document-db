@@ -38,10 +38,10 @@ namespace DiplodocusDB
 class EmbeddedTreeDBTransactionImpl : public TreeDBTransactionImpl
 {
 public:
-    TreeDBNode appendChildNode(EmbeddedDocumentDBStorageEngine& storageEngine, TreeDBNode& parent,
-        const std::string& name, const Value& value, Ishiko::Error& error);
+    TreeDBNode appendChildNode(EDDBImpl::StorageEngine& storageEngine, TreeDBNode& parent, const std::string& name,
+        const Value& value, Ishiko::Error& error);
 
-    void commit(EmbeddedDocumentDBStorageEngine& storageEngine, Ishiko::Error& error);
+    void commit(EDDBImpl::StorageEngine& storageEngine, Ishiko::Error& error);
     void rollback();
 
 private:
@@ -52,13 +52,14 @@ private:
         eFoundInUpdated,
         eFoundInCache
     };
-    EFindResult findSiblingNodesRecordGroup(EmbeddedDocumentDBStorageEngine& storageEngine,
-        const NodeID& parentNodeID, std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error);
+    EFindResult findSiblingNodesRecordGroup(EDDBImpl::StorageEngine& storageEngine,
+        const EDDBImpl::NodeID& parentNodeID, std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup>& siblingNodes,
+        Ishiko::Error& error);
 
 private:
     // TODO : see comments about using shared pointers in SiblingNodesRecordGroupCache, the same may apply here
-    std::vector<std::shared_ptr<SiblingNodesRecordGroup>> m_newSiblingNodesRecordGroups;
-    std::vector<std::shared_ptr<SiblingNodesRecordGroup>> m_updatedSiblingNodesRecordGroups;
+    std::vector<std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup>> m_newSiblingNodesRecordGroups;
+    std::vector<std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup>> m_updatedSiblingNodesRecordGroups;
 };
 
 }
