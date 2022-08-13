@@ -48,8 +48,8 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPhysicalStorage,
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFilesSet.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordMarker.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepository.hpp
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryReader.h
-        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryWriter.h
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryReader.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryWriter.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SecondaryFile.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodeRecordGroup.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodesRecordGroup.hpp

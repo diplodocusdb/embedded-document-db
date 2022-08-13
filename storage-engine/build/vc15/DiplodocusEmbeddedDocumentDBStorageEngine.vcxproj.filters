@@ -50,10 +50,10 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepository.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryReader.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryReader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryWriter.h">
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryWriter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SecondaryFile.hpp">

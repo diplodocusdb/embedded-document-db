@@ -180,8 +180,8 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFilesSet.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordMarker.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepository.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryReader.h" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryWriter.h" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryReader.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryWriter.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SecondaryFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SiblingNodeRecordGroup.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SiblingNodesRecordGroup.hpp" />
