@@ -16,6 +16,8 @@
 #include "StorageEngine/RecordFilesSet.hpp"
 #include "StorageEngine/RecordMarker.hpp"
 #include "StorageEngine/RecordRepository.hpp"
+#include "StorageEngine/RecordRepositoryReader.hpp"
+#include "StorageEngine/RecordRepositoryWriter.hpp"
 #include "StorageEngine/SecondaryFile.hpp"
 #include "StorageEngine/SiblingNodeRecordGroup.hpp"
 #include "StorageEngine/SiblingNodesRecordGroup.hpp"
