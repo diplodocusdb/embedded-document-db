@@ -4,22 +4,22 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
+#include "StorageEngineErrorCategory.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
-const EmbeddedDocumentDBStorageEngineErrorCategory& EmbeddedDocumentDBStorageEngineErrorCategory::Get() noexcept
+const StorageEngineErrorCategory& StorageEngineErrorCategory::Get() noexcept
 {
-    static EmbeddedDocumentDBStorageEngineErrorCategory theCategory;
+    static StorageEngineErrorCategory theCategory;
     return theCategory;
 }
 
-const char* EmbeddedDocumentDBStorageEngineErrorCategory::name() const noexcept
+const char* StorageEngineErrorCategory::name() const noexcept
 {
-    return "DiplodocusDB::EmbeddedDocumentDBStorageEngineErrorCategory";
+    return "DiplodocusDB::EDDBImpl::StorageEngineErrorCategory";
 }
 
-std::ostream& EmbeddedDocumentDBStorageEngineErrorCategory::streamOut(int value, std::ostream& os) const
+std::ostream& StorageEngineErrorCategory::streamOut(int value, std::ostream& os) const
 {
     switch (static_cast<Value>(value))
     {
@@ -34,13 +34,13 @@ std::ostream& EmbeddedDocumentDBStorageEngineErrorCategory::streamOut(int value,
     return os;
 }
 
-void Fail(Ishiko::Error& error, EmbeddedDocumentDBStorageEngineErrorCategory::Value value) noexcept
+void Fail(Ishiko::Error& error, StorageEngineErrorCategory::Value value) noexcept
 {
-    error.fail(EmbeddedDocumentDBStorageEngineErrorCategory::Get(), value);
+    error.fail(StorageEngineErrorCategory::Get(), value);
 }
 
-void Fail(Ishiko::Error& error, EmbeddedDocumentDBStorageEngineErrorCategory::Value value, const std::string& message,
-    const char* file, int line) noexcept
+void Fail(Ishiko::Error& error, StorageEngineErrorCategory::Value value, const std::string& message, const char* file,
+    int line) noexcept
 {
-    error.fail(EmbeddedDocumentDBStorageEngineErrorCategory::Get(), value, message, file, line);
+    error.fail(StorageEngineErrorCategory::Get(), value, message, file, line);
 }
