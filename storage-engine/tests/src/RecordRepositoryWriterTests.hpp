@@ -1,18 +1,18 @@
 /*
     Copyright (c) 2018-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/diplodocusdb/physical-storage/blob/main/LICENSE.txt
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_TEST_PHYSICALSTORAGE_PAGEREPOSITORY_PAGEREPOSITORYWRITERTESTS_H_
-#define _DIPLODOCUSDB_TEST_PHYSICALSTORAGE_PAGEREPOSITORY_PAGEREPOSITORYWRITERTESTS_H_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_TESTS_RECORDREPOSITORYWRITERTESTS_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_TESTS_RECORDREPOSITORYWRITERTESTS_HPP
 
 #include <Ishiko/TestFramework.hpp>
 
-class PageRepositoryWriterTests : public Ishiko::TestSequence
+class RecordRepositoryWriterTests : public Ishiko::TestSequence
 {
 public:
-    PageRepositoryWriterTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
+    RecordRepositoryWriterTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
     static void CreationTest1(Ishiko::Test& test);

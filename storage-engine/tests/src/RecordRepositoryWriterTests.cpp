@@ -1,19 +1,19 @@
 /*
     Copyright (c) 2018-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/diplodocusdb/physical-storage/blob/main/LICENSE.txt
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "PageRepositoryWriterTests.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepositoryWriter.h"
-#include "DiplodocusDB/PhysicalStorage/PageFileRepository2.hpp"
+#include "RecordRepositoryWriterTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryWriter.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp"
 #include <boost/filesystem/operations.hpp>
 
-using namespace DiplodocusDB::PhysicalStorage;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
-PageRepositoryWriterTests::PageRepositoryWriterTests(const TestNumber& number, const TestContext& context)
-    : TestSequence(number, "PageRepositoryWriter tests", context)
+RecordRepositoryWriterTests::RecordRepositoryWriterTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "RecordRepositoryWriter tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
     append<HeapAllocationErrorsTest>("write test 1", WriteTest1);
@@ -31,45 +31,45 @@ PageRepositoryWriterTests::PageRepositoryWriterTests(const TestNumber& number, c
     append<HeapAllocationErrorsTest>("writeLEB128 test 5", WriteLEB128Test5);
 }
 
-void PageRepositoryWriterTests::CreationTest1(Test& test)
+void RecordRepositoryWriterTests::CreationTest1(Test& test)
 {
     boost::filesystem::path inputPath = test.context().getDataPath("PageRepositoryWriterCreationTest1.dpdb");
 
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(inputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    std::shared_ptr<Page2> page = repository.page(0, error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.page(0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    PageRepositoryWriter writer(repository, page, 0);
+    RecordRepositoryWriter writer(repository, page, 0);
 
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 0);
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteTest1(Test& test)
+void RecordRepositoryWriterTests::WriteTest1(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteTest1.dpdb";
     
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    std::shared_ptr<Page2> page = repository.allocatePage(error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
         
-    PageRepositoryWriter writer = repository.insert(page->number(), 0, error);
+    RecordRepositoryWriter writer = repository.insert(page->number(), 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
             
@@ -89,23 +89,23 @@ void PageRepositoryWriterTests::WriteTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteTest2(Test& test)
+void RecordRepositoryWriterTests::WriteTest2(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteTest2.dpdb";
     
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page2> page = repository.allocatePage(error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
     
-    PageRepositoryWriter writer = repository.insert(page->number(), 0, error);
+    RecordRepositoryWriter writer = repository.insert(page->number(), 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -129,7 +129,7 @@ void PageRepositoryWriterTests::WriteTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteTest3(Test& test)
+void RecordRepositoryWriterTests::WriteTest3(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteTest3.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
@@ -139,12 +139,12 @@ void PageRepositoryWriterTests::WriteTest3(Test& test)
 
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryWriter writer = repository.insert(0, 0, error);
+    RecordRepositoryWriter writer = repository.insert(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -157,11 +157,14 @@ void PageRepositoryWriterTests::WriteTest3(Test& test)
     writer.save(error);
 
     ISHIKO_TEST_FAIL_IF(error);
+
+    repository.close();
+
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteTest4(Test& test)
+void RecordRepositoryWriterTests::WriteTest4(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteTest4.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
@@ -171,12 +174,12 @@ void PageRepositoryWriterTests::WriteTest4(Test& test)
 
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    PageRepositoryWriter writer = repository.insert(0, 6, error);
+    RecordRepositoryWriter writer = repository.insert(0, 6, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -189,11 +192,14 @@ void PageRepositoryWriterTests::WriteTest4(Test& test)
     writer.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
+
+    repository.close();
+
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteTest5(Test& test)
+void RecordRepositoryWriterTests::WriteTest5(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteTest5.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
@@ -203,12 +209,12 @@ void PageRepositoryWriterTests::WriteTest5(Test& test)
 
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    PageRepositoryWriter writer = repository.insert(0, 0, error);
+    RecordRepositoryWriter writer = repository.insert(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -224,11 +230,14 @@ void PageRepositoryWriterTests::WriteTest5(Test& test)
     writer.save(error);
 
     ISHIKO_TEST_FAIL_IF(error);
+
+    repository.close();
+
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteTest6(Test& test)
+void RecordRepositoryWriterTests::WriteTest6(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteTest6.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
@@ -238,12 +247,12 @@ void PageRepositoryWriterTests::WriteTest6(Test& test)
 
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    PageRepositoryWriter writer = repository.insert(0, 0, error);
+    RecordRepositoryWriter writer = repository.insert(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -259,11 +268,14 @@ void PageRepositoryWriterTests::WriteTest6(Test& test)
     writer.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
+
+    repository.close();
+
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteTest7(Test& test)
+void RecordRepositoryWriterTests::WriteTest7(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteTest7.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
@@ -273,12 +285,12 @@ void PageRepositoryWriterTests::WriteTest7(Test& test)
 
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryWriter writer = repository.insert(0, 0, error);
+    RecordRepositoryWriter writer = repository.insert(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -295,11 +307,14 @@ void PageRepositoryWriterTests::WriteTest7(Test& test)
     writer.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
+
+    repository.close();
+
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteTest8(Test& test)
+void RecordRepositoryWriterTests::WriteTest8(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteTest8.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
@@ -309,12 +324,12 @@ void PageRepositoryWriterTests::WriteTest8(Test& test)
 
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(outputPath, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryWriter writer = repository.insert(0, 0, error);
+    RecordRepositoryWriter writer = repository.insert(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -330,27 +345,30 @@ void PageRepositoryWriterTests::WriteTest8(Test& test)
     writer.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
+
+    repository.close();
+
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteLEB128Test1(Test& test)
+void RecordRepositoryWriterTests::WriteLEB128Test1(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteLEB128Test1.dpdb";
    
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page2> page = repository.allocatePage(error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
 
-    PageRepositoryWriter writer = repository.insert(page->number(), 0, error);
+    RecordRepositoryWriter writer = repository.insert(page->number(), 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -370,23 +388,23 @@ void PageRepositoryWriterTests::WriteLEB128Test1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteLEB128Test2(Test& test)
+void RecordRepositoryWriterTests::WriteLEB128Test2(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteLEB128Test2.dpdb";
     
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page2> page = repository.allocatePage(error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
 
-    PageRepositoryWriter writer = repository.insert(page->number(), 0, error);
+    RecordRepositoryWriter writer = repository.insert(page->number(), 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -406,23 +424,23 @@ void PageRepositoryWriterTests::WriteLEB128Test2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteLEB128Test3(Test& test)
+void RecordRepositoryWriterTests::WriteLEB128Test3(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteLEB128Test3.dpdb";
    
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page2> page = repository.allocatePage(error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
 
-    PageRepositoryWriter writer = repository.insert(page->number(), 0, error);
+    RecordRepositoryWriter writer = repository.insert(page->number(), 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -442,23 +460,23 @@ void PageRepositoryWriterTests::WriteLEB128Test3(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteLEB128Test4(Test& test)
+void RecordRepositoryWriterTests::WriteLEB128Test4(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteLEB128Test4.dpdb";
     
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page2> page = repository.allocatePage(error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
 
-    PageRepositoryWriter writer = repository.insert(page->number(), 0, error);
+    RecordRepositoryWriter writer = repository.insert(page->number(), 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -478,23 +496,23 @@ void PageRepositoryWriterTests::WriteLEB128Test4(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryWriterTests::WriteLEB128Test5(Test& test)
+void RecordRepositoryWriterTests::WriteLEB128Test5(Test& test)
 {
     const char* outputName = "PageRepositoryWriterWriteLEB128Test5.dpdb";
    
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(outputName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page2> page = repository.allocatePage(error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
 
-    PageRepositoryWriter writer = repository.insert(page->number(), 0, error);
+    RecordRepositoryWriter writer = repository.insert(page->number(), 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 

@@ -1,18 +1,18 @@
 /*
     Copyright (c) 2018-2022 Xavier Leclercq
     Released under the MIT License
-    See https://github.com/diplodocusdb/physical-storage/blob/main/LICENSE.txt
+    See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "PageRepositoryReaderTests.h"
-#include "DiplodocusDB/PhysicalStorage/PageRepositoryReader.h"
-#include "DiplodocusDB/PhysicalStorage/PageFileRepository2.hpp"
+#include "RecordRepositoryReaderTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryReader.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp"
 
-using namespace DiplodocusDB::PhysicalStorage;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
-PageRepositoryReaderTests::PageRepositoryReaderTests(const TestNumber& number, const TestContext& context)
-    : TestSequence(number, "PageRepositoryReader tests", context)
+RecordRepositoryReaderTests::RecordRepositoryReaderTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "RecordRepositoryReader tests", context)
 {
     append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
     append<HeapAllocationErrorsTest>("read test 1", ReadTest1);
@@ -27,36 +27,36 @@ PageRepositoryReaderTests::PageRepositoryReaderTests(const TestNumber& number, c
     append<HeapAllocationErrorsTest>("readLEB128 test 5", ReadLEB128Test5);
 }
 
-void PageRepositoryReaderTests::CreationTest1(Test& test)
+void RecordRepositoryReaderTests::CreationTest1(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderCreationTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<Page2> page = repository.page(0, error);
+    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.page(0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    PageRepositoryReader reader(repository, page, 0);
+    RecordRepositoryReader reader(repository, page, 0);
 
     ISHIKO_TEST_FAIL_IF_NEQ(reader.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(reader.currentPosition().offset(), 0);
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryReaderTests::ReadTest1(Test& test)
+void RecordRepositoryReaderTests::ReadTest1(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadTest1.dpdb"), error);
     
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -70,16 +70,16 @@ void PageRepositoryReaderTests::ReadTest1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryReaderTests::ReadTest2(Test& test)
+void RecordRepositoryReaderTests::ReadTest2(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
         
@@ -98,16 +98,16 @@ void PageRepositoryReaderTests::ReadTest2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryReaderTests::ReadTest3(Test& test)
+void RecordRepositoryReaderTests::ReadTest3(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadTest3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 6, error);
+    RecordRepositoryReader reader = repository.read(0, 6, error);
 
     ISHIKO_TEST_ABORT_IF(error);
         
@@ -123,16 +123,16 @@ void PageRepositoryReaderTests::ReadTest3(Test& test)
 
 /// Checks the behavior when we read the very last byte of a page and then read the first bytes of the next page in 
 /// two consecutive calls to the read function.
-void PageRepositoryReaderTests::ReadTest4(Test& test)
+void RecordRepositoryReaderTests::ReadTest4(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadTest4.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -153,16 +153,16 @@ void PageRepositoryReaderTests::ReadTest4(Test& test)
 }
 
 /// Checks the behavior when a single call to the read function crosses a single page boundary.
-void PageRepositoryReaderTests::ReadTest5(Test& test)
+void RecordRepositoryReaderTests::ReadTest5(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadTest5.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 4070, error);
+    RecordRepositoryReader reader = repository.read(0, 4070, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -175,16 +175,16 @@ void PageRepositoryReaderTests::ReadTest5(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryReaderTests::ReadLEB128Test1(Test& test)
+void RecordRepositoryReaderTests::ReadLEB128Test1(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -195,16 +195,16 @@ void PageRepositoryReaderTests::ReadLEB128Test1(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryReaderTests::ReadLEB128Test2(Test& test)
+void RecordRepositoryReaderTests::ReadLEB128Test2(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -215,16 +215,16 @@ void PageRepositoryReaderTests::ReadLEB128Test2(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryReaderTests::ReadLEB128Test3(Test& test)
+void RecordRepositoryReaderTests::ReadLEB128Test3(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -235,16 +235,16 @@ void PageRepositoryReaderTests::ReadLEB128Test3(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryReaderTests::ReadLEB128Test4(Test& test)
+void RecordRepositoryReaderTests::ReadLEB128Test4(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test4.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -255,16 +255,16 @@ void PageRepositoryReaderTests::ReadLEB128Test4(Test& test)
     ISHIKO_TEST_PASS();
 }
 
-void PageRepositoryReaderTests::ReadLEB128Test5(Test& test)
+void RecordRepositoryReaderTests::ReadLEB128Test5(Test& test)
 {
     Error error;
 
-    PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test5.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
