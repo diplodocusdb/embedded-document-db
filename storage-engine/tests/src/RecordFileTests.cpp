@@ -169,6 +169,9 @@ void RecordFileTests::InsertPageAfterTest1(Test& test)
     repository.store(*page2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
+
+    repository.close();
+
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
     ISHIKO_TEST_PASS();
 }
