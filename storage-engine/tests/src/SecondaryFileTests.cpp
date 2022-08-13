@@ -7,7 +7,7 @@
 #include "SecondaryFileTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SecondaryFile.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
 SecondaryFileTests::SecondaryFileTests(const TestNumber& number, const TestContext& context)
