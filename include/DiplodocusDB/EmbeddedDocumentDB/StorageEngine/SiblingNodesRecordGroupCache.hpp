@@ -14,6 +14,8 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
 class SiblingNodesRecordGroupCache
 {
@@ -29,6 +31,7 @@ private:
     std::map<NodeID, std::shared_ptr<SiblingNodesRecordGroup>> m_groups;
 };
 
+}
 }
 
 #endif

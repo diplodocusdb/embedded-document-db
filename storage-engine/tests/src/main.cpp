@@ -4,7 +4,6 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "EmbeddedDocumentDBStorageEngineTests.hpp"
 #include "MasterFileTests.hpp"
 #include "NodeIDTests.hpp"
 #include "NodeIDAllocatorTests.hpp"
@@ -13,6 +12,7 @@
 #include "SecondaryFileTests.hpp"
 #include "SiblingNodesRecordGroupCacheTests.hpp"
 #include "SiblingNodesRecordGroupTests.hpp"
+#include "StorageEngineTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/linkoptions.hpp"
 #include <Ishiko/TestFramework.hpp>
 
@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
     theTests.append<MasterFileTests>();
     theTests.append<SecondaryFileTests>();
     theTests.append<RecordFilesSetTests>();
-    theTests.append<EmbeddedDocumentDBStorageEngineTests>();
+    theTests.append<StorageEngineTests>();
 
     return theTestHarness.run();
 }

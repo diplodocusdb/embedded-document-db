@@ -6,7 +6,7 @@
 
 #include "NodeID.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 NodeID::NodeID()
     : m_value(0)

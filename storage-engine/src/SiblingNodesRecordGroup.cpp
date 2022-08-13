@@ -7,7 +7,7 @@
 #include "SiblingNodesRecordGroup.hpp"
 #include "Record.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 SiblingNodesRecordGroup::SiblingNodesRecordGroup(const NodeID& parentNodeID)
     : m_parentNodeID(parentNodeID)

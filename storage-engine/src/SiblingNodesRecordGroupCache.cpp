@@ -6,7 +6,7 @@
 
 #include "SiblingNodesRecordGroupCache.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 bool SiblingNodesRecordGroupCache::find(const NodeID& key,
     std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes)

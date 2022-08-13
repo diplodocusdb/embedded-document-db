@@ -16,6 +16,8 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
 /// A list of records storing sibling nodes.
 /**
@@ -47,6 +49,7 @@ private:
     std::vector<SiblingNodeRecordGroup> m_siblings;
 };
 
+}
 }
 
 #endif

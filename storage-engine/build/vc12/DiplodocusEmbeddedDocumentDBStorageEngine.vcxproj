@@ -150,7 +150,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\EmbeddedDocumentDBStorageEngine.cpp" />
     <ClCompile Include="..\..\src\MasterFile.cpp" />
     <ClCompile Include="..\..\src\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\src\NodeID.cpp" />
@@ -163,12 +162,12 @@
     <ClCompile Include="..\..\src\SiblingNodeRecordGroup.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroup.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupCache.cpp" />
+    <ClCompile Include="..\..\src\StorageEngine.cpp" />
     <ClCompile Include="..\..\src\EmbeddedDocumentDBStorageEngineErrorCategory.cpp" />
     <ClCompile Include="..\..\src\ValueCodec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\EmbeddedDocumentDBStorageEngine.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\linkoptions.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\NodeID.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\NodeIDAllocator.hpp" />
@@ -182,6 +181,7 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SiblingNodeRecordGroup.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SiblingNodesRecordGroup.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\SiblingNodesRecordGroupCache.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\StorageEngine.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\EmbeddedDocumentDBStorageEngineErrorCategory.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\ValueCodec.hpp" />
   </ItemGroup>

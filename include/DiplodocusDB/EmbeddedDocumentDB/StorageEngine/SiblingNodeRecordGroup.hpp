@@ -4,14 +4,16 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODERECORDGROUP_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODERECORDGROUP_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODERECORDGROUP_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODERECORDGROUP_HPP
 
 #include "NodeID.hpp"
 #include <DiplodocusDB/Core.hpp>
 #include <string>
 
 namespace DiplodocusDB
+{
+namespace EDDBImpl
 {
 
 class SiblingNodeRecordGroup
@@ -33,6 +35,7 @@ private:
     NodeID m_nodeID;
 };
 
+}
 }
 
 #endif

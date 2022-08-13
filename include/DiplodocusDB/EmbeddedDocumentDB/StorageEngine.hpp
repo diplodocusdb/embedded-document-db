@@ -4,10 +4,9 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP_
-#define _DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP_
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_HPP
 
-#include "StorageEngine/EmbeddedDocumentDBStorageEngine.hpp"
 #include "StorageEngine/EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
 #include "StorageEngine/linkoptions.hpp"
 #include "StorageEngine/MasterFile.hpp"
@@ -22,6 +21,7 @@
 #include "StorageEngine/SiblingNodeRecordGroup.hpp"
 #include "StorageEngine/SiblingNodesRecordGroup.hpp"
 #include "StorageEngine/SiblingNodesRecordGroupCache.hpp"
+#include "StorageEngine/StorageEngine.hpp"
 #include "StorageEngine/ValueCodec.hpp"
 
 #endif

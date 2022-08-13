@@ -12,6 +12,8 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
 /// The ID of a node.
 /**
@@ -49,6 +51,7 @@ private:
     size_t m_value;
 };
 
+}
 }
 
 #endif
