@@ -14,13 +14,14 @@ EmbeddedDocumentDBNodeImpl::EmbeddedDocumentDBNodeImpl()
 {
 }
 
-EmbeddedDocumentDBNodeImpl::EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeID, const NodeID& nodeID,
-    const std::string& name)
+EmbeddedDocumentDBNodeImpl::EmbeddedDocumentDBNodeImpl(const EDDBImpl::NodeID& parentNodeID,
+    const EDDBImpl::NodeID& nodeID, const std::string& name)
     : m_name(name), m_parentNodeID(parentNodeID), m_nodeID(nodeID)
 {
 }
 
-EmbeddedDocumentDBNodeImpl::EmbeddedDocumentDBNodeImpl(const NodeID& parentNodeID, const SiblingNodeRecordGroup& node)
+EmbeddedDocumentDBNodeImpl::EmbeddedDocumentDBNodeImpl(const EDDBImpl::NodeID& parentNodeID,
+    const EDDBImpl::SiblingNodeRecordGroup& node)
     : m_name(node.name()), m_value(node.value()), m_parentNodeID(parentNodeID), m_nodeID(node.nodeID())
 {
 }
@@ -45,12 +46,12 @@ bool EmbeddedDocumentDBNodeImpl::isRoot() const
     return (m_name == "/");
 }
 
-const NodeID& EmbeddedDocumentDBNodeImpl::parentNodeID() const
+const EDDBImpl::NodeID& EmbeddedDocumentDBNodeImpl::parentNodeID() const
 {
     return m_parentNodeID;
 }
 
-const NodeID& EmbeddedDocumentDBNodeImpl::nodeID() const
+const EDDBImpl::NodeID& EmbeddedDocumentDBNodeImpl::nodeID() const
 {
     return m_nodeID;
 }

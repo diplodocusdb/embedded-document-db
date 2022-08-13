@@ -23,7 +23,8 @@ void EmbeddedDocumentDBImpl::create(const boost::filesystem::path& path, Ishiko:
     m_storageEngine.createMasterFile(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(NodeID(0), NodeID(1), "/"));
+        m_root = TreeDBNode(
+            std::make_shared<EmbeddedDocumentDBNodeImpl>(EDDBImpl::NodeID{0}, EDDBImpl::NodeID{1}, "/"));
     }
 }
 
@@ -32,7 +33,8 @@ void EmbeddedDocumentDBImpl::open(const boost::filesystem::path& path, Ishiko::E
     m_storageEngine.openMasterFile(path, error);
     if (!error)
     {
-        m_root = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(NodeID(0), NodeID(1), "/"));
+        m_root = TreeDBNode(
+            std::make_shared<EmbeddedDocumentDBNodeImpl>(EDDBImpl::NodeID{0}, EDDBImpl::NodeID{1}, "/"));
     }
 }
 
@@ -98,7 +100,7 @@ std::vector<TreeDBNode> EmbeddedDocumentDBImpl::childNodes(TreeDBNode& parent, I
     std::vector<TreeDBNode> result;
 
     EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
-    std::shared_ptr<SiblingNodesRecordGroup> siblingNodesRecordGroup;
+    std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup> siblingNodesRecordGroup;
     bool found = m_storageEngine.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup,
         error);
     if (!error && found)
@@ -119,12 +121,12 @@ TreeDBNode EmbeddedDocumentDBImpl::child(TreeDBNode& parent, const std::string& 
     TreeDBNode result;
 
     EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
-    std::shared_ptr<SiblingNodesRecordGroup> siblingNodesRecordGroup;
+    std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup> siblingNodesRecordGroup;
     bool found = m_storageEngine.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(), siblingNodesRecordGroup,
         error);
     if (!error && found)
     {
-        SiblingNodeRecordGroup node;
+        EDDBImpl::SiblingNodeRecordGroup node;
         found = siblingNodesRecordGroup->find(name, node);
         if (found)
         {
@@ -192,8 +194,8 @@ void EmbeddedDocumentDBImpl::setValue(TreeDBNode& node, const Value& value, Ishi
 {
     // TODO : this can't be working, it re-adds the node, surely that creates duplicate nodes
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*node.impl());
-    SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
-        SiblingNodeRecordGroup(nodeImpl.name(), value, nodeImpl.nodeID()));
+    EDDBImpl::SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
+        EDDBImpl::SiblingNodeRecordGroup(nodeImpl.name(), value, nodeImpl.nodeID()));
     m_storageEngine.addSiblingNodesRecordGroup(siblings, error);
 }
 
@@ -210,11 +212,11 @@ TreeDBNode EmbeddedDocumentDBImpl::insertChildNode(TreeDBNode& parent, size_t in
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
     TreeDBNode result =
-        TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
+        TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), EDDBImpl::NodeID{0}, name));
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
-        SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
+    EDDBImpl::SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
+        EDDBImpl::SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
     m_storageEngine.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
@@ -232,11 +234,12 @@ TreeDBNode EmbeddedDocumentDBImpl::insertChildNodeBefore(TreeDBNode& parent, Tre
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
+    TreeDBNode result =
+        TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), EDDBImpl::NodeID{0}, name));
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
-        SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
+    EDDBImpl::SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
+        EDDBImpl::SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
     m_storageEngine.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
@@ -254,11 +257,12 @@ TreeDBNode EmbeddedDocumentDBImpl::insertChildNodeAfter(TreeDBNode& parent, Tree
     // TODO : does this work?
     // TODO : doesn't work if there are already child nodes on this node
     EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
-    TreeDBNode result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
+    TreeDBNode result =
+        TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), EDDBImpl::NodeID{0}, name));
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
-    SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
-        SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
+    EDDBImpl::SiblingNodesRecordGroup siblings(nodeImpl.parentNodeID(),
+        EDDBImpl::SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
     m_storageEngine.addSiblingNodesRecordGroup(siblings, error);
     return result;
 }
@@ -282,11 +286,12 @@ TreeDBNode EmbeddedDocumentDBImpl::appendChildNode(TreeDBNode& parent, const std
     TreeDBNode result;
 
     EmbeddedDocumentDBNodeImpl& parentNodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*parent.impl());
-    result = TreeDBNode(std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), NodeID(0), name));
+    result = TreeDBNode(
+        std::make_shared<EmbeddedDocumentDBNodeImpl>(parentNodeImpl.nodeID(), EDDBImpl::NodeID{0}, name));
     EmbeddedDocumentDBNodeImpl& nodeImpl = static_cast<EmbeddedDocumentDBNodeImpl&>(*result.impl());
     nodeImpl.value() = value;
 
-    std::shared_ptr<SiblingNodesRecordGroup> existingSiblingNodesRecordGroup;
+    std::shared_ptr<EDDBImpl::SiblingNodesRecordGroup> existingSiblingNodesRecordGroup;
     bool found = m_storageEngine.findSiblingNodesRecordGroup(parentNodeImpl.nodeID(),
         existingSiblingNodesRecordGroup, error);
     if (!error)
@@ -295,13 +300,13 @@ TreeDBNode EmbeddedDocumentDBImpl::appendChildNode(TreeDBNode& parent, const std
         {
             // TODO
             existingSiblingNodesRecordGroup->push_back(
-                SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
+                EDDBImpl::SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
             m_storageEngine.updateSiblingNodesRecordGroup(*existingSiblingNodesRecordGroup, error);
         }
         else
         {
-            SiblingNodesRecordGroup siblings(parentNodeImpl.nodeID(),
-                SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
+            EDDBImpl::SiblingNodesRecordGroup siblings(parentNodeImpl.nodeID(),
+                EDDBImpl::SiblingNodeRecordGroup(nodeImpl.name(), nodeImpl.value(), nodeImpl.nodeID()));
             m_storageEngine.addSiblingNodesRecordGroup(siblings, error);
         }
     }

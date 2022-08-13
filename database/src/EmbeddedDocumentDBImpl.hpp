@@ -74,7 +74,7 @@ public:
     size_t removeAllChildNodes(TreeDBNode& parent, Ishiko::Error& error);
 
 private:
-    EmbeddedDocumentDBStorageEngine m_storageEngine;
+    EDDBImpl::StorageEngine m_storageEngine;
     TreeDBNode m_root;
 };
 
