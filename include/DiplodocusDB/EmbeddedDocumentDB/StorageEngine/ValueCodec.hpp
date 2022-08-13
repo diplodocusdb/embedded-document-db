@@ -13,6 +13,8 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
 class ValueCodec
 {
@@ -30,6 +32,7 @@ public:
         Ishiko::Error& error);
 };
 
+}
 }
 
 #endif

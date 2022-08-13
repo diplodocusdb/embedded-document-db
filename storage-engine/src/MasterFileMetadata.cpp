@@ -6,7 +6,7 @@
 
 #include "MasterFileMetadata.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 MasterFileMetadata::MasterFileMetadata()
     : m_fileFormatVersion(1, 0, 0)

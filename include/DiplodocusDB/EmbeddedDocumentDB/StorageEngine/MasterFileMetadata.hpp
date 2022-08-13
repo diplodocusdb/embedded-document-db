@@ -12,6 +12,8 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
 class MasterFileMetadata
 {
@@ -25,6 +27,7 @@ private:
     VersionNumber m_fileFormatVersion;
 };
 
+}
 }
 
 #endif

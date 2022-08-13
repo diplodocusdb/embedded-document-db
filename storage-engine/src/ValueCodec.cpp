@@ -8,6 +8,7 @@
 #include <Ishiko/Memory.hpp>
 
 using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 Value ValueCodec::ReadInlineValue(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
 {
