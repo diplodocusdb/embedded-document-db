@@ -21,16 +21,17 @@ class RecordRepository;
 class RecordRepositoryReader
 {
 public:
-    RecordRepositoryReader(RecordRepository& repository, std::shared_ptr<Page2> startPage, size_t startOffset);
+    RecordRepositoryReader(RecordRepository& repository, std::shared_ptr<PhysicalStorage::Page2> startPage,
+        size_t startOffset);
 
-    PageRepositoryPosition currentPosition() const;
+    PhysicalStorage::PageRepositoryPosition currentPosition() const;
 
     void read(char* buffer, size_t n, Ishiko::Error& error);
     size_t readLEB128(Ishiko::Error& error);
 
 private:
-    PageFileRepository2& m_repository;
-    std::shared_ptr<Page2> m_currentPage;
+    RecordRepository& m_repository;
+    std::shared_ptr<PhysicalStorage::Page2> m_currentPage;
     size_t m_currentOffset;
 };
 

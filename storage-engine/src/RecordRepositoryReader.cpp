@@ -15,9 +15,9 @@ RecordRepositoryReader::RecordRepositoryReader(RecordRepository& repository, std
 {
 }
 
-PageRepositoryPosition RecordRepositoryReader::currentPosition() const
+PhysicalStorage::PageRepositoryPosition RecordRepositoryReader::currentPosition() const
 {
-    return PageRepositoryPosition(m_currentPage->number(), m_currentOffset);
+    return PhysicalStorage::PageRepositoryPosition(m_currentPage->number(), m_currentOffset);
 }
 
 void RecordRepositoryReader::read(char* buffer, size_t n, Ishiko::Error& error)

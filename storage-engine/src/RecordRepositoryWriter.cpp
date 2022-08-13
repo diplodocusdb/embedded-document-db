@@ -15,9 +15,9 @@ RecordRepositoryWriter::RecordRepositoryWriter(RecordRepository& repository, std
 {
 }
 
-PageRepositoryPosition RecordRepositoryWriter::currentPosition() const
+PhysicalStorage::PageRepositoryPosition RecordRepositoryWriter::currentPosition() const
 {
-    return PageRepositoryPosition(m_currentPage->number(), m_currentOffset);
+    return PhysicalStorage::PageRepositoryPosition(m_currentPage->number(), m_currentOffset);
 }
 
 void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko::Error& error)
@@ -42,7 +42,7 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
         {
             // We need to move some data to a new page
             size_t nextPageIndex = m_currentPage->nextPage();
-            std::shared_ptr<Page2> newPage;
+            std::shared_ptr<PhysicalStorage::Page2> newPage;
             if (nextPageIndex != 0)
             {
                 newPage = m_repository.page(nextPageIndex, error);

@@ -7,8 +7,9 @@
 #ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_MASTERFILEMETADATA_HPP
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_MASTERFILEMETADATA_HPP
 
+#include "RecordRepositoryReader.hpp"
+#include "RecordRepositoryWriter.hpp"
 #include <DiplodocusDB/Core.hpp>
-#include <DiplodocusDB/PhysicalStorage.hpp>
 
 namespace DiplodocusDB
 {
@@ -20,8 +21,8 @@ class MasterFileMetadata
 public:
     MasterFileMetadata();
 
-    void read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void read(RecordRepositoryReader& reader, Ishiko::Error& error);
+    void write(RecordRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     VersionNumber m_fileFormatVersion;
