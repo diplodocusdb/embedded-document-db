@@ -9,6 +9,7 @@
 #include "ValueCodec.hpp"
 
 using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 Record::Record(ERecordType type)
     : m_type(type)

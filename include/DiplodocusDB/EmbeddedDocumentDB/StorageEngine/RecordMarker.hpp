@@ -11,6 +11,8 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
 class RecordMarker
 {
@@ -24,6 +26,7 @@ private:
     PhysicalStorage::PageRepositoryPosition m_position;
 };
 
+}
 }
 
 #endif

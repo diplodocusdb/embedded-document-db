@@ -7,6 +7,7 @@
 #include "SiblingNodeRecordGroup.hpp"
 
 using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 SiblingNodeRecordGroup::SiblingNodeRecordGroup()
 {

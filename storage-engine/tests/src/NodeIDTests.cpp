@@ -7,7 +7,7 @@
 #include "NodeIDTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeID.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
 NodeIDTests::NodeIDTests(const TestNumber& number, const TestContext& context)
@@ -18,7 +18,7 @@ NodeIDTests::NodeIDTests(const TestNumber& number, const TestContext& context)
 
 void NodeIDTests::ConstructionTest1(Test& test)
 {
-    NodeID id(0);
+    NodeID id{0};
 
     ISHIKO_TEST_PASS();
 }

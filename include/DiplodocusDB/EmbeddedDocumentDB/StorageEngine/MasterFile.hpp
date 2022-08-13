@@ -20,6 +20,8 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
 /// The master file where the database contents are physically stored.
 /**
@@ -123,6 +125,7 @@ private:
     size_t m_dataEndOffset;
 };
 
+}
 }
 
 #endif

@@ -7,7 +7,7 @@
 #include "SiblingNodesRecordGroupCacheTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodesRecordGroupCache.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
 SiblingNodesRecordGroupCacheTests::SiblingNodesRecordGroupCacheTests(const TestNumber& number,

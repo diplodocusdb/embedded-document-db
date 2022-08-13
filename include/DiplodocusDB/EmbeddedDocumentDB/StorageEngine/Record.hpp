@@ -18,6 +18,8 @@
 
 namespace DiplodocusDB
 {
+namespace EDDBImpl
+{
 
 /// A record in physical storage.
 /**
@@ -136,6 +138,7 @@ private:
     boost::variant<MasterFileMetadata, NodeID, std::string, Value> m_data;
 };
 
+}
 }
 
 #endif

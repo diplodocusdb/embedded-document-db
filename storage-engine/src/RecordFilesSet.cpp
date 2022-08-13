@@ -6,7 +6,7 @@
 
 #include "RecordFilesSet.hpp"
 
-using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 void RecordFilesSet::createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
 {

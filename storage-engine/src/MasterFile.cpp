@@ -9,6 +9,7 @@
 #include "EmbeddedDocumentDBStorageEngineErrorCategory.hpp"
 
 using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 MasterFile::MasterFile()
     : m_metadataRecord(MasterFileMetadata()), m_dataStartOffset(0), m_dataEndOffset(0)

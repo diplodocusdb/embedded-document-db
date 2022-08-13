@@ -9,6 +9,7 @@
 #include <sstream>
 
 using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
 MasterFileTests::MasterFileTests(const TestNumber& number, const TestContext& context)

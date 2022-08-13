@@ -7,6 +7,7 @@
 #include "RecordMarker.hpp"
 
 using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 
 RecordMarker::RecordMarker(const PhysicalStorage::PageRepositoryPosition& pos)
     : m_position(pos)

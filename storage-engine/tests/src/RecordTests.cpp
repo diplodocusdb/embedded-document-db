@@ -9,6 +9,7 @@
 #include <DiplodocusDB/PhysicalStorage.hpp>
 
 using namespace DiplodocusDB;
+using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
 RecordTests::RecordTests(const TestNumber& number, const TestContext& context)
