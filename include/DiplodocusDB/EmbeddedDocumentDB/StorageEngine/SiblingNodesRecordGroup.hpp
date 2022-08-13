@@ -8,8 +8,9 @@
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_SIBLINGNODESRECORDGROUP_HPP
 
 #include "NodeID.hpp"
+#include "RecordRepositoryReader.hpp"
+#include "RecordRepositoryWriter.hpp"
 #include "SiblingNodeRecordGroup.hpp"
-#include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
 #include <string>
 #include <vector>
@@ -37,12 +38,11 @@ public:
     void push_back(const SiblingNodeRecordGroup& value);
     bool find(const std::string& name, SiblingNodeRecordGroup& node);
 
-    void readWithoutType(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void readWithoutType(RecordRepositoryReader& reader, Ishiko::Error& error);
+    void write(RecordRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
-    static void writeNode(PhysicalStorage::PageRepositoryWriter& writer, const SiblingNodeRecordGroup& node,
-        Ishiko::Error& error);
+    static void writeNode(RecordRepositoryWriter& writer, const SiblingNodeRecordGroup& node, Ishiko::Error& error);
 
 private:
     NodeID m_parentNodeID;

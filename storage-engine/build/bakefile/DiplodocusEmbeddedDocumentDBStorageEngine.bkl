@@ -47,6 +47,9 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPhysicalStorage,
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFilesSet.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordMarker.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepository.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryReader.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryWriter.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SecondaryFile.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodeRecordGroup.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/SiblingNodesRecordGroup.hpp
@@ -66,6 +69,8 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPhysicalStorage,
         ../../src/RecordFile.cpp
         ../../src/RecordFilesSet.cpp
         ../../src/RecordMarker.cpp
+        ../../src/RecordRepositoryReader.cpp
+        ../../src/RecordRepositoryWriter.cpp
         ../../src/SecondaryFile.cpp
         ../../src/SiblingNodeRecordGroup.cpp
         ../../src/SiblingNodesRecordGroup.cpp

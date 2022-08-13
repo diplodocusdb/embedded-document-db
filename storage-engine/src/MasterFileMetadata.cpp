@@ -9,11 +9,11 @@
 using namespace DiplodocusDB::EDDBImpl;
 
 MasterFileMetadata::MasterFileMetadata()
-    : m_fileFormatVersion(1, 0, 0)
+    : m_fileFormatVersion{1, 0, 0}
 {
 }
 
-void MasterFileMetadata::read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error)
+void MasterFileMetadata::read(RecordRepositoryReader& reader, Ishiko::Error& error)
 {
     // TODO: this needs to decode LEB128
     uint8_t size;
@@ -26,7 +26,7 @@ void MasterFileMetadata::read(PhysicalStorage::PageRepositoryReader& reader, Ish
     }
 }
 
-void MasterFileMetadata::write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const
+void MasterFileMetadata::write(RecordRepositoryWriter& writer, Ishiko::Error& error) const
 {
     writer.writeLEB128(12, error);
     if (!error)

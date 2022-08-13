@@ -6,6 +6,7 @@
 
 #include "RecordTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/Record.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp"
 #include <DiplodocusDB/PhysicalStorage.hpp>
 
 using namespace DiplodocusDB;
@@ -57,12 +58,12 @@ void RecordTests::ReadMasterFileMetadataTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadMasterFileMetadataTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -78,12 +79,12 @@ void RecordTests::ReadDataStartTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadDataStartTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -99,12 +100,12 @@ void RecordTests::ReadDataEndTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadDataEndTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -120,12 +121,12 @@ void RecordTests::ReadNodeStartTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeStartTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -141,12 +142,12 @@ void RecordTests::ReadNodeEndTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeEndTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -162,12 +163,12 @@ void RecordTests::ReadParentNodeIDTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadParentNodeIDTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -184,12 +185,12 @@ void RecordTests::ReadNodeNameTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeNameTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -206,12 +207,12 @@ void RecordTests::ReadNodeNameTest2(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeNameTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -230,12 +231,12 @@ void RecordTests::ReadNodeIDTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeIDTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -252,12 +253,12 @@ void RecordTests::ReadNodeIDTest2(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadNodeIDTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -274,12 +275,12 @@ void RecordTests::ReadPersistentNodeIDTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadPersistentNodeIDTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -296,12 +297,12 @@ void RecordTests::ReadInlineValueBinaryTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadInlineValueBinaryTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -318,12 +319,12 @@ void RecordTests::ReadInlineValueBooleanTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadInlineValueBooleanTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -340,12 +341,12 @@ void RecordTests::ReadInlineValueUTF8StringTest1(Test& test)
 {
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.open(test.context().getDataPath("RecordTests_ReadInlineValueUTF8StringTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryReader reader = repository.read(0, 0, error);
+    RecordRepositoryReader reader = repository.read(0, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -364,7 +365,7 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -373,7 +374,7 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -396,7 +397,7 @@ void RecordTests::WriteDataStartTest1(Test& test)
    
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -405,7 +406,7 @@ void RecordTests::WriteDataStartTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -428,7 +429,7 @@ void RecordTests::WriteDataEndTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -437,7 +438,7 @@ void RecordTests::WriteDataEndTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -460,7 +461,7 @@ void RecordTests::WriteNodeStartTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -469,7 +470,7 @@ void RecordTests::WriteNodeStartTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -492,7 +493,7 @@ void RecordTests::WriteNodeEndTest1(Test& test)
    
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -501,7 +502,7 @@ void RecordTests::WriteNodeEndTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -524,7 +525,7 @@ void RecordTests::WriteParentNodeIDTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -533,7 +534,7 @@ void RecordTests::WriteParentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -556,7 +557,7 @@ void RecordTests::WriteNodeNameTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -565,7 +566,7 @@ void RecordTests::WriteNodeNameTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -588,7 +589,7 @@ void RecordTests::WriteNodeNameTest2(Test& test)
     
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -597,7 +598,7 @@ void RecordTests::WriteNodeNameTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -622,7 +623,7 @@ void RecordTests::WriteNodeIDTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -631,7 +632,7 @@ void RecordTests::WriteNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -654,7 +655,7 @@ void RecordTests::WriteNodeIDTest2(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -663,7 +664,7 @@ void RecordTests::WriteNodeIDTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -686,7 +687,7 @@ void RecordTests::WritePersistentNodeIDTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -695,7 +696,7 @@ void RecordTests::WritePersistentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -718,7 +719,7 @@ void RecordTests::WriteInlineValueBinaryTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -727,7 +728,7 @@ void RecordTests::WriteInlineValueBinaryTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -750,7 +751,7 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -759,7 +760,7 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -782,7 +783,7 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
 
     Error error;
 
-    PhysicalStorage::PageFileRepository2 repository;
+    RecordFile repository;
     repository.create(test.context().getOutputPath(testName), error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -791,7 +792,7 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    PhysicalStorage::PageRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = repository.insert(page, 0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 

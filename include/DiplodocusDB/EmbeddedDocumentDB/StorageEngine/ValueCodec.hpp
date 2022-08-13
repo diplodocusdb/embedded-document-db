@@ -7,8 +7,9 @@
 #ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_VALUECODEC_HPP
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_VALUECODEC_HPP
 
+#include "RecordRepositoryReader.hpp"
+#include "RecordRepositoryWriter.hpp"
 #include <DiplodocusDB/Core.hpp>
-#include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
@@ -19,17 +20,14 @@ namespace EDDBImpl
 class ValueCodec
 {
 public:
-    static Value ReadInlineValue(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
-    static void WriteInlineValue(PhysicalStorage::PageRepositoryWriter& writer, const Value& value,
-        Ishiko::Error& error);
-    static DataType ReadDataType(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
-    static void WriteDataType(PhysicalStorage::PageRepositoryWriter& writer, const DataType& dataType,
-        Ishiko::Error& error);
-    static bool ReadBoolean(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
-    static void WriteBoolean(PhysicalStorage::PageRepositoryWriter& writer, bool data, Ishiko::Error& error);
-    static std::string ReadString(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
-    static void WriteString(PhysicalStorage::PageRepositoryWriter& writer, const std::string& data,
-        Ishiko::Error& error);
+    static Value ReadInlineValue(RecordRepositoryReader& reader, Ishiko::Error& error);
+    static void WriteInlineValue(RecordRepositoryWriter& writer, const Value& value, Ishiko::Error& error);
+    static DataType ReadDataType(RecordRepositoryReader& reader, Ishiko::Error& error);
+    static void WriteDataType(RecordRepositoryWriter& writer, const DataType& dataType, Ishiko::Error& error);
+    static bool ReadBoolean(RecordRepositoryReader& reader, Ishiko::Error& error);
+    static void WriteBoolean(RecordRepositoryWriter& writer, bool data, Ishiko::Error& error);
+    static std::string ReadString(RecordRepositoryReader& reader, Ishiko::Error& error);
+    static void WriteString(RecordRepositoryWriter& writer, const std::string& data, Ishiko::Error& error);
 };
 
 }

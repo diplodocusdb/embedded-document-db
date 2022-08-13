@@ -7,7 +7,8 @@
 #ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_NODEID_HPP
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_NODEID_HPP
 
-#include <DiplodocusDB/PhysicalStorage.hpp>
+#include "RecordRepositoryReader.hpp"
+#include "RecordRepositoryWriter.hpp"
 #include <Ishiko/Errors.hpp>
 
 namespace DiplodocusDB
@@ -44,8 +45,8 @@ public:
     bool operator<(const NodeID& other) const;
     bool operator>(const NodeID& other) const;
 
-    void read(PhysicalStorage::PageRepositoryReader& reader, Ishiko::Error& error);
-    void write(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error) const;
+    void read(RecordRepositoryReader& reader, Ishiko::Error& error);
+    void write(RecordRepositoryWriter& writer, Ishiko::Error& error) const;
 
 private:
     size_t m_value;

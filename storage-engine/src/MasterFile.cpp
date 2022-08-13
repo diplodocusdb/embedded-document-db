@@ -30,7 +30,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    PhysicalStorage::PageRepositoryWriter writer = m_repository.insert(page, 0, error);
+    RecordRepositoryWriter writer = m_repository.insert(page, 0, error);
     if (error)
     {
         return;
@@ -101,7 +101,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
 {
     bool result = false;
 
-    PhysicalStorage::PageRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
+    RecordRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
     while (!result && !error)
     {
         Record nextRecord(Record::ERecordType::eInvalid);
@@ -142,7 +142,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
 
 void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
 {
-    PhysicalStorage::PageRepositoryWriter writer = m_repository.insert(dataEndPosition().position(), error);
+    RecordRepositoryWriter writer = m_repository.insert(dataEndPosition().position(), error);
     if (error)
     {
         return;
@@ -176,7 +176,7 @@ bool MasterFile::removeSiblingNodesRecordGroup(const NodeID& parentNodeID, Ishik
     return false;
 }
 
-void MasterFile::createRootNode(PhysicalStorage::PageRepositoryWriter& writer, Ishiko::Error& error)
+void MasterFile::createRootNode(RecordRepositoryWriter& writer, Ishiko::Error& error)
 {
     Record nodeStartRecord(Record::ERecordType::eSiblingNodesStart);
     nodeStartRecord.write(writer, error);
