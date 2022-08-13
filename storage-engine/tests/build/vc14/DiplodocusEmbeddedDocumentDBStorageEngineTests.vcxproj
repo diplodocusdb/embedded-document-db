@@ -161,6 +161,8 @@
     <ClCompile Include="..\..\src\NodeIDTests.cpp" />
     <ClCompile Include="..\..\src\NodeIDAllocatorTests.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSetTests.cpp" />
+    <ClCompile Include="..\..\src\RecordRepositoryWriterTests.cpp" />
+    <ClCompile Include="..\..\src\RecordRepositoryReaderTests.cpp" />
     <ClCompile Include="..\..\src\RecordTests.cpp" />
     <ClCompile Include="..\..\src\SecondaryFileTests.cpp" />
     <ClCompile Include="..\..\src\SiblingNodesRecordGroupTests.cpp" />
@@ -172,6 +174,8 @@
     <ClInclude Include="..\..\src\NodeIDTests.hpp" />
     <ClInclude Include="..\..\src\NodeIDAllocatorTests.hpp" />
     <ClInclude Include="..\..\src\RecordFilesSetTests.hpp" />
+    <ClInclude Include="..\..\src\RecordRepositoryWriterTests.hpp" />
+    <ClInclude Include="..\..\src\RecordRepositoryReaderTests.hpp" />
     <ClInclude Include="..\..\src\RecordTests.hpp" />
     <ClInclude Include="..\..\src\SecondaryFileTests.hpp" />
     <ClInclude Include="..\..\src\SiblingNodesRecordGroupTests.hpp" />
