@@ -13,6 +13,7 @@
 #include "StorageEngine/NodeID.hpp"
 #include "StorageEngine/NodeIDAllocator.hpp"
 #include "StorageEngine/Record.hpp"
+#include "StorageEngine/RecordFile.hpp"
 #include "StorageEngine/RecordFilesSet.hpp"
 #include "StorageEngine/RecordMarker.hpp"
 #include "StorageEngine/RecordRepository.hpp"
