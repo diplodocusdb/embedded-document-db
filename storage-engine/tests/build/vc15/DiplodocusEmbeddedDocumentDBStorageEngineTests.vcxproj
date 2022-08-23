@@ -163,6 +163,7 @@
     <ClCompile Include="..\..\src\PageCacheTests.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSetTests.cpp" />
     <ClCompile Include="..\..\src\RecordFileTests.cpp" />
+    <ClCompile Include="..\..\src\RecordPageTests.cpp" />
     <ClCompile Include="..\..\src\RecordRepositoryWriterTests.cpp" />
     <ClCompile Include="..\..\src\RecordRepositoryReaderTests.cpp" />
     <ClCompile Include="..\..\src\RecordTests.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="..\..\src\PageCacheTests.h" />
     <ClInclude Include="..\..\src\RecordFilesSetTests.hpp" />
     <ClInclude Include="..\..\src\RecordFileTests.hpp" />
+    <ClInclude Include="..\..\src\RecordPageTests.hpp" />
     <ClInclude Include="..\..\src\RecordRepositoryWriterTests.hpp" />
     <ClInclude Include="..\..\src\RecordRepositoryReaderTests.hpp" />
     <ClInclude Include="..\..\src\RecordTests.hpp" />
