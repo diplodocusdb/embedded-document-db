@@ -88,7 +88,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(ISHIKO_CPP)/base-platform\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP)/io\include;$(ISHIKO_CPP_THIRD_PARTY_BOOST);$(DIPLODOCUSDB)/physical-storage\include;$(DIPLODOCUSDB)/core\include;$(ISHIKO_CPP)/memory\include;..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ISHIKO_CPP)/base-platform\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP)/io\include;$(ISHIKO_CPP_THIRD_PARTY_BOOST);$(ISHIKO_CPP)/filesystem\include;$(ISHIKO_CPP)/memory\include;$(DIPLODOCUSDB)/physical-storage\include;$(DIPLODOCUSDB)/core\include;..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(ISHIKO_CPP)/base-platform\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP)/io\include;$(ISHIKO_CPP_THIRD_PARTY_BOOST);$(DIPLODOCUSDB)/physical-storage\include;$(DIPLODOCUSDB)/core\include;$(ISHIKO_CPP)/memory\include;..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ISHIKO_CPP)/base-platform\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP)/io\include;$(ISHIKO_CPP_THIRD_PARTY_BOOST);$(ISHIKO_CPP)/filesystem\include;$(ISHIKO_CPP)/memory\include;$(DIPLODOCUSDB)/physical-storage\include;$(DIPLODOCUSDB)/core\include;..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(ISHIKO_CPP)/base-platform\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP)/io\include;$(ISHIKO_CPP_THIRD_PARTY_BOOST);$(DIPLODOCUSDB)/physical-storage\include;$(DIPLODOCUSDB)/core\include;$(ISHIKO_CPP)/memory\include;..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ISHIKO_CPP)/base-platform\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP)/io\include;$(ISHIKO_CPP_THIRD_PARTY_BOOST);$(ISHIKO_CPP)/filesystem\include;$(ISHIKO_CPP)/memory\include;$(DIPLODOCUSDB)/physical-storage\include;$(DIPLODOCUSDB)/core\include;..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -139,7 +139,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(ISHIKO_CPP)/base-platform\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP)/io\include;$(ISHIKO_CPP_THIRD_PARTY_BOOST);$(DIPLODOCUSDB)/physical-storage\include;$(DIPLODOCUSDB)/core\include;$(ISHIKO_CPP)/memory\include;..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ISHIKO_CPP)/base-platform\include;$(ISHIKO_CPP)/errors\include;$(ISHIKO_CPP)/io\include;$(ISHIKO_CPP_THIRD_PARTY_BOOST);$(ISHIKO_CPP)/filesystem\include;$(ISHIKO_CPP)/memory\include;$(DIPLODOCUSDB)/physical-storage\include;$(DIPLODOCUSDB)/core\include;..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -154,10 +154,12 @@
     <ClCompile Include="..\..\src\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\src\NodeID.cpp" />
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
+    <ClCompile Include="..\..\src\PageCache.cpp" />
     <ClCompile Include="..\..\src\Record.cpp" />
     <ClCompile Include="..\..\src\RecordFile.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\RecordMarker.cpp" />
+    <ClCompile Include="..\..\src\RecordPage.cpp" />
     <ClCompile Include="..\..\src\RecordRepositoryReader.cpp" />
     <ClCompile Include="..\..\src\RecordRepositoryWriter.cpp" />
     <ClCompile Include="..\..\src\SecondaryFile.cpp" />
@@ -175,10 +177,12 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\NodeIDAllocator.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFileMetadata.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\PageCache.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\Record.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFilesSet.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordMarker.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordPage.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepository.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryReader.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryWriter.hpp" />

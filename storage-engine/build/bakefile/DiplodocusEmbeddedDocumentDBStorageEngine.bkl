@@ -43,10 +43,12 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPhysicalStorage,
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/NodeIDAllocator.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/MasterFile.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/MasterFileMetadata.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/PageCache.h
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/Record.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFilesSet.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordMarker.hpp
+        ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordPage.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepository.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryReader.hpp
         ../../../include/DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryWriter.hpp
@@ -65,10 +67,12 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPhysicalStorage,
         ../../src/MasterFileMetadata.cpp
         ../../src/NodeID.cpp
         ../../src/NodeIDAllocator.cpp
+        ../../src/PageCache.cpp
         ../../src/Record.cpp
         ../../src/RecordFile.cpp
         ../../src/RecordFilesSet.cpp
         ../../src/RecordMarker.cpp
+        ../../src/RecordPage.cpp
         ../../src/RecordRepositoryReader.cpp
         ../../src/RecordRepositoryWriter.cpp
         ../../src/SecondaryFile.cpp
