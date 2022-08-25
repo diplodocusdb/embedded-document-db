@@ -28,24 +28,21 @@ public:
     void close();
 
     size_t pageCount();
-    std::shared_ptr<PhysicalStorage::Page2> page(size_t index, Ishiko::Error& error) override;
-    std::shared_ptr<PhysicalStorage::Page2> allocatePage(Ishiko::Error& error);
-    std::shared_ptr<PhysicalStorage::Page2> insertPageAfter(PhysicalStorage::Page2& page,
-        Ishiko::Error& error) override;
-    void store(const PhysicalStorage::Page2& page, Ishiko::Error& error) override;
+    std::shared_ptr<RecordPage> page(size_t index, Ishiko::Error& error) override;
+    std::shared_ptr<RecordPage> allocatePage(Ishiko::Error& error);
+    std::shared_ptr<RecordPage> insertPageAfter(RecordPage& page, Ishiko::Error& error) override;
+    void store(const RecordPage& page, Ishiko::Error& error) override;
 
     RecordRepositoryReader read(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
     RecordRepositoryReader read(size_t startPage, size_t offset, Ishiko::Error& error);
-    RecordRepositoryReader read(std::shared_ptr<PhysicalStorage::Page2> startPage, size_t offset,
-        Ishiko::Error& error);
+    RecordRepositoryReader read(std::shared_ptr<RecordPage> startPage, size_t offset, Ishiko::Error& error);
 
     RecordRepositoryWriter insert(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
     RecordRepositoryWriter insert(size_t startPage, size_t offset, Ishiko::Error& error);
-    RecordRepositoryWriter insert(std::shared_ptr<PhysicalStorage::Page2> startPage, size_t offset,
-        Ishiko::Error& error);
+    RecordRepositoryWriter insert(std::shared_ptr<RecordPage> startPage, size_t offset, Ishiko::Error& error);
 
 private:
-    PhysicalStorage::PageFileRepository m_page_file_repository;
+    PhysicalStorage::PageFile m_page_file;
 };
 
 }
