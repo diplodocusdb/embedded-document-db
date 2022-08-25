@@ -16,13 +16,11 @@ namespace DiplodocusDB
 namespace EDDBImpl
 {
 
-class PageFileRepository;
-
 /// A page.
 /**
     Each page has an index which is its position in the repository.
 */
-class Page2
+class RecordPage
 {
 public:
     /// Constructor.
@@ -32,7 +30,7 @@ public:
 
         @param index The index of the page.
     */
-    Page2(size_t number);
+    RecordPage(size_t number);
     /// Fills the contents of the page with zeroes.
     void init();
 
@@ -63,14 +61,14 @@ public:
     void get(char* buffer, size_t pos, size_t n, Ishiko::Error& error) const;
     void insert(const char* buffer, size_t bufferSize, size_t pos, Ishiko::Error& error);
     void erase(size_t pos, size_t n, Ishiko::Error& error);
-    void moveTo(size_t pos, size_t n, Page2& targetPage, Ishiko::Error& error);
+    void moveTo(size_t pos, size_t n, RecordPage& targetPage, Ishiko::Error& error);
 
     /// Write the contents of the page to a stream.
     /**
         @param output The stream to which the page will be written.
         @param error The result of the operation.
     */
-    void write(PageFileRepository& repository, Ishiko::Error& error) const;
+    void write(PhysicalStorage::PageRepository& repository, Ishiko::Error& error) const;
     /// Reads the contents of the page from a stream.
     /**
         The index of the page is used to find the start position of the page data in the stream. After this operation
@@ -81,7 +79,7 @@ public:
         @param input The stream from which the page will be read.
         @param error The result of the operation.
     */
-    void read(PageFileRepository& repository, Ishiko::Error& error);
+    void read(PhysicalStorage::PageRepository& repository, Ishiko::Error& error);
 
 public:
     static const size_t sm_startMarkerSize = 8;
@@ -89,7 +87,7 @@ public:
 
 private:
     // TODO: avoid mutable
-    mutable Page m_page;
+    mutable PhysicalStorage::Page m_page;
     size_t m_dataSize;
     size_t m_availableSpace;
     size_t m_nextPage;
