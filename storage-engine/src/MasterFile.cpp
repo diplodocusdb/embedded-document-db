@@ -101,43 +101,39 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
 {
     bool result = false;
 
-    RecordPage start_page = m_repository.page(0, error);
-    if (!error)
+    RecordRepositoryReader reader{m_repository, 0, m_dataStartOffset + 1, error};
+    while (!result && !error)
     {
-        RecordRepositoryReader reader{m_repository, start_page, m_dataStartOffset + 1};
-        while (!result)
+        Record nextRecord(Record::ERecordType::eInvalid);
+        nextRecord.read(reader, error);
+        if (error)
         {
-            Record nextRecord(Record::ERecordType::eInvalid);
-            nextRecord.read(reader, error);
+            break;
+        }
+        if (nextRecord.type() == Record::ERecordType::eSiblingNodesStart)
+        {
+            SiblingNodesRecordGroup siblingNodesRecordGroup;
+            siblingNodesRecordGroup.readWithoutType(reader, error);
             if (error)
             {
                 break;
             }
-            if (nextRecord.type() == Record::ERecordType::eSiblingNodesStart)
+            if (siblingNodesRecordGroup.parentNodeID() == parentNodeID)
             {
-                SiblingNodesRecordGroup siblingNodesRecordGroup;
-                siblingNodesRecordGroup.readWithoutType(reader, error);
-                if (error)
-                {
-                    break;
-                }
-                if (siblingNodesRecordGroup.parentNodeID() == parentNodeID)
-                {
-                    siblingNodes = siblingNodesRecordGroup;
-                    result = true;
-                    break;
-                }
-            }
-            else if (nextRecord.type() == Record::ERecordType::eDataEnd)
-            {
+                siblingNodes = siblingNodesRecordGroup;
+                result = true;
                 break;
             }
-            else
-            {
-                // TODO : more precise error
-                error.fail(StorageEngineErrorCategory::Get(), -1, "TODO", __FILE__, __LINE__);
-                break;
-            }
+        }
+        else if (nextRecord.type() == Record::ERecordType::eDataEnd)
+        {
+            break;
+        }
+        else
+        {
+            // TODO : more precise error
+            error.fail(StorageEngineErrorCategory::Get(), -1, "TODO", __FILE__, __LINE__);
+            break;
         }
     }
 
