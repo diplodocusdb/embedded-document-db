@@ -20,7 +20,6 @@ RecordPageTests::RecordPageTests(const TestNumber& number, const TestContext& co
     append<HeapAllocationErrorsTest>("Load test 1", LoadTest1);
     append<HeapAllocationErrorsTest>("Load test 2", LoadTest2);
     append<HeapAllocationErrorsTest>("Load test 3", LoadTest3);
-    append<HeapAllocationErrorsTest>("Load test 4", LoadTest4);
     append<HeapAllocationErrorsTest>("get test 1", GetTest1);
     append<HeapAllocationErrorsTest>("insert test 1", InsertTest1);
     append<HeapAllocationErrorsTest>("insert test 2", InsertTest2);
@@ -151,7 +150,7 @@ void RecordPageTests::LoadTest3(Test& test)
     Error error;
 
     PhysicalStorage::PageFile repository;
-    repository.open(test.context().getDataPath("PageTests_ReadTest3.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordPageTests_LoadTest3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -161,30 +160,10 @@ void RecordPageTests::LoadTest3(Test& test)
 
     RecordPage record_page = RecordPage::Load(std::move(page));
 
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.number(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 10);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4070);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.nextPage(), 0);
-    ISHIKO_TEST_PASS();
-}
-
-/// Tests reading a page that is incomplete, this should be impossible unless the file has been truncated.
-void RecordPageTests::LoadTest4(Test& test)
-{
-    Error error;
-
-    PhysicalStorage::PageFile repository;
-    repository.open(test.context().getDataPath("PageTests_ReadTest5.dpdb"), error);
-
-    ISHIKO_TEST_ABORT_IF(error);
-
-    PhysicalStorage::Page page = repository.load(0, error);
-
-    ISHIKO_TEST_ABORT_IF(error);
-
-    RecordPage record_page = RecordPage::Load(std::move(page));
-
-    ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 0);
-    ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4080);
     ISHIKO_TEST_PASS();
 }
 
