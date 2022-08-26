@@ -13,7 +13,6 @@
 #include <DiplodocusDB/PhysicalStorage.hpp>
 #include <boost/filesystem.hpp>
 #include <Ishiko/Errors.hpp>
-#include <memory>
 
 namespace DiplodocusDB
 {
@@ -28,18 +27,18 @@ public:
     void close();
 
     size_t pageCount();
-    std::shared_ptr<RecordPage> page(size_t index, Ishiko::Error& error) override;
-    std::shared_ptr<RecordPage> allocatePage(Ishiko::Error& error);
-    std::shared_ptr<RecordPage> insertPageAfter(RecordPage& page, Ishiko::Error& error) override;
-    void store(const RecordPage& page, Ishiko::Error& error) override;
+    RecordPage page(size_t index, Ishiko::Error& error) override;
+    RecordPage allocatePage(Ishiko::Error& error);
+    RecordPage insertPageAfter(RecordPage& page, Ishiko::Error& error) override;
+    void store(RecordPage& page, Ishiko::Error& error) override;
 
     RecordRepositoryReader read(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
     RecordRepositoryReader read(size_t startPage, size_t offset, Ishiko::Error& error);
-    RecordRepositoryReader read(std::shared_ptr<RecordPage> startPage, size_t offset, Ishiko::Error& error);
+    RecordRepositoryReader read(const RecordPage& startPage, size_t offset, Ishiko::Error& error);
 
     RecordRepositoryWriter insert(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
     RecordRepositoryWriter insert(size_t startPage, size_t offset, Ishiko::Error& error);
-    RecordRepositoryWriter insert(std::shared_ptr<RecordPage> startPage, size_t offset, Ishiko::Error& error);
+    RecordRepositoryWriter insert(RecordPage& startPage, size_t offset, Ishiko::Error& error);
 
 private:
     PhysicalStorage::PageFile m_page_file;
