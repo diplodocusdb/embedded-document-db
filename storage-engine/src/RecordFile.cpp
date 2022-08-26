@@ -55,22 +55,6 @@ void RecordFile::store(RecordPage& page, Ishiko::Error& error)
     page.store(m_page_file, error);
 }
 
-RecordRepositoryReader RecordFile::read(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error)
-{
-    return read(pos.page(), pos.offset(), error);
-}
-
-RecordRepositoryReader RecordFile::read(size_t startPage, size_t offset, Ishiko::Error& error)
-{
-    RecordPage p = page(startPage, error);
-    return read(p, offset, error);
-}
-
-RecordRepositoryReader RecordFile::read(const RecordPage& startPage, size_t offset, Ishiko::Error& error)
-{
-    return RecordRepositoryReader(*this, startPage, offset);
-}
-
 RecordRepositoryWriter RecordFile::insert(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error)
 {
     return insert(pos.page(), pos.offset(), error);

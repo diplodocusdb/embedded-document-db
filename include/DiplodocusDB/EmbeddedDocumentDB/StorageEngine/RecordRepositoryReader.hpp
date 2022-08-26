@@ -22,7 +22,9 @@ class RecordRepository;
 class RecordRepositoryReader
 {
 public:
-    RecordRepositoryReader(RecordRepository& repository, std::shared_ptr<RecordPage> startPage, size_t startOffset);
+    RecordRepositoryReader(RecordRepository& repository, const RecordPage& startPage, size_t startOffset);
+    RecordRepositoryReader(RecordRepository& repository, size_t start_page_number, size_t startOffset,
+        Ishiko::Error& error);
 
     PhysicalStorage::PageRepositoryPosition currentPosition() const;
 
@@ -31,7 +33,7 @@ public:
 
 private:
     RecordRepository& m_repository;
-    std::shared_ptr<RecordPage> m_currentPage;
+    RecordPage m_currentPage;
     size_t m_currentOffset;
 };
 

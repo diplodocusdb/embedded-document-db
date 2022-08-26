@@ -101,7 +101,7 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
 {
     bool result = false;
 
-    RecordRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
+    RecordRepositoryReader reader{m_repository, 0, m_dataStartOffset + 1, error};
     while (!result && !error)
     {
         Record nextRecord(Record::ERecordType::eInvalid);

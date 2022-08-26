@@ -10,7 +10,6 @@
 #include "RecordPage.hpp"
 #include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
-#include <memory>
 
 namespace DiplodocusDB
 {
@@ -22,9 +21,9 @@ class RecordRepository
 public:
     virtual ~RecordRepository() noexcept = default;
 
-    virtual std::shared_ptr<RecordPage> page(size_t index, Ishiko::Error& error) = 0;
-    virtual std::shared_ptr<RecordPage> insertPageAfter(RecordPage& page, Ishiko::Error& error) = 0;
-    virtual void store(const RecordPage& page, Ishiko::Error& error) = 0;
+    virtual RecordPage page(size_t index, Ishiko::Error& error) = 0;
+    virtual RecordPage insertPageAfter(RecordPage& page, Ishiko::Error& error) = 0;
+    virtual void store(RecordPage& page, Ishiko::Error& error) = 0;
 };
 
 }
