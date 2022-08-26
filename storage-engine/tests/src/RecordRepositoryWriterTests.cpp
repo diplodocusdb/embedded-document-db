@@ -157,10 +157,10 @@ void RecordRepositoryWriterTests::WriteTest3(Test& test)
 
 void RecordRepositoryWriterTests::WriteTest4(Test& test)
 {
-    const char* basename = "PageRepositoryWriterWriteTest4.dpdb";
+    const char* basename = "RecordRepositoryWriterTests_WriteTest4.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
-    boost::filesystem::copy_file(test.context().getDataPath("PageRepositoryWriterWriteTest4.dpdb"), outputPath,
+    boost::filesystem::copy_file(test.context().getDataPath(basename), outputPath,
         boost::filesystem::copy_option::overwrite_if_exists);
 
     Error error;
@@ -193,10 +193,10 @@ void RecordRepositoryWriterTests::WriteTest4(Test& test)
 
 void RecordRepositoryWriterTests::WriteTest5(Test& test)
 {
-    const char* basename = "PageRepositoryWriterWriteTest5.dpdb";
+    const char* basename = "RecordRepositoryWriterTests_WriteTest5.dpdb";
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
-    boost::filesystem::copy_file(test.context().getDataPath("PageRepositoryWriterWriteTest5.dpdb"), outputPath,
+    boost::filesystem::copy_file(test.context().getDataPath(basename), outputPath,
         boost::filesystem::copy_option::overwrite_if_exists);
 
     Error error;
