@@ -264,7 +264,7 @@ void RecordPageTests::InsertTest3(Test& test)
     Error error;
 
     PhysicalStorage::PageFile repository;
-    repository.open(test.context().getDataPath("PageTests_InsertTest3.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordPageTests_InsertTest3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -273,7 +273,6 @@ void RecordPageTests::InsertTest3(Test& test)
     ISHIKO_TEST_ABORT_IF(error);
 
     RecordPage record_page = RecordPage::Load(std::move(page));
-
     record_page.insert("", 4075, 0, error);
 
     ISHIKO_TEST_FAIL_IF_NOT(error);
