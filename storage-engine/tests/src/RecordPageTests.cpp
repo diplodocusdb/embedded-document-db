@@ -56,8 +56,10 @@ void RecordPageTests::CreateTest1(Test& test)
 
     RecordPage record_page = RecordPage::Create(std::move(page));
 
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.number(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4080);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.nextPage(), 0);
 
     repository.close();
 
@@ -82,8 +84,10 @@ void RecordPageTests::CreateTest2(Test& test)
 
     RecordPage record_page = RecordPage::Create(std::move(page));
 
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.number(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4080);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.nextPage(), 0);
 
     record_page.store(repository, error);
 
@@ -101,7 +105,7 @@ void RecordPageTests::LoadTest1(Test& test)
     Error error;
 
     PhysicalStorage::PageFile repository;
-    repository.open(test.context().getDataPath("PageTests_ReadTest1.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordPageTests_LoadTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -111,6 +115,7 @@ void RecordPageTests::LoadTest1(Test& test)
 
     RecordPage record_page = RecordPage::Load(std::move(page));
 
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.number(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4080);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.nextPage(), 0);
@@ -123,7 +128,7 @@ void RecordPageTests::LoadTest2(Test& test)
     Error error;
 
     PhysicalStorage::PageFile repository;
-    repository.open(test.context().getDataPath("PageTests_ReadTest2.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordPageTests_LoadTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -133,6 +138,7 @@ void RecordPageTests::LoadTest2(Test& test)
 
     RecordPage record_page = RecordPage::Load(std::move(page));
 
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.number(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 6);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4074);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.nextPage(), 0);
