@@ -198,7 +198,7 @@ void RecordRepositoryReaderTests::ReadLEB128Test1(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test1.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadLEB128Test1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -218,7 +218,7 @@ void RecordRepositoryReaderTests::ReadLEB128Test2(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test2.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadLEB128Test2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -238,7 +238,7 @@ void RecordRepositoryReaderTests::ReadLEB128Test3(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test3.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadLEB128Test3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -258,7 +258,7 @@ void RecordRepositoryReaderTests::ReadLEB128Test4(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test4.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadLEB128Test4.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -278,7 +278,7 @@ void RecordRepositoryReaderTests::ReadLEB128Test5(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadLEB128Test5.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadLEB128Test5.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
