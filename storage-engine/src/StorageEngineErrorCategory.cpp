@@ -34,13 +34,13 @@ std::ostream& StorageEngineErrorCategory::streamOut(int value, std::ostream& os)
     return os;
 }
 
-void Fail(Ishiko::Error& error, StorageEngineErrorCategory::Value value) noexcept
+void DiplodocusDB::EDDBImpl::Fail(Ishiko::Error& error, StorageEngineErrorCategory::Value value) noexcept
 {
     error.fail(StorageEngineErrorCategory::Get(), value);
 }
 
-void Fail(Ishiko::Error& error, StorageEngineErrorCategory::Value value, const std::string& message, const char* file,
-    int line) noexcept
+void DiplodocusDB::EDDBImpl::Fail(Ishiko::Error& error, StorageEngineErrorCategory::Value value,
+    const std::string& message, const char* file, int line) noexcept
 {
     error.fail(StorageEngineErrorCategory::Get(), value, message, file, line);
 }

@@ -315,23 +315,26 @@ void RecordPageTests::EraseTest2(Test& test)
     PhysicalStorage::PageFile repository;
     repository.open(test.context().getDataPath(basename), error);
 
-    RecordPage page{0};
-    page.read(repository, error);
+    ISHIKO_TEST_ABORT_IF(error);
+
+    PhysicalStorage::Page page = repository.load(0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    page.erase(5, 1, error);
+    RecordPage record_page = RecordPage::Load(std::move(page));
+
+    record_page.erase(5, 1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.dataSize(), 5);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.availableSpace(), 4075);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 5);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4075);
 
     PhysicalStorage::PageFile output_repository;
     output_repository.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    page.write(output_repository, error);
+    record_page.write(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -350,23 +353,28 @@ void RecordPageTests::EraseTest3(Test& test)
     PhysicalStorage::PageFile repository;
     repository.open(test.context().getDataPath(basename), error);
 
-    RecordPage page{0};
-    page.read(repository, error);
+    ISHIKO_TEST_ABORT_IF(error);
+
+    PhysicalStorage::Page page = repository.load(0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    page.erase(2, 10, error);
+    RecordPage record_page = RecordPage::Load(std::move(page));
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    record_page.erase(2, 10, error);
 
     ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.dataSize(), 2);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.availableSpace(), 4078);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 2);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4078);
 
     PhysicalStorage::PageFile output_repository;
     output_repository.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    page.write(output_repository, error);
+    record_page.write(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -385,30 +393,38 @@ void RecordPageTests::MoveToTest1(Test& test)
     PhysicalStorage::PageFile repository;
     repository.open(test.context().getDataPath(basename), error);
 
-    RecordPage page1{0};
-    page1.read(repository, error);
+    ISHIKO_TEST_ABORT_IF(error);
+
+    PhysicalStorage::Page page_1 = repository.load(0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page2{1};
-    page2.read(repository, error);
+    RecordPage record_page_1 = RecordPage::Load(std::move(page_1));
 
-    page1.moveTo(0, 6, page2, error);
+    ISHIKO_TEST_ABORT_IF(error);
+
+    PhysicalStorage::Page page_2 = repository.load(1, error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    RecordPage record_page_2 = RecordPage::Load(std::move(page_2));
+
+    record_page_1.moveTo(0, 6, record_page_2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page1.dataSize(), 0);
-    ISHIKO_TEST_FAIL_IF_NEQ(page2.dataSize(), 6);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page_1.dataSize(), 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page_2.dataSize(), 6);
 
     PhysicalStorage::PageFile output_repository;
     output_repository.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    page1.write(output_repository, error);
+    record_page_1.write(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    page2.write(output_repository, error);
+    record_page_2.write(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -427,30 +443,38 @@ void RecordPageTests::MoveToTest2(Test& test)
     PhysicalStorage::PageFile repository;
     repository.open(test.context().getDataPath(basename), error);
 
-    RecordPage page1{0};
-    page1.read(repository, error);
+    ISHIKO_TEST_ABORT_IF(error);
+
+    PhysicalStorage::Page page_1 = repository.load(0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page2{1};
-    page2.read(repository, error);
+    RecordPage record_page_1 = RecordPage::Load(std::move(page_1));
 
-    page1.moveTo(0, 6, page2, error);
+    ISHIKO_TEST_ABORT_IF(error);
+
+    PhysicalStorage::Page page_2 = repository.load(1, error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    RecordPage record_page_2 = RecordPage::Load(std::move(page_2));
+
+    record_page_1.moveTo(0, 6, record_page_2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page1.dataSize(), 0);
-    ISHIKO_TEST_FAIL_IF_NEQ(page2.dataSize(), 12);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page_1.dataSize(), 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page_2.dataSize(), 12);
 
     PhysicalStorage::PageFile output_repository;
     output_repository.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    page1.write(output_repository, error);
+    record_page_1.write(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    page2.write(output_repository, error);
+    record_page_2.write(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
