@@ -195,7 +195,7 @@ void RecordPageTests::GetTest1(Test& test)
 
 void RecordPageTests::InsertTest1(Test& test)
 {
-    const char* basename = "PageTests_InsertTest1.dpdb";
+    const char* basename = "RecordPageTests_InsertTest1.dpdb";
 
     Error error;
 
@@ -219,15 +219,13 @@ void RecordPageTests::InsertTest1(Test& test)
 
     repository.close();
 
-    ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void RecordPageTests::InsertTest2(Test& test)
 {
-    // TODO: need to copy to output dir
-    const char* basename = "PageTests_InsertTest2.dpdb";
+    const char* basename = "RecordPageTests_InsertTest2.dpdb";
 
     Error error;
 
@@ -241,7 +239,6 @@ void RecordPageTests::InsertTest2(Test& test)
     ISHIKO_TEST_ABORT_IF(error);
 
     RecordPage record_page = RecordPage::Load(std::move(page));
-
     record_page.insert("value0", 6, 0, error);
 
     ISHIKO_TEST_FAIL_IF(error);
