@@ -7,6 +7,7 @@
 #include "RecordPageTests.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordPage.hpp"
 
+using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
@@ -14,11 +15,11 @@ RecordPageTests::RecordPageTests(const TestNumber& number, const TestContext& co
     : TestSequence(number, "RecordPage tests", context)
 {
     append<HeapAllocationErrorsTest>("ConstructorTest1 test 1", ConstructorTest1);
-    append<HeapAllocationErrorsTest>("read test 1", ReadTest1);
-    append<HeapAllocationErrorsTest>("read test 2", ReadTest2);
-    append<HeapAllocationErrorsTest>("read test 3", ReadTest3);
-    append<HeapAllocationErrorsTest>("read test 4", ReadTest4);
-    append<HeapAllocationErrorsTest>("read test 5", ReadTest5);
+    append<HeapAllocationErrorsTest>("Create test 1", CreateTest1);
+    append<HeapAllocationErrorsTest>("Load test 1", LoadTest1);
+    append<HeapAllocationErrorsTest>("Load test 2", LoadTest2);
+    append<HeapAllocationErrorsTest>("Load test 3", LoadTest3);
+    append<HeapAllocationErrorsTest>("Load test 4", LoadTest4);
     append<HeapAllocationErrorsTest>("write test 1", WriteTest1);
     append<HeapAllocationErrorsTest>("get test 1", GetTest1);
     append<HeapAllocationErrorsTest>("insert test 1", InsertTest1);
@@ -31,105 +32,89 @@ RecordPageTests::RecordPageTests(const TestNumber& number, const TestContext& co
     append<HeapAllocationErrorsTest>("moveTo test 2", MoveToTest2);
 }
 
-void PageTests::ConstructorTest1(Test& test)
+void RecordPageTests::ConstructorTest1(Test& test)
 {
-    RecordPage page{0};
+    RecordPage page;
 
     ISHIKO_TEST_PASS();
 }
 
-/// Tests reading an empty page.
-void RecordPageTests::ReadTest1(Test& test)
+void RecordPageTests::CreateTest1(Test& test)
 {
-    boost::filesystem::path inputPath = test.context().getDataPath("PageTests_ReadTest1.dpdb");
+}
 
+/// Tests reading an empty page.
+void RecordPageTests::LoadTest1(Test& test)
+{
     Error error;
 
-    PageFileRepository repository;
-    repository.open(inputPath, error);
+    PhysicalStorage::PageFile repository;
+    repository.open(test.context().getDataPath("PageTests_ReadTest1.dpdb"), error);
+    PhysicalStorage::Page page = repository.load(0, error);
 
-    Page page{0};
-    page.read(repository, error);
+    ISHIKO_TEST_ABORT_IF(error);
 
-    ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.dataSize(), 0);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.availableSpace(), 4080);
+    RecordPage record_page = RecordPage::Load(std::move(page));
+
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4080);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.nextPage(), 0);
     ISHIKO_TEST_PASS();
 }
 
 /// Tests reading a page containing 6 bytes of data.
-void RecordPageTests::ReadTest2(Test& test)
+void RecordPageTests::LoadTest2(Test& test)
 {
-    boost::filesystem::path inputPath = test.context().getDataPath("PageTests_ReadTest2.dpdb");
-
     Error error;
 
-    PageFileRepository repository;
-    repository.open(inputPath, error);
+    PhysicalStorage::PageFile repository;
+    repository.open(test.context().getDataPath("PageTests_ReadTest2.dpdb"), error);
+    PhysicalStorage::Page page = repository.load(0, error);
 
-    Page2 page{0};
-    page.read(repository, error);
+    ISHIKO_TEST_ABORT_IF(error);
 
-    ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.dataSize(), 6);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.availableSpace(), 4074);
+    RecordPage record_page = RecordPage::Load(std::move(page));
+
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 6);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4074);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.nextPage(), 0);
     ISHIKO_TEST_PASS();
 }
 
 /// Tests reading the second page.
-void RecordPageTests::ReadTest3(Test& test)
+void RecordPageTests::LoadTest3(Test& test)
 {
-    boost::filesystem::path inputPath = test.context().getDataPath("PageTests_ReadTest3.dpdb");
-
     Error error;
 
-    PageFileRepository repository;
-    repository.open(inputPath, error);
+    PhysicalStorage::PageFile repository;
+    repository.open(test.context().getDataPath("PageTests_ReadTest3.dpdb"), error);
+    PhysicalStorage::Page page = repository.load(1, error);
 
-    Page2 page{1};
-    page.read(repository, error);
+    ISHIKO_TEST_ABORT_IF(error);
 
-    ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.dataSize(), 10);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.availableSpace(), 4070);
-    ISHIKO_TEST_PASS();
-}
+    RecordPage record_page = RecordPage::Load(std::move(page));
 
-/// Tests reading a page that doesn't exist.
-void RecordPageTests::ReadTest4(Test& test)
-{
-    boost::filesystem::path inputPath = test.context().getDataPath("PageTests_ReadTest4.dpdb");
-
-    Error error;
-
-    PageFileRepository repository;
-    repository.open(inputPath, error);
-
-    Page2 page{1};
-    page.read(repository, error);
-
-    ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.dataSize(), 0);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.availableSpace(), 4080);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 10);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4070);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.nextPage(), 0);
     ISHIKO_TEST_PASS();
 }
 
 /// Tests reading a page that is incomplete, this should be impossible unless the file has been truncated.
-void RecordPageTests::ReadTest5(Test& test)
+void RecordPageTests::LoadTest4(Test& test)
 {
-    boost::filesystem::path inputPath = test.context().getDataPath("PageTests_ReadTest5.dpdb");
-
     Error error;
 
-    PageFileRepository repository;
-    repository.open(inputPath, error);
+    PhysicalStorage::PageFile repository;
+    repository.open(test.context().getDataPath("PageTests_ReadTest5.dpdb"), error);
+    PhysicalStorage::Page page = repository.load(0, error);
 
-    Page2 page{0};
-    page.read(repository, error);
+    ISHIKO_TEST_ABORT_IF(error);
 
-    ISHIKO_TEST_FAIL_IF_NOT(error);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.dataSize(), 0);
-    ISHIKO_TEST_FAIL_IF_NEQ(page.availableSpace(), 4080);
+    RecordPage record_page = RecordPage::Load(std::move(page));
+
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4080);
     ISHIKO_TEST_PASS();
 }
 
@@ -144,7 +129,7 @@ void RecordPageTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    Page2 page{0};
+    RecordPage page{0};
     page.init();
     page.write(repository, error);
 
@@ -167,7 +152,7 @@ void RecordPageTests::GetTest1(Test& test)
     PageFileRepository repository;
     repository.open(inputPath, error);
 
-    Page2 page{0};
+    RecordPage page{0};
     page.read(repository, error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -193,7 +178,7 @@ void RecordPageTests::InsertTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    Page2 page{0};
+    RecordPage page{0};
     page.init();
     page.insert("value1", 6, 0, error);
 
@@ -219,7 +204,7 @@ void RecordPageTests::InsertTest2(Test& test)
     PageFileRepository repository;
     repository.open(test.context().getDataPath(basename), error);
 
-    Page2 page{0};
+    RecordPage page{0};
     page.read(repository, error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -251,7 +236,7 @@ void RecordPageTests::InsertTest3(Test& test)
     PageFileRepository repository;
     repository.open(test.context().getDataPath("PageTests_InsertTest3.dpdb"), error);
 
-    Page2 page{0};
+    RecordPage page{0};
     page.read(repository, error);
 
     ISHIKO_TEST_ABORT_IF(error);
@@ -271,7 +256,7 @@ void RecordPageTests::EraseTest1(Test& test)
     PageFileRepository repository;
     repository.open(test.context().getDataPath(basename), error);
 
-    Page2 page{0};
+    RecordPage page{0};
     page.read(repository, error);
 
     ISHIKO_TEST_ABORT_IF(error);

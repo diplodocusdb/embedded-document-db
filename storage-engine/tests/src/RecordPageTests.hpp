@@ -16,11 +16,11 @@ public:
 
 private:
     static void ConstructorTest1(Ishiko::Test& test);
-    static void ReadTest1(Ishiko::Test& test);
-    static void ReadTest2(Ishiko::Test& test);
-    static void ReadTest3(Ishiko::Test& test);
-    static void ReadTest4(Ishiko::Test& test);
-    static void ReadTest5(Ishiko::Test& test);
+    static void CreateTest1(Ishiko::Test& test);
+    static void LoadTest1(Ishiko::Test& test);
+    static void LoadTest2(Ishiko::Test& test);
+    static void LoadTest3(Ishiko::Test& test);
+    static void LoadTest4(Ishiko::Test& test);
     static void WriteTest1(Ishiko::Test& test);
     static void GetTest1(Ishiko::Test& test);
     static void InsertTest1(Ishiko::Test& test);
