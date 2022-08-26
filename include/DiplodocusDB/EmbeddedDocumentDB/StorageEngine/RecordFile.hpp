@@ -32,10 +32,6 @@ public:
     RecordPage insertPageAfter(RecordPage& page, Ishiko::Error& error) override;
     void store(RecordPage& page, Ishiko::Error& error) override;
 
-    RecordRepositoryReader read(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
-    RecordRepositoryReader read(size_t startPage, size_t offset, Ishiko::Error& error);
-    RecordRepositoryReader read(const RecordPage& startPage, size_t offset, Ishiko::Error& error);
-
     RecordRepositoryWriter insert(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
     RecordRepositoryWriter insert(size_t startPage, size_t offset, Ishiko::Error& error);
     RecordRepositoryWriter insert(RecordPage& startPage, size_t offset, Ishiko::Error& error);

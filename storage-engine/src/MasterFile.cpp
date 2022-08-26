@@ -101,39 +101,43 @@ bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, Sibling
 {
     bool result = false;
 
-    RecordRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
-    while (!result && !error)
+    RecordPage start_page = m_repository.page(0, error);
+    if (!error)
     {
-        Record nextRecord(Record::ERecordType::eInvalid);
-        nextRecord.read(reader, error);
-        if (error)
+        RecordRepositoryReader reader{m_repository, start_page, m_dataStartOffset + 1};
+        while (!result)
         {
-            break;
-        }
-        if (nextRecord.type() == Record::ERecordType::eSiblingNodesStart)
-        {
-            SiblingNodesRecordGroup siblingNodesRecordGroup;
-            siblingNodesRecordGroup.readWithoutType(reader, error);
+            Record nextRecord(Record::ERecordType::eInvalid);
+            nextRecord.read(reader, error);
             if (error)
             {
                 break;
             }
-            if (siblingNodesRecordGroup.parentNodeID() == parentNodeID)
+            if (nextRecord.type() == Record::ERecordType::eSiblingNodesStart)
             {
-                siblingNodes = siblingNodesRecordGroup;
-                result = true;
+                SiblingNodesRecordGroup siblingNodesRecordGroup;
+                siblingNodesRecordGroup.readWithoutType(reader, error);
+                if (error)
+                {
+                    break;
+                }
+                if (siblingNodesRecordGroup.parentNodeID() == parentNodeID)
+                {
+                    siblingNodes = siblingNodesRecordGroup;
+                    result = true;
+                    break;
+                }
+            }
+            else if (nextRecord.type() == Record::ERecordType::eDataEnd)
+            {
                 break;
             }
-        }
-        else if (nextRecord.type() == Record::ERecordType::eDataEnd)
-        {
-            break;
-        }
-        else
-        {
-            // TODO : more precise error
-            error.fail(StorageEngineErrorCategory::Get(), -1, "TODO", __FILE__, __LINE__);
-            break;
+            else
+            {
+                // TODO : more precise error
+                error.fail(StorageEngineErrorCategory::Get(), -1, "TODO", __FILE__, __LINE__);
+                break;
+            }
         }
     }
 
