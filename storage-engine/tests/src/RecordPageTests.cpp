@@ -172,7 +172,7 @@ void RecordPageTests::GetTest1(Test& test)
     Error error;
 
     PhysicalStorage::PageFile repository;
-    repository.open(test.context().getDataPath("PageTests_GetTest1.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordPageTests_GetTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
