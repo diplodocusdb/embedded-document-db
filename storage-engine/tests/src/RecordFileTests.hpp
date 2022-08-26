@@ -15,12 +15,14 @@ public:
     RecordFileTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void CreationTest1(Ishiko::Test& test);
+    static void ConstructorTest1(Ishiko::Test& test);
     static void CreateTest1(Ishiko::Test& test);
     static void OpenTest1(Ishiko::Test& test);
     static void OpenTest2(Ishiko::Test& test);
     static void AllocatePageTest1(Ishiko::Test& test);
     static void AllocatePageTest2(Ishiko::Test& test);
+    static void StoreTest1(Ishiko::Test& test);
+    static void StoreTest2(Ishiko::Test& test);
     static void InsertPageAfterTest1(Ishiko::Test& test);
 };
 
