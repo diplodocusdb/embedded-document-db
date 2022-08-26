@@ -16,16 +16,18 @@ using namespace Ishiko;
 RecordFileTests::RecordFileTests(const TestNumber& number, const TestContext& context)
     : TestSequence(number, "RecordFile tests", context)
 {
-    append<HeapAllocationErrorsTest>("Creation test 1", CreationTest1);
+    append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
     append<HeapAllocationErrorsTest>("allocatePage test 1", AllocatePageTest1);
     append<HeapAllocationErrorsTest>("allocatePage test 2", AllocatePageTest2);
+    append<HeapAllocationErrorsTest>("store test 1", StoreTest1);
+    append<HeapAllocationErrorsTest>("store test 2", StoreTest2);
     append<HeapAllocationErrorsTest>("insertPageAfter test 1", InsertPageAfterTest1);
 }
 
-void RecordFileTests::CreationTest1(Test& test)
+void RecordFileTests::ConstructorTest1(Test& test)
 {
     RecordFile repository;
 
@@ -34,29 +36,27 @@ void RecordFileTests::CreationTest1(Test& test)
 
 void RecordFileTests::CreateTest1(Test& test)
 {
-    const char* outputName = "PageFileRepositoryCreateTest1.dpdb";
+    const char* basename = "RecordFileTests_CreateTest1.dpdb";
 
     Error error;
 
     RecordFile repository;
-    repository.create(test.context().getOutputPath(outputName), error);
+    repository.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.close();
 
-    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void RecordFileTests::OpenTest1(Test& test)
 {
-    boost::filesystem::path inputPath = test.context().getDataPath("PageFileRepositoryOpenTest1.dpdb");
-
     Error error;
 
     RecordFile repository;
-    repository.open(inputPath, error);
+    repository.open(test.context().getDataPath("RecordFileTests_OpenTest1.dpdb"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(repository.pageCount(), 0);
@@ -65,12 +65,10 @@ void RecordFileTests::OpenTest1(Test& test)
 
 void RecordFileTests::OpenTest2(Test& test)
 {
-    boost::filesystem::path inputPath = test.context().getDataPath("PageFileRepositoryOpenTest2.dpdb");
-
     Error error;
 
     RecordFile repository;
-    repository.open(inputPath, error);
+    repository.open(test.context().getDataPath("RecordFileTests_OpenTest2.dpdb"), error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(repository.pageCount(), 1);
@@ -79,71 +77,114 @@ void RecordFileTests::OpenTest2(Test& test)
 
 void RecordFileTests::AllocatePageTest1(Test& test)
 {
-    const char* outputName = "PageFileRepositoryTests_AllocatePageTest1.dpdb";
+    const char* basename = "RecordFileTests_AllocatePageTest1.dpdb";
 
     Error error;
 
     RecordFile repository;
-    repository.create(test.context().getOutputPath(outputName), error);
+    repository.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NOT(page);
-
-    repository.store(*page, error);
-
-    ISHIKO_TEST_FAIL_IF(error);
 
     repository.close();
 
-    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void RecordFileTests::AllocatePageTest2(Test& test)
 {
-    const char* outputName = "PageFileRepositoryTests_AllocatePageTest2.dpdb";
+    const char* basename = "RecordFileTests_AllocatePageTest2.dpdb";
 
     Error error;
 
     RecordFile repository;
-    repository.create(test.context().getOutputPath(outputName), error);
+    repository.create(test.context().getOutputPath(basename), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page1 = repository.allocatePage(error);
-
-    ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NOT(page1);
-
-    repository.store(*page1, error);
+    RecordPage page1 = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page2 = repository.allocatePage(error);
+    RecordPage page2 = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NOT(page2);
-
-    repository.store(*page2, error);
-
-    ISHIKO_TEST_FAIL_IF(error);
 
     repository.close();
 
-    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
+    ISHIKO_TEST_PASS();
+}
+
+void RecordFileTests::StoreTest1(Test& test)
+{
+    const char* basename = "RecordFileTests_StoreTest1.dpdb";
+
+    Error error;
+
+    RecordFile repository;
+    repository.create(test.context().getOutputPath(basename), error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    RecordPage page = repository.allocatePage(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    repository.store(page, error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    repository.close();
+
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
+    ISHIKO_TEST_PASS();
+}
+
+void RecordFileTests::StoreTest2(Test& test)
+{
+    const char* basename = "RecordFileTests_StoreTest2.dpdb";
+
+    Error error;
+
+    RecordFile repository;
+    repository.create(test.context().getOutputPath(basename), error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    RecordPage page1 = repository.allocatePage(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    RecordPage page2 = repository.allocatePage(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    repository.store(page1, error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    repository.store(page2, error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    repository.close();
+
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
 
 void RecordFileTests::InsertPageAfterTest1(Test& test)
 {
-    const char* outputName = "PageFileRepositoryTests_InsertPageAfterTest1.dpdb";
-    boost::filesystem::path outputPath = test.context().getOutputPath(outputName);
+    const char* basename = "RecordFileTests_InsertPageAfterTest1.dpdb";
+    boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
-    boost::filesystem::copy_file(test.context().getDataPath("PageFileRepositoryTests_InsertPageAfterTest1.dpdb"), outputPath,
+    boost::filesystem::copy_file(test.context().getDataPath(basename), outputPath,
         boost::filesystem::copy_option::overwrite_if_exists);
 
     Error error;
@@ -153,25 +194,24 @@ void RecordFileTests::InsertPageAfterTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page1 = repository.page(0, error);
-
-    ISHIKO_TEST_ABORT_IF(error);
-    ISHIKO_TEST_ABORT_IF_NOT(page1);
-
-    std::shared_ptr<RecordPage> page2 = repository.insertPageAfter(*page1, error);
+    RecordPage page1 = repository.page(0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    repository.store(*page1, error);
+    RecordPage page2 = repository.insertPageAfter(page1, error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    repository.store(page1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page2, error);
+    repository.store(page2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.close();
 
-    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(outputName);
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
