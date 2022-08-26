@@ -16,6 +16,7 @@ RecordPageTests::RecordPageTests(const TestNumber& number, const TestContext& co
 {
     append<HeapAllocationErrorsTest>("ConstructorTest1 test 1", ConstructorTest1);
     append<HeapAllocationErrorsTest>("Create test 1", CreateTest1);
+    append<HeapAllocationErrorsTest>("Create test 2", CreateTest2);
     append<HeapAllocationErrorsTest>("Load test 1", LoadTest1);
     append<HeapAllocationErrorsTest>("Load test 2", LoadTest2);
     append<HeapAllocationErrorsTest>("Load test 3", LoadTest3);
@@ -40,7 +41,7 @@ void RecordPageTests::ConstructorTest1(Test& test)
 
 void RecordPageTests::CreateTest1(Test& test)
 {
-    const char* basename = "PageTests_WriteTest1.dpdb";
+    const char* basename = "RecordPageTests_CreateTest1.dpdb";
 
     Error error;
 
@@ -55,10 +56,41 @@ void RecordPageTests::CreateTest1(Test& test)
 
     RecordPage record_page = RecordPage::Create(std::move(page));
 
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 0);
+    ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4080);
+
     repository.close();
+
+    ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
+    ISHIKO_TEST_PASS();
+}
+
+void RecordPageTests::CreateTest2(Test& test)
+{
+    const char* basename = "RecordPageTests_CreateTest2.dpdb";
+
+    Error error;
+
+    PhysicalStorage::PageFile repository;
+    repository.create(test.context().getOutputPath(basename), error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    PhysicalStorage::Page page = repository.allocatePage(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    RecordPage record_page = RecordPage::Create(std::move(page));
 
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.dataSize(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(record_page.availableSpace(), 4080);
+
+    record_page.store(repository, error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
+    repository.close();
+
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(basename);
     ISHIKO_TEST_PASS();
 }
@@ -196,7 +228,7 @@ void RecordPageTests::InsertTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    record_page.write(repository, error);
+    record_page.store(repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -234,7 +266,7 @@ void RecordPageTests::InsertTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    record_page.write(output_repository, error);
+    record_page.store(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -296,7 +328,7 @@ void RecordPageTests::EraseTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    record_page.write(output_repository, error);
+    record_page.store(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -334,7 +366,7 @@ void RecordPageTests::EraseTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    record_page.write(output_repository, error);
+    record_page.store(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -374,7 +406,7 @@ void RecordPageTests::EraseTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    record_page.write(output_repository, error);
+    record_page.store(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -420,11 +452,11 @@ void RecordPageTests::MoveToTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    record_page_1.write(output_repository, error);
+    record_page_1.store(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    record_page_2.write(output_repository, error);
+    record_page_2.store(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -470,11 +502,11 @@ void RecordPageTests::MoveToTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    record_page_1.write(output_repository, error);
+    record_page_1.store(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    record_page_2.write(output_repository, error);
+    record_page_2.store(output_repository, error);
 
     ISHIKO_TEST_FAIL_IF(error);
 

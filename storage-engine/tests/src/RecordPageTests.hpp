@@ -17,6 +17,7 @@ public:
 private:
     static void ConstructorTest1(Ishiko::Test& test);
     static void CreateTest1(Ishiko::Test& test);
+    static void CreateTest2(Ishiko::Test& test);
     static void LoadTest1(Ishiko::Test& test);
     static void LoadTest2(Ishiko::Test& test);
     static void LoadTest3(Ishiko::Test& test);
