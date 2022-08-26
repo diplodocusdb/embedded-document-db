@@ -9,30 +9,35 @@
 
 #include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
-#include <Ishiko/FileSystem.hpp>
 
 namespace DiplodocusDB
 {
 namespace EDDBImpl
 {
 
-/// A page.
+/// A page containing a list of records.
 /**
-    Each page has an index which is its position in the repository.
+    Each page has a number which is its position in the repository.
 */
 class RecordPage
 {
 public:
-    /// Constructor.
-    /**
-        Note that the page contents are not initialized by this constructor. Use the init() function to initialize the
-        page to all zeroes.
+    // TODO: try to get rid of this constructor that doesn#t construct valid objects
+    RecordPage();
+    RecordPage(const RecordPage& other) = default;
+    RecordPage(RecordPage&& other) noexcept = default;
 
-        @param index The index of the page.
+    RecordPage& operator=(const RecordPage& other) = delete;
+    RecordPage& operator=(RecordPage&& other) noexcept = default;
+
+    static RecordPage Create(PhysicalStorage::Page&& page);
+    static RecordPage Load(PhysicalStorage::Page&& page);
+
+    /// Stores the contents of the page to the repository.
+    /**
+        @param error The result of the operation.
     */
-    RecordPage(size_t number);
-    /// Fills the contents of the page with zeroes.
-    void init();
+    void store(PhysicalStorage::PageRepository& repository, Ishiko::Error& error);
 
     size_t number() const;
     /// Returns the amount of data stored in the page.
@@ -63,31 +68,20 @@ public:
     void erase(size_t pos, size_t n, Ishiko::Error& error);
     void moveTo(size_t pos, size_t n, RecordPage& targetPage, Ishiko::Error& error);
 
-    /// Write the contents of the page to a stream.
-    /**
-        @param output The stream to which the page will be written.
-        @param error The result of the operation.
-    */
-    void write(PhysicalStorage::PageRepository& repository, Ishiko::Error& error) const;
-    /// Reads the contents of the page from a stream.
-    /**
-        The index of the page is used to find the start position of the page data in the stream. After this operation
-        completes successfully the stream's position will be the byte past the end of the page.
-
-        The index of the page needs to be set to the correct value before calling this function.
-
-        @param input The stream from which the page will be read.
-        @param error The result of the operation.
-    */
-    void read(PhysicalStorage::PageRepository& repository, Ishiko::Error& error);
-
-public:
     static const size_t sm_startMarkerSize = 8;
     static const size_t sm_endMarkerSize = 8;
 
 private:
-    // TODO: avoid mutable
-    mutable PhysicalStorage::Page m_page;
+    /// Constructor.
+    /**
+        Note that the page contents are not initialized by this constructor. Use the init() function to initialize the
+        page to all zeroes.
+
+        @param index The index of the page.
+    */
+    RecordPage(PhysicalStorage::Page&& page, size_t data_size, size_t available_space, size_t next_page);
+
+    PhysicalStorage::Page m_page;
     size_t m_dataSize;
     size_t m_availableSpace;
     size_t m_nextPage;

@@ -24,7 +24,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    std::shared_ptr<RecordPage> page = m_repository.allocatePage(error);
+    RecordPage page = m_repository.allocatePage(error);
     if (error)
     {
         return;
@@ -42,7 +42,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    m_dataStartOffset = page->dataSize();
+    m_dataStartOffset = page.dataSize();
     Record dataStartRecord(Record::ERecordType::eDataStart);
     dataStartRecord.write(writer, error);
     if (error)
@@ -56,8 +56,8 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
 
-    m_dataEndPageIndex = page->number();
-    m_dataEndOffset = page->dataSize();
+    m_dataEndPageIndex = page.number();
+    m_dataEndOffset = page.dataSize();
     Record dataEndRecord(Record::ERecordType::eDataEnd);
     dataEndRecord.write(writer, error);
     if (error)
@@ -65,7 +65,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    m_repository.store(*page, error);
+    m_repository.store(page, error);
 }
 
 void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
@@ -73,11 +73,11 @@ void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
     m_repository.open(path, error);
     m_dataStartOffset = 14;
     m_dataEndPageIndex = m_repository.pageCount() - 1;
-    std::shared_ptr<RecordPage> dataEndPage = m_repository.page(m_dataEndPageIndex, error);
+    RecordPage dataEndPage = m_repository.page(m_dataEndPageIndex, error);
     if (!error)
     {
         // Deduct 1 for the end of data record
-        m_dataEndOffset = (dataEndPage->dataSize() - 1);
+        m_dataEndOffset = (dataEndPage.dataSize() - 1);
     }
 }
 
