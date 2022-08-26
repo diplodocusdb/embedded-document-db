@@ -281,7 +281,7 @@ void RecordPageTests::InsertTest3(Test& test)
 
 void RecordPageTests::EraseTest1(Test& test)
 {
-    const char* basename = "PageTests_EraseTest1.dpdb";
+    const char* basename = "RecordPageTests_EraseTest1.dpdb";
 
     Error error;
 
@@ -295,9 +295,6 @@ void RecordPageTests::EraseTest1(Test& test)
     ISHIKO_TEST_ABORT_IF(error);
 
     RecordPage record_page = RecordPage::Load(std::move(page));
-
-    ISHIKO_TEST_ABORT_IF(error);
-
     record_page.erase(0, 6, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -321,7 +318,7 @@ void RecordPageTests::EraseTest1(Test& test)
 
 void RecordPageTests::EraseTest2(Test& test)
 {
-    const char* basename = "PageTests_EraseTest2.dpdb";
+    const char* basename = "RecordPageTests_EraseTest2.dpdb";
 
     Error error;
 
@@ -335,7 +332,6 @@ void RecordPageTests::EraseTest2(Test& test)
     ISHIKO_TEST_ABORT_IF(error);
 
     RecordPage record_page = RecordPage::Load(std::move(page));
-
     record_page.erase(5, 1, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -359,7 +355,7 @@ void RecordPageTests::EraseTest2(Test& test)
 
 void RecordPageTests::EraseTest3(Test& test)
 {
-    const char* basename = "PageTests_EraseTest3.dpdb";
+    const char* basename = "RecordPageTests_EraseTest3.dpdb";
 
     Error error;
 
@@ -373,9 +369,6 @@ void RecordPageTests::EraseTest3(Test& test)
     ISHIKO_TEST_ABORT_IF(error);
 
     RecordPage record_page = RecordPage::Load(std::move(page));
-
-    ISHIKO_TEST_ABORT_IF(error);
-
     record_page.erase(2, 10, error);
 
     ISHIKO_TEST_FAIL_IF(error);
