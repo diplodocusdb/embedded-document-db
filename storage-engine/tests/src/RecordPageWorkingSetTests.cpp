@@ -4,21 +4,21 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#include "PageCacheTests.h"
-#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/PageCache.h"
+#include "RecordPageWorkingSetTests.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordPageWorkingSet.hpp"
 
 using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
 
-PageCacheTests::PageCacheTests(const TestNumber& number, const TestContext& context)
-    : TestSequence(number, "PageCache tests", context)
+RecordPageWorkingSetTests::RecordPageWorkingSetTests(const TestNumber& number, const TestContext& context)
+    : TestSequence(number, "RecordPageWorkingSet tests", context)
 {
     append<HeapAllocationErrorsTest>("ConstructorTest1 test 1", ConstructorTest1);
 }
 
-void PageCacheTests::ConstructorTest1(Test& test)
+void RecordPageWorkingSetTests::ConstructorTest1(Test& test)
 {
-    PageCache pageCache;
+    RecordPageWorkingSet working_set;
 
     ISHIKO_TEST_PASS();
 }
