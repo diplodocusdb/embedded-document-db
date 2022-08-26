@@ -12,15 +12,36 @@
 
 using namespace DiplodocusDB::EDDBImpl;
 
-RecordPage::RecordPage(size_t number)
-    : m_page{number}, m_dataSize(0),
-    m_availableSpace(PhysicalStorage::Page::sm_size - sm_startMarkerSize - sm_endMarkerSize), m_nextPage(0)
+RecordPage::RecordPage()
+    : m_page{0}
 {
 }
 
-void RecordPage::init()
+RecordPage RecordPage::Create(PhysicalStorage::Page&& page)
 {
-    m_page.zero();
+    size_t available_space = (PhysicalStorage::Page::sm_size - sm_startMarkerSize - sm_endMarkerSize);
+    RecordPage new_page{std::move(page), 0, available_space, 0};
+    new_page.m_page.zero();
+    return new_page;
+}
+
+RecordPage RecordPage::Load(PhysicalStorage::Page&& page)
+{
+    size_t data_size = *((uint16_t*)(page.data.data() + 6));
+    size_t available_space = PhysicalStorage::Page::sm_size - sm_startMarkerSize - sm_endMarkerSize - data_size;
+    size_t next_page = *((uint32_t*)(page.data.data() + sm_startMarkerSize + data_size + 2));
+    return RecordPage{std::move(page), data_size, available_space, next_page};
+}
+
+void RecordPage::store(PhysicalStorage::PageRepository& repository, Ishiko::Error& error)
+{
+    Ishiko::Byte* data_begin = m_page.data.data();
+    memcpy(data_begin, "\xF0\x06\x00\x00\x00\x00", 6);
+    *((uint16_t*)(data_begin + 6)) = (uint16_t)m_dataSize;
+    memcpy(data_begin + sm_startMarkerSize + m_dataSize, "\xF1\x06\x00\x00\x00\x00\x00\x00", 8);
+    *((uint32_t*)(data_begin + sm_startMarkerSize + m_dataSize + 2)) = m_nextPage;
+
+    repository.store(m_page, error);
 }
 
 size_t RecordPage::number() const
@@ -107,39 +128,7 @@ void RecordPage::moveTo(size_t pos, size_t n, RecordPage& targetPage, Ishiko::Er
     }
 }
 
-void RecordPage::write(PhysicalStorage::PageRepository& repository, Ishiko::Error& error) const
+RecordPage::RecordPage(PhysicalStorage::Page&& page, size_t data_size, size_t available_space, size_t next_page)
+    : m_page{std::move(page)}, m_dataSize(data_size), m_availableSpace(available_space), m_nextPage(next_page)
 {
-    Ishiko::Byte* data_begin = m_page.data.data();
-    memcpy(data_begin, "\xF0\x06\x00\x00\x00\x00", 6);
-    *((uint16_t*)(data_begin + 6)) = (uint16_t)m_dataSize;
-    memcpy(data_begin + sm_startMarkerSize + m_dataSize, "\xF1\x06\x00\x00\x00\x00\x00\x00", 8);
-    *((uint32_t*)(data_begin + sm_startMarkerSize + m_dataSize + 2)) = m_nextPage;
-        
-    repository.store(m_page, error);
-}
-
-void RecordPage::read(PhysicalStorage::PageRepository& repository, Ishiko::Error& error)
-{
-    repository.m_file.setFilePointer(m_page.number * PhysicalStorage::Page::sm_size);
-    if (!error)
-    {
-        size_t read_count = repository.m_file.read(PhysicalStorage::Page::sm_size, (char*)m_page.data.data(),
-            error);
-        if (!error)
-        {
-            if (read_count == PhysicalStorage::Page::sm_size)
-            {
-                m_dataSize = *((uint16_t*)(m_page.data.data() + 6));
-                m_availableSpace = PhysicalStorage::Page::sm_size - sm_startMarkerSize - sm_endMarkerSize - m_dataSize;
-
-                uint32_t nextPage = *((uint32_t*)(m_page.data.data() + sm_startMarkerSize + m_dataSize + 2));
-                m_nextPage = nextPage;
-            }
-            else
-            {
-                // TODO
-                Fail(error, StorageEngineErrorCategory::Value::generic_error, "", __FILE__, __LINE__);
-            }
-        }
-    }
 }
