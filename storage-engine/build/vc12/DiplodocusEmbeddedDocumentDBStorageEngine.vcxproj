@@ -154,12 +154,12 @@
     <ClCompile Include="..\..\src\MasterFileMetadata.cpp" />
     <ClCompile Include="..\..\src\NodeID.cpp" />
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
-    <ClCompile Include="..\..\src\PageCache.cpp" />
     <ClCompile Include="..\..\src\Record.cpp" />
     <ClCompile Include="..\..\src\RecordFile.cpp" />
     <ClCompile Include="..\..\src\RecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\RecordMarker.cpp" />
     <ClCompile Include="..\..\src\RecordPage.cpp" />
+    <ClCompile Include="..\..\src\RecordPageWorkingSet.cpp" />
     <ClCompile Include="..\..\src\RecordRepositoryReader.cpp" />
     <ClCompile Include="..\..\src\RecordRepositoryWriter.cpp" />
     <ClCompile Include="..\..\src\SecondaryFile.cpp" />
@@ -177,12 +177,12 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\NodeIDAllocator.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFileMetadata.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\PageCache.h" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\Record.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFile.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFilesSet.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordMarker.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordPage.hpp" />
+    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordPageWorkingSet.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepository.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryReader.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordRepositoryWriter.hpp" />
