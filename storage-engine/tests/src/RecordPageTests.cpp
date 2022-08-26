@@ -392,7 +392,7 @@ void RecordPageTests::EraseTest3(Test& test)
 
 void RecordPageTests::MoveToTest1(Test& test)
 {
-    const char* basename = "PageTests_MoveToTest1.dpdb";
+    const char* basename = "RecordPageTests_MoveToTest1.dpdb";
 
     Error error;
 
@@ -442,7 +442,7 @@ void RecordPageTests::MoveToTest1(Test& test)
 
 void RecordPageTests::MoveToTest2(Test& test)
 {
-    const char* basename = "PageTests_MoveToTest2.dpdb";
+    const char* basename = "RecordPageTests_MoveToTest2.dpdb";
 
     Error error;
 
