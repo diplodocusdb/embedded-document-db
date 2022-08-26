@@ -7,6 +7,7 @@
 #ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDREPOSITORYWRITER_HPP
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDREPOSITORYWRITER_HPP
 
+#include "RecordPage.hpp"
 #include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
 #include <set>
@@ -22,8 +23,7 @@ class RecordRepository;
 class RecordRepositoryWriter
 {
 public:
-    RecordRepositoryWriter(RecordRepository& repository, std::shared_ptr<PhysicalStorage::Page2> startPage,
-        size_t startOffset);
+    RecordRepositoryWriter(RecordRepository& repository, std::shared_ptr<RecordPage> startPage, size_t startOffset);
     
     PhysicalStorage::PageRepositoryPosition currentPosition() const;
 
@@ -33,9 +33,9 @@ public:
 
 private:
     RecordRepository& m_repository;
-    std::shared_ptr<PhysicalStorage::Page2> m_currentPage;
+    std::shared_ptr<RecordPage> m_currentPage;
     size_t m_currentOffset;
-    std::set<std::shared_ptr<PhysicalStorage::Page2>> m_updatedPages;
+    std::set<std::shared_ptr<RecordPage>> m_updatedPages;
 };
 
 }

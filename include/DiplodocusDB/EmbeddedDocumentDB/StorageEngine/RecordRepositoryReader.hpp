@@ -7,6 +7,7 @@
 #ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDREPOSITORYREADER_HPP
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDREPOSITORYREADER_HPP
 
+#include "RecordPage.hpp"
 #include <DiplodocusDB/PhysicalStorage.hpp>
 #include <Ishiko/Errors.hpp>
 #include <memory>
@@ -21,8 +22,7 @@ class RecordRepository;
 class RecordRepositoryReader
 {
 public:
-    RecordRepositoryReader(RecordRepository& repository, std::shared_ptr<PhysicalStorage::Page2> startPage,
-        size_t startOffset);
+    RecordRepositoryReader(RecordRepository& repository, std::shared_ptr<RecordPage> startPage, size_t startOffset);
 
     PhysicalStorage::PageRepositoryPosition currentPosition() const;
 
@@ -31,7 +31,7 @@ public:
 
 private:
     RecordRepository& m_repository;
-    std::shared_ptr<PhysicalStorage::Page2> m_currentPage;
+    std::shared_ptr<RecordPage> m_currentPage;
     size_t m_currentOffset;
 };
 

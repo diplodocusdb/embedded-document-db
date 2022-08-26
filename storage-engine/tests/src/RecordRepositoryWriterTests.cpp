@@ -42,7 +42,7 @@ void RecordRepositoryWriterTests::CreationTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.page(0, error);
+    std::shared_ptr<RecordPage> page = repository.page(0, error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
@@ -64,7 +64,7 @@ void RecordRepositoryWriterTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
+    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
@@ -100,7 +100,7 @@ void RecordRepositoryWriterTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
+    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
@@ -363,7 +363,7 @@ void RecordRepositoryWriterTests::WriteLEB128Test1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
+    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
@@ -399,7 +399,7 @@ void RecordRepositoryWriterTests::WriteLEB128Test2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
+    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
@@ -435,7 +435,7 @@ void RecordRepositoryWriterTests::WriteLEB128Test3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
+    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
@@ -471,7 +471,7 @@ void RecordRepositoryWriterTests::WriteLEB128Test4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
+    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
@@ -507,7 +507,7 @@ void RecordRepositoryWriterTests::WriteLEB128Test5(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<DiplodocusDB::PhysicalStorage::Page2> page = repository.allocatePage(error);
+    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NOT(page);
