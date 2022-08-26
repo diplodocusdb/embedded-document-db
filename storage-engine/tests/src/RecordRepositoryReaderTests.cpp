@@ -70,7 +70,7 @@ void RecordRepositoryReaderTests::ReadTest1(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadTest1.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadTest1.dpdb"), error);
     
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -93,7 +93,7 @@ void RecordRepositoryReaderTests::ReadTest2(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadTest2.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadTest2.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
     
