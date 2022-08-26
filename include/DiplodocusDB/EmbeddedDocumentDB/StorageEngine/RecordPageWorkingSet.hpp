@@ -4,8 +4,8 @@
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
 
-#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_PAGECACHE_HPP
-#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_PAGECACHE_HPP
+#ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDPAGEWORKINGSET_HPP
+#define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDPAGEWORKINGSET_HPP
 
 #include "RecordPage.hpp"
 #include <map>
@@ -16,12 +16,11 @@ namespace DiplodocusDB
 namespace EDDBImpl
 {
 
-/// An in-memory cache for the pages.
-class PageCache
+class RecordPageWorkingSet
 {
 public:
     /// Constructor.
-    PageCache() = default;
+    RecordPageWorkingSet() = default;
 
     bool get(size_t index, std::shared_ptr<RecordPage>& page);
     void set(std::shared_ptr<RecordPage>& page);

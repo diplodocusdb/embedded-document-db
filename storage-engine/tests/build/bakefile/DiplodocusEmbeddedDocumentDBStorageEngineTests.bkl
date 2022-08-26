@@ -30,10 +30,10 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
         ../../src/MasterFileTests.hpp
         ../../src/NodeIDTests.hpp
         ../../src/NodeIDAllocatorTests.hpp
-        ../../src/PageCacheTests.h
         ../../src/RecordFilesSetTests.hpp
         ../../src/RecordFileTests.hpp
         ../../src/RecordPageTests.hpp
+        ../../src/RecordPageWorkingSetTests.hpp
         ../../src/RecordRepositoryWriterTests.hpp
         ../../src/RecordRepositoryReaderTests.hpp
         ../../src/RecordTests.hpp
@@ -49,10 +49,10 @@ program DiplodocusEmbeddedDocumentDBStorageEngineTests : DiplodocusEmbeddedDocum
         ../../src/MasterFileTests.cpp
         ../../src/NodeIDTests.cpp
         ../../src/NodeIDAllocatorTests.cpp
-        ../../src/PageCacheTests.cpp
         ../../src/RecordFilesSetTests.cpp
         ../../src/RecordFileTests.cpp
         ../../src/RecordPageTests.cpp
+        ../../src/RecordPageWorkingSetTests.cpp
         ../../src/RecordRepositoryWriterTests.cpp
         ../../src/RecordRepositoryReaderTests.cpp
         ../../src/RecordTests.cpp
