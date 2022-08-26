@@ -121,7 +121,7 @@ void RecordRepositoryReaderTests::ReadTest3(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadTest3.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadTest3.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -146,7 +146,7 @@ void RecordRepositoryReaderTests::ReadTest4(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadTest4.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadTest4.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -176,7 +176,7 @@ void RecordRepositoryReaderTests::ReadTest5(Test& test)
     Error error;
 
     RecordFile repository;
-    repository.open(test.context().getDataPath("PageRepositoryReaderReadTest5.dpdb"), error);
+    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ReadTest5.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
