@@ -156,7 +156,6 @@
     <ClCompile Include="..\..\src\NodeIDAllocator.cpp" />
     <ClCompile Include="..\..\src\Record.cpp" />
     <ClCompile Include="..\..\src\RecordFile.cpp" />
-    <ClCompile Include="..\..\src\RecordFilesSet.cpp" />
     <ClCompile Include="..\..\src\RecordMarker.cpp" />
     <ClCompile Include="..\..\src\RecordPage.cpp" />
     <ClCompile Include="..\..\src\RecordPageWorkingSet.cpp" />
@@ -179,7 +178,6 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\MasterFileMetadata.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\Record.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFile.hpp" />
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFilesSet.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordMarker.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordPage.hpp" />
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordPageWorkingSet.hpp" />
