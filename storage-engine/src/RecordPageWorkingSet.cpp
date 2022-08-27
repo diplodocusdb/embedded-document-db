@@ -8,21 +8,35 @@
 
 using namespace DiplodocusDB::EDDBImpl;
 
-bool RecordPageWorkingSet::get(size_t index, std::shared_ptr<RecordPage>& page)
+RecordPageWorkingSet::RecordPageWorkingSet(RecordRepository& repository)
+    : m_repository{repository}
 {
-    std::map<size_t, std::shared_ptr<RecordPage>>::iterator it = m_pages.find(index);
+}
+
+std::shared_ptr<RecordPage> RecordPageWorkingSet::get(size_t page_number, Ishiko::Error& error)
+{
+    std::map<size_t, Entry>::iterator it = m_pages.find(page_number);
     if (it != m_pages.end())
     {
-        page = it->second;
-        return true;
+        return it->second.m_page;
     }
     else
     {
-        return false;
+        RecordPage page = m_repository.page(page_number, error);
+        if (!error)
+        {
+            std::pair<std::map<size_t, Entry>::iterator, bool> r =
+                m_pages.insert({page_number, Entry{std::move(page)}});
+            return r.first->second.m_page;
+        }
+        else
+        {
+            return std::shared_ptr<RecordPage>();
+        }
     }
 }
 
-void RecordPageWorkingSet::set(std::shared_ptr<RecordPage>& page)
+RecordPageWorkingSet::Entry::Entry(RecordPage&& page)
+    : m_page{std::make_shared<RecordPage>(std::move(page))}
 {
-    m_pages[page->number()] = page;
 }

@@ -7,8 +7,8 @@
 #ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_STORAGEENGINE_HPP
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_STORAGEENGINE_HPP
 
+#include "MasterFile.hpp"
 #include "NodeID.hpp"
-#include "RecordFilesSet.hpp"
 #include "SiblingNodesRecordGroup.hpp"
 #include "SiblingNodesRecordGroupCache.hpp"
 #include <boost/filesystem.hpp>
@@ -33,7 +33,7 @@ public:
 
 private:
     SiblingNodesRecordGroupCache m_siblingNodesRecordGroupCache;
-    RecordFilesSet m_recordFiles;
+    MasterFile m_master_file;
 };
 
 }

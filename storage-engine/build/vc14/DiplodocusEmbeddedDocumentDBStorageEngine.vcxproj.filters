@@ -41,9 +41,6 @@
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFile.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordFilesSet.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\DiplodocusDB\EmbeddedDocumentDB\StorageEngine\RecordMarker.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -101,9 +98,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\RecordFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\RecordFilesSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\RecordMarker.cpp">

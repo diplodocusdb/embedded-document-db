@@ -10,17 +10,17 @@ using namespace DiplodocusDB::EDDBImpl;
 
 void StorageEngine::createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
 {
-    m_recordFiles.createMasterFile(path, error);
+    m_master_file.create(path, error);
 }
 
 void StorageEngine::openMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
 {
-    m_recordFiles.openMasterFile(path, error);
+    m_master_file.open(path, error);
 }
 
 void StorageEngine::close()
 {
-    m_recordFiles.close();
+    m_master_file.close();
 }
 
 bool StorageEngine::findSiblingNodesRecordGroup(const NodeID& parentNodeID,
@@ -36,7 +36,7 @@ bool StorageEngine::findSiblingNodesRecordGroup(const NodeID& parentNodeID,
     else
     {
         std::shared_ptr<SiblingNodesRecordGroup> newCachedSiblingNodes = m_siblingNodesRecordGroupCache[parentNodeID];
-        bool foundInFiles = m_recordFiles.findSiblingNodesRecordGroup(parentNodeID, *newCachedSiblingNodes, error);
+        bool foundInFiles = m_master_file.findSiblingNodesRecordGroup(parentNodeID, *newCachedSiblingNodes, error);
         if (error)
         {
             result = false;
@@ -60,10 +60,10 @@ bool StorageEngine::findSiblingNodesRecordGroup(const NodeID& parentNodeID,
 
 void StorageEngine::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
 {
-    m_recordFiles.addSiblingNodesRecordGroup(siblingNodes, error);
+    m_master_file.addSiblingNodesRecordGroup(siblingNodes, error);
 }
 
 void StorageEngine::updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
 {
-    m_recordFiles.updateSiblingNodesRecordGroup(siblingNodes, error);
+    m_master_file.updateSiblingNodesRecordGroup(siblingNodes, error);
 }
