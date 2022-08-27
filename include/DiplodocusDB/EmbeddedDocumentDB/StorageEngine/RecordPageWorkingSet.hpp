@@ -8,6 +8,8 @@
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDPAGEWORKINGSET_HPP
 
 #include "RecordPage.hpp"
+#include "RecordRepository.hpp"
+#include <Ishiko/Errors.hpp>
 #include <map>
 #include <memory>
 
@@ -20,13 +22,21 @@ class RecordPageWorkingSet
 {
 public:
     /// Constructor.
-    RecordPageWorkingSet() = default;
+    RecordPageWorkingSet(RecordRepository& repository);
 
-    bool get(size_t index, std::shared_ptr<RecordPage>& page);
-    void set(std::shared_ptr<RecordPage>& page);
+    std::shared_ptr<RecordPage> get(size_t page_number, Ishiko::Error& error);
 
 private:
-    std::map<size_t, std::shared_ptr<RecordPage>> m_pages;
+    class Entry
+    {
+    public:
+        Entry(RecordPage&& page);
+
+        std::shared_ptr<RecordPage> m_page;
+    };
+
+    RecordRepository& m_repository;
+    std::map<size_t, Entry> m_pages;
 };
 
 }
