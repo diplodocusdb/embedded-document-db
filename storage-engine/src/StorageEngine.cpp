@@ -5,8 +5,14 @@
 */
 
 #include "StorageEngine.hpp"
+#include "StorageEngineErrorCategory.hpp"
 
 using namespace DiplodocusDB::EDDBImpl;
+
+StorageEngine::StorageEngine()
+    : m_working_set{m_master_file}
+{
+}
 
 void StorageEngine::createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
 {
@@ -36,7 +42,9 @@ bool StorageEngine::findSiblingNodesRecordGroup(const NodeID& parentNodeID,
     else
     {
         std::shared_ptr<SiblingNodesRecordGroup> newCachedSiblingNodes = m_siblingNodesRecordGroupCache[parentNodeID];
-        bool foundInFiles = m_master_file.findSiblingNodesRecordGroup(parentNodeID, *newCachedSiblingNodes, error);
+        // TODO: 0 is for dataStartPosition, I think it doesn't matter that much, it's just that master file has the
+        // metadata record at the start but even if we parse it doesn't matter
+        bool foundInFiles = findSiblingNodesRecordGroup(m_working_set, 0, parentNodeID, *newCachedSiblingNodes, error);
         if (error)
         {
             result = false;
@@ -52,6 +60,50 @@ bool StorageEngine::findSiblingNodesRecordGroup(const NodeID& parentNodeID,
             // for them
             m_siblingNodesRecordGroupCache.erase(parentNodeID);
             result = false;
+        }
+    }
+
+    return result;
+}
+
+bool StorageEngine::findSiblingNodesRecordGroup(RecordPageWorkingSet& repository, size_t dataStartOffset,
+    const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
+{
+    bool result = false;
+
+    RecordRepositoryReader reader{repository, 0, dataStartOffset + 1, error};
+    while (!result && !error)
+    {
+        Record nextRecord(Record::ERecordType::eInvalid);
+        nextRecord.read(reader, error);
+        if (error)
+        {
+            break;
+        }
+        if (nextRecord.type() == Record::ERecordType::eSiblingNodesStart)
+        {
+            SiblingNodesRecordGroup siblingNodesRecordGroup;
+            siblingNodesRecordGroup.readWithoutType(reader, error);
+            if (error)
+            {
+                break;
+            }
+            if (siblingNodesRecordGroup.parentNodeID() == parentNodeID)
+            {
+                siblingNodes = siblingNodesRecordGroup;
+                result = true;
+                break;
+            }
+        }
+        else if (nextRecord.type() == Record::ERecordType::eDataEnd)
+        {
+            break;
+        }
+        else
+        {
+            // TODO : more precise error
+            error.fail(StorageEngineErrorCategory::Get(), -1, "TODO", __FILE__, __LINE__);
+            break;
         }
     }
 

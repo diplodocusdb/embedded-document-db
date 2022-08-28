@@ -81,7 +81,7 @@ namespace EDDBImpl
 
     @see PageFileRepository
 */
-class MasterFile : public RecordFile
+class MasterFile : public RecordFile // TODO: this should be RecordRepository
 {
 public:
     /// Constructor.
@@ -96,8 +96,6 @@ public:
     // TODO : can be marked private. Remove?
     RecordMarker dataEndPosition() const;
 
-    bool findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
-        Ishiko::Error& error);
     /// Adds a sibling nodes record group to the file.
     /**
         This is a low-level function used to write a new record group to the file. This function should not be called
