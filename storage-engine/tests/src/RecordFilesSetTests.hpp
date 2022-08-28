@@ -13,15 +13,6 @@ class RecordFilesSetTests : public Ishiko::TestSequence
 {
 public:
     RecordFilesSetTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
-
-private:
-    static void ConstructionTest1(Ishiko::Test& test);
-    static void CreateMasterFileTest1(Ishiko::Test& test);
-    static void OpenMasterFileTest1(Ishiko::Test& test);
-    static void OpenMasterFileTest2(Ishiko::Test& test);
-    static void FindSiblingNodesRecordGroupTest1(Ishiko::Test& test);
-    static void FindSiblingNodesRecordGroupTest2(Ishiko::Test& test);
-    static void FindSiblingNodesRecordGroupTest3(Ishiko::Test& test);
 };
 
 #endif
