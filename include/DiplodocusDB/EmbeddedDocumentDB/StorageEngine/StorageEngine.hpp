@@ -9,6 +9,7 @@
 
 #include "MasterFile.hpp"
 #include "NodeID.hpp"
+#include "RecordPageWorkingSet.hpp"
 #include "SiblingNodesRecordGroup.hpp"
 #include "SiblingNodesRecordGroupCache.hpp"
 #include <boost/filesystem.hpp>
@@ -28,12 +29,15 @@ public:
 
     bool findSiblingNodesRecordGroup(const NodeID& parentNodeID,
         std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error);
+    static bool findSiblingNodesRecordGroup(RecordPageWorkingSet& repository, size_t dataStartOffset,
+        const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     void addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
 
 private:
     SiblingNodesRecordGroupCache m_siblingNodesRecordGroupCache;
     MasterFile m_master_file;
+    RecordPageWorkingSet m_working_set;
 };
 
 }
