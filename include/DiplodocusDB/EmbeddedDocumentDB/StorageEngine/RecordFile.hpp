@@ -8,8 +8,6 @@
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_RECORDFILE_HPP
 
 #include "RecordRepository.hpp"
-#include "RecordRepositoryReader.hpp"
-#include "RecordRepositoryWriter.hpp"
 #include <DiplodocusDB/PhysicalStorage.hpp>
 #include <boost/filesystem.hpp>
 #include <Ishiko/Errors.hpp>
@@ -31,10 +29,6 @@ public:
     RecordPage allocatePage(Ishiko::Error& error);
     RecordPage insertPageAfter(RecordPage& page, Ishiko::Error& error) override;
     void store(RecordPage& page, Ishiko::Error& error) override;
-
-    RecordRepositoryWriter insert(const PhysicalStorage::PageRepositoryPosition& pos, Ishiko::Error& error);
-    RecordRepositoryWriter insert(size_t startPage, size_t offset, Ishiko::Error& error);
-    RecordRepositoryWriter insert(RecordPage& startPage, size_t offset, Ishiko::Error& error);
 
 private:
     PhysicalStorage::PageFile m_page_file;
