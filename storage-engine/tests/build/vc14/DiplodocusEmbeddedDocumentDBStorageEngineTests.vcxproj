@@ -160,7 +160,6 @@
     <ClCompile Include="..\..\src\MasterFileTests.cpp" />
     <ClCompile Include="..\..\src\NodeIDTests.cpp" />
     <ClCompile Include="..\..\src\NodeIDAllocatorTests.cpp" />
-    <ClCompile Include="..\..\src\RecordFilesSetTests.cpp" />
     <ClCompile Include="..\..\src\RecordFileTests.cpp" />
     <ClCompile Include="..\..\src\RecordPageTests.cpp" />
     <ClCompile Include="..\..\src\RecordPageWorkingSetTests.cpp" />
@@ -176,7 +175,6 @@
     <ClInclude Include="..\..\src\MasterFileTests.hpp" />
     <ClInclude Include="..\..\src\NodeIDTests.hpp" />
     <ClInclude Include="..\..\src\NodeIDAllocatorTests.hpp" />
-    <ClInclude Include="..\..\src\RecordFilesSetTests.hpp" />
     <ClInclude Include="..\..\src\RecordFileTests.hpp" />
     <ClInclude Include="..\..\src\RecordPageTests.hpp" />
     <ClInclude Include="..\..\src\RecordPageWorkingSetTests.hpp" />
