@@ -9,6 +9,11 @@
 
 using namespace DiplodocusDB::EDDBImpl;
 
+StorageEngine::StorageEngine()
+    : m_working_set{m_master_file}
+{
+}
+
 void StorageEngine::createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error)
 {
     m_master_file.create(path, error);

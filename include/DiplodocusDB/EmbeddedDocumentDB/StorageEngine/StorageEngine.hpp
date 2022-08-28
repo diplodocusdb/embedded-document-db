@@ -23,6 +23,8 @@ namespace EDDBImpl
 class StorageEngine
 {
 public:
+    StorageEngine();
+
     void createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);
     void openMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
