@@ -63,7 +63,8 @@ void RecordTests::ReadMasterFileMetadataTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -84,7 +85,8 @@ void RecordTests::ReadDataStartTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -105,7 +107,8 @@ void RecordTests::ReadDataEndTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -126,7 +129,8 @@ void RecordTests::ReadNodeStartTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -147,7 +151,8 @@ void RecordTests::ReadNodeEndTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -168,7 +173,8 @@ void RecordTests::ReadParentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -190,7 +196,8 @@ void RecordTests::ReadNodeNameTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -212,7 +219,8 @@ void RecordTests::ReadNodeNameTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -236,7 +244,8 @@ void RecordTests::ReadNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -258,7 +267,8 @@ void RecordTests::ReadNodeIDTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -280,7 +290,8 @@ void RecordTests::ReadPersistentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -302,7 +313,8 @@ void RecordTests::ReadInlineValueBinaryTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -324,7 +336,8 @@ void RecordTests::ReadInlineValueBooleanTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -346,7 +359,8 @@ void RecordTests::ReadInlineValueUTF8StringTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader = repository.read(0, 0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -370,11 +384,11 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -383,7 +397,7 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -402,11 +416,11 @@ void RecordTests::WriteDataStartTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -415,7 +429,7 @@ void RecordTests::WriteDataStartTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -434,11 +448,11 @@ void RecordTests::WriteDataEndTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -447,7 +461,7 @@ void RecordTests::WriteDataEndTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -466,11 +480,11 @@ void RecordTests::WriteNodeStartTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -479,7 +493,7 @@ void RecordTests::WriteNodeStartTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -498,11 +512,11 @@ void RecordTests::WriteNodeEndTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -511,7 +525,7 @@ void RecordTests::WriteNodeEndTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -530,11 +544,11 @@ void RecordTests::WriteParentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -543,7 +557,7 @@ void RecordTests::WriteParentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -562,11 +576,11 @@ void RecordTests::WriteNodeNameTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -575,7 +589,7 @@ void RecordTests::WriteNodeNameTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -594,11 +608,11 @@ void RecordTests::WriteNodeNameTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -609,7 +623,7 @@ void RecordTests::WriteNodeNameTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -628,11 +642,11 @@ void RecordTests::WriteNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -641,7 +655,7 @@ void RecordTests::WriteNodeIDTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -660,11 +674,11 @@ void RecordTests::WriteNodeIDTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -673,7 +687,7 @@ void RecordTests::WriteNodeIDTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -692,11 +706,11 @@ void RecordTests::WritePersistentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -705,7 +719,7 @@ void RecordTests::WritePersistentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -724,11 +738,11 @@ void RecordTests::WriteInlineValueBinaryTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -737,7 +751,7 @@ void RecordTests::WriteInlineValueBinaryTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -756,11 +770,11 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -769,7 +783,7 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -788,11 +802,11 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -801,7 +815,7 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);

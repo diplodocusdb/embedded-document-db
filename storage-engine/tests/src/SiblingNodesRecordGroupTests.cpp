@@ -41,11 +41,11 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -54,7 +54,7 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -73,11 +73,11 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -88,7 +88,7 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -107,11 +107,11 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -122,7 +122,7 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -141,11 +141,11 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    std::shared_ptr<RecordPage> page = repository.allocatePage(error);
+    RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer = repository.insert(page, 0, error);
+    RecordRepositoryWriter writer{repository, page, 0};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -158,7 +158,7 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(*page, error);
+    repository.store(page, error);
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);

@@ -5,8 +5,9 @@
 */
 
 #include "RecordRepositoryReaderTests.hpp"
-#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryReader.hpp"
 #include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordFile.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordPageWorkingSet.hpp"
+#include "DiplodocusDB/EmbeddedDocumentDB/StorageEngine/RecordRepositoryReader.hpp"
 
 using namespace DiplodocusDB::EDDBImpl;
 using namespace Ishiko;
@@ -15,7 +16,6 @@ RecordRepositoryReaderTests::RecordRepositoryReaderTests(const TestNumber& numbe
     : TestSequence(number, "RecordRepositoryReader tests", context)
 {
     append<HeapAllocationErrorsTest>("Constructor test 1", ConstructorTest1);
-    append<HeapAllocationErrorsTest>("Constructor test 2", ConstructorTest2);
     append<HeapAllocationErrorsTest>("read test 1", ReadTest1);
     append<HeapAllocationErrorsTest>("read test 2", ReadTest2);
     append<HeapAllocationErrorsTest>("read test 3", ReadTest3);
@@ -37,27 +37,8 @@ void RecordRepositoryReaderTests::ConstructorTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page = repository.page(0, error);
-
-    ISHIKO_TEST_ABORT_IF(error);
-    
-    RecordRepositoryReader reader{repository, page, 0};
-
-    ISHIKO_TEST_FAIL_IF_NEQ(reader.currentPosition().page(), 0);
-    ISHIKO_TEST_FAIL_IF_NEQ(reader.currentPosition().offset(), 0);
-    ISHIKO_TEST_PASS();
-}
-
-void RecordRepositoryReaderTests::ConstructorTest2(Test& test)
-{
-    Error error;
-
-    RecordFile repository;
-    repository.open(test.context().getDataPath("RecordRepositoryReaderTests_ConstructorTest1.dpdb"), error);
-
-    ISHIKO_TEST_ABORT_IF(error);
-
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(reader.currentPosition().page(), 0);
@@ -74,7 +55,8 @@ void RecordRepositoryReaderTests::ReadTest1(Test& test)
     
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -97,7 +79,8 @@ void RecordRepositoryReaderTests::ReadTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
         
@@ -125,7 +108,8 @@ void RecordRepositoryReaderTests::ReadTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 6, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 6, error};
 
     ISHIKO_TEST_ABORT_IF(error);
         
@@ -150,7 +134,8 @@ void RecordRepositoryReaderTests::ReadTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -180,7 +165,8 @@ void RecordRepositoryReaderTests::ReadTest5(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 4070, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 4070, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -202,7 +188,8 @@ void RecordRepositoryReaderTests::ReadLEB128Test1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -222,7 +209,8 @@ void RecordRepositoryReaderTests::ReadLEB128Test2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -242,7 +230,8 @@ void RecordRepositoryReaderTests::ReadLEB128Test3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -262,7 +251,8 @@ void RecordRepositoryReaderTests::ReadLEB128Test4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -282,7 +272,8 @@ void RecordRepositoryReaderTests::ReadLEB128Test5(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryReader reader{repository, 0, 0, error};
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryReader reader{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
