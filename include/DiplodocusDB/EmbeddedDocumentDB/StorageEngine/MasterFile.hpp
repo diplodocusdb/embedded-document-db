@@ -85,7 +85,7 @@ class MasterFile : public RecordFile // TODO: this should be RecordRepository
 {
 public:
     /// Constructor.
-    MasterFile();
+    MasterFile(RecordPageWorkingSet& working_set);
 
     void create(const boost::filesystem::path& path, Ishiko::Error& error);
     void open(const boost::filesystem::path& path, Ishiko::Error& error);
@@ -116,6 +116,7 @@ private:
     static void createRootNode(RecordRepositoryWriter& writer, Ishiko::Error& error);
 
 private:
+    RecordPageWorkingSet& m_working_set;
     RecordFile m_repository;
     Record m_metadataRecord;
     size_t m_dataStartOffset;

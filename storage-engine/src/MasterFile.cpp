@@ -11,7 +11,7 @@
 using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
-MasterFile::MasterFile()
+MasterFile::MasterFile(RecordPageWorkingSet& working_set)
     : m_metadataRecord(MasterFileMetadata()), m_dataStartOffset(0), m_dataEndOffset(0)
 {
 }
@@ -30,7 +30,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    RecordRepositoryWriter writer{m_repository, page, 0};
+    RecordRepositoryWriter writer{m_repository, page, 0, error};
     if (error)
     {
         return;
