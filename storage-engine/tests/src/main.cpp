@@ -40,12 +40,10 @@ int main(int argc, char* argv[])
     theTests.append<NodeIDAllocatorTests>();
     theTests.append<RecordTests>();
     theTests.append<SiblingNodesRecordGroupTests>();
-    // TODO
-    /*theTests.append<SiblingNodesRecordGroupCacheTests>();
+    theTests.append<SiblingNodesRecordGroupCacheTests>();
     theTests.append<MasterFileTests>();
     theTests.append<SecondaryFileTests>();
     theTests.append<StorageEngineTests>();
-    */
 
     return theTestHarness.run();
 }

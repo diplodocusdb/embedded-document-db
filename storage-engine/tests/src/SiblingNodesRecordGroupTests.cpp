@@ -56,7 +56,10 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -92,7 +95,10 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -128,7 +134,10 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -166,7 +175,10 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);

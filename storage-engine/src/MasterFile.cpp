@@ -30,7 +30,8 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    RecordPageWorkingSet working_set{*this};
+    RecordPageWorkingSet working_set{m_repository};
+    working_set.add(page);
     RecordRepositoryWriter writer{working_set, page.number(), 0, error};
     if (error)
     {
@@ -66,7 +67,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    m_repository.store(page, error);
+    working_set.save(error);
 }
 
 void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
@@ -105,7 +106,7 @@ void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& sibli
         return;
     }
 
-    RecordPageWorkingSet working_set{*this};
+    RecordPageWorkingSet working_set{m_repository};
     RecordRepositoryWriter writer{working_set, page.number(), dataEndPosition().position().offset(), error};
     if (error)
     {
