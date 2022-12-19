@@ -36,12 +36,12 @@ int main(int argc, char* argv[])
     theTests.append<RecordPageWorkingSetTests>();
     theTests.append<RecordRepositoryReaderTests>();
     theTests.append<RecordRepositoryWriterTests>();
-    // TODO
-    /*theTests.append<NodeIDTests>();
+    theTests.append<NodeIDTests>();
     theTests.append<NodeIDAllocatorTests>();
     theTests.append<RecordTests>();
     theTests.append<SiblingNodesRecordGroupTests>();
-    theTests.append<SiblingNodesRecordGroupCacheTests>();
+    // TODO
+    /*theTests.append<SiblingNodesRecordGroupCacheTests>();
     theTests.append<MasterFileTests>();
     theTests.append<SecondaryFileTests>();
     theTests.append<StorageEngineTests>();

@@ -386,6 +386,7 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
 
     RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
+    working_set.add(page);
 
     ISHIKO_TEST_ABORT_IF(error);
     ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
@@ -397,12 +398,14 @@ void RecordTests::WriteMasterFileMetadataTest1(Test& test)
     Record record = MasterFileMetadata();
     record.write(writer, error);
 
-    ISHIKO_TEST_FAIL_IF(error);
+    ISHIKO_TEST_ABORT_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
-
-    ISHIKO_TEST_FAIL_IF(error);
+    
     ISHIKO_TEST_FAIL_IF_OUTPUT_AND_REFERENCE_FILES_NEQ(testName);
     ISHIKO_TEST_PASS();
 }
@@ -433,7 +436,10 @@ void RecordTests::WriteDataStartTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -467,7 +473,10 @@ void RecordTests::WriteDataEndTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -501,7 +510,10 @@ void RecordTests::WriteNodeStartTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -535,7 +547,10 @@ void RecordTests::WriteNodeEndTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -569,7 +584,10 @@ void RecordTests::WriteParentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -603,7 +621,10 @@ void RecordTests::WriteNodeNameTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -639,7 +660,10 @@ void RecordTests::WriteNodeNameTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -673,7 +697,10 @@ void RecordTests::WriteNodeIDTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -707,7 +734,10 @@ void RecordTests::WriteNodeIDTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -741,7 +771,10 @@ void RecordTests::WritePersistentNodeIDTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -775,7 +808,10 @@ void RecordTests::WriteInlineValueBinaryTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -809,7 +845,10 @@ void RecordTests::WriteInlineValueBooleanTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -843,7 +882,10 @@ void RecordTests::WriteInlineValueUTF8StringTest1(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
 
-    repository.store(page, error);
+    working_set.save(error);
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     repository.close();
 
     ISHIKO_TEST_FAIL_IF(error);
