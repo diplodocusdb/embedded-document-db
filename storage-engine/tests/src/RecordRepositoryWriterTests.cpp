@@ -39,13 +39,16 @@ void RecordRepositoryWriterTests::ConstructorTest1(Test& test)
     repository.open(test.context().getDataPath("RecordRepositoryWriter_ConstructorTest1.dpdb"), error);
 
     ISHIKO_TEST_ABORT_IF(error);
-    
+
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.page(0, error);
+    working_set.add(page);
 
     ISHIKO_TEST_ABORT_IF(error);
     
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
+    ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 0);
     ISHIKO_TEST_PASS();
@@ -62,18 +65,23 @@ void RecordRepositoryWriterTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
     
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
         
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     writer.write("value1", 6, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 6);
     
-    writer.save(error);
+    working_set.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -94,11 +102,16 @@ void RecordRepositoryWriterTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
     
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     writer.write("value1", 6, error);
 
     ISHIKO_TEST_FAIL_IF(error);
@@ -108,9 +121,9 @@ void RecordRepositoryWriterTests::WriteTest2(Test& test)
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 12);
-        
-    writer.save(error);
-        
+      
+    working_set.save(error);
+
     ISHIKO_TEST_FAIL_IF(error);
 
     repository.close();
@@ -134,18 +147,18 @@ void RecordRepositoryWriterTests::WriteTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page = repository.page(0,error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer{repository, page, 0};
     writer.write("value0", 6, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 6);
     
-    writer.save(error);
+    working_set.save(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -170,18 +183,18 @@ void RecordRepositoryWriterTests::WriteTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page = repository.page(0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryWriter writer{working_set, 0, 6, error};
 
     ISHIKO_TEST_ABORT_IF(error);
-    
-    RecordRepositoryWriter writer{repository, page, 6};
+
     writer.write("value2", 6, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 12);
 
-    writer.save(error);
+    working_set.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -206,11 +219,11 @@ void RecordRepositoryWriterTests::WriteTest5(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page = repository.page(0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
-    
-    RecordRepositoryWriter writer{repository, page, 0};
+
     for (size_t i = 0; i < 409; ++i)
     {
         writer.write("0123456789", 10, error);
@@ -220,7 +233,7 @@ void RecordRepositoryWriterTests::WriteTest5(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 10);
 
-    writer.save(error);
+    working_set.save(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -245,11 +258,11 @@ void RecordRepositoryWriterTests::WriteTest6(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page = repository.page(0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
-    
-    RecordRepositoryWriter writer{repository, page, 0};
+
     for (size_t i = 0; i < 409; ++i)
     {
         writer.write("01234567890123456789", 20, error);
@@ -259,7 +272,7 @@ void RecordRepositoryWriterTests::WriteTest6(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 2);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 20);
 
-    writer.save(error);
+    working_set.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -284,11 +297,11 @@ void RecordRepositoryWriterTests::WriteTest7(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page = repository.page(0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer{repository, page, 0};
     for (size_t i = 0; i < 407; ++i)
     {
         writer.write("0123456789", 10, error);
@@ -299,7 +312,7 @@ void RecordRepositoryWriterTests::WriteTest7(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 1);
 
-    writer.save(error);
+    working_set.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -324,11 +337,11 @@ void RecordRepositoryWriterTests::WriteTest8(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordPage page = repository.page(0, error);
+    RecordPageWorkingSet working_set{repository};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
-    RecordRepositoryWriter writer{repository, page, 0};
     for (size_t i = 0; i < 409; ++i)
     {
         writer.write("0123456789", 10, error);
@@ -338,7 +351,7 @@ void RecordRepositoryWriterTests::WriteTest8(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 10);
 
-    writer.save(error);
+    working_set.save(error);
     
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -359,18 +372,25 @@ void RecordRepositoryWriterTests::WriteLEB128Test1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    ISHIKO_TEST_ABORT_IF(error);
+
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     writer.writeLEB128(0, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 1);
 
-    writer.save(error);
+    working_set.save(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -391,18 +411,23 @@ void RecordRepositoryWriterTests::WriteLEB128Test2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     writer.writeLEB128(1, error);
 
     ISHIKO_TEST_FAIL_IF((bool)error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 1);
 
-    writer.save(error);
+    working_set.save(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 
@@ -423,18 +448,23 @@ void RecordRepositoryWriterTests::WriteLEB128Test3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     writer.writeLEB128(127, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 1);
 
-    writer.save(error);
+    working_set.save(error);
 
     ISHIKO_TEST_FAIL_IF((bool)error);
 
@@ -455,18 +485,23 @@ void RecordRepositoryWriterTests::WriteLEB128Test4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     writer.writeLEB128(128, error);
 
     ISHIKO_TEST_FAIL_IF((bool)error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 2);
 
-    writer.save(error);
+    working_set.save(error);
 
     ISHIKO_TEST_FAIL_IF((bool)error);
 
@@ -487,18 +522,23 @@ void RecordRepositoryWriterTests::WriteLEB128Test5(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
+
+    ISHIKO_TEST_ABORT_IF(error);
+
     writer.writeLEB128(16384, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(writer.currentPosition().offset(), 3);
 
-    writer.save(error);
+    working_set.save(error);
 
     ISHIKO_TEST_FAIL_IF(error);
 

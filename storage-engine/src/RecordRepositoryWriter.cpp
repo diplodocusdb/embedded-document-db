@@ -10,9 +10,9 @@ using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
 RecordRepositoryWriter::RecordRepositoryWriter(RecordPageWorkingSet& working_set, size_t start_page_number,
-    size_t startOffset, Ishiko::Error& error)
+    size_t start_offset, Ishiko::Error& error)
     : m_working_set(working_set), m_currentPage(m_working_set.get(start_page_number, error)),
-    m_currentOffset(startOffset)
+    m_currentOffset(start_offset)
 {
 }
 
@@ -37,7 +37,8 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
             {
                 m_currentOffset += bufferSize;
             }
-            m_updatedPages->insert(m_currentPage);
+            // TODO: mark dirty
+            //m_updatedPages.insert(m_currentPage);
         }
         else
         {
@@ -50,7 +51,8 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
             }
             else
             {
-                newPage = m_working_set.insertPageAfter(m_currentPage, error);
+                // TODO
+                // newPage = m_working_set.insertPageAfter(m_currentPage, error);
             }
             if (error)
             {
@@ -67,14 +69,16 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
             {
                 m_currentOffset += bufferSize;
             }
-            m_updatedPages.insert(&m_currentPage);
-            m_updatedPages.insert(&newPage);
+            // TODO
+            //m_updatedPages.insert(&m_currentPage);
+            //m_updatedPages.insert(&newPage);
         }
     }
     else
     {
         // Only part of the new data can fit in the current page. We have to
         // move any existing data to the next page.
+        /* TODO
         size_t nextPageIndex = m_currentPage.nextPage();
         std::shared_ptr<RecordPage> newPage;
         if (nextPageIndex != 0)
@@ -104,7 +108,7 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
                     write(buffer + spaceInCurrentPage, bufferSize - spaceInCurrentPage, error);
                 }
             }
-        }
+        }*/
     }
 }
 
@@ -126,13 +130,3 @@ void RecordRepositoryWriter::writeLEB128(size_t value, Ishiko::Error& error)
         }
     }
 }
-
-/*
-void RecordRepositoryWriter::save(Ishiko::Error& error)
-{
-    for (RecordPage* page : m_updatedPages)
-    {
-        m_repository.store(*page, error);
-    }
-}
-*/

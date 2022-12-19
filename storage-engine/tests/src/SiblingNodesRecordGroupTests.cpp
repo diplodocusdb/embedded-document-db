@@ -41,11 +41,13 @@ void SiblingNodesRecordGroupTests::WriteTest1(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -73,11 +75,13 @@ void SiblingNodesRecordGroupTests::WriteTest2(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -107,11 +111,13 @@ void SiblingNodesRecordGroupTests::WriteTest3(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
@@ -141,11 +147,13 @@ void SiblingNodesRecordGroupTests::WriteTest4(Test& test)
 
     ISHIKO_TEST_ABORT_IF(error);
 
+    RecordPageWorkingSet working_set{repository};
     RecordPage page = repository.allocatePage(error);
 
     ISHIKO_TEST_ABORT_IF(error);
+    ISHIKO_TEST_ABORT_IF_NEQ(page.number(), 0);
 
-    RecordRepositoryWriter writer{repository, page, 0};
+    RecordRepositoryWriter writer{working_set, 0, 0, error};
 
     ISHIKO_TEST_ABORT_IF(error);
 
