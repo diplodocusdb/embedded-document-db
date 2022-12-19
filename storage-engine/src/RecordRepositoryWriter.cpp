@@ -5,14 +5,14 @@
 */
 
 #include "RecordRepositoryWriter.hpp"
-#include "RecordRepository.hpp"
 
 using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
-RecordRepositoryWriter::RecordRepositoryWriter(RecordRepository& repository, std::shared_ptr<RecordPage> startPage,
-    size_t startOffset)
-    : m_repository(repository), m_currentPage(startPage), m_currentOffset(startOffset)
+RecordRepositoryWriter::RecordRepositoryWriter(RecordPageWorkingSet& working_set, size_t start_page_number,
+    size_t start_offset, Ishiko::Error& error)
+    : m_working_set(working_set), m_currentPage(m_working_set.get(start_page_number, error)),
+    m_currentOffset(start_offset)
 {
 }
 
@@ -37,7 +37,8 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
             {
                 m_currentOffset += bufferSize;
             }
-            m_updatedPages.insert(m_currentPage);
+            // TODO: mark dirty
+            //m_updatedPages.insert(m_currentPage);
         }
         else
         {
@@ -46,11 +47,11 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
             std::shared_ptr<RecordPage> newPage;
             if (nextPageIndex != 0)
             {
-                newPage = m_repository.page(nextPageIndex, error);
+                newPage = m_working_set.get(nextPageIndex, error);
             }
             else
             {
-                newPage = m_repository.insertPageAfter(*m_currentPage, error);
+                newPage = m_working_set.insertPageAfter(*m_currentPage, error);
             }
             if (error)
             {
@@ -67,8 +68,9 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
             {
                 m_currentOffset += bufferSize;
             }
-            m_updatedPages.insert(m_currentPage);
-            m_updatedPages.insert(newPage);
+            // TODO
+            //m_updatedPages.insert(&m_currentPage);
+            //m_updatedPages.insert(&newPage);
         }
     }
     else
@@ -79,11 +81,11 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
         std::shared_ptr<RecordPage> newPage;
         if (nextPageIndex != 0)
         {
-            newPage = m_repository.page(nextPageIndex, error);
+            newPage = m_working_set.get(nextPageIndex, error);
         }
         else
         {
-            newPage = m_repository.insertPageAfter(*m_currentPage, error);
+            newPage = m_working_set.insertPageAfter(*m_currentPage, error);
         }
         if (error)
         {
@@ -92,15 +94,16 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
         size_t spaceInCurrentPage = (m_currentPage->maxDataSize() - m_currentOffset);
         if (!error)
         {
-            m_currentPage->moveTo(m_currentOffset, m_currentPage->dataSize() - m_currentOffset, *newPage, error);
+            m_currentPage->moveTo(m_currentOffset, (m_currentPage->dataSize() - m_currentOffset), *newPage, error);
             if (!error)
             {
                 write(buffer, m_currentPage->availableSpace(), error);
                 if (!error)
                 {
-                    m_currentPage = newPage;
+                    m_currentPage = std::move(newPage);
                     m_currentOffset = 0;
-                    m_updatedPages.insert(m_currentPage);
+                    // TODO
+                    //m_updatedPages.insert(&m_currentPage);
                     write(buffer + spaceInCurrentPage, bufferSize - spaceInCurrentPage, error);
                 }
             }
@@ -124,13 +127,5 @@ void RecordRepositoryWriter::writeLEB128(size_t value, Ishiko::Error& error)
             byte |= 0x80;
             write(&byte, 1, error);
         }
-    }
-}
-
-void RecordRepositoryWriter::save(Ishiko::Error& error)
-{
-    for (const std::shared_ptr<RecordPage>& page : m_updatedPages)
-    {
-        m_repository.store(*page, error);
     }
 }
