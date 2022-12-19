@@ -19,6 +19,8 @@ private:
     static void CreateMasterFileTest1(Ishiko::Test& test);
     static void OpenMasterFileTest1(Ishiko::Test& test);
     static void OpenMasterFileTest2(Ishiko::Test& test);
+    static void OpenMasterFileTest3(Ishiko::Test& test);
+    static void OpenMasterFileTest4(Ishiko::Test& test);
     static void FindSiblingNodesRecordGroupTest1(Ishiko::Test& test);
     static void FindSiblingNodesRecordGroupTest2(Ishiko::Test& test);
     static void FindSiblingNodesRecordGroupTest3(Ishiko::Test& test);

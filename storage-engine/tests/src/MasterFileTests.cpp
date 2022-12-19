@@ -19,8 +19,6 @@ MasterFileTests::MasterFileTests(const TestNumber& number, const TestContext& co
     append<HeapAllocationErrorsTest>("create test 1", CreateTest1);
     append<HeapAllocationErrorsTest>("open test 1", OpenTest1);
     append<HeapAllocationErrorsTest>("open test 2", OpenTest2);
-    append<HeapAllocationErrorsTest>("open test 3", OpenTest3);
-    append<HeapAllocationErrorsTest>("open test 4", OpenTest4);
     append<HeapAllocationErrorsTest>("addSiblingNodesRecordGroup test 1", AddSiblingNodesRecordGroupTest1);
     append<HeapAllocationErrorsTest>("addSiblingNodesRecordGroup test 2", AddSiblingNodesRecordGroupTest2);
     append<HeapAllocationErrorsTest>("addSiblingNodesRecordGroup test 3", AddSiblingNodesRecordGroupTest3);
@@ -102,68 +100,6 @@ void MasterFileTests::OpenTest2(Test& test)
 
     ISHIKO_TEST_FAIL_IF_NEQ(dataEndMarker.position().page(), 0);
     ISHIKO_TEST_FAIL_IF_NEQ(dataEndMarker.position().offset(), 30);
-
-    ISHIKO_TEST_PASS();
-}
-
-void MasterFileTests::OpenTest3(Test& test)
-{
-    Error error;
-
-    MasterFile masterFile;
-    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest3.dpdb"), error);
-
-    ISHIKO_TEST_ABORT_IF(error);
-
-    // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
-    // The record group can be found by passing 0 as the parent Node ID.
-    SiblingNodesRecordGroup siblingsNodesRecordGroup1;
-    bool found1 = masterFile.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup1, error);
-
-    ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NOT(found1);
-    ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup1.size(), 1);
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1[0].name(), "/");
-
-    SiblingNodesRecordGroup siblingsNodesRecordGroup2;
-    bool found2 = masterFile.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
-
-    ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NOT(found2);
-    ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup2.size(), 521);
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup2[0].name(), "key0");
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup2[520].name(), "k123");
-
-    ISHIKO_TEST_PASS();
-}
-
-void MasterFileTests::OpenTest4(Test& test)
-{
-    Error error;
-
-    MasterFile masterFile;
-    masterFile.open(test.context().getDataPath("MasterFileTests_OpenTest4.dpdb"), error);
-
-    ISHIKO_TEST_ABORT_IF(error);
-
-    // Get the root node record group. This only ever contains one node, the root, and has no parent node ID.
-    // The record group can be found by passing 0 as the parent Node ID.
-    SiblingNodesRecordGroup siblingsNodesRecordGroup1;
-    bool found1 = masterFile.findSiblingNodesRecordGroup(NodeID(0), siblingsNodesRecordGroup1, error);
-
-    ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NOT(found1);
-    ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup1.size(), 1);
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1[0].name(), "/");
-
-    SiblingNodesRecordGroup siblingsNodesRecordGroup2;
-    bool found2 = masterFile.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
-
-    ISHIKO_TEST_FAIL_IF(error);
-    ISHIKO_TEST_FAIL_IF_NOT(found2);
-    ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup2.size(), 1000000);
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup2[0].name(), "key0");
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup2[999999].name(), "key999999");
 
     ISHIKO_TEST_PASS();
 }

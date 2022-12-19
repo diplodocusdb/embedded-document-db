@@ -19,8 +19,6 @@ private:
     static void CreateTest1(Ishiko::Test& test);
     static void OpenTest1(Ishiko::Test& test);
     static void OpenTest2(Ishiko::Test& test);
-    static void OpenTest3(Ishiko::Test& test);
-    static void OpenTest4(Ishiko::Test& test);
     static void AddSiblingNodesRecordGroupTest1(Ishiko::Test& test);
     static void AddSiblingNodesRecordGroupTest2(Ishiko::Test& test);
     static void AddSiblingNodesRecordGroupTest3(Ishiko::Test& test);
