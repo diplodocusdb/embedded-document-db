@@ -36,11 +36,18 @@ std::shared_ptr<RecordPage> RecordPageWorkingSet::get(size_t page_number, Ishiko
     }
 }
 
-
 void RecordPageWorkingSet::add(const RecordPage& page)
 {
     // TODO: what if page already exists?
     m_pages.insert({page.number(), Entry{page}});
+}
+
+std::shared_ptr<RecordPage> RecordPageWorkingSet::insertPageAfter(RecordPage& page, Ishiko::Error& error)
+{
+    RecordPage new_page = m_repository.insertPageAfter(page, error);
+    std::pair<std::map<size_t, Entry>::iterator, bool> r =
+        m_pages.insert({new_page.number(), Entry{std::move(new_page)}});
+    return r.first->second.m_page;
 }
 
 void RecordPageWorkingSet::save(Ishiko::Error& error)

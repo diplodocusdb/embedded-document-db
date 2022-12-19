@@ -28,6 +28,9 @@ public:
 
     void add(const RecordPage& page);
 
+    // TODO: not sure whether this should be on the working set or on a separate interface
+    std::shared_ptr<RecordPage> insertPageAfter(RecordPage& page, Ishiko::Error& error);
+
     // TODO: not sure if this should be here or on the storage engine
     void save(Ishiko::Error& error);
 

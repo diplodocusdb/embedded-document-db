@@ -51,8 +51,7 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
             }
             else
             {
-                // TODO
-                // newPage = m_working_set.insertPageAfter(m_currentPage, error);
+                newPage = m_working_set.insertPageAfter(*m_currentPage, error);
             }
             if (error)
             {
@@ -78,8 +77,7 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
     {
         // Only part of the new data can fit in the current page. We have to
         // move any existing data to the next page.
-        /* TODO
-        size_t nextPageIndex = m_currentPage.nextPage();
+        size_t nextPageIndex = m_currentPage->nextPage();
         std::shared_ptr<RecordPage> newPage;
         if (nextPageIndex != 0)
         {
@@ -87,7 +85,7 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
         }
         else
         {
-            newPage = m_working_set.insertPageAfter(m_currentPage, error);
+            newPage = m_working_set.insertPageAfter(*m_currentPage, error);
         }
         if (error)
         {
@@ -104,11 +102,12 @@ void RecordRepositoryWriter::write(const char* buffer, size_t bufferSize, Ishiko
                 {
                     m_currentPage = std::move(newPage);
                     m_currentOffset = 0;
-                    m_updatedPages.insert(&m_currentPage);
+                    // TODO
+                    //m_updatedPages.insert(&m_currentPage);
                     write(buffer + spaceInCurrentPage, bufferSize - spaceInCurrentPage, error);
                 }
             }
-        }*/
+        }
     }
 }
 
