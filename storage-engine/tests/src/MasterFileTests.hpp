@@ -29,9 +29,6 @@ private:
     static void AddSiblingNodesRecordGroupTest8(Ishiko::Test& test);
     static void AddSiblingNodesRecordGroupTest9(Ishiko::Test& test);
     static void AddSiblingNodesRecordGroupTest10(Ishiko::Test& test);
-    static void FindSiblingNodesRecordGroupTest1(Ishiko::Test& test);
-    static void FindSiblingNodesRecordGroupTest2(Ishiko::Test& test);
-    static void FindSiblingNodesRecordGroupTest3(Ishiko::Test& test);
     // TODO
     //static void RemoveSiblingNodesRecordGroupTest1(Ishiko::Test& test);
 };

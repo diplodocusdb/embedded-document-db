@@ -107,14 +107,14 @@ void StorageEngineTests::OpenMasterFileTest3(Test& test)
     ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1->size(), 1);
     ISHIKO_TEST_FAIL_IF_NEQ((*siblingsNodesRecordGroup1)[0].name(), "/");
 
-    SiblingNodesRecordGroup siblingsNodesRecordGroup2;
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
     bool found2 = storageEngine.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
-    ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup2.size(), 521);
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup2[0].name(), "key0");
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup2[520].name(), "k123");
+    ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup2->size(), 521);
+    ISHIKO_TEST_FAIL_IF_NEQ((*siblingsNodesRecordGroup2)[0].name(), "key0");
+    ISHIKO_TEST_FAIL_IF_NEQ((*siblingsNodesRecordGroup2)[520].name(), "k123");
 
     ISHIKO_TEST_PASS();
 }
@@ -135,17 +135,17 @@ void StorageEngineTests::OpenMasterFileTest4(Test& test)
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found1);
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1.size(), 1);
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1[0].name(), "/");
+    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup1->size(), 1);
+    ISHIKO_TEST_FAIL_IF_NEQ((*siblingsNodesRecordGroup1)[0].name(), "/");
 
-    SiblingNodesRecordGroup siblingsNodesRecordGroup2;
+    std::shared_ptr<SiblingNodesRecordGroup> siblingsNodesRecordGroup2;
     bool found2 = storageEngine.findSiblingNodesRecordGroup(NodeID(1), siblingsNodesRecordGroup2, error);
 
     ISHIKO_TEST_FAIL_IF(error);
     ISHIKO_TEST_FAIL_IF_NOT(found2);
-    ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup2.size(), 1000000);
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup2[0].name(), "key0");
-    ISHIKO_TEST_FAIL_IF_NEQ(siblingsNodesRecordGroup2[999999].name(), "key999999");
+    ISHIKO_TEST_ABORT_IF_NEQ(siblingsNodesRecordGroup2->size(), 1000000);
+    ISHIKO_TEST_FAIL_IF_NEQ((*siblingsNodesRecordGroup2)[0].name(), "key0");
+    ISHIKO_TEST_FAIL_IF_NEQ((*siblingsNodesRecordGroup2)[999999].name(), "key999999");
 
     ISHIKO_TEST_PASS();
 }
