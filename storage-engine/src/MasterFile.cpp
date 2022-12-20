@@ -12,7 +12,7 @@ using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
 MasterFile::MasterFile()
-    : m_metadataRecord(MasterFileMetadata()), m_dataStartOffset(0), m_dataEndOffset(0)
+    : m_metadataRecord{MasterFileMetadata()}, m_dataStartOffset{0}, m_dataEndOffset{0}
 {
 }
 
@@ -24,13 +24,15 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    std::shared_ptr<PhysicalStorage::Page2> page = m_repository.allocatePage(error);
+    RecordPage page = m_repository.allocatePage(error);
     if (error)
     {
         return;
     }
     
-    RecordRepositoryWriter writer = m_repository.insert(page, 0, error);
+    RecordPageWorkingSet working_set{m_repository};
+    working_set.add(page);
+    RecordRepositoryWriter writer{working_set, page.number(), 0, error};
     if (error)
     {
         return;
@@ -42,7 +44,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    m_dataStartOffset = page->dataSize();
+    m_dataStartOffset = page.dataSize();
     Record dataStartRecord(Record::ERecordType::eDataStart);
     dataStartRecord.write(writer, error);
     if (error)
@@ -56,8 +58,8 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
 
-    m_dataEndPageIndex = page->number();
-    m_dataEndOffset = page->dataSize();
+    m_dataEndPageIndex = page.number();
+    m_dataEndOffset = page.dataSize();
     Record dataEndRecord(Record::ERecordType::eDataEnd);
     dataEndRecord.write(writer, error);
     if (error)
@@ -65,7 +67,7 @@ void MasterFile::create(const boost::filesystem::path& path, Ishiko::Error& erro
         return;
     }
     
-    m_repository.store(*page, error);
+    working_set.save(error);
 }
 
 void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
@@ -73,11 +75,11 @@ void MasterFile::open(const boost::filesystem::path& path, Ishiko::Error& error)
     m_repository.open(path, error);
     m_dataStartOffset = 14;
     m_dataEndPageIndex = m_repository.pageCount() - 1;
-    std::shared_ptr<PhysicalStorage::Page2> dataEndPage = m_repository.page(m_dataEndPageIndex, error);
+    RecordPage dataEndPage = m_repository.page(m_dataEndPageIndex, error);
     if (!error)
     {
         // Deduct 1 for the end of data record
-        m_dataEndOffset = (dataEndPage->dataSize() - 1);
+        m_dataEndOffset = (dataEndPage.dataSize() - 1);
     }
 }
 
@@ -96,65 +98,22 @@ RecordMarker MasterFile::dataEndPosition() const
     return RecordMarker(PhysicalStorage::PageRepositoryPosition(m_dataEndPageIndex, m_dataEndOffset));
 }
 
-bool MasterFile::findSiblingNodesRecordGroup(const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes,
-    Ishiko::Error& error)
-{
-    bool result = false;
-
-    RecordRepositoryReader reader = m_repository.read(0, m_dataStartOffset + 1, error);
-    while (!result && !error)
-    {
-        Record nextRecord(Record::ERecordType::eInvalid);
-        nextRecord.read(reader, error);
-        if (error)
-        {
-            break;
-        }
-        if (nextRecord.type() == Record::ERecordType::eSiblingNodesStart)
-        {
-            SiblingNodesRecordGroup siblingNodesRecordGroup;
-            siblingNodesRecordGroup.readWithoutType(reader, error);
-            if (error)
-            {
-                break;
-            }
-            if (siblingNodesRecordGroup.parentNodeID() == parentNodeID)
-            {
-                siblingNodes = siblingNodesRecordGroup;
-                result = true;
-                break;
-            }
-        }
-        else if (nextRecord.type() == Record::ERecordType::eDataEnd)
-        {
-            break;
-        }
-        else
-        {
-            // TODO : more precise error
-            error.fail(StorageEngineErrorCategory::Get(), -1, "TODO", __FILE__, __LINE__);
-            break;
-        }
-    }
-
-    return result;
-}
-
 void MasterFile::addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error)
 {
-    RecordRepositoryWriter writer = m_repository.insert(dataEndPosition().position(), error);
+    RecordPage page = m_repository.page(dataEndPosition().position().page(), error);
+    if (error)
+    {
+        return;
+    }
+
+    RecordPageWorkingSet working_set{m_repository};
+    RecordRepositoryWriter writer{working_set, page.number(), dataEndPosition().position().offset(), error};
     if (error)
     {
         return;
     }
 
     siblingNodes.write(writer, error);
-    if (error)
-    {
-        return;
-    }
-    
-    writer.save(error);
     if (error)
     {
         return;

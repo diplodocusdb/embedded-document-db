@@ -15,7 +15,7 @@ public:
     RecordRepositoryWriterTests(const Ishiko::TestNumber& number, const Ishiko::TestContext& context);
 
 private:
-    static void CreationTest1(Ishiko::Test& test);
+    static void ConstructorTest1(Ishiko::Test& test);
     static void WriteTest1(Ishiko::Test& test);
     static void WriteTest2(Ishiko::Test& test);
     static void WriteTest3(Ishiko::Test& test);

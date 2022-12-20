@@ -26,10 +26,13 @@
     <ClInclude Include="..\..\src\NodeIDAllocatorTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\RecordFilesSetTests.hpp">
+    <ClInclude Include="..\..\src\RecordFileTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\RecordFileTests.hpp">
+    <ClInclude Include="..\..\src\RecordPageTests.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RecordPageWorkingSetTests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\RecordRepositoryWriterTests.hpp">
@@ -67,10 +70,13 @@
     <ClCompile Include="..\..\src\NodeIDAllocatorTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\RecordFilesSetTests.cpp">
+    <ClCompile Include="..\..\src\RecordFileTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\RecordFileTests.cpp">
+    <ClCompile Include="..\..\src\RecordPageTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RecordPageWorkingSetTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\RecordRepositoryWriterTests.cpp">

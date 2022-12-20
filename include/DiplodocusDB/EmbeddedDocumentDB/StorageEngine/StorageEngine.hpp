@@ -7,8 +7,9 @@
 #ifndef GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_STORAGEENGINE_HPP
 #define GUARD_DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_STORAGEENGINE_STORAGEENGINE_HPP
 
+#include "MasterFile.hpp"
 #include "NodeID.hpp"
-#include "RecordFilesSet.hpp"
+#include "RecordPageWorkingSet.hpp"
 #include "SiblingNodesRecordGroup.hpp"
 #include "SiblingNodesRecordGroupCache.hpp"
 #include <boost/filesystem.hpp>
@@ -22,18 +23,23 @@ namespace EDDBImpl
 class StorageEngine
 {
 public:
+    StorageEngine();
+
     void createMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);
     void openMasterFile(const boost::filesystem::path& path, Ishiko::Error& error);
     void close();
 
     bool findSiblingNodesRecordGroup(const NodeID& parentNodeID,
         std::shared_ptr<SiblingNodesRecordGroup>& siblingNodes, Ishiko::Error& error);
+    static bool findSiblingNodesRecordGroup(RecordPageWorkingSet& repository, size_t dataStartOffset,
+        const NodeID& parentNodeID, SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     void addSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
     void updateSiblingNodesRecordGroup(const SiblingNodesRecordGroup& siblingNodes, Ishiko::Error& error);
 
 private:
     SiblingNodesRecordGroupCache m_siblingNodesRecordGroupCache;
-    RecordFilesSet m_recordFiles;
+    MasterFile m_master_file;
+    RecordPageWorkingSet m_working_set;
 };
 
 }

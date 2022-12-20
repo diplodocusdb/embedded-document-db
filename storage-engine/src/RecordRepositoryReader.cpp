@@ -5,14 +5,14 @@
 */
 
 #include "RecordRepositoryReader.hpp"
-#include "RecordRepository.hpp"
 
 using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
-RecordRepositoryReader::RecordRepositoryReader(RecordRepository& repository,
-    std::shared_ptr<PhysicalStorage::Page2> startPage, size_t startOffset)
-    : m_repository(repository), m_currentPage(startPage), m_currentOffset(startOffset)
+RecordRepositoryReader::RecordRepositoryReader(RecordPageWorkingSet& working_set, size_t start_page_number,
+    size_t startOffset, Ishiko::Error& error)
+    : m_working_set(working_set), m_currentPage(m_working_set.get(start_page_number, error)),
+    m_currentOffset(startOffset)
 {
 }
 
@@ -42,7 +42,7 @@ void RecordRepositoryReader::read(char* buffer, size_t n, Ishiko::Error& error)
             if (nextPageIndex != 0)
             {
                 // TODO : if error this would be modified, use a temp?
-                m_currentPage = m_repository.page(nextPageIndex, error);
+                m_currentPage = m_working_set.get(nextPageIndex, error);
                 if (!error)
                 {
                     m_currentOffset = 0;
