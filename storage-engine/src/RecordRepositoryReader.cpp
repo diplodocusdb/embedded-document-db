@@ -5,33 +5,27 @@
 */
 
 #include "RecordRepositoryReader.hpp"
-#include "RecordRepository.hpp"
 
 using namespace DiplodocusDB;
 using namespace DiplodocusDB::EDDBImpl;
 
-RecordRepositoryReader::RecordRepositoryReader(RecordRepository& repository, const RecordPage& startPage,
-    size_t startOffset)
-    : m_repository(repository), m_currentPage(startPage), m_currentOffset(startOffset)
-{
-}
-
-RecordRepositoryReader::RecordRepositoryReader(RecordRepository& repository, size_t start_page_number,
+RecordRepositoryReader::RecordRepositoryReader(RecordPageWorkingSet& working_set, size_t start_page_number,
     size_t startOffset, Ishiko::Error& error)
-    : m_repository(repository), m_currentPage(repository.page(start_page_number, error)), m_currentOffset(startOffset)
+    : m_working_set(working_set), m_currentPage(m_working_set.get(start_page_number, error)),
+    m_currentOffset(startOffset)
 {
 }
 
 PhysicalStorage::PageRepositoryPosition RecordRepositoryReader::currentPosition() const
 {
-    return PhysicalStorage::PageRepositoryPosition(m_currentPage.number(), m_currentOffset);
+    return PhysicalStorage::PageRepositoryPosition(m_currentPage->number(), m_currentOffset);
 }
 
 void RecordRepositoryReader::read(char* buffer, size_t n, Ishiko::Error& error)
 {
-    if ((m_currentOffset + n) <= m_currentPage.maxDataSize())
+    if ((m_currentOffset + n) <= m_currentPage->maxDataSize())
     {
-        m_currentPage.get(buffer, m_currentOffset, n, error);
+        m_currentPage->get(buffer, m_currentOffset, n, error);
         if (!error)
         {
             m_currentOffset += n;
@@ -40,20 +34,20 @@ void RecordRepositoryReader::read(char* buffer, size_t n, Ishiko::Error& error)
     else
     {
         // TODO : only works if the read doesn't cross more than one page boundary
-        size_t n1 = (m_currentPage.maxDataSize() - m_currentOffset);
-        m_currentPage.get(buffer, m_currentOffset, n1, error);
+        size_t n1 = (m_currentPage->maxDataSize() - m_currentOffset);
+        m_currentPage->get(buffer, m_currentOffset, n1, error);
         if (!error)
         {
-            size_t nextPageIndex = m_currentPage.nextPage();
+            size_t nextPageIndex = m_currentPage->nextPage();
             if (nextPageIndex != 0)
             {
                 // TODO : if error this would be modified, use a temp?
-                m_currentPage = m_repository.page(nextPageIndex, error);
+                m_currentPage = m_working_set.get(nextPageIndex, error);
                 if (!error)
                 {
                     m_currentOffset = 0;
                     size_t n2 = (n - n1);
-                    m_currentPage.get((buffer + n1), m_currentOffset, n2, error);
+                    m_currentPage->get((buffer + n1), m_currentOffset, n2, error);
                     if (!error)
                     {
                         m_currentOffset += n2;

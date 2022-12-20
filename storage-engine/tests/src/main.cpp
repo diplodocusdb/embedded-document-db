@@ -8,7 +8,8 @@
 #include "NodeIDTests.hpp"
 #include "NodeIDAllocatorTests.hpp"
 #include "RecordFileTests.hpp"
-#include "RecordFilesSetTests.hpp"
+#include "RecordPageTests.hpp"
+#include "RecordPageWorkingSetTests.hpp"
 #include "RecordRepositoryReaderTests.hpp"
 #include "RecordRepositoryWriterTests.hpp"
 #include "RecordTests.hpp"
@@ -30,7 +31,9 @@ int main(int argc, char* argv[])
     theTestHarness.context().setReferenceDirectory("../../reference");
 
     TestSequence& theTests = theTestHarness.tests();
+    theTests.append<RecordPageTests>();
     theTests.append<RecordFileTests>();
+    theTests.append<RecordPageWorkingSetTests>();
     theTests.append<RecordRepositoryReaderTests>();
     theTests.append<RecordRepositoryWriterTests>();
     theTests.append<NodeIDTests>();
@@ -40,7 +43,6 @@ int main(int argc, char* argv[])
     theTests.append<SiblingNodesRecordGroupCacheTests>();
     theTests.append<MasterFileTests>();
     theTests.append<SecondaryFileTests>();
-    theTests.append<RecordFilesSetTests>();
     theTests.append<StorageEngineTests>();
 
     return theTestHarness.run();
