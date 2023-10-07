@@ -76,9 +76,9 @@ endif
 # 
 
 # Path to the Boost installation
-ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
+ISHIKO_CPP_BOOST_ROOT ?= $(BOOST_ROOT)
 # Path to the fmt installation
-ISHIKO_CPP_FMT_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_FMT)
+ISHIKO_CPP_FMT_ROOT ?= $(FMT_ROOT)
 # Path to the Ishiko Timeinstallation
 ISHIKO_CPP_TIME_ROOT ?= $(ISHIKO_CPP)/time
 # Path to the DiplodocusDB installation
@@ -98,7 +98,7 @@ DIPLODOCUSDB_PHYSICALSTORAGE_ROOT ?= $(DIPLODOCUSDB)/physical-storage
 # Path to the DiplodocusDB Embedded Document DB installation
 DIPLODOCUSDB_EMBEDDEDDOCUMENTDB_ROOT ?= $(DIPLODOCUSDB)/embedded-document-db
 # Path to the pugixml installation
-ISHIKO_CPP_PUGIXML_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_PUGIXML)
+ISHIKO_CPP_PUGIXML_ROOT ?= $(PUGIXML_ROOT)
 
 # ------------
 

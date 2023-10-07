@@ -74,9 +74,9 @@ endif
 # 
 
 # Path to the Boost installation
-ISHIKO_CPP_BOOST_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_BOOST)
+ISHIKO_CPP_BOOST_ROOT ?= $(BOOST_ROOT)
 # Path to the fmt installation
-ISHIKO_CPP_FMT_ROOT ?= $(ISHIKO_CPP_THIRD_PARTY_FMT)
+ISHIKO_CPP_FMT_ROOT ?= $(FMT_ROOT)
 # Path to the Ishiko Timeinstallation
 ISHIKO_CPP_TIME_ROOT ?= $(ISHIKO_CPP)/time
 # Path to the DiplodocusDB installation
