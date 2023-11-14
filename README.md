@@ -12,6 +12,6 @@ This project is in early development and not ready for public use yet.
 
 ## License
 
-Copyright (c) 2018-2022 Xavier Leclercq\
+Copyright (c) 2018-2023 Xavier Leclercq\
 Released under the MIT License\
 See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt

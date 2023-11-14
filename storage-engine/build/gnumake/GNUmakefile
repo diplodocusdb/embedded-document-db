@@ -39,12 +39,12 @@ endif
 #
 #      ISHIKO_CPP_BOOST_ROOT              Path to the Boost installation
 #      ISHIKO_CPP_FMT_ROOT                Path to the fmt installation
-#      ISHIKO_CPP_TIME_ROOT               Path to the Ishiko Timeinstallation
+#      ISHIKO_CPP_TIME_ROOT               Path to the Ishiko/C++ Time installation
 #      DIPLODOCUSDB_CORE_ROOT             Path to the DiplodocusDB installation
-#      ISHIKO_CPP_BASEPLATFORM_ROOT       Path to the Ishiko BasePlatform installation
-#      ISHIKO_CPP_ERRORS_ROOT             Path to the Ishiko Errors installation
+#      ISHIKO_CPP_BASEPLATFORM_ROOT       Path to the Ishiko/C++ BasePlatform installation
+#      ISHIKO_CPP_ERRORS_ROOT             Path to the Ishiko/C++ Errors installation
 #      ISHIKO_CPP_IO_ROOT                 Path to the Ishiko/C++ IO installation
-#      ISHIKO_CPP_FILESYSTEM_ROOT         Path to the Ishiko FileSystem installation
+#      ISHIKO_CPP_FILESYSTEM_ROOT         Path to the Ishiko/C++ FileSystem installation
 #      ISHIKO_CPP_MEMORY_ROOT             Path to the Ishiko/C++ Memory installation
 #      DIPLODOCUSDB_PHYSICALSTORAGE_ROOT  Path to the DiplodocusDB installation
 
@@ -77,20 +77,20 @@ endif
 ISHIKO_CPP_BOOST_ROOT ?= $(BOOST_ROOT)
 # Path to the fmt installation
 ISHIKO_CPP_FMT_ROOT ?= $(FMT_ROOT)
-# Path to the Ishiko Timeinstallation
-ISHIKO_CPP_TIME_ROOT ?= $(ISHIKO_CPP)/time
+# Path to the Ishiko/C++ Time installation
+ISHIKO_CPP_TIME_ROOT ?= $(ISHIKO_CPP_ROOT)/time
 # Path to the DiplodocusDB installation
 DIPLODOCUSDB_CORE_ROOT ?= $(DIPLODOCUSDB)/core
-# Path to the Ishiko BasePlatform installation
-ISHIKO_CPP_BASEPLATFORM_ROOT ?= $(ISHIKO_CPP)/base-platform
-# Path to the Ishiko Errors installation
-ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP)/errors
+# Path to the Ishiko/C++ BasePlatform installation
+ISHIKO_CPP_BASEPLATFORM_ROOT ?= $(ISHIKO_CPP_ROOT)/base-platform
+# Path to the Ishiko/C++ Errors installation
+ISHIKO_CPP_ERRORS_ROOT ?= $(ISHIKO_CPP_ROOT)/errors
 # Path to the Ishiko/C++ IO installation
-ISHIKO_CPP_IO_ROOT ?= $(ISHIKO_CPP)/io
-# Path to the Ishiko FileSystem installation
-ISHIKO_CPP_FILESYSTEM_ROOT ?= $(ISHIKO_CPP)/filesystem
+ISHIKO_CPP_IO_ROOT ?= $(ISHIKO_CPP_ROOT)/io
+# Path to the Ishiko/C++ FileSystem installation
+ISHIKO_CPP_FILESYSTEM_ROOT ?= $(ISHIKO_CPP_ROOT)/filesystem
 # Path to the Ishiko/C++ Memory installation
-ISHIKO_CPP_MEMORY_ROOT ?= $(ISHIKO_CPP)/memory
+ISHIKO_CPP_MEMORY_ROOT ?= $(ISHIKO_CPP_ROOT)/memory
 # Path to the DiplodocusDB installation
 DIPLODOCUSDB_PHYSICALSTORAGE_ROOT ?= $(DIPLODOCUSDB)/physical-storage
 
