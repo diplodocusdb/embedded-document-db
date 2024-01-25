@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2019-2022 Xavier Leclercq
+    Copyright (c) 2019-2023 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/tree-db/blob/main/LICENSE.txt
 */
@@ -326,6 +326,36 @@ void XMLTreeDBNodeImpl::updateValue()
         }
         break;
 
+    case PrimitiveDataType::timeOfDay:
+        {
+            pugi::xml_attribute attributeNode = m_node.attribute("data-type");
+            if (attributeNode)
+            {
+                attributeNode.set_value("time-of-day");
+            }
+            else
+            {
+                m_node.append_attribute("data-type").set_value("time-of-day");
+            }
+
+            if (m_children.empty())
+            {
+                pugi::xml_node pcdataNode = m_node.first_child();
+                if (!pcdataNode || (pcdataNode.type() != pugi::node_pcdata))
+                {
+                    pcdataNode = m_node.prepend_child(pugi::node_pcdata);
+                }
+                pcdataNode.set_value(Ishiko::TimeOfDay(v.asTimeOfDay()).toISO8601String().c_str());
+            }
+            else
+            {
+                pugi::xml_node valueNode = m_node.prepend_child("data");
+                valueNode.append_child(pugi::node_pcdata).set_value(
+                    Ishiko::TimeOfDay(v.asTimeOfDay()).toISO8601String().c_str());
+            }
+        }
+        break;
+
     default:
         // TODO
         throw 0;
@@ -368,6 +398,12 @@ void XMLTreeDBNodeImpl::loadChildren(Ishiko::Error& error)
                 {
                     // TODO: more robust decoding
                     newNode->value().setDate(boost::gregorian::from_string(childNode.child_value()));
+                    m_children.push_back(newNode);
+                }
+                else if (strcmp(dataTypeAttribute.as_string(), "time-of-day") == 0)
+                {
+                    // TODO: more robust decoding
+                    newNode->value().setTimeOfDay(boost::posix_time::duration_from_string(childNode.child_value()));
                     m_children.push_back(newNode);
                 }
                 else if (strcmp(dataTypeAttribute.as_string(), "unicode-string") == 0)
