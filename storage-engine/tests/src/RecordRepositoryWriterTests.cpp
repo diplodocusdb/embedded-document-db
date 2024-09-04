@@ -138,7 +138,7 @@ void RecordRepositoryWriterTests::WriteTest3(Test& test)
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
     
     boost::filesystem::copy_file(test.context().getDataPath(basename), outputPath,
-        boost::filesystem::copy_option::overwrite_if_exists);
+        boost::filesystem::copy_options::overwrite_existing);
 
     Error error;
 
@@ -174,7 +174,7 @@ void RecordRepositoryWriterTests::WriteTest4(Test& test)
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
     boost::filesystem::copy_file(test.context().getDataPath(basename), outputPath,
-        boost::filesystem::copy_option::overwrite_if_exists);
+        boost::filesystem::copy_options::overwrite_existing);
 
     Error error;
 
@@ -210,7 +210,7 @@ void RecordRepositoryWriterTests::WriteTest5(Test& test)
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
     boost::filesystem::copy_file(test.context().getDataPath(basename), outputPath,
-        boost::filesystem::copy_option::overwrite_if_exists);
+        boost::filesystem::copy_options::overwrite_existing);
 
     Error error;
 
@@ -249,7 +249,7 @@ void RecordRepositoryWriterTests::WriteTest6(Test& test)
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
     boost::filesystem::copy_file(test.context().getDataPath("PageRepositoryWriterWriteTest6.dpdb"), outputPath,
-        boost::filesystem::copy_option::overwrite_if_exists);
+        boost::filesystem::copy_options::overwrite_existing);
 
     Error error;
 
@@ -288,7 +288,7 @@ void RecordRepositoryWriterTests::WriteTest7(Test& test)
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
     boost::filesystem::copy_file(test.context().getDataPath("PageRepositoryWriterWriteTest7.dpdb"), outputPath,
-        boost::filesystem::copy_option::overwrite_if_exists);
+        boost::filesystem::copy_options::overwrite_existing);
 
     Error error;
 
@@ -328,7 +328,7 @@ void RecordRepositoryWriterTests::WriteTest8(Test& test)
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
     boost::filesystem::copy_file(test.context().getDataPath("PageRepositoryWriterWriteTest8.dpdb"), outputPath,
-        boost::filesystem::copy_option::overwrite_if_exists);
+        boost::filesystem::copy_options::overwrite_existing);
 
     Error error;
 
