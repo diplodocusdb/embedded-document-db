@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2020-2022 Xavier Leclercq
+    Copyright (c) 2020-2024 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
@@ -19,19 +19,16 @@ const char* EmbeddedDocumentDBErrorCategory::name() const noexcept
     return "DiplodocusDB::EmbeddedDocumentDBErrorCategory";
 }
 
-std::ostream& EmbeddedDocumentDBErrorCategory::streamOut(int value, std::ostream& os) const
+const char* EmbeddedDocumentDBErrorCategory::message(int ev, char* buffer, size_t len) const noexcept
 {
-    switch (static_cast<Value>(value))
+    switch (static_cast<Value>(ev))
     {
     case Value::generic_error:
-        os << "generic error";
-        break;
+        return "generic error";
 
     default:
-        os << "unknown value";
-        break;
+        return "unknown value";
     }
-    return os;
 }
 
 void DiplodocusDB::Fail(Ishiko::Error& error, EmbeddedDocumentDBErrorCategory::Value value) noexcept
