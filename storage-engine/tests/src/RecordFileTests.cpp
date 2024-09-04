@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2022 Xavier Leclercq
+    Copyright (c) 2022-2024 Xavier Leclercq
     Released under the MIT License
     See https://github.com/diplodocusdb/embedded-document-db/blob/main/LICENSE.txt
 */
@@ -185,7 +185,7 @@ void RecordFileTests::InsertPageAfterTest1(Test& test)
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
     boost::filesystem::copy_file(test.context().getDataPath(basename), outputPath,
-        boost::filesystem::copy_option::overwrite_if_exists);
+        boost::filesystem::copy_options::overwrite_existing);
 
     Error error;
 
