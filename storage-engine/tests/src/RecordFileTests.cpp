@@ -185,7 +185,7 @@ void RecordFileTests::InsertPageAfterTest1(Test& test)
     boost::filesystem::path outputPath = test.context().getOutputPath(basename);
 
     boost::filesystem::copy_file(test.context().getDataPath(basename), outputPath,
-        boost::filesystem::copy_options::overwrite_if_exists);
+        boost::filesystem::copy_options::overwrite_existing);
 
     Error error;
 
