@@ -2,37 +2,37 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ishiko/gcc-ishiko-cpp:0.41.0
+      - image: ishiko/gcc-ishiko-cpp:0.42.0
     steps:
       - run: 
           name: "Set DIPLODOCUSDB_ROOT environment variable and create workspace directory"
-          command: mkdir -p /projects/diplodocusdb && echo 'export DIPLODOCUSDB_ROOT="/projects/diplodocusdb"' >> $BASH_ENV
+          command: mkdir -p /workspace/projects/diplodocusdb && echo 'export DIPLODOCUSDB_ROOT="/workspace/projects/diplodocusdb"' >> $BASH_ENV
       - run:
           name: "Install build dependency: DiplodocusDB Core"
-          command: cd /projects/diplodocusdb && git clone https://github.com/diplodocusdb/core.git && cd core/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb && git clone https://github.com/diplodocusdb/core.git && cd core/build-files/gnumake && make
       - run:
           name: "Install build dependency: DiplodocusDB PhysicalStorage"
-          command: cd /projects/diplodocusdb && git clone https://github.com/diplodocusdb/physical-storage.git && cd physical-storage/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb && git clone https://github.com/diplodocusdb/physical-storage.git && cd physical-storage/build-files/gnumake && make
       - checkout:
-          path: /projects/diplodocusdb/embedded-document-db
+          path: /workspace/projects/diplodocusdb/embedded-document-db
       - run:
           name: "Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine"
-          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/build-files/gnumake && make
       - run:
           name: "Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests"
-          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/tests/build-files/gnumake && make
       - run:
           name: "Run: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests"
-          command: cd /projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBStorageEngineTests
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/tests/build-files/gnumake && ./DiplodocusEmbeddedDocumentDBStorageEngineTests
       - run:
           name: "Build: DiplodocusDB EmbeddedDocumentDB"
-          command: cd /projects/diplodocusdb/embedded-document-db/database/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/build-files/gnumake && make
       - run:
           name: "Build: DiplodocusDB EmbeddedDocumentDB tests"
-          command: cd /projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/tests/build-files/gnumake && make
       - run:
           name: "Run: DiplodocusDB EmbeddedDocumentDB tests"
-          command: cd /projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBTests
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/tests/build-files/gnumake && ./DiplodocusEmbeddedDocumentDBTests
 workflows:
   version: 2
   continuous_build:
