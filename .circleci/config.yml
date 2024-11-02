@@ -17,22 +17,22 @@ jobs:
           path: /workspace/projects/diplodocusdb/embedded-document-db
       - run:
           name: "Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine"
-          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/build-files/gnumake && make
       - run:
           name: "Build: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests"
-          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/tests/build-files/gnumake && make
       - run:
           name: "Run: DiplodocusDB EmbeddedDocumentDB/StorageEngine tests"
-          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBStorageEngineTests
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/storage-engine/tests/build-files/gnumake && ./DiplodocusEmbeddedDocumentDBStorageEngineTests
       - run:
           name: "Build: DiplodocusDB EmbeddedDocumentDB"
-          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/build-files/gnumake && make
       - run:
           name: "Build: DiplodocusDB EmbeddedDocumentDB tests"
-          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/tests/build-files/gnumake && make
       - run:
           name: "Run: DiplodocusDB EmbeddedDocumentDB tests"
-          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/tests/build/gnumake && ./DiplodocusEmbeddedDocumentDBTests
+          command: cd /workspace/projects/diplodocusdb/embedded-document-db/database/tests/build-files/gnumake && ./DiplodocusEmbeddedDocumentDBTests
 workflows:
   version: 2
   continuous_build:
