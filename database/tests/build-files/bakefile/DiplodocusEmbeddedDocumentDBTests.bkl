@@ -3,14 +3,13 @@ import $(ishikopath)/test-framework/include/Ishiko/TestFramework.bkl;
 diplodocusdbpath = envvar("DIPLODOCUSDB_ROOT");
 import $(diplodocusdbpath)/embedded-document-db/include/DiplodocusDB/EmbeddedDocumentDB.bkl;
 
-toolsets = gnu vs2022 vs2019 vs2017 vs2015 vs2013;
+toolsets = gnu vs2022 vs2019 vs2017 vs2015;
 
 gnu.makefile = ../gnumake/GNUmakefile;
 vs2022.solutionfile = ../vc17/DiplodocusEmbeddedDocumentDBTests.sln;
 vs2019.solutionfile = ../vc16/DiplodocusEmbeddedDocumentDBTests.sln;
 vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBTests.sln;
 vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBTests.sln;
-vs2013.solutionfile = ../vc12/DiplodocusEmbeddedDocumentDBTests.sln;
 
 program DiplodocusEmbeddedDocumentDBTests : DiplodocusEmbeddedDocumentDB, IshikoTestFramework
 {
