@@ -9,10 +9,10 @@ jobs:
           command: mkdir -p /workspace/projects/diplodocusdb && echo 'export DIPLODOCUSDB_ROOT="/workspace/projects/diplodocusdb"' >> $BASH_ENV
       - run:
           name: "Install build dependency: DiplodocusDB Core"
-          command: cd /workspace/projects/diplodocusdb && git clone https://github.com/diplodocusdb/core.git && cd core/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb && git clone https://github.com/diplodocusdb/core.git && cd core/build-files/gnumake && make
       - run:
           name: "Install build dependency: DiplodocusDB PhysicalStorage"
-          command: cd /workspace/projects/diplodocusdb && git clone https://github.com/diplodocusdb/physical-storage.git && cd physical-storage/build/gnumake && make
+          command: cd /workspace/projects/diplodocusdb && git clone https://github.com/diplodocusdb/physical-storage.git && cd physical-storage/build-files/gnumake && make
       - checkout:
           path: /workspace/projects/diplodocusdb/embedded-document-db
       - run:
