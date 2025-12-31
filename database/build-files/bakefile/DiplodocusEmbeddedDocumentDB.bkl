@@ -8,13 +8,12 @@ import $(ishikopath)/third-party-glue/include/Ishiko/ThirdParty/pugixml.bkl;
 import $(ishikopath)/time/include/Ishiko/Time.bkl;
 
 
-toolsets = gnu vs2022 vs2019 vs2017 vs2015;
+toolsets = gnu vs2022 vs2019 vs2017;
 
 gnu.makefile = ../gnumake/GNUmakefile;
 vs2022.solutionfile = ../vc17/DiplodocusEmbeddedDocumentDB.sln;
 vs2019.solutionfile = ../vc16/DiplodocusEmbeddedDocumentDB.sln;
 vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDB.sln;
-vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDB.sln;
 
 library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine, DiplodocusDBCore, IshikoTime, IshikoErrors, pugixml, Boost
 {
@@ -30,6 +29,7 @@ library DiplodocusEmbeddedDocumentDB : DiplodocusEmbeddedDocumentDBStorageEngine
 
     if ($(toolset) != gnu)
     {
+        cxx-compiler-options = "/utf-8";
         outputdir = ../../../lib/$(arch);
     }
 
