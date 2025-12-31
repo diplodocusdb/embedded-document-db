@@ -5,13 +5,12 @@ ishikopath = envvar("ISHIKO_CPP_ROOT");
 import $(ishikopath)/errors/include/Ishiko/Errors.bkl;
 import $(ishikopath)/memory/include/Ishiko/Memory.bkl;
 
-toolsets = gnu vs2022 vs2019 vs2017 vs2015;
+toolsets = gnu vs2022 vs2019 vs2017;
 
 gnu.makefile = ../gnumake/GNUmakefile;
 vs2022.solutionfile = ../vc17/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 vs2019.solutionfile = ../vc16/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 vs2017.solutionfile = ../vc15/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
-vs2015.solutionfile = ../vc14/DiplodocusEmbeddedDocumentDBStorageEngine.sln;
 
 library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPhysicalStorage, DiplodocusDBCore, IshikoMemory, IshikoErrors
 {
@@ -27,6 +26,7 @@ library DiplodocusEmbeddedDocumentDBStorageEngine : DiplodocusDBPhysicalStorage,
 
     if ($(toolset) != gnu)
     {
+        cxx-compiler-options = "/utf-8";
         outputdir = ../../../lib/$(arch);
     }
 
