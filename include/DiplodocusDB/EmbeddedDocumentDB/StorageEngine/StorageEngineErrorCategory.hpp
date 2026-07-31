@@ -28,7 +28,7 @@ public:
     const char* message(int ev, char* buffer, size_t len) const noexcept override;
 
 private:
-    StorageEngineErrorCategory() noexcept = default;
+    StorageEngineErrorCategory() noexcept;
 };
 
 void Fail(Ishiko::Error& error, StorageEngineErrorCategory::Value value) noexcept;

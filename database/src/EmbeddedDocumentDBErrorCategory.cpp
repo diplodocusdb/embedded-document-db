@@ -8,6 +8,11 @@
 
 using namespace DiplodocusDB;
 
+EmbeddedDocumentDBErrorCategory::EmbeddedDocumentDBErrorCategory() noexcept
+    : Ishiko::ErrorCategory(ID(0x552e077f48b843f0ULL, 0xa2da2d4e6e404d1cULL)) // 552e077f-48b8-43f0-a2da-2d4e6e404d1c
+{
+}
+
 const EmbeddedDocumentDBErrorCategory& EmbeddedDocumentDBErrorCategory::Get() noexcept
 {
     static EmbeddedDocumentDBErrorCategory theCategory;
