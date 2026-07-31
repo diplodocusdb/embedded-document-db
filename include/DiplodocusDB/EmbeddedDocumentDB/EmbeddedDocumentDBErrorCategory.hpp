@@ -26,7 +26,7 @@ public:
     const char* message(int ev, char* buffer, size_t len) const noexcept override;
 
 private:
-    EmbeddedDocumentDBErrorCategory() noexcept = default;
+    EmbeddedDocumentDBErrorCategory() noexcept;
 };
 
 void Fail(Ishiko::Error& error, EmbeddedDocumentDBErrorCategory::Value value) noexcept;

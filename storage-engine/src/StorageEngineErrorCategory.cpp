@@ -8,6 +8,11 @@
 
 using namespace DiplodocusDB::EDDBImpl;
 
+StorageEngineErrorCategory::StorageEngineErrorCategory() noexcept
+    : Ishiko::ErrorCategory(ID(0x91fd442777204217ULL, 0xb3118df500f9bd45ULL)) // 91fd4427-7720-4217-b311-8df500f9bd45
+{
+}
+
 const StorageEngineErrorCategory& StorageEngineErrorCategory::Get() noexcept
 {
     static StorageEngineErrorCategory theCategory;
